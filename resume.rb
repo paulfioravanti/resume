@@ -1,5 +1,4 @@
 DOCUMENT_NAME = "Resume-Paul-Fioravanti"
-KEY = "Hire me!" # don't change this or you won't be able to read the resume!
 
 ################################################################################
 ### Script helper methods
@@ -37,36 +36,27 @@ end
 def position_summary(qualification, organization, period)
   move_down 10
   formatted_text([
-    {
-      text: "#{qualification}\n",
-      styles: [:bold]
-    },
-    {
-      text: "#{organization}\n",
-      styles: [:bold],
-      size: 11
-    },
-    {
-      text: period,
-      size: 10,
-      color: "666666"
-    }
+    { text: "#{qualification}\n", styles: [:bold] },
+    { text: "#{organization}\n", styles: [:bold], size: 11 },
+    { text: period, size: 10, color: "666666" }
   ])
 end
 
-################################################################################
-### Monkey patching String to obfuscate (not encrypt) resume content so it's
-### easier to actually generate a file than read it here in the code
-################################################################################
-class String
-  def xor
-    b1 = self.unpack("U*")
-    b2 = KEY.unpack("U*")
-    longest = [b1.length, b2.length].max
-    b1 = [0] * (longest - b1.length) + b1
-    b2 = [0] * (longest - b2.length) + b2
-    b1.zip(b2).map{ |a, b| a ^ b }.pack("U*")
+def bullet_list(*items)
+  table_data = []
+  items.each do |item|
+    table_data << ["•", item]
   end
+  table(table_data, cell_style: { border_color: "FFFFFF" })
+end
+
+def link_list(*items)
+  list = []
+  items.each do |text, link|
+    list << { text: text, link: link, styles: [:underline] }
+    list << { text: "  " }
+  end
+  formatted_text(list, color: "0000FF")
 end
 
 ################################################################################
@@ -100,8 +90,6 @@ end
 ### Generate document
 ################################################################################
 require "prawn"
-require "open-uri"
-
 Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
                          margin_top: 0.75,
                          margin_bottom: 0.75,
@@ -116,6 +104,18 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
     size: 14
   )
 
+  move_down 5
+  link_list(
+    ["Email", "mailto:paul.fioravanti@gmail.com"],
+    ["LinkedIn", "http://linkedin.com/in/paulfioravanti"],
+    ["Github", "http://github.com/paulfioravanti"],
+    ["StackOverflow", "http://stackoverflow.com/users/567863/paul-fioravanti"],
+    ["Twitter", "https://twitter.com/pefioravanti"],
+    ["SpeakerDeck", "https://speakerdeck.com/paulfioravanti"],
+    ["Vimeo", "https://vimeo.com/paulfioravanti"],
+    ["Blog", "http://paulfioravanti.com/about"]
+  )
+
   pad(10) { stroke_horizontal_rule { color "666666" } }
 
   text "Employment History", color: "666666", style: :bold
@@ -127,7 +127,8 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   )
 
   move_down 10
-  text "Project and short-term contract work with Adelaide start-up companies using Ruby on Rails, primarily remotely or in coworking spaces."
+  text "Project and short-term contract work with Adelaide start-up companies "\
+       "using Ruby on Rails, primarily remotely or in coworking spaces."
 
   position_summary(
     "Pre-sales Consultant",
@@ -136,18 +137,25 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   )
 
   move_down 10
-  text "Complex sales of Guidewire ClaimCenter insurance claim handling system to business and IT departments of Property & Casualty insurance companies.  Responsibilities included:"
-  table([
-    ["•", "Perform value-based and technology-focused presentations and product demonstrations"],
-    ["•", "Conduct Agile-driven Proof of Concept workshops for prospects"],
-    ["•", "Work with System Integrator partner companies in their Guidewire project proposals"],
-    ["•", "Conduct business process and product value consulting workshops for prospects/customers"],
-    ["•", "Prepare written responses to customer RFP/RFIs"],
-    ["•", "Demo environment configuration and prospect requirement-driven function development"],
-    ["•", "Product localization development for Japanese market"],
-    ["•", "Customer product training"],
-    ["•", "Japan and overseas trade shows/marketing events"]
-  ], cell_style: { border_color: "FFFFFF" })
+  text "Complex sales of Guidewire ClaimCenter insurance claim handling "\
+       "system to business and IT departments of Property & Casualty "\
+       "insurance companies.  Responsibilities included:"
+
+  bullet_list(
+    "Perform value-based and technology-focused presentations and product "\
+    "demonstrations",
+    "Conduct Agile-driven Proof of Concept workshops for prospects",
+    "Work with System Integrator partner companies in their Guidewire project "\
+    "proposals",
+    "Conduct business process and product value consulting workshops for "\
+    "prospects/customers",
+    "Prepare written responses to customer RFP/RFIs",
+    "Demo environment configuration and prospect requirement-driven function "\
+    "development",
+    "Product localization development for Japanese market",
+    "Customer product training",
+    "Japan and overseas trade shows/marketing events"
+  )
 
   position_summary(
     "Implementation Consultant, Professional Services",
@@ -156,18 +164,26 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   )
 
   move_down 10
-  text "On and off-site customer implementations of Right Now Cloud CRM product.  Responsibilities included:"
-  table([
-    ["•", "Confirm high-level business requirements feasibility with pre-sales team"],
-    ["•", "Documentation: project charter, scope, schedules, and technical design of customizations"],
-    ["•", "Conduct inception phase requirements workshops for business processes, workflows, and product implementation; determine possible out-of-scope change requests as needed"],
-    ["•", "Configure and setup product test environment for client to track project progress"],
-    ["•", "Manage, QA, and localize customization work performed by engineers"],
-    ["•", "Document and execute on-site UAT and training"],
-    ["•", "Prepare and execute “site go-live”, analyze risks, prepare fallback plans"],
-    ["•", "Work with customer support to handle implementation-related support incidents"],
-    ["•", "Host, linguistically support, and handle Japan immigration of overseas project members"]
-  ], cell_style: { border_color: "FFFFFF" })
+  text "On and off-site customer implementations of Right Now Cloud CRM "\
+       "product.  Responsibilities included:"
+
+  bullet_list(
+    "Confirm high-level business requirements feasibility with pre-sales team",
+    "Documentation: project charter, scope, schedules, and technical design "\
+    "of customizations",
+    "Conduct inception phase requirements workshops for business processes, "\
+    "workflows, and product implementation; determine possible out-of-scope "\
+    "change requests as needed",
+    "Configure and setup product test environment for client to track project "\
+    "progress",
+    "Manage, QA, and localize customization work performed by engineers",
+    "Document and execute on-site UAT and training",
+    "Prepare and execute “site go-live”, analyze risks, prepare fallback plans",
+    "Work with customer support to handle implementation-related support "\
+    "incidents",
+    "Host, linguistically support, and handle Japan immigration of overseas "\
+    "project members"
+  )
 
   position_summary(
     "Software Engineer",
@@ -176,7 +192,10 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   )
 
   move_down 10
-  text "Custom software development in small teams; design, coding, testing, documentation, deployment; internal system administration duties.  Development predominantly done using Pure Ruby/Ruby on Rails in small teams of 2-3 people."
+  text "Custom software development in small teams; design, coding, testing, "\
+       "documentation, deployment; internal system administration duties.  "\
+       "Development predominantly done using Pure Ruby/Ruby on Rails in small "\
+       "teams of 2-3 people."
 
   position_summary(
     "Coordinator of International Relations (CIR)",
@@ -185,7 +204,10 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   )
 
   move_down 10
-  text "Translation; interpreting; editorial supervision of bilingual pamphlets; reception of foreign guests; planning and implementing international exchange projects; accompanying tour groups overseas; work with non-profit organizations"
+  text "Translation; interpreting; editorial supervision of bilingual "\
+       "pamphlets; reception of foreign guests; planning and implementing "\
+       "international exchange projects; accompanying tour groups overseas; "\
+       "work with non-profit organizations"
 
   position_summary(
     "International Marketing Assistant – Asia and Japan",
@@ -194,7 +216,10 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   )
 
   move_down 10
-  text "Process trade enquiries from Asia and Japan; assist operators of tourism products in South Australia with Japan/Asia marketing; assisting with trade shows, the sourcing of suitable promotional items for campaigns, and marketing research"
+  text "Process trade enquiries from Asia and Japan; assist operators of "\
+       "tourism products in South Australia with Japan/Asia marketing; "\
+       "assisting with trade shows, the sourcing of suitable promotional "\
+       "items for campaigns, and marketing research"
 
   move_down 10
   stroke_horizontal_rule { color "666666" }
@@ -235,15 +260,3 @@ print yellow "Would you like me to open the resume for you (Y/N)? "
 response = gets.chomp
 open_document if yes?(response)
 puts cyan "Thanks for generating my resume.  Hope to hear from you soon!"
-
-
-### Test stuff
-  # email_link = make_cell(content: "Email", link: "mailto:paul.fioravanti@gmail.com")
-  # table([
-  #   [
-  #     { image: open("http://farm3.staticflickr.com/2826/8753727736_2a7a294527_t.jpg") }
-  #   ],
-  #   [
-  #     "<a href='mailto:paul.fioravanti@gmail.com'>Email</a>"
-  #   ]
-  # ], cell_style: { inline_format: true})
