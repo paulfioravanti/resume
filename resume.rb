@@ -63,14 +63,14 @@ end
 ### Get dependent gems if not available
 ################################################################################
 unless gem_available?("prawn")
-  print yellow "May I please install the prawn Ruby gem to help me generate "\
+  print yellow "May I please install the 'Prawn' Ruby gem to help me generate "\
                "a PDF (Y/N)? "
   response = gets.chomp
   if yes?(response)
     puts green "Thank you kindly."
     puts "Installing prawn gem..."
     begin
-      %x(gem install prawn --version '1.0.0.rc2')
+      %x(gem install prawn)
     rescue
       puts red "Sorry, for some reason I wasn't able to install prawn.\n"\
                "Either try again or ask Paul directly for a PDF copy of his "\
