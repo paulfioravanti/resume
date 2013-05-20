@@ -1,4 +1,4 @@
-DOCUMENT_NAME = "Resume-Paul-Fioravanti"
+DOCUMENT_NAME = "Resume"
 
 ################################################################################
 ### Script helper methods
@@ -19,6 +19,10 @@ rescue Gem::LoadError
    false
 end
 
+def d(string) # decode string
+  Base64.strict_decode64(string)
+end
+
 def open_document
   case RUBY_PLATFORM
   when %r(darwin)
@@ -36,27 +40,43 @@ end
 def position_summary(qualification, organization, period)
   move_down 10
   formatted_text([
-    { text: "#{qualification}\n", styles: [:bold] },
-    { text: "#{organization}\n", styles: [:bold], size: 11 },
-    { text: period, size: 10, color: "666666" }
+    { text: d(qualification) + "\n", styles: [:bold] },
+    { text: d(organization) + "\n", styles: [:bold], size: 11 },
+    { text: d(period), size: 10, color: "666666" }
   ])
 end
 
 def bullet_list(*items)
   table_data = []
   items.each do |item|
-    table_data << ["•", item]
+    table_data << ["•", d(item)]
   end
   table(table_data, cell_style: { border_color: "FFFFFF" })
 end
 
-def link_list(*items)
+def list_of_links(*items)
   list = []
   items.each do |text, link|
-    list << { text: text, link: link, styles: [:underline] }
+    list <<
+      { text: d(text), link: d(link), styles: [:underline], color: "0000FF" }
     list << { text: "  " }
   end
-  formatted_text(list, color: "0000FF")
+  formatted_text(list)
+end
+
+def heading(string)
+  formatted_text([{ text: d(string), styles: [:bold], color: "666666" }])
+end
+
+def name(string)
+  font("Times-Roman", size: 20) { text d(string) }
+end
+
+def description(ruby, rest)
+  formatted_text([
+    { text: d(ruby), color: "85200C" },
+    { text: d(rest) }
+  ], size: 14)
 end
 
 ################################################################################
@@ -65,23 +85,21 @@ end
 unless gem_available?("prawn")
   print yellow "May I please install the 'Prawn' Ruby gem to help me generate "\
                "a PDF (Y/N)? "
-  response = gets.chomp
-  if yes?(response)
+  if yes?(gets.chomp)
     puts green "Thank you kindly."
     puts "Installing prawn gem..."
     begin
       %x(gem install prawn)
     rescue
       puts red "Sorry, for some reason I wasn't able to install prawn.\n"\
-               "Either try again or ask Paul directly for a PDF copy of his "\
-               "resume."
+              "Either try again or ask me directly for a PDF copy of my resume."
       exit
     end
     puts green "Prawn gem successfully installed."
-    Gem.clear_paths
+    Gem.clear_paths # Reset the dir and path values so Prawn can be required
   else
     puts red "Sorry, I won't be able to generate a PDF without this gem.\n"\
-             "Please ask Paul directly for a PDF copy of his resume."
+             "Please ask me directly for a PDF copy of my resume."
     exit
   end
 end
@@ -89,166 +107,173 @@ end
 ################################################################################
 ### Generate document
 ################################################################################
+require "base64"
 require "prawn"
+
 Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
-                         margin_top: 0.75,
-                         margin_bottom: 0.75,
-                         margin_left: 1,
-                         margin_right: 1) do
-  font("Times-Roman", size: 20) { text "Paul Fioravanti" }
-  formatted_text(
-    [
-      { text: "Ruby Developer ", color: "85200C" },
-      { text: "and Information Technology Services Professional"}
-    ],
-    size: 14
-  )
+  margin_top: 0.75, margin_bottom: 0.75, margin_left: 1, margin_right: 1) do
+
+  name "UGF1bCBGaW9yYXZhbnRp"
+  description "UnVieSBEZXZlbG9wZXIg",
+              "YW5kIEluZm9ybWF0aW9uIFRlY2hub2xvZ3kgU2VydmljZXMgUHJvZmVzc2lvbmFs"
 
   move_down 5
-  link_list(
-    ["Email", "mailto:paul.fioravanti@gmail.com"],
-    ["LinkedIn", "http://linkedin.com/in/paulfioravanti"],
-    ["Github", "http://github.com/paulfioravanti"],
-    ["StackOverflow", "http://stackoverflow.com/users/567863/paul-fioravanti"],
-    ["Twitter", "https://twitter.com/pefioravanti"],
-    ["SpeakerDeck", "https://speakerdeck.com/paulfioravanti"],
-    ["Vimeo", "https://vimeo.com/paulfioravanti"],
-    ["Blog", "http://paulfioravanti.com/about"]
+  list_of_links(
+    ["RW1haWw=", "bWFpbHRvOnBhdWwuZmlvcmF2YW50aUBnbWFpbC5jb20="],
+    ["TGlua2VkSW4=", "aHR0cDovL2xpbmtlZGluLmNvbS9pbi9wYXVsZmlvcmF2YW50aQ=="],
+    ["R2l0aHVi", "aHR0cDovL2dpdGh1Yi5jb20vcGF1bGZpb3JhdmFudGk="],
+    ["U3RhY2tPdmVyZmxvdw==", "aHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL3V"\
+     "zZXJzLzU2Nzg2My9wYXVsLWZpb3JhdmFudGk="],
+    ["VHdpdHRlcg==", "aHR0cHM6Ly90d2l0dGVyLmNvbS9wZWZpb3JhdmFudGk="],
+    ["U3BlYWtlckRlY2s=", "aHR0cHM6Ly9zcGVha2VyZGVjay5jb20vcGF1bGZ"\
+     "pb3JhdmFudGk="],
+    ["VmltZW8=", "aHR0cHM6Ly92aW1lby5jb20vcGF1bGZpb3JhdmFudGk="],
+    ["QmxvZw==", "aHR0cDovL3BhdWxmaW9yYXZhbnRpLmNvbS9hYm91dA=="]
   )
 
   pad(10) { stroke_horizontal_rule { color "666666" } }
 
-  text "Employment History", color: "666666", style: :bold
+  heading "RW1wbG95bWVudCBIaXN0b3J5"
 
   position_summary(
-    "Ruby Developer",
-    "Freelance",
-    "September 2012 – Present | Adelaide, Australia"
+    "UnVieSBEZXZlbG9wZXI=",
+    "RnJlZWxhbmNl",
+    "U2VwdGVtYmVyIDIwMTIg4oCTIFByZXNlbnQgfCBBZGVsYWlkZSwgQXVzdHJhbGlh"
   )
 
   move_down 10
-  text "Project and short-term contract work with Adelaide start-up companies "\
-       "using Ruby on Rails, primarily remotely or in coworking spaces."
+  text d "UHJvamVjdCBhbmQgc2hvcnQtdGVybSBjb250cmFjdCB3b3JrIHdpdGggQWRlbGFp"\
+         "ZGUgc3RhcnQtdXAgY29tcGFuaWVzIHVzaW5nIFJ1Ynkgb24gUmFpbHMsIHByaW1h"\
+         "cmlseSByZW1vdGVseSBvciBpbiBjb3dvcmtpbmcgc3BhY2VzLg=="
 
   position_summary(
-    "Pre-sales Consultant",
-    "Guidewire Software",
-    "January 2009 – September 2011 | Tokyo, Japan"
+    "UHJlLXNhbGVzIENvbnN1bHRhbnQ=",
+    "R3VpZGV3aXJlIFNvZnR3YXJl",
+    "SmFudWFyeSAyMDA5IOKAkyBTZXB0ZW1iZXIgMjAxMSB8IFRva3lvLCBKYXBhbg=="
   )
 
   move_down 10
-  text "Complex sales of Guidewire ClaimCenter insurance claim handling "\
-       "system to business and IT departments of Property & Casualty "\
-       "insurance companies.  Responsibilities included:"
+  text d "Q29tcGxleCBzYWxlcyBvZiBHdWlkZXdpcmUgQ2xhaW1DZW50ZXIgaW5zdXJhbmNlI"\
+         "GNsYWltIGhhbmRsaW5nIHN5c3RlbSB0byBidXNpbmVzcyBhbmQgSVQgZGVwYXJ0bW"\
+         "VudHMgb2YgUHJvcGVydHkgJiBDYXN1YWx0eSBpbnN1cmFuY2UgY29tcGFuaWVzLiA"\
+         "gUmVzcG9uc2liaWxpdGllcyBpbmNsdWRlZDo="
 
   bullet_list(
-    "Perform value-based and technology-focused presentations and product "\
-    "demonstrations",
-    "Conduct Agile-driven Proof of Concept workshops for prospects",
-    "Work with System Integrator partner companies in their Guidewire project "\
-    "proposals",
-    "Conduct business process and product value consulting workshops for "\
-    "prospects/customers",
-    "Prepare written responses to customer RFP/RFIs",
-    "Demo environment configuration and prospect requirement-driven function "\
-    "development",
-    "Product localization development for Japanese market",
-    "Customer product training",
-    "Japan and overseas trade shows/marketing events"
+    "UGVyZm9ybSB2YWx1ZS1iYXNlZCBhbmQgdGVjaG5vbG9neS1mb2N1c2VkIHByZXNlbnRhdGl"\
+      "vbnMgYW5kIHByb2R1Y3QgZGVtb25zdHJhdGlvbnM=",
+    "Q29uZHVjdCBBZ2lsZS1kcml2ZW4gUHJvb2Ygb2YgQ29uY2VwdCB3b3Jrc2hvcHMgZm9yIHB"\
+      "yb3NwZWN0cw==",
+    "V29yayB3aXRoIFN5c3RlbSBJbnRlZ3JhdG9yIHBhcnRuZXIgY29tcGFuaWVzIGluIHRoZWl"\
+      "yIEd1aWRld2lyZSBwcm9qZWN0IHByb3Bvc2Fscw==",
+    "Q29uZHVjdCBidXNpbmVzcyBwcm9jZXNzIGFuZCBwcm9kdWN0IHZhbHVlIGNvbnN1bHRpbmc"\
+      "gd29ya3Nob3BzIGZvciBwcm9zcGVjdHMvY3VzdG9tZXJz",
+    "UHJlcGFyZSB3cml0dGVuIHJlc3BvbnNlcyB0byBjdXN0b21lciBSRlAvUkZJcw==",
+    "RGVtbyBlbnZpcm9ubWVudCBjb25maWd1cmF0aW9uIGFuZCBwcm9zcGVjdCByZXF1aXJlbWV"\
+      "udC1kcml2ZW4gZnVuY3Rpb24gZGV2ZWxvcG1lbnQ=",
+    "UHJvZHVjdCBsb2NhbGl6YXRpb24gZGV2ZWxvcG1lbnQgZm9yIEphcGFuZXNlIG1hcmtldA==",
+    "Q3VzdG9tZXIgcHJvZHVjdCB0cmFpbmluZw==",
+    "SmFwYW4gYW5kIG92ZXJzZWFzIHRyYWRlIHNob3dzL21hcmtldGluZyBldmVudHM="
   )
 
   position_summary(
-    "Implementation Consultant, Professional Services",
-    "Right Now Technologies",
-    "July 2007 – August 2008 | Tokyo, Japan"
+    "SW1wbGVtZW50YXRpb24gQ29uc3VsdGFudCwgUHJvZmVzc2lvbmFsIFNlcnZpY2Vz",
+    "UmlnaHQgTm93IFRlY2hub2xvZ2llcw==",
+    "SnVseSAyMDA3IOKAkyBBdWd1c3QgMjAwOCB8IFRva3lvLCBKYXBhbg=="
   )
 
   move_down 10
-  text "On and off-site customer implementations of Right Now Cloud CRM "\
-       "product.  Responsibilities included:"
+  text d "T24gYW5kIG9mZi1zaXRlIGN1c3RvbWVyIGltcGxlbWVudGF0aW9ucyBvZiBSaWdodCBO"\
+         "b3cgQ2xvdWQgQ1JNIHByb2R1Y3QuICBSZXNwb25zaWJpbGl0aWVzIGluY2x1ZGVkOg=="
 
   bullet_list(
-    "Confirm high-level business requirements feasibility with pre-sales team",
-    "Documentation: project charter, scope, schedules, and technical design "\
-    "of customizations",
-    "Conduct inception phase requirements workshops for business processes, "\
-    "workflows, and product implementation; determine possible out-of-scope "\
-    "change requests as needed",
-    "Configure and setup product test environment for client to track project "\
-    "progress",
-    "Manage, QA, and localize customization work performed by engineers",
-    "Document and execute on-site UAT and training",
-    "Prepare and execute “site go-live”, analyze risks, prepare fallback plans",
-    "Work with customer support to handle implementation-related support "\
-    "incidents",
-    "Host, linguistically support, and handle Japan immigration of overseas "\
-    "project members"
+    "Q29uZmlybSBoaWdoLWxldmVsIGJ1c2luZXNzIHJlcXVpcmVtZW50cyBmZWFzaWJpbGl0eSB3"\
+      "aXRoIHByZS1zYWxlcyB0ZWFt",
+    "RG9jdW1lbnRhdGlvbjogcHJvamVjdCBjaGFydGVyLCBzY29wZSwgc2NoZWR1bGVzLCBhbmQg"\
+      "dGVjaG5pY2FsIGRlc2lnbiBvZiBjdXN0b21pemF0aW9ucw==",
+    "Q29uZHVjdCBpbmNlcHRpb24gcGhhc2UgcmVxdWlyZW1lbnRzIHdvcmtzaG9wcyBmb3IgYnVz"\
+      "aW5lc3MgcHJvY2Vzc2VzLCB3b3JrZmxvd3MsIGFuZCBwcm9kdWN0IGltcGxlbWVudGF0aW"\
+      "9uOyBkZXRlcm1pbmUgcG9zc2libGUgb3V0LW9mLXNjb3BlIGNoYW5nZSByZXF1ZXN0cyBh"\
+      "cyBuZWVkZWQ=",
+    "Q29uZmlndXJlIGFuZCBzZXR1cCBwcm9kdWN0IHRlc3QgZW52aXJvbm1lbnQgZm9yIGNsaWVu"\
+      "dCB0byB0cmFjayBwcm9qZWN0IHByb2dyZXNz",
+    "TWFuYWdlLCBRQSwgYW5kIGxvY2FsaXplIGN1c3RvbWl6YXRpb24gd29yayBwZXJmb3JtZWQg"\
+      "YnkgZW5naW5lZXJz",
+    "RG9jdW1lbnQgYW5kIGV4ZWN1dGUgb24tc2l0ZSBVQVQgYW5kIHRyYWluaW5n",
+    "UHJlcGFyZSBhbmQgZXhlY3V0ZSDigJxzaXRlIGdvLWxpdmXigJ0sIGFuYWx5emUgcmlza3Ms"\
+      "IHByZXBhcmUgZmFsbGJhY2sgcGxhbnM=",
+    "V29yayB3aXRoIGN1c3RvbWVyIHN1cHBvcnQgdG8gaGFuZGxlIGltcGxlbWVudGF0aW9uLXJl"\
+      "bGF0ZWQgc3VwcG9ydCBpbmNpZGVudHM=",
+    "SG9zdCwgbGluZ3Vpc3RpY2FsbHkgc3VwcG9ydCwgYW5kIGhhbmRsZSBKYXBhbiBpbW1pZ3Jh"\
+      "dGlvbiBvZiBvdmVyc2VhcyBwcm9qZWN0IG1lbWJlcnM="
   )
 
   position_summary(
-    "Software Engineer",
-    "Software Research Associates (SRA)",
-    "April 2006 – June 2007 | Tokyo, Japan"
+    "U29mdHdhcmUgRW5naW5lZXI=",
+    "U29mdHdhcmUgUmVzZWFyY2ggQXNzb2NpYXRlcyAoU1JBKQ==",
+    "QXByaWwgMjAwNiDigJMgSnVuZSAyMDA3IHwgVG9reW8sIEphcGFu"
   )
 
   move_down 10
-  text "Custom software development in small teams; design, coding, testing, "\
-       "documentation, deployment; internal system administration duties.  "\
-       "Development predominantly done using Pure Ruby/Ruby on Rails in small "\
-       "teams of 2-3 people."
+  text d "Q3VzdG9tIHNvZnR3YXJlIGRldmVsb3BtZW50IGluIHNtYWxsIHRlYW1zOyBkZXNpZ24"\
+         "sIGNvZGluZywgdGVzdGluZywgZG9jdW1lbnRhdGlvbiwgZGVwbG95bWVudDsgaW50ZX"\
+         "JuYWwgc3lzdGVtIGFkbWluaXN0cmF0aW9uIGR1dGllcy4gIERldmVsb3BtZW50IHByZ"\
+         "WRvbWluYW50bHkgZG9uZSB1c2luZyBQdXJlIFJ1YnkvUnVieSBvbiBSYWlscyBpbiBz"\
+         "bWFsbCB0ZWFtcyBvZiAyLTMgcGVvcGxlLg=="
 
   position_summary(
-    "Coordinator of International Relations (CIR)",
-    "Japan Exchange and Teaching Programme (JET)",
-    "July 2001 – July 2004 | Kochi, Japan"
+    "Q29vcmRpbmF0b3Igb2YgSW50ZXJuYXRpb25hbCBSZWxhdGlvbnMgKENJUik=",
+    "SmFwYW4gRXhjaGFuZ2UgYW5kIFRlYWNoaW5nIFByb2dyYW1tZSAoSkVUKQ==",
+    "SnVseSAyMDAxIOKAkyBKdWx5IDIwMDQgfCBLb2NoaSwgSmFwYW4="
   )
 
   move_down 10
-  text "Translation; interpreting; editorial supervision of bilingual "\
-       "pamphlets; reception of foreign guests; planning and implementing "\
-       "international exchange projects; accompanying tour groups overseas; "\
-       "work with non-profit organizations"
+  text d "VHJhbnNsYXRpb247IGludGVycHJldGluZzsgZWRpdG9yaWFsIHN1cGVydmlzaW9uIG9"\
+         "mIGJpbGluZ3VhbCBwYW1waGxldHM7IHJlY2VwdGlvbiBvZiBmb3JlaWduIGd1ZXN0cz"\
+         "sgcGxhbm5pbmcgYW5kIGltcGxlbWVudGluZyBpbnRlcm5hdGlvbmFsIGV4Y2hhbmdlI"\
+         "HByb2plY3RzOyBhY2NvbXBhbnlpbmcgdG91ciBncm91cHMgb3ZlcnNlYXM7IHdvcmsg"\
+         "d2l0aCBub24tcHJvZml0IG9yZ2FuaXphdGlvbnM="
 
   position_summary(
-    "International Marketing Assistant – Asia and Japan",
-    "South Australian Tourism Commission",
-    "May 2000 – May 2001 | Adelaide, Australia"
+    "SW50ZXJuYXRpb25hbCBNYXJrZXRpbmcgQXNzaXN0YW50IOKAkyBBc2lhIGFuZCBKYXBhbg==",
+    "U291dGggQXVzdHJhbGlhbiBUb3VyaXNtIENvbW1pc3Npb24=",
+    "TWF5IDIwMDAg4oCTIE1heSAyMDAxIHwgQWRlbGFpZGUsIEF1c3RyYWxpYQ=="
   )
 
   move_down 10
-  text "Process trade enquiries from Asia and Japan; assist operators of "\
-       "tourism products in South Australia with Japan/Asia marketing; "\
-       "assisting with trade shows, the sourcing of suitable promotional "\
-       "items for campaigns, and marketing research"
+  text d "UHJvY2VzcyB0cmFkZSBlbnF1aXJpZXMgZnJvbSBBc2lhIGFuZCBKYXBhbjsgYXNzaXN"\
+         "0IG9wZXJhdG9ycyBvZiB0b3VyaXNtIHByb2R1Y3RzIGluIFNvdXRoIEF1c3RyYWxpYS"\
+         "B3aXRoIEphcGFuL0FzaWEgbWFya2V0aW5nOyBhc3Npc3Rpbmcgd2l0aCB0cmFkZSBza"\
+         "G93cywgdGhlIHNvdXJjaW5nIG9mIHN1aXRhYmxlIHByb21vdGlvbmFsIGl0ZW1zIGZv"\
+         "ciBjYW1wYWlnbnMsIGFuZCBtYXJrZXRpbmcgcmVzZWFyY2g="
 
   move_down 10
   stroke_horizontal_rule { color "666666" }
 
   move_down 10
-  text "Education", color: "666666", style: :bold
+  heading "RWR1Y2F0aW9u"
 
   position_summary(
-    "Masters of Information Technology",
-    "University of South Australia",
-    "2004-2005 | Adelaide, Australia"
+    "TWFzdGVycyBvZiBJbmZvcm1hdGlvbiBUZWNobm9sb2d5",
+    "VW5pdmVyc2l0eSBvZiBTb3V0aCBBdXN0cmFsaWE=",
+    "MjAwNC0yMDA1IHwgQWRlbGFpZGUsIEF1c3RyYWxpYQ=="
   )
 
   position_summary(
-    "Bachelor of International Business",
-    "Flinders University",
-    "1997-1999 | Adelaide, Australia"
+    "QmFjaGVsb3Igb2YgSW50ZXJuYXRpb25hbCBCdXNpbmVzcw==",
+    "RmxpbmRlcnMgVW5pdmVyc2l0eQ==",
+    "MTk5Ny0xOTk5IHwgQWRlbGFpZGUsIEF1c3RyYWxpYQ=="
   )
 
   position_summary(
-    "Student Exchange Programme",
-    "Ryukoku University",
-    "Sep 1999 - Feb 2000 | Kyoto, Japan"
+    "U3R1ZGVudCBFeGNoYW5nZSBQcm9ncmFtbWU=",
+    "Unl1a29rdSBVbml2ZXJzaXR5",
+    "U2VwIDE5OTkgLSBGZWIgMjAwMCB8IEt5b3RvLCBKYXBhbg=="
   )
 
   position_summary(
-    "Certificate II in Tourism",
-    "Adelaide TAFE",
-    "May 2000 - May 2001 | Adelaide, Australia"
+    "Q2VydGlmaWNhdGUgSUkgaW4gVG91cmlzbQ==",
+    "QWRlbGFpZGUgVEFGRQ==",
+    "TWF5IDIwMDAgLSBNYXkgMjAwMSB8IEFkZWxhaWRlLCBBdXN0cmFsaWE="
   )
 end
 
@@ -257,6 +282,5 @@ end
 ################################################################################
 puts green "Resume generated successfully."
 print yellow "Would you like me to open the resume for you (Y/N)? "
-response = gets.chomp
-open_document if yes?(response)
+open_document if yes?(gets.chomp)
 puts cyan "Thanks for generating my resume.  Hope to hear from you soon!"
