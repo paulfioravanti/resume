@@ -231,7 +231,7 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
          "cmlseSByZW1vdGVseSBvciBpbiBjb3dvcmtpbmcgc3BhY2VzLg=="
 
   move_down 10
-  guidewire_table_data = [
+  gw_table_data = [
     [
       {
         content: d("PGI+UHJlLXNhbGVzIENvbnN1bHRhbnQ8L2I+Cjxmb250IHNpemU9JzExJ"\
@@ -267,7 +267,7 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
       }
     ]
   ]
-  table(guidewire_table_data, cell_style: { borders: [] })
+  table(gw_table_data, cell_style: { borders: [] })
 
   move_down 10
   text d "Q29tcGxleCBzYWxlcyBvZiBHdWlkZXdpcmUgQ2xhaW1DZW50ZXIgaW5zdXJhbmNlI"\
@@ -293,7 +293,7 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   )
 
   move_down 10
-  rightnow_table_data = [
+  rnt_table_data = [
     [
       {
         content: d("PGI+SW1wbGVtZW50YXRpb24gQ29uc3VsdGFudCwgUHJvZmVzc2lvbmFsI"\
@@ -331,7 +331,7 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
       }
     ]
   ]
-  table(rightnow_table_data, cell_style: { borders: [] })
+  table(rnt_table_data, cell_style: { borders: [] })
 
   move_down 10
   text d "T24gYW5kIG9mZi1zaXRlIGN1c3RvbWVyIGltcGxlbWVudGF0aW9ucyBvZiBSaWdodCBO"\
@@ -496,7 +496,7 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   move_down 10
   heading "RWR1Y2F0aW9u"
 
-  education_table_data = [
+  edu_table_data = [
     [
       {
         content: d("PGI+TWFzdGVycyBvZiBJbmZvcm1hdGlvbiBUZWNobm9sb2d5PC9iPgo8Z"\
@@ -607,7 +607,7 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
       }
     ],
   ]
-  table(education_table_data, cell_style: { borders: [] })
+  table(edu_table_data, cell_style: { borders: [] })
 end
 
 ################################################################################
