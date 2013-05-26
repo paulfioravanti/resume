@@ -7,6 +7,7 @@ DOCUMENT_NAME = "Resume"
 ###    don't have it already.  Otherwise, please contact me for a resume.
 ### 3. The script will pull down some small images from Flickr, so please ensure
 ###    you have an internet connection.
+### 4. Run the script: $ ruby resume.rb
 ################################################################################
 
 ################################################################################
