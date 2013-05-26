@@ -12,13 +12,13 @@ If you don't have the Prawn gem installed, you will be asked for permission to i
 
 ### Dependencies
 
-- Ruby 2.0.0
-- Prawn 0.12.0
+- Ruby 1.9.2 or higher
+- Prawn 1.0.0.rc2 or higher
 
 ### Issues:
 
 - I would have liked to use the Arial font, but since it's not included with Prawn by default and I did not want to include any external fonts, I stuck with Helvetica
-- It doesn't seem possible yet in Prawn to make an embedded image a clickable link
+- It doesn't seem possible yet in Prawn to make an embedded image a clickable link.  Until support is possible, I've simply pulled in images from Flickr and placed a text image underneath.  There's an [open bounty on the topic at StackOverflow](http://stackoverflow.com/q/8289031/567863).
 
 ### Social
 
