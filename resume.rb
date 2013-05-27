@@ -25,8 +25,7 @@ def yes?(response)
 end
 
 def required_gem_available?(name, version)
-   Gem::Specification.find_by_name(name).version >=
-     Gem::Version.new(version)
+   Gem::Specification.find_by_name(name).version >= Gem::Version.new(version)
 rescue Gem::LoadError
    false
 end
