@@ -24,9 +24,9 @@ def yes?(response)
   response =~ %r(\Ay\z|\Ayes\z)i
 end
 
-def gem_available?(name)
+def required_gem_available?(name, version)
    Gem::Specification.find_by_name(name).version >=
-     Gem::Version.new('1.0.0.rc2')
+     Gem::Version.new(version)
 rescue Gem::LoadError
    false
 end
@@ -87,7 +87,7 @@ end
 ################################################################################
 ### Get dependent gems if not available
 ################################################################################
-unless gem_available?("prawn")
+unless required_gem_available?('prawn', '1.0.0.rc2')
   print yellow "May I please install version 1.0.0.rc2 of the 'Prawn'\n"\
                "Ruby gem to help me generate a PDF (Y/N)? "
   if yes?(gets.chomp)
