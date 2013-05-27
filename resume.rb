@@ -1,7 +1,7 @@
 # encoding: utf-8
 DOCUMENT_NAME = "Resume"
 ################################################################################
-### This resume also lives online at https://github.com/paulfioravanti/resume
+### This resume lives online at https://github.com/paulfioravanti/resume
 ### Instructions:
 ### 1. Make sure you have Ruby 1.9.2 or greater installed (1.8.7 will not work)
 ### 2. Please let the script install the Prawn gem for PDF generation if you
@@ -25,7 +25,8 @@ def yes?(response)
 end
 
 def gem_available?(name)
-   Gem::Specification.find_by_name(name)
+   Gem::Specification.find_by_name(name).version >=
+     Gem::Version.new('1.0.0.rc2')
 rescue Gem::LoadError
    false
 end
@@ -43,8 +44,8 @@ def open_document
   when %r(windows)
     %x(cmd /c "start #{DOCUMENT_NAME}.pdf")
   else
-    puts yellow "Sorry, I can't figure out how to open the resume on this"\
-                " computer. Please open it yourself."
+    puts yellow "Sorry, I can't figure out how to open the resume on\n"\
+                "this computer. Please open it yourself."
   end
 end
 
@@ -87,22 +88,24 @@ end
 ### Get dependent gems if not available
 ################################################################################
 unless gem_available?("prawn")
-  print yellow "May I please install the 'Prawn' Ruby gem to help me generate "\
-               "a PDF (Y/N)? "
+  print yellow "May I please install version 1.0.0.rc2 of the 'Prawn'\n"\
+               "Ruby gem to help me generate a PDF (Y/N)? "
   if yes?(gets.chomp)
     puts green "Thank you kindly."
-    puts "Installing prawn gem..."
+    puts "Installing Prawn gem version 1.0.0.rc2..."
     begin
       %x(gem install prawn -v 1.0.0.rc2)
     rescue
       puts red "Sorry, for some reason I wasn't able to install prawn.\n"\
-        "Either try again or ask me directly for a PDF copy of my resume."
+               "Either try again or ask me directly for a PDF copy of"\
+               " my resume."
       exit
     end
     puts green "Prawn gem successfully installed."
     Gem.clear_paths # Reset the dir and path values so Prawn can be required
   else
-    puts red "Sorry, I won't be able to generate a PDF without this gem.\n"\
+    puts red "Sorry, I won't be able to generate a PDF without this\n"\
+             "specific version of the Prawn gem.\n"\
              "Please ask me directly for a PDF copy of my resume."
     exit
   end
