@@ -1,8 +1,9 @@
 # encoding: utf-8
 DOCUMENT_NAME = "Resume"
 ################################################################################
+### This resume also lives online at https://github.com/paulfioravanti/resume
 ### Instructions:
-### 1. Make sure you have Ruby 1.9.2 or greater installed (1.8.7 will fail)
+### 1. Make sure you have Ruby 1.9.2 or greater installed (1.8.7 will not work)
 ### 2. Please let the script install the Prawn gem for PDF generation if you
 ###    don't have it already.  Otherwise, please contact me for a resume.
 ### 3. The script will pull down some small images from Flickr, so please ensure
