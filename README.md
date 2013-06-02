@@ -18,7 +18,7 @@ If you don't have the Prawn gem installed, you will be asked for permission to i
 ### Issues:
 
 - I would have liked to use the Arial font, but since it's not included with Prawn by default and I did not want to include any external fonts, I stuck with Helvetica
-- It doesn't seem possible yet in Prawn to make an embedded image a clickable link.  Until support is possible, I've simply pulled in images from Flickr and placed a text image underneath.  There's an [open bounty on the topic at StackOverflow](http://stackoverflow.com/q/8289031/567863).
+- It doesn't seem possible yet in Prawn to make an embedded image a clickable link.  Until support is possible, I've simply pulled in images from Flickr and overlaid a transparent text link on top to simulate clicking an image.  More discussion on this issue is at [this StackOverflow thread](http://stackoverflow.com/q/8289031/567863).
 
 ### Social
 
