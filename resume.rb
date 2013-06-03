@@ -532,7 +532,6 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
     end
   end
 
-
   move_down 10
   text d "UHJvY2VzcyB0cmFkZSBlbnF1aXJpZXMgZnJvbSBBc2lhIGFuZCBKYXBhbjsgYXNzaXN"\
          "0IG9wZXJhdG9ycyBvZiB0b3VyaXNtIHByb2R1Y3RzIGluIFNvdXRoIEF1c3RyYWxpYS"\
