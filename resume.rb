@@ -162,16 +162,20 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
             "dmFudGk="
     },
     {
-      image: "http://farm3.staticflickr.com/2837/8799235993_26a7d17540_m.jpg",
-      link: "aHR0cHM6Ly90d2l0dGVyLmNvbS9wZWZpb3JhdmFudGk="
-    },
-    {
       image: "http://farm8.staticflickr.com/7404/8799250189_4125b90a14_m.jpg",
       link: "aHR0cHM6Ly9zcGVha2VyZGVjay5jb20vcGF1bGZpb3JhdmFudGk="
     },
     {
       image: "http://farm9.staticflickr.com/8546/8809862216_0cdd40c3dc_m.jpg",
       link: "aHR0cHM6Ly92aW1lby5jb20vcGF1bGZpb3JhdmFudGk="
+    },
+    {
+      image: "http://farm4.staticflickr.com/3714/9015339024_0651daf2c4_m.jpg",
+      link: "aHR0cDovL3d3dy5jb2Rlc2Nob29sLmNvbS91c2Vycy9wYXVsZmlvcmF2YW50aQ=="
+    },
+    {
+      image: "http://farm3.staticflickr.com/2837/8799235993_26a7d17540_m.jpg",
+      link: "aHR0cHM6Ly90d2l0dGVyLmNvbS9wZWZpb3JhdmFudGk="
     },
     {
       image: "http://farm4.staticflickr.com/3752/8809826162_e4d765d15b_m.jpg",
