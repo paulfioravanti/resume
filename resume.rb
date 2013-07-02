@@ -191,9 +191,46 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   heading "RW1wbG95bWVudCBIaXN0b3J5"
 
 ################################################################################
-### FL
+### RC
 ################################################################################
   move_down 10
+  formatted_text([{ text: d("U2VuaW9yIERldmVsb3Blcg=="), styles: [:bold] }])
+  formatted_text([
+    {
+      text: d("UmF0ZUNpdHk="),
+      styles: [:bold], size: 11
+    }
+  ])
+  formatted_text([
+    { text: d("SnVseSAyMDEzIC0gUHJlc2VudCB8") },
+    {
+      text: d("U3lkbmV5LCBBdXN0cmFsaWE="),
+      link: d("aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9xPTYxK0xhdmVuZGVyK1N0K01pbHNvbnMrUG9pbnQrTlNXKzIwNjEmaGw9ZW4mbGw9LTMzLjg1MDYwMiwxNTEuMjEzMTYmc3BuPTAuMDI3MjY1LDAuMDM4OTY3JnNsbD0tMzMuODQzNjU5LDE1MS4yMDk5NDkmc3Nwbj0wLjAwNjgxNywwLjAwOTc0MiZobmVhcj02MStMYXZlbmRlcitTdCwrTWlsc29ucytQb2ludCtOZXcrU291dGgrV2FsZXMrMjA2MSZ0PW0mej0xNQ==")
+    }
+  ], color: "666666", size: 10)
+
+  move_up 40
+  bounding_box([415, cursor], width: 115, height: 40) do
+    image open(
+      "http://farm6.staticflickr.com/5484/9192095974_b49a1fc142_m.jpg"),
+      fit: [110, 40], align: :center
+    move_up 40
+    transparent(0) do
+      formatted_text([{
+        text: "||||||||||",
+        size: 43,
+        link: d("aHR0cDovL3d3dy5yYXRlY2l0eS5jb20uYXUv")
+      }])
+    end
+  end
+
+  move_down 10
+  text d "QWdpbGUgUnVieSBvbiBSYWlscyBkZXZlbG9wbWVudCBvZiB0aGUgUmF0ZUNpdHkgZmluYW5jaWFsIHNlcnZpY2VzIGFnZ3JlZ2F0aW9uIHByb2R1Y3Qu"
+
+################################################################################
+### FL
+################################################################################
+  move_down 15
   formatted_text([{ text: d("UnVieSBEZXZlbG9wZXI="), styles: [:bold] }])
   formatted_text([{ text: d("RnJlZWxhbmNl"), styles: [:bold], size: 11 }])
   formatted_text([
