@@ -197,7 +197,7 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   formatted_text([{ text: d("U2VuaW9yIERldmVsb3Blcg=="), styles: [:bold] }])
   formatted_text([
     {
-      text: d("UmF0ZUNpdHk="),
+      text: d("UmF0ZUNpdHkuY29tLmF1"),
       styles: [:bold], size: 11
     }
   ])
@@ -230,7 +230,23 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   end
 
   move_down 10
-  text d "QWdpbGUgUnVieSBvbiBSYWlscyBkZXZlbG9wbWVudCBvZiB0aGUgUmF0ZUNpdHkgZmluYW5jaWFsIHNlcnZpY2VzIGFnZ3JlZ2F0aW9uIHByb2R1Y3Qu"
+  text d "UnVieSBvbiBSYWlscyBkZXZlbG9wZXIgZm9yIFJhdGVDaXR5LmNvbS5hdSBmaW5hbmNp"\
+         "YWwgcHJvZHVjdHMgYW5kIHNlcnZpY2VzIGNvbXBhcmlzb24gd2Vic2l0ZS4="
+
+  bullet_list(
+    "T3VyIHRlYW0gaXMgZmllcmNlbHkgQWdpbGUsIHdpdGggdGlnaHQgZGV2ZWxvcG1lbnQgZmVlZ"\
+      "GJhY2sgbG9vcHMgb2Ygb25lIHdlZWssIG1lYXN1cmVkIGFuZCBtYW5hZ2VkIHRyYW5zcGFy"\
+      "ZW50bHkgaW4gVHJlbGxvIGFuZCBkYWlseSBzdGFuZC11cCBtZWV0aW5ncw==",
+    "V2UgYWN0aXZlbHkgdXNlIFJTcGVjIGZvciB0ZXN0LWRyaXZlbiBkZXZlbG9wbWVudCwgYW5kI"\
+      "G1lYXN1cmUgb3VyIGNvZGUgcXVhbGl0eSB1c2luZyBzZXJ2aWNlcyBsaWtlIENvZGUgQ2xp"\
+      "bWF0ZSBhbmQgQ292ZXJhbGxz",
+    "R2l0aHViIHB1bGwgcmVxdWVzdHMsIGNvbnRpbnVvdXMgaW50ZWdyYXRpb24gd2l0aCBUcmF2a"\
+      "XMgUHJvLCBwZWVyIGNvZGUgcmV2aWV3LCBhbmQgY29udGludW91cyBzdGFnaW5nL3Byb2R1"\
+      "Y3Rpb24gZGVwbG95cyBhcmUgY2VudHJhbCB0byBvdXIgZXZlcnlkYXkgZGV2ZWxvcG1lbnQ"\
+      "gd29ya2Zsb3c=",
+    "V2UgZ2V0IHN0dWZmIGRvbmUsIGdldCBpdCBsaXZlIGZhc3QsIGFuZCBzdHJpdmUgdG8gZ2V0I"\
+      "GJldHRlcg=="
+  )
 
 ################################################################################
 ### FL
@@ -239,7 +255,7 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   formatted_text([{ text: d("UnVieSBEZXZlbG9wZXI="), styles: [:bold] }])
   formatted_text([{ text: d("RnJlZWxhbmNl"), styles: [:bold], size: 11 }])
   formatted_text([
-    { text: d("U2VwdGVtYmVyIDIwMTIg4oCTIFByZXNlbnQgfCAg") },
+    { text: d("U2VwdGVtYmVyIDIwMTIg4oCTIEp1bHkgMjAxMyB8ICA=") },
     {
       text: d("QWRlbGFpZGUsIEF1c3RyYWxpYQ=="),
       link: d("aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9mPXEmc291cmNlPXNfcSZobD1"\
@@ -281,7 +297,8 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   end
 
   move_down 15
-  text d "UGFydC10aW1lIGFuZCBwcm9qZWN0LWJhc2VkIFJ1Ynkgb24gUmFpbHMgd29yayBmb3IgbG9jYWwgc3RhcnQtdXAgYW5kIHNtYWxsIGNvbXBhbmllcy4="
+  text d "UGFydC10aW1lIGFuZCBwcm9qZWN0LWJhc2VkIFJ1Ynkgb24gUmFpbHMgd29yayBmb3Ig"\
+         "bG9jYWwgc3RhcnQtdXAgYW5kIHNtYWxsIGNvbXBhbmllcy4="
 
 ################################################################################
 ### GW
@@ -327,10 +344,9 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   end
 
   move_down 10
-  text d "Q29tcGxleCBzYWxlcyBvZiBHdWlkZXdpcmUgQ2xhaW1DZW50ZXIgaW5zdXJhbmNlI"\
-         "GNsYWltIGhhbmRsaW5nIHN5c3RlbSB0byBidXNpbmVzcyBhbmQgSVQgZGVwYXJ0bW"\
-         "VudHMgb2YgUHJvcGVydHkgJiBDYXN1YWx0eSBpbnN1cmFuY2UgY29tcGFuaWVzLiA"\
-         "gUmVzcG9uc2liaWxpdGllcyBpbmNsdWRlZDo="
+  text d "Q29tcGxleCBzYWxlcyBvZiBHdWlkZXdpcmUgQ2xhaW1DZW50ZXIgaW5zdXJhbmNlIGNs"\
+         "YWltIGhhbmRsaW5nIHN5c3RlbSB0byBidXNpbmVzcyBhbmQgSVQgZGVwYXJ0bWVudHMg"\
+         "b2YgUHJvcGVydHkgJiBDYXN1YWx0eSBpbnN1cmFuY2UgY29tcGFuaWVzLg=="
 
   bullet_list(
     "UGVyZm9ybSB2YWx1ZS1iYXNlZCBhbmQgdGVjaG5vbG9neS1mb2N1c2VkIHByZXNlbnRhdGl"\
@@ -401,7 +417,7 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
 
   move_down 10
   text d "T24gYW5kIG9mZi1zaXRlIGN1c3RvbWVyIGltcGxlbWVudGF0aW9ucyBvZiBSaWdodCBO"\
-         "b3cgQ2xvdWQgQ1JNIHByb2R1Y3QuICBSZXNwb25zaWJpbGl0aWVzIGluY2x1ZGVkOg=="
+         "b3cgQ2xvdWQgQ1JNIHByb2R1Y3Qu"
 
   bullet_list(
     "Q29uZmlybSBoaWdoLWxldmVsIGJ1c2luZXNzIHJlcXVpcmVtZW50cyBmZWFzaWJpbGl0eSB3"\
@@ -524,11 +540,10 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   end
 
   move_down 13
-  text d "VHJhbnNsYXRpb247IGludGVycHJldGluZzsgZWRpdG9yaWFsIHN1cGVydmlzaW9uIG9"\
-         "mIGJpbGluZ3VhbCBwYW1waGxldHM7IHJlY2VwdGlvbiBvZiBmb3JlaWduIGd1ZXN0cz"\
-         "sgcGxhbm5pbmcgYW5kIGltcGxlbWVudGluZyBpbnRlcm5hdGlvbmFsIGV4Y2hhbmdlI"\
-         "HByb2plY3RzOyBhY2NvbXBhbnlpbmcgdG91ciBncm91cHMgb3ZlcnNlYXM7IHdvcmsg"\
-         "d2l0aCBub24tcHJvZml0IG9yZ2FuaXphdGlvbnM="
+  text d "VHJhbnNsYXRpb24vaW50ZXJwcmV0aW5nOyBncmFzcy1yb290cyBjb21tdW5pdHkgYWN0"\
+         "aXZpdGllcyBhbmQgam91cm5hbGlzbTsgcGxhbm5pbmcvaW1wbGVtZW50aW5nIGludGVy"\
+         "bmF0aW9uYWwgZXhjaGFuZ2UgcHJvamVjdHM7IGluYm91bmQgZ3Vlc3QgaG9zcGl0YWxp"\
+         "dHk7IG91dGJvdW5kIHRvdXItZ3VpZGluZw=="
 
 ################################################################################
 ### SATC
@@ -577,11 +592,8 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   end
 
   move_down 10
-  text d "UHJvY2VzcyB0cmFkZSBlbnF1aXJpZXMgZnJvbSBBc2lhIGFuZCBKYXBhbjsgYXNzaXN"\
-         "0IG9wZXJhdG9ycyBvZiB0b3VyaXNtIHByb2R1Y3RzIGluIFNvdXRoIEF1c3RyYWxpYS"\
-         "B3aXRoIEphcGFuL0FzaWEgbWFya2V0aW5nOyBhc3Npc3Rpbmcgd2l0aCB0cmFkZSBza"\
-         "G93cywgdGhlIHNvdXJjaW5nIG9mIHN1aXRhYmxlIHByb21vdGlvbmFsIGl0ZW1zIGZv"\
-         "ciBjYW1wYWlnbnMsIGFuZCBtYXJrZXRpbmcgcmVzZWFyY2g="
+  text d "QXNzaXN0IHdpdGggdGhlIHByb21vdGlvbi9tYXJrZXRpbmcgb2YgU291dGggQXVzdHJh"\
+         "bGlhIGFzIGEgdG91cmlzbSBkZXN0aW5hdGlvbiB0byBBc2lhIGFuZCBKYXBhbi4="
 
   move_down 10
   stroke_horizontal_rule { color "666666" }
