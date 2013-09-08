@@ -20,13 +20,13 @@ def yellow(text); colorize(text, 33); end
 def green(text); colorize(text, 32); end
 def cyan(text); colorize(text, 36); end
 
-def yes?(response)
-  response =~ %r(\Ay\z|\Ayes\z)i
+def permission_granted?(response)
+  response.match(%r{\A(y|yes)\z}i)
 end
 
 def required_gem_available?(name, version)
   Gem::Specification.find_by_name(name).version >= Gem::Version.new(version)
-rescue Gem::LoadError
+rescue Gem::LoadError # gem not installed
   false
 end
 
@@ -96,8 +96,8 @@ end
 unless required_gem_available?('prawn', '1.0.0.rc2')
   print yellow "May I please install version 1.0.0.rc2 of the 'Prawn'\n"\
                "Ruby gem to help me generate a PDF (Y/N)? "
-  if yes?(gets.chomp)
-    puts green "Thank you kindly."
+  if permission_granted?(gets.chomp)
+    puts green "Thank you kindly :-)"
     puts "Installing Prawn gem version 1.0.0.rc2..."
     begin
       %x(gem install prawn -v 1.0.0.rc2)
@@ -205,7 +205,12 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
     { text: d("SnVseSAyMDEzIC0gUHJlc2VudCB8") },
     {
       text: d("U3lkbmV5LCBBdXN0cmFsaWE="),
-      link: d("aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9xPTYxK0xhdmVuZGVyK1N0K01pbHNvbnMrUG9pbnQrTlNXKzIwNjEmaGw9ZW4mbGw9LTMzLjg1MDYwMiwxNTEuMjEzMTYmc3BuPTAuMDI3MjY1LDAuMDM4OTY3JnNsbD0tMzMuODQzNjU5LDE1MS4yMDk5NDkmc3Nwbj0wLjAwNjgxNywwLjAwOTc0MiZobmVhcj02MStMYXZlbmRlcitTdCwrTWlsc29ucytQb2ludCtOZXcrU291dGgrV2FsZXMrMjA2MSZ0PW0mej0xNQ==")
+      link: d("aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9xPTYxK0xhdmVuZGVyK1N"\
+              "0K01pbHNvbnMrUG9pbnQrTlNXKzIwNjEmaGw9ZW4mbGw9LTMzLjg1MDYwMiwxNT"\
+              "EuMjEzMTYmc3BuPTAuMDI3MjY1LDAuMDM4OTY3JnNsbD0tMzMuODQzNjU5LDE1M"\
+              "S4yMDk5NDkmc3Nwbj0wLjAwNjgxNywwLjAwOTc0MiZobmVhcj02MStMYXZlbmRl"\
+              "citTdCwrTWlsc29ucytQb2ludCtOZXcrU291dGgrV2FsZXMrMjA2MSZ0PW0mej0"\
+              "xNQ==")
     }
   ], color: "666666", size: 10)
 
@@ -276,9 +281,7 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   end
 
   move_down 15
-  text d "UHJvamVjdCBhbmQgc2hvcnQtdGVybSBjb250cmFjdCB3b3JrIHdpdGggQWRlbGFp"\
-         "ZGUgc3RhcnQtdXAgY29tcGFuaWVzIHVzaW5nIFJ1Ynkgb24gUmFpbHMsIHByaW1h"\
-         "cmlseSByZW1vdGVseSBvciBpbiBjb3dvcmtpbmcgc3BhY2VzLg=="
+  text d "UGFydC10aW1lIGFuZCBwcm9qZWN0LWJhc2VkIFJ1Ynkgb24gUmFpbHMgd29yayBmb3IgbG9jYWwgc3RhcnQtdXAgYW5kIHNtYWxsIGNvbXBhbmllcy4="
 
 ################################################################################
 ### GW
@@ -787,5 +790,5 @@ end
 ################################################################################
 puts green "Resume generated successfully."
 print yellow "Would you like me to open the resume for you (Y/N)? "
-open_document if yes?(gets.chomp)
+open_document if permission_granted?(gets.chomp)
 puts cyan "Thanks for looking at my resume.  I hope to hear from you soon!"
