@@ -3,7 +3,7 @@ DOCUMENT_NAME = "Resume"
 ################################################################################
 ### This resume lives online at https://github.com/paulfioravanti/resume
 ### Instructions:
-### 1. Make sure you have Ruby 1.9.2 or greater installed (1.8.7 will not work)
+### 1. Make sure you run this with Ruby 1.9.2 or greater (1.8.7 will not work)
 ### 2. Please let the script install the Prawn gem for PDF generation if you
 ###    don't have it already.  Otherwise, please contact me for a resume.
 ### 3. The script will pull down some small images from Flickr, so please ensure
@@ -34,8 +34,8 @@ def cyan(text)
   colorize(text, 36)
 end
 
-def permission_granted?(response)
-  response.match(%r{\A(y|yes)\z}i)
+def permission_granted?
+  gets.chomp.match(%r{\A(y|yes)\z}i)
 end
 
 def required_gem_available?(name, version)
@@ -110,7 +110,7 @@ end
 unless required_gem_available?('prawn', '1.0.0.rc2')
   print yellow "May I please install version 1.0.0.rc2 of the 'Prawn'\n"\
                "Ruby gem to help me generate a PDF (Y/N)? "
-  if permission_granted?(gets.chomp)
+  if permission_granted?
     puts green "Thank you kindly :-)"
     puts "Installing Prawn gem version 1.0.0.rc2..."
     begin
