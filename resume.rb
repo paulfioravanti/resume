@@ -165,6 +165,62 @@ class MediaBank
   def self.linked_in_link
     d('aHR0cDovL2xpbmtlZGluLmNvbS9pbi9wYXVsZmlvcmF2YW50aQ==')
   end
+
+  def self.github_image
+    open('http://farm4.staticflickr.com/3828/8799239149_d23e4acff0_m.jpg')
+  end
+
+  def self.github_link
+    d('aHR0cDovL2dpdGh1Yi5jb20vcGF1bGZpb3JhdmFudGk=')
+  end
+
+  def self.stackoverflow_image
+
+  end
+
+  def self.stackoverflow_link
+
+  end
+
+  def self.speakerdeck_image
+
+  end
+
+  def self.speakerdeck_link
+
+  end
+
+  def self.vimeo_image
+
+  end
+
+  def self.vimeo_link
+
+  end
+
+  def self.code_school_image
+
+  end
+
+  def self.code_school_link
+
+  end
+
+  def self.twitter_image
+
+  end
+
+  def self.twitter_link
+
+  end
+
+  def self.blog_image
+
+  end
+
+  def self.blog_link
+
+  end
 end
 
 class Resource
@@ -183,6 +239,27 @@ class Resource
     {
       image: MediaBank.linked_in_image,
       link: MediaBank.linked_in_link,
+    }
+  end
+
+  def self.github_image_link
+    {
+      image: MediaBank.github_image,
+      link: MediaBank.github_link,
+    }
+  end
+
+  def self.stackoverflow_image_link
+    {
+      image: MediaBank.stackoverflow_image,
+      link: MediaBank.stackoverflow_link,
+    }
+  end
+
+  def self.speakerdeck_image_link
+    {
+      image: MediaBank.speakerdeck_image,
+      link: MediaBank.speakerdeck_link,
     }
   end
 end
@@ -207,37 +284,34 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
 
   move_down 5
   social_media_links([
-    # Resource.email_image_link.merge(move_up: 0),
-    # Resource.linked_in_image_link,
-    {
-      image: 'http://farm4.staticflickr.com/3828/8799239149_d23e4acff0_m.jpg',
-      link: "aHR0cDovL2dpdGh1Yi5jb20vcGF1bGZpb3JhdmFudGk="
-    },
-    {
-      image: 'http://farm3.staticflickr.com/2815/8799253647_e4ec3ab1bc_m.jpg',
-      link: "aHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL3VzZXJzLzU2Nzg2My9wYXVsLWZpb3Jh"\
-            "dmFudGk="
-    },
-    {
-      image: 'http://farm8.staticflickr.com/7404/8799250189_4125b90a14_m.jpg',
-      link: 'aHR0cHM6Ly9zcGVha2VyZGVjay5jb20vcGF1bGZpb3JhdmFudGk='
-    },
-    {
-      image: 'http://farm9.staticflickr.com/8546/8809862216_0cdd40c3dc_m.jpg',
-      link: 'aHR0cHM6Ly92aW1lby5jb20vcGF1bGZpb3JhdmFudGk='
-    },
-    {
-      image: 'http://farm4.staticflickr.com/3714/9015339024_0651daf2c4_m.jpg',
-      link: 'aHR0cDovL3d3dy5jb2Rlc2Nob29sLmNvbS91c2Vycy9wYXVsZmlvcmF2YW50aQ=='
-    },
-    {
-      image: 'http://farm3.staticflickr.com/2837/8799235993_26a7d17540_m.jpg',
-      link: 'aHR0cHM6Ly90d2l0dGVyLmNvbS9wZWZpb3JhdmFudGk='
-    },
-    {
-      image: 'http://farm4.staticflickr.com/3752/8809826162_e4d765d15b_m.jpg',
-      link: 'aHR0cDovL3BhdWxmaW9yYXZhbnRpLmNvbS9hYm91dA=='
-    }
+    Resource.email_image_link.merge(move_up: 0),
+    Resource.linked_in_image_link,
+    Resource.github_image_link
+    # {
+    #   image: 'http://farm3.staticflickr.com/2815/8799253647_e4ec3ab1bc_m.jpg',
+    #   link: "aHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL3VzZXJzLzU2Nzg2My9wYXVsLWZpb3Jh"\
+    #         "dmFudGk="
+    # },
+    # {
+    #   image: 'http://farm8.staticflickr.com/7404/8799250189_4125b90a14_m.jpg',
+    #   link: 'aHR0cHM6Ly9zcGVha2VyZGVjay5jb20vcGF1bGZpb3JhdmFudGk='
+    # },
+    # {
+    #   image: 'http://farm9.staticflickr.com/8546/8809862216_0cdd40c3dc_m.jpg',
+    #   link: 'aHR0cHM6Ly92aW1lby5jb20vcGF1bGZpb3JhdmFudGk='
+    # },
+    # {
+    #   image: 'http://farm4.staticflickr.com/3714/9015339024_0651daf2c4_m.jpg',
+    #   link: 'aHR0cDovL3d3dy5jb2Rlc2Nob29sLmNvbS91c2Vycy9wYXVsZmlvcmF2YW50aQ=='
+    # },
+    # {
+    #   image: 'http://farm3.staticflickr.com/2837/8799235993_26a7d17540_m.jpg',
+    #   link: 'aHR0cHM6Ly90d2l0dGVyLmNvbS9wZWZpb3JhdmFudGk='
+    # },
+    # {
+    #   image: 'http://farm4.staticflickr.com/3752/8809826162_e4d765d15b_m.jpg',
+    #   link: 'aHR0cDovL3BhdWxmaW9yYXZhbnRpLmNvbS9hYm91dA=='
+    # }
   ])
 
   stroke_horizontal_rule { color '666666' }
