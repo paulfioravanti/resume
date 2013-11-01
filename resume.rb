@@ -816,5 +816,5 @@ end
 ################################################################################
 puts green "Resume generated successfully."
 print yellow "Would you like me to open the resume for you (Y/N)? "
-open_document if permission_granted?(gets.chomp)
+open_document if permission_granted?
 puts cyan "Thanks for looking at my resume.  I hope to hear from you soon!"
