@@ -187,6 +187,21 @@ class Link
     d('aHR0cDovL3d3dy5yYXRlY2l0eS5jb20uYXUv')
   end
   private_class_method :rc
+
+  def self.ruby
+    d('aHR0cDovL3d3dy5ydWJ5LWxhbmcub3JnL2VuLw==')
+  end
+  private_class_method :ruby
+
+  def self.rails
+    d('aHR0cDovL3J1YnlvbnJhaWxzLm9yZy8=')
+  end
+  private_class_method :rails
+
+  def self.gw
+    d('aHR0cDovL3d3dy5ndWlkZXdpcmUuY29tLw==')
+  end
+  private_class_method :gw
 end
 
 class Image
@@ -247,6 +262,22 @@ class Image
   def self.rc
     open('http://farm6.staticflickr.com/5484/9192095974_b49a1fc142_m.jpg')
   end
+  private_class_method :rc
+
+  def self.ruby
+    open('http://farm4.staticflickr.com/3793/8799953079_33cfdc0def_m.jpg')
+  end
+  private_class_method :ruby
+
+  def self.rails
+    open('http://farm4.staticflickr.com/3681/8810534562_dfc34ea70c_m.jpg')
+  end
+  private_class_method :rails
+
+  def self.gw
+    open('http://farm8.staticflickr.com/7376/8812488914_f0bfd0a841_m.jpg')
+  end
+  private_class_method :gw
 end
 
 class Resource
@@ -352,7 +383,7 @@ module PDFHelper
       image Image.for(options[:organisation]),
             fit: options[:fit],
             align: :center
-      move_up 40
+      move_up options[:move_up]
       transparent(0) do
         formatted_text([{
           text: '|' * options[:bars],
@@ -416,6 +447,7 @@ class Resume
         width: 115,
         height: 40,
         fit: [110, 40],
+        move_up: 40
         bars: 10,
         size: 43
       )
@@ -440,119 +472,105 @@ class Resume
           "2V0IGJldHRlcg=="
       )
 
-    ################################################################################
+    ############################################################################
     ### FL
-    ################################################################################
+    ############################################################################
       move_down 15
-      formatted_text([{ text: d('UnVieSBEZXZlbG9wZXI='), styles: [:bold] }])
-      formatted_text([{ text: d('RnJlZWxhbmNl'), styles: [:bold], size: 11 }])
-      formatted_text([
-        { text: d('U2VwdGVtYmVyIDIwMTIg4oCTIEp1bHkgMjAxMyB8ICA=') },
-        {
-          text: d('QWRlbGFpZGUsIEF1c3RyYWxpYQ=='),
-          link: d("aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9mPXEmc291cmNlPXNfcSZobD1"\
-                  "lbiZnZW9jb2RlPSZxPWFkZWxhaWRlLCthdXN0cmFsaWEmYXE9JnNsbD0tMzQuOT"\
-                  "YxNjkyLDEzOC42MjEzOTkmc3Nwbj0wLjA1NjgzNiwwLjA3MTU4MyZ2cHNyYz00J"\
-                  "mllPVVURjgmaHE9JmhuZWFyPUFkZWxhaWRlK1NvdXRoK0F1c3RyYWxpYSwrQXVz"\
-                  "dHJhbGlhJnQ9bSZ6PTkmaXdsb2M9QQ==")
-        }
-      ], color: '666666', size: 10)
+      job_title 'UnVieSBEZXZlbG9wZXI='
+      organisation 'RnJlZWxhbmNl'
+      period_and_location(
+        period: 'U2VwdGVtYmVyIDIwMTIg4oCTIEp1bHkgMjAxMyB8ICA=',
+        location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
+        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9mPXEmc291cmNlPXNfcSZobD1"\
+              "lbiZnZW9jb2RlPSZxPWFkZWxhaWRlLCthdXN0cmFsaWEmYXE9JnNsbD0tMzQuOT"\
+              "YxNjkyLDEzOC42MjEzOTkmc3Nwbj0wLjA1NjgzNiwwLjA3MTU4MyZ2cHNyYz00J"\
+              "mllPVVURjgmaHE9JmhuZWFyPUFkZWxhaWRlK1NvdXRoK0F1c3RyYWxpYSwrQXVz"\
+              "dHJhbGlhJnQ9bSZ6PTkmaXdsb2M9QQ=="
+      )
 
       move_up 40
-      bounding_box([440, cursor], width: 37, height: 33) do
-        image open(
-          'http://farm4.staticflickr.com/3793/8799953079_33cfdc0def_m.jpg'),
-          fit: [31, 31], align: :center
-        move_up 30
-        transparent(0) do
-          formatted_text([{
-            text: '||||',
-            size: 34,
-            link: d('aHR0cDovL3d3dy5ydWJ5LWxhbmcub3JnL2VuLw==')
-          }])
-        end
-      end
+      organisation_logo(
+        organisation: 'ruby',
+        origin: 440,
+        width: 37,
+        height: 33,
+        fit: [31, 31],
+        move_up: 30,
+        bars: 4,
+        size: 34
+      )
 
       move_up 33
-      bounding_box([480, cursor], width: 32, height: 34) do
-        image open(
-          'http://farm4.staticflickr.com/3681/8810534562_dfc34ea70c_m.jpg'),
-          fit: [31, 31], align: :center
-        move_up 30
-        transparent(0) do
-          formatted_text([{
-            text: '|||',
-            size: 35,
-            link: d('aHR0cDovL3J1YnlvbnJhaWxzLm9yZy8=')
-          }])
-        end
-      end
+      organisation_logo(
+        organisation: 'rails',
+        origin: 480,
+        width: 32,
+        height: 34,
+        fit: [31, 31],
+        move_up: 30,
+        bars: 3,
+        size: 35
+      )
 
       move_down 15
-      text d "UGFydC10aW1lIGFuZCBwcm9qZWN0LWJhc2VkIFJ1Ynkgb24gUmFpbHMgd29yayBmb3Ig"\
-             "bG9jYWwgc3RhcnQtdXAgYW5kIHNtYWxsIGNvbXBhbmllcy4="
+      text d "UGFydC10aW1lIGFuZCBwcm9qZWN0LWJhc2VkIFJ1Ynkgb24gUmFpbHMgd29yayBm"\
+             "b3IgbG9jYWwgc3RhcnQtdXAgYW5kIHNtYWxsIGNvbXBhbmllcy4="
 
-    ################################################################################
+    ############################################################################
     ### GW
-    ################################################################################
+    ############################################################################
       move_down 15
-      formatted_text([{ text: d('UHJlLXNhbGVzIENvbnN1bHRhbnQ='), styles: [:bold] }])
-      formatted_text([
-        { text: d('R3VpZGV3aXJlIFNvZnR3YXJl'), styles: [:bold], size: 11 }
-      ])
-      formatted_text([
-        { text: d('SmFudWFyeSAyMDA5IOKAkyBTZXB0ZW1iZXIgMjAxMSB8ICA=') },
-        {
-          text: d('VG9reW8sIEphcGFu'),
-          link: d("aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9mPXEmc291cmNlPXNfcSZobD1"\
-                  "lbiZnZW9jb2RlPSZxPSVFMyU4MCU5MjEwMC0wMDA2KyslRTYlOUQlQjElRTQlQk"\
-                  "ElQUMlRTklODMlQkQlRTUlOEQlODMlRTQlQkIlQTMlRTclOTQlQjAlRTUlOEMlQ"\
-                  "kElRTYlOUMlODklRTYlQTUlQkQlRTclOTQlQkEyLTctMSsrJUU2JTlDJTg5JUU2"\
-                  "JUE1JUJEJUU3JTk0JUJBJUUzJTgyJUE0JUUzJTgzJTg4JUUzJTgyJUI3JUUzJTg"\
-                  "yJUEyKzEyJUU5JTlBJThFJmFxPSZzbGw9LTM0LjkyODYyMSwxMzguNTk5OTU5Jn"\
-                  "NzcG49MS44MTk0MzYsMi4yOTA2NDkmdnBzcmM9MCZnPWFkZWxhaWRlLCthdXN0c"\
-                  "mFsaWEmaWU9VVRGOCZocT0lRTMlODAlOTIxMDAtMDAwNisrJUU2JTlEJUIxJUU0"\
-                  "JUJBJUFDJUU5JTgzJUJEJUU1JThEJTgzJUU0JUJCJUEzJUU3JTk0JUIwJUU1JTh"\
-                  "DJUJBJUU2JTlDJTg5JUU2JUE1JUJEJUU3JTk0JUJBMi03LTErKyVFNiU5QyU4OS"\
-                  "VFNiVBNSVCRCVFNyU5NCVCQSVFMyU4MiVBNCVFMyU4MyU4OCVFMyU4MiVCNyVFM"\
-                  "yU4MiVBMisxMiVFOSU5QSU4RSZ0PW0mej0xNSZpd2xvYz1BJmNpZD0xNzQ4MjYw"\
-                  "NDQzMTMwNjkxMzEzMw==")
-        }
-      ], color: '666666', size: 10)
-
+      job_title 'UHJlLXNhbGVzIENvbnN1bHRhbnQ='
+      organisation 'R3VpZGV3aXJlIFNvZnR3YXJl'
+      period_and_location(
+        period: 'SmFudWFyeSAyMDA5IOKAkyBTZXB0ZW1iZXIgMjAxMSB8ICA=',
+        location: 'VG9reW8sIEphcGFu',
+        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9mPXEmc291cmNlPXNfcSZobD1"\
+              "lbiZnZW9jb2RlPSZxPSVFMyU4MCU5MjEwMC0wMDA2KyslRTYlOUQlQjElRTQlQk"\
+              "ElQUMlRTklODMlQkQlRTUlOEQlODMlRTQlQkIlQTMlRTclOTQlQjAlRTUlOEMlQ"\
+              "kElRTYlOUMlODklRTYlQTUlQkQlRTclOTQlQkEyLTctMSsrJUU2JTlDJTg5JUU2"\
+              "JUE1JUJEJUU3JTk0JUJBJUUzJTgyJUE0JUUzJTgzJTg4JUUzJTgyJUI3JUUzJTg"\
+              "yJUEyKzEyJUU5JTlBJThFJmFxPSZzbGw9LTM0LjkyODYyMSwxMzguNTk5OTU5Jn"\
+              "NzcG49MS44MTk0MzYsMi4yOTA2NDkmdnBzcmM9MCZnPWFkZWxhaWRlLCthdXN0c"\
+              "mFsaWEmaWU9VVRGOCZocT0lRTMlODAlOTIxMDAtMDAwNisrJUU2JTlEJUIxJUU0"\
+              "JUJBJUFDJUU5JTgzJUJEJUU1JThEJTgzJUU0JUJCJUEzJUU3JTk0JUIwJUU1JTh"\
+              "DJUJBJUU2JTlDJTg5JUU2JUE1JUJEJUU3JTk0JUJBMi03LTErKyVFNiU5QyU4OS"\
+              "VFNiVBNSVCRCVFNyU5NCVCQSVFMyU4MiVBNCVFMyU4MyU4OCVFMyU4MiVCNyVFM"\
+              "yU4MiVBMisxMiVFOSU5QSU4RSZ0PW0mej0xNSZpd2xvYz1BJmNpZD0xNzQ4MjYw"\
+              "NDQzMTMwNjkxMzEzMw=="
+      )
       move_up 40
-      bounding_box([415, cursor], width: 118, height: 39) do
-        image open(
-          'http://farm8.staticflickr.com/7376/8812488914_f0bfd0a841_m.jpg'),
-          fit: [110, 40], align: :center
-        move_up 32
-        transparent(0) do
-          formatted_text([{
-            text: '|||||||||||',
-            size: 41,
-            link: d('aHR0cDovL3d3dy5ndWlkZXdpcmUuY29tLw==')
-          }])
-        end
-      end
+      organisation_logo(
+        organisation: 'gw',
+        origin: 415,
+        width: 118,
+        height: 39,
+        fit: [110, 40],
+        move_up: 32,
+        bars: 11,
+        size: 41
+      )
 
       move_down 10
-      text d "Q29tcGxleCBzYWxlcyBvZiBHdWlkZXdpcmUgQ2xhaW1DZW50ZXIgaW5zdXJhbmNlIGNs"\
-             "YWltIGhhbmRsaW5nIHN5c3RlbSB0byBidXNpbmVzcyBhbmQgSVQgZGVwYXJ0bWVudHMg"\
-             "b2YgUHJvcGVydHkgJiBDYXN1YWx0eSBpbnN1cmFuY2UgY29tcGFuaWVzLg=="
+      text d "Q29tcGxleCBzYWxlcyBvZiBHdWlkZXdpcmUgQ2xhaW1DZW50ZXIgaW5zdXJhbmNl"\
+             "IGNsYWltIGhhbmRsaW5nIHN5c3RlbSB0byBidXNpbmVzcyBhbmQgSVQgZGVwYXJ0"\
+             "bWVudHMgb2YgUHJvcGVydHkgJiBDYXN1YWx0eSBpbnN1cmFuY2UgY29tcGFuaWVz"\
+             "Lg=="
 
       bullet_list(
-        "UGVyZm9ybSB2YWx1ZS1iYXNlZCBhbmQgdGVjaG5vbG9neS1mb2N1c2VkIHByZXNlbnRhdGl"\
-          "vbnMgYW5kIHByb2R1Y3QgZGVtb25zdHJhdGlvbnM=",
-        "Q29uZHVjdCBBZ2lsZS1kcml2ZW4gUHJvb2Ygb2YgQ29uY2VwdCB3b3Jrc2hvcHMgZm9yIHB"\
-          "yb3NwZWN0cw==",
-        "V29yayB3aXRoIFN5c3RlbSBJbnRlZ3JhdG9yIHBhcnRuZXIgY29tcGFuaWVzIGluIHRoZWl"\
-          "yIEd1aWRld2lyZSBwcm9qZWN0IHByb3Bvc2Fscw==",
-        "Q29uZHVjdCBidXNpbmVzcyBwcm9jZXNzIGFuZCBwcm9kdWN0IHZhbHVlIGNvbnN1bHRpbmc"\
-          "gd29ya3Nob3BzIGZvciBwcm9zcGVjdHMvY3VzdG9tZXJz",
+        "UGVyZm9ybSB2YWx1ZS1iYXNlZCBhbmQgdGVjaG5vbG9neS1mb2N1c2VkIHByZXNlbnRhd"\
+          "GlvbnMgYW5kIHByb2R1Y3QgZGVtb25zdHJhdGlvbnM=",
+        "Q29uZHVjdCBBZ2lsZS1kcml2ZW4gUHJvb2Ygb2YgQ29uY2VwdCB3b3Jrc2hvcHMgZm9yI"\
+          "HByb3NwZWN0cw==",
+        "V29yayB3aXRoIFN5c3RlbSBJbnRlZ3JhdG9yIHBhcnRuZXIgY29tcGFuaWVzIGluIHRoZ"\
+          "WlyIEd1aWRld2lyZSBwcm9qZWN0IHByb3Bvc2Fscw==",
+        "Q29uZHVjdCBidXNpbmVzcyBwcm9jZXNzIGFuZCBwcm9kdWN0IHZhbHVlIGNvbnN1bHRpb"\
+          "mcgd29ya3Nob3BzIGZvciBwcm9zcGVjdHMvY3VzdG9tZXJz",
         'UHJlcGFyZSB3cml0dGVuIHJlc3BvbnNlcyB0byBjdXN0b21lciBSRlAvUkZJcw==',
-        "RGVtbyBlbnZpcm9ubWVudCBjb25maWd1cmF0aW9uIGFuZCBwcm9zcGVjdCByZXF1aXJlbWV"\
-          "udC1kcml2ZW4gZnVuY3Rpb24gZGV2ZWxvcG1lbnQ=",
-        'UHJvZHVjdCBsb2NhbGl6YXRpb24gZGV2ZWxvcG1lbnQgZm9yIEphcGFuZXNlIG1hcmtldA==',
+        "RGVtbyBlbnZpcm9ubWVudCBjb25maWd1cmF0aW9uIGFuZCBwcm9zcGVjdCByZXF1aXJlb"\
+          "WVudC1kcml2ZW4gZnVuY3Rpb24gZGV2ZWxvcG1lbnQ=",
+        "UHJvZHVjdCBsb2NhbGl6YXRpb24gZGV2ZWxvcG1lbnQgZm9yIEphcGFuZXNlIG1hcmtld"\
+          "A==",
         'Q3VzdG9tZXIgcHJvZHVjdCB0cmFpbmluZw==',
         'SmFwYW4gYW5kIG92ZXJzZWFzIHRyYWRlIHNob3dzL21hcmtldGluZyBldmVudHM='
       )
