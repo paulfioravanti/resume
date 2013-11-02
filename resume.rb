@@ -229,6 +229,21 @@ class Link
     d('aHR0cHM6Ly93d3cudW5pc2EuZWR1LmF1Lw==')
   end
   private_class_method :mit
+
+  def self.bib
+    d('aHR0cDovL3d3dy5mbGluZGVycy5lZHUuYXUv')
+  end
+  private_class_method :bib
+
+  def self.ryu
+    d('aHR0cDovL3d3dy5yeXVrb2t1LmFjLmpwL2VuZ2xpc2gyL2luZGV4LnBocA==')
+  end
+  private_class_method :ryu
+
+  def self.tafe
+    d('aHR0cDovL3d3dy50YWZlc2EuZWR1LmF1')
+  end
+  private_class_method :tafe
 end
 
 class Image
@@ -330,6 +345,21 @@ class Image
     open('http://farm4.staticflickr.com/3792/8812488692_96818be468_m.jpg')
   end
   private_class_method :mit
+
+  def self.bib
+    open('http://farm4.staticflickr.com/3707/8812488974_71c6981155_m.jpg')
+  end
+  private_class_method :bib
+
+  def self.ryu
+    open('http://farm8.staticflickr.com/7428/8812488856_c4c1b1f418_m.jpg')
+  end
+  private_class_method :ryu
+
+  def self.tafe
+    open('http://farm8.staticflickr.com/7377/8812488734_e43ce6742b_m.jpg')
+  end
+  private_class_method :tafe
 end
 
 class Resource
