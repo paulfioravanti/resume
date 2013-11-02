@@ -224,6 +224,11 @@ class Link
     d('aHR0cDovL3d3dy5zb3V0aGF1c3RyYWxpYS5jb20v')
   end
   private_class_method :satc
+
+  def self.mit
+    d('aHR0cHM6Ly93d3cudW5pc2EuZWR1LmF1Lw==')
+  end
+  private_class_method :mit
 end
 
 class Image
@@ -320,6 +325,11 @@ class Image
     open('http://farm4.staticflickr.com/3804/8801903991_103f5a47f8_m.jpg')
   end
   private_class_method :satc
+
+  def self.mit
+    open('http://farm4.staticflickr.com/3792/8812488692_96818be468_m.jpg')
+  end
+  private_class_method :mit
 end
 
 class Resource
@@ -800,51 +810,34 @@ class Resume
       heading 'RWR1Y2F0aW9u'
 
       move_down 15
-      formatted_text([
-        {
-          text: d('TWFzdGVycyBvZiBJbmZvcm1hdGlvbiBUZWNobm9sb2d5'),
-          styles: [:bold]
-        }
-      ])
-      formatted_text([
-        {
-          text: d('VW5pdmVyc2l0eSBvZiBTb3V0aCBBdXN0cmFsaWE='),
-          styles: [:bold], size: 11
-        }
-      ])
-      formatted_text([
-        { text: d('MjAwNC0yMDA1IHw=') },
-        {
-          text: d('QWRlbGFpZGUsIEF1c3RyYWxpYQ=='),
-          link: d("aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZ"\
-                  "obD1lbiZnZW9jb2RlPSZxPTU1K05vcnRoK1RlcnJhY2UsK0FkZWxhaWRlK1NBKz"\
-                  "UwMDAmc2xsPS0zNC45NjE2OTIsMTM4LjYyMTM5OSZzc3BuPTAuMDU2ODM2LDAuM"\
-                  "DcxNTgzJnZwc3JjPTYmaWU9VVRGOCZocT0maG5lYXI9NTUrTm9ydGgrVGVycmFj"\
-                  "ZSwrQWRlbGFpZGUsK1NvdXRoK0F1c3RyYWxpYSs1MDAwJmxsPS0zNC45MjIxODI"\
-                  "sMTM4LjU5MDg1NiZzcG49MC4wMjg0MzIsMC4wMzU3OTEmdD1tJno9MTUmaXdsb2"\
-                  "M9QQ==")
-        }
-      ], color: '666666', size: 10)
+      position 'TWFzdGVycyBvZiBJbmZvcm1hdGlvbiBUZWNobm9sb2d5'
+      organisation 'VW5pdmVyc2l0eSBvZiBTb3V0aCBBdXN0cmFsaWE='
+      period_and_location(
+        period: 'MjAwNC0yMDA1IHw=',
+        location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
+        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZ"\
+              "obD1lbiZnZW9jb2RlPSZxPTU1K05vcnRoK1RlcnJhY2UsK0FkZWxhaWRlK1NBKz"\
+              "UwMDAmc2xsPS0zNC45NjE2OTIsMTM4LjYyMTM5OSZzc3BuPTAuMDU2ODM2LDAuM"\
+              "DcxNTgzJnZwc3JjPTYmaWU9VVRGOCZocT0maG5lYXI9NTUrTm9ydGgrVGVycmFj"\
+              "ZSwrQWRlbGFpZGUsK1NvdXRoK0F1c3RyYWxpYSs1MDAwJmxsPS0zNC45MjIxODI"\
+              "sMTM4LjU5MDg1NiZzcG49MC4wMjg0MzIsMC4wMzU3OTEmdD1tJno9MTUmaXdsb2"\
+              "M9QQ=="
+      )
 
       move_up 40
-      bounding_box([210, cursor], width: 35, height: 40) do
-        image open(
-          'http://farm4.staticflickr.com/3792/8812488692_96818be468_m.jpg'),
-          fit: [35, 40]
-        move_up 35
-        transparent(0) do
-          formatted_text([{
-            text: '|||',
-            size: 43,
-            link: d('aHR0cHM6Ly93d3cudW5pc2EuZWR1LmF1Lw=='),
-            align: :center
-          }])
-        end
-      end
-
-    ################################################################################
+      organisation_logo(
+        organisation: 'mit',
+        origin: 210,
+        width: 35,
+        height: 40,
+        fit: [35, 40],
+        move_up: 35,
+        bars: 3,
+        size: 43
+      )
+    ############################################################################
     ### BIB
-    ################################################################################
+    ############################################################################
       move_up 38
       formatted_text_box([
         {
