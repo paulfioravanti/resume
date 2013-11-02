@@ -40,9 +40,13 @@ module Colourable
 end
 
 class CLI
-  extend Colourable
+  include Colourable
 
   def self.start
+    new
+  end
+
+  def initialize
     check_ability_to_generate_resume
     generate_resume
     clean_up
@@ -52,7 +56,9 @@ class CLI
     puts string
   end
 
-  def self.check_ability_to_generate_resume
+  private
+
+  def check_ability_to_generate_resume
     unless required_gem_available?('prawn', '1.0.0.rc2')
       print yellow "May I please install version 1.0.0.rc2 of the 'Prawn'\n"\
                    "Ruby gem to help me generate a PDF (Y/N)? "
@@ -67,22 +73,19 @@ class CLI
     end
     require 'prawn'
   end
-  private_class_method :check_ability_to_generate_resume
 
-  def self.generate_resume
+  def generate_resume
     Resume.generate
   end
-  private_class_method :generate_resume
 
-  def self.clean_up
+  def clean_up
     puts green 'Resume generated successfully.'
     print yellow 'Would you like me to open the resume for you (Y/N)? '
     open_document if permission_granted?
     puts cyan 'Thanks for looking at my resume.  I hope to hear from you soon!'
   end
-  private_class_method :clean_up
 
-  def self.open_document
+  def open_document
     case RUBY_PLATFORM
     when %r(darwin)
       %x(open #{DOCUMENT_NAME}.pdf)
@@ -95,21 +98,18 @@ class CLI
                   "this computer. Please open it yourself."
     end
   end
-  private_class_method :open_document
 
-  def self.required_gem_available?(name, version)
+  def required_gem_available?(name, version)
     Gem::Specification.find_by_name(name).version >= Gem::Version.new(version)
   rescue Gem::LoadError # gem not installed
     false
   end
-  private_class_method :required_gem_available?
 
-  def self.permission_granted?
+  def permission_granted?
     gets.chomp.match(%r{\A(y|yes)\z}i)
   end
-  private_class_method :permission_granted?
 
-  def self.install_gem
+  def install_gem
     puts green 'Thank you kindly :-)'
     puts 'Installing Prawn gem version 1.0.0.rc2...'
     begin
@@ -123,7 +123,6 @@ class CLI
     puts green 'Prawn gem successfully installed.'
     Gem.clear_paths # Reset the dir and path values so Prawn can be required
   end
-  private_class_method :install_gem
 end
 
 module TextHelper
