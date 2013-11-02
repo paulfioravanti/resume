@@ -219,6 +219,11 @@ class Link
       "zLmh0bWw=")
   end
   private_class_method :jet
+
+  def self.satc
+    d('aHR0cDovL3d3dy5zb3V0aGF1c3RyYWxpYS5jb20v')
+  end
+  private_class_method :satc
 end
 
 class Image
@@ -310,6 +315,11 @@ class Image
     open('http://farm4.staticflickr.com/3690/8801904135_37197a468c_m.jpg')
   end
   private_class_method :jet
+
+  def self.satc
+    open('http://farm4.staticflickr.com/3804/8801903991_103f5a47f8_m.jpg')
+  end
+  private_class_method :satc
 end
 
 class Resource
@@ -385,7 +395,7 @@ module PDFHelper
     ], size: 14)
   end
 
-  def job_title(title)
+  def position(title)
     formatted_text([{ text: d(title), styles: [:bold] }])
   end
 
@@ -460,7 +470,7 @@ class Resume
     ### RC
     ############################################################################
       move_down 10
-      job_title 'U2VuaW9yIERldmVsb3Blcg=='
+      position 'U2VuaW9yIERldmVsb3Blcg=='
       organisation 'UmF0ZUNpdHkuY29tLmF1'
       period_and_location(
         period: 'SnVseSAyMDEzIC0gUHJlc2VudCB8',
@@ -507,7 +517,7 @@ class Resume
     ### FL
     ############################################################################
       move_down 15
-      job_title 'UnVieSBEZXZlbG9wZXI='
+      position 'UnVieSBEZXZlbG9wZXI='
       organisation 'RnJlZWxhbmNl'
       period_and_location(
         period: 'U2VwdGVtYmVyIDIwMTIg4oCTIEp1bHkgMjAxMyB8ICA=',
@@ -550,7 +560,7 @@ class Resume
     ### GW
     ############################################################################
       move_down 15
-      job_title 'UHJlLXNhbGVzIENvbnN1bHRhbnQ='
+      position 'UHJlLXNhbGVzIENvbnN1bHRhbnQ='
       organisation 'R3VpZGV3aXJlIFNvZnR3YXJl'
       period_and_location(
         period: 'SmFudWFyeSAyMDA5IOKAkyBTZXB0ZW1iZXIgMjAxMSB8ICA=',
@@ -608,8 +618,8 @@ class Resume
     ### RNT
     ############################################################################
       move_down 15
-      job_title "SW1wbGVtZW50YXRpb24gQ29uc3VsdGFudCwgUHJvZmVzc2lvbmFsIFNlcn"\
-                "ZpY2Vz"
+      position "SW1wbGVtZW50YXRpb24gQ29uc3VsdGFudCwgUHJvZmVzc2lvbmFsIFNlcn"\
+               "ZpY2Vz"
       organisation 'UmlnaHQgTm93IFRlY2hub2xvZ2llcw=='
       period_and_location(
         period: 'SnVseSAyMDA3IOKAkyBBdWd1c3QgMjAwOCB8ICA=',
@@ -670,7 +680,7 @@ class Resume
     ### SRA
     ############################################################################
       move_down 15
-      job_title 'U29mdHdhcmUgRW5naW5lZXI='
+      position 'U29mdHdhcmUgRW5naW5lZXI='
       organisation 'U29mdHdhcmUgUmVzZWFyY2ggQXNzb2NpYXRlcyAoU1JBKQ=='
       period_and_location(
         period: 'QXByaWwgMjAwNiDigJMgSnVuZSAyMDA3IHwgIA==',
@@ -708,7 +718,7 @@ class Resume
     ### JET
     ############################################################################
       move_down 15
-      job_title 'Q29vcmRpbmF0b3Igb2YgSW50ZXJuYXRpb25hbCBSZWxhdGlvbnMgKENJUik='
+      position 'Q29vcmRpbmF0b3Igb2YgSW50ZXJuYXRpb25hbCBSZWxhdGlvbnMgKENJUik='
       organisation "SmFwYW4gRXhjaGFuZ2UgYW5kIFRlYWNoaW5nIFByb2dyYW1tZSAoSkVUK"\
                    "Q=="
       period_and_location(
@@ -747,63 +757,48 @@ class Resume
     ### SATC
     ############################################################################
       move_down 15
-      formatted_text([
-        {
-          text: d("SW50ZXJuYXRpb25hbCBNYXJrZXRpbmcgQXNzaXN0YW50IOKAkyBBc2lhIGFuZCB"\
-                  "KYXBhbg=="),
-          styles: [:bold]
-        }
-      ])
-      formatted_text([
-        {
-          text: d('U291dGggQXVzdHJhbGlhbiBUb3VyaXNtIENvbW1pc3Npb24='),
-          styles: [:bold], size: 11
-        }
-      ])
-      formatted_text([
-        { text: d('TWF5IDIwMDAg4oCTIE1heSAyMDAxIHwgIA==') },
-        {
-          text: d('QWRlbGFpZGUsIEF1c3RyYWxpYQ=='),
-          link: d("aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZ"\
-                  "obD1lbiZnZW9jb2RlPSZxPTUwK0dyZW5mZWxsK1N0LCtBZGVsYWlkZStTQSZhcT"\
-                  "0mc2xsPS0zNC45MjQyMjMsMTM4LjYwMTcxMyZzc3BuPTAuMDU3MTQzLDAuMDcxN"\
-                  "TgzJnZwc3JjPTYmZz01MCtHcmVuZmVsbCtTdCwrQWRlbGFpZGUrU0EmaWU9VVRG"\
-                  "OCZocT0maG5lYXI9NTArR3JlbmZlbGwrU3QsK0FkZWxhaWRlK1NvdXRoK0F1c3R"\
-                  "yYWxpYSs1MDAwJmxsPS0zNC45MjQwODIsMTM4LjYwMTY5MiZzcG49MC4wMTQyMT"\
-                  "UsMC4wMTc4OTYmdD1tJno9MTYmaXdsb2M9QQ==")
-        }
-      ], color: '666666', size: 10)
+      position "SW50ZXJuYXRpb25hbCBNYXJrZXRpbmcgQXNzaXN0YW50IOKAkyBBc2lhIGFuZ"\
+               "CBKYXBhbg=="
+      organisation 'U291dGggQXVzdHJhbGlhbiBUb3VyaXNtIENvbW1pc3Npb24='
+      period_and_location(
+        period: 'TWF5IDIwMDAg4oCTIE1heSAyMDAxIHwgIA==',
+        location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
+        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZ"\
+              "obD1lbiZnZW9jb2RlPSZxPTUwK0dyZW5mZWxsK1N0LCtBZGVsYWlkZStTQSZhcT"\
+              "0mc2xsPS0zNC45MjQyMjMsMTM4LjYwMTcxMyZzc3BuPTAuMDU3MTQzLDAuMDcxN"\
+              "TgzJnZwc3JjPTYmZz01MCtHcmVuZmVsbCtTdCwrQWRlbGFpZGUrU0EmaWU9VVRG"\
+              "OCZocT0maG5lYXI9NTArR3JlbmZlbGwrU3QsK0FkZWxhaWRlK1NvdXRoK0F1c3R"\
+              "yYWxpYSs1MDAwJmxsPS0zNC45MjQwODIsMTM4LjYwMTY5MiZzcG49MC4wMTQyMT"\
+              "UsMC4wMTc4OTYmdD1tJno9MTYmaXdsb2M9QQ=="
+      )
 
       move_up 40
-      bounding_box([430, cursor], width: 90, height: 40) do
-        image open(
-          'http://farm4.staticflickr.com/3804/8801903991_103f5a47f8_m.jpg'),
-          fit: [110, 40], align: :center
-        move_up 40
-        transparent(0) do
-          formatted_text([{
-            text: '||||||||',
-            size: 43,
-            link: d('aHR0cDovL3d3dy5zb3V0aGF1c3RyYWxpYS5jb20v')
-          }])
-        end
-      end
+      organisation_logo(
+        organisation: 'satc',
+        origin: 430,
+        width: 90,
+        height: 40,
+        fit: [110, 40],
+        move_up: 40,
+        bars: 8,
+        size: 43
+      )
 
       move_down 10
-      text d "QXNzaXN0IHdpdGggdGhlIHByb21vdGlvbi9tYXJrZXRpbmcgb2YgU291dGggQXVzdHJh"\
-             "bGlhIGFzIGEgdG91cmlzbSBkZXN0aW5hdGlvbiB0byBBc2lhIGFuZCBKYXBhbi4="
+      text d "QXNzaXN0IHdpdGggdGhlIHByb21vdGlvbi9tYXJrZXRpbmcgb2YgU291dGggQXVz"\
+             "dHJhbGlhIGFzIGEgdG91cmlzbSBkZXN0aW5hdGlvbiB0byBBc2lhIGFuZCBKYXBh"\
+             "bi4="
 
       move_down 10
       stroke_horizontal_rule { color '666666' }
-
+    ############################################################################
+    ### MIT
+    ############################################################################
       CLI.report('Creating education section...')
 
       move_down 10
       heading 'RWR1Y2F0aW9u'
 
-    ################################################################################
-    ### MIT
-    ################################################################################
       move_down 15
       formatted_text([
         {
