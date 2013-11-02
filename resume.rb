@@ -103,7 +103,7 @@ end
 
 def social_media_resources
   %w(email linked_in github stackoverflow speakerdeck vimeo code_school blog).map do |item|
-    Resource.for(name)
+    Resource.for(item)
   end
 end
 
@@ -157,6 +157,9 @@ require 'prawn'
 require 'open-uri'
 
 class Image
+  def self.for(resource)
+    send(:"#{resource}")
+  end
 
   def self.background
     open('http://farm6.staticflickr.com/5453/8801916021_3ac1df6072_o_d.jpg')
@@ -202,6 +205,10 @@ end
 class Link
   include TextHelper
 
+  def self.for(resource)
+    send(:"#{resource}")
+  end
+
   def self.email
     d('bWFpbHRvOnBhdWwuZmlvcmF2YW50aUBnbWFpbC5jb20=')
   end
@@ -235,7 +242,7 @@ class Link
     d('aHR0cHM6Ly90d2l0dGVyLmNvbS9wZWZpb3JhdmFudGk=')
   end
 
-  def self.blog_link
+  def self.blog
     d('aHR0cDovL3BhdWxmaW9yYXZhbnRpLmNvbS9hYm91dA==')
   end
 end
