@@ -1,4 +1,8 @@
 # encoding: utf-8
+require 'base64'
+require 'prawn'
+require 'open-uri'
+
 DOCUMENT_NAME = 'Resume'
 ################################################################################
 ### This resume lives online at https://github.com/paulfioravanti/resume
@@ -14,148 +18,57 @@ DOCUMENT_NAME = 'Resume'
 ################################################################################
 ### Script helper methods
 ################################################################################
-
-# CLI <-> Resume Generator -> Resume -> Resource -> Media Bank
-
 module TextHelper
   def d(string) # decode string
     Base64.strict_decode64(string)
   end
 end
 
-def colorize(text, color_code)
-  "\e[#{color_code}m#{text}\e[0m"
-end
-
-def red(text)
-  colorize(text, 31)
-end
-
-def yellow(text)
-  colorize(text, 33)
-end
-
-def green(text)
-  colorize(text, 32)
-end
-
-def cyan(text)
-  colorize(text, 36)
-end
-
-def permission_granted?
-  gets.chomp.match(%r{\A(y|yes)\z}i)
-end
-
-def required_gem_available?(name, version)
-  Gem::Specification.find_by_name(name).version >= Gem::Version.new(version)
-rescue Gem::LoadError # gem not installed
-  false
-end
-
-def open_document
-  case RUBY_PLATFORM
-  when %r(darwin)
-    %x(open #{DOCUMENT_NAME}.pdf)
-  when %r(linux)
-    %x(xdg-open #{DOCUMENT_NAME}.pdf)
-  when %r(windows)
-    %x(cmd /c "start #{DOCUMENT_NAME}.pdf")
-  else
-    puts yellow "Sorry, I can't figure out how to open the resume on\n"\
-                "this computer. Please open it yourself."
+module CLIHelper
+  def colorize(text, color_code)
+    "\e[#{color_code}m#{text}\e[0m"
   end
-end
 
-def bullet_list(*items)
-  table_data = []
-  items.each do |item|
-    table_data << ['•', d(item)]
+  def red(text)
+    colorize(text, 31)
   end
-  table(table_data, cell_style: { borders: [] })
-end
 
-def social_media_links
-  resources = social_media_resources
-  x_position = 0
-  bounding_box_for(resources.first, x_position)
-  x_position += 45
-  resources[1..-1].each do |image_link|
-    move_up 46.25
-    bounding_box_for(image_link, x_position)
-    x_position += 45
+  def yellow(text)
+    colorize(text, 33)
   end
-end
 
-def bounding_box_for(image_link, x_position)
-  bounding_box([x_position, cursor], width: 35) do
-    image image_link.image, fit: [35, 35], align: :center
-    move_up 35
-    transparent(0) do
-      formatted_text([{
-        text: '|||',
-        size: 40,
-        link: image_link.link
-      }], align: :center)
+  def green(text)
+    colorize(text, 32)
+  end
+
+  def cyan(text)
+    colorize(text, 36)
+  end
+
+  def permission_granted?
+    gets.chomp.match(%r{\A(y|yes)\z}i)
+  end
+
+  def required_gem_available?(name, version)
+    Gem::Specification.find_by_name(name).version >= Gem::Version.new(version)
+  rescue Gem::LoadError # gem not installed
+    false
+  end
+
+  def open_document
+    case RUBY_PLATFORM
+    when %r(darwin)
+      %x(open #{DOCUMENT_NAME}.pdf)
+    when %r(linux)
+      %x(xdg-open #{DOCUMENT_NAME}.pdf)
+    when %r(windows)
+      %x(cmd /c "start #{DOCUMENT_NAME}.pdf")
+    else
+      puts yellow "Sorry, I can't figure out how to open the resume on\n"\
+                  "this computer. Please open it yourself."
     end
   end
 end
-
-def social_media_resources
-  %w(email linked_in github stackoverflow
-     speakerdeck vimeo code_school blog).map do |item|
-    Resource.for(item)
-  end
-end
-
-def heading(string)
-  formatted_text([{ text: d(string), styles: [:bold], color: '666666' }])
-end
-
-def name(string)
-  font('Times-Roman', size: 20) { text d(string) }
-end
-
-def description(ruby, rest)
-  formatted_text([
-    { text: d(ruby), color: '85200C' },
-    { text: d(rest) }
-  ], size: 14)
-end
-
-################################################################################
-### Get dependent gems if not available
-################################################################################
-unless required_gem_available?('prawn', '1.0.0.rc2')
-  print yellow "May I please install version 1.0.0.rc2 of the 'Prawn'\n"\
-               "Ruby gem to help me generate a PDF (Y/N)? "
-  if permission_granted?
-    puts green 'Thank you kindly :-)'
-    puts 'Installing Prawn gem version 1.0.0.rc2...'
-    begin
-      %x(gem install prawn -v 1.0.0.rc2)
-    rescue
-      puts red "Sorry, for some reason I wasn't able to install prawn.\n"\
-               "Either try again or ask me directly for a PDF copy of "\
-               "my resume."
-      exit
-    end
-    puts green 'Prawn gem successfully installed.'
-    Gem.clear_paths # Reset the dir and path values so Prawn can be required
-  else
-    puts red "Sorry, I won't be able to generate a PDF without this\n"\
-             "specific version of the Prawn gem.\n"\
-             "Please ask me directly for a PDF copy of my resume."
-    exit
-  end
-end
-
-################################################################################
-### Generate document
-################################################################################
-require 'base64'
-require 'prawn'
-require 'open-uri'
 
 class Image
   def self.for(resource)
@@ -262,7 +175,95 @@ class Resource
   end
 end
 
-include TextHelper
+def bullet_list(*items)
+  table_data = []
+  items.each do |item|
+    table_data << ['•', d(item)]
+  end
+  table(table_data, cell_style: { borders: [] })
+end
+
+def social_media_links
+  resources = social_media_resources
+  x_position = 0
+  bounding_box_for(resources.first, x_position)
+  x_position += 45
+  resources[1..-1].each do |image_link|
+    move_up 46.25
+    bounding_box_for(image_link, x_position)
+    x_position += 45
+  end
+end
+
+def bounding_box_for(image_link, x_position)
+  bounding_box([x_position, cursor], width: 35) do
+    image image_link.image, fit: [35, 35], align: :center
+    move_up 35
+    transparent(0) do
+      formatted_text([{
+        text: '|||',
+        size: 40,
+        link: image_link.link
+      }], align: :center)
+    end
+  end
+end
+
+def social_media_resources
+  %w(email linked_in github stackoverflow
+     speakerdeck vimeo code_school blog).map do |item|
+    Resource.for(item)
+  end
+end
+
+def heading(string)
+  formatted_text([{ text: d(string), styles: [:bold], color: '666666' }])
+end
+
+def name(string)
+  font('Times-Roman', size: 20) { text d(string) }
+end
+
+def description(ruby, rest)
+  formatted_text([
+    { text: d(ruby), color: '85200C' },
+    { text: d(rest) }
+  ], size: 14)
+end
+
+################################################################################
+### Get dependent gems if not available
+################################################################################
+unless required_gem_available?('prawn', '1.0.0.rc2')
+  print yellow "May I please install version 1.0.0.rc2 of the 'Prawn'\n"\
+               "Ruby gem to help me generate a PDF (Y/N)? "
+  if permission_granted?
+    puts green 'Thank you kindly :-)'
+    puts 'Installing Prawn gem version 1.0.0.rc2...'
+    begin
+      %x(gem install prawn -v 1.0.0.rc2)
+    rescue
+      puts red "Sorry, for some reason I wasn't able to install prawn.\n"\
+               "Either try again or ask me directly for a PDF copy of "\
+               "my resume."
+      exit
+    end
+    puts green 'Prawn gem successfully installed.'
+    Gem.clear_paths # Reset the dir and path values so Prawn can be required
+  else
+    puts red "Sorry, I won't be able to generate a PDF without this\n"\
+             "specific version of the Prawn gem.\n"\
+             "Please ask me directly for a PDF copy of my resume."
+    exit
+  end
+end
+
+################################################################################
+### Generate document
+################################################################################
+
+
+include TextHelper, CLIHelper
 
 Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   margin_top: 0.75, margin_bottom: 0.75, margin_left: 1, margin_right: 1,
@@ -904,3 +905,7 @@ puts green 'Resume generated successfully.'
 print yellow 'Would you like me to open the resume for you (Y/N)? '
 open_document if permission_granted?
 puts cyan 'Thanks for looking at my resume.  I hope to hear from you soon!'
+
+if __FILE__ == $0
+  CLI.start
+end
