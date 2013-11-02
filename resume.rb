@@ -213,6 +213,12 @@ class Link
     d('aHR0cDovL3d3dy5zcmEuY28uanAvaW5kZXgtZW4uc2h0bWw=')
   end
   private_class_method :sra
+
+  def self.jet
+    d("aHR0cDovL3d3dy5qZXRwcm9ncmFtbWUub3JnL2UvYXNwaXJpbmcvcG9zaXRpb25"\
+      "zLmh0bWw=")
+  end
+  private_class_method :jet
 end
 
 class Image
@@ -299,6 +305,11 @@ class Image
     open('http://farm4.staticflickr.com/3801/8801903945_723a5d7276_m.jpg')
   end
   private_class_method :sra
+
+  def self.jet
+    open('http://farm4.staticflickr.com/3690/8801904135_37197a468c_m.jpg')
+  end
+  private_class_method :jet
 end
 
 class Resource
@@ -697,60 +708,44 @@ class Resume
     ### JET
     ############################################################################
       move_down 15
-      formatted_text([
-        {
-          text: d('Q29vcmRpbmF0b3Igb2YgSW50ZXJuYXRpb25hbCBSZWxhdGlvbnMgKENJUik='),
-          styles: [:bold]
-        }
-      ])
-      formatted_text([
-        {
-          text: d('SmFwYW4gRXhjaGFuZ2UgYW5kIFRlYWNoaW5nIFByb2dyYW1tZSAoSkVUKQ=='),
-          styles: [:bold], size: 11
-        }
-      ])
-      formatted_text([
-        { text: d('SnVseSAyMDAxIOKAkyBKdWx5IDIwMDQgfCAg') },
-        {
-          text: d('S29jaGksIEphcGFu'),
-          link: d("aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZ"\
-                  "obD1lbiZnZW9jb2RlPSZxPSVFMyU4MCU5Mjc4MC0wODUwJUU5JUFCJTk4JUU3JT"\
-                  "lGJUE1JUU1JUI4JTgyJUU0JUI4JUI4JUUzJTgzJThFJUU1JTg2JTg1MSVFNCVCO"\
-                  "CU4MSVFNyU5QiVBRTclRTclOTUlQUE1MiVFNSU4RiVCNyZhcT0mc2xsPS0zNC45"\
-                  "NjE2OTIsMTM4LjYyMTM5OSZzc3BuPTAuMDU2ODM2LDAuMDcxNTgzJnZwc3JjPTY"\
-                  "maWU9VVRGOCZocT0maG5lYXI9SmFwYW4sK0slQzUlOERjaGkta2VuLCtLJUM1JT"\
-                  "hEY2hpLXNoaSwrTWFydW5vdWNoaSwrJUVGJUJDJTkxJUU0JUI4JTgxJUU3JTlCJ"\
-                  "UFFJUVGJUJDJTk3JUUyJTg4JTkyJUVGJUJDJTk1JUVGJUJDJTkyJmxsPTMzLjU1"\
-                  "OTQ1NiwxMzMuNTI4MzA0JnNwbj0wLjAxNDQ0OCwwLjAxNzg5NiZ0PW0mej0xNiZ"\
-                  "pd2xvYz1B")
-        }
-      ], color: '666666', size: 10)
+      job_title 'Q29vcmRpbmF0b3Igb2YgSW50ZXJuYXRpb25hbCBSZWxhdGlvbnMgKENJUik='
+      organisation "SmFwYW4gRXhjaGFuZ2UgYW5kIFRlYWNoaW5nIFByb2dyYW1tZSAoSkVUK"\
+                   "Q=="
+      period_and_location(
+        period: 'SnVseSAyMDAxIOKAkyBKdWx5IDIwMDQgfCAg',
+        location: 'S29jaGksIEphcGFu',
+        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZ"\
+              "obD1lbiZnZW9jb2RlPSZxPSVFMyU4MCU5Mjc4MC0wODUwJUU5JUFCJTk4JUU3JT"\
+              "lGJUE1JUU1JUI4JTgyJUU0JUI4JUI4JUUzJTgzJThFJUU1JTg2JTg1MSVFNCVCO"\
+              "CU4MSVFNyU5QiVBRTclRTclOTUlQUE1MiVFNSU4RiVCNyZhcT0mc2xsPS0zNC45"\
+              "NjE2OTIsMTM4LjYyMTM5OSZzc3BuPTAuMDU2ODM2LDAuMDcxNTgzJnZwc3JjPTY"\
+              "maWU9VVRGOCZocT0maG5lYXI9SmFwYW4sK0slQzUlOERjaGkta2VuLCtLJUM1JT"\
+              "hEY2hpLXNoaSwrTWFydW5vdWNoaSwrJUVGJUJDJTkxJUU0JUI4JTgxJUU3JTlCJ"\
+              "UFFJUVGJUJDJTk3JUUyJTg4JTkyJUVGJUJDJTk1JUVGJUJDJTkyJmxsPTMzLjU1"\
+              "OTQ1NiwxMzMuNTI4MzA0JnNwbj0wLjAxNDQ0OCwwLjAxNzg5NiZ0PW0mej0xNiZ"\
+              "pd2xvYz1B"
+      )
 
       move_up 40
-      bounding_box([435, cursor], width: 75, height: 35) do
-        image open(
-          'http://farm4.staticflickr.com/3690/8801904135_37197a468c_m.jpg'),
-          fit: [110, 35], align: :center
-        move_up 34
-        transparent(0) do
-          formatted_text([{
-            text: '||||||||',
-            size: 36,
-            link: d("aHR0cDovL3d3dy5qZXRwcm9ncmFtbWUub3JnL2UvYXNwaXJpbmcvcG9zaXRpb"\
-                    "25zLmh0bWw=")
-          }])
-        end
-      end
+      organisation_logo(
+        organisation: 'jet',
+        origin: 435,
+        width: 75,
+        height: 35,
+        fit: [110, 35],
+        move_up: 34,
+        bars: 8,
+        size: 36
+      )
 
       move_down 13
-      text d "VHJhbnNsYXRpb24vaW50ZXJwcmV0aW5nOyBncmFzcy1yb290cyBjb21tdW5pdHkgYWN0"\
-             "aXZpdGllcyBhbmQgam91cm5hbGlzbTsgcGxhbm5pbmcvaW1wbGVtZW50aW5nIGludGVy"\
-             "bmF0aW9uYWwgZXhjaGFuZ2UgcHJvamVjdHM7IGluYm91bmQgZ3Vlc3QgaG9zcGl0YWxp"\
-             "dHk7IG91dGJvdW5kIHRvdXItZ3VpZGluZw=="
-
-    ################################################################################
+      text d "VHJhbnNsYXRpb24vaW50ZXJwcmV0aW5nOyBncmFzcy1yb290cyBjb21tdW5pdHkg"\
+             "YWN0aXZpdGllcyBhbmQgam91cm5hbGlzbTsgcGxhbm5pbmcvaW1wbGVtZW50aW5n"\
+             "IGludGVybmF0aW9uYWwgZXhjaGFuZ2UgcHJvamVjdHM7IGluYm91bmQgZ3Vlc3Qg"\
+             "aG9zcGl0YWxpdHk7IG91dGJvdW5kIHRvdXItZ3VpZGluZw=="
+    ############################################################################
     ### SATC
-    ################################################################################
+    ############################################################################
       move_down 15
       formatted_text([
         {
