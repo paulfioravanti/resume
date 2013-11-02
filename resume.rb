@@ -436,7 +436,7 @@ module PDFHelper
   end
 
   def position(title, options = {})
-    if options[:at].present?
+    if options.has_key?(:at)
       formatted_text_box(
         [{ text: d(title), styles: [:bold] }], at: [options[:at], cursor]
       )
@@ -446,7 +446,7 @@ module PDFHelper
   end
 
   def organisation(name, options = {})
-    if options[:at].present?
+    if options.has_key?(:at)
       formatted_text_box(
         [{ text: d(name), styles: [:bold], size: 11 }],
         at: [options[:at], cursor]
@@ -457,7 +457,7 @@ module PDFHelper
   end
 
   def period_and_location(options)
-    if options[:at].present?
+    if options.has_key?(:at)
       formatted_text_box(
         [
           { text: d(options[:period]), color: '666666', size: 10 },
@@ -551,7 +551,7 @@ class Resume
         width: 115,
         height: 40,
         fit: [110, 40],
-        move_up: 40
+        move_up: 40,
         bars: 10,
         size: 43
       )
