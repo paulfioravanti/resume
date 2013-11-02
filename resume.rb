@@ -75,11 +75,12 @@ def bullet_list(*items)
   table(table_data, cell_style: { borders: [] })
 end
 
-def social_media_links(image_links)
+def social_media_links
+  resources = social_media_resources
   x_position = 0
-  bounding_box_for(image_links.first, x_position)
+  bounding_box_for(resources.first, x_position)
   x_position += 45
-  image_links[1..-1].each do |image_link|
+  resources[1..-1].each do |image_link|
     move_up 46.25
     bounding_box_for(image_link, x_position)
     x_position += 45
@@ -97,6 +98,12 @@ def bounding_box_for(image_link, x_position)
         link: image_link.link
       }], align: :center)
     end
+  end
+end
+
+def social_media_resources
+  %w(email linked_in github stackoverflow speakerdeck vimeo code_school blog).map do |item|
+    Resource.for(name)
   end
 end
 
@@ -149,84 +156,83 @@ require 'base64'
 require 'prawn'
 require 'open-uri'
 
-class MediaBank
-  include TextHelper
+class Image
 
-  def self.background_image
+  def self.background
     open('http://farm6.staticflickr.com/5453/8801916021_3ac1df6072_o_d.jpg')
   end
 
-  def self.background_link
-    'http://farm6.staticflickr.com/5453/8801916021_3ac1df6072_o_d.jpg'
-  end
-
-  def self.email_image
+  def self.email
     open('http://farm3.staticflickr.com/2826/8753727736_2a7a294527_m.jpg')
   end
 
-  def self.email_link
-    d('bWFpbHRvOnBhdWwuZmlvcmF2YW50aUBnbWFpbC5jb20=')
-  end
-
-  def self.linked_in_image
+  def self.linked_in
     open('http://farm4.staticflickr.com/3687/8809717292_4938937a94_m.jpg')
   end
 
-  def self.linked_in_link
-    d('aHR0cDovL2xpbmtlZGluLmNvbS9pbi9wYXVsZmlvcmF2YW50aQ==')
-  end
-
-  def self.github_image
+  def self.github
     open('http://farm4.staticflickr.com/3828/8799239149_d23e4acff0_m.jpg')
   end
 
-  def self.github_link
-    d('aHR0cDovL2dpdGh1Yi5jb20vcGF1bGZpb3JhdmFudGk=')
-  end
-
-  def self.stackoverflow_image
+  def self.stackoverflow
     open('http://farm3.staticflickr.com/2815/8799253647_e4ec3ab1bc_m.jpg')
   end
 
-  def self.stackoverflow_link
+  def self.speakerdeck
+    open('http://farm8.staticflickr.com/7404/8799250189_4125b90a14_m.jpg')
+  end
+
+  def self.vimeo
+    open('http://farm9.staticflickr.com/8546/8809862216_0cdd40c3dc_m.jpg')
+  end
+
+  def self.code_school
+    open('http://farm4.staticflickr.com/3714/9015339024_0651daf2c4_m.jpg')
+  end
+
+  def self.twitter
+    open('http://farm3.staticflickr.com/2837/8799235993_26a7d17540_m.jpg')
+  end
+
+  def self.blog
+    open('http://farm4.staticflickr.com/3752/8809826162_e4d765d15b_m.jpg')
+  end
+end
+
+class Link
+  include TextHelper
+
+  def self.email
+    d('bWFpbHRvOnBhdWwuZmlvcmF2YW50aUBnbWFpbC5jb20=')
+  end
+
+  def self.linked_in
+    d('aHR0cDovL2xpbmtlZGluLmNvbS9pbi9wYXVsZmlvcmF2YW50aQ==')
+  end
+
+  def self.github
+    d('aHR0cDovL2dpdGh1Yi5jb20vcGF1bGZpb3JhdmFudGk=')
+  end
+
+  def self.stackoverflow
     d("aHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL3VzZXJzLzU2Nzg2My9wYXVsLWZpb3Jh"\
       "dmFudGk=")
   end
 
-  def self.speakerdeck_image
-    open('http://farm8.staticflickr.com/7404/8799250189_4125b90a14_m.jpg')
-  end
-
-  def self.speakerdeck_link
+  def self.speakerdeck
     d('aHR0cHM6Ly9zcGVha2VyZGVjay5jb20vcGF1bGZpb3JhdmFudGk=')
   end
 
-  def self.vimeo_image
-    open('http://farm9.staticflickr.com/8546/8809862216_0cdd40c3dc_m.jpg')
-  end
-
-  def self.vimeo_link
+  def self.vimeo
     d('aHR0cHM6Ly92aW1lby5jb20vcGF1bGZpb3JhdmFudGk=')
   end
 
-  def self.code_school_image
-    open('http://farm4.staticflickr.com/3714/9015339024_0651daf2c4_m.jpg')
-  end
-
-  def self.code_school_link
+  def self.code_school
     d('aHR0cDovL3d3dy5jb2Rlc2Nob29sLmNvbS91c2Vycy9wYXVsZmlvcmF2YW50aQ==')
   end
 
-  def self.twitter_image
-    open('http://farm3.staticflickr.com/2837/8799235993_26a7d17540_m.jpg')
-  end
-
-  def self.twitter_link
+  def self.twitter
     d('aHR0cHM6Ly90d2l0dGVyLmNvbS9wZWZpb3JhdmFudGk=')
-  end
-
-  def self.blog_image
-   open('http://farm4.staticflickr.com/3752/8809826162_e4d765d15b_m.jpg')
   end
 
   def self.blog_link
@@ -238,10 +244,7 @@ class Resource
   attr_reader :image, :link
 
   def self.for(name)
-    new(
-      image: MediaBank.send(:"#{name}_image"),
-      link: MediaBank.send(:"#{name}_link")
-    )
+    new(image: Image.for(:"#{name}"), link: Link.for(:"#{name}"))
   end
 
   def initialize(options)
@@ -255,7 +258,7 @@ include TextHelper
 
 Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   margin_top: 0.75, margin_bottom: 0.75, margin_left: 1, margin_right: 1,
-  background: Resource.for('background').image,
+  background: Image.for('background'),
   repeat: true) do
 
   puts "Generating PDF.  This shouldn't take longer than a few seconds..."
@@ -270,16 +273,7 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   puts 'Creating social media links section...'
 
   move_down 5
-  social_media_links([
-    Resource.for('email'),
-    Resource.for('linked_in'),
-    Resource.for('github'),
-    Resource.for('stackoverflow'),
-    Resource.for('speakerdeck'),
-    Resource.for('vimeo'),
-    Resource.for('code_school'),
-    Resource.for('blog')
-  ])
+  social_media_links
 
   stroke_horizontal_rule { color '666666' }
 
