@@ -182,6 +182,11 @@ class Link
     d('aHR0cDovL3BhdWxmaW9yYXZhbnRpLmNvbS9hYm91dA==')
   end
   private_class_method :blog
+
+  def self.rc
+    d('aHR0cDovL3d3dy5yYXRlY2l0eS5jb20uYXUv')
+  end
+  private_class_method :rc
 end
 
 class Image
@@ -238,6 +243,10 @@ class Image
     open('http://farm4.staticflickr.com/3752/8809826162_e4d765d15b_m.jpg')
   end
   private_class_method :blog
+
+  def self.rc
+    open('http://farm6.staticflickr.com/5484/9192095974_b49a1fc142_m.jpg')
+  end
 end
 
 class Resource
@@ -312,6 +321,47 @@ module PDFHelper
       { text: d(rest) }
     ], size: 14)
   end
+
+  def job_title(title)
+    formatted_text([{ text: d(title), styles: [:bold] }])
+  end
+
+  def organisation(name)
+    formatted_text([
+      {
+        text: d(name),
+        styles: [:bold], size: 11
+      }
+    ])
+  end
+
+  def period_and_location(options)
+    formatted_text([
+      { text: d(options[:period]) },
+      {
+        text: d(options[:location]),
+        link: d(options[:link])
+      }
+    ], color: '666666', size: 10)
+  end
+
+  def organisation_logo(options)
+    bounding_box([options[:origin], cursor],
+                 width: options[:width],
+                 height: options[:height]) do
+      image Image.for(options[:organisation]),
+            fit: options[:fit],
+            align: :center
+      move_up 40
+      transparent(0) do
+        formatted_text([{
+          text: '|' * options[:bars],
+          size: options[:size],
+          link: Link.for(options[:organisation])
+        }])
+      end
+    end
+  end
 end
 
 class Resume
@@ -324,84 +374,70 @@ class Resume
       background: ::Image.for('background'),
       repeat: true) do
 
-      CLI.report("Generating PDF. This shouldn't take longer than a few seconds...")
+      CLI.report "Generating PDF. "\
+                 "This shouldn't take longer than a few seconds..."
 
-      # name 'UGF1bCBGaW9yYXZhbnRp'
-      font('Times-Roman', size: 20) { text d('UGF1bCBGaW9yYXZhbnRp') }
+      name 'UGF1bCBGaW9yYXZhbnRp'
       description 'UnVieSBEZXZlbG9wZXIg',
-                  'YW5kIEluZm9ybWF0aW9uIFRlY2hub2xvZ3kgU2VydmljZXMgUHJvZmVzc2lvbmFs'
+                  "YW5kIEluZm9ybWF0aW9uIFRlY2hub2xvZ3kgU2VydmljZXMgUHJvZmVzc2l"\
+                  "vbmFs"
 
-    ################################################################################
+    ############################################################################
     ### Social Media
-    ################################################################################
-      CLI.report('Creating social media links section...')
-
+    ############################################################################
+      CLI.report 'Creating social media links section...'
       move_down 5
       social_media_links
-
       stroke_horizontal_rule { color '666666' }
 
-      CLI.report('Creating employment history section...')
-
+      CLI.report 'Creating employment history section...'
       move_down 10
       heading 'RW1wbG95bWVudCBIaXN0b3J5'
-
-    ################################################################################
+    ############################################################################
     ### RC
-    ################################################################################
+    ############################################################################
       move_down 10
-      formatted_text([{ text: d('U2VuaW9yIERldmVsb3Blcg=='), styles: [:bold] }])
-      formatted_text([
-        {
-          text: d('UmF0ZUNpdHkuY29tLmF1'),
-          styles: [:bold], size: 11
-        }
-      ])
-      formatted_text([
-        { text: d('SnVseSAyMDEzIC0gUHJlc2VudCB8') },
-        {
-          text: d('U3lkbmV5LCBBdXN0cmFsaWE='),
-          link: d("aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9xPTYxK0xhdmVuZGVyK1N"\
-                  "0K01pbHNvbnMrUG9pbnQrTlNXKzIwNjEmaGw9ZW4mbGw9LTMzLjg1MDYwMiwxNT"\
-                  "EuMjEzMTYmc3BuPTAuMDI3MjY1LDAuMDM4OTY3JnNsbD0tMzMuODQzNjU5LDE1M"\
-                  "S4yMDk5NDkmc3Nwbj0wLjAwNjgxNywwLjAwOTc0MiZobmVhcj02MStMYXZlbmRl"\
-                  "citTdCwrTWlsc29ucytQb2ludCtOZXcrU291dGgrV2FsZXMrMjA2MSZ0PW0mej0"\
-                  "xNQ==")
-        }
-      ], color: '666666', size: 10)
-
+      job_title 'U2VuaW9yIERldmVsb3Blcg=='
+      organisation 'UmF0ZUNpdHkuY29tLmF1'
+      period_and_location(
+        period: 'SnVseSAyMDEzIC0gUHJlc2VudCB8',
+        location: 'U3lkbmV5LCBBdXN0cmFsaWE=',
+        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9xPTYxK0xhdmVuZGVyK1N"\
+              "0K01pbHNvbnMrUG9pbnQrTlNXKzIwNjEmaGw9ZW4mbGw9LTMzLjg1MDYwMiwxNT"\
+              "EuMjEzMTYmc3BuPTAuMDI3MjY1LDAuMDM4OTY3JnNsbD0tMzMuODQzNjU5LDE1M"\
+              "S4yMDk5NDkmc3Nwbj0wLjAwNjgxNywwLjAwOTc0MiZobmVhcj02MStMYXZlbmRl"\
+              "citTdCwrTWlsc29ucytQb2ludCtOZXcrU291dGgrV2FsZXMrMjA2MSZ0PW0mej0"\
+              "xNQ=="
+      )
       move_up 40
-      bounding_box([415, cursor], width: 115, height: 40) do
-        image open(
-          'http://farm6.staticflickr.com/5484/9192095974_b49a1fc142_m.jpg'),
-          fit: [110, 40], align: :center
-        move_up 40
-        transparent(0) do
-          formatted_text([{
-            text: '||||||||||',
-            size: 43,
-            link: d('aHR0cDovL3d3dy5yYXRlY2l0eS5jb20uYXUv')
-          }])
-        end
-      end
+      organisation_logo(
+        organisation: 'rc',
+        origin: 415,
+        width: 115,
+        height: 40,
+        fit: [110, 40],
+        bars: 10,
+        size: 43
+      )
 
       move_down 10
-      text d "UnVieSBvbiBSYWlscyBkZXZlbG9wZXIgZm9yIFJhdGVDaXR5LmNvbS5hdSBmaW5hbmNp"\
-             "YWwgcHJvZHVjdHMgYW5kIHNlcnZpY2VzIGNvbXBhcmlzb24gd2Vic2l0ZS4="
+      text d "UnVieSBvbiBSYWlscyBkZXZlbG9wZXIgZm9yIFJhdGVDaXR5LmNvbS5hdSBmaW5h"\
+             "bmNpYWwgcHJvZHVjdHMgYW5kIHNlcnZpY2VzIGNvbXBhcmlzb24gd2Vic2l0ZS4="
 
       bullet_list(
-        "T3VyIHRlYW0gaXMgZmllcmNlbHkgQWdpbGUsIHdpdGggdGlnaHQgZGV2ZWxvcG1lbnQgZmVlZ"\
-          "GJhY2sgbG9vcHMgb2Ygb25lIHdlZWssIG1lYXN1cmVkIGFuZCBtYW5hZ2VkIHRyYW5zcGFy"\
-          "ZW50bHkgaW4gVHJlbGxvIGFuZCBkYWlseSBzdGFuZC11cCBtZWV0aW5ncw==",
-        "V2UgYWN0aXZlbHkgdXNlIFJTcGVjIGZvciB0ZXN0LWRyaXZlbiBkZXZlbG9wbWVudCwgYW5kI"\
-          "G1lYXN1cmUgb3VyIGNvZGUgcXVhbGl0eSB1c2luZyBzZXJ2aWNlcyBsaWtlIENvZGUgQ2xp"\
-          "bWF0ZSBhbmQgQ292ZXJhbGxz",
-        "R2l0aHViIHB1bGwgcmVxdWVzdHMsIGNvbnRpbnVvdXMgaW50ZWdyYXRpb24gd2l0aCBUcmF2a"\
-          "XMgUHJvLCBwZWVyIGNvZGUgcmV2aWV3LCBhbmQgY29udGludW91cyBzdGFnaW5nL3Byb2R1"\
-          "Y3Rpb24gZGVwbG95cyBhcmUgY2VudHJhbCB0byBvdXIgZXZlcnlkYXkgZGV2ZWxvcG1lbnQ"\
-          "gd29ya2Zsb3c=",
-        "V2UgZ2V0IHN0dWZmIGRvbmUsIGdldCBpdCBsaXZlIGZhc3QsIGFuZCBzdHJpdmUgdG8gZ2V0I"\
-          "GJldHRlcg=="
+        "T3VyIHRlYW0gaXMgZmllcmNlbHkgQWdpbGUsIHdpdGggdGlnaHQgZGV2ZWxvcG1lbnQgZ"\
+          "mVlZGJhY2sgbG9vcHMgb2Ygb25lIHdlZWssIG1lYXN1cmVkIGFuZCBtYW5hZ2VkIHRy"\
+          "YW5zcGFyZW50bHkgaW4gVHJlbGxvIGFuZCBkYWlseSBzdGFuZC11cCBtZWV0aW5ncw="\
+          "=",
+        "V2UgYWN0aXZlbHkgdXNlIFJTcGVjIGZvciB0ZXN0LWRyaXZlbiBkZXZlbG9wbWVudCwgY"\
+          "W5kIG1lYXN1cmUgb3VyIGNvZGUgcXVhbGl0eSB1c2luZyBzZXJ2aWNlcyBsaWtlIENv"\
+          "ZGUgQ2xpbWF0ZSBhbmQgQ292ZXJhbGxz",
+        "R2l0aHViIHB1bGwgcmVxdWVzdHMsIGNvbnRpbnVvdXMgaW50ZWdyYXRpb24gd2l0aCBUc"\
+          "mF2aXMgUHJvLCBwZWVyIGNvZGUgcmV2aWV3LCBhbmQgY29udGludW91cyBzdGFnaW5n"\
+          "L3Byb2R1Y3Rpb24gZGVwbG95cyBhcmUgY2VudHJhbCB0byBvdXIgZXZlcnlkYXkgZGV"\
+          "2ZWxvcG1lbnQgd29ya2Zsb3c=",
+        "V2UgZ2V0IHN0dWZmIGRvbmUsIGdldCBpdCBsaXZlIGZhc3QsIGFuZCBzdHJpdmUgdG8gZ"\
+          "2V0IGJldHRlcg=="
       )
 
     ################################################################################
