@@ -77,20 +77,26 @@ end
 
 def social_media_links(image_links)
   x_position = 0
-  image_links.each do |image_link|
-    move_up image_link[:move_up] || 46.25
-    bounding_box([x_position, cursor], width: 35) do
-      image image_link[:image], fit: [35, 35], align: :center
-      move_up 35
-      transparent(0) do
-        formatted_text([{
-          text: '|||',
-          size: 40,
-          link: image_link[:link]
-        }], align: :center)
-      end
-    end
+  bounding_box_for(image_links.first, x_position)
+  x_position += 45
+  image_links[1..-1].each do |image_link|
+    move_up 46.25
+    bounding_box_for(image_link, x_position)
     x_position += 45
+  end
+end
+
+def bounding_box_for(image_link, x_position)
+  bounding_box([x_position, cursor], width: 35) do
+    image image_link.image, fit: [35, 35], align: :center
+    move_up 35
+    transparent(0) do
+      formatted_text([{
+        text: '|||',
+        size: 40,
+        link: image_link.link
+      }], align: :center)
+    end
   end
 end
 
@@ -175,11 +181,12 @@ class MediaBank
   end
 
   def self.stackoverflow_image
-
+    open('http://farm3.staticflickr.com/2815/8799253647_e4ec3ab1bc_m.jpg')
   end
 
   def self.stackoverflow_link
-
+    d("aHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL3VzZXJzLzU2Nzg2My9wYXVsLWZpb3Jh"\
+      "dmFudGk=")
   end
 
   def self.speakerdeck_image
@@ -224,51 +231,73 @@ class MediaBank
 end
 
 class Resource
+  attr_accessor :image, :link
+
+  def self.for(name)
+    new(image: MediaBank.send(:"#{name}_image"),
+        link: MediaBank.send(:"#{name}_link"))
+  end
+
+  def initialize(options)
+    options.each do |attribute, value|
+      send("#{attribute}=", value)
+    end
+  end
+end
+
+class ResourceBank
+
+  def self.resource_for(name)
+    send(:"#{name}")
+  end
+
   def self.background_image
     MediaBank.background_image
   end
 
-  def self.email_image_link
-    {
-      image: MediaBank.email_image,
-      link: MediaBank.email_link,
-    }
+  def self.email
+    # {
+    #   image: MediaBank.email_image,
+    #   link: MediaBank.email_link,
+    # }
+    Resource.new(MediaBank.email_image, MediaBank.email_link)
   end
 
-  def self.linked_in_image_link
-    {
-      image: MediaBank.linked_in_image,
-      link: MediaBank.linked_in_link,
-    }
+  def self.linked_in
+    # {
+    #   image: MediaBank.linked_in_image,
+    #   link: MediaBank.linked_in_link,
+    # }
+    Resource.new(MediaBank.linked_in_image, MediaBank.linked_in_link)
   end
 
-  def self.github_image_link
-    {
-      image: MediaBank.github_image,
-      link: MediaBank.github_link,
-    }
-  end
+  # def self.github_image_link
+  #   {
+  #     image: MediaBank.github_image,
+  #     link: MediaBank.github_link,
+  #   }
+  # end
 
-  def self.stackoverflow_image_link
-    {
-      image: MediaBank.stackoverflow_image,
-      link: MediaBank.stackoverflow_link,
-    }
-  end
+  # def self.stackoverflow_image_link
+  #   {
+  #     image: MediaBank.stackoverflow_image,
+  #     link: MediaBank.stackoverflow_link,
+  #   }
+  # end
 
-  def self.speakerdeck_image_link
-    {
-      image: MediaBank.speakerdeck_image,
-      link: MediaBank.speakerdeck_link,
-    }
-  end
+  # def self.speakerdeck_image_link
+  #   {
+  #     image: MediaBank.speakerdeck_image,
+  #     link: MediaBank.speakerdeck_link,
+  #   }
+  # end
 end
 
 include TextHelper
 
 Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   margin_top: 0.75, margin_bottom: 0.75, margin_left: 1, margin_right: 1,
-  background: Resource.background_image,
+  background: ResourceBank.resource_for('background_image'),
   repeat: true) do
 
   puts "Generating PDF.  This shouldn't take longer than a few seconds..."
@@ -284,9 +313,10 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
 
   move_down 5
   social_media_links([
-    Resource.email_image_link.merge(move_up: 0),
-    Resource.linked_in_image_link,
-    Resource.github_image_link
+    Resource.for('email'),
+    Resource.for('linked_in'),
+    Resource.for('github'),
+    Resource.for('stackoverflow')
     # {
     #   image: 'http://farm3.staticflickr.com/2815/8799253647_e4ec3ab1bc_m.jpg',
     #   link: "aHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL3VzZXJzLzU2Nzg2My9wYXVsLWZpb3Jh"\
