@@ -12,6 +12,8 @@ DOCUMENT_NAME = 'Resume'
 ### 3. The script will pull down some small images from Flickr, so please ensure
 ###    you have an internet connection.
 ### 4. Run the script: $ ruby resume.rb
+### Note: I would usually split code like this into seperate files, but keeping
+### this a 'single page' resume is entirely intentional
 ################################################################################
 module Colourable
   private
@@ -429,10 +431,13 @@ module PDFHelper
   end
 
   def description(ruby, rest)
-    formatted_text([
-      { text: d(ruby), color: '85200C' },
-      { text: d(rest) }
-    ], size: 14)
+    formatted_text(
+      [
+        { text: d(ruby), color: '85200C' },
+        { text: d(rest) }
+      ],
+      size: 14
+    )
   end
 
   def position(title, options = {})
