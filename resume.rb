@@ -68,7 +68,7 @@ class CLI
   private_class_method :check_ability_to_generate_resume
 
   def self.generate_resume
-    ::Resume.generate
+    Resume.generate
   end
   private_class_method :generate_resume
 
@@ -416,7 +416,7 @@ module PDFHelper
   def social_media_resources
     %w(email linked_in github stackoverflow
        speakerdeck vimeo code_school blog).map do |item|
-      ::Resource.for(item)
+      Resource.for(item)
     end
   end
 
@@ -506,7 +506,7 @@ class Resume
     end
     Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
       margin_top: 0.75, margin_bottom: 0.75, margin_left: 1, margin_right: 1,
-      background: ::Image.for('background'),
+      background: Image.for('background'),
       repeat: true) do
 
       CLI.report "Generating PDF. "\
