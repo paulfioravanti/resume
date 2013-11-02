@@ -46,6 +46,10 @@ class CLI
     clean_up
   end
 
+  def self.report(string)
+    puts string
+  end
+
   def self.check_ability_to_generate_resume
     unless required_gem_available?('prawn', '1.0.0.rc2')
       print yellow "May I please install version 1.0.0.rc2 of the 'Prawn'\n"\
@@ -320,7 +324,7 @@ class Resume
       background: ::Image.for('background'),
       repeat: true) do
 
-      puts "Generating PDF.  This shouldn't take longer than a few seconds..."
+      CLI.report("Generating PDF. This shouldn't take longer than a few seconds...")
 
       # name 'UGF1bCBGaW9yYXZhbnRp'
       font('Times-Roman', size: 20) { text d('UGF1bCBGaW9yYXZhbnRp') }
@@ -330,14 +334,14 @@ class Resume
     ################################################################################
     ### Social Media
     ################################################################################
-      puts 'Creating social media links section...'
+      CLI.report('Creating social media links section...')
 
       move_down 5
       social_media_links
 
       stroke_horizontal_rule { color '666666' }
 
-      puts 'Creating employment history section...'
+      CLI.report('Creating employment history section...')
 
       move_down 10
       heading 'RW1wbG95bWVudCBIaXN0b3J5'
@@ -750,7 +754,7 @@ class Resume
       move_down 10
       stroke_horizontal_rule { color '666666' }
 
-      puts 'Creating education section...'
+      CLI.report('Creating education section...')
 
       move_down 10
       heading 'RWR1Y2F0aW9u'
