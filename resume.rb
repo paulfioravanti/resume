@@ -435,27 +435,49 @@ module PDFHelper
     ], size: 14)
   end
 
-  def position(title)
-    formatted_text([{ text: d(title), styles: [:bold] }])
+  def position(title, options = {})
+    if options[:at].present?
+      formatted_text_box(
+        [{ text: d(title), styles: [:bold] }], at: [options[:at], cursor]
+      )
+    else
+      formatted_text([{ text: d(title), styles: [:bold] }])
+    end
   end
 
-  def organisation(name)
-    formatted_text([
-      {
-        text: d(name),
-        styles: [:bold], size: 11
-      }
-    ])
+  def organisation(name, options = {})
+    if options[:at].present?
+      formatted_text_box(
+        [{ text: d(name), styles: [:bold], size: 11 }],
+        at: [options[:at], cursor]
+      )
+    else
+      formatted_text([{ text: d(name), styles: [:bold], size: 11 }])
+    end
   end
 
   def period_and_location(options)
-    formatted_text([
-      { text: d(options[:period]) },
-      {
-        text: d(options[:location]),
-        link: d(options[:link])
-      }
-    ], color: '666666', size: 10)
+    if options[:at].present?
+      formatted_text_box(
+        [
+          { text: d(options[:period]), color: '666666', size: 10 },
+          {
+            text: d(options[:location]),
+            link: d(options[:link]),
+            color: '666666', size: 10
+          }
+        ],
+        at: [options[:at], cursor]
+      )
+    else
+      formatted_text([
+        { text: d(options[:period]) },
+        {
+          text: d(options[:location]),
+          link: d(options[:link])
+        }
+      ], color: '666666', size: 10)
+    end
   end
 
   def organisation_logo(options)
@@ -495,9 +517,9 @@ class Resume
                   "YW5kIEluZm9ybWF0aW9uIFRlY2hub2xvZ3kgU2VydmljZXMgUHJvZmVzc2l"\
                   "vbmFs"
 
-    ############################################################################
-    ### Social Media
-    ############################################################################
+      ##########################################################################
+      ### Social Media
+      ##########################################################################
       CLI.report 'Creating social media links section...'
       move_down 5
       social_media_links
@@ -506,9 +528,9 @@ class Resume
       CLI.report 'Creating employment history section...'
       move_down 10
       heading 'RW1wbG95bWVudCBIaXN0b3J5'
-    ############################################################################
-    ### RC
-    ############################################################################
+      ##########################################################################
+      ### RC
+      ##########################################################################
       move_down 10
       position 'U2VuaW9yIERldmVsb3Blcg=='
       organisation 'UmF0ZUNpdHkuY29tLmF1'
@@ -553,9 +575,9 @@ class Resume
         "V2UgZ2V0IHN0dWZmIGRvbmUsIGdldCBpdCBsaXZlIGZhc3QsIGFuZCBzdHJpdmUgdG8gZ"\
           "2V0IGJldHRlcg=="
       )
-    ############################################################################
-    ### FL
-    ############################################################################
+      ##########################################################################
+      ### FL
+      ##########################################################################
       move_down 15
       position 'UnVieSBEZXZlbG9wZXI='
       organisation 'RnJlZWxhbmNl'
@@ -596,9 +618,9 @@ class Resume
       move_down 15
       text d "UGFydC10aW1lIGFuZCBwcm9qZWN0LWJhc2VkIFJ1Ynkgb24gUmFpbHMgd29yayBm"\
              "b3IgbG9jYWwgc3RhcnQtdXAgYW5kIHNtYWxsIGNvbXBhbmllcy4="
-    ############################################################################
-    ### GW
-    ############################################################################
+      ##########################################################################
+      ### GW
+      ##########################################################################
       move_down 15
       position 'UHJlLXNhbGVzIENvbnN1bHRhbnQ='
       organisation 'R3VpZGV3aXJlIFNvZnR3YXJl'
@@ -654,9 +676,9 @@ class Resume
         'Q3VzdG9tZXIgcHJvZHVjdCB0cmFpbmluZw==',
         'SmFwYW4gYW5kIG92ZXJzZWFzIHRyYWRlIHNob3dzL21hcmtldGluZyBldmVudHM='
       )
-    ############################################################################
-    ### RNT
-    ############################################################################
+      ##########################################################################
+      ### RNT
+      ##########################################################################
       move_down 15
       position "SW1wbGVtZW50YXRpb24gQ29uc3VsdGFudCwgUHJvZmVzc2lvbmFsIFNlcn"\
                "ZpY2Vz"
@@ -716,9 +738,9 @@ class Resume
         "SG9zdCwgbGluZ3Vpc3RpY2FsbHkgc3VwcG9ydCwgYW5kIGhhbmRsZSBKYXBhbiBpbW1pZ"\
           "3JhdGlvbiBvZiBvdmVyc2VhcyBwcm9qZWN0IG1lbWJlcnM="
       )
-    ############################################################################
-    ### SRA
-    ############################################################################
+      ##########################################################################
+      ### SRA
+      ##########################################################################
       move_down 15
       position 'U29mdHdhcmUgRW5naW5lZXI='
       organisation 'U29mdHdhcmUgUmVzZWFyY2ggQXNzb2NpYXRlcyAoU1JBKQ=='
@@ -754,9 +776,9 @@ class Resume
              "aW50ZXJuYWwgc3lzdGVtIGFkbWluaXN0cmF0aW9uIGR1dGllcy4gIERldmVsb3Bt"\
              "ZW50IHByZWRvbWluYW50bHkgZG9uZSB1c2luZyBQdXJlIFJ1YnkvUnVieSBvbiBS"\
              "YWlscyBpbiBzbWFsbCB0ZWFtcyBvZiAyLTMgcGVvcGxlLg=="
-    ############################################################################
-    ### JET
-    ############################################################################
+      ##########################################################################
+      ### JET
+      ##########################################################################
       move_down 15
       position 'Q29vcmRpbmF0b3Igb2YgSW50ZXJuYXRpb25hbCBSZWxhdGlvbnMgKENJUik='
       organisation "SmFwYW4gRXhjaGFuZ2UgYW5kIFRlYWNoaW5nIFByb2dyYW1tZSAoSkVUK"\
@@ -793,9 +815,9 @@ class Resume
              "YWN0aXZpdGllcyBhbmQgam91cm5hbGlzbTsgcGxhbm5pbmcvaW1wbGVtZW50aW5n"\
              "IGludGVybmF0aW9uYWwgZXhjaGFuZ2UgcHJvamVjdHM7IGluYm91bmQgZ3Vlc3Qg"\
              "aG9zcGl0YWxpdHk7IG91dGJvdW5kIHRvdXItZ3VpZGluZw=="
-    ############################################################################
-    ### SATC
-    ############################################################################
+      ##########################################################################
+      ### SATC
+      ##########################################################################
       move_down 15
       position "SW50ZXJuYXRpb25hbCBNYXJrZXRpbmcgQXNzaXN0YW50IOKAkyBBc2lhIGFuZ"\
                "CBKYXBhbg=="
@@ -831,9 +853,9 @@ class Resume
 
       move_down 10
       stroke_horizontal_rule { color '666666' }
-    ############################################################################
-    ### MIT
-    ############################################################################
+      ##########################################################################
+      ### MIT
+      ##########################################################################
       CLI.report('Creating education section...')
 
       move_down 10
@@ -865,152 +887,104 @@ class Resume
         bars: 3,
         size: 43
       )
-    ############################################################################
-    ### BIB
-    ############################################################################
+      ##########################################################################
+      ### BIB
+      ##########################################################################
       move_up 38
-      formatted_text_box([
-        {
-          text: d('QmFjaGVsb3Igb2YgSW50ZXJuYXRpb25hbCBCdXNpbmVzcw=='),
-          styles: [:bold]
-        }
-      ], at: [280, cursor])
+      position 'QmFjaGVsb3Igb2YgSW50ZXJuYXRpb25hbCBCdXNpbmVzcw==', at: 280
+
       move_down 14
-      formatted_text_box([
-        {
-          text: d('RmxpbmRlcnMgVW5pdmVyc2l0eQ=='),
-          styles: [:bold], size: 11
-        }
-      ], at: [280, cursor])
+      organisation 'RmxpbmRlcnMgVW5pdmVyc2l0eQ==', at: 280
       move_down 13
-      formatted_text_box([
-        { text: d('MTk5Ny0xOTk5IHw='), color: '666666', size: 10 },
-        {
-          text: d('QWRlbGFpZGUsIEF1c3RyYWxpYQ=='),
-          link: d("aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZ"\
-                  "obD1lbiZnZW9jb2RlPSZxPVN0dXJ0K1JkLCtCZWRmb3JkK1BhcmsrU0ErNTA0Mi"\
-                  "ZhcT0mc2xsPS0zNC45MjIxODIsMTM4LjU5MDg1NiZzc3BuPTAuMDI4NDMyLDAuM"\
-                  "DM1NzkxJnZwc3JjPTYmaWU9VVRGOCZocT0maG5lYXI9U3R1cnQrUmQsK0JlZGZv"\
-                  "cmQrUGFyaytTb3V0aCtBdXN0cmFsaWErNTA0MiZsbD0tMzUuMDE2NzgyLDEzOC4"\
-                  "1Njc5ODImc3BuPTAuMDU2Nzk4LDAuMDcxNTgzJnQ9bSZ6PTE0Jml3bG9jPUE="),
-          color: '666666', size: 10
-        }
-      ], at: [280, cursor])
+      period_and_location(
+        period: 'MTk5Ny0xOTk5IHw=',
+        location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
+        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZ"\
+              "obD1lbiZnZW9jb2RlPSZxPVN0dXJ0K1JkLCtCZWRmb3JkK1BhcmsrU0ErNTA0Mi"\
+              "ZhcT0mc2xsPS0zNC45MjIxODIsMTM4LjU5MDg1NiZzc3BuPTAuMDI4NDMyLDAuM"\
+              "DM1NzkxJnZwc3JjPTYmaWU9VVRGOCZocT0maG5lYXI9U3R1cnQrUmQsK0JlZGZv"\
+              "cmQrUGFyaytTb3V0aCtBdXN0cmFsaWErNTA0MiZsbD0tMzUuMDE2NzgyLDEzOC4"\
+              "1Njc5ODImc3BuPTAuMDU2Nzk4LDAuMDcxNTgzJnQ9bSZ6PTE0Jml3bG9jPUE=",
+        at: 280
+      )
 
       move_up 30
-      bounding_box([490, cursor], width: 35, height: 40) do
-        image open(
-          'http://farm4.staticflickr.com/3707/8812488974_71c6981155_m.jpg'),
-          fit: [35, 40]
-        move_up 40
-        transparent(0) do
-          formatted_text([{
-            text: '|||',
-            size: 43,
-            link: d('aHR0cDovL3d3dy5mbGluZGVycy5lZHUuYXUv'),
-            align: :center
-          }])
-        end
-      end
-
-    ################################################################################
-    ### RYU
-    ################################################################################
-     move_down 20
-      formatted_text([
-        {
-          text: d('U3R1ZGVudCBFeGNoYW5nZSBQcm9ncmFtbWU='),
-          styles: [:bold]
-        }
-      ])
-      formatted_text([
-        {
-          text: d('Unl1a29rdSBVbml2ZXJzaXR5'),
-          styles: [:bold], size: 11
-        }
-      ])
-      formatted_text([
-        { text: d('U2VwIDE5OTkgLSBGZWIgMjAwMCB8') },
-        {
-          text: d('S3lvdG8sIEphcGFu'),
-          link: d("aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZ"\
-                  "obD1lbiZnZW9jb2RlPSZxPSVFNCVCQSVBQyVFOSU4MyVCRCVFNSVCQSU5QyVFNC"\
-                  "VCQSVBQyVFOSU4MyVCRCVFNSVCOCU4MiVFNCVCQyU4RiVFOCVBNiU4QiVFNSU4Q"\
-                  "yVCQSVFNiVCNyVCMSVFOCU4RCU4OSVFNSVBMSU5QSVFNiU5QyVBQyVFNyU5NCVC"\
-                  "QSVFRiVCQyU5NiVFRiVCQyU5NyZhcT0mc2xsPS0zNS4wMTY3ODIsMTM4LjU2Nzk"\
-                  "4MiZzc3BuPTAuMDU2Nzk4LDAuMDcxNTgzJnZwc3JjPTYmZz1TdHVydCtSZCwrQm"\
-                  "VkZm9yZCtQYXJrK1NvdXRoK0F1c3RyYWxpYSs1MDQyJmllPVVURjgmaHE9JmhuZ"\
-                  "WFyPUphcGFuLCtLeSVDNSU4RHRvLWZ1LCtLeSVDNSU4RHRvLXNoaSwrRnVzaGlt"\
-                  "aS1rdSwrRnVrYWt1c2ErVHN1a2Ftb3RvY2glQzUlOEQsKyVFRiVCQyU5NiVFRiV"\
-                  "CQyU5NyZsbD0zNC45NjM5NzQsMTM1Ljc2Nzk3JnNwbj0wLjAwNzEwNCwwLjAwOD"\
-                  "k0OCZ0PW0mej0xNyZpd2xvYz1B")
-        }
-      ], color: '666666', size: 10)
+      organisation_logo(
+        organisation: 'bib',
+        origin: 490,
+        width: 35,
+        height: 40,
+        fit: [35, 40],
+        move_up: 40,
+        bars: 3,
+        size: 43
+      )
+      ##########################################################################
+      ### RYU
+      ##########################################################################
+      move_down 20
+      position 'U3R1ZGVudCBFeGNoYW5nZSBQcm9ncmFtbWU='
+      organisation 'Unl1a29rdSBVbml2ZXJzaXR5'
+      period_and_location(
+        period: 'U2VwIDE5OTkgLSBGZWIgMjAwMCB8',
+        location: 'S3lvdG8sIEphcGFu',
+        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZ"\
+              "obD1lbiZnZW9jb2RlPSZxPSVFNCVCQSVBQyVFOSU4MyVCRCVFNSVCQSU5QyVFNC"\
+              "VCQSVBQyVFOSU4MyVCRCVFNSVCOCU4MiVFNCVCQyU4RiVFOCVBNiU4QiVFNSU4Q"\
+              "yVCQSVFNiVCNyVCMSVFOCU4RCU4OSVFNSVBMSU5QSVFNiU5QyVBQyVFNyU5NCVC"\
+              "QSVFRiVCQyU5NiVFRiVCQyU5NyZhcT0mc2xsPS0zNS4wMTY3ODIsMTM4LjU2Nzk"\
+              "4MiZzc3BuPTAuMDU2Nzk4LDAuMDcxNTgzJnZwc3JjPTYmZz1TdHVydCtSZCwrQm"\
+              "VkZm9yZCtQYXJrK1NvdXRoK0F1c3RyYWxpYSs1MDQyJmllPVVURjgmaHE9JmhuZ"\
+              "WFyPUphcGFuLCtLeSVDNSU4RHRvLWZ1LCtLeSVDNSU4RHRvLXNoaSwrRnVzaGlt"\
+              "aS1rdSwrRnVrYWt1c2ErVHN1a2Ftb3RvY2glQzUlOEQsKyVFRiVCQyU5NiVFRiV"\
+              "CQyU5NyZsbD0zNC45NjM5NzQsMTM1Ljc2Nzk3JnNwbj0wLjAwNzEwNCwwLjAwOD"\
+              "k0OCZ0PW0mej0xNyZpd2xvYz1B"
+      )
 
       move_up 40
-      bounding_box([214, cursor], width: 32, height: 40) do
-        image open(
-          'http://farm8.staticflickr.com/7428/8812488856_c4c1b1f418_m.jpg'),
-          fit: [32, 40]
-        move_up 40
-        transparent(0) do
-          formatted_text([{
-            text: '|||',
-            size: 40,
-            link: d('aHR0cDovL3d3dy5yeXVrb2t1LmFjLmpwL2VuZ2xpc2gyL2luZGV4LnBocA=='),
-            align: :center
-          }])
-        end
-      end
-
-    ################################################################################
-    ### TAFE
-    ################################################################################
+      organisation_logo(
+        organisation: 'ryu',
+        origin: 214,
+        width: 32,
+        height: 40,
+        fit: [32, 40],
+        move_up: 40,
+        bars: 3,
+        size: 40
+      )
+      ##########################################################################
+      ### TAFE
+      ##########################################################################
       move_up 38
-      formatted_text_box([
-        {
-          text: d('Q2VydGlmaWNhdGUgSUkgaW4gVG91cmlzbQ=='),
-          styles: [:bold]
-        }
-      ], at: [280, cursor])
+      position 'Q2VydGlmaWNhdGUgSUkgaW4gVG91cmlzbQ==', at: 280
       move_down 14
-      formatted_text_box([
-        {
-          text: d('QWRlbGFpZGUgVEFGRQ=='),
-          styles: [:bold], size: 11
-        }
-      ], at: [280, cursor])
+      organisation 'QWRlbGFpZGUgVEFGRQ==', at: 280
+
       move_down 13
-      formatted_text_box([
-        { text: d('TWF5IDIwMDAgLSBNYXkgMjAwMSB8'), color: '666666', size: 10 },
-        {
-          text: d('QWRlbGFpZGUsIEF1c3RyYWxpYQ=='),
-          link: d("aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZ"\
-                  "obD1lbiZnZW9jb2RlPSZxPTEyMCtDdXJyaWUrU3RyZWV0K0FERUxBSURFK1NBKz"\
-                  "UwMDAmYXE9JnNsbD0zNC45NjM5NzQsMTM1Ljc2Nzk3JnNzcG49MC4wMDcxMDQsM"\
-                  "C4wMDg5NDgmdnBzcmM9NiZpZT1VVEY4JmhxPSZobmVhcj0xMjArQ3VycmllK1N0"\
-                  "LCtBZGVsYWlkZStTb3V0aCtBdXN0cmFsaWErNTAwMCZ0PW0mbGw9LTM0LjkyNDU"\
-                  "0LDEzOC41OTU1MTImc3BuPTAuMDE0MjE1LDAuMDE3ODk2Jno9MTYmaXdsb2M9QQ"\
-                  "=="),
-          color: '666666', size: 10
-        }
-      ], at: [280, cursor])
+      period_and_location(
+        period: 'TWF5IDIwMDAgLSBNYXkgMjAwMSB8',
+        location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
+        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZ"\
+              "obD1lbiZnZW9jb2RlPSZxPTEyMCtDdXJyaWUrU3RyZWV0K0FERUxBSURFK1NBKz"\
+              "UwMDAmYXE9JnNsbD0zNC45NjM5NzQsMTM1Ljc2Nzk3JnNzcG49MC4wMDcxMDQsM"\
+              "C4wMDg5NDgmdnBzcmM9NiZpZT1VVEY4JmhxPSZobmVhcj0xMjArQ3VycmllK1N0"\
+              "LCtBZGVsYWlkZStTb3V0aCtBdXN0cmFsaWErNTAwMCZ0PW0mbGw9LTM0LjkyNDU"\
+              "0LDEzOC41OTU1MTImc3BuPTAuMDE0MjE1LDAuMDE3ODk2Jno9MTYmaXdsb2M9QQ"\
+              "==",
+        at: 280
+      )
 
       move_up 23
-      bounding_box([490, cursor], width: 37, height: 35) do
-        image open(
-          'http://farm8.staticflickr.com/7377/8812488734_e43ce6742b_m.jpg'),
-          fit: [37, 35]
-        move_up 19
-        transparent(0) do
-          formatted_text([{
-            text: '|||||',
-            size: 28,
-            link: d('aHR0cDovL3d3dy50YWZlc2EuZWR1LmF1'),
-            align: :center
-          }])
-        end
-      end
+      organisation_logo(
+        organisation: 'tafe',
+        origin: 490,
+        width: 37,
+        height: 35,
+        fit: [37, 35],
+        move_up: 19,
+        bars: 5,
+        size: 28
+      )
     end
   end
 end
