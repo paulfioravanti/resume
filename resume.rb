@@ -156,6 +156,10 @@ class MediaBank
     open('http://farm6.staticflickr.com/5453/8801916021_3ac1df6072_o_d.jpg')
   end
 
+  def self.background_link
+    'http://farm6.staticflickr.com/5453/8801916021_3ac1df6072_o_d.jpg'
+  end
+
   def self.email_image
     open('http://farm3.staticflickr.com/2826/8753727736_2a7a294527_m.jpg')
   end
@@ -190,114 +194,68 @@ class MediaBank
   end
 
   def self.speakerdeck_image
-
+    open('http://farm8.staticflickr.com/7404/8799250189_4125b90a14_m.jpg')
   end
 
   def self.speakerdeck_link
-
+    d('aHR0cHM6Ly9zcGVha2VyZGVjay5jb20vcGF1bGZpb3JhdmFudGk=')
   end
 
   def self.vimeo_image
-
+    open('http://farm9.staticflickr.com/8546/8809862216_0cdd40c3dc_m.jpg')
   end
 
   def self.vimeo_link
-
+    d('aHR0cHM6Ly92aW1lby5jb20vcGF1bGZpb3JhdmFudGk=')
   end
 
   def self.code_school_image
-
+    open('http://farm4.staticflickr.com/3714/9015339024_0651daf2c4_m.jpg')
   end
 
   def self.code_school_link
-
+    d('aHR0cDovL3d3dy5jb2Rlc2Nob29sLmNvbS91c2Vycy9wYXVsZmlvcmF2YW50aQ==')
   end
 
   def self.twitter_image
-
+    open('http://farm3.staticflickr.com/2837/8799235993_26a7d17540_m.jpg')
   end
 
   def self.twitter_link
-
+    d('aHR0cHM6Ly90d2l0dGVyLmNvbS9wZWZpb3JhdmFudGk=')
   end
 
   def self.blog_image
-
+   open('http://farm4.staticflickr.com/3752/8809826162_e4d765d15b_m.jpg')
   end
 
   def self.blog_link
-
+    d('aHR0cDovL3BhdWxmaW9yYXZhbnRpLmNvbS9hYm91dA==')
   end
 end
 
 class Resource
-  attr_accessor :image, :link
+  attr_reader :image, :link
 
   def self.for(name)
-    new(image: MediaBank.send(:"#{name}_image"),
-        link: MediaBank.send(:"#{name}_link"))
+    new(
+      image: MediaBank.send(:"#{name}_image"),
+      link: MediaBank.send(:"#{name}_link")
+    )
   end
 
   def initialize(options)
     options.each do |attribute, value|
-      send("#{attribute}=", value)
+      instance_variable_set("@#{attribute}", value)
     end
   end
-end
-
-class ResourceBank
-
-  def self.resource_for(name)
-    send(:"#{name}")
-  end
-
-  def self.background_image
-    MediaBank.background_image
-  end
-
-  def self.email
-    # {
-    #   image: MediaBank.email_image,
-    #   link: MediaBank.email_link,
-    # }
-    Resource.new(MediaBank.email_image, MediaBank.email_link)
-  end
-
-  def self.linked_in
-    # {
-    #   image: MediaBank.linked_in_image,
-    #   link: MediaBank.linked_in_link,
-    # }
-    Resource.new(MediaBank.linked_in_image, MediaBank.linked_in_link)
-  end
-
-  # def self.github_image_link
-  #   {
-  #     image: MediaBank.github_image,
-  #     link: MediaBank.github_link,
-  #   }
-  # end
-
-  # def self.stackoverflow_image_link
-  #   {
-  #     image: MediaBank.stackoverflow_image,
-  #     link: MediaBank.stackoverflow_link,
-  #   }
-  # end
-
-  # def self.speakerdeck_image_link
-  #   {
-  #     image: MediaBank.speakerdeck_image,
-  #     link: MediaBank.speakerdeck_link,
-  #   }
-  # end
 end
 
 include TextHelper
 
 Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
   margin_top: 0.75, margin_bottom: 0.75, margin_left: 1, margin_right: 1,
-  background: ResourceBank.resource_for('background_image'),
+  background: Resource.for('background').image,
   repeat: true) do
 
   puts "Generating PDF.  This shouldn't take longer than a few seconds..."
@@ -316,32 +274,11 @@ Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
     Resource.for('email'),
     Resource.for('linked_in'),
     Resource.for('github'),
-    Resource.for('stackoverflow')
-    # {
-    #   image: 'http://farm3.staticflickr.com/2815/8799253647_e4ec3ab1bc_m.jpg',
-    #   link: "aHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL3VzZXJzLzU2Nzg2My9wYXVsLWZpb3Jh"\
-    #         "dmFudGk="
-    # },
-    # {
-    #   image: 'http://farm8.staticflickr.com/7404/8799250189_4125b90a14_m.jpg',
-    #   link: 'aHR0cHM6Ly9zcGVha2VyZGVjay5jb20vcGF1bGZpb3JhdmFudGk='
-    # },
-    # {
-    #   image: 'http://farm9.staticflickr.com/8546/8809862216_0cdd40c3dc_m.jpg',
-    #   link: 'aHR0cHM6Ly92aW1lby5jb20vcGF1bGZpb3JhdmFudGk='
-    # },
-    # {
-    #   image: 'http://farm4.staticflickr.com/3714/9015339024_0651daf2c4_m.jpg',
-    #   link: 'aHR0cDovL3d3dy5jb2Rlc2Nob29sLmNvbS91c2Vycy9wYXVsZmlvcmF2YW50aQ=='
-    # },
-    # {
-    #   image: 'http://farm3.staticflickr.com/2837/8799235993_26a7d17540_m.jpg',
-    #   link: 'aHR0cHM6Ly90d2l0dGVyLmNvbS9wZWZpb3JhdmFudGk='
-    # },
-    # {
-    #   image: 'http://farm4.staticflickr.com/3752/8809826162_e4d765d15b_m.jpg',
-    #   link: 'aHR0cDovL3BhdWxmaW9yYXZhbnRpLmNvbS9hYm91dA=='
-    # }
+    Resource.for('stackoverflow'),
+    Resource.for('speakerdeck'),
+    Resource.for('vimeo'),
+    Resource.for('code_school'),
+    Resource.for('blog')
   ])
 
   stroke_horizontal_rule { color '666666' }
