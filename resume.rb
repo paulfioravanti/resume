@@ -102,7 +102,8 @@ def bounding_box_for(image_link, x_position)
 end
 
 def social_media_resources
-  %w(email linked_in github stackoverflow speakerdeck vimeo code_school blog).map do |item|
+  %w(email linked_in github stackoverflow
+     speakerdeck vimeo code_school blog).map do |item|
     Resource.for(item)
   end
 end
