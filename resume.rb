@@ -377,7 +377,7 @@ class Resource
   end
 end
 
-module PDFHelper
+module ResumeHelper
   private
 
   def bullet_list(*items)
@@ -506,7 +506,7 @@ end
 class Resume
   def self.generate
     Prawn::Document.class_eval do
-      include PDFHelper, TextHelper
+      include ResumeHelper, TextHelper
     end
     Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
       margin_top: 0.75, margin_bottom: 0.75, margin_left: 1, margin_right: 1,
