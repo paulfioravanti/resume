@@ -6,39 +6,34 @@ module Resume
   class CLI
     include Colourable
 
-    def self.start
-      new
-    end
-
     def self.report(string)
       puts string
     end
 
-    private
-
-    def initialize
+    def start
       check_ability_to_generate_resume
       generate_resume
       clean_up
     end
 
+    private
+
     def check_ability_to_generate_resume
-      unless required_gem_available?('prawn', '1.0.0.rc2')
-        print yellow "May I please install version 1.0.0.rc2 of the 'Prawn'\n"\
-                     "Ruby gem to help me generate a PDF (Y/N)? "
-        if permission_granted?
-          install_gem
-        else
-          puts red "Sorry, I won't be able to generate a PDF without this\n"\
-                   "specific version of the Prawn gem.\n"\
-                   "Please ask me directly for a PDF copy of my resume."
-          exit
-        end
+      return if required_gem_available?('prawn', '1.0.0.rc2')
+      print yellow "May I please install version 1.0.0.rc2 of the 'Prawn'\n"\
+                   "Ruby gem to help me generate a PDF (Y/N)? "
+      if permission_granted?
+        install_gem
+      else
+        puts red "Sorry, I won't be able to generate a PDF without this\n"\
+                 "specific version of the Prawn gem.\n"\
+                 "Please ask me directly for a PDF copy of my resume."
+        exit
       end
-      require 'prawn'
     end
 
     def generate_resume
+      require 'prawn'
       Resume.generate
     end
 
@@ -48,6 +43,7 @@ module Resume
       open_document if permission_granted?
       puts cyan "Thanks for looking at my resume. "\
                 "I hope to hear from you soon!"
+      stdout.close
     end
 
     def open_document
