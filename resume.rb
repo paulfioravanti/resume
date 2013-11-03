@@ -369,6 +369,8 @@ class Resource
     new(image: Image.for(:"#{name}"), link: Link.for(:"#{name}"))
   end
 
+  private
+
   def initialize(options)
     options.each do |attribute, value|
       instance_variable_set("@#{attribute}", value)
