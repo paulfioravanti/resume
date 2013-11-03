@@ -46,17 +46,17 @@ class CLI
     new
   end
 
-  def initialize
-    check_ability_to_generate_resume
-    generate_resume
-    clean_up
-  end
-
   def self.report(string)
     puts string
   end
 
   private
+
+  def initialize
+    check_ability_to_generate_resume
+    generate_resume
+    clean_up
+  end
 
   def check_ability_to_generate_resume
     unless required_gem_available?('prawn', '1.0.0.rc2')
