@@ -6,6 +6,14 @@ Text is deliberately obfuscated with [Base64](http://ruby-doc.org/stdlib-2.0/lib
 
 ## Usage
 
+Both commands below produce the same result of my PDF resume.  The only difference is that one runs the componentised code in the `lib` directory, and the other runs just the one Ruby script, which contains all the classes and modules from `lib` in one file.
+
+### Run the resume generator under the `lib` folder:
+
+    $ bin/resume
+
+### Run the 'one-sheet' resume script:
+
     $ ruby resume.rb
 
 ### Dependencies

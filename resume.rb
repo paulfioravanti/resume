@@ -4,7 +4,8 @@ require 'open-uri'
 
 DOCUMENT_NAME = 'Resume'
 ################################################################################
-### This resume lives online at https://github.com/paulfioravanti/resume
+### This resume also lives online in a more componentised format at
+### https://github.com/paulfioravanti/resume
 ### Instructions:
 ### 1. Make sure you run this with Ruby 1.9.2 or greater (1.8.7 will not work)
 ### 2. Please let the script install the Prawn gem for PDF generation if you
@@ -12,8 +13,6 @@ DOCUMENT_NAME = 'Resume'
 ### 3. The script will pull down some small images from Flickr, so please ensure
 ###    you have an internet connection.
 ### 4. Run the script: $ ruby resume.rb
-### Note: I would usually split code like this into seperate files, but keeping
-### this a 'single page' resume is entirely intentional
 ################################################################################
 module Colourable
   private
