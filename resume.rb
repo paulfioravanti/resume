@@ -125,14 +125,14 @@ class CLI
   end
 end
 
-module TextHelper
+module Decodable
   def d(string) # decode string
     Base64.strict_decode64(string)
   end
 end
 
 class Link
-  extend TextHelper
+  extend Decodable
 
   def self.for(resource)
     send(:"#{resource}")
@@ -506,7 +506,7 @@ end
 class Resume
   def self.generate
     Prawn::Document.class_eval do
-      include ResumeHelper, TextHelper
+      include ResumeHelper, Decodable
     end
     Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
       margin_top: 0.75, margin_bottom: 0.75, margin_left: 1, margin_right: 1,
