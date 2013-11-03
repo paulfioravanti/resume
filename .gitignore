@@ -2,3 +2,14 @@
 Resume.pdf
 strings.rb
 resume.rb.txt
+
+Gemfile.lock
+doc/
+pkg/
+vendor/cache/*.gem
+coverage/
+
+# Ignore bundler config
+
+.DS_Store
+.coveralls.yml
