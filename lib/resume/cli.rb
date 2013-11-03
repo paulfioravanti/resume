@@ -1,4 +1,4 @@
-$LOAD_PATH << File.join(File.dirname(__FILE__), "..", "resume")
+$LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'resume')
 require 'colourable'
 require 'resume/resume'
 
