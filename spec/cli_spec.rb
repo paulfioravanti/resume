@@ -4,6 +4,8 @@ require_relative '../lib/resume'
 describe CLI do
   let(:cli) { CLI.new }
 
+  before { allow(cli).to receive(:"`").and_return } # stub out `gem install ...`
+
   describe 'PDF generator gem installation' do
     context 'user has the gem installed' do
       before do
