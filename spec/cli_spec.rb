@@ -1,5 +1,4 @@
 require 'spec_helper'
-require_relative '../lib/resume'
 
 describe CLI do
   let(:cli) { CLI.new }
@@ -66,9 +65,10 @@ describe CLI do
   end
 
   describe 'generating the PDF' do
+    before { allow(cli).to receive(:require).with('prawn') }
+
     it 'tells the PDF to generate itself' do
-      allow(Resume::Resume).to receive(:generate).and_return
-      allow(cli).to receive(:require).with('prawn')
+      expect(Resume::Resume).to receive(:generate)
       cli.send(:generate_resume)
     end
   end
