@@ -7,9 +7,8 @@ describe CLI do
   let(:user_input) { double('user_input', chomp: self, match: true) }
 
   before do
-    # stub out `gem install ...`
-    allow(cli).to receive(:`).and_return
     allow(cli).to receive(:gets).and_return(user_input)
+    allow(cli).to receive(:`).and_return # stub out `gem install ...`
   end
 
   describe 'PDF generator gem installation' do
