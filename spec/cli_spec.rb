@@ -11,10 +11,38 @@ describe CLI do
     allow(cli).to receive(:`).and_return # stub out `gem install ...`
   end
 
+  describe 'class methods' do
+    describe '.report' do
+      it 'outputs the passed in message to stdout' do
+        expect(cli.class).to receive(:puts).with('hello')
+        CLI.report('hello')
+      end
+    end
+  end
+
+  describe 'instance methods' do
+    describe '#start' do
+      it 'runs the script' do
+        expect(cli).to receive(:check_ability_to_generate_resume)
+        expect(cli).to receive(:generate_resume)
+        expect(cli).to receive(:clean_up)
+        cli.start
+      end
+    end
+  end
+
   describe 'PDF generator gem installation' do
-    context 'user has the gem installed' do
+    let(:prawn_gem) { double('prawn_gem') }
+
+    before do
+      allow(Gem::Specification).to \
+        receive(:find_by_name).with('prawn').and_return(prawn_gem)
+      allow(Gem::Version).to receive(:new).and_return(1)
+    end
+
+    context 'user has the expected gem installed' do
       before do
-        allow(cli).to receive(:required_gem_available?).and_return(true)
+        allow(prawn_gem).to receive(:version).and_return(1)
       end
 
       specify 'user is not asked to install the gem' do
@@ -23,9 +51,21 @@ describe CLI do
       end
     end
 
+    context 'user has the expected gem installed, but it is an older version' do
+      before do
+        allow(prawn_gem).to receive(:version).and_return(0)
+      end
+
+      specify 'user is asked to install the gem' do
+        expect(cli).to receive(:print)
+        cli.send(:check_ability_to_generate_resume)
+      end
+    end
+
     context 'user does not have the gem installed' do
       before do
-        allow(cli).to receive(:required_gem_available?).and_return(false)
+        allow(Gem::Specification).to \
+          receive(:find_by_name).and_raise(Gem::LoadError)
       end
 
       specify 'user is asked to install the gem' do
