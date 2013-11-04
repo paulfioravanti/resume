@@ -19,8 +19,8 @@ describe CLI do
       end
 
       specify 'user is not asked to install the gem' do
-        cli.send(:check_ability_to_generate_resume)
         expect(cli).to_not receive(:permission_granted?)
+        cli.send(:check_ability_to_generate_resume)
       end
     end
 
