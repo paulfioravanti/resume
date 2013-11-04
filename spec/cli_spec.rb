@@ -11,23 +11,19 @@ describe CLI do
     allow(cli).to receive(:`).and_return # stub out `gem install ...`
   end
 
-  describe 'class methods' do
-    describe '.report' do
-      it 'outputs the passed in message to stdout' do
-        expect(cli.class).to receive(:puts).with('hello')
-        CLI.report('hello')
-      end
+  describe '.report' do
+    it 'outputs the passed in message to stdout' do
+      expect(cli.class).to receive(:puts).with('hello')
+      CLI.report('hello')
     end
   end
 
-  describe 'instance methods' do
-    describe '#start' do
-      it 'runs the script' do
-        expect(cli).to receive(:check_ability_to_generate_resume)
-        expect(cli).to receive(:generate_resume)
-        expect(cli).to receive(:clean_up)
-        cli.start
-      end
+  describe '#start' do
+    it 'runs the script' do
+      expect(cli).to receive(:check_ability_to_generate_resume)
+      expect(cli).to receive(:generate_resume)
+      expect(cli).to receive(:clean_up)
+      cli.start
     end
   end
 

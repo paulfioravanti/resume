@@ -2,7 +2,32 @@ require 'spec_helper'
 
 describe Image do
   describe '.for' do
-    let(:resource) { 'background' }
+    let(:resources) do
+      [
+        'background',
+        'email',
+        'linked_in',
+        'github',
+        'stackoverflow',
+        'speakerdeck',
+        'vimeo',
+        'code_school',
+        'twitter',
+        'blog',
+        'rc',
+        'ruby',
+        'rails',
+        'gw',
+        'rnt',
+        'sra',
+        'jet',
+        'satc',
+        'mit',
+        'bib',
+        'ryu',
+        'tafe'
+      ]
+    end
     let(:image) { double('image') }
 
     before do
@@ -10,7 +35,9 @@ describe Image do
     end
 
     it 'returns the image for a resource' do
-      expect(Image.for(resource)).to equal(image)
+      resources.each do |resource|
+        expect(Image.for(resource)).to equal(image)
+      end
     end
   end
 end

@@ -2,7 +2,31 @@ require 'spec_helper'
 
 describe Link do
   describe '.for' do
-    let(:resource) { 'email' }
+    let(:resources) do
+      [
+        'email',
+        'linked_in',
+        'github',
+        'stackoverflow',
+        'speakerdeck',
+        'vimeo',
+        'code_school',
+        'twitter',
+        'blog',
+        'rc',
+        'ruby',
+        'rails',
+        'gw',
+        'rnt',
+        'sra',
+        'jet',
+        'satc',
+        'mit',
+        'bib',
+        'ryu',
+        'tafe'
+      ]
+    end
     let(:decoded_email) { double('decoded_email') }
 
     before do
@@ -10,7 +34,9 @@ describe Link do
     end
 
     it 'returns the link for a resource' do
-      expect(Link.for(resource)).to equal(decoded_email)
+      resources.each do |resource|
+        expect(Link.for(resource)).to equal(decoded_email)
+      end
     end
   end
 end
