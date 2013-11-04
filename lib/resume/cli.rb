@@ -43,7 +43,6 @@ module Resume
       open_document if permission_granted?
       puts cyan "Thanks for looking at my resume. "\
                 "I hope to hear from you soon!"
-      stdout.close
     end
 
     def open_document
