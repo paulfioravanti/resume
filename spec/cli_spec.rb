@@ -21,7 +21,7 @@ describe CLI do
     context 'user does not have the gem installed' do
       before do
         allow(cli).to receive(:required_gem_available?).and_return(false)
-        cli.stub_chain(:gets, :chomp, :match).and_return('yes')
+        # cli.stub_chain(:gets, :chomp, :match).and_return('yes')
       end
 
       specify 'user is asked to install the gem' do
@@ -30,7 +30,10 @@ describe CLI do
       end
 
       context 'user agrees to install the gem' do
-        before { allow(cli).to receive(:permission_granted?).and_return(true) }
+        before do
+          allow(cli).to receive(:permission_granted?).and_return(true)
+          cli.stub_chain(:gets, :chomp, :match).and_return('yes')
+        end
 
         context 'gem is able be installed' do
           before { allow(cli).to receive(:install_gem).and_return }
@@ -76,9 +79,9 @@ describe CLI do
     context 'user allows the script to open the PDF' do
       context 'user is on a mac' do
         it 'opens the file using the open command' do
-          # expect(cli).to receive(:puts)
-          # expect(cli).to receive(:print)
-          # cli.send(:clean_up)
+          expect(cli).to receive(:puts)
+          expect(cli).to receive(:print)
+          cli.send(:clean_up)
         end
       end
 
