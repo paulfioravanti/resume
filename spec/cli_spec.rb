@@ -8,7 +8,7 @@ describe CLI do
 
   before do
     allow(cli).to receive(:gets).and_return(user_input)
-    allow(cli).to receive(:`).and_return # stub out `gem install ...`
+    allow(cli).to receive(:system).and_return # stub out `gem install ...`
   end
 
   describe '.report' do
@@ -78,7 +78,7 @@ describe CLI do
         end
 
         context 'gem is unable to be installed' do
-          before { allow(cli).to receive(:`).and_raise } # aka %x(...)
+          before { allow(cli).to receive(:system).and_raise } # aka %x(...)
 
           it 'prints an error message and exits' do
             # 'thank you', 'installing...', 'error'
@@ -138,7 +138,7 @@ describe CLI do
         before { stub_const('RUBY_PLATFORM', 'darwin') }
 
         it 'opens the file using the open command' do
-          expect(cli).to receive(:`).with("open #{document_name}.pdf")
+          expect(cli).to receive(:system).with("open #{document_name}.pdf")
           cli.send(:clean_up)
         end
       end
@@ -146,8 +146,8 @@ describe CLI do
       context 'user is on linux' do
         before { stub_const('RUBY_PLATFORM', 'linux') }
 
-        it 'opens the file using the open command' do
-          expect(cli).to receive(:`).with("xdg-open #{document_name}.pdf")
+        it 'opens the file using the xdg-open command' do
+          expect(cli).to receive(:system).with("xdg-open #{document_name}.pdf")
           cli.send(:clean_up)
         end
       end
@@ -155,17 +155,17 @@ describe CLI do
       context 'user is on windows' do
         before { stub_const('RUBY_PLATFORM', 'windows') }
 
-        it 'opens the file using the open command' do
+        it 'opens the file using the cmd command' do
           expect(cli).to \
-            receive(:`).with("cmd /c \"start #{document_name}.pdf\"")
+            receive(:system).with("cmd /c \"start #{document_name}.pdf\"")
           cli.send(:clean_up)
         end
       end
 
       context 'user is on an unknown operating system' do
-        before { stub_const('RUBY_PLATFORM', 'no_idea') }
+        before { stub_const('RUBY_PLATFORM', 'unknown') }
 
-        it 'opens the file using the open command' do
+        it 'prints a message telling the user to open the file' do
           # including calls to #puts in #clean_up
           expect(cli).to receive(:puts).exactly(3).times
           cli.send(:clean_up)

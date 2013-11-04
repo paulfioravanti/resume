@@ -48,11 +48,11 @@ module Resume
     def open_document
       case RUBY_PLATFORM
       when %r(darwin)
-        %x(open #{DOCUMENT_NAME}.pdf)
+        system("open #{DOCUMENT_NAME}.pdf")
       when %r(linux)
-        %x(xdg-open #{DOCUMENT_NAME}.pdf)
+        system("xdg-open #{DOCUMENT_NAME}.pdf")
       when %r(windows)
-        %x(cmd /c "start #{DOCUMENT_NAME}.pdf")
+        system("cmd /c \"start #{DOCUMENT_NAME}.pdf\"")
       else
         puts yellow "Sorry, I can't figure out how to open the resume on\n"\
                     "this computer. Please open it yourself."
@@ -73,7 +73,7 @@ module Resume
       puts green 'Thank you kindly :-)'
       puts 'Installing Prawn gem version 1.0.0.rc2...'
       begin
-        %x(gem install prawn -v 1.0.0.rc2)
+        system('gem install prawn -v 1.0.0.rc2')
         puts green 'Prawn gem successfully installed.'
         Gem.clear_paths # Reset the dir and path values so Prawn can be required
       rescue
