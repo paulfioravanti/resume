@@ -75,14 +75,14 @@ module Resume
       puts 'Installing Prawn gem version 1.0.0.rc2...'
       begin
         %x(gem install prawn -v 1.0.0.rc2)
+        puts green 'Prawn gem successfully installed.'
+        Gem.clear_paths # Reset the dir and path values so Prawn can be required
       rescue
         puts red "Sorry, for some reason I wasn't able to install prawn.\n"\
                  "Either try again or ask me directly for a PDF copy of "\
                  "my resume."
         exit
       end
-      puts green 'Prawn gem successfully installed.'
-      Gem.clear_paths # Reset the dir and path values so Prawn can be required
     end
   end
 end
