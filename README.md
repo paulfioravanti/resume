@@ -33,3 +33,6 @@ Both commands below produce the same result of my PDF resume.  The only differen
 </a>
 
 [![endorse](http://api.coderwall.com/pfioravanti/endorsecount.png)](http://coderwall.com/pfioravanti)
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/paulfioravanti/resume/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
