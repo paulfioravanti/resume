@@ -1,4 +1,4 @@
-$LOAD_PATH << File.join(File.dirname(__FILE__), 'resume')
+$LOAD_PATH << File.join(File.dirname(__FILE__), 'resume_generator')
 require 'colourable'
 require 'cli'
 require 'decodable'
@@ -7,3 +7,4 @@ require 'image'
 require 'resource'
 require 'resume_helper'
 require 'resume'
+require 'version'

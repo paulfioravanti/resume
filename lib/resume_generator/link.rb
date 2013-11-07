@@ -1,6 +1,6 @@
 require 'decodable'
 
-module Resume
+module ResumeGenerator
   class Link
     extend Decodable
 

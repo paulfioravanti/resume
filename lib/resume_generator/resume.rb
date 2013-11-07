@@ -1,7 +1,7 @@
 require 'resume_helper'
 require 'decodable'
 
-module Resume
+module ResumeGenerator
   class Resume
     def self.generate
       Prawn::Document.class_eval do

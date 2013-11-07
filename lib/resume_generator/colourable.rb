@@ -1,4 +1,4 @@
-module Resume
+module ResumeGenerator
   module Colourable
     private
 

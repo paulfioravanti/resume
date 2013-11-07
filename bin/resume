@@ -2,6 +2,5 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'resume/cli'
 
-DOCUMENT_NAME = 'Resume'
-cli = Resume::CLI.new
+cli = ResumeGenerator::CLI.new
 cli.start

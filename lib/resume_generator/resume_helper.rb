@@ -2,7 +2,7 @@ require 'image'
 require 'link'
 require 'resource'
 
-module Resume
+module ResumeGenerator
   module ResumeHelper
     private
 

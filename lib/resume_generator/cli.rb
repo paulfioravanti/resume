@@ -1,8 +1,10 @@
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'resume')
 require 'colourable'
-require 'resume/resume'
+require 'resume'
 
-module Resume
+module ResumeGenerator
+  DOCUMENT_NAME = 'Resume'
+
   class CLI
     include Colourable
 

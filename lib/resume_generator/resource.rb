@@ -1,7 +1,7 @@
 require 'image'
 require 'link'
 
-module Resume
+module ResumeGenerator
   class Resource
     attr_reader :image, :link
 

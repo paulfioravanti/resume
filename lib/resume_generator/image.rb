@@ -1,6 +1,6 @@
 require 'open-uri'
 
-module Resume
+module ResumeGenerator
   class Image
     def self.for(resource)
       send(:"#{resource}")
