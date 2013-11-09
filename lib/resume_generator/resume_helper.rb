@@ -88,26 +88,34 @@ module ResumeGenerator
 
     def period_and_location(options)
       if options.has_key?(:at)
-        formatted_text_box(
-          [
-            { text: d(options[:period]), color: '666666', size: 10 },
-            {
-              text: d(options[:location]),
-              link: d(options[:link]),
-              color: '666666', size: 10
-            }
-          ],
-          at: [options[:at], cursor]
-        )
+        period_and_location_formatted_text_box(options)
       else
-        formatted_text([
-          { text: d(options[:period]) },
+        period_and_location_formatted_text(options)
+      end
+    end
+
+    def period_and_location_formatted_text(options)
+      formatted_text([
+        { text: d(options[:period]) },
+        {
+          text: d(options[:location]),
+          link: d(options[:link])
+        }
+      ], color: '666666', size: 10)
+    end
+
+    def period_and_location_formatted_text_box(options)
+      formatted_text_box(
+        [
+          { text: d(options[:period]), color: '666666', size: 10 },
           {
             text: d(options[:location]),
-            link: d(options[:link])
+            link: d(options[:link]),
+            color: '666666', size: 10
           }
-        ], color: '666666', size: 10)
-      end
+        ],
+        at: [options[:at], cursor]
+      )
     end
 
     def organisation_logo(options)
