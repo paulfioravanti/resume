@@ -19,20 +19,9 @@ module ResumeGenerator
         CLI.report 'Creating social media links section...'
         social_media_links
         CLI.report 'Creating employment history section...'
-        heading 'RW1wbG95bWVudCBIaXN0b3J5'
-        rc
-        fl
-        gw
-        rnt
-        sra
-        jet
-        satc
+        employment_history
         CLI.report('Creating education history section...')
-        heading 'RWR1Y2F0aW9u'
-        mit
-        bib
-        ryu
-        tafe
+        education_history
       end
     end
   end

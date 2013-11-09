@@ -13,6 +13,25 @@ module ResumeGenerator
                   "2lvbmFs"
     end
 
+    def employment_history
+      heading 'RW1wbG95bWVudCBIaXN0b3J5'
+      rc
+      fl
+      gw
+      rnt
+      sra
+      jet
+      satc
+    end
+
+    def education_history
+      heading 'RWR1Y2F0aW9u'
+      mit
+      bib
+      ryu
+      tafe
+    end
+
     def rc
       move_down 10
       position 'U2VuaW9yIERldmVsb3Blcg=='
