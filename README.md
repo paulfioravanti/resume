@@ -6,6 +6,10 @@ Text is deliberately obfuscated with [Base64](http://ruby-doc.org/stdlib-2.0/lib
 
 ## Usage
 
+Install the gems (primarily if you want to run the specs):
+
+    $ bundle install
+
 Both commands below produce the same result of my PDF resume.  The only difference is that one runs the componentised code in the `lib` directory, and the other runs just the one Ruby script, which contains all the classes and modules from `lib` in one file.
 
 ### Run the resume generator under the `lib` folder:
@@ -16,10 +20,19 @@ Both commands below produce the same result of my PDF resume.  The only differen
 
     $ ruby resume.rb
 
+### Run the specs on the resume generator under the `lib` folder:
+
+    $ rspec spec/
+
+### Run the specs on the 'one-sheet' resume script:
+
+    $ rspec resume.rb
+
 ### Dependencies
 
 - Ruby 1.9.2 or higher (1.8.7 will not work)
 - Prawn 1.0.0.rc2 or higher (if you don't have the Prawn version 1.0.0.rc2 gem installed, you will be asked for permission to install it)
+- RSpec 2.14.7 or higher, if you want to run the specs
 
 ### Issues:
 
