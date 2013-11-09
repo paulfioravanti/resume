@@ -3,15 +3,23 @@ require 'base64'
 require 'open-uri'
 
 ################################################################################
-### This resume also lives online in a more componentised format at
-### https://github.com/paulfioravanti/resume
+### This resume also lives online at https://github.com/paulfioravanti/resume
+### in case you want to see a more readable, structured version of the files.
+###
 ### Instructions:
 ### 1. Make sure you run this with Ruby 1.9.2 or greater (1.8.7 will not work)
 ### 2. Please let the script install the Prawn gem for PDF generation if you
-###    don't have it already.  Otherwise, contact me for a dead tree resume.
+###    don't have it already.  Otherwise, contact me directly for the PDF file.
 ### 3. The script will pull down some small images from Flickr, so please ensure
 ###    you have an internet connection.
-### 4. Run the script: $ ruby resume.rb
+### 4. Run the script:
+###
+###    $ ruby resume.rb
+###
+### 5. If you have RSpec installed, run the specs:
+###
+###    $ rspec resume.rb
+###
 ################################################################################
 module ResumeGenerator
   VERSION = '0.0.1'
@@ -1048,7 +1056,7 @@ module ResumeGenerator
         end
       end
 
-      context 'user has the expected gem installed, but it is an older version' do
+      context 'user has expected gem installed, but it is an older version' do
         before do
           allow(prawn_gem).to receive(:version).and_return(0)
         end
@@ -1071,7 +1079,9 @@ module ResumeGenerator
         end
 
         context 'user agrees to install the gem' do
-          before { allow(cli).to receive(:permission_granted?).and_return(true) }
+          before do
+            allow(cli).to receive(:permission_granted?).and_return(true)
+          end
 
           it 'executes installation' do
             expect(cli).to receive(:install_gem)
@@ -1091,7 +1101,9 @@ module ResumeGenerator
         end
 
         context 'when user does not agree to install the gem' do
-          before { allow(cli).to receive(:permission_granted?).and_return(false) }
+          before do
+            allow(cli).to receive(:permission_granted?).and_return(false)
+          end
 
           it 'prints an error message and exits' do
             expect(cli).to receive(:puts).once
@@ -1113,8 +1125,8 @@ module ResumeGenerator
 
     describe 'post-PDF generation' do
       it 'shows a success message and asks to open the resume' do
-        # expect puts twice as it includes the printed message you get regardless
-        # of whether you allow the script to open resume or not
+        # expect puts twice as it includes the printed message you get
+        # regardless of whether you allow the script to open resume or not
         expect(cli).to receive(:puts).twice
         expect(cli).to receive(:print)
         cli.send(:clean_up)
@@ -1143,7 +1155,8 @@ module ResumeGenerator
           before { stub_const('RUBY_PLATFORM', 'linux') }
 
           it 'opens the file using the xdg-open command' do
-            expect(cli).to receive(:system).with("xdg-open #{document_name}.pdf")
+            expect(cli).to \
+              receive(:system).with("xdg-open #{document_name}.pdf")
             cli.send(:clean_up)
           end
         end
@@ -1316,13 +1329,15 @@ module ResumeGenerator
 
     describe ".generate" do
       # Link points to a 1x1 pixel placeholder to not slow down test suite
+      # Couldn't send Prawn::Document an image test double
       let(:placeholder_image) do
         open('http://farm4.staticflickr.com/3722/10753699026_a1603247cf_m.jpg')
       end
       let(:filename) { "#{ResumeGenerator::DOCUMENT_NAME}.pdf" }
 
       before do
-        allow(Image).to receive(:for).with(anything).and_return(placeholder_image)
+        allow(Image).to \
+          receive(:for).with(anything).and_return(placeholder_image)
         Resume.generate
       end
       after { File.delete(filename) }

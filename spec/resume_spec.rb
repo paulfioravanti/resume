@@ -3,6 +3,7 @@ require 'prawn'
 describe Resume do
   describe ".generate" do
     # Link points to a 1x1 pixel placeholder to not slow down test suite
+    # Couldn't send Prawn::Document an image test double
     let(:placeholder_image) do
       open('http://farm4.staticflickr.com/3722/10753699026_a1603247cf_m.jpg')
     end
