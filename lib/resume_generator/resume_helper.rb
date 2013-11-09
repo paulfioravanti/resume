@@ -35,8 +35,8 @@ module ResumeGenerator
     def rc
       move_down 10
       position_header(
-        position: 'U2VuaW9yIERldmVsb3Blcg==',
-        organisation: 'UmF0ZUNpdHkuY29tLmF1',
+        position: { title: 'U2VuaW9yIERldmVsb3Blcg==' },
+        organisation: { name: 'UmF0ZUNpdHkuY29tLmF1' },
         period: 'SnVseSAyMDEzIC0gUHJlc2VudCB8',
         location: 'U3lkbmV5LCBBdXN0cmFsaWE=',
         location_link: 'rc_location'
@@ -79,8 +79,8 @@ module ResumeGenerator
     def fl
       move_down 15
       position_header(
-        position: 'UnVieSBEZXZlbG9wZXI=',
-        organisation: 'RnJlZWxhbmNl',
+        position: { title: 'UnVieSBEZXZlbG9wZXI=' },
+        organisation: { name: 'RnJlZWxhbmNl' },
         period: 'U2VwdGVtYmVyIDIwMTIg4oCTIEp1bHkgMjAxMyB8ICA=',
         location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
         location_link: 'fl_location'
@@ -117,8 +117,8 @@ module ResumeGenerator
     def gw
       move_down 15
       position_header(
-        position: 'UHJlLXNhbGVzIENvbnN1bHRhbnQ=',
-        organisation: 'R3VpZGV3aXJlIFNvZnR3YXJl',
+        position: { title: 'UHJlLXNhbGVzIENvbnN1bHRhbnQ=' },
+        organisation: { name: 'R3VpZGV3aXJlIFNvZnR3YXJl' },
         period: 'SmFudWFyeSAyMDA5IOKAkyBTZXB0ZW1iZXIgMjAxMSB8ICA=',
         location: 'VG9reW8sIEphcGFu',
         location_link: 'gw_location'
@@ -164,9 +164,9 @@ module ResumeGenerator
     def rnt
       move_down 15
       position_header(
-        position: "SW1wbGVtZW50YXRpb24gQ29uc3VsdGFudCwgUHJvZmVzc2lvbmFsIFNlcn"\
-                    "ZpY2Vz",
-        organisation: 'UmlnaHQgTm93IFRlY2hub2xvZ2llcw==',
+        position: { title: "SW1wbGVtZW50YXRpb24gQ29uc3VsdGFudCwgUHJvZmVzc2lvbmFsIFNlcn"\
+                    "ZpY2Vz" },
+        organisation: { name: 'UmlnaHQgTm93IFRlY2hub2xvZ2llcw==' },
         period: 'SnVseSAyMDA3IOKAkyBBdWd1c3QgMjAwOCB8ICA=',
         location: 'VG9reW8sIEphcGFu',
         location_link: 'rnt_location'
@@ -214,8 +214,8 @@ module ResumeGenerator
     def sra
       move_down 15
       position_header(
-        position: 'U29mdHdhcmUgRW5naW5lZXI=',
-        organisation: 'U29mdHdhcmUgUmVzZWFyY2ggQXNzb2NpYXRlcyAoU1JBKQ==',
+        position: { title: 'U29mdHdhcmUgRW5naW5lZXI=' },
+        organisation: { name: 'U29mdHdhcmUgUmVzZWFyY2ggQXNzb2NpYXRlcyAoU1JBKQ==' },
         period: 'QXByaWwgMjAwNiDigJMgSnVuZSAyMDA3IHwgIA==',
         location: 'VG9reW8sIEphcGFu',
         location_link: 'sra_location'
@@ -244,9 +244,9 @@ module ResumeGenerator
     def jet
       move_down 15
       position_header(
-        position: 'Q29vcmRpbmF0b3Igb2YgSW50ZXJuYXRpb25hbCBSZWxhdGlvbnMgKENJUik=',
-        organisation: "SmFwYW4gRXhjaGFuZ2UgYW5kIFRlYWNoaW5nIFByb2dyYW1tZSAoSkVU"\
-                  "KQ==",
+        position: { title: 'Q29vcmRpbmF0b3Igb2YgSW50ZXJuYXRpb25hbCBSZWxhdGlvbnMgKENJUik=' },
+        organisation: { name: "SmFwYW4gRXhjaGFuZ2UgYW5kIFRlYWNoaW5nIFByb2dyYW1tZSAoSkVU"\
+                  "KQ==" },
         period: 'SnVseSAyMDAxIOKAkyBKdWx5IDIwMDQgfCAg',
         location: 'S29jaGksIEphcGFu',
         location_link: 'jet_location'
@@ -274,9 +274,9 @@ module ResumeGenerator
     def satc
       move_down 15
       position_header(
-        position: "SW50ZXJuYXRpb25hbCBNYXJrZXRpbmcgQXNzaXN0YW50IOKAkyBBc2lhIGFu"\
-                    "ZCBKYXBhbg==",
-        organisation: 'U291dGggQXVzdHJhbGlhbiBUb3VyaXNtIENvbW1pc3Npb24=',
+        position: { title: "SW50ZXJuYXRpb25hbCBNYXJrZXRpbmcgQXNzaXN0YW50IOKAkyBBc2lhIGFu"\
+                    "ZCBKYXBhbg==" },
+        organisation: { name: 'U291dGggQXVzdHJhbGlhbiBUb3VyaXNtIENvbW1pc3Npb24=' },
         period: 'TWF5IDIwMDAg4oCTIE1heSAyMDAxIHwgIA==',
         location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
         location_link: 'satc_location'
@@ -306,8 +306,8 @@ module ResumeGenerator
     def mit
       move_down 15
       position_header(
-        position: 'TWFzdGVycyBvZiBJbmZvcm1hdGlvbiBUZWNobm9sb2d5',
-        organisation: 'VW5pdmVyc2l0eSBvZiBTb3V0aCBBdXN0cmFsaWE=',
+        position: { title: 'TWFzdGVycyBvZiBJbmZvcm1hdGlvbiBUZWNobm9sb2d5' },
+        organisation: { name: 'VW5pdmVyc2l0eSBvZiBTb3V0aCBBdXN0cmFsaWE=' },
         period: 'MjAwNC0yMDA1IHw=',
         location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
         location_link: 'mit_location'
@@ -328,21 +328,12 @@ module ResumeGenerator
 
     def bib
       move_up 38
-      # position_header(
-      #   position:
-      #   header:
-      #   period:
-      #   location:
-      #   location_link:
-      # )
-      position 'QmFjaGVsb3Igb2YgSW50ZXJuYXRpb25hbCBCdXNpbmVzcw==', at: 280
-      move_down 14
-      organisation 'RmxpbmRlcnMgVW5pdmVyc2l0eQ==', at: 280
-      move_down 13
-      period_and_location(
+      position_header(
+        position: { title: 'QmFjaGVsb3Igb2YgSW50ZXJuYXRpb25hbCBCdXNpbmVzcw==', at: 280 },
+        organisation: { name: 'RmxpbmRlcnMgVW5pdmVyc2l0eQ==', at: 280 },
         period: 'MTk5Ny0xOTk5IHw=',
         location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
-        link: 'bib_location',
+        location_link: 'bib_location',
         at: 280
       )
 
@@ -362,8 +353,8 @@ module ResumeGenerator
     def ryu
       move_down 20
       position_header(
-        position: 'U3R1ZGVudCBFeGNoYW5nZSBQcm9ncmFtbWU=',
-        organisation: 'Unl1a29rdSBVbml2ZXJzaXR5',
+        position: { title: 'U3R1ZGVudCBFeGNoYW5nZSBQcm9ncmFtbWU=' },
+        organisation: { name: 'Unl1a29rdSBVbml2ZXJzaXR5' },
         period: 'U2VwIDE5OTkgLSBGZWIgMjAwMCB8',
         location: 'S3lvdG8sIEphcGFu',
         location_link: 'ryu_location'
@@ -384,22 +375,12 @@ module ResumeGenerator
 
     def tafe
       move_up 38
-      # position_header(
-      #   position:
-      #   header:
-      #   period:
-      #   location:
-      #   location_link:
-      # )
-      position 'Q2VydGlmaWNhdGUgSUkgaW4gVG91cmlzbQ==', at: 280
-      move_down 14
-      organisation 'QWRlbGFpZGUgVEFGRQ==', at: 280
-
-      move_down 13
-      period_and_location(
+      position_header(
+        position: { title: 'Q2VydGlmaWNhdGUgSUkgaW4gVG91cmlzbQ==', at: 280 },
+        organisation: { name: 'QWRlbGFpZGUgVEFGRQ==', at: 280 },
         period: 'TWF5IDIwMDAgLSBNYXkgMjAwMSB8',
         location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
-        link: 'tafe_location',
+        location_link: 'tafe_location',
         at: 280
       )
 
@@ -422,7 +403,8 @@ module ResumeGenerator
       period_and_location(
         period: options[:period],
         location: options[:location],
-        link: options[:location_link]
+        link: options[:location_link],
+        at: options[:at]
       )
     end
 
@@ -501,32 +483,34 @@ module ResumeGenerator
       )
     end
 
-    def position(title, options = {})
+    def position(options)
       if options.has_key?(:at)
         formatted_text_box(
-          [{ text: d(title), styles: [:bold] }], at: [options[:at], cursor]
+          [{ text: d(options[:title]), styles: [:bold] }], at: [options[:at], cursor]
         )
+        move_down 14
       else
-        formatted_text([{ text: d(title), styles: [:bold] }])
+        formatted_text([{ text: d(options[:title]), styles: [:bold] }])
       end
     end
 
-    def organisation(name, options = {})
+    def organisation(options)
       if options.has_key?(:at)
         formatted_text_box(
-          [{ text: d(name), styles: [:bold], size: 11 }],
+          [{ text: d(options[:name]), styles: [:bold], size: 11 }],
           at: [options[:at], cursor]
         )
+        move_down 13
       else
-        formatted_text([{ text: d(name), styles: [:bold], size: 11 }])
+        formatted_text([{ text: d(options[:name]), styles: [:bold], size: 11 }])
       end
     end
 
     def period_and_location(options)
-      if options.has_key?(:at)
-        period_and_location_formatted_text_box(options)
-      else
+      if options[:at].nil?
         period_and_location_formatted_text(options)
+      else
+        period_and_location_formatted_text_box(options)
       end
     end
 
