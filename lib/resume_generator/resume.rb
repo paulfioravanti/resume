@@ -5,7 +5,7 @@ module ResumeGenerator
   class Resume
     def self.generate
       Prawn::Document.class_eval do
-        include ResumeHelper, Decodable
+        include ResumeHelper, ResumeContentHelper, Decodable
       end
       Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
         margin_top: 0.75, margin_bottom: 0.75, margin_left: 1, margin_right: 1,
