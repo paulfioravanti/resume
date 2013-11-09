@@ -1,8 +1,8 @@
-require File.expand_path('../lib/resume/version', __FILE__)
+require File.expand_path('../lib/resume_generator/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = 'resume'
-  gem.version       = Resume::VERSION
+  gem.version       = ResumeGenerator::VERSION
   gem.summary       = %q{Resume Generator}
   gem.description   = %q{Generates my resume using the Prawn PDF library}
   gem.license       = 'MIT'
