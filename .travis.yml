@@ -3,5 +3,5 @@ language: ruby
 rvm:
 - 2.0.0
 script:
-- bundle exec rspec resume.rb
+# - bundle exec rspec resume.rb
 - bundle exec rspec spec/ --no-drb --format progress
