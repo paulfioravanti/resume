@@ -1,5 +1,7 @@
 # Resume
 
+[![Build Status](https://travis-ci.org/paulfioravanti/resume.png?branch=master)](https://travis-ci.org/paulfioravanti/resume) [![Coverage Status](https://coveralls.io/repos/paulfioravanti/resume/badge.png?branch=master)](https://coveralls.io/r/paulfioravanti/resume?branch=master)
+
 This is a short Ruby script that generates my resume.  I made it in order to teach myself a bit about the Ruby PDF generation library [Prawn](https://github.com/prawnpdf/prawn).  [Railscast #153](http://railscasts.com/episodes/153-pdfs-with-prawn-revised) is also a good resource for learning about it.
 
 Text is deliberately obfuscated with [Base64](http://ruby-doc.org/stdlib-2.0/libdoc/base64/rdoc/Base64.html) to encourage people to generate the PDF and not read the resume content from within the code.
