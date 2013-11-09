@@ -105,17 +105,12 @@ describe CLI do
     before { allow(cli).to receive(:require).with('prawn') }
 
     it 'tells the PDF to generate itself' do
-      expect(Resume::Resume).to receive(:generate)
+      expect(Resume).to receive(:generate)
       cli.send(:generate_resume)
     end
   end
 
   describe 'post-PDF generation' do
-
-    before do
-      stub_const('Resume::CLI::DOCUMENT_NAME', 'Resume')
-    end
-
     it 'shows a success message and asks to open the resume' do
       # expect puts twice as it includes the printed message you get regardless
       # of whether you allow the script to open resume or not
@@ -125,7 +120,7 @@ describe CLI do
     end
 
     context 'user allows the script to open the PDF' do
-      let(:document_name) { Resume::CLI::DOCUMENT_NAME }
+      let(:document_name) { ResumeGenerator::DOCUMENT_NAME }
 
       before { allow(cli).to receive(:permission_granted?).and_return(true) }
 
