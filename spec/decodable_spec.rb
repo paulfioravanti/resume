@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Decodable do
   let(:decoder) { Object.new.extend(Decodable) }
 

@@ -78,7 +78,7 @@ describe CLI do
         end
 
         context 'gem is unable to be installed' do
-          before { allow(cli).to receive(:system).and_raise } # aka %x(...)
+          before { allow(cli).to receive(:system).and_raise }
 
           it 'prints an error message and exits' do
             # 'thank you', 'installing...', 'error'

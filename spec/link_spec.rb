@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Link do
   describe '.for' do
     let(:resources) do

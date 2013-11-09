@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ResumeGenerator do
   describe 'constants' do
     let(:version) { ResumeGenerator.const_get('VERSION') }

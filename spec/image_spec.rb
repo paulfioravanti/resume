@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe Image do
   describe '.for' do
     let(:resources) do
