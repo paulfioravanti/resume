@@ -12,17 +12,28 @@ describe Link do
         'twitter',
         'blog',
         'rc',
+        'rc_location',
         'ruby',
         'rails',
+        'fl_location',
         'gw',
+        'gw_location',
         'rnt',
+        'rnt_location',
         'sra',
+        'sra_location',
         'jet',
+        'jet_location',
         'satc',
+        'satc_location',
         'mit',
+        'mit_location',
         'bib',
+        'bib_location',
         'ryu',
-        'tafe'
+        'ryu_location',
+        'tafe',
+        'tafe_location'
       ]
     end
     let(:decoded_email) { double('decoded_email') }
