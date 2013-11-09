@@ -3,7 +3,6 @@ require 'decodable'
 
 module ResumeGenerator
   class Resume
-
     def self.generate
       Prawn::Document.class_eval do
         include ResumeHelper, Decodable

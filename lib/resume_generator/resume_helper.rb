@@ -39,12 +39,7 @@ module ResumeGenerator
       period_and_location(
         period: 'SnVseSAyMDEzIC0gUHJlc2VudCB8',
         location: 'U3lkbmV5LCBBdXN0cmFsaWE=',
-        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9xPTYxK0xhdmVuZGVyK"\
-              "1N0K01pbHNvbnMrUG9pbnQrTlNXKzIwNjEmaGw9ZW4mbGw9LTMzLjg1MDYwMi"\
-              "wxNTEuMjEzMTYmc3BuPTAuMDI3MjY1LDAuMDM4OTY3JnNsbD0tMzMuODQzNjU"\
-              "5LDE1MS4yMDk5NDkmc3Nwbj0wLjAwNjgxNywwLjAwOTc0MiZobmVhcj02MStM"\
-              "YXZlbmRlcitTdCwrTWlsc29ucytQb2ludCtOZXcrU291dGgrV2FsZXMrMjA2M"\
-              "SZ0PW0mej0xNQ=="
+        link: Link.for('rc_location')
       )
       move_up 40
       organisation_logo(
@@ -87,11 +82,7 @@ module ResumeGenerator
       period_and_location(
         period: 'U2VwdGVtYmVyIDIwMTIg4oCTIEp1bHkgMjAxMyB8ICA=',
         location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
-        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9mPXEmc291cmNlPXNfcSZob"\
-              "D1lbiZnZW9jb2RlPSZxPWFkZWxhaWRlLCthdXN0cmFsaWEmYXE9JnNsbD0tMz"\
-              "QuOTYxNjkyLDEzOC42MjEzOTkmc3Nwbj0wLjA1NjgzNiwwLjA3MTU4MyZ2cHN"\
-              "yYz00JmllPVVURjgmaHE9JmhuZWFyPUFkZWxhaWRlK1NvdXRoK0F1c3RyYWxp"\
-              "YSwrQXVzdHJhbGlhJnQ9bSZ6PTkmaXdsb2M9QQ=="
+        link: Link.for('fl_location')
       )
 
       move_up 40
@@ -130,19 +121,7 @@ module ResumeGenerator
       period_and_location(
         period: 'SmFudWFyeSAyMDA5IOKAkyBTZXB0ZW1iZXIgMjAxMSB8ICA=',
         location: 'VG9reW8sIEphcGFu',
-        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9mPXEmc291cmNlPXNfcSZob"\
-              "D1lbiZnZW9jb2RlPSZxPSVFMyU4MCU5MjEwMC0wMDA2KyslRTYlOUQlQjElRT"\
-              "QlQkElQUMlRTklODMlQkQlRTUlOEQlODMlRTQlQkIlQTMlRTclOTQlQjAlRTU"\
-              "lOEMlQkElRTYlOUMlODklRTYlQTUlQkQlRTclOTQlQkEyLTctMSsrJUU2JTlD"\
-              "JTg5JUU2JUE1JUJEJUU3JTk0JUJBJUUzJTgyJUE0JUUzJTgzJTg4JUUzJTgyJ"\
-              "UI3JUUzJTgyJUEyKzEyJUU5JTlBJThFJmFxPSZzbGw9LTM0LjkyODYyMSwxMz"\
-              "guNTk5OTU5JnNzcG49MS44MTk0MzYsMi4yOTA2NDkmdnBzcmM9MCZnPWFkZWx"\
-              "haWRlLCthdXN0cmFsaWEmaWU9VVRGOCZocT0lRTMlODAlOTIxMDAtMDAwNisr"\
-              "JUU2JTlEJUIxJUU0JUJBJUFDJUU5JTgzJUJEJUU1JThEJTgzJUU0JUJCJUEzJ"\
-              "UU3JTk0JUIwJUU1JThDJUJBJUU2JTlDJTg5JUU2JUE1JUJEJUU3JTk0JUJBMi"\
-              "03LTErKyVFNiU5QyU4OSVFNiVBNSVCRCVFNyU5NCVCQSVFMyU4MiVBNCVFMyU"\
-              "4MyU4OCVFMyU4MiVCNyVFMyU4MiVBMisxMiVFOSU5QSU4RSZ0PW0mej0xNSZp"\
-              "d2xvYz1BJmNpZD0xNzQ4MjYwNDQzMTMwNjkxMzEzMw=="
+        link: Link.for('gw_location')
       )
       move_up 40
       organisation_logo(
@@ -189,19 +168,7 @@ module ResumeGenerator
       period_and_location(
         period: 'SnVseSAyMDA3IOKAkyBBdWd1c3QgMjAwOCB8ICA=',
         location: 'VG9reW8sIEphcGFu',
-        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9mPXEmc291cmNlPXNfcSZob"\
-              "D1lbiZnZW9jb2RlPSZxPSVFMyU4MCU5MjEwNS02MDI3JUU2JTlEJUIxJUU0JU"\
-              "JBJUFDJUU5JTgzJUJEJUU2JUI4JUFGJUU1JThDJUJBJUU4JTk5JThFJUUzJTg"\
-              "zJThFJUU5JTk2JTgwNC0zLTErJUU1JTlGJThFJUU1JUIxJUIxJUUzJTgzJTg4"\
-              "JUUzJTgzJUE5JUUzJTgyJUI5JUUzJTgzJTg4JUUzJTgyJUJGJUUzJTgzJUFGJ"\
-              "UUzJTgzJUJDKzI3JUU5JTlBJThFJmFxPSZzbGw9MzUuNjY0Njg4LDEzOS43ND"\
-              "MzMDQmc3Nwbj0wLjAyODE3MiwwLjAzNTc5MSZ2cHNyYz02JmllPVVURjgmaHE"\
-              "9JmhuZWFyPUphcGFuLCtUJUM1JThEa3klQzUlOEQtdG8sK01pbmF0by1rdSwr"\
-              "VG9yYW5vbW9uLCslRUYlQkMlOTQlRTQlQjglODElRTclOUIlQUUlRUYlQkMlO"\
-              "TMlRTIlODglOTIlRUYlQkMlOTErJUU1JTlGJThFJUU1JUIxJUIxJUUzJTgzJT"\
-              "g4JUUzJTgzJUE5JUUzJTgyJUI5JUUzJTgzJTg4JUUzJTgyJUJGJUUzJTgzJUF"\
-              "GJUUzJTgzJUJDJmxsPTM1LjY2NDY4OCwxMzkuNzQzMjYxJnNwbj0wLjAyODE3"\
-              "MiwwLjAzNTc5MSZ0PW0mej0xNSZpd2xvYz1B"
+        link: Link.for('rnt_location')
       )
 
       move_up 40
@@ -250,15 +217,7 @@ module ResumeGenerator
       period_and_location(
         period: 'QXByaWwgMjAwNiDigJMgSnVuZSAyMDA3IHwgIA==',
         location: 'VG9reW8sIEphcGFu',
-        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfc"\
-              "SZobD1lbiZnZW9jb2RlPSZxPSVFMyU4MCU5MjE3MS04NTEzJUU2JTlEJUIxJU"\
-              "U0JUJBJUFDJUU5JTgzJUJEJUU4JUIxJThBJUU1JUIzJUI2JUU1JThDJUJBJUU"\
-              "1JThEJTk3JUU2JUIxJUEwJUU4JUEyJThCMi0zMi04JmFxPSZzbGw9MzUuNzI2"\
-              "NjAxLDEzOS43MTU1MDgmc3Nwbj0wLjAwNzAzOCwwLjAwODk0OCZ2cHNyYz0wJ"\
-              "mllPVVURjgmaHE9JmhuZWFyPUphcGFuLCtUJUM1JThEa3klQzUlOEQtdG8sK1"\
-              "Rvc2hpbWEta3UsK01pbmFtaWlrZWJ1a3VybywrJUVGJUJDJTkyJUU0JUI4JTg"\
-              "xJUU3JTlCJUFFJUVGJUJDJTkzJUVGJUJDJTkyJUUyJTg4JTkyJUVGJUJDJTk4"\
-              "JnQ9bSZ6PTE3Jml3bG9jPUE="
+        link: Link.for('sra_location')
       )
 
       move_up 40
@@ -289,16 +248,7 @@ module ResumeGenerator
       period_and_location(
         period: 'SnVseSAyMDAxIOKAkyBKdWx5IDIwMDQgfCAg',
         location: 'S29jaGksIEphcGFu',
-        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfc"\
-              "SZobD1lbiZnZW9jb2RlPSZxPSVFMyU4MCU5Mjc4MC0wODUwJUU5JUFCJTk4JU"\
-              "U3JTlGJUE1JUU1JUI4JTgyJUU0JUI4JUI4JUUzJTgzJThFJUU1JTg2JTg1MSV"\
-              "FNCVCOCU4MSVFNyU5QiVBRTclRTclOTUlQUE1MiVFNSU4RiVCNyZhcT0mc2xs"\
-              "PS0zNC45NjE2OTIsMTM4LjYyMTM5OSZzc3BuPTAuMDU2ODM2LDAuMDcxNTgzJ"\
-              "nZwc3JjPTYmaWU9VVRGOCZocT0maG5lYXI9SmFwYW4sK0slQzUlOERjaGkta2"\
-              "VuLCtLJUM1JThEY2hpLXNoaSwrTWFydW5vdWNoaSwrJUVGJUJDJTkxJUU0JUI"\
-              "4JTgxJUU3JTlCJUFFJUVGJUJDJTk3JUUyJTg4JTkyJUVGJUJDJTk1JUVGJUJD"\
-              "JTkyJmxsPTMzLjU1OTQ1NiwxMzMuNTI4MzA0JnNwbj0wLjAxNDQ0OCwwLjAxN"\
-              "zg5NiZ0PW0mej0xNiZpd2xvYz1B"
+        link: Link.for('jet_location')
       )
 
       move_up 40
@@ -328,13 +278,7 @@ module ResumeGenerator
       period_and_location(
         period: 'TWF5IDIwMDAg4oCTIE1heSAyMDAxIHwgIA==',
         location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
-        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfc"\
-              "SZobD1lbiZnZW9jb2RlPSZxPTUwK0dyZW5mZWxsK1N0LCtBZGVsYWlkZStTQS"\
-              "ZhcT0mc2xsPS0zNC45MjQyMjMsMTM4LjYwMTcxMyZzc3BuPTAuMDU3MTQzLDA"\
-              "uMDcxNTgzJnZwc3JjPTYmZz01MCtHcmVuZmVsbCtTdCwrQWRlbGFpZGUrU0Em"\
-              "aWU9VVRGOCZocT0maG5lYXI9NTArR3JlbmZlbGwrU3QsK0FkZWxhaWRlK1Nvd"\
-              "XRoK0F1c3RyYWxpYSs1MDAwJmxsPS0zNC45MjQwODIsMTM4LjYwMTY5MiZzcG"\
-              "49MC4wMTQyMTUsMC4wMTc4OTYmdD1tJno9MTYmaXdsb2M9QQ=="
+        link: Link.for('satc_location')
       )
 
       move_up 40
@@ -365,13 +309,7 @@ module ResumeGenerator
       period_and_location(
         period: 'MjAwNC0yMDA1IHw=',
         location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
-        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfc"\
-              "SZobD1lbiZnZW9jb2RlPSZxPTU1K05vcnRoK1RlcnJhY2UsK0FkZWxhaWRlK1"\
-              "NBKzUwMDAmc2xsPS0zNC45NjE2OTIsMTM4LjYyMTM5OSZzc3BuPTAuMDU2ODM"\
-              "2LDAuMDcxNTgzJnZwc3JjPTYmaWU9VVRGOCZocT0maG5lYXI9NTUrTm9ydGgr"\
-              "VGVycmFjZSwrQWRlbGFpZGUsK1NvdXRoK0F1c3RyYWxpYSs1MDAwJmxsPS0zN"\
-              "C45MjIxODIsMTM4LjU5MDg1NiZzcG49MC4wMjg0MzIsMC4wMzU3OTEmdD1tJn"\
-              "o9MTUmaXdsb2M9QQ=="
+        link: Link.for('mit_location')
       )
 
       move_up 40
@@ -397,13 +335,7 @@ module ResumeGenerator
       period_and_location(
         period: 'MTk5Ny0xOTk5IHw=',
         location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
-        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfc"\
-              "SZobD1lbiZnZW9jb2RlPSZxPVN0dXJ0K1JkLCtCZWRmb3JkK1BhcmsrU0ErNT"\
-              "A0MiZhcT0mc2xsPS0zNC45MjIxODIsMTM4LjU5MDg1NiZzc3BuPTAuMDI4NDM"\
-              "yLDAuMDM1NzkxJnZwc3JjPTYmaWU9VVRGOCZocT0maG5lYXI9U3R1cnQrUmQs"\
-              "K0JlZGZvcmQrUGFyaytTb3V0aCtBdXN0cmFsaWErNTA0MiZsbD0tMzUuMDE2N"\
-              "zgyLDEzOC41Njc5ODImc3BuPTAuMDU2Nzk4LDAuMDcxNTgzJnQ9bSZ6PTE0Jm"\
-              "l3bG9jPUE=",
+        link: Link.for('bib_location'),
         at: 280
       )
 
@@ -427,17 +359,7 @@ module ResumeGenerator
       period_and_location(
         period: 'U2VwIDE5OTkgLSBGZWIgMjAwMCB8',
         location: 'S3lvdG8sIEphcGFu',
-        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfc"\
-              "SZobD1lbiZnZW9jb2RlPSZxPSVFNCVCQSVBQyVFOSU4MyVCRCVFNSVCQSU5Qy"\
-              "VFNCVCQSVBQyVFOSU4MyVCRCVFNSVCOCU4MiVFNCVCQyU4RiVFOCVBNiU4QiV"\
-              "FNSU4QyVCQSVFNiVCNyVCMSVFOCU4RCU4OSVFNSVBMSU5QSVFNiU5QyVBQyVF"\
-              "NyU5NCVCQSVFRiVCQyU5NiVFRiVCQyU5NyZhcT0mc2xsPS0zNS4wMTY3ODIsM"\
-              "TM4LjU2Nzk4MiZzc3BuPTAuMDU2Nzk4LDAuMDcxNTgzJnZwc3JjPTYmZz1TdH"\
-              "VydCtSZCwrQmVkZm9yZCtQYXJrK1NvdXRoK0F1c3RyYWxpYSs1MDQyJmllPVV"\
-              "URjgmaHE9JmhuZWFyPUphcGFuLCtLeSVDNSU4RHRvLWZ1LCtLeSVDNSU4RHRv"\
-              "LXNoaSwrRnVzaGltaS1rdSwrRnVrYWt1c2ErVHN1a2Ftb3RvY2glQzUlOEQsK"\
-              "yVFRiVCQyU5NiVFRiVCQyU5NyZsbD0zNC45NjM5NzQsMTM1Ljc2Nzk3JnNwbj"\
-              "0wLjAwNzEwNCwwLjAwODk0OCZ0PW0mej0xNyZpd2xvYz1B"
+        link: Link.for('ryu_location')
       )
 
       move_up 40
@@ -463,13 +385,7 @@ module ResumeGenerator
       period_and_location(
         period: 'TWF5IDIwMDAgLSBNYXkgMjAwMSB8',
         location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
-        link: "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfc"\
-              "SZobD1lbiZnZW9jb2RlPSZxPTEyMCtDdXJyaWUrU3RyZWV0K0FERUxBSURFK1"\
-              "NBKzUwMDAmYXE9JnNsbD0zNC45NjM5NzQsMTM1Ljc2Nzk3JnNzcG49MC4wMDc"\
-              "xMDQsMC4wMDg5NDgmdnBzcmM9NiZpZT1VVEY4JmhxPSZobmVhcj0xMjArQ3Vy"\
-              "cmllK1N0LCtBZGVsYWlkZStTb3V0aCtBdXN0cmFsaWErNTAwMCZ0PW0mbGw9L"\
-              "TM0LjkyNDU0LDEzOC41OTU1MTImc3BuPTAuMDE0MjE1LDAuMDE3ODk2Jno9MT"\
-              "YmaXdsb2M9QQ==",
+        link: Link.for('tafe_location'),
         at: 280
       )
 
@@ -595,7 +511,7 @@ module ResumeGenerator
         { text: d(options[:period]) },
         {
           text: d(options[:location]),
-          link: d(options[:link])
+          link: options[:link]
         }
       ], color: '666666', size: 10)
     end
@@ -606,7 +522,7 @@ module ResumeGenerator
           { text: d(options[:period]), color: '666666', size: 10 },
           {
             text: d(options[:location]),
-            link: d(options[:link]),
+            link: options[:link],
             color: '666666', size: 10
           }
         ],
