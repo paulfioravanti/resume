@@ -30,13 +30,26 @@ module ResumeGenerator
       bounding_box([x_position, cursor], width: 35) do
         image image_link.image, fit: [35, 35], align: :center
         move_up 35
-        transparent(0) do
-          formatted_text([{
-            text: '|||',
-            size: 40,
-            link: image_link.link
-          }], align: :center)
-        end
+        transparent_link(
+          bars: 3,
+          size: 40,
+          link: image_link.link,
+          align: :center
+        )
+      end
+    end
+
+    def transparent_link(options)
+      transparent(0) do
+        formatted_text(
+          [
+            {
+              text: '|' * options[:bars],
+              size: options[:size],
+              link: options[:link]
+            }
+          ], align: options[:align]
+        )
       end
     end
 
@@ -126,13 +139,12 @@ module ResumeGenerator
               fit: options[:fit],
               align: :center
         move_up options[:move_up]
-        transparent(0) do
-          formatted_text([{
-            text: '|' * options[:bars],
-            size: options[:size],
-            link: Link.for(options[:organisation])
-          }])
-        end
+        transparent_link(
+          bars: options[:bars],
+          size: options[:size],
+          link: Link.for(options[:organisation]),
+          align: :left
+        )
       end
     end
   end
