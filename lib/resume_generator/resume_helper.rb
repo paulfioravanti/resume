@@ -1,6 +1,7 @@
 require 'image'
 require 'link'
 require 'resource'
+require 'logo'
 
 module ResumeGenerator
   module ResumeHelper
@@ -78,7 +79,7 @@ module ResumeGenerator
         period: 'SnVseSAyMDEzIC0gUHJlc2VudCB8',
         location: 'U3lkbmV5LCBBdXN0cmFsaWE=',
         link: 'rc_location',
-        logo: {
+        logo: Logo.new(
           organisation: 'rc',
           origin: 415,
           width: 115,
@@ -87,7 +88,7 @@ module ResumeGenerator
           move_up: 40,
           bars: 10,
           size: 43
-        }
+        )
       },
       fl: {
         position: 'UnVieSBEZXZlbG9wZXI=',
@@ -95,7 +96,7 @@ module ResumeGenerator
         period: 'U2VwdGVtYmVyIDIwMTIg4oCTIEp1bHkgMjAxMyB8ICA=',
         location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
         link: 'fl_location',
-        ruby_logo: {
+        ruby_logo: Logo.new(
           organisation: 'ruby',
           origin: 440,
           width: 37,
@@ -104,8 +105,8 @@ module ResumeGenerator
           move_up: 30,
           bars: 4,
           size: 34
-        },
-        rails_logo: {
+        ),
+        rails_logo: Logo.new(
           organisation: 'rails',
           origin: 480,
           width: 32,
@@ -114,7 +115,7 @@ module ResumeGenerator
           move_up: 30,
           bars: 3,
           size: 35
-        }
+        )
       }
     }
 
@@ -283,18 +284,18 @@ module ResumeGenerator
       )
     end
 
-    def organisation_logo(options)
-      bounding_box([options[:origin], cursor],
-                   width: options[:width],
-                   height: options[:height]) do
-        image Image.for(options[:organisation]),
-              fit: options[:fit],
+    def organisation_logo(logo)
+      bounding_box([logo.origin, cursor],
+                   width: logo.width,
+                   height: logo.height) do
+        image Image.for(logo.organisation),
+              fit: logo.fit,
               align: :center
-        move_up options[:move_up]
+        move_up logo.move_up
         transparent_link(
-          bars: options[:bars],
-          size: options[:size],
-          link: Link.for(options[:organisation]),
+          bars: logo.bars,
+          size: logo.size,
+          link: Link.for(logo.organisation),
           align: :left
         )
       end
