@@ -6,13 +6,6 @@ module ResumeGenerator
   module ResumeHelper
     private
 
-    def header
-      name 'UGF1bCBGaW9yYXZhbnRp'
-      description 'UnVieSBEZXZlbG9wZXIg',
-                  "YW5kIEluZm9ybWF0aW9uIFRlY2hub2xvZ3kgU2VydmljZXMgUHJvZmVzc"\
-                  "2lvbmFs"
-    end
-
     def employment_history
       heading 'RW1wbG95bWVudCBIaXN0b3J5'
       rc
@@ -469,15 +462,18 @@ module ResumeGenerator
       formatted_text([{ text: d(string), styles: [:bold], color: '666666' }])
     end
 
-    def name(string)
-      font('Times-Roman', size: 20) { text d(string) }
+    def name
+      font('Times-Roman', size: 20) { text d('UGF1bCBGaW9yYXZhbnRp') }
     end
 
-    def description(ruby, rest)
+    def headline
       formatted_text(
         [
-          { text: d(ruby), color: '85200C' },
-          { text: d(rest) }
+          { text: d('UnVieSBEZXZlbG9wZXIg'), color: '85200C' },
+          {
+            text: d("YW5kIEluZm9ybWF0aW9uIFRlY2hub2xvZ3kgU2VydmljZXMgUHJvZmVzc"\
+                    "2lvbmFs")
+          }
         ],
         size: 14
       )

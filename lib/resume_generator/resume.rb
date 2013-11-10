@@ -14,7 +14,8 @@ module ResumeGenerator
 
         CLI.report "Generating PDF. "\
                    "This shouldn't take longer than a few seconds..."
-        header
+        name
+        headline
         CLI.report 'Creating social media links section...'
         social_media_links
         CLI.report 'Creating employment history section...'
