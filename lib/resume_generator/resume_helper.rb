@@ -2,6 +2,7 @@ require 'image'
 require 'link'
 require 'resource'
 require 'logo'
+require 'rc'
 
 module ResumeGenerator
   module ResumeHelper
@@ -72,52 +73,52 @@ module ResumeGenerator
       end
     end
 
-    POSITIONS = {
-      rc: {
-        position: 'U2VuaW9yIERldmVsb3Blcg==',
-        organisation: 'UmF0ZUNpdHkuY29tLmF1',
-        period: 'SnVseSAyMDEzIC0gUHJlc2VudCB8',
-        location: 'U3lkbmV5LCBBdXN0cmFsaWE=',
-        link: 'rc_location',
-        logo: Logo.new(
-          organisation: 'rc',
-          origin: 415,
-          width: 115,
-          height: 40,
-          fit: [110, 40],
-          move_up: 40,
-          bars: 10,
-          size: 43
-        )
-      },
-      fl: {
-        position: 'UnVieSBEZXZlbG9wZXI=',
-        organisation: 'RnJlZWxhbmNl',
-        period: 'U2VwdGVtYmVyIDIwMTIg4oCTIEp1bHkgMjAxMyB8ICA=',
-        location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
-        link: 'fl_location',
-        ruby_logo: Logo.new(
-          organisation: 'ruby',
-          origin: 440,
-          width: 37,
-          height: 33,
-          fit: [31, 31],
-          move_up: 30,
-          bars: 4,
-          size: 34
-        ),
-        rails_logo: Logo.new(
-          organisation: 'rails',
-          origin: 480,
-          width: 32,
-          height: 34,
-          fit: [31, 31],
-          move_up: 30,
-          bars: 3,
-          size: 35
-        )
-      }
-    }
+    # POSITIONS = {
+      # rc: {
+      #   position: 'U2VuaW9yIERldmVsb3Blcg==',
+      #   organisation: 'UmF0ZUNpdHkuY29tLmF1',
+      #   period: 'SnVseSAyMDEzIC0gUHJlc2VudCB8',
+      #   location: 'U3lkbmV5LCBBdXN0cmFsaWE=',
+      #   link: 'rc_location',
+      #   logo: Logo.new(
+      #     organisation: 'rc',
+      #     origin: 415,
+      #     width: 115,
+      #     height: 40,
+      #     fit: [110, 40],
+      #     move_up: 40,
+      #     bars: 10,
+      #     size: 43
+      #   )
+      # },
+    #   fl: {
+    #     position: 'UnVieSBEZXZlbG9wZXI=',
+    #     organisation: 'RnJlZWxhbmNl',
+    #     period: 'U2VwdGVtYmVyIDIwMTIg4oCTIEp1bHkgMjAxMyB8ICA=',
+    #     location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
+    #     link: 'fl_location',
+    #     ruby_logo: Logo.new(
+    #       organisation: 'ruby',
+    #       origin: 440,
+    #       width: 37,
+    #       height: 33,
+    #       fit: [31, 31],
+    #       move_up: 30,
+    #       bars: 4,
+    #       size: 34
+    #     ),
+    #     rails_logo: Logo.new(
+    #       organisation: 'rails',
+    #       origin: 480,
+    #       width: 32,
+    #       height: 34,
+    #       fit: [31, 31],
+    #       move_up: 30,
+    #       bars: 3,
+    #       size: 35
+    #     )
+    #   }
+    # }
 
     def employment_history
       heading 'RW1wbG95bWVudCBIaXN0b3J5'
@@ -140,14 +141,15 @@ module ResumeGenerator
 
     def rc
       move_down 10
-      options = POSITIONS.fetch(:rc)
+      # options = POSITIONS.fetch(:rc)
+      rc = RC.new
 
-      position(options[:position])
-      organisation(options[:organisation])
-      period_and_location(options[:period], options[:location], options[:link])
+      position(rc.position)
+      organisation(rc.organisation)
+      period_and_location(rc.period, rc.location, rc.location_link)
 
       move_up 40
-      organisation_logo(options[:logo])
+      organisation_logo(rc.logo)
 
       move_down 10
       summary(
@@ -174,16 +176,17 @@ module ResumeGenerator
 
     def fl
       move_down 15
-      options = POSITIONS.fetch(:fl)
+      # options = POSITIONS.fetch(:fl)
+      fl = FL.new
 
-      position(options[:position])
-      organisation(options[:organisation])
-      period_and_location(options[:period], options[:location], options[:link])
+      position(fl.position)
+      organisation(fl.organisation)
+      period_and_location(fl.period, fl.location, fl.location_link)
 
       move_up 40
-      organisation_logo(options[:ruby_logo])
+      organisation_logo(fl.ruby_logo)
       move_up 33
-      organisation_logo(options[:rails_logo])
+      organisation_logo(fl.rails_logo)
 
       move_down 15
       summary(
