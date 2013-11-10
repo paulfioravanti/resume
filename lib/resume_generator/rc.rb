@@ -6,17 +6,7 @@ module ResumeGenerator
     attr_reader :logo, :location_link
 
     def initialize
-      @logo =
-        Logo.new(
-          organisation: 'rc',
-          origin: 415,
-          width: 115,
-          height: 40,
-          fit: [110, 40],
-          move_up: 40,
-          bars: 10,
-          size: 43
-        )
+      @logo = Logo.for('rc')
       # @location_link = Link.for('rc_location')
       @location_link = 'rc_location'
     end

@@ -288,17 +288,17 @@ module ResumeGenerator
     end
 
     def organisation_logo(logo)
-      bounding_box([logo.origin, cursor],
-                   width: logo.width,
-                   height: logo.height) do
-        image Image.for(logo.organisation),
-              fit: logo.fit,
+      bounding_box([logo[:origin], cursor],
+                   width: logo[:width],
+                   height: logo[:height]) do
+        image Image.for(logo[:organisation]),
+              fit: logo[:fit],
               align: :center
-        move_up logo.move_up
+        move_up logo[:move_up]
         transparent_link(
-          bars: logo.bars,
-          size: logo.size,
-          link: Link.for(logo.organisation),
+          bars: logo[:bars],
+          size: logo[:size],
+          link: Link.for(logo[:organisation]),
           align: :left
         )
       end

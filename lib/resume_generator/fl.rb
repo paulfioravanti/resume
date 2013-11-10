@@ -6,28 +6,8 @@ module ResumeGenerator
     attr_reader :ruby_logo, :rails_logo, :location_link
 
     def initialize
-      @ruby_logo =
-        Logo.new(
-          organisation: 'ruby',
-          origin: 440,
-          width: 37,
-          height: 33,
-          fit: [31, 31],
-          move_up: 30,
-          bars: 4,
-          size: 34
-        )
-      @rails_logo =
-        Logo.new(
-          organisation: 'rails',
-          origin: 480,
-          width: 32,
-          height: 34,
-          fit: [31, 31],
-          move_up: 30,
-          bars: 3,
-          size: 35
-        )
+      @ruby_logo = Logo.for('ruby')
+      @rails_logo = Logo.for('rails')
       # @location_link = Link.for('rc_location')
       @location_link = 'fl_location'
     end
