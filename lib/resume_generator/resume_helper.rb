@@ -71,7 +71,7 @@ module ResumeGenerator
       end
     end
 
-    SECTIONS = {
+    POSITIONS = {
       rc: {
         position: 'U2VuaW9yIERldmVsb3Blcg==',
         organisation: 'UmF0ZUNpdHkuY29tLmF1',
@@ -88,13 +88,40 @@ module ResumeGenerator
           bars: 10,
           size: 43
         }
+      },
+      fl: {
+        position: 'UnVieSBEZXZlbG9wZXI=',
+        organisation: 'RnJlZWxhbmNl',
+        period: 'U2VwdGVtYmVyIDIwMTIg4oCTIEp1bHkgMjAxMyB8ICA=',
+        location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
+        link: 'fl_location',
+        ruby_logo: {
+          organisation: 'ruby',
+          origin: 440,
+          width: 37,
+          height: 33,
+          fit: [31, 31],
+          move_up: 30,
+          bars: 4,
+          size: 34
+        },
+        rails_logo: {
+          organisation: 'rails',
+          origin: 480,
+          width: 32,
+          height: 34,
+          fit: [31, 31],
+          move_up: 30,
+          bars: 3,
+          size: 35
+        }
       }
     }
 
     def employment_history
       heading 'RW1wbG95bWVudCBIaXN0b3J5'
       rc
-      # fl
+      fl
       # gw
       # rnt
       # sra
@@ -112,12 +139,15 @@ module ResumeGenerator
 
     def rc
       move_down 10
-      options = SECTIONS.fetch(:rc)
+      options = POSITIONS.fetch(:rc)
+
       position(options[:position])
       organisation(options[:organisation])
       period_and_location(options[:period], options[:location], options[:link])
+
       move_up 40
       organisation_logo(options[:logo])
+
       move_down 10
       summary(
         "UnVieSBvbiBSYWlscyBkZXZlbG9wZXIgZm9yIFJhdGVDaXR5LmNvbS5hdSBmaW"\
@@ -138,6 +168,26 @@ module ResumeGenerator
           "XkgZGV2ZWxvcG1lbnQgd29ya2Zsb3c=",
         "V2UgZ2V0IHN0dWZmIGRvbmUsIGdldCBpdCBsaXZlIGZhc3QsIGFuZCBzdHJpdmUgdG8"\
           "gZ2V0IGJldHRlcg=="
+      )
+    end
+
+    def fl
+      move_down 15
+      options = POSITIONS.fetch(:fl)
+
+      position(options[:position])
+      organisation(options[:organisation])
+      period_and_location(options[:period], options[:location], options[:link])
+
+      move_up 40
+      organisation_logo(options[:ruby_logo])
+      move_up 33
+      organisation_logo(options[:rails_logo])
+
+      move_down 15
+      summary(
+        "UGFydC10aW1lIGFuZCBwcm9qZWN0LWJhc2VkIFJ1Ynkgb24gUmFpbHMgd29yay"\
+          "Bmb3IgbG9jYWwgc3RhcnQtdXAgYW5kIHNtYWxsIGNvbXBhbmllcy4="
       )
     end
 
@@ -261,46 +311,6 @@ module ResumeGenerator
       end
       table(table_data, cell_style: { borders: [] })
     end
-
-############
-
-    # def fl
-    #   move_down 15
-    #   position_header(
-    #     position: { title: 'UnVieSBEZXZlbG9wZXI=' },
-    #     organisation: { name: 'RnJlZWxhbmNl' },
-    #     period: 'U2VwdGVtYmVyIDIwMTIg4oCTIEp1bHkgMjAxMyB8ICA=',
-    #     location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
-    #     location_link: 'fl_location'
-    #   )
-
-    #   move_up 40
-    #   organisation_logo(
-    #     organisation: 'ruby',
-    #     origin: 440,
-    #     width: 37,
-    #     height: 33,
-    #     fit: [31, 31],
-    #     move_up: 30,
-    #     bars: 4,
-    #     size: 34
-    #   )
-
-    #   move_up 33
-    #   organisation_logo(
-    #     organisation: 'rails',
-    #     origin: 480,
-    #     width: 32,
-    #     height: 34,
-    #     fit: [31, 31],
-    #     move_up: 30,
-    #     bars: 3,
-    #     size: 35
-    #   )
-    #   move_down 15
-    #   text d "UGFydC10aW1lIGFuZCBwcm9qZWN0LWJhc2VkIFJ1Ynkgb24gUmFpbHMgd29yay"\
-    #          "Bmb3IgbG9jYWwgc3RhcnQtdXAgYW5kIHNtYWxsIGNvbXBhbmllcy4="
-    # end
 
     # def gw
     #   move_down 15
