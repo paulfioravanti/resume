@@ -6,53 +6,125 @@ module ResumeGenerator
   module ResumeHelper
     private
 
+    def name
+      font('Times-Roman', size: 20) { text d('UGF1bCBGaW9yYXZhbnRp') }
+    end
+
+    def headline
+      formatted_text(
+        [
+          { text: d('UnVieSBEZXZlbG9wZXIg'), color: '85200C' },
+          {
+            text: d("YW5kIEluZm9ybWF0aW9uIFRlY2hub2xvZ3kgU2VydmljZXMgUHJvZmVzc"\
+                    "2lvbmFs")
+          }
+        ],
+        size: 14
+      )
+    end
+
+    def social_media_links
+      move_down 5
+      resources = social_media_resources
+      x_position = 0
+      social_media_link_for(resources.first, x_position)
+      x_position += 45
+      resources[1..-1].each do |image_link|
+        move_up 46.25
+        social_media_link_for(image_link, x_position)
+        x_position += 45
+      end
+      stroke_horizontal_rule { color '666666' }
+    end
+
+    def social_media_resources
+      %w(email linked_in github stackoverflow
+         speakerdeck vimeo code_school blog).map do |item|
+        Resource.for(item)
+      end
+    end
+
+    def social_media_link_for(image_link, x_position)
+      bounding_box([x_position, cursor], width: 35) do
+        image image_link.image, fit: [35, 35], align: :center
+        move_up 35
+        transparent_link(
+          bars: 3,
+          size: 40,
+          link: image_link.link,
+          align: :center
+        )
+      end
+    end
+
+    def transparent_link(options)
+      transparent(0) do
+        formatted_text(
+          [
+            {
+              text: '|' * options[:bars],
+              size: options[:size],
+              link: options[:link]
+            }
+          ], align: options[:align]
+        )
+      end
+    end
+
+    SECTIONS = {
+      rc: {
+        position: 'U2VuaW9yIERldmVsb3Blcg==',
+        organisation: 'UmF0ZUNpdHkuY29tLmF1',
+        period: 'SnVseSAyMDEzIC0gUHJlc2VudCB8',
+        location: 'U3lkbmV5LCBBdXN0cmFsaWE=',
+        link: 'rc_location',
+        logo: {
+          organisation: 'rc',
+          origin: 415,
+          width: 115,
+          height: 40,
+          fit: [110, 40],
+          move_up: 40,
+          bars: 10,
+          size: 43
+        }
+      }
+    }
+
     def employment_history
       heading 'RW1wbG95bWVudCBIaXN0b3J5'
       rc
-      fl
-      gw
-      rnt
-      sra
-      jet
-      satc
+      # fl
+      # gw
+      # rnt
+      # sra
+      # jet
+      # satc
     end
 
-    def education_history
-      heading 'RWR1Y2F0aW9u'
-      mit
-      bib
-      ryu
-      tafe
-    end
+    # def education_history
+    #   heading 'RWR1Y2F0aW9u'
+    #   mit
+    #   bib
+    #   ryu
+    #   tafe
+    # end
 
     def rc
       move_down 10
-      position_header(
-        position: { title: 'U2VuaW9yIERldmVsb3Blcg==' },
-        organisation: { name: 'UmF0ZUNpdHkuY29tLmF1' },
-        period: 'SnVseSAyMDEzIC0gUHJlc2VudCB8',
-        location: 'U3lkbmV5LCBBdXN0cmFsaWE=',
-        location_link: 'rc_location'
-      )
-
+      options = SECTIONS.fetch(:rc)
+      position(options[:position])
+      organisation(options[:organisation])
+      period_and_location(options[:period], options[:location], options[:link])
       move_up 40
-      organisation_logo(
-        organisation: 'rc',
-        origin: 415,
-        width: 115,
-        height: 40,
-        fit: [110, 40],
-        move_up: 40,
-        bars: 10,
-        size: 43
-      )
-
+      organisation_logo(options[:logo])
       move_down 10
-      text d "UnVieSBvbiBSYWlscyBkZXZlbG9wZXIgZm9yIFJhdGVDaXR5LmNvbS5hdSBmaW"\
-             "5hbmNpYWwgcHJvZHVjdHMgYW5kIHNlcnZpY2VzIGNvbXBhcmlzb24gd2Vic2l0"\
-             "ZS4="
-
-      bullet_list(
+      summary(
+        "UnVieSBvbiBSYWlscyBkZXZlbG9wZXIgZm9yIFJhdGVDaXR5LmNvbS5hdSBmaW"\
+        "5hbmNpYWwgcHJvZHVjdHMgYW5kIHNlcnZpY2VzIGNvbXBhcmlzb24gd2Vic2l0"\
+        "ZS4="
+      )
+      profile(
         "T3VyIHRlYW0gaXMgZmllcmNlbHkgQWdpbGUsIHdpdGggdGlnaHQgZGV2ZWxvcG1lbnQ"\
           "gZmVlZGJhY2sgbG9vcHMgb2Ygb25lIHdlZWssIG1lYXN1cmVkIGFuZCBtYW5hZ2Vk"\
           "IHRyYW5zcGFyZW50bHkgaW4gVHJlbGxvIGFuZCBkYWlseSBzdGFuZC11cCBtZWV0a"\
@@ -68,6 +140,129 @@ module ResumeGenerator
           "gZ2V0IGJldHRlcg=="
       )
     end
+
+    def heading(string)
+      move_down 10
+      formatted_text(
+        [
+          {
+            text: d(string),
+            styles: [:bold],
+            color: '666666'
+          }
+        ]
+      )
+    end
+
+    def position(string)
+      formatted_text(
+        formatted_position(string)
+      )
+    end
+
+    def position_at(string, at)
+      formatted_text_box(
+        formatted_position(string),
+        at: [at, cursor]
+      )
+      move_down 14
+    end
+
+    def formatted_position(string)
+      [
+        {
+          text: d(string),
+          styles: [:bold]
+        }
+      ]
+    end
+
+    def organisation(string)
+      formatted_text(
+        formatted_organisation(string)
+      )
+    end
+
+    def organisation_at(string, at)
+      formatted_text_box(
+        formatted_organisation(string),
+        at: [at, cursor]
+      )
+      move_down 13
+    end
+
+    def formatted_organisation(string)
+      [
+        {
+          text: d(string),
+          styles: [:bold],
+          size: 11
+        }
+      ]
+    end
+
+    def period_and_location(period, location, link)
+      formatted_text(
+        [
+          {
+            text: d(period)
+          },
+          {
+            text: d(location),
+            link: Link.for(link)
+          }
+        ],
+        color: '666666',
+        size: 10
+      )
+    end
+
+    def period_and_location_at(period, location, link, at)
+      formatted_text_box(
+        [
+          {
+            text: d(period), color: '666666', size: 10
+          },
+          {
+            text: d(location),
+            link: Link.for(link),
+            color: '666666', size: 10
+          }
+        ],
+        at: [at, cursor]
+      )
+    end
+
+    def organisation_logo(options)
+      bounding_box([options[:origin], cursor],
+                   width: options[:width],
+                   height: options[:height]) do
+        image Image.for(options[:organisation]),
+              fit: options[:fit],
+              align: :center
+        move_up options[:move_up]
+        transparent_link(
+          bars: options[:bars],
+          size: options[:size],
+          link: Link.for(options[:organisation]),
+          align: :left
+        )
+      end
+    end
+
+    def summary(string)
+      text d(string)
+    end
+
+    def profile(*items)
+      table_data = []
+      items.each do |item|
+        table_data << ['•', d(item)]
+      end
+      table(table_data, cell_style: { borders: [] })
+    end
+
+############
 
     def fl
       move_down 15
@@ -388,211 +583,6 @@ module ResumeGenerator
         bars: 5,
         size: 28
       )
-    end
-
->>>>>>> refactor-resume-1
-    def position_header(options)
-      position options[:position]
-      organisation options[:organisation]
-      period_and_location(
-        period: options[:period],
-        location: options[:location],
-        link: options[:location_link],
-        at: options[:at]
-      )
-    end
-
-    def bullet_list(*items)
-      table_data = []
-      items.each do |item|
-        table_data << ['•', d(item)]
-      end
-      table(table_data, cell_style: { borders: [] })
-    end
-
-    def social_media_links
-      move_down 5
-      resources = social_media_resources
-      x_position = 0
-      bounding_box_for(resources.first, x_position)
-      x_position += 45
-      resources[1..-1].each do |image_link|
-        move_up 46.25
-        bounding_box_for(image_link, x_position)
-        x_position += 45
-      end
-      stroke_horizontal_rule { color '666666' }
-    end
-
-    def bounding_box_for(image_link, x_position)
-      bounding_box([x_position, cursor], width: 35) do
-        image image_link.image, fit: [35, 35], align: :center
-        move_up 35
-        transparent_link(
-          bars: 3,
-          size: 40,
-          link: image_link.link,
-          align: :center
-        )
-      end
-    end
-
-    def transparent_link(options)
-      transparent(0) do
-        formatted_text(
-          [
-            {
-              text: '|' * options[:bars],
-              size: options[:size],
-              link: options[:link]
-            }
-          ], align: options[:align]
-        )
-      end
-    end
-
-    def social_media_resources
-      %w(email linked_in github stackoverflow
-         speakerdeck vimeo code_school blog).map do |item|
-        Resource.for(item)
-      end
-    end
-
-    def heading(string)
-      move_down 10
-      formatted_text(
-        [
-          {
-            text: d(string),
-            styles: [:bold],
-            color: '666666'
-          }
-        ]
-      )
-    end
-
-    def name
-      font('Times-Roman', size: 20) { text d('UGF1bCBGaW9yYXZhbnRp') }
-    end
-
-    def headline
-      formatted_text(
-        [
-          { text: d('UnVieSBEZXZlbG9wZXIg'), color: '85200C' },
-          {
-            text: d("YW5kIEluZm9ybWF0aW9uIFRlY2hub2xvZ3kgU2VydmljZXMgUHJvZmVzc"\
-                    "2lvbmFs")
-          }
-        ],
-        size: 14
-      )
-    end
-
-    def position(options)
-      if options.has_key?(:at)
-        formatted_text_box(
-          [
-            {
-              text: d(options[:title]),
-              styles: [:bold]
-            }
-          ],
-          at: [options[:at], cursor]
-        )
-        move_down 14
-      else
-        formatted_text(
-          [
-            {
-              text: d(options[:title]),
-              styles: [:bold]
-            }
-          ]
-        )
-      end
-    end
-
-    def organisation(options)
-      if options.has_key?(:at)
-        formatted_text_box(
-          [
-            {
-              text: d(options[:name]),
-              styles: [:bold],
-              size: 11
-            }
-          ],
-          at: [options[:at], cursor]
-        )
-        move_down 13
-      else
-        formatted_text(
-          [
-            {
-              text: d(options[:name]),
-              styles: [:bold],
-              size: 11
-            }
-          ]
-        )
-      end
-    end
-
-    def period_and_location(options)
-      if options[:at].nil?
-        period_and_location_formatted_text(options)
-      else
-        period_and_location_formatted_text_box(options)
-      end
-    end
-
-    def period_and_location_formatted_text(options)
-      formatted_text(
-        [
-          {
-            text: d(options[:period])
-          },
-          {
-            text: d(options[:location]),
-            link: Link.for(options[:link])
-          }
-        ],
-        color: '666666',
-        size: 10
-      )
-    end
-
-    def period_and_location_formatted_text_box(options)
-      formatted_text_box(
-        [
-          {
-            text: d(options[:period]), color: '666666', size: 10
-          },
-          {
-            text: d(options[:location]),
-            link: Link.for(options[:link]),
-            color: '666666', size: 10
-          }
-        ],
-        at: [options[:at], cursor]
-      )
-    end
-
-    def organisation_logo(options)
-      bounding_box([options[:origin], cursor],
-                   width: options[:width],
-                   height: options[:height]) do
-        image Image.for(options[:organisation]),
-              fit: options[:fit],
-              align: :center
-        move_up options[:move_up]
-        transparent_link(
-          bars: options[:bars],
-          size: options[:size],
-          link: Link.for(options[:organisation]),
-          align: :left
-        )
-      end
     end
   end
 end
