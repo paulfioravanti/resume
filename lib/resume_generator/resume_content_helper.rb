@@ -1,6 +1,60 @@
 module ResumeGenerator
   module ResumeContentHelper
+
+    CONFIG = {
+      bib: {
+        position: 'QmFjaGVsb3Igb2YgSW50ZXJuYXRpb25hbCBCdXNpbmVzcw==',
+        organisation: 'RmxpbmRlcnMgVW5pdmVyc2l0eQ==',
+        period: 'MTk5Ny0xOTk5IHw=',
+        location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
+        location_link: 'bib_location',
+        x_position: 280,
+        logo_name: 'bib',
+        logo_origin: 490,
+        width: 35,
+        height: 40,
+        fit: [35, 40],
+        move_up: 40,
+        bars: 3,
+        size: 43
+      }
+    }
+
     private
+
+    # See if the :at key only needs to be passed in once
+    # See if all work positions can just be stored as a set of values
+    # in a properties hash to be passed into a method to generate a
+    # section of the resume
+    def section_for(options)
+      move_up 38
+      position_header(
+        position: {
+          title: options[:position],
+          at: options[:x_position]
+        },
+        organisation: {
+          name: options[:organisation],
+          at: options[:x_position]
+        },
+        period: options[:period],
+        location: options[:location],
+        location_link: options[:location_link],
+        at: options[:x_position]
+      )
+
+      move_up 23
+      organisation_logo(
+        organisation: options[:logo_name],
+        origin: options[:logo_origin],
+        width: options[:width],
+        height: options[:height],
+        fit: options[:fit],
+        move_up: options[:move_up],
+        bars: options[:bars],
+        size: options[:size]
+      )
+    end
 
     def header
       name 'UGF1bCBGaW9yYXZhbnRp'
@@ -355,33 +409,34 @@ module ResumeGenerator
     end
 
     def bib
-      move_up 38
-      position_header(
-        position: {
-          title: 'QmFjaGVsb3Igb2YgSW50ZXJuYXRpb25hbCBCdXNpbmVzcw==',
-          at: 280
-        },
-        organisation: {
-          name: 'RmxpbmRlcnMgVW5pdmVyc2l0eQ==',
-          at: 280
-        },
-        period: 'MTk5Ny0xOTk5IHw=',
-        location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
-        location_link: 'bib_location',
-        at: 280
-      )
+      # move_up 38
+      # position_header(
+      #   position: {
+      #     title: 'QmFjaGVsb3Igb2YgSW50ZXJuYXRpb25hbCBCdXNpbmVzcw==',
+      #     at: 280
+      #   },
+      #   organisation: {
+      #     name: 'RmxpbmRlcnMgVW5pdmVyc2l0eQ==',
+      #     at: 280
+      #   },
+      #   period: 'MTk5Ny0xOTk5IHw=',
+      #   location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
+      #   location_link: 'bib_location',
+      #   at: 280
+      # )
 
-      move_up 30
-      organisation_logo(
-        organisation: 'bib',
-        origin: 490,
-        width: 35,
-        height: 40,
-        fit: [35, 40],
-        move_up: 40,
-        bars: 3,
-        size: 43
-      )
+      # move_up 30
+      # organisation_logo(
+      #   organisation: 'bib',
+      #   origin: 490,
+      #   width: 35,
+      #   height: 40,
+      #   fit: [35, 40],
+      #   move_up: 40,
+      #   bars: 3,
+      #   size: 43
+      # )
+     section_for(CONFIG[:bib])
     end
 
     def ryu
