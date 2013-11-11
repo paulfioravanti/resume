@@ -73,53 +73,6 @@ module ResumeGenerator
       end
     end
 
-    # POSITIONS = {
-      # rc: {
-      #   position: 'U2VuaW9yIERldmVsb3Blcg==',
-      #   organisation: 'UmF0ZUNpdHkuY29tLmF1',
-      #   period: 'SnVseSAyMDEzIC0gUHJlc2VudCB8',
-      #   location: 'U3lkbmV5LCBBdXN0cmFsaWE=',
-      #   link: 'rc_location',
-      #   logo: Logo.new(
-      #     organisation: 'rc',
-      #     origin: 415,
-      #     width: 115,
-      #     height: 40,
-      #     fit: [110, 40],
-      #     move_up: 40,
-      #     bars: 10,
-      #     size: 43
-      #   )
-      # },
-    #   fl: {
-    #     position: 'UnVieSBEZXZlbG9wZXI=',
-    #     organisation: 'RnJlZWxhbmNl',
-    #     period: 'U2VwdGVtYmVyIDIwMTIg4oCTIEp1bHkgMjAxMyB8ICA=',
-    #     location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
-    #     link: 'fl_location',
-    #     ruby_logo: Logo.new(
-    #       organisation: 'ruby',
-    #       origin: 440,
-    #       width: 37,
-    #       height: 33,
-    #       fit: [31, 31],
-    #       move_up: 30,
-    #       bars: 4,
-    #       size: 34
-    #     ),
-    #     rails_logo: Logo.new(
-    #       organisation: 'rails',
-    #       origin: 480,
-    #       width: 32,
-    #       height: 34,
-    #       fit: [31, 31],
-    #       move_up: 30,
-    #       bars: 3,
-    #       size: 35
-    #     )
-    #   }
-    # }
-
     def employment_history
       heading 'RW1wbG95bWVudCBIaXN0b3J5'
       rc
@@ -291,14 +244,14 @@ module ResumeGenerator
       bounding_box([logo[:origin], cursor],
                    width: logo[:width],
                    height: logo[:height]) do
-        image Image.for(logo[:organisation]),
+        image logo[:resource].image,
               fit: logo[:fit],
               align: :center
         move_up logo[:move_up]
         transparent_link(
           bars: logo[:bars],
           size: logo[:size],
-          link: Link.for(logo[:organisation]),
+          link: logo[:resource].link,
           align: :left
         )
       end
