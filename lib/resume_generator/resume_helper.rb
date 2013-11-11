@@ -3,16 +3,28 @@ module ResumeGenerator
     private
 
     def name
-      font('Times-Roman', size: 20) { text d('UGF1bCBGaW9yYXZhbnRp') }
+      formatted_name(d('UGF1bCBGaW9yYXZhbnRp'))
+    end
+
+    def formatted_name(name)
+      font('Times-Roman', size: 20) { text name }
     end
 
     def headline
+      formatted_headline(
+        d('UnVieSBEZXZlbG9wZXIg'),
+        d('YW5kIEluZm9ybWF0aW9uIFRlY2hub2xvZ3kgU2VydmljZXMgUHJvZmVzc2lvbmFs')
+      )
+    end
+
+    def formatted_headline(ruby, rest)
       formatted_text(
         [
-          { text: d('UnVieSBEZXZlbG9wZXIg'), color: '85200C' },
           {
-            text: d("YW5kIEluZm9ybWF0aW9uIFRlY2hub2xvZ3kgU2VydmljZXMgUHJvZmVzc"\
-                    "2lvbmFs")
+            text: ruby, color: '85200C'
+          },
+          {
+            text: rest
           }
         ],
         size: 14
@@ -68,10 +80,10 @@ module ResumeGenerator
     end
 
     def employment_history
-      heading 'RW1wbG95bWVudCBIaXN0b3J5'
+      heading d('RW1wbG95bWVudCBIaXN0b3J5')
       rc
       fl
-      gw
+      # gw
       # rnt
       # sra
       # jet
@@ -88,14 +100,13 @@ module ResumeGenerator
 
     def rc
       move_down 10
-      rc = RC.new
-
-      position(rc.position)
-      organisation(rc.organisation)
-      period_and_location(rc.period, rc.location, rc.location_link)
+      position(Position.for(:rc))
+      organisation(Organisation.for(:rc))
+      period_and_location(Period.for(:rc),
+        Location.for(:rc), Link.for(:rc_location))
 
       move_up 40
-      organisation_logo(rc.logo)
+      organisation_logo(Logo.for(:rc))
 
       move_down 10
       summary(
@@ -122,16 +133,16 @@ module ResumeGenerator
 
     def fl
       move_down 15
-      fl = FL.new
 
-      position(fl.position)
-      organisation(fl.organisation)
-      period_and_location(fl.period, fl.location, fl.location_link)
+      position(Position.for(:fl))
+      organisation(Organisation.for(:fl))
+      period_and_location(Period.for(:fl),
+        Location.for(:fl), Link.for(:fl_location))
 
       move_up 40
-      organisation_logo(fl.ruby_logo)
+      organisation_logo(Logo.for(:ruby))
       move_up 33
-      organisation_logo(fl.rails_logo)
+      organisation_logo(Logo.for(:rails))
 
       move_down 15
       summary(
@@ -140,49 +151,49 @@ module ResumeGenerator
       )
     end
 
-    def gw
-      move_down 15
-      gw = GW.new
+    # def gw
+    #   move_down 15
+    #   gw = GW.new
 
-      position(gw.position)
-      organisation(gw.organisation)
-      period_and_location(gw.period, gw.location, gw.location_link)
+    #   position(gw.position)
+    #   organisation(gw.organisation)
+    #   period_and_location(gw.period, gw.location, gw.location_link)
 
-      move_up 40
-      organisation_logo(gw.logo)
+    #   move_up 40
+    #   organisation_logo(gw.logo)
 
-      move_down 10
-      summary(
-        "Q29tcGxleCBzYWxlcyBvZiBHdWlkZXdpcmUgQ2xhaW1DZW50ZXIgaW5zdXJhbm"\
-          "NlIGNsYWltIGhhbmRsaW5nIHN5c3RlbSB0byBidXNpbmVzcyBhbmQgSVQgZGVw"\
-          "YXJ0bWVudHMgb2YgUHJvcGVydHkgJiBDYXN1YWx0eSBpbnN1cmFuY2UgY29tcG"\
-          "FuaWVzLg=="
-      )
-      profile(
-        "UGVyZm9ybSB2YWx1ZS1iYXNlZCBhbmQgdGVjaG5vbG9neS1mb2N1c2VkIHByZXNlbnR"\
-          "hdGlvbnMgYW5kIHByb2R1Y3QgZGVtb25zdHJhdGlvbnM=",
-        "Q29uZHVjdCBBZ2lsZS1kcml2ZW4gUHJvb2Ygb2YgQ29uY2VwdCB3b3Jrc2hvcHMgZm9"\
-          "yIHByb3NwZWN0cw==",
-        "V29yayB3aXRoIFN5c3RlbSBJbnRlZ3JhdG9yIHBhcnRuZXIgY29tcGFuaWVzIGluIHR"\
-          "oZWlyIEd1aWRld2lyZSBwcm9qZWN0IHByb3Bvc2Fscw==",
-        "Q29uZHVjdCBidXNpbmVzcyBwcm9jZXNzIGFuZCBwcm9kdWN0IHZhbHVlIGNvbnN1bHR"\
-          "pbmcgd29ya3Nob3BzIGZvciBwcm9zcGVjdHMvY3VzdG9tZXJz",
-        'UHJlcGFyZSB3cml0dGVuIHJlc3BvbnNlcyB0byBjdXN0b21lciBSRlAvUkZJcw==',
-        "RGVtbyBlbnZpcm9ubWVudCBjb25maWd1cmF0aW9uIGFuZCBwcm9zcGVjdCByZXF1aXJ"\
-          "lbWVudC1kcml2ZW4gZnVuY3Rpb24gZGV2ZWxvcG1lbnQ=",
-        "UHJvZHVjdCBsb2NhbGl6YXRpb24gZGV2ZWxvcG1lbnQgZm9yIEphcGFuZXNlIG1hcmt"\
-          "ldA==",
-        'Q3VzdG9tZXIgcHJvZHVjdCB0cmFpbmluZw==',
-        'SmFwYW4gYW5kIG92ZXJzZWFzIHRyYWRlIHNob3dzL21hcmtldGluZyBldmVudHM='
-      )
-    end
+    #   move_down 10
+    #   summary(
+    #     "Q29tcGxleCBzYWxlcyBvZiBHdWlkZXdpcmUgQ2xhaW1DZW50ZXIgaW5zdXJhbm"\
+    #       "NlIGNsYWltIGhhbmRsaW5nIHN5c3RlbSB0byBidXNpbmVzcyBhbmQgSVQgZGVw"\
+    #       "YXJ0bWVudHMgb2YgUHJvcGVydHkgJiBDYXN1YWx0eSBpbnN1cmFuY2UgY29tcG"\
+    #       "FuaWVzLg=="
+    #   )
+    #   profile(
+    #     "UGVyZm9ybSB2YWx1ZS1iYXNlZCBhbmQgdGVjaG5vbG9neS1mb2N1c2VkIHByZXNlbnR"\
+    #       "hdGlvbnMgYW5kIHByb2R1Y3QgZGVtb25zdHJhdGlvbnM=",
+    #     "Q29uZHVjdCBBZ2lsZS1kcml2ZW4gUHJvb2Ygb2YgQ29uY2VwdCB3b3Jrc2hvcHMgZm9"\
+    #       "yIHByb3NwZWN0cw==",
+    #     "V29yayB3aXRoIFN5c3RlbSBJbnRlZ3JhdG9yIHBhcnRuZXIgY29tcGFuaWVzIGluIHR"\
+    #       "oZWlyIEd1aWRld2lyZSBwcm9qZWN0IHByb3Bvc2Fscw==",
+    #     "Q29uZHVjdCBidXNpbmVzcyBwcm9jZXNzIGFuZCBwcm9kdWN0IHZhbHVlIGNvbnN1bHR"\
+    #       "pbmcgd29ya3Nob3BzIGZvciBwcm9zcGVjdHMvY3VzdG9tZXJz",
+    #     'UHJlcGFyZSB3cml0dGVuIHJlc3BvbnNlcyB0byBjdXN0b21lciBSRlAvUkZJcw==',
+    #     "RGVtbyBlbnZpcm9ubWVudCBjb25maWd1cmF0aW9uIGFuZCBwcm9zcGVjdCByZXF1aXJ"\
+    #       "lbWVudC1kcml2ZW4gZnVuY3Rpb24gZGV2ZWxvcG1lbnQ=",
+    #     "UHJvZHVjdCBsb2NhbGl6YXRpb24gZGV2ZWxvcG1lbnQgZm9yIEphcGFuZXNlIG1hcmt"\
+    #       "ldA==",
+    #     'Q3VzdG9tZXIgcHJvZHVjdCB0cmFpbmluZw==',
+    #     'SmFwYW4gYW5kIG92ZXJzZWFzIHRyYWRlIHNob3dzL21hcmtldGluZyBldmVudHM='
+    #   )
+    # end
 
     def heading(string)
       move_down 10
       formatted_text(
         [
           {
-            text: d(string),
+            text: string,
             styles: [:bold],
             color: '666666'
           }
@@ -207,7 +218,7 @@ module ResumeGenerator
     def formatted_position(string)
       [
         {
-          text: d(string),
+          text: string,
           styles: [:bold]
         }
       ]
@@ -230,7 +241,7 @@ module ResumeGenerator
     def formatted_organisation(string)
       [
         {
-          text: d(string),
+          text: string,
           styles: [:bold],
           size: 11
         }
@@ -241,10 +252,10 @@ module ResumeGenerator
       formatted_text(
         [
           {
-            text: d(period)
+            text: period
           },
           {
-            text: d(location),
+            text: location,
             link: link
           }
         ],
@@ -257,11 +268,11 @@ module ResumeGenerator
       formatted_text_box(
         [
           {
-            text: d(period), color: '666666', size: 10
+            text: period, color: '666666', size: 10
           },
           {
-            text: d(location),
-            link: Link.for(link),
+            text: location,
+            link: link,
             color: '666666', size: 10
           }
         ],

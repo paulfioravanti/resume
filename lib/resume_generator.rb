@@ -1,7 +1,4 @@
 $LOAD_PATH << File.join(File.dirname(__FILE__), 'resume_generator')
-require 'positions/rc'
-require 'positions/fl'
-require 'positions/gw'
 
 require 'colourable'
 require 'cli'
@@ -10,6 +7,10 @@ require 'link'
 require 'logo'
 require 'image'
 require 'resource'
+require 'position'
+require 'organisation'
+require 'period'
+require 'location'
 require 'resume_helper'
 require 'resume'
 require 'version'
