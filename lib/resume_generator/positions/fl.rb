@@ -8,8 +8,7 @@ module ResumeGenerator
     def initialize
       @ruby_logo = Logo.for('ruby')
       @rails_logo = Logo.for('rails')
-      # @location_link = Link.for('rc_location')
-      @location_link = 'fl_location'
+      @location_link = Link.for('rc_location')
     end
 
     def position

@@ -1,9 +1,3 @@
-require 'image'
-require 'link'
-require 'resource'
-require 'logo'
-require 'rc'
-
 module ResumeGenerator
   module ResumeHelper
     private
@@ -77,7 +71,7 @@ module ResumeGenerator
       heading 'RW1wbG95bWVudCBIaXN0b3J5'
       rc
       fl
-      # gw
+      gw
       # rnt
       # sra
       # jet
@@ -94,7 +88,6 @@ module ResumeGenerator
 
     def rc
       move_down 10
-      # options = POSITIONS.fetch(:rc)
       rc = RC.new
 
       position(rc.position)
@@ -129,7 +122,6 @@ module ResumeGenerator
 
     def fl
       move_down 15
-      # options = POSITIONS.fetch(:fl)
       fl = FL.new
 
       position(fl.position)
@@ -145,6 +137,43 @@ module ResumeGenerator
       summary(
         "UGFydC10aW1lIGFuZCBwcm9qZWN0LWJhc2VkIFJ1Ynkgb24gUmFpbHMgd29yay"\
           "Bmb3IgbG9jYWwgc3RhcnQtdXAgYW5kIHNtYWxsIGNvbXBhbmllcy4="
+      )
+    end
+
+    def gw
+      move_down 15
+      gw = GW.new
+
+      position(gw.position)
+      organisation(gw.organisation)
+      period_and_location(gw.period, gw.location, gw.location_link)
+
+      move_up 40
+      organisation_logo(gw.logo)
+
+      move_down 10
+      summary(
+        "Q29tcGxleCBzYWxlcyBvZiBHdWlkZXdpcmUgQ2xhaW1DZW50ZXIgaW5zdXJhbm"\
+          "NlIGNsYWltIGhhbmRsaW5nIHN5c3RlbSB0byBidXNpbmVzcyBhbmQgSVQgZGVw"\
+          "YXJ0bWVudHMgb2YgUHJvcGVydHkgJiBDYXN1YWx0eSBpbnN1cmFuY2UgY29tcG"\
+          "FuaWVzLg=="
+      )
+      profile(
+        "UGVyZm9ybSB2YWx1ZS1iYXNlZCBhbmQgdGVjaG5vbG9neS1mb2N1c2VkIHByZXNlbnR"\
+          "hdGlvbnMgYW5kIHByb2R1Y3QgZGVtb25zdHJhdGlvbnM=",
+        "Q29uZHVjdCBBZ2lsZS1kcml2ZW4gUHJvb2Ygb2YgQ29uY2VwdCB3b3Jrc2hvcHMgZm9"\
+          "yIHByb3NwZWN0cw==",
+        "V29yayB3aXRoIFN5c3RlbSBJbnRlZ3JhdG9yIHBhcnRuZXIgY29tcGFuaWVzIGluIHR"\
+          "oZWlyIEd1aWRld2lyZSBwcm9qZWN0IHByb3Bvc2Fscw==",
+        "Q29uZHVjdCBidXNpbmVzcyBwcm9jZXNzIGFuZCBwcm9kdWN0IHZhbHVlIGNvbnN1bHR"\
+          "pbmcgd29ya3Nob3BzIGZvciBwcm9zcGVjdHMvY3VzdG9tZXJz",
+        'UHJlcGFyZSB3cml0dGVuIHJlc3BvbnNlcyB0byBjdXN0b21lciBSRlAvUkZJcw==',
+        "RGVtbyBlbnZpcm9ubWVudCBjb25maWd1cmF0aW9uIGFuZCBwcm9zcGVjdCByZXF1aXJ"\
+          "lbWVudC1kcml2ZW4gZnVuY3Rpb24gZGV2ZWxvcG1lbnQ=",
+        "UHJvZHVjdCBsb2NhbGl6YXRpb24gZGV2ZWxvcG1lbnQgZm9yIEphcGFuZXNlIG1hcmt"\
+          "ldA==",
+        'Q3VzdG9tZXIgcHJvZHVjdCB0cmFpbmluZw==',
+        'SmFwYW4gYW5kIG92ZXJzZWFzIHRyYWRlIHNob3dzL21hcmtldGluZyBldmVudHM='
       )
     end
 
@@ -216,7 +245,7 @@ module ResumeGenerator
           },
           {
             text: d(location),
-            link: Link.for(link)
+            link: link
           }
         ],
         color: '666666',
@@ -268,53 +297,6 @@ module ResumeGenerator
       end
       table(table_data, cell_style: { borders: [] })
     end
-
-    # def gw
-    #   move_down 15
-    #   position_header(
-    #     position: { title: 'UHJlLXNhbGVzIENvbnN1bHRhbnQ=' },
-    #     organisation: { name: 'R3VpZGV3aXJlIFNvZnR3YXJl' },
-    #     period: 'SmFudWFyeSAyMDA5IOKAkyBTZXB0ZW1iZXIgMjAxMSB8ICA=',
-    #     location: 'VG9reW8sIEphcGFu',
-    #     location_link: 'gw_location'
-    #   )
-
-    #   move_up 40
-    #   organisation_logo(
-    #     organisation: 'gw',
-    #     origin: 415,
-    #     width: 118,
-    #     height: 39,
-    #     fit: [110, 40],
-    #     move_up: 32,
-    #     bars: 11,
-    #     size: 41
-    #   )
-
-    #   move_down 10
-    #   text d "Q29tcGxleCBzYWxlcyBvZiBHdWlkZXdpcmUgQ2xhaW1DZW50ZXIgaW5zdXJhbm"\
-    #          "NlIGNsYWltIGhhbmRsaW5nIHN5c3RlbSB0byBidXNpbmVzcyBhbmQgSVQgZGVw"\
-    #          "YXJ0bWVudHMgb2YgUHJvcGVydHkgJiBDYXN1YWx0eSBpbnN1cmFuY2UgY29tcG"\
-    #          "FuaWVzLg=="
-
-    #   bullet_list(
-    #     "UGVyZm9ybSB2YWx1ZS1iYXNlZCBhbmQgdGVjaG5vbG9neS1mb2N1c2VkIHByZXNlbnR"\
-    #       "hdGlvbnMgYW5kIHByb2R1Y3QgZGVtb25zdHJhdGlvbnM=",
-    #     "Q29uZHVjdCBBZ2lsZS1kcml2ZW4gUHJvb2Ygb2YgQ29uY2VwdCB3b3Jrc2hvcHMgZm9"\
-    #       "yIHByb3NwZWN0cw==",
-    #     "V29yayB3aXRoIFN5c3RlbSBJbnRlZ3JhdG9yIHBhcnRuZXIgY29tcGFuaWVzIGluIHR"\
-    #       "oZWlyIEd1aWRld2lyZSBwcm9qZWN0IHByb3Bvc2Fscw==",
-    #     "Q29uZHVjdCBidXNpbmVzcyBwcm9jZXNzIGFuZCBwcm9kdWN0IHZhbHVlIGNvbnN1bHR"\
-    #       "pbmcgd29ya3Nob3BzIGZvciBwcm9zcGVjdHMvY3VzdG9tZXJz",
-    #     'UHJlcGFyZSB3cml0dGVuIHJlc3BvbnNlcyB0byBjdXN0b21lciBSRlAvUkZJcw==',
-    #     "RGVtbyBlbnZpcm9ubWVudCBjb25maWd1cmF0aW9uIGFuZCBwcm9zcGVjdCByZXF1aXJ"\
-    #       "lbWVudC1kcml2ZW4gZnVuY3Rpb24gZGV2ZWxvcG1lbnQ=",
-    #     "UHJvZHVjdCBsb2NhbGl6YXRpb24gZGV2ZWxvcG1lbnQgZm9yIEphcGFuZXNlIG1hcmt"\
-    #       "ldA==",
-    #     'Q3VzdG9tZXIgcHJvZHVjdCB0cmFpbmluZw==',
-    #     'SmFwYW4gYW5kIG92ZXJzZWFzIHRyYWRlIHNob3dzL21hcmtldGluZyBldmVudHM='
-    #   )
-    # end
 
     # def rnt
     #   move_down 15
