@@ -17,7 +17,7 @@ module ResumeGenerator
       tafe:  [Resource.for('tafe'), 490, 37, 35, [37, 35], 19, 5, 28]
     }
 
-    KEYS = %i(resource origin width height fit move_up bars size)
+    KEYS = [:resource, :origin, :width, :height, :fit, :move_up, :bars, :size]
 
     def self.for(organisation)
       values = LOGO_CONFIG.fetch(:"#{organisation}")
