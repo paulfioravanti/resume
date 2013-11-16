@@ -122,9 +122,6 @@ module ResumeGenerator
     #   tafe
     # end
 
-    # Next attempted refactor: Shove all info about the positions into
-    # a JSON feed on Github that will be read in and populate the resume
-
     def rc
       entry = RESUME[:entries][:rc]
       move_down 10
