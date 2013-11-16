@@ -2,9 +2,6 @@ require 'json'
 
 module ResumeGenerator
   module ResumeHelper
-    # RESUME = JSON.load(open('resources/resume.json'))['resume']
-    # RESUME = JSON.parse(File.read('resources/resume.json').to_s,
-    #          symbolize_names: true)[:resume]
     RESUME =
       JSON.parse(
         open('resources/resume.json').read,
@@ -35,7 +32,7 @@ module ResumeGenerator
       headline = RESUME[:headline]
       formatted_headline(
         d(headline[:ruby]),
-        d(headline[:rest])
+        d(headline[:other])
       )
     end
 
@@ -68,10 +65,6 @@ module ResumeGenerator
     end
 
     def social_media_resources
-      # %w(email linked_in github stackoverflow
-      #    speakerdeck vimeo code_school blog).map do |item|
-      #   Resource.for(item)
-      # end
       RESUME[:social_media].reduce([]) do |resources, social_medium|
         resources << Resource.for(social_medium)
       end
