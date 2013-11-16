@@ -18,13 +18,13 @@ module ResumeGenerator
         name
         headline
 
-        CLI.report 'Creating social media links section...'
+        # CLI.report 'Creating social media links section...'
 
-        social_media_links
+        # social_media_links
 
-        CLI.report 'Creating employment history section...'
+        # CLI.report 'Creating employment history section...'
 
-        employment_history
+        # employment_history
 
         # CLI.report('Creating education history section...')
         # education_history

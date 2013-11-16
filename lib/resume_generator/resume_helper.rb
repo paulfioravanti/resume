@@ -14,8 +14,7 @@ module ResumeGenerator
     private
 
     def name
-      my_name = RESUME[:name]
-      formatted_name(d(my_name))
+      formatted_name(d(RESUME[:name]))
     end
 
     def formatted_name(name)
