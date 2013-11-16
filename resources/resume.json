@@ -66,17 +66,25 @@
         "logo": {
           "resource": {
             "image": "http://farm6.staticflickr.com/5484/9192095974_b49a1fc142_m.jpg",
-            "link": "aHR0cDovL3d3dy5yYXRlY2l0eS5jb20uYXUv"
-          },
-          "properties": {
+            "link": "aHR0cDovL3d3dy5yYXRlY2l0eS5jb20uYXUv",
             "origin": 415,
             "width": 115,
             "height": 40,
             "fit": [110, 40],
             "move_up": 40,
             "bars": 10,
-            "size": 43
+            "size": 43,
+            "align": "left"
           }
+          // "properties": {
+          //   "origin": 415,
+          //   "width": 115,
+          //   "height": 40,
+          //   "fit": [110, 40],
+          //   "move_up": 40,
+          //   "bars": 10,
+          //   "size": 43
+          // }
         },
         "summary": "UnVieSBvbiBSYWlscyBkZXZlbG9wZXIgZm9yIFJhdGVDaXR5LmNvbS5hdSBmaW5hbmNpYWwgcHJvZHVjdHMgYW5kIHNlcnZpY2VzIGNvbXBhcmlzb24gd2Vic2l0ZS4=",
         "profile": [

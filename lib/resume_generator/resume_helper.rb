@@ -65,25 +65,26 @@ module ResumeGenerator
     end
 
     def social_media_resources
+      properties = RESUME[:social_media][:properties]
       RESUME[:social_media][:resources].values.map do |social_medium|
+        social_medium.merge!(properties)
         Resource.for(social_medium)
       end
     end
 
     def social_media_icon_for(resource, x_position)
-      properties = RESUME[:social_media][:properties]
-      bounding_box([x_position, cursor], width: properties[:width]) do
+      bounding_box([x_position, cursor], width: resource.width) do
         image(
           resource.image,
-          fit: properties[:fit],
-          align: properties[:align].to_sym
+          fit: resource.fit,
+          align: resource.align
         )
         move_up 35
         transparent_link(
-          bars: properties[:bars],
-          size: properties[:size],
+          bars: resource.bars,
+          size: resource.size,
           link: resource.link,
-          align: properties[:align].to_sym
+          align: resource.align
         )
       end
     end
@@ -136,10 +137,7 @@ module ResumeGenerator
       )
 
       move_up 40
-      organisation_logo(
-        Resource.for(entry[:logo][:resource]),
-        entry[:logo][:properties]
-      )
+      organisation_logo(Resource.for(entry[:logo][:resource]))
 
       move_down 10
       summary(entry[:summary])
@@ -295,19 +293,19 @@ module ResumeGenerator
       )
     end
 
-    def organisation_logo(resource, properties)
-      bounding_box([properties[:origin], cursor],
-                   width: properties[:width],
-                   height: properties[:height]) do
+    def organisation_logo(resource)
+      bounding_box([resource.origin, cursor],
+                   width: resource.width,
+                   height: resource.height) do
         image resource.image,
-              fit: properties[:fit],
-              align: :center
-        move_up properties[:move_up]
+              fit: resource.fit,
+              align: resource.align
+        move_up resource.move_up
         transparent_link(
-          bars: properties[:bars],
-          size: properties[:size],
+          bars: resource.bars,
+          size: resource.size,
           link: resource.link,
-          align: :left
+          align: resource.align
         )
       end
     end
