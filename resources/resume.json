@@ -7,41 +7,51 @@
       "other": "YW5kIEluZm9ybWF0aW9uIFRlY2hub2xvZ3kgU2VydmljZXMgUHJvZmVzc2lvbmFs"
     },
     "social_media": {
-      "email": {
-        "image": "http://farm3.staticflickr.com/2826/8753727736_2a7a294527_m.jpg",
-        "link": "bWFpbHRvOnBhdWwuZmlvcmF2YW50aUBnbWFpbC5jb20="
+      "resources": {
+        "email": {
+          "image": "http://farm3.staticflickr.com/2826/8753727736_2a7a294527_m.jpg",
+          "link": "bWFpbHRvOnBhdWwuZmlvcmF2YW50aUBnbWFpbC5jb20="
+        },
+        "linked_in": {
+          "image": "http://farm4.staticflickr.com/3687/8809717292_4938937a94_m.jpg",
+          "link": "aHR0cDovL2xpbmtlZGluLmNvbS9pbi9wYXVsZmlvcmF2YW50aQ=="
+        },
+        "github": {
+          "image": "http://farm4.staticflickr.com/3828/8799239149_d23e4acff0_m.jpg",
+          "link": "aHR0cDovL2dpdGh1Yi5jb20vcGF1bGZpb3JhdmFudGk="
+        },
+        "stackoverflow": {
+          "image": "http://farm3.staticflickr.com/2815/8799253647_e4ec3ab1bc_m.jpg",
+          "link": "aHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL3VzZXJzLzU2Nzg2My9wYXVsLWZpb3JhdmFudGk="
+        },
+        "speakerdeck": {
+          "image": "http://farm8.staticflickr.com/7404/8799250189_4125b90a14_m.jpg",
+          "link": "aHR0cHM6Ly9zcGVha2VyZGVjay5jb20vcGF1bGZpb3JhdmFudGk="
+        },
+        "vimeo": {
+          "image": "http://farm9.staticflickr.com/8546/8809862216_0cdd40c3dc_m.jpg",
+          "link": "aHR0cHM6Ly92aW1lby5jb20vcGF1bGZpb3JhdmFudGk="
+        },
+        "code_school": {
+          "image": "http://farm4.staticflickr.com/3714/9015339024_0651daf2c4_m.jpg",
+          "link": "aHR0cDovL3d3dy5jb2Rlc2Nob29sLmNvbS91c2Vycy9wYXVsZmlvcmF2YW50aQ=="
+        },
+        "twitter": {
+          "image": "http://farm3.staticflickr.com/2837/8799235993_26a7d17540_m.jpg",
+          "link": "aHR0cHM6Ly90d2l0dGVyLmNvbS9wZWZpb3JhdmFudGk="
+        },
+        "blog": {
+          "image": "http://farm4.staticflickr.com/3752/8809826162_e4d765d15b_m.jpg",
+          "link": "aHR0cDovL3BhdWxmaW9yYXZhbnRpLmNvbS9hYm91dA=="
+        }
       },
-      "linked_in": {
-        "image": "http://farm4.staticflickr.com/3687/8809717292_4938937a94_m.jpg",
-        "link": "aHR0cDovL2xpbmtlZGluLmNvbS9pbi9wYXVsZmlvcmF2YW50aQ=="
-      },
-      "github": {
-        "image": "http://farm4.staticflickr.com/3828/8799239149_d23e4acff0_m.jpg",
-        "link": "aHR0cDovL2dpdGh1Yi5jb20vcGF1bGZpb3JhdmFudGk="
-      },
-      "stackoverflow": {
-        "image": "http://farm3.staticflickr.com/2815/8799253647_e4ec3ab1bc_m.jpg",
-        "link": "aHR0cDovL3N0YWNrb3ZlcmZsb3cuY29tL3VzZXJzLzU2Nzg2My9wYXVsLWZpb3JhdmFudGk="
-      },
-      "speakerdeck": {
-        "image": "http://farm8.staticflickr.com/7404/8799250189_4125b90a14_m.jpg",
-        "link": "aHR0cHM6Ly9zcGVha2VyZGVjay5jb20vcGF1bGZpb3JhdmFudGk="
-      },
-      "vimeo": {
-        "image": "http://farm9.staticflickr.com/8546/8809862216_0cdd40c3dc_m.jpg",
-        "link": "aHR0cHM6Ly92aW1lby5jb20vcGF1bGZpb3JhdmFudGk="
-      },
-      "code_school": {
-        "image": "http://farm4.staticflickr.com/3714/9015339024_0651daf2c4_m.jpg",
-        "link": "aHR0cDovL3d3dy5jb2Rlc2Nob29sLmNvbS91c2Vycy9wYXVsZmlvcmF2YW50aQ=="
-      },
-      "twitter": {
-        "image": "http://farm3.staticflickr.com/2837/8799235993_26a7d17540_m.jpg",
-        "link": "aHR0cHM6Ly90d2l0dGVyLmNvbS9wZWZpb3JhdmFudGk="
-      },
-      "blog": {
-        "image": "http://farm4.staticflickr.com/3752/8809826162_e4d765d15b_m.jpg",
-        "link": "aHR0cDovL3BhdWxmaW9yYXZhbnRpLmNvbS9hYm91dA=="
+      "properties": {
+        "width": 35,
+        "fit": [35, 35],
+        "align": "center",
+        "move_up": 35,
+        "bars": 3,
+        "size": 40
       }
     },
     "entries": {

@@ -65,20 +65,25 @@ module ResumeGenerator
     end
 
     def social_media_resources
-      RESUME[:social_media].values.map do |social_medium|
+      RESUME[:social_media][:resources].values.map do |social_medium|
         Resource.for(social_medium)
       end
     end
 
     def social_media_icon_for(resource, x_position)
-      bounding_box([x_position, cursor], width: 35) do
-        image resource.image, fit: [35, 35], align: :center
+      properties = RESUME[:social_media][:properties]
+      bounding_box([x_position, cursor], width: properties[:width]) do
+        image(
+          resource.image,
+          fit: properties[:fit],
+          align: properties[:align].to_sym
+        )
         move_up 35
         transparent_link(
-          bars: 3,
-          size: 40,
+          bars: properties[:bars],
+          size: properties[:size],
           link: resource.link,
-          align: :center
+          align: properties[:align].to_sym
         )
       end
     end
