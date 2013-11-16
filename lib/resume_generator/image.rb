@@ -3,26 +3,6 @@ require 'open-uri'
 module ResumeGenerator
   class Image
     IMAGE_BANK = {
-      background:
-        'http://farm6.staticflickr.com/5453/8801916021_3ac1df6072_o_d.jpg',
-      email:
-        'http://farm3.staticflickr.com/2826/8753727736_2a7a294527_m.jpg',
-      linked_in:
-        'http://farm4.staticflickr.com/3687/8809717292_4938937a94_m.jpg',
-      github:
-        'http://farm4.staticflickr.com/3828/8799239149_d23e4acff0_m.jpg',
-      stackoverflow:
-        'http://farm3.staticflickr.com/2815/8799253647_e4ec3ab1bc_m.jpg',
-      speakerdeck:
-        'http://farm8.staticflickr.com/7404/8799250189_4125b90a14_m.jpg',
-      vimeo:
-        'http://farm9.staticflickr.com/8546/8809862216_0cdd40c3dc_m.jpg',
-      code_school:
-        'http://farm4.staticflickr.com/3714/9015339024_0651daf2c4_m.jpg',
-      twitter:
-        'http://farm3.staticflickr.com/2837/8799235993_26a7d17540_m.jpg',
-      blog:
-        'http://farm4.staticflickr.com/3752/8809826162_e4d765d15b_m.jpg',
       rc:
         'http://farm6.staticflickr.com/5484/9192095974_b49a1fc142_m.jpg',
       ruby:

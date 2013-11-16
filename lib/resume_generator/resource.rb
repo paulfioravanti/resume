@@ -1,12 +1,11 @@
-require 'image'
-require 'link'
-
 module ResumeGenerator
   class Resource
+    extend Decodable
+
     attr_reader :image, :link
 
-    def self.for(name)
-      new(image: Image.for(:"#{name}"), link: Link.for(:"#{name}"))
+    def self.for(hash)
+      new(image: open(hash.last[:image]), link: d(hash.last[:link]))
     end
 
     private

@@ -7,9 +7,13 @@ module ResumeGenerator
       Prawn::Document.class_eval do
         include ResumeHelper, Decodable
       end
-      Prawn::Document.generate("#{DOCUMENT_NAME}.pdf",
-        margin_top: 0.75, margin_bottom: 0.75, margin_left: 1, margin_right: 1,
-        background: Image.for('background'),
+      Prawn::Document.generate(
+        "#{DOCUMENT_NAME}.pdf",
+        margin_top: 0.75,
+        margin_bottom: 0.75,
+        margin_left: 1,
+        margin_right: 1,
+        background: background_image,
         repeat: true) do
 
         CLI.report "Generating PDF. "\
@@ -18,9 +22,9 @@ module ResumeGenerator
         name
         headline
 
-        # CLI.report 'Creating social media links section...'
+        CLI.report 'Creating social media links section...'
 
-        # social_media_links
+        social_media_links
 
         # CLI.report 'Creating employment history section...'
 

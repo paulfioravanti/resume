@@ -11,6 +11,16 @@ module ResumeGenerator
         symbolize_names: true
       )[:resume]
 
+    def self.included(base)
+      Resume.extend(ClassMethods)
+    end
+
+    module ClassMethods
+      def background_image
+        open(RESUME[:background_image])
+      end
+    end
+
     private
 
     def name
@@ -47,31 +57,34 @@ module ResumeGenerator
       move_down 5
       resources = social_media_resources
       x_position = 0
-      social_media_link_for(resources.first, x_position)
+      social_media_icon_for(resources.first, x_position)
       x_position += 45
-      resources[1..-1].each do |image_link|
+      resources[1..-1].each do |resource|
         move_up 46.25
-        social_media_link_for(image_link, x_position)
+        social_media_icon_for(resource, x_position)
         x_position += 45
       end
       stroke_horizontal_rule { color '666666' }
     end
 
     def social_media_resources
-      %w(email linked_in github stackoverflow
-         speakerdeck vimeo code_school blog).map do |item|
-        Resource.for(item)
+      # %w(email linked_in github stackoverflow
+      #    speakerdeck vimeo code_school blog).map do |item|
+      #   Resource.for(item)
+      # end
+      RESUME[:social_media].reduce([]) do |resources, social_medium|
+        resources << Resource.for(social_medium)
       end
     end
 
-    def social_media_link_for(image_link, x_position)
+    def social_media_icon_for(resource, x_position)
       bounding_box([x_position, cursor], width: 35) do
-        image image_link.image, fit: [35, 35], align: :center
+        image resource.image, fit: [35, 35], align: :center
         move_up 35
         transparent_link(
           bars: 3,
           size: 40,
-          link: image_link.link,
+          link: resource.link,
           align: :center
         )
       end
@@ -92,9 +105,9 @@ module ResumeGenerator
     end
 
     def employment_history
-      heading d('RW1wbG95bWVudCBIaXN0b3J5')
-      rc
-      fl
+      # heading d('RW1wbG95bWVudCBIaXN0b3J5')
+      # rc
+      # fl
       # gw
       # rnt
       # sra
@@ -113,58 +126,58 @@ module ResumeGenerator
     # Next attempted refactor: Shove all info about the positions into
     # a JSON feed on Github that will be read in and populate the resume
 
-    def rc
-      move_down 10
-      position(Position.for(:rc))
-      organisation(Organisation.for(:rc))
-      period_and_location(Period.for(:rc),
-        Location.for(:rc), Link.for(:rc_location))
+    # def rc
+    #   move_down 10
+    #   position(Position.for(:rc))
+    #   organisation(Organisation.for(:rc))
+    #   period_and_location(Period.for(:rc),
+    #     Location.for(:rc), Link.for(:rc_location))
 
-      move_up 40
-      organisation_logo(Logo.for(:rc))
+    #   move_up 40
+    #   organisation_logo(Logo.for(:rc))
 
-      move_down 10
-      summary(
-        "UnVieSBvbiBSYWlscyBkZXZlbG9wZXIgZm9yIFJhdGVDaXR5LmNvbS5hdSBmaW"\
-        "5hbmNpYWwgcHJvZHVjdHMgYW5kIHNlcnZpY2VzIGNvbXBhcmlzb24gd2Vic2l0"\
-        "ZS4="
-      )
-      profile(
-        "T3VyIHRlYW0gaXMgZmllcmNlbHkgQWdpbGUsIHdpdGggdGlnaHQgZGV2ZWxvcG1lbnQ"\
-          "gZmVlZGJhY2sgbG9vcHMgb2Ygb25lIHdlZWssIG1lYXN1cmVkIGFuZCBtYW5hZ2Vk"\
-          "IHRyYW5zcGFyZW50bHkgaW4gVHJlbGxvIGFuZCBkYWlseSBzdGFuZC11cCBtZWV0a"\
-          "W5ncw==",
-        "V2UgYWN0aXZlbHkgdXNlIFJTcGVjIGZvciB0ZXN0LWRyaXZlbiBkZXZlbG9wbWVudCw"\
-          "gYW5kIG1lYXN1cmUgb3VyIGNvZGUgcXVhbGl0eSB1c2luZyBzZXJ2aWNlcyBsaWtl"\
-          "IENvZGUgQ2xpbWF0ZSBhbmQgQ292ZXJhbGxz",
-        "R2l0aHViIHB1bGwgcmVxdWVzdHMsIGNvbnRpbnVvdXMgaW50ZWdyYXRpb24gd2l0aCB"\
-          "UcmF2aXMgUHJvLCBwZWVyIGNvZGUgcmV2aWV3LCBhbmQgY29udGludW91cyBzdGFn"\
-          "aW5nL3Byb2R1Y3Rpb24gZGVwbG95cyBhcmUgY2VudHJhbCB0byBvdXIgZXZlcnlkY"\
-          "XkgZGV2ZWxvcG1lbnQgd29ya2Zsb3c=",
-        "V2UgZ2V0IHN0dWZmIGRvbmUsIGdldCBpdCBsaXZlIGZhc3QsIGFuZCBzdHJpdmUgdG8"\
-          "gZ2V0IGJldHRlcg=="
-      )
-    end
+    #   move_down 10
+    #   summary(
+    #     "UnVieSBvbiBSYWlscyBkZXZlbG9wZXIgZm9yIFJhdGVDaXR5LmNvbS5hdSBmaW"\
+    #     "5hbmNpYWwgcHJvZHVjdHMgYW5kIHNlcnZpY2VzIGNvbXBhcmlzb24gd2Vic2l0"\
+    #     "ZS4="
+    #   )
+    #   profile(
+    #     "T3VyIHRlYW0gaXMgZmllcmNlbHkgQWdpbGUsIHdpdGggdGlnaHQgZGV2ZWxvcG1lbnQ"\
+    #       "gZmVlZGJhY2sgbG9vcHMgb2Ygb25lIHdlZWssIG1lYXN1cmVkIGFuZCBtYW5hZ2Vk"\
+    #       "IHRyYW5zcGFyZW50bHkgaW4gVHJlbGxvIGFuZCBkYWlseSBzdGFuZC11cCBtZWV0a"\
+    #       "W5ncw==",
+    #     "V2UgYWN0aXZlbHkgdXNlIFJTcGVjIGZvciB0ZXN0LWRyaXZlbiBkZXZlbG9wbWVudCw"\
+    #       "gYW5kIG1lYXN1cmUgb3VyIGNvZGUgcXVhbGl0eSB1c2luZyBzZXJ2aWNlcyBsaWtl"\
+    #       "IENvZGUgQ2xpbWF0ZSBhbmQgQ292ZXJhbGxz",
+    #     "R2l0aHViIHB1bGwgcmVxdWVzdHMsIGNvbnRpbnVvdXMgaW50ZWdyYXRpb24gd2l0aCB"\
+    #       "UcmF2aXMgUHJvLCBwZWVyIGNvZGUgcmV2aWV3LCBhbmQgY29udGludW91cyBzdGFn"\
+    #       "aW5nL3Byb2R1Y3Rpb24gZGVwbG95cyBhcmUgY2VudHJhbCB0byBvdXIgZXZlcnlkY"\
+    #       "XkgZGV2ZWxvcG1lbnQgd29ya2Zsb3c=",
+    #     "V2UgZ2V0IHN0dWZmIGRvbmUsIGdldCBpdCBsaXZlIGZhc3QsIGFuZCBzdHJpdmUgdG8"\
+    #       "gZ2V0IGJldHRlcg=="
+    #   )
+    # end
 
-    def fl
-      move_down 15
+    # def fl
+    #   move_down 15
 
-      position(Position.for(:fl))
-      organisation(Organisation.for(:fl))
-      period_and_location(Period.for(:fl),
-        Location.for(:fl), Link.for(:fl_location))
+    #   position(Position.for(:fl))
+    #   organisation(Organisation.for(:fl))
+    #   period_and_location(Period.for(:fl),
+    #     Location.for(:fl), Link.for(:fl_location))
 
-      move_up 40
-      organisation_logo(Logo.for(:ruby))
-      move_up 33
-      organisation_logo(Logo.for(:rails))
+    #   move_up 40
+    #   organisation_logo(Logo.for(:ruby))
+    #   move_up 33
+    #   organisation_logo(Logo.for(:rails))
 
-      move_down 15
-      summary(
-        "UGFydC10aW1lIGFuZCBwcm9qZWN0LWJhc2VkIFJ1Ynkgb24gUmFpbHMgd29yay"\
-          "Bmb3IgbG9jYWwgc3RhcnQtdXAgYW5kIHNtYWxsIGNvbXBhbmllcy4="
-      )
-    end
+    #   move_down 15
+    #   summary(
+    #     "UGFydC10aW1lIGFuZCBwcm9qZWN0LWJhc2VkIFJ1Ynkgb24gUmFpbHMgd29yay"\
+    #       "Bmb3IgbG9jYWwgc3RhcnQtdXAgYW5kIHNtYWxsIGNvbXBhbmllcy4="
+    #   )
+    # end
 
     # def gw
     #   move_down 15
