@@ -1,9 +1,21 @@
+require 'json'
+
 module ResumeGenerator
   module ResumeHelper
+    # RESUME = JSON.load(open('resources/resume.json'))['resume']
+    # RESUME = JSON.parse(File.read('resources/resume.json').to_s,
+    #          symbolize_names: true)[:resume]
+    RESUME =
+      JSON.parse(
+        open('resources/resume.json').read,
+        symbolize_names: true
+      )[:resume]
+
     private
 
     def name
-      formatted_name(d('UGF1bCBGaW9yYXZhbnRp'))
+      my_name = RESUME[:name]
+      formatted_name(d(my_name))
     end
 
     def formatted_name(name)
@@ -11,9 +23,10 @@ module ResumeGenerator
     end
 
     def headline
+      headline = RESUME[:headline]
       formatted_headline(
-        d('UnVieSBEZXZlbG9wZXIg'),
-        d('YW5kIEluZm9ybWF0aW9uIFRlY2hub2xvZ3kgU2VydmljZXMgUHJvZmVzc2lvbmFs')
+        d(headline[:ruby]),
+        d(headline[:rest])
       )
     end
 
@@ -97,6 +110,9 @@ module ResumeGenerator
     #   ryu
     #   tafe
     # end
+
+    # Next attempted refactor: Shove all info about the positions into
+    # a JSON feed on Github that will be read in and populate the resume
 
     def rc
       move_down 10
