@@ -65,8 +65,8 @@ module ResumeGenerator
     end
 
     def social_media_resources
-      RESUME[:social_media].reduce([]) do |resources, social_medium|
-        resources << Resource.for(social_medium)
+      RESUME[:social_media].values.map do |social_medium|
+        Resource.for(social_medium)
       end
     end
 
@@ -98,8 +98,8 @@ module ResumeGenerator
     end
 
     def employment_history
-      # heading d('RW1wbG95bWVudCBIaXN0b3J5')
-      # rc
+      heading d('RW1wbG95bWVudCBIaXN0b3J5')
+      rc
       # fl
       # gw
       # rnt
@@ -119,38 +119,27 @@ module ResumeGenerator
     # Next attempted refactor: Shove all info about the positions into
     # a JSON feed on Github that will be read in and populate the resume
 
-    # def rc
-    #   move_down 10
-    #   position(Position.for(:rc))
-    #   organisation(Organisation.for(:rc))
-    #   period_and_location(Period.for(:rc),
-    #     Location.for(:rc), Link.for(:rc_location))
+    def rc
+      entry = RESUME[:entries][:rc]
+      move_down 10
+      position(d(entry[:position]))
+      organisation(d(entry[:organisation]))
+      period_and_location(
+        d(entry[:period]),
+        d(entry[:location][:name]),
+        d(entry[:location][:link])
+      )
 
-    #   move_up 40
-    #   organisation_logo(Logo.for(:rc))
+      move_up 40
+      organisation_logo(
+        Resource.for(entry[:logo][:resource]),
+        entry[:logo][:properties]
+      )
 
-    #   move_down 10
-    #   summary(
-    #     "UnVieSBvbiBSYWlscyBkZXZlbG9wZXIgZm9yIFJhdGVDaXR5LmNvbS5hdSBmaW"\
-    #     "5hbmNpYWwgcHJvZHVjdHMgYW5kIHNlcnZpY2VzIGNvbXBhcmlzb24gd2Vic2l0"\
-    #     "ZS4="
-    #   )
-    #   profile(
-    #     "T3VyIHRlYW0gaXMgZmllcmNlbHkgQWdpbGUsIHdpdGggdGlnaHQgZGV2ZWxvcG1lbnQ"\
-    #       "gZmVlZGJhY2sgbG9vcHMgb2Ygb25lIHdlZWssIG1lYXN1cmVkIGFuZCBtYW5hZ2Vk"\
-    #       "IHRyYW5zcGFyZW50bHkgaW4gVHJlbGxvIGFuZCBkYWlseSBzdGFuZC11cCBtZWV0a"\
-    #       "W5ncw==",
-    #     "V2UgYWN0aXZlbHkgdXNlIFJTcGVjIGZvciB0ZXN0LWRyaXZlbiBkZXZlbG9wbWVudCw"\
-    #       "gYW5kIG1lYXN1cmUgb3VyIGNvZGUgcXVhbGl0eSB1c2luZyBzZXJ2aWNlcyBsaWtl"\
-    #       "IENvZGUgQ2xpbWF0ZSBhbmQgQ292ZXJhbGxz",
-    #     "R2l0aHViIHB1bGwgcmVxdWVzdHMsIGNvbnRpbnVvdXMgaW50ZWdyYXRpb24gd2l0aCB"\
-    #       "UcmF2aXMgUHJvLCBwZWVyIGNvZGUgcmV2aWV3LCBhbmQgY29udGludW91cyBzdGFn"\
-    #       "aW5nL3Byb2R1Y3Rpb24gZGVwbG95cyBhcmUgY2VudHJhbCB0byBvdXIgZXZlcnlkY"\
-    #       "XkgZGV2ZWxvcG1lbnQgd29ya2Zsb3c=",
-    #     "V2UgZ2V0IHN0dWZmIGRvbmUsIGdldCBpdCBsaXZlIGZhc3QsIGFuZCBzdHJpdmUgdG8"\
-    #       "gZ2V0IGJldHRlcg=="
-    #   )
-    # end
+      move_down 10
+      summary(entry[:summary])
+      profile(entry[:profile])
+    end
 
     # def fl
     #   move_down 15
@@ -301,18 +290,18 @@ module ResumeGenerator
       )
     end
 
-    def organisation_logo(logo)
-      bounding_box([logo[:origin], cursor],
-                   width: logo[:width],
-                   height: logo[:height]) do
-        image logo[:resource].image,
-              fit: logo[:fit],
+    def organisation_logo(resource, properties)
+      bounding_box([properties[:origin], cursor],
+                   width: properties[:width],
+                   height: properties[:height]) do
+        image resource.image,
+              fit: properties[:fit],
               align: :center
-        move_up logo[:move_up]
+        move_up properties[:move_up]
         transparent_link(
-          bars: logo[:bars],
-          size: logo[:size],
-          link: logo[:resource].link,
+          bars: properties[:bars],
+          size: properties[:size],
+          link: resource.link,
           align: :left
         )
       end
@@ -322,7 +311,7 @@ module ResumeGenerator
       text d(string)
     end
 
-    def profile(*items)
+    def profile(items)
       table_data = []
       items.each do |item|
         table_data << ['•', d(item)]

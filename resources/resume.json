@@ -43,6 +43,39 @@
         "image": "http://farm4.staticflickr.com/3752/8809826162_e4d765d15b_m.jpg",
         "link": "aHR0cDovL3BhdWxmaW9yYXZhbnRpLmNvbS9hYm91dA=="
       }
+    },
+    "entries": {
+      "rc": {
+        "position": "U2VuaW9yIERldmVsb3Blcg==",
+        "organisation": "UmF0ZUNpdHkuY29tLmF1",
+        "period": "SnVseSAyMDEzIC0gUHJlc2VudCB8",
+        "location": {
+          "name": "U3lkbmV5LCBBdXN0cmFsaWE=",
+          "link": "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9xPTYxK0xhdmVuZGVyK1N0K01pbHNvbnMrUG9pbnQrTlNXKzIwNjEmaGw9ZW4mbGw9LTMzLjg1MDYwMiwxNTEuMjEzMTYmc3BuPTAuMDI3MjY1LDAuMDM4OTY3JnNsbD0tMzMuODQzNjU5LDE1MS4yMDk5NDkmc3Nwbj0wLjAwNjgxNywwLjAwOTc0MiZobmVhcj02MStMYXZlbmRlcitTdCwrTWlsc29ucytQb2ludCtOZXcrU291dGgrV2FsZXMrMjA2MSZ0PW0mej0xNQ=="
+        },
+        "logo": {
+          "resource": {
+            "image": "http://farm6.staticflickr.com/5484/9192095974_b49a1fc142_m.jpg",
+            "link": "aHR0cDovL3d3dy5yYXRlY2l0eS5jb20uYXUv"
+          },
+          "properties": {
+            "origin": 415,
+            "width": 115,
+            "height": 40,
+            "fit": [110, 40],
+            "move_up": 40,
+            "bars": 10,
+            "size": 43
+          }
+        },
+        "summary": "UnVieSBvbiBSYWlscyBkZXZlbG9wZXIgZm9yIFJhdGVDaXR5LmNvbS5hdSBmaW5hbmNpYWwgcHJvZHVjdHMgYW5kIHNlcnZpY2VzIGNvbXBhcmlzb24gd2Vic2l0ZS4=",
+        "profile": [
+          "T3VyIHRlYW0gaXMgZmllcmNlbHkgQWdpbGUsIHdpdGggdGlnaHQgZGV2ZWxvcG1lbnQgZmVlZGJhY2sgbG9vcHMgb2Ygb25lIHdlZWssIG1lYXN1cmVkIGFuZCBtYW5hZ2VkIHRyYW5zcGFyZW50bHkgaW4gVHJlbGxvIGFuZCBkYWlseSBzdGFuZC11cCBtZWV0aW5ncw==",
+          "V2UgYWN0aXZlbHkgdXNlIFJTcGVjIGZvciB0ZXN0LWRyaXZlbiBkZXZlbG9wbWVudCwgYW5kIG1lYXN1cmUgb3VyIGNvZGUgcXVhbGl0eSB1c2luZyBzZXJ2aWNlcyBsaWtlIENvZGUgQ2xpbWF0ZSBhbmQgQ292ZXJhbGxz",
+          "R2l0aHViIHB1bGwgcmVxdWVzdHMsIGNvbnRpbnVvdXMgaW50ZWdyYXRpb24gd2l0aCBUcmF2aXMgUHJvLCBwZWVyIGNvZGUgcmV2aWV3LCBhbmQgY29udGludW91cyBzdGFnaW5nL3Byb2R1Y3Rpb24gZGVwbG95cyBhcmUgY2VudHJhbCB0byBvdXIgZXZlcnlkYXkgZGV2ZWxvcG1lbnQgd29ya2Zsb3c=",
+          "V2UgZ2V0IHN0dWZmIGRvbmUsIGdldCBpdCBsaXZlIGZhc3QsIGFuZCBzdHJpdmUgdG8gZ2V0IGJldHRlcg=="
+        ]
+      }
     }
   }
 }

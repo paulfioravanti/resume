@@ -5,7 +5,7 @@ module ResumeGenerator
     attr_reader :image, :link
 
     def self.for(hash)
-      new(image: open(hash.last[:image]), link: d(hash.last[:link]))
+      new(image: open(hash[:image]), link: d(hash[:link]))
     end
 
     private

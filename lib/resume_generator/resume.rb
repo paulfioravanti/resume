@@ -26,9 +26,9 @@ module ResumeGenerator
 
         social_media_links
 
-        # CLI.report 'Creating employment history section...'
+        CLI.report 'Creating employment history section...'
 
-        # employment_history
+        employment_history
 
         # CLI.report('Creating education history section...')
         # education_history
