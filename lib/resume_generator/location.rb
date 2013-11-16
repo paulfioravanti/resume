@@ -5,7 +5,6 @@
 #     extend Decodable
 
 #     LOCATIONS = {
-#       fl: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
 #       gw: 'VG9reW8sIEphcGFu',
 #       rnt: 'VG9reW8sIEphcGFu',
 #       sra: 'VG9reW8sIEphcGFu',

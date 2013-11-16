@@ -106,7 +106,7 @@ module ResumeGenerator
     def employment_history
       heading d('RW1wbG95bWVudCBIaXN0b3J5')
       rc
-      # fl
+      fl
       # gw
       # rnt
       # sra
@@ -137,26 +137,21 @@ module ResumeGenerator
       profile(entry[:profile])
     end
 
-    # def fl
-    #   entry = RESUME[:entries][:fl]
-    #   move_down 15
+    def fl
+      entry = RESUME[:entries][:fl]
+      move_down 15
+      position(entry[:position])
+      organisation(entry[:organisation])
+      period_and_location(entry[:period], entry[:location])
 
-    #   position(Position.for(:fl))
-    #   organisation(Organisation.for(:fl))
-    #   period_and_location(Period.for(:fl),
-    #     Location.for(:fl), Link.for(:fl_location))
+      move_up 40
+      organisation_logo(Resource.for(entry[:logos][:ruby]))
+      move_up 33
+      organisation_logo(Resource.for(entry[:logos][:rails]))
 
-    #   move_up 40
-    #   organisation_logo(Logo.for(:ruby))
-    #   move_up 33
-    #   organisation_logo(Logo.for(:rails))
-
-    #   move_down 15
-    #   summary(
-    #     "UGFydC10aW1lIGFuZCBwcm9qZWN0LWJhc2VkIFJ1Ynkgb24gUmFpbHMgd29yay"\
-    #       "Bmb3IgbG9jYWwgc3RhcnQtdXAgYW5kIHNtYWxsIGNvbXBhbmllcy4="
-    #   )
-    # end
+      move_down 15
+      summary(entry[:summary])
+    end
 
     # def gw
     #   move_down 15

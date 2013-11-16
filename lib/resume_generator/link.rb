@@ -5,25 +5,6 @@ module ResumeGenerator
     extend Decodable
 
     LINK_BANK = {
-      rc:
-        'aHR0cDovL3d3dy5yYXRlY2l0eS5jb20uYXUv',
-      rc_location:
-        "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9xPTYxK0xhdmVuZGVyK"\
-          "1N0K01pbHNvbnMrUG9pbnQrTlNXKzIwNjEmaGw9ZW4mbGw9LTMzLjg1MDYwMi"\
-          "wxNTEuMjEzMTYmc3BuPTAuMDI3MjY1LDAuMDM4OTY3JnNsbD0tMzMuODQzNjU"\
-          "5LDE1MS4yMDk5NDkmc3Nwbj0wLjAwNjgxNywwLjAwOTc0MiZobmVhcj02MStM"\
-          "YXZlbmRlcitTdCwrTWlsc29ucytQb2ludCtOZXcrU291dGgrV2FsZXMrMjA2M"\
-          "SZ0PW0mej0xNQ==",
-      ruby:
-        'aHR0cDovL3d3dy5ydWJ5LWxhbmcub3JnL2VuLw==',
-      rails:
-        'aHR0cDovL3J1YnlvbnJhaWxzLm9yZy8=',
-      fl_location:
-        "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9mPXEmc291cmNlPXNfcSZob"\
-          "D1lbiZnZW9jb2RlPSZxPWFkZWxhaWRlLCthdXN0cmFsaWEmYXE9JnNsbD0tMz"\
-          "QuOTYxNjkyLDEzOC42MjEzOTkmc3Nwbj0wLjA1NjgzNiwwLjA3MTU4MyZ2cHN"\
-          "yYz00JmllPVVURjgmaHE9JmhuZWFyPUFkZWxhaWRlK1NvdXRoK0F1c3RyYWxp"\
-          "YSwrQXVzdHJhbGlhJnQ9bSZ6PTkmaXdsb2M9QQ==",
       gw:
         'aHR0cDovL3d3dy5ndWlkZXdpcmUuY29tLw==',
       gw_location:

@@ -82,10 +82,43 @@
           "R2l0aHViIHB1bGwgcmVxdWVzdHMsIGNvbnRpbnVvdXMgaW50ZWdyYXRpb24gd2l0aCBUcmF2aXMgUHJvLCBwZWVyIGNvZGUgcmV2aWV3LCBhbmQgY29udGludW91cyBzdGFnaW5nL3Byb2R1Y3Rpb24gZGVwbG95cyBhcmUgY2VudHJhbCB0byBvdXIgZXZlcnlkYXkgZGV2ZWxvcG1lbnQgd29ya2Zsb3c=",
           "V2UgZ2V0IHN0dWZmIGRvbmUsIGdldCBpdCBsaXZlIGZhc3QsIGFuZCBzdHJpdmUgdG8gZ2V0IGJldHRlcg=="
         ]
+      },
+      "fl": {
+        "position": "UnVieSBEZXZlbG9wZXI=",
+        "organisation": "RnJlZWxhbmNl",
+        "period": "U2VwdGVtYmVyIDIwMTIg4oCTIEp1bHkgMjAxMyB8ICA=",
+        "location": {
+          "name": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",
+          "link": "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9mPXEmc291cmNlPXNfcSZobD1lbiZnZW9jb2RlPSZxPWFkZWxhaWRlLCthdXN0cmFsaWEmYXE9JnNsbD0tMzQuOTYxNjkyLDEzOC42MjEzOTkmc3Nwbj0wLjA1NjgzNiwwLjA3MTU4MyZ2cHNyYz00JmllPVVURjgmaHE9JmhuZWFyPUFkZWxhaWRlK1NvdXRoK0F1c3RyYWxpYSwrQXVzdHJhbGlhJnQ9bSZ6PTkmaXdsb2M9QQ=="
+        },
+        "logos": {
+          "ruby": {
+            "image": "http://farm4.staticflickr.com/3793/8799953079_33cfdc0def_m.jpg",
+            "link": "aHR0cDovL3d3dy5ydWJ5LWxhbmcub3JnL2VuLw==",
+            "origin": 440,
+            "width": 37,
+            "height": 33,
+            "fit": [31, 31],
+            "move_up": 30,
+            "bars": 4,
+            "size": 34,
+            "align": "left"
+          },
+          "rails": {
+            "image": "http://farm4.staticflickr.com/3681/8810534562_dfc34ea70c_m.jpg",
+            "link": "aHR0cDovL3J1YnlvbnJhaWxzLm9yZy8=",
+            "origin": 480,
+            "width": 32,
+            "height": 34,
+            "fit": [31, 31],
+            "move_up": 30,
+            "bars": 3,
+            "size": 34,
+            "align": "left"
+          }
+        },
+        "summary": "UGFydC10aW1lIGFuZCBwcm9qZWN0LWJhc2VkIFJ1Ynkgb24gUmFpbHMgd29yayBmb3IgbG9jYWwgc3RhcnQtdXAgYW5kIHNtYWxsIGNvbXBhbmllcy4="
       }
-    },
-    "fl": {
-
     }
   }
 }

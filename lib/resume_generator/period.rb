@@ -5,7 +5,6 @@
 #     extend Decodable
 
 #     PERIODS = {
-#       fl: 'U2VwdGVtYmVyIDIwMTIg4oCTIEp1bHkgMjAxMyB8ICA=',
 #       gw: 'SmFudWFyeSAyMDA5IOKAkyBTZXB0ZW1iZXIgMjAxMSB8ICA=',
 #       rnt: 'SnVseSAyMDA3IOKAkyBBdWd1c3QgMjAwOCB8ICA=',
 #       sra: 'QXByaWwgMjAwNiDigJMgSnVuZSAyMDA3IHwgIA==',

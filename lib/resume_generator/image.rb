@@ -3,12 +3,6 @@ require 'open-uri'
 module ResumeGenerator
   class Image
     IMAGE_BANK = {
-      rc:
-        'http://farm6.staticflickr.com/5484/9192095974_b49a1fc142_m.jpg',
-      ruby:
-        'http://farm4.staticflickr.com/3793/8799953079_33cfdc0def_m.jpg',
-      rails:
-        'http://farm4.staticflickr.com/3681/8810534562_dfc34ea70c_m.jpg',
       gw:
         'http://farm8.staticflickr.com/7376/8812488914_f0bfd0a841_m.jpg',
       rnt:
