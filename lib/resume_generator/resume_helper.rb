@@ -125,13 +125,9 @@ module ResumeGenerator
     def rc
       entry = RESUME[:entries][:rc]
       move_down 10
-      position(d(entry[:position]))
-      organisation(d(entry[:organisation]))
-      period_and_location(
-        d(entry[:period]),
-        d(entry[:location][:name]),
-        d(entry[:location][:link])
-      )
+      position(entry[:position])
+      organisation(entry[:organisation])
+      period_and_location(entry[:period], entry[:location])
 
       move_up 40
       organisation_logo(Resource.for(entry[:logo][:resource]))
@@ -213,7 +209,7 @@ module ResumeGenerator
 
     def position(string)
       formatted_text(
-        formatted_position(string)
+        formatted_position(d(string))
       )
     end
 
@@ -236,7 +232,7 @@ module ResumeGenerator
 
     def organisation(string)
       formatted_text(
-        formatted_organisation(string)
+        formatted_organisation(d(string))
       )
     end
 
@@ -258,15 +254,15 @@ module ResumeGenerator
       ]
     end
 
-    def period_and_location(period, location, link)
+    def period_and_location(period, location)
       formatted_text(
         [
           {
-            text: period
+            text: d(period)
           },
           {
-            text: location,
-            link: link
+            text: d(location[:name]),
+            link: d(location[:link])
           }
         ],
         color: '666666',
