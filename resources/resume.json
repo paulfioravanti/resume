@@ -63,17 +63,19 @@
           "name": "U3lkbmV5LCBBdXN0cmFsaWE=",
           "link": "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9xPTYxK0xhdmVuZGVyK1N0K01pbHNvbnMrUG9pbnQrTlNXKzIwNjEmaGw9ZW4mbGw9LTMzLjg1MDYwMiwxNTEuMjEzMTYmc3BuPTAuMDI3MjY1LDAuMDM4OTY3JnNsbD0tMzMuODQzNjU5LDE1MS4yMDk5NDkmc3Nwbj0wLjAwNjgxNywwLjAwOTc0MiZobmVhcj02MStMYXZlbmRlcitTdCwrTWlsc29ucytQb2ludCtOZXcrU291dGgrV2FsZXMrMjA2MSZ0PW0mej0xNQ=="
         },
-        "logo": {
-          "image": "http://farm6.staticflickr.com/5484/9192095974_b49a1fc142_m.jpg",
-          "link": "aHR0cDovL3d3dy5yYXRlY2l0eS5jb20uYXUv",
-          "origin": 415,
-          "width": 115,
-          "height": 40,
-          "fit": [110, 40],
-          "move_up": 40,
-          "bars": 10,
-          "size": 43,
-          "align": "left"
+        "logos": {
+          "rc": {
+            "image": "http://farm6.staticflickr.com/5484/9192095974_b49a1fc142_m.jpg",
+            "link": "aHR0cDovL3d3dy5yYXRlY2l0eS5jb20uYXUv",
+            "origin": 415,
+            "width": 115,
+            "height": 40,
+            "fit": [110, 40],
+            "move_up": 40,
+            "bars": 10,
+            "size": 43,
+            "align": "left"
+          }
         },
         "summary": "UnVieSBvbiBSYWlscyBkZXZlbG9wZXIgZm9yIFJhdGVDaXR5LmNvbS5hdSBmaW5hbmNpYWwgcHJvZHVjdHMgYW5kIHNlcnZpY2VzIGNvbXBhcmlzb24gd2Vic2l0ZS4=",
         "profile": [

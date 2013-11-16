@@ -123,34 +123,31 @@ module ResumeGenerator
     # end
 
     def rc
-      entry = RESUME[:entries][:rc]
-      move_down 10
-      position(entry[:position])
-      organisation(entry[:organisation])
-      period_and_location(entry[:period], entry[:location])
-
-      move_up 40
-      organisation_logo(Resource.for(entry[:logo]))
-
-      move_down 10
-      summary(entry[:summary])
-      profile(entry[:profile])
+      header_text_for(:rc, 10)
+      organisation_logo(:rc, 40)
+      content_for(:rc, 10)
     end
 
     def fl
-      entry = RESUME[:entries][:fl]
-      move_down 15
+      header_text_for(:fl, 15)
+      organisation_logo(:fl, :ruby, 40)
+      organisation_logo(:fl, :rails, 33)
+      content_for(:fl, 15)
+    end
+
+    def header_text_for(position, start_point)
+      entry = RESUME[:entries][position]
+      move_down start_point
       position(entry[:position])
       organisation(entry[:organisation])
       period_and_location(entry[:period], entry[:location])
+    end
 
-      move_up 40
-      organisation_logo(Resource.for(entry[:logos][:ruby]))
-      move_up 33
-      organisation_logo(Resource.for(entry[:logos][:rails]))
-
-      move_down 15
+    def content_for(position, start_point)
+      entry = RESUME[:entries][position]
+      move_down start_point
       summary(entry[:summary])
+      profile(entry[:profile]) if entry[:profile]
     end
 
     # def gw
@@ -282,7 +279,9 @@ module ResumeGenerator
       )
     end
 
-    def organisation_logo(resource)
+    def organisation_logo(position, logo = position, start_point)
+      resource = Resource.for(RESUME[:entries][position][:logos][logo])
+      move_up start_point
       bounding_box([resource.origin, cursor],
                    width: resource.width,
                    height: resource.height) do
