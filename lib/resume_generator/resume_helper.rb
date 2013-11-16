@@ -130,7 +130,7 @@ module ResumeGenerator
       period_and_location(entry[:period], entry[:location])
 
       move_up 40
-      organisation_logo(Resource.for(entry[:logo][:resource]))
+      organisation_logo(Resource.for(entry[:logo]))
 
       move_down 10
       summary(entry[:summary])
@@ -138,6 +138,7 @@ module ResumeGenerator
     end
 
     # def fl
+    #   entry = RESUME[:entries][:fl]
     #   move_down 15
 
     #   position(Position.for(:fl))
