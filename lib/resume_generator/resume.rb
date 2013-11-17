@@ -24,7 +24,7 @@ module ResumeGenerator
 
         CLI.report 'Creating social media links section...'
 
-        social_media_links
+        social_media_icons
 
         CLI.report 'Creating employment history section...'
 

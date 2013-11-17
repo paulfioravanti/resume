@@ -39,7 +39,7 @@ module ResumeGenerator
       )
     end
 
-    def social_media_links
+    def social_media_icons
       move_down 5
       resources = social_media_resources
       x_position = 0
