@@ -3,7 +3,7 @@ module ResumeGenerator
     extend Decodable
 
     attr_reader :image, :link, :width, :height, :fit, :align, :move_up, :bars,
-                :size, :origin
+                :size, :origin, :at
 
     def self.for(hash)
       hash[:image] = open(hash[:image])

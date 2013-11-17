@@ -285,6 +285,30 @@
             "align": "left"
           }
         }
+      },
+      "bib": {
+        "position": "QmFjaGVsb3Igb2YgSW50ZXJuYXRpb25hbCBCdXNpbmVzcw==",
+        "organisation": "RmxpbmRlcnMgVW5pdmVyc2l0eQ==",
+        "period": "MTk5Ny0xOTk5IHw=",
+        "location": {
+          "name": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",
+          "link": "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZobD1lbiZnZW9jb2RlPSZxPVN0dXJ0K1JkLCtCZWRmb3JkK1BhcmsrU0ErNTA0MiZhcT0mc2xsPS0zNC45MjIxODIsMTM4LjU5MDg1NiZzc3BuPTAuMDI4NDMyLDAuMDM1NzkxJnZwc3JjPTYmaWU9VVRGOCZocT0maG5lYXI9U3R1cnQrUmQsK0JlZGZvcmQrUGFyaytTb3V0aCtBdXN0cmFsaWErNTA0MiZsbD0tMzUuMDE2NzgyLDEzOC41Njc5ODImc3BuPTAuMDU2Nzk4LDAuMDcxNTgzJnQ9bSZ6PTE0Jml3bG9jPUE="
+        },
+        "logos": {
+          "bib": {
+            "image": "http://farm4.staticflickr.com/3707/8812488974_71c6981155_m.jpg",
+            "link": "aHR0cDovL3d3dy5mbGluZGVycy5lZHUuYXUv",
+            "origin": 490,
+            "width": 35,
+            "height": 40,
+            "fit": [35, 40],
+            "move_up": 40,
+            "bars": 3,
+            "size": 43,
+            "align": "left"
+          }
+        },
+        "at": 280
       }
     }
   }

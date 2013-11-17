@@ -103,7 +103,7 @@ module ResumeGenerator
     def education_history
       heading d('RWR1Y2F0aW9u')
       mit
-    #   bib
+      bib
     #   ryu
     #   tafe
     end
@@ -156,12 +156,25 @@ module ResumeGenerator
       organisation_logo_for(:mit)
     end
 
+    def bib
+      move_up 38
+      header_text_for(:bib, 0)
+      move_up 30
+      organisation_logo_for(:bib, :bib, 0)
+    end
+
     def header_text_for(position, start_point = 15)
       entry = RESUME[:entries][position]
       move_down start_point
-      position(entry[:position])
-      organisation(entry[:organisation])
-      period_and_location(entry[:period], entry[:location])
+      if entry[:at]
+        position_at(entry)
+        organisation_at(entry)
+        period_and_location_at(entry)
+      else
+        position(entry)
+        organisation(entry)
+        period_and_location(entry)
+      end
     end
 
     def content_for(position, start_point = 10)
@@ -184,16 +197,16 @@ module ResumeGenerator
       )
     end
 
-    def position(string)
+    def position(entry)
       formatted_text(
-        formatted_position(d(string))
+        formatted_position(d(entry[:position]))
       )
     end
 
-    def position_at(string, at)
+    def position_at(entry)
       formatted_text_box(
-        formatted_position(string),
-        at: [at, cursor]
+        formatted_position(d(entry[:position])),
+        at: [entry[:at], cursor]
       )
       move_down 14
     end
@@ -207,16 +220,16 @@ module ResumeGenerator
       ]
     end
 
-    def organisation(string)
+    def organisation(entry)
       formatted_text(
-        formatted_organisation(d(string))
+        formatted_organisation(d(entry[:organisation]))
       )
     end
 
-    def organisation_at(string, at)
+    def organisation_at(entry)
       formatted_text_box(
-        formatted_organisation(string),
-        at: [at, cursor]
+        formatted_organisation(d(entry[:organisation])),
+        at: [entry[:at], cursor]
       )
       move_down 13
     end
@@ -231,15 +244,15 @@ module ResumeGenerator
       ]
     end
 
-    def period_and_location(period, location)
+    def period_and_location(entry)
       formatted_text(
         [
           {
-            text: d(period)
+            text: d(entry[:period])
           },
           {
-            text: d(location[:name]),
-            link: d(location[:link])
+            text: d(entry[:location][:name]),
+            link: d(entry[:location][:link])
           }
         ],
         color: '666666',
@@ -247,24 +260,27 @@ module ResumeGenerator
       )
     end
 
-    def period_and_location_at(period, location, link, at)
+    def period_and_location_at(entry)
       formatted_text_box(
         [
           {
-            text: period, color: '666666', size: 10
+            text: d(entry[:period]), color: '666666', size: 10
           },
           {
-            text: location,
-            link: link,
+            text: d(entry[:location][:name]),
+            link: d(entry[:location][:link]),
             color: '666666', size: 10
           }
         ],
-        at: [at, cursor]
+        at: [entry[:at], cursor]
       )
     end
 
     def organisation_logo_for(position, logo = position, start_point = 40)
-      resource = Resource.for(RESUME[:entries][position][:logos][logo])
+      entry = RESUME[:entries][position]
+      position_logo = entry[:logos][logo]
+      position_logo.merge!(at: entry[:at]) if entry[:at]
+      resource = Resource.for(position_logo)
       move_up start_point
       bounding_box([resource.origin, cursor],
                    width: resource.width,
@@ -286,30 +302,6 @@ module ResumeGenerator
       end
       table(table_data, cell_style: { borders: [] })
     end
-
-    # def bib
-    #   move_up 38
-    #   position_header(
-    #     position: { title: 'QmFjaGVsb3Igb2YgSW50ZXJuYXRpb25hbCBCdXNpbmVzcw==', at: 280 },
-    #     organisation: { name: 'RmxpbmRlcnMgVW5pdmVyc2l0eQ==', at: 280 },
-    #     period: 'MTk5Ny0xOTk5IHw=',
-    #     location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
-    #     location_link: 'bib_location',
-    #     at: 280
-    #   )
-
-    #   move_up 30
-    #   organisation_logo(
-    #     organisation: 'bib',
-    #     origin: 490,
-    #     width: 35,
-    #     height: 40,
-    #     fit: [35, 40],
-    #     move_up: 40,
-    #     bars: 3,
-    #     size: 43
-    #   )
-    # end
 
     # def ryu
     #   move_down 20
