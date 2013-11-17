@@ -16,7 +16,7 @@ describe Resume do
         receive(:open).with(anything).and_return(placeholder_image)
       Resume.generate
     end
-    # after { File.delete(filename) }
+    after { File.delete(filename) }
 
     it 'generates a pdf resume' do
       expect(File.exist?(filename)).to be_true
