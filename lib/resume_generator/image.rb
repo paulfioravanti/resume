@@ -4,7 +4,7 @@ module ResumeGenerator
   class Image
     IMAGE_BANK = {
       gw:
-        'http://farm8.staticflickr.com/7376/8812488914_f0bfd0a841_m.jpg',
+        '',
       rnt:
         'http://farm8.staticflickr.com/7326/8801904137_e6008ee907_m.jpg',
       sra:

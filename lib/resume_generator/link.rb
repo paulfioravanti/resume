@@ -5,22 +5,6 @@ module ResumeGenerator
     extend Decodable
 
     LINK_BANK = {
-      gw:
-        'aHR0cDovL3d3dy5ndWlkZXdpcmUuY29tLw==',
-      gw_location:
-        "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9mPXEmc291cmNlPXNfcSZob"\
-          "D1lbiZnZW9jb2RlPSZxPSVFMyU4MCU5MjEwMC0wMDA2KyslRTYlOUQlQjElRT"\
-          "QlQkElQUMlRTklODMlQkQlRTUlOEQlODMlRTQlQkIlQTMlRTclOTQlQjAlRTU"\
-          "lOEMlQkElRTYlOUMlODklRTYlQTUlQkQlRTclOTQlQkEyLTctMSsrJUU2JTlD"\
-          "JTg5JUU2JUE1JUJEJUU3JTk0JUJBJUUzJTgyJUE0JUUzJTgzJTg4JUUzJTgyJ"\
-          "UI3JUUzJTgyJUEyKzEyJUU5JTlBJThFJmFxPSZzbGw9LTM0LjkyODYyMSwxMz"\
-          "guNTk5OTU5JnNzcG49MS44MTk0MzYsMi4yOTA2NDkmdnBzcmM9MCZnPWFkZWx"\
-          "haWRlLCthdXN0cmFsaWEmaWU9VVRGOCZocT0lRTMlODAlOTIxMDAtMDAwNisr"\
-          "JUU2JTlEJUIxJUU0JUJBJUFDJUU5JTgzJUJEJUU1JThEJTgzJUU0JUJCJUEzJ"\
-          "UU3JTk0JUIwJUU1JThDJUJBJUU2JTlDJTg5JUU2JUE1JUJEJUU3JTk0JUJBMi"\
-          "03LTErKyVFNiU5QyU4OSVFNiVBNSVCRCVFNyU5NCVCQSVFMyU4MiVBNCVFMyU"\
-          "4MyU4OCVFMyU4MiVCNyVFMyU4MiVBMisxMiVFOSU5QSU4RSZ0PW0mej0xNSZp"\
-          "d2xvYz1BJmNpZD0xNzQ4MjYwNDQzMTMwNjkxMzEzMw==",
       rnt:
         "aHR0cDovL3d3dy5vcmFjbGUuY29tL3VzL3Byb2R1Y3RzL2FwcGxpY2F0aW9uc"\
           "y9yaWdodG5vdy9vdmVydmlldy9pbmRleC5odG1s",

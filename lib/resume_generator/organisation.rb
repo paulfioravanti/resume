@@ -5,7 +5,7 @@
 #     extend Decodable
 
 #     NAMES = {
-#       gw: 'R3VpZGV3aXJlIFNvZnR3YXJl',
+#       gw: '',
 #       rnt: 'UmlnaHQgTm93IFRlY2hub2xvZ2llcw==',
 #       sra: 'U29mdHdhcmUgUmVzZWFyY2ggQXNzb2NpYXRlcyAoU1JBKQ==',
 #       jet: 'SmFwYW4gRXhjaGFuZ2UgYW5kIFRlYWNoaW5nIFByb2dyYW1tZSAoSkVUKQ==',

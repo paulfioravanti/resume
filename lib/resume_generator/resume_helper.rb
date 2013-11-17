@@ -107,7 +107,7 @@ module ResumeGenerator
       heading d('RW1wbG95bWVudCBIaXN0b3J5')
       rc
       fl
-      # gw
+      gw
       # rnt
       # sra
       # jet
@@ -135,6 +135,12 @@ module ResumeGenerator
       content_for(:fl, 15)
     end
 
+    def gw
+      header_text_for(:gw, 15)
+      organisation_logo(:gw, 40)
+      content_for(:gw, 10)
+    end
+
     def header_text_for(position, start_point)
       entry = RESUME[:entries][position]
       move_down start_point
@@ -149,43 +155,6 @@ module ResumeGenerator
       summary(entry[:summary])
       profile(entry[:profile]) if entry[:profile]
     end
-
-    # def gw
-    #   move_down 15
-    #   gw = GW.new
-
-    #   position(gw.position)
-    #   organisation(gw.organisation)
-    #   period_and_location(gw.period, gw.location, gw.location_link)
-
-    #   move_up 40
-    #   organisation_logo(gw.logo)
-
-    #   move_down 10
-    #   summary(
-    #     "Q29tcGxleCBzYWxlcyBvZiBHdWlkZXdpcmUgQ2xhaW1DZW50ZXIgaW5zdXJhbm"\
-    #       "NlIGNsYWltIGhhbmRsaW5nIHN5c3RlbSB0byBidXNpbmVzcyBhbmQgSVQgZGVw"\
-    #       "YXJ0bWVudHMgb2YgUHJvcGVydHkgJiBDYXN1YWx0eSBpbnN1cmFuY2UgY29tcG"\
-    #       "FuaWVzLg=="
-    #   )
-    #   profile(
-    #     "UGVyZm9ybSB2YWx1ZS1iYXNlZCBhbmQgdGVjaG5vbG9neS1mb2N1c2VkIHByZXNlbnR"\
-    #       "hdGlvbnMgYW5kIHByb2R1Y3QgZGVtb25zdHJhdGlvbnM=",
-    #     "Q29uZHVjdCBBZ2lsZS1kcml2ZW4gUHJvb2Ygb2YgQ29uY2VwdCB3b3Jrc2hvcHMgZm9"\
-    #       "yIHByb3NwZWN0cw==",
-    #     "V29yayB3aXRoIFN5c3RlbSBJbnRlZ3JhdG9yIHBhcnRuZXIgY29tcGFuaWVzIGluIHR"\
-    #       "oZWlyIEd1aWRld2lyZSBwcm9qZWN0IHByb3Bvc2Fscw==",
-    #     "Q29uZHVjdCBidXNpbmVzcyBwcm9jZXNzIGFuZCBwcm9kdWN0IHZhbHVlIGNvbnN1bHR"\
-    #       "pbmcgd29ya3Nob3BzIGZvciBwcm9zcGVjdHMvY3VzdG9tZXJz",
-    #     'UHJlcGFyZSB3cml0dGVuIHJlc3BvbnNlcyB0byBjdXN0b21lciBSRlAvUkZJcw==',
-    #     "RGVtbyBlbnZpcm9ubWVudCBjb25maWd1cmF0aW9uIGFuZCBwcm9zcGVjdCByZXF1aXJ"\
-    #       "lbWVudC1kcml2ZW4gZnVuY3Rpb24gZGV2ZWxvcG1lbnQ=",
-    #     "UHJvZHVjdCBsb2NhbGl6YXRpb24gZGV2ZWxvcG1lbnQgZm9yIEphcGFuZXNlIG1hcmt"\
-    #       "ldA==",
-    #     'Q3VzdG9tZXIgcHJvZHVjdCB0cmFpbmluZw==',
-    #     'SmFwYW4gYW5kIG92ZXJzZWFzIHRyYWRlIHNob3dzL21hcmtldGluZyBldmVudHM='
-    #   )
-    # end
 
     def heading(string)
       move_down 10
