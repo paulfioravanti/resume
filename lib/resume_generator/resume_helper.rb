@@ -105,7 +105,7 @@ module ResumeGenerator
       mit
       bib
       ryu
-    #   tafe
+      tafe
     end
 
     def rc
@@ -166,6 +166,13 @@ module ResumeGenerator
     def ryu
       header_text_for(:ryu, 20)
       organisation_logo_for(:ryu)
+    end
+
+    def tafe
+      move_up 38
+      header_text_for(:tafe, 0)
+      move_up 23
+      organisation_logo_for(:tafe, :tafe, 0)
     end
 
     def header_text_for(position, y_start = 15)
@@ -317,52 +324,5 @@ module ResumeGenerator
       end
       table(table_data, cell_style: { borders: [] })
     end
-
-    # def ryu
-    #   move_down 20
-    #   position_header(
-    #     position: { title: 'U3R1ZGVudCBFeGNoYW5nZSBQcm9ncmFtbWU=' },
-    #     organisation: { name: 'Unl1a29rdSBVbml2ZXJzaXR5' },
-    #     period: 'U2VwIDE5OTkgLSBGZWIgMjAwMCB8',
-    #     location: 'S3lvdG8sIEphcGFu',
-    #     location_link: 'ryu_location'
-    #   )
-
-    #   move_up 40
-    #   organisation_logo(
-    #     organisation: 'ryu',
-    #     origin: 214,
-    #     width: 32,
-    #     height: 40,
-    #     fit: [32, 40],
-    #     move_up: 40,
-    #     bars: 3,
-    #     size: 40
-    #   )
-    # end
-
-    # def tafe
-    #   move_up 38
-    #   position_header(
-    #     position: { title: 'Q2VydGlmaWNhdGUgSUkgaW4gVG91cmlzbQ==', at: 280 },
-    #     organisation: { name: 'QWRlbGFpZGUgVEFGRQ==', at: 280 },
-    #     period: 'TWF5IDIwMDAgLSBNYXkgMjAwMSB8',
-    #     location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
-    #     location_link: 'tafe_location',
-    #     at: 280
-    #   )
-
-    #   move_up 23
-    #   organisation_logo(
-    #     organisation: 'tafe',
-    #     origin: 490,
-    #     width: 37,
-    #     height: 35,
-    #     fit: [37, 35],
-    #     move_up: 19,
-    #     bars: 5,
-    #     size: 28
-    #   )
-    # end
   end
 end

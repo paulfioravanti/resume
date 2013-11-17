@@ -332,6 +332,30 @@
             "align": "left"
           }
         }
+      },
+      "tafe": {
+        "position": "Q2VydGlmaWNhdGUgSUkgaW4gVG91cmlzbQ==",
+        "organisation": "QWRlbGFpZGUgVEFGRQ==",
+        "period": "TWF5IDIwMDAgLSBNYXkgMjAwMSB8",
+        "location": {
+          "name": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",
+          "link": "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZobD1lbiZnZW9jb2RlPSZxPTEyMCtDdXJyaWUrU3RyZWV0K0FERUxBSURFK1NBKzUwMDAmYXE9JnNsbD0zNC45NjM5NzQsMTM1Ljc2Nzk3JnNzcG49MC4wMDcxMDQsMC4wMDg5NDgmdnBzcmM9NiZpZT1VVEY4JmhxPSZobmVhcj0xMjArQ3VycmllK1N0LCtBZGVsYWlkZStTb3V0aCtBdXN0cmFsaWErNTAwMCZ0PW0mbGw9LTM0LjkyNDU0LDEzOC41OTU1MTImc3BuPTAuMDE0MjE1LDAuMDE3ODk2Jno9MTYmaXdsb2M9QQ=="
+        },
+        "logos": {
+          "tafe": {
+            "image": "http://farm8.staticflickr.com/7377/8812488734_e43ce6742b_m.jpg",
+            "link": "aHR0cDovL3d3dy50YWZlc2EuZWR1LmF1",
+            "origin": 490,
+            "width": 37,
+            "height": 35,
+            "fit": [37, 35],
+            "move_up": 19,
+            "bars": 5,
+            "size": 28,
+            "align": "left"
+          }
+        },
+        "at": 280
       }
     }
   }
