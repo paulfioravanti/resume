@@ -43,33 +43,42 @@ module ResumeGenerator
       )
     end
 
-    def social_media_resources
+    def social_media_icons
       social_media = RESUME[:social_media]
-      social_media[:resources].values.map do |social_medium|
-        social_medium.merge!(social_media[:properties])
-        Resource.for(social_medium)
+      move_down 5
+      resources = resources_for(social_media)
+      x_position = 0
+      social_media_icon_for(resources.first, x_position)
+      x_position += 45
+      resources[1..-1].each do |resource|
+        move_up 46.25
+        social_media_icon_for(resource, x_position)
+        x_position += 45
       end
+      stroke_horizontal_rule { color '666666' }
     end
 
-    def header_text_for(position, y_start = 15)
-      entry = RESUME[:entries][position]
-      move_down y_start
-      return formatted_text_boxes_for(entry) if entry[:at]
-      formatted_text_fields_for(entry)
+    def employment_history
+      heading d('RW1wbG95bWVudCBIaXN0b3J5')
+      entries = RESUME[:entries]
+      rc(entries[:rc])
+      fl(entries[:fl])
+      gw(entries[:gw])
+      rnt(entries[:rnt])
+      sra(entries[:sra])
+      jet(entries[:jet])
+      satc(entries[:satc])
+      move_down 10
+      stroke_horizontal_rule { color '666666' }
     end
 
-    def content_for(position, start_point = 10)
-      entry = RESUME[:entries][position]
-      move_down start_point
-      summary(entry[:summary])
-      profile(entry[:profile])
-    end
-
-    def logo_resource(position, logo)
-      entry = RESUME[:entries][position]
-      organisation_logo = entry[:logos][logo]
-      organisation_logo.merge!(at: entry[:at])
-      Resource.for(organisation_logo)
+    def education_history
+      heading d('RWR1Y2F0aW9u')
+      entries = RESUME[:entries]
+      mit(entries[:mit])
+      bib(entries[:bib])
+      ryu(entries[:ryu])
+      tafe(entries[:tafe])
     end
   end
 end

@@ -1,17 +1,10 @@
 module ResumeGenerator
   module ResumeEntryHelper
-    def social_media_icons
-      move_down 5
-      resources = social_media_resources
-      x_position = 0
-      social_media_icon_for(resources.first, x_position)
-      x_position += 45
-      resources[1..-1].each do |resource|
-        move_up 46.25
-        social_media_icon_for(resource, x_position)
-        x_position += 45
+    def resources_for(social_media)
+      social_media[:resources].values.map do |social_medium|
+        social_medium.merge!(social_media[:properties])
+        Resource.for(social_medium)
       end
-      stroke_horizontal_rule { color '666666' }
     end
 
     def social_media_icon_for(resource, x_position)
@@ -53,96 +46,59 @@ module ResumeGenerator
       )
     end
 
-    def employment_history
-      heading d('RW1wbG95bWVudCBIaXN0b3J5')
-      rc
-      fl
-      gw
-      rnt
-      sra
-      jet
-      satc
-      move_down 10
-      stroke_horizontal_rule { color '666666' }
+    def rc(entry)
+      header_text_for(entry, 10)
+      organisation_logo_for(entry, :rc)
+      content_for(entry)
     end
 
-    def rc
-      header_text_for(:rc, 10)
-      organisation_logo_for(:rc)
-      content_for(:rc)
+    def fl(entry)
+      header_text_for(entry)
+      organisation_logo_for(entry, :ruby)
+      organisation_logo_for(entry, :rails, 33)
+      content_for(entry, 15)
     end
 
-    def fl
-      header_text_for(:fl)
-      organisation_logo_for(:fl, :ruby)
-      organisation_logo_for(:fl, :rails, 33)
-      content_for(:fl, 15)
+    def gw(entry)
+      header_text_for(entry)
+      organisation_logo_for(entry, :gw)
+      content_for(entry)
     end
 
-    def gw
-      header_text_for(:gw)
-      organisation_logo_for(:gw)
-      content_for(:gw)
+    def rnt(entry)
+      header_text_for(entry)
+      organisation_logo_for(entry, :rnt)
+      content_for(entry)
     end
 
-    def rnt
-      header_text_for(:rnt)
-      organisation_logo_for(:rnt)
-      content_for(:rnt)
+    def sra(entry)
+      header_text_for(entry)
+      organisation_logo_for(entry, :sra)
+      content_for(entry)
     end
 
-    def sra
-      header_text_for(:sra)
-      organisation_logo_for(:sra)
-      content_for(:sra)
+    def jet(entry)
+      header_text_for(entry)
+      organisation_logo_for(entry, :jet)
+      content_for(entry)
     end
 
-    def jet
-      header_text_for(:jet)
-      organisation_logo_for(:jet)
-      content_for(:jet)
+    def satc(entry)
+      header_text_for(entry)
+      organisation_logo_for(entry, :satc)
+      content_for(entry)
     end
 
-    def satc
-      header_text_for(:satc)
-      organisation_logo_for(:satc)
-      content_for(:satc)
+    def header_text_for(entry, y_start = 15)
+      # entry = RESUME[:entries][position]
+      move_down y_start
+      return formatted_text_boxes_for(entry) if entry[:at]
+      formatted_text_fields_for(entry)
     end
 
-    def education_history
-      heading d('RWR1Y2F0aW9u')
-      mit
-      bib
-      ryu
-      tafe
-    end
-
-    def mit
-      header_text_for(:mit)
-      organisation_logo_for(:mit)
-    end
-
-    def bib
-      move_up 38
-      header_text_for(:bib, 0)
-      move_up 30
-      organisation_logo_for(:bib, :bib, 0)
-    end
-
-    def ryu
-      header_text_for(:ryu, 20)
-      organisation_logo_for(:ryu)
-    end
-
-    def tafe
-      move_up 38
-      header_text_for(:tafe, 0)
-      move_up 23
-      organisation_logo_for(:tafe, :tafe, 0)
-    end
-
-    def organisation_logo_for(position, logo = position, start_point = 40)
-      resource = logo_resource(position, logo)
+    def organisation_logo_for(entry, logo, start_point = 40)
+      organisation_logo = entry[:logos][logo]
+      resource = logo_resource(entry, organisation_logo)
       move_up start_point
       bounding_box([resource.origin, cursor],
                    width: resource.width,
@@ -152,6 +108,43 @@ module ResumeGenerator
         transparent_link(resource)
       end
     end
+
+    def logo_resource(entry, logo)
+      logo.merge!(at: entry[:at])
+      Resource.for(logo)
+    end
+
+    def content_for(entry, start_point = 10)
+      move_down start_point
+      summary(entry[:summary])
+      profile(entry[:profile])
+    end
+
+    def mit(entry)
+      header_text_for(entry)
+      organisation_logo_for(entry, :mit)
+    end
+
+    def bib(entry)
+      move_up 38
+      header_text_for(entry, 0)
+      move_up 30
+      organisation_logo_for(entry, :bib, 0)
+    end
+
+    def ryu(entry)
+      header_text_for(entry, 20)
+      organisation_logo_for(entry, :ryu)
+    end
+
+    def tafe(entry)
+      move_up 38
+      header_text_for(entry, 0)
+      move_up 23
+      organisation_logo_for(entry, :tafe, 0)
+    end
+
+
 
     def formatted_text_fields_for(entry)
       position(entry)
