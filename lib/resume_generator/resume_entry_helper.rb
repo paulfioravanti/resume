@@ -1,5 +1,58 @@
 module ResumeGenerator
   module ResumeEntryHelper
+    def social_media_icons
+      move_down 5
+      resources = social_media_resources
+      x_position = 0
+      social_media_icon_for(resources.first, x_position)
+      x_position += 45
+      resources[1..-1].each do |resource|
+        move_up 46.25
+        social_media_icon_for(resource, x_position)
+        x_position += 45
+      end
+      stroke_horizontal_rule { color '666666' }
+    end
+
+    def social_media_icon_for(resource, x_position)
+      bounding_box([x_position, cursor], width: resource.width) do
+        image(
+          resource.image,
+          fit: resource.fit,
+          align: resource.align
+        )
+        move_up 35
+        transparent_link(resource)
+      end
+    end
+
+    def transparent_link(resource)
+      transparent(0) do
+        formatted_text(
+          [
+            {
+              text: '|' * resource.bars,
+              size: resource.size,
+              link: resource.link
+            }
+          ], align: resource.align
+        )
+      end
+    end
+
+    def heading(string)
+      move_down 10
+      formatted_text(
+        [
+          {
+            text: string,
+            styles: [:bold],
+            color: '666666'
+          }
+        ]
+      )
+    end
+
     def employment_history
       heading d('RW1wbG95bWVudCBIaXN0b3J5')
       rc
@@ -11,14 +64,6 @@ module ResumeGenerator
       satc
       move_down 10
       stroke_horizontal_rule { color '666666' }
-    end
-
-    def education_history
-      heading d('RWR1Y2F0aW9u')
-      mit
-      bib
-      ryu
-      tafe
     end
 
     def rc
@@ -64,6 +109,14 @@ module ResumeGenerator
       content_for(:satc)
     end
 
+    def education_history
+      heading d('RWR1Y2F0aW9u')
+      mit
+      bib
+      ryu
+      tafe
+    end
+
     def mit
       header_text_for(:mit)
       organisation_logo_for(:mit)
@@ -86,6 +139,122 @@ module ResumeGenerator
       header_text_for(:tafe, 0)
       move_up 23
       organisation_logo_for(:tafe, :tafe, 0)
+    end
+
+    def organisation_logo_for(position, logo = position, start_point = 40)
+      resource = logo_resource(position, logo)
+      move_up start_point
+      bounding_box([resource.origin, cursor],
+                   width: resource.width,
+                   height: resource.height) do
+        image resource.image, fit: resource.fit, align: resource.align
+        move_up resource.move_up
+        transparent_link(resource)
+      end
+    end
+
+    def formatted_text_fields_for(entry)
+      position(entry)
+      organisation(entry)
+      period_and_location(entry)
+    end
+
+    def formatted_text_boxes_for(entry)
+      position_at(entry)
+      organisation_at(entry)
+      period_and_location_at(entry)
+    end
+
+    def position(entry)
+      formatted_text(
+        formatted_position(d(entry[:position]))
+      )
+    end
+
+    def position_at(entry)
+      formatted_text_box(
+        formatted_position(d(entry[:position])),
+        at: [entry[:at], cursor]
+      )
+      move_down 14
+    end
+
+    def formatted_position(string)
+      [
+        {
+          text: string,
+          styles: [:bold]
+        }
+      ]
+    end
+
+    def organisation(entry)
+      formatted_text(
+        formatted_organisation(d(entry[:organisation]))
+      )
+    end
+
+    def organisation_at(entry)
+      formatted_text_box(
+        formatted_organisation(d(entry[:organisation])),
+        at: [entry[:at], cursor]
+      )
+      move_down 13
+    end
+
+    def formatted_organisation(string)
+      [
+        {
+          text: string,
+          styles: [:bold],
+          size: 11
+        }
+      ]
+    end
+
+    def period_and_location(entry)
+      formatted_text(
+        [
+          {
+            text: d(entry[:period])
+          },
+          {
+            text: d(entry[:location][:name]),
+            link: d(entry[:location][:link])
+          }
+        ],
+        color: '666666',
+        size: 10
+      )
+    end
+
+    def period_and_location_at(entry)
+      formatted_text_box(
+        [
+          {
+            text: d(entry[:period]), color: '666666', size: 10
+          },
+          {
+            text: d(entry[:location][:name]),
+            link: d(entry[:location][:link]),
+            color: '666666', size: 10
+          }
+        ],
+        at: [entry[:at], cursor]
+      )
+    end
+
+    def summary(string)
+      text d(string)
+    end
+
+    def profile(items)
+      return unless items
+      table_data = []
+      items.each do |item|
+        table_data << ['•', d(item)]
+      end
+      table(table_data, cell_style: { borders: [] })
     end
   end
 end

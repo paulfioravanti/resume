@@ -1,7 +1,7 @@
 require 'json'
 require 'open-uri'
 require 'social_media_helper'
-require 'resume_history_helper'
+require 'resume_entry_helper'
 
 module ResumeGenerator
   module ResumeHelper
@@ -45,132 +45,18 @@ module ResumeGenerator
     end
 
     def social_media_resources
-      properties = RESUME[:social_media][:properties]
-      RESUME[:social_media][:resources].values.map do |social_medium|
-        social_medium.merge!(properties)
+      social_media = RESUME[:social_media]
+      social_media[:resources].values.map do |social_medium|
+        social_medium.merge!(social_media[:properties])
         Resource.for(social_medium)
       end
     end
-
-    def transparent_link(resource)
-      transparent(0) do
-        formatted_text(
-          [
-            {
-              text: '|' * resource.bars,
-              size: resource.size,
-              link: resource.link
-            }
-          ], align: resource.align
-        )
-      end
-    end
-
-    # def employment_history
-    #   heading d('RW1wbG95bWVudCBIaXN0b3J5')
-    #   rc
-    #   fl
-    #   gw
-    #   rnt
-    #   sra
-    #   jet
-    #   satc
-    #   move_down 10
-    #   stroke_horizontal_rule { color '666666' }
-    # end
-
-    # def education_history
-    #   heading d('RWR1Y2F0aW9u')
-    #   mit
-    #   bib
-    #   ryu
-    #   tafe
-    # end
-
-    # def rc
-    #   header_text_for(:rc, 10)
-    #   organisation_logo_for(:rc)
-    #   content_for(:rc)
-    # end
-
-    # def fl
-    #   header_text_for(:fl)
-    #   organisation_logo_for(:fl, :ruby)
-    #   organisation_logo_for(:fl, :rails, 33)
-    #   content_for(:fl, 15)
-    # end
-
-    # def gw
-    #   header_text_for(:gw)
-    #   organisation_logo_for(:gw)
-    #   content_for(:gw)
-    # end
-
-    # def rnt
-    #   header_text_for(:rnt)
-    #   organisation_logo_for(:rnt)
-    #   content_for(:rnt)
-    # end
-
-    # def sra
-    #   header_text_for(:sra)
-    #   organisation_logo_for(:sra)
-    #   content_for(:sra)
-    # end
-
-    # def jet
-    #   header_text_for(:jet)
-    #   organisation_logo_for(:jet)
-    #   content_for(:jet)
-    # end
-
-    # def satc
-    #   header_text_for(:satc)
-    #   organisation_logo_for(:satc)
-    #   content_for(:satc)
-    # end
-
-    # def mit
-    #   header_text_for(:mit)
-    #   organisation_logo_for(:mit)
-    # end
-
-    # def bib
-    #   move_up 38
-    #   header_text_for(:bib, 0)
-    #   move_up 30
-    #   organisation_logo_for(:bib, :bib, 0)
-    # end
-
-    # def ryu
-    #   header_text_for(:ryu, 20)
-    #   organisation_logo_for(:ryu)
-    # end
-
-    # def tafe
-    #   move_up 38
-    #   header_text_for(:tafe, 0)
-    #   move_up 23
-    #   organisation_logo_for(:tafe, :tafe, 0)
-    # end
 
     def header_text_for(position, y_start = 15)
       entry = RESUME[:entries][position]
       move_down y_start
       return formatted_text_boxes_for(entry) if entry[:at]
       formatted_text_fields_for(entry)
-    end
-
-    def formatted_text_boxes_for(entry)
-      position_at(entry)
-      organisation_at(entry)
-      period_and_location_at(entry)
-    end
-
-    def formatted_text_fields_for(entry)
-      position(entry)
-      organisation(entry)
-      period_and_location(entry)
     end
 
     def content_for(position, start_point = 10)
@@ -180,128 +66,11 @@ module ResumeGenerator
       profile(entry[:profile])
     end
 
-    def heading(string)
-      move_down 10
-      formatted_text(
-        [
-          {
-            text: string,
-            styles: [:bold],
-            color: '666666'
-          }
-        ]
-      )
-    end
-
-    def position(entry)
-      formatted_text(
-        formatted_position(d(entry[:position]))
-      )
-    end
-
-    def position_at(entry)
-      formatted_text_box(
-        formatted_position(d(entry[:position])),
-        at: [entry[:at], cursor]
-      )
-      move_down 14
-    end
-
-    def formatted_position(string)
-      [
-        {
-          text: string,
-          styles: [:bold]
-        }
-      ]
-    end
-
-    def organisation(entry)
-      formatted_text(
-        formatted_organisation(d(entry[:organisation]))
-      )
-    end
-
-    def organisation_at(entry)
-      formatted_text_box(
-        formatted_organisation(d(entry[:organisation])),
-        at: [entry[:at], cursor]
-      )
-      move_down 13
-    end
-
-    def formatted_organisation(string)
-      [
-        {
-          text: string,
-          styles: [:bold],
-          size: 11
-        }
-      ]
-    end
-
-    def period_and_location(entry)
-      formatted_text(
-        [
-          {
-            text: d(entry[:period])
-          },
-          {
-            text: d(entry[:location][:name]),
-            link: d(entry[:location][:link])
-          }
-        ],
-        color: '666666',
-        size: 10
-      )
-    end
-
-    def period_and_location_at(entry)
-      formatted_text_box(
-        [
-          {
-            text: d(entry[:period]), color: '666666', size: 10
-          },
-          {
-            text: d(entry[:location][:name]),
-            link: d(entry[:location][:link]),
-            color: '666666', size: 10
-          }
-        ],
-        at: [entry[:at], cursor]
-      )
-    end
-
-    def organisation_logo_for(position, logo = position, start_point = 40)
-      resource = logo_resource(position, logo)
-      move_up start_point
-      bounding_box([resource.origin, cursor],
-                   width: resource.width,
-                   height: resource.height) do
-        image resource.image, fit: resource.fit, align: resource.align
-        move_up resource.move_up
-        transparent_link(resource)
-      end
-    end
-
     def logo_resource(position, logo)
       entry = RESUME[:entries][position]
       organisation_logo = entry[:logos][logo]
       organisation_logo.merge!(at: entry[:at])
       Resource.for(organisation_logo)
-    end
-
-    def summary(string)
-      text d(string)
-    end
-
-    def profile(items)
-      return unless items
-      table_data = []
-      items.each do |item|
-        table_data << ['•', d(item)]
-      end
-      table(table_data, cell_style: { borders: [] })
     end
   end
 end
