@@ -186,7 +186,7 @@ module ResumeGenerator
       entry = RESUME[:entries][position]
       move_down start_point
       summary(entry[:summary])
-      profile(entry[:profile]) if entry[:profile]
+      profile(entry[:profile])
     end
 
     def heading(string)
@@ -305,6 +305,7 @@ module ResumeGenerator
     end
 
     def profile(items)
+      return unless items
       table_data = []
       items.each do |item|
         table_data << ['•', d(item)]
