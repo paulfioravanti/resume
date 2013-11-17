@@ -1,10 +1,13 @@
 require 'json'
 require 'open-uri'
-require 'resume_entry_helper'
+require 'decodable'
+require 'sociable'
+require 'employable'
+require 'educatable'
 
 module ResumeGenerator
   module ResumeHelper
-    include ResumeEntryHelper
+    include Decodable, Sociable, Employable, Educatable
 
     RESUME =
       JSON.parse(
