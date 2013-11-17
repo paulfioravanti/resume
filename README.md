@@ -12,23 +12,13 @@ Install the gems (primarily if you want to run the specs):
 
     $ bundle install
 
-Both commands below produce the same result of my PDF resume.  The only difference is that one runs the componentised code in the `lib` directory, and the other runs just the one Ruby script, which contains all the classes and modules from `lib` in one file.
-
-Run the resume generator under the `lib` folder:
+Generate the resume:
 
     $ bin/resume
 
-Run the 'one-sheet' resume script:
-
-    $ ruby resume.rb
-
-Run the specs on the resume generator under the `lib` folder:
+Run the specs:
 
     $ rspec spec/
-
-Run the specs on the 'one-sheet' resume script:
-
-    $ rspec resume.rb
 
 ### Dependencies
 
