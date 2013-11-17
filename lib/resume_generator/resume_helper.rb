@@ -1,7 +1,7 @@
 require 'json'
 require 'open-uri'
 require 'social_media_helper'
-require 'employment_history_helper'
+require 'resume_history_helper'
 
 module ResumeGenerator
   module ResumeHelper
