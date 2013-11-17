@@ -6,7 +6,7 @@ module ResumeGenerator
       gw:
         '',
       rnt:
-        'http://farm8.staticflickr.com/7326/8801904137_e6008ee907_m.jpg',
+        '',
       sra:
         'http://farm4.staticflickr.com/3801/8801903945_723a5d7276_m.jpg',
       jet:

@@ -6,7 +6,7 @@
 
 #     LOCATIONS = {
 #       gw: '',
-#       rnt: 'VG9reW8sIEphcGFu',
+#       rnt: '',
 #       sra: 'VG9reW8sIEphcGFu',
 #       jet: 'S29jaGksIEphcGFu',
 #       satc: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',

@@ -3,7 +3,6 @@
 # module ResumeGenerator
 #   class Logo
 #     LOGO_CONFIG = {
-#       gw:    [Resource.for('gw'), 415, 118, 39, [110, 40], 32, 11, 41],
 #       rnt:   [Resource.for('rnt'), 435, 80, 40, [110, 40], 40, 7, 43],
 #       sra:   [Resource.for('sra'), 415, 115, 40, [110, 40], 40, 10, 43],
 #       jet:   [Resource.for('jet'), 435, 75, 35, [110, 35], 34, 8, 36],

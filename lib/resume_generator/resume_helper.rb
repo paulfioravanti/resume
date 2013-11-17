@@ -108,7 +108,7 @@ module ResumeGenerator
       rc
       fl
       gw
-      # rnt
+      rnt
       # sra
       # jet
       # satc
@@ -139,6 +139,12 @@ module ResumeGenerator
       header_text_for(:gw, 15)
       organisation_logo(:gw, 40)
       content_for(:gw, 10)
+    end
+
+    def rnt
+      header_text_for(:rnt, 15)
+      organisation_logo(:rnt, 40)
+      content_for(:rnt, 10)
     end
 
     def header_text_for(position, start_point)
@@ -278,56 +284,6 @@ module ResumeGenerator
       end
       table(table_data, cell_style: { borders: [] })
     end
-
-    # def rnt
-    #   move_down 15
-    #   position_header(
-    #     position: { title: "SW1wbGVtZW50YXRpb24gQ29uc3VsdGFudCwgUHJvZmVzc2lvbmFsIFNlcn"\
-    #                 "ZpY2Vz" },
-    #     organisation: { name: 'UmlnaHQgTm93IFRlY2hub2xvZ2llcw==' },
-    #     period: 'SnVseSAyMDA3IOKAkyBBdWd1c3QgMjAwOCB8ICA=',
-    #     location: 'VG9reW8sIEphcGFu',
-    #     location_link: 'rnt_location'
-    #   )
-
-    #   move_up 40
-    #   organisation_logo(
-    #     organisation: 'rnt',
-    #     origin: 435,
-    #     width: 80,
-    #     height: 40,
-    #     fit: [110, 40],
-    #     move_up: 40,
-    #     bars: 7,
-    #     size: 43
-    #   )
-
-    #   move_down 10
-    #   text d "T24gYW5kIG9mZi1zaXRlIGN1c3RvbWVyIGltcGxlbWVudGF0aW9ucyBvZiBSaW"\
-    #          "dodCBOb3cgQ2xvdWQgQ1JNIHByb2R1Y3Qu"
-
-    #   bullet_list(
-    #     "Q29uZmlybSBoaWdoLWxldmVsIGJ1c2luZXNzIHJlcXVpcmVtZW50cyBmZWFzaWJpbGl"\
-    #       "0eSB3aXRoIHByZS1zYWxlcyB0ZWFt",
-    #     "RG9jdW1lbnRhdGlvbjogcHJvamVjdCBjaGFydGVyLCBzY29wZSwgc2NoZWR1bGVzLCB"\
-    #       "hbmQgdGVjaG5pY2FsIGRlc2lnbiBvZiBjdXN0b21pemF0aW9ucw==",
-    #     "Q29uZHVjdCBpbmNlcHRpb24gcGhhc2UgcmVxdWlyZW1lbnRzIHdvcmtzaG9wcyBmb3I"\
-    #       "gYnVzaW5lc3MgcHJvY2Vzc2VzLCB3b3JrZmxvd3MsIGFuZCBwcm9kdWN0IGltcGxl"\
-    #       "bWVudGF0aW9uOyBkZXRlcm1pbmUgcG9zc2libGUgb3V0LW9mLXNjb3BlIGNoYW5nZ"\
-    #       "SByZXF1ZXN0cyBhcyBuZWVkZWQ=",
-    #     "Q29uZmlndXJlIGFuZCBzZXR1cCBwcm9kdWN0IHRlc3QgZW52aXJvbm1lbnQgZm9yIGN"\
-    #       "saWVudCB0byB0cmFjayBwcm9qZWN0IHByb2dyZXNz",
-    #     "TWFuYWdlLCBRQSwgYW5kIGxvY2FsaXplIGN1c3RvbWl6YXRpb24gd29yayBwZXJmb3J"\
-    #       "tZWQgYnkgZW5naW5lZXJz",
-    #     'RG9jdW1lbnQgYW5kIGV4ZWN1dGUgb24tc2l0ZSBVQVQgYW5kIHRyYWluaW5n',
-    #     "UHJlcGFyZSBhbmQgZXhlY3V0ZSDigJxzaXRlIGdvLWxpdmXigJ0sIGFuYWx5emUgcml"\
-    #       "za3MsIHByZXBhcmUgZmFsbGJhY2sgcGxhbnM=",
-    #     "V29yayB3aXRoIGN1c3RvbWVyIHN1cHBvcnQgdG8gaGFuZGxlIGltcGxlbWVudGF0aW9"\
-    #       "uLXJlbGF0ZWQgc3VwcG9ydCBpbmNpZGVudHM=",
-    #     "SG9zdCwgbGluZ3Vpc3RpY2FsbHkgc3VwcG9ydCwgYW5kIGhhbmRsZSBKYXBhbiBpbW1"\
-    #       "pZ3JhdGlvbiBvZiBvdmVyc2VhcyBwcm9qZWN0IG1lbWJlcnM="
-    #   )
-    # end
 
     # def sra
     #   move_down 15

@@ -6,7 +6,7 @@
 
 #     NAMES = {
 #       gw: '',
-#       rnt: 'SW1wbGVtZW50YXRpb24gQ29uc3VsdGFudCwgUHJvZmVzc2lvbmFsIFNlcnZpY2Vz',
+#       rnt: '',
 #       sra: 'U29mdHdhcmUgRW5naW5lZXI=',
 #       jet: 'Q29vcmRpbmF0b3Igb2YgSW50ZXJuYXRpb25hbCBSZWxhdGlvbnMgKENJUik=',
 #       satc: "SW50ZXJuYXRpb25hbCBNYXJrZXRpbmcgQXNzaXN0YW50IOKAkyBBc2lhIGFu"\

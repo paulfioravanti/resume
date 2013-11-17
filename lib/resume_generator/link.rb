@@ -5,23 +5,6 @@ module ResumeGenerator
     extend Decodable
 
     LINK_BANK = {
-      rnt:
-        "aHR0cDovL3d3dy5vcmFjbGUuY29tL3VzL3Byb2R1Y3RzL2FwcGxpY2F0aW9uc"\
-          "y9yaWdodG5vdy9vdmVydmlldy9pbmRleC5odG1s",
-      rnt_location:
-        "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9mPXEmc291cmNlPXNfcSZob"\
-          "D1lbiZnZW9jb2RlPSZxPSVFMyU4MCU5MjEwNS02MDI3JUU2JTlEJUIxJUU0JU"\
-          "JBJUFDJUU5JTgzJUJEJUU2JUI4JUFGJUU1JThDJUJBJUU4JTk5JThFJUUzJTg"\
-          "zJThFJUU5JTk2JTgwNC0zLTErJUU1JTlGJThFJUU1JUIxJUIxJUUzJTgzJTg4"\
-          "JUUzJTgzJUE5JUUzJTgyJUI5JUUzJTgzJTg4JUUzJTgyJUJGJUUzJTgzJUFGJ"\
-          "UUzJTgzJUJDKzI3JUU5JTlBJThFJmFxPSZzbGw9MzUuNjY0Njg4LDEzOS43ND"\
-          "MzMDQmc3Nwbj0wLjAyODE3MiwwLjAzNTc5MSZ2cHNyYz02JmllPVVURjgmaHE"\
-          "9JmhuZWFyPUphcGFuLCtUJUM1JThEa3klQzUlOEQtdG8sK01pbmF0by1rdSwr"\
-          "VG9yYW5vbW9uLCslRUYlQkMlOTQlRTQlQjglODElRTclOUIlQUUlRUYlQkMlO"\
-          "TMlRTIlODglOTIlRUYlQkMlOTErJUU1JTlGJThFJUU1JUIxJUIxJUUzJTgzJT"\
-          "g4JUUzJTgzJUE5JUUzJTgyJUI5JUUzJTgzJTg4JUUzJTgyJUJGJUUzJTgzJUF"\
-          "GJUUzJTgzJUJDJmxsPTM1LjY2NDY4OCwxMzkuNzQzMjYxJnNwbj0wLjAyODE3"\
-          "MiwwLjAzNTc5MSZ0PW0mej0xNSZpd2xvYz1B",
       sra:
         'aHR0cDovL3d3dy5zcmEuY28uanAvaW5kZXgtZW4uc2h0bWw=',
       sra_location:
