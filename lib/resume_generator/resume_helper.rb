@@ -277,10 +277,7 @@ module ResumeGenerator
     end
 
     def organisation_logo_for(position, logo = position, start_point = 40)
-      entry = RESUME[:entries][position]
-      position_logo = entry[:logos][logo]
-      position_logo.merge!(at: entry[:at]) if entry[:at]
-      resource = Resource.for(position_logo)
+      resource = logo_resource(position, logo)
       move_up start_point
       bounding_box([resource.origin, cursor],
                    width: resource.width,
@@ -289,6 +286,13 @@ module ResumeGenerator
         move_up resource.move_up
         transparent_link(resource)
       end
+    end
+
+    def logo_resource(position, logo)
+      entry = RESUME[:entries][position]
+      organisation_logo = entry[:logos][logo]
+      organisation_logo.merge!(at: entry[:at]) if entry[:at]
+      Resource.for(organisation_logo)
     end
 
     def summary(string)
