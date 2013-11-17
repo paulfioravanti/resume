@@ -113,38 +113,38 @@ module ResumeGenerator
 
     def rc
       header_text_for(:rc, 10)
-      organisation_logo_for(:rc)
+      organisation_logo_for(:rc, 40)
       content_for(:rc)
     end
 
     def fl
       header_text_for(:fl)
-      organisation_logo_for(:fl, :ruby)
+      organisation_logo_for(:fl, :ruby, 40)
       organisation_logo_for(:fl, :rails, 33)
       content_for(:fl, 15)
     end
 
     def gw
       header_text_for(:gw)
-      organisation_logo_for(:gw)
+      organisation_logo_for(:gw, 40)
       content_for(:gw)
     end
 
     def rnt
       header_text_for(:rnt)
-      organisation_logo_for(:rnt)
+      organisation_logo_for(:rnt, 40)
       content_for(:rnt)
     end
 
     def sra
       header_text_for(:sra)
-      organisation_logo_for(:sra)
+      organisation_logo_for(:sra, 40)
       content_for(:sra)
     end
 
     def jet
       header_text_for(:jet)
-      organisation_logo_for(:jet)
+      organisation_logo_for(:jet, 40)
       content_for(:jet)
     end
 
@@ -255,7 +255,7 @@ module ResumeGenerator
       )
     end
 
-    def organisation_logo_for(position, logo = position, start_point = 40)
+    def organisation_logo_for(position, logo = position, start_point)
       resource = Resource.for(RESUME[:entries][position][:logos][logo])
       move_up start_point
       bounding_box([resource.origin, cursor],
