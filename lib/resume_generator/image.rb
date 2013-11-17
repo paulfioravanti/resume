@@ -8,7 +8,7 @@ module ResumeGenerator
       rnt:
         '',
       sra:
-        'http://farm4.staticflickr.com/3801/8801903945_723a5d7276_m.jpg',
+        '',
       jet:
         'http://farm4.staticflickr.com/3690/8801904135_37197a468c_m.jpg',
       satc:

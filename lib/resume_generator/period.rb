@@ -7,7 +7,7 @@
 #     PERIODS = {
 #       gw: '',
 #       rnt: '',
-#       sra: 'QXByaWwgMjAwNiDigJMgSnVuZSAyMDA3IHwgIA==',
+#       sra: '',
 #       jet: 'SnVseSAyMDAxIOKAkyBKdWx5IDIwMDQgfCAg',
 #       satc: 'TWF5IDIwMDAg4oCTIE1heSAyMDAxIHwgIA==',
 #       mit: 'MjAwNC0yMDA1IHw=',
