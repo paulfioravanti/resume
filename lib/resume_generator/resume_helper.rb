@@ -163,18 +163,23 @@ module ResumeGenerator
       organisation_logo_for(:bib, :bib, 0)
     end
 
-    def header_text_for(position, start_point = 15)
+    def header_text_for(position, y_start = 15)
       entry = RESUME[:entries][position]
-      move_down start_point
-      if entry[:at]
-        position_at(entry)
-        organisation_at(entry)
-        period_and_location_at(entry)
-      else
-        position(entry)
-        organisation(entry)
-        period_and_location(entry)
-      end
+      move_down y_start
+      return formatted_text_boxes_for(entry) if entry[:at]
+      formatted_text_fields_for(entry)
+    end
+
+    def formatted_text_boxes_for(entry)
+      position_at(entry)
+      organisation_at(entry)
+      period_and_location_at(entry)
+    end
+
+    def formatted_text_fields_for(entry)
+      position(entry)
+      organisation(entry)
+      period_and_location(entry)
     end
 
     def content_for(position, start_point = 10)
@@ -291,7 +296,7 @@ module ResumeGenerator
     def logo_resource(position, logo)
       entry = RESUME[:entries][position]
       organisation_logo = entry[:logos][logo]
-      organisation_logo.merge!(at: entry[:at]) if entry[:at]
+      organisation_logo.merge!(at: entry[:at])
       Resource.for(organisation_logo)
     end
 
