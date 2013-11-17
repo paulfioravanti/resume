@@ -14,14 +14,6 @@ module ResumeGenerator
       stroke_horizontal_rule { color '666666' }
     end
 
-    # def social_media_resources
-    #   properties = RESUME[:social_media][:properties]
-    #   RESUME[:social_media][:resources].values.map do |social_medium|
-    #     social_medium.merge!(properties)
-    #     Resource.for(social_medium)
-    #   end
-    # end
-
     def social_media_icon_for(resource, x_position)
       bounding_box([x_position, cursor], width: resource.width) do
         image(
