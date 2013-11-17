@@ -69,25 +69,20 @@ module ResumeGenerator
           align: resource.align
         )
         move_up 35
-        transparent_link(
-          bars: resource.bars,
-          size: resource.size,
-          link: resource.link,
-          align: resource.align
-        )
+        transparent_link(resource)
       end
     end
 
-    def transparent_link(options)
+    def transparent_link(resource)
       transparent(0) do
         formatted_text(
           [
             {
-              text: '|' * options[:bars],
-              size: options[:size],
-              link: options[:link]
+              text: '|' * resource.bars,
+              size: resource.size,
+              link: resource.link
             }
-          ], align: options[:align]
+          ], align: resource.align
         )
       end
     end
@@ -256,23 +251,14 @@ module ResumeGenerator
     end
 
     def organisation_logo_for(position, logo = position, start_point = 40)
-      move_up start_point
-      bounding_box_for(position, logo)
-    end
-
-    def bounding_box_for(position, logo)
       resource = Resource.for(RESUME[:entries][position][:logos][logo])
+      move_up start_point
       bounding_box([resource.origin, cursor],
                    width: resource.width,
                    height: resource.height) do
         image resource.image, fit: resource.fit, align: resource.align
         move_up resource.move_up
-        transparent_link(
-          bars: resource.bars,
-          size: resource.size,
-          link: resource.link,
-          align: resource.align
-        )
+        transparent_link(resource)
       end
     end
 
