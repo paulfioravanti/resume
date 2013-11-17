@@ -21,29 +21,18 @@ module ResumeGenerator
     private
 
     def name
-      formatted_name(d(RESUME[:name]))
-    end
-
-    def formatted_name(name)
-      font('Times-Roman', size: 20) { text name }
+      font('Times-Roman', size: 20) { text d(RESUME[:name]) }
     end
 
     def headline
       headline = RESUME[:headline]
-      formatted_headline(
-        d(headline[:ruby]),
-        d(headline[:other])
-      )
-    end
-
-    def formatted_headline(ruby, rest)
       formatted_text(
         [
           {
-            text: ruby, color: '85200C'
+            text: d(headline[:ruby]), color: '85200C'
           },
           {
-            text: rest
+            text: d(headline[:other])
           }
         ],
         size: 14
