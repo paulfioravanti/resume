@@ -1,11 +1,10 @@
 require 'json'
 require 'open-uri'
-require 'social_media_helper'
 require 'resume_entry_helper'
 
 module ResumeGenerator
   module ResumeHelper
-    include SocialMediaHelper, ResumeEntryHelper
+    include ResumeEntryHelper
 
     RESUME =
       JSON.parse(
