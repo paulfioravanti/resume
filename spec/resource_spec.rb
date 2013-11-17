@@ -67,6 +67,5 @@ describe Resource do
     it 'has an at ' do
       expect(resource.at).to eq(280)
     end
-
   end
 end
