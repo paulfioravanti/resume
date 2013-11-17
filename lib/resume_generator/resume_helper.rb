@@ -110,7 +110,7 @@ module ResumeGenerator
       gw
       rnt
       sra
-      # jet
+      jet
       # satc
     end
 
@@ -124,33 +124,39 @@ module ResumeGenerator
 
     def rc
       header_text_for(:rc, 10)
-      organisation_logo(:rc)
+      organisation_logo_for(:rc)
       content_for(:rc)
     end
 
     def fl
       header_text_for(:fl)
-      organisation_logo(:fl, :ruby)
-      organisation_logo(:fl, :rails, 33)
+      organisation_logo_for(:fl, :ruby)
+      organisation_logo_for(:fl, :rails, 33)
       content_for(:fl, 15)
     end
 
     def gw
       header_text_for(:gw)
-      organisation_logo(:gw)
+      organisation_logo_for(:gw)
       content_for(:gw)
     end
 
     def rnt
       header_text_for(:rnt)
-      organisation_logo(:rnt)
+      organisation_logo_for(:rnt)
       content_for(:rnt)
     end
 
     def sra
       header_text_for(:sra)
-      organisation_logo(:sra)
+      organisation_logo_for(:sra)
       content_for(:sra)
+    end
+
+    def jet
+      header_text_for(:jet)
+      organisation_logo_for(:jet)
+      content_for(:jet)
     end
 
     def header_text_for(position, start_point = 15)
@@ -260,7 +266,7 @@ module ResumeGenerator
       )
     end
 
-    def organisation_logo(position, logo = position, start_point = 40)
+    def organisation_logo_for(position, logo = position, start_point = 40)
       resource = Resource.for(RESUME[:entries][position][:logos][logo])
       move_up start_point
       bounding_box([resource.origin, cursor],
@@ -290,66 +296,6 @@ module ResumeGenerator
       end
       table(table_data, cell_style: { borders: [] })
     end
-
-    # def sra
-    #   move_down 15
-    #   position_header(
-    #     position: { title: 'U29mdHdhcmUgRW5naW5lZXI=' },
-    #     organisation: { name: 'U29mdHdhcmUgUmVzZWFyY2ggQXNzb2NpYXRlcyAoU1JBKQ==' },
-    #     period: 'QXByaWwgMjAwNiDigJMgSnVuZSAyMDA3IHwgIA==',
-    #     location: 'VG9reW8sIEphcGFu',
-    #     location_link: 'sra_location'
-    #   )
-
-    #   move_up 40
-    #   organisation_logo(
-    #     organisation: 'sra',
-    #     origin: 415,
-    #     width: 115,
-    #     height: 40,
-    #     fit: [110, 40],
-    #     move_up: 40,
-    #     bars: 10,
-    #     size: 43
-    #   )
-
-    #   move_down 10
-    #   text d "Q3VzdG9tIHNvZnR3YXJlIGRldmVsb3BtZW50IGluIHNtYWxsIHRlYW1zOyBkZX"\
-    #          "NpZ24sIGNvZGluZywgdGVzdGluZywgZG9jdW1lbnRhdGlvbiwgZGVwbG95bWVu"\
-    #          "dDsgaW50ZXJuYWwgc3lzdGVtIGFkbWluaXN0cmF0aW9uIGR1dGllcy4gIERldm"\
-    #          "Vsb3BtZW50IHByZWRvbWluYW50bHkgZG9uZSB1c2luZyBQdXJlIFJ1YnkvUnVi"\
-    #          "eSBvbiBSYWlscyBpbiBzbWFsbCB0ZWFtcyBvZiAyLTMgcGVvcGxlLg=="
-    # end
-
-    # def jet
-    #   move_down 15
-    #   position_header(
-    #     position: { title: 'Q29vcmRpbmF0b3Igb2YgSW50ZXJuYXRpb25hbCBSZWxhdGlvbnMgKENJUik=' },
-    #     organisation: { name: "SmFwYW4gRXhjaGFuZ2UgYW5kIFRlYWNoaW5nIFByb2dyYW1tZSAoSkVU"\
-    #               "KQ==" },
-    #     period: 'SnVseSAyMDAxIOKAkyBKdWx5IDIwMDQgfCAg',
-    #     location: 'S29jaGksIEphcGFu',
-    #     location_link: 'jet_location'
-    #   )
-
-    #   move_up 40
-    #   organisation_logo(
-    #     organisation: 'jet',
-    #     origin: 435,
-    #     width: 75,
-    #     height: 35,
-    #     fit: [110, 35],
-    #     move_up: 34,
-    #     bars: 8,
-    #     size: 36
-    #   )
-
-    #   move_down 13
-    #   text d "VHJhbnNsYXRpb24vaW50ZXJwcmV0aW5nOyBncmFzcy1yb290cyBjb21tdW5pdH"\
-    #          "kgYWN0aXZpdGllcyBhbmQgam91cm5hbGlzbTsgcGxhbm5pbmcvaW1wbGVtZW50"\
-    #          "aW5nIGludGVybmF0aW9uYWwgZXhjaGFuZ2UgcHJvamVjdHM7IGluYm91bmQgZ3"\
-    #          "Vlc3QgaG9zcGl0YWxpdHk7IG91dGJvdW5kIHRvdXItZ3VpZGluZw=="
-    # end
 
     # def satc
     #   move_down 15

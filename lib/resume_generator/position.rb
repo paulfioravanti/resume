@@ -8,7 +8,7 @@
 #       gw: '',
 #       rnt: '',
 #       sra: '',
-#       jet: 'Q29vcmRpbmF0b3Igb2YgSW50ZXJuYXRpb25hbCBSZWxhdGlvbnMgKENJUik=',
+#       jet: '',
 #       satc: "SW50ZXJuYXRpb25hbCBNYXJrZXRpbmcgQXNzaXN0YW50IOKAkyBBc2lhIGFu"\
 #               "ZCBKYXBhbg==",
 #       mit: 'TWFzdGVycyBvZiBJbmZvcm1hdGlvbiBUZWNobm9sb2d5',
