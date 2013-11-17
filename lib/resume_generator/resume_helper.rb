@@ -104,7 +104,7 @@ module ResumeGenerator
       heading d('RWR1Y2F0aW9u')
       mit
       bib
-    #   ryu
+      ryu
     #   tafe
     end
 
@@ -161,6 +161,11 @@ module ResumeGenerator
       header_text_for(:bib, 0)
       move_up 30
       organisation_logo_for(:bib, :bib, 0)
+    end
+
+    def ryu
+      header_text_for(:ryu, 20)
+      organisation_logo_for(:ryu)
     end
 
     def header_text_for(position, y_start = 15)

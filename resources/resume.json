@@ -309,6 +309,29 @@
           }
         },
         "at": 280
+      },
+      "ryu": {
+        "position": "U3R1ZGVudCBFeGNoYW5nZSBQcm9ncmFtbWU=",
+        "organisation": "Unl1a29rdSBVbml2ZXJzaXR5",
+        "period": "U2VwIDE5OTkgLSBGZWIgMjAwMCB8",
+        "location": {
+          "name": "S3lvdG8sIEphcGFu",
+          "link": "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZobD1lbiZnZW9jb2RlPSZxPSVFNCVCQSVBQyVFOSU4MyVCRCVFNSVCQSU5QyVFNCVCQSVBQyVFOSU4MyVCRCVFNSVCOCU4MiVFNCVCQyU4RiVFOCVBNiU4QiVFNSU4QyVCQSVFNiVCNyVCMSVFOCU4RCU4OSVFNSVBMSU5QSVFNiU5QyVBQyVFNyU5NCVCQSVFRiVCQyU5NiVFRiVCQyU5NyZhcT0mc2xsPS0zNS4wMTY3ODIsMTM4LjU2Nzk4MiZzc3BuPTAuMDU2Nzk4LDAuMDcxNTgzJnZwc3JjPTYmZz1TdHVydCtSZCwrQmVkZm9yZCtQYXJrK1NvdXRoK0F1c3RyYWxpYSs1MDQyJmllPVVURjgmaHE9JmhuZWFyPUphcGFuLCtLeSVDNSU4RHRvLWZ1LCtLeSVDNSU4RHRvLXNoaSwrRnVzaGltaS1rdSwrRnVrYWt1c2ErVHN1a2Ftb3RvY2glQzUlOEQsKyVFRiVCQyU5NiVFRiVCQyU5NyZsbD0zNC45NjM5NzQsMTM1Ljc2Nzk3JnNwbj0wLjAwNzEwNCwwLjAwODk0OCZ0PW0mej0xNyZpd2xvYz1B"
+        },
+        "logos": {
+          "ryu": {
+            "image": "http://farm8.staticflickr.com/7428/8812488856_c4c1b1f418_m.jpg",
+            "link": "aHR0cDovL3d3dy5yeXVrb2t1LmFjLmpwL2VuZ2xpc2gyL2luZGV4LnBocA==",
+            "origin": 214,
+            "width": 32,
+            "height": 40,
+            "fit": [32, 40],
+            "move_up": 40,
+            "bars": 3,
+            "size": 40,
+            "align": "left"
+          }
+        }
       }
     }
   }
