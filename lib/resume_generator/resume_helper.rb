@@ -95,16 +95,18 @@ module ResumeGenerator
       rnt
       sra
       jet
-      # satc
+      satc
+      move_down 10
+      stroke_horizontal_rule { color '666666' }
     end
 
-    # def education_history
+    def education_history
     #   heading 'RWR1Y2F0aW9u'
     #   mit
     #   bib
     #   ryu
     #   tafe
-    # end
+    end
 
     def rc
       header_text_for(:rc, 10)
@@ -141,6 +143,12 @@ module ResumeGenerator
       header_text_for(:jet)
       organisation_logo_for(:jet)
       content_for(:jet)
+    end
+
+    def satc
+      header_text_for(:satc)
+      organisation_logo_for(:satc)
+      content_for(:satc)
     end
 
     def header_text_for(position, start_point = 15)
@@ -273,38 +281,6 @@ module ResumeGenerator
       end
       table(table_data, cell_style: { borders: [] })
     end
-
-    # def satc
-    #   move_down 15
-    #   position_header(
-    #     position: { title: "SW50ZXJuYXRpb25hbCBNYXJrZXRpbmcgQXNzaXN0YW50IOKAkyBBc2lhIGFu"\
-    #                 "ZCBKYXBhbg==" },
-    #     organisation: { name: 'U291dGggQXVzdHJhbGlhbiBUb3VyaXNtIENvbW1pc3Npb24=' },
-    #     period: 'TWF5IDIwMDAg4oCTIE1heSAyMDAxIHwgIA==',
-    #     location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
-    #     location_link: 'satc_location'
-    #   )
-
-    #   move_up 40
-    #   organisation_logo(
-    #     organisation: 'satc',
-    #     origin: 430,
-    #     width: 90,
-    #     height: 40,
-    #     fit: [110, 40],
-    #     move_up: 40,
-    #     bars: 8,
-    #     size: 43
-    #   )
-
-    #   move_down 10
-    #   text d "QXNzaXN0IHdpdGggdGhlIHByb21vdGlvbi9tYXJrZXRpbmcgb2YgU291dGggQX"\
-    #          "VzdHJhbGlhIGFzIGEgdG91cmlzbSBkZXN0aW5hdGlvbiB0byBBc2lhIGFuZCBK"\
-    #          "YXBhbi4="
-
-    #   move_down 10
-    #   stroke_horizontal_rule { color '666666' }
-    # end
 
     # def mit
     #   move_down 15

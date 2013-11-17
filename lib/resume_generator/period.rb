@@ -5,11 +5,6 @@
 #     extend Decodable
 
 #     PERIODS = {
-#       gw: '',
-#       rnt: '',
-#       sra: '',
-#       jet: '',
-#       satc: 'TWF5IDIwMDAg4oCTIE1heSAyMDAxIHwgIA==',
 #       mit: 'MjAwNC0yMDA1IHw=',
 #       bib: 'MTk5Ny0xOTk5IHw=',
 #       ryu: 'U2VwIDE5OTkgLSBGZWIgMjAwMCB8',

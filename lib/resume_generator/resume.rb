@@ -30,8 +30,8 @@ module ResumeGenerator
 
         employment_history
 
-        # CLI.report('Creating education history section...')
-        # education_history
+        CLI.report('Creating education history section...')
+        education_history
       end
     end
   end
