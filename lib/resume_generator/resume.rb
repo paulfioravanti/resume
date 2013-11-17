@@ -1,5 +1,4 @@
 require 'resume_helper'
-require 'decodable'
 
 module ResumeGenerator
   class Resume
