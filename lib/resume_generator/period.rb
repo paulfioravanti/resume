@@ -5,7 +5,7 @@
 #     extend Decodable
 
 #     PERIODS = {
-#       mit: 'MjAwNC0yMDA1IHw=',
+#       mit: '',
 #       bib: 'MTk5Ny0xOTk5IHw=',
 #       ryu: 'U2VwIDE5OTkgLSBGZWIgMjAwMCB8',
 #       tafe: 'TWF5IDIwMDAgLSBNYXkgMjAwMSB8'

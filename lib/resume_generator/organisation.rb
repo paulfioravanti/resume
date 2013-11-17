@@ -5,7 +5,7 @@
 #     extend Decodable
 
 #     NAMES = {
-#       mit: 'VW5pdmVyc2l0eSBvZiBTb3V0aCBBdXN0cmFsaWE=',
+#       mit: '',
 #       bib: 'RmxpbmRlcnMgVW5pdmVyc2l0eQ==',
 #       ryu: 'Unl1a29rdSBVbml2ZXJzaXR5',
 #       tafe: 'QWRlbGFpZGUgVEFGRQ=='

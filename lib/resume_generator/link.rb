@@ -5,16 +5,6 @@ module ResumeGenerator
     extend Decodable
 
     LINK_BANK = {
-      mit:
-        'aHR0cHM6Ly93d3cudW5pc2EuZWR1LmF1Lw==',
-      mit_location:
-        "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfc"\
-          "SZobD1lbiZnZW9jb2RlPSZxPTU1K05vcnRoK1RlcnJhY2UsK0FkZWxhaWRlK1"\
-          "NBKzUwMDAmc2xsPS0zNC45NjE2OTIsMTM4LjYyMTM5OSZzc3BuPTAuMDU2ODM"\
-          "2LDAuMDcxNTgzJnZwc3JjPTYmaWU9VVRGOCZocT0maG5lYXI9NTUrTm9ydGgr"\
-          "VGVycmFjZSwrQWRlbGFpZGUsK1NvdXRoK0F1c3RyYWxpYSs1MDAwJmxsPS0zN"\
-          "C45MjIxODIsMTM4LjU5MDg1NiZzcG49MC4wMjg0MzIsMC4wMzU3OTEmdD1tJn"\
-          "o9MTUmaXdsb2M9QQ==",
       bib:
         'aHR0cDovL3d3dy5mbGluZGVycy5lZHUuYXUv',
       bib_location:

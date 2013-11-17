@@ -101,8 +101,8 @@ module ResumeGenerator
     end
 
     def education_history
-    #   heading 'RWR1Y2F0aW9u'
-    #   mit
+      heading d('RWR1Y2F0aW9u')
+      mit
     #   bib
     #   ryu
     #   tafe
@@ -149,6 +149,11 @@ module ResumeGenerator
       header_text_for(:satc)
       organisation_logo_for(:satc)
       content_for(:satc)
+    end
+
+    def mit
+      header_text_for(:mit)
+      organisation_logo_for(:mit)
     end
 
     def header_text_for(position, start_point = 15)
@@ -281,29 +286,6 @@ module ResumeGenerator
       end
       table(table_data, cell_style: { borders: [] })
     end
-
-    # def mit
-    #   move_down 15
-    #   position_header(
-    #     position: { title: 'TWFzdGVycyBvZiBJbmZvcm1hdGlvbiBUZWNobm9sb2d5' },
-    #     organisation: { name: 'VW5pdmVyc2l0eSBvZiBTb3V0aCBBdXN0cmFsaWE=' },
-    #     period: 'MjAwNC0yMDA1IHw=',
-    #     location: 'QWRlbGFpZGUsIEF1c3RyYWxpYQ==',
-    #     location_link: 'mit_location'
-    #   )
-
-    #   move_up 40
-    #   organisation_logo(
-    #     organisation: 'mit',
-    #     origin: 210,
-    #     width: 35,
-    #     height: 40,
-    #     fit: [35, 40],
-    #     move_up: 35,
-    #     bars: 3,
-    #     size: 43
-    #   )
-    # end
 
     # def bib
     #   move_up 38

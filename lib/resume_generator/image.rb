@@ -3,8 +3,6 @@ require 'open-uri'
 module ResumeGenerator
   class Image
     IMAGE_BANK = {
-      mit:
-        'http://farm4.staticflickr.com/3792/8812488692_96818be468_m.jpg',
       bib:
         'http://farm4.staticflickr.com/3707/8812488974_71c6981155_m.jpg',
       ryu:
