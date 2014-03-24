@@ -21,8 +21,8 @@ module ResumeGenerator
     private
 
     def check_ability_to_generate_resume
-      return if required_gem_available?('prawn', '1.0.0.rc2')
-      print yellow "May I please install version 1.0.0.rc2 of the 'Prawn'\n"\
+      return if required_gem_available?('prawn', '1.0.0')
+      print yellow "May I please install version 1.0.0 of the 'Prawn'\n"\
                    "Ruby gem to help me generate a PDF (Y/N)? "
       if permission_granted?
         install_gem
@@ -73,9 +73,9 @@ module ResumeGenerator
 
     def install_gem
       puts green 'Thank you kindly :-)'
-      puts 'Installing Prawn gem version 1.0.0.rc2...'
+      puts 'Installing Prawn gem version 1.0.0...'
       begin
-        system('gem install prawn -v 1.0.0.rc2')
+        system('gem install prawn -v 1.0.0')
         puts green 'Prawn gem successfully installed.'
         Gem.clear_paths # Reset the dir and path values so Prawn can be required
       rescue
