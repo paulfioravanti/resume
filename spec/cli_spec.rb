@@ -8,7 +8,7 @@ describe CLI do
 
   before do
     allow(cli).to receive(:gets).and_return(user_input)
-    allow(cli).to receive(:system).and_return # stub out `gem install ...`
+    allow(cli).to receive(:system) # stub out `gem install ...`
   end
 
   describe '.report' do

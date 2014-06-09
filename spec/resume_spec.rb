@@ -19,7 +19,7 @@ describe Resume do
     after { File.delete(filename) }
 
     it 'generates a pdf resume' do
-      expect(File.exist?(filename)).to be_true
+      expect(File.exist?(filename)).to be true
     end
   end
 
