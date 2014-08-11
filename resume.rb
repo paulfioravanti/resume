@@ -541,6 +541,7 @@ if __FILE__ == $0
 end
 
 module ResumeGenerator
+  # TODO: Upgrade to RSpec 3
   gem 'rspec', '2.14.1'
   require 'rspec'
 
@@ -826,6 +827,7 @@ module ResumeGenerator
   end
 
   describe Resume do
+    gem 'prawn', '1.0.0'
     require 'prawn'
 
     # Link points to a 1x1 pixel placeholder to not slow down test suite
