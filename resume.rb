@@ -556,6 +556,7 @@ module ResumeGenerator
     before do
       allow(cli).to receive(:gets).and_return(user_input)
       allow(cli).to receive(:system) # stub out `gem install ...`
+      allow($stdout).to receive(:write)
     end
 
     describe '.report' do
@@ -711,7 +712,9 @@ module ResumeGenerator
     end
 
     describe 'generating the PDF' do
-      before { allow(cli).to receive(:require).with('prawn') }
+      before do
+        allow(cli).to receive(:require).with('prawn')
+      end
 
       it 'tells the PDF to generate itself' do
         expect(Resume).to receive(:generate)
@@ -720,12 +723,22 @@ module ResumeGenerator
     end
 
     describe 'post-PDF generation' do
+      let(:cleaning_up) do
+        -> { cli.send(:clean_up) }
+      end
+      let(:message) do
+        Regexp.escape(
+          green("Resume generated successfully.") << "\n" <<
+          yellow("Would you like me to open the resume for you (Y/N)? ") <<
+          cyan(
+            "Thanks for looking at my resume. "\
+            "I hope to hear from you soon!"
+          ) << "\n"
+        )
+      end
+
       it 'shows a success message and asks to open the resume' do
-        # expect puts twice as it includes the printed message you get
-        # regardless of whether you allow the script to open resume or not
-        expect(cli).to receive(:puts).twice
-        expect(cli).to receive(:print)
-        cli.send(:clean_up)
+        expect(cleaning_up).to output(/#{message}/).to_stdout
       end
 
       context 'user allows the script to open the PDF' do
@@ -768,12 +781,22 @@ module ResumeGenerator
         end
 
         context 'user is on an unknown operating system' do
+          let(:cleaning_up) do
+            -> { cli.send(:clean_up) }
+          end
+          let(:message) do
+            Regexp.escape(
+              yellow(
+               "Sorry, I can't figure out how to open the resume on\n"\
+               "this computer. Please open it yourself."
+              ) << "\n"
+            )
+          end
+
           before { stub_const('RUBY_PLATFORM', 'unknown') }
 
           it 'prints a message telling the user to open the file' do
-            # including calls to #puts in #clean_up
-            expect(cli).to receive(:puts).exactly(3).times
-            cli.send(:clean_up)
+            expect(cleaning_up).to output(/#{message}/).to_stdout
           end
         end
       end
@@ -894,6 +917,10 @@ module ResumeGenerator
     # Couldn't send Prawn::Document an image test double
     let(:placeholder_image) do
       open('http://farm4.staticflickr.com/3722/10753699026_a1603247cf_m.jpg')
+    end
+
+    before do
+      allow($stdout).to receive(:write)
     end
 
     describe ".generate" do
