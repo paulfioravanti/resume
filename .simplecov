@@ -3,7 +3,3 @@
 unless ENV['DRB']
   SimpleCov.start 'rails'
 end
-if ENV['TRAVIS']
-  require 'coveralls'
-  Coveralls.wear! 'rails'
-end
