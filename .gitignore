@@ -8,5 +8,4 @@ pkg/
 vendor/cache/*.gem
 coverage/
 
-resume.rb
 resume.rb.txt

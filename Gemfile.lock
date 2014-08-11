@@ -78,7 +78,7 @@ DEPENDENCIES
   coveralls
   fuubar
   kramdown
-  prawn (~> 1.0.0)
+  prawn (= 1.0.0)
   rake (~> 10.1)
   reek
   resume!
