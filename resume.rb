@@ -23,7 +23,9 @@ require 'json'
 ###
 ################################################################################
 module ResumeGenerator
-  VERSION = '0.0.1'
+  # This const would only ever be defined when this file's specs
+  # are run in the repo with the structured version.
+  VERSION = '0.0.1' unless const_defined?(:VERSION)
   DOCUMENT_NAME = 'Resume'
 
   module Colourable
@@ -541,8 +543,6 @@ if __FILE__ == $0
 end
 
 module ResumeGenerator
-  # TODO: Upgrade to RSpec 3
-  gem 'rspec', '2.14.1'
   require 'rspec'
 
   describe CLI do
@@ -553,7 +553,7 @@ module ResumeGenerator
 
     before do
       allow(cli).to receive(:gets).and_return(user_input)
-      allow(cli).to receive(:system).and_return # stub out `gem install ...`
+      allow(cli).to receive(:system) # stub out `gem install ...`
     end
 
     describe '.report' do
@@ -849,7 +849,7 @@ module ResumeGenerator
       after { File.delete(filename) }
 
       it 'generates a pdf resume' do
-        expect(File.exist?(filename)).to be_true
+        expect(File.exist?(filename)).to be true
       end
     end
 
