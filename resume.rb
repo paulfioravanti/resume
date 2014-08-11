@@ -617,47 +617,94 @@ module ResumeGenerator
       end
 
       context 'user does not have the gem installed' do
+        let(:checking_ability_to_generate_resume) do
+          -> { cli.send(:check_ability_to_generate_resume) }
+        end
+        let(:message) do
+          Regexp.escape(
+            yellow "May I please install version 1.0.0 of the 'Prawn'\n"\
+                   "Ruby gem to help me generate a PDF (Y/N)? "
+          )
+        end
+
         before do
           allow(Gem::Specification).to \
             receive(:find_by_name).and_raise(Gem::LoadError)
         end
 
         specify 'user is asked to install the gem' do
-          expect(cli).to receive(:print)
-          cli.send(:check_ability_to_generate_resume)
+          expect(checking_ability_to_generate_resume).to \
+            output(/#{message}/).to_stdout
         end
 
         context 'user agrees to install the gem' do
+          let(:checking_ability_to_generate_resume) do
+            -> { cli.send(:check_ability_to_generate_resume) }
+          end
+          let(:message) do
+            Regexp.escape(
+              green("Thank you kindly :-)") << "\n" <<
+              "Installing Prawn gem version 1.0.0...\n" <<
+              green("Prawn gem successfully installed.") << "\n"
+            )
+          end
+
           before do
             allow(cli).to receive(:permission_granted?).and_return(true)
           end
 
           it 'executes installation' do
-            expect(cli).to receive(:install_gem)
-            cli.send(:check_ability_to_generate_resume)
+            expect(checking_ability_to_generate_resume).to \
+              output(/#{message}/).to_stdout
           end
 
           context 'gem is unable to be installed' do
+            let(:checking_ability_to_generate_resume) do
+              -> { cli.send(:check_ability_to_generate_resume) }
+            end
+            let(:message) do
+              Regexp.escape(
+                green("Thank you kindly :-)") << "\n" <<
+                "Installing Prawn gem version 1.0.0...\n" <<
+                red(
+                  "Sorry, for some reason I wasn't able to install prawn.\n"\
+                  "Either try again or ask me directly for a PDF copy of "\
+                  "my resume."
+                ) << "\n"
+              )
+            end
+
             before { allow(cli).to receive(:system).and_raise }
 
             it 'prints an error message and exits' do
-              # 'thank you', 'installing...', 'error'
-              expect(cli).to receive(:puts).exactly(3).times
               expect(cli).to receive(:exit)
-              cli.send(:check_ability_to_generate_resume)
+              expect(checking_ability_to_generate_resume).to \
+                output(/#{message}/).to_stdout
             end
           end
         end
 
         context 'when user does not agree to install the gem' do
+          let(:checking_ability_to_generate_resume) do
+            -> { cli.send(:check_ability_to_generate_resume) }
+          end
+          let(:message) do
+            Regexp.escape(
+              red(
+                "Sorry, I won't be able to generate a PDF without this\n"\
+                "specific version of the Prawn gem.\n"\
+                "Please ask me directly for a PDF copy of my resume."
+              ) << "\n"
+            )
+          end
           before do
             allow(cli).to receive(:permission_granted?).and_return(false)
           end
 
           it 'prints an error message and exits' do
-            expect(cli).to receive(:puts).once
             expect(cli).to receive(:exit)
-            cli.send(:check_ability_to_generate_resume)
+            expect(checking_ability_to_generate_resume).to \
+              output(/#{message}/).to_stdout
           end
         end
       end
