@@ -546,6 +546,8 @@ module ResumeGenerator
   require 'rspec'
 
   describe CLI do
+    include Colourable
+
     let(:cli) { CLI.new }
     # stub out the innards of permission_granted? (i.e. calls chained to #gets)
     # so it doesn't interfere with spec operation
@@ -557,9 +559,10 @@ module ResumeGenerator
     end
 
     describe '.report' do
+      let(:reporting_to_cli) { -> { CLI.report('hello') } }
+
       it 'outputs the passed in message to stdout' do
-        expect(cli.class).to receive(:puts).with('hello')
-        CLI.report('hello')
+        expect(reporting_to_cli).to output("hello\n").to_stdout
       end
     end
 
@@ -593,13 +596,23 @@ module ResumeGenerator
       end
 
       context 'user has the expected gem installed, but an older version' do
+        let(:checking_ability_to_generate_resume) do
+          -> { cli.send(:check_ability_to_generate_resume) }
+        end
+        let(:message) do
+          Regexp.escape(
+            yellow "May I please install version 1.0.0 of the 'Prawn'\n"\
+                   "Ruby gem to help me generate a PDF (Y/N)? "
+          )
+        end
+
         before do
           allow(prawn_gem).to receive(:version).and_return(0)
         end
 
         specify 'user is asked to install the gem' do
-          expect(cli).to receive(:print)
-          cli.send(:check_ability_to_generate_resume)
+          expect(checking_ability_to_generate_resume).to \
+            output(/#{message}/).to_stdout
         end
       end
 
