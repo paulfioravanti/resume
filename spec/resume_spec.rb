@@ -34,7 +34,7 @@ describe Resume do
         receive(:open).with(anything).and_return(placeholder_image)
     end
 
-    it 'has a background image' do
+    it 'fetches the background image of the resume' do
       expect(Resume.background_image).to eq(placeholder_image)
     end
   end

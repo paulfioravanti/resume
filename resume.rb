@@ -25,7 +25,7 @@ require 'json'
 module ResumeGenerator
   # This const would only ever be defined when this file's specs
   # are run in the repo with the structured version of the resume.
-  VERSION = '0.0.2' unless const_defined?(:VERSION)
+  VERSION = '0.2' unless const_defined?(:VERSION)
   DOCUMENT_NAME = 'Resume'
 
   module Colourable
@@ -52,8 +52,75 @@ module ResumeGenerator
     end
   end
 
-  class CLI
+  module Messages
     include Colourable
+
+    private
+
+    def request_gem_installation
+      print yellow(
+        "May I please install version 1.0.0 of the 'Prawn'\n"\
+        "Ruby gem to help me generate a PDF (Y/N)? "
+      )
+    end
+
+    def thank_user_for_permission
+      puts green('Thank you kindly :-)')
+    end
+
+    def inform_start_of_gem_installation
+      puts 'Installing Prawn gem version 1.0.0...'
+    end
+
+    def inform_start_of_resume_generation
+      puts "Generating PDF. This shouldn't take longer than a few seconds..."
+    end
+
+    def inform_of_failure_to_generate_resume
+      puts red(
+        "Sorry, I won't be able to generate a PDF without this\n"\
+        "specific version of the Prawn gem.\n"\
+        "Please ask me directly for a PDF copy of my resume."
+      )
+    end
+
+    def inform_of_successful_resume_generation
+      puts green('Resume generated successfully.')
+    end
+
+    def print_thank_you_message
+      puts cyan(
+        "Thanks for looking at my resume. "\
+        "I hope to hear from you soon!"
+      )
+    end
+
+    def request_to_open_resume
+      print yellow 'Would you like me to open the resume for you (Y/N)? '
+    end
+
+    def request_user_to_open_document
+      puts yellow(
+        "Sorry, I can't figure out how to open the resume on\n"\
+        "this computer. Please open it yourself."
+      )
+    end
+
+    def inform_of_successful_gem_installation
+      puts green('Prawn gem successfully installed.')
+    end
+
+    def inform_of_gem_installation_failure
+      puts red(
+        "Sorry, for some reason I wasn't able to install prawn.\n"\
+        "Either try again or ask me directly for a PDF copy of "\
+        "my resume."
+      )
+    end
+  end
+
+  class CLI
+    include Messages
 
     def self.report(string)
       puts string
@@ -69,14 +136,13 @@ module ResumeGenerator
 
     def check_ability_to_generate_resume
       return if required_gem_available?('prawn', '1.0.0')
-      print yellow "May I please install version 1.0.0 of the 'Prawn'\n"\
-                   "Ruby gem to help me generate a PDF (Y/N)? "
+      request_gem_installation
       if permission_granted?
+        thank_user_for_permission
+        inform_start_of_gem_installation
         install_gem
       else
-        puts red "Sorry, I won't be able to generate a PDF without this\n"\
-                 "specific version of the Prawn gem.\n"\
-                 "Please ask me directly for a PDF copy of my resume."
+        inform_of_failure_to_generate_resume
         exit
       end
     end
@@ -84,15 +150,15 @@ module ResumeGenerator
     def generate_resume
       gem 'prawn', '1.0.0'
       require 'prawn'
+      inform_start_of_resume_generation
       Resume.generate
     end
 
     def clean_up
-      puts green 'Resume generated successfully.'
-      print yellow 'Would you like me to open the resume for you (Y/N)? '
+      inform_of_successful_resume_generation
+      request_to_open_resume
       open_document if permission_granted?
-      puts cyan "Thanks for looking at my resume. "\
-                "I hope to hear from you soon!"
+      print_thank_you_message
     end
 
     def open_document
@@ -104,8 +170,7 @@ module ResumeGenerator
       when %r(windows)
         system("cmd /c \"start #{DOCUMENT_NAME}.pdf\"")
       else
-        puts yellow "Sorry, I can't figure out how to open the resume on\n"\
-                    "this computer. Please open it yourself."
+        request_user_to_open_document
       end
     end
 
@@ -116,20 +181,17 @@ module ResumeGenerator
     end
 
     def permission_granted?
-      gets.chomp.match(%r{\A(y|yes)\z}i)
+      gets.chomp.match(%r{\Ay(es)?\z}i)
     end
 
     def install_gem
-      puts green 'Thank you kindly :-)'
-      puts 'Installing Prawn gem version 1.0.0...'
       begin
         system('gem install prawn -v 1.0.0')
-        puts green 'Prawn gem successfully installed.'
-        Gem.clear_paths # Reset the dir and path values so Prawn can be required
+        inform_of_successful_gem_installation
+        # Reset the dir and path values so Prawn can be required
+        Gem.clear_paths
       rescue
-        puts red "Sorry, for some reason I wasn't able to install prawn.\n"\
-                 "Either try again or ask me directly for a PDF copy of "\
-                 "my resume."
+        inform_of_gem_installation_failure
         exit
       end
     end
@@ -427,13 +489,13 @@ module ResumeGenerator
   module ResumeHelper
     include Decodable, Sociable, Employable, Educatable
 
-    RESUME =
-      JSON.parse(
-        open(
-          "https://raw.github.com/paulfioravanti/"\
-          "resume/master/resources/resume.json").read,
-        symbolize_names: true
-      )[:resume]
+    RESUME = JSON.parse(
+      open(
+        "https://raw.github.com/paulfioravanti/"\
+        "resume/master/resources/resume.json"
+      ).read,
+      symbolize_names: true
+    )[:resume]
 
     def self.included(base)
       Resume.extend(ClassMethods)
@@ -467,9 +529,9 @@ module ResumeGenerator
     end
 
     def social_media_icons
-      social_media = RESUME[:social_media]
+      CLI.report 'Creating social media links section...'
       move_down 5
-      resources = resources_for(social_media)
+      resources = resources_for(RESUME[:social_media])
       x_position = 0
       social_media_icon_for(resources.first, x_position)
       x_position += 45
@@ -482,6 +544,7 @@ module ResumeGenerator
     end
 
     def employment_history
+      CLI.report 'Creating employment history section...'
       heading d('RW1wbG95bWVudCBIaXN0b3J5')
       entries = RESUME[:entries]
       rc(entries[:rc])
@@ -496,6 +559,7 @@ module ResumeGenerator
     end
 
     def education_history
+      CLI.report('Creating education history section...')
       heading d('RWR1Y2F0aW9u')
       entries = RESUME[:entries]
       mit(entries[:mit])
@@ -510,31 +574,26 @@ module ResumeGenerator
       Prawn::Document.class_eval do
         include ResumeHelper
       end
-      Prawn::Document.generate(
-        "#{DOCUMENT_NAME}.pdf",
+      Prawn::Document.generate("#{DOCUMENT_NAME}.pdf", pdf_options) do
+        name
+        headline
+        social_media_icons
+        employment_history
+        education_history
+      end
+    end
+
+    def self.pdf_options
+      {
         margin_top: 0.75,
         margin_bottom: 0.75,
         margin_left: 1,
         margin_right: 1,
         background: background_image,
-        repeat: true) do
-
-        CLI.report "Generating PDF. "\
-                   "This shouldn't take longer than a few seconds..."
-
-        name
-        headline
-
-        CLI.report 'Creating social media links section...'
-        social_media_icons
-
-        CLI.report 'Creating employment history section...'
-        employment_history
-
-        CLI.report('Creating education history section...')
-        education_history
-      end
+        repeat: true
+      }
     end
+    private_class_method :pdf_options
   end
 end
 
@@ -546,8 +605,6 @@ module ResumeGenerator
   require 'rspec'
 
   describe CLI do
-    include Colourable
-
     let(:cli) { CLI.new }
     # stub out the innards of permission_granted? (i.e. calls chained to #gets)
     # so it doesn't interfere with spec operation
@@ -578,6 +635,9 @@ module ResumeGenerator
 
     describe 'PDF generator gem installation' do
       let(:prawn_gem) { double('prawn_gem') }
+      let(:checking_ability_to_generate_resume) do
+        -> { cli.send(:check_ability_to_generate_resume) }
+      end
 
       before do
         allow(Gem::Specification).to \
@@ -596,116 +656,62 @@ module ResumeGenerator
         end
       end
 
-      context 'user has the expected gem installed, but an older version' do
-        let(:checking_ability_to_generate_resume) do
-          -> { cli.send(:check_ability_to_generate_resume) }
-        end
-        let(:message) do
-          Regexp.escape(
-            yellow "May I please install version 1.0.0 of the 'Prawn'\n"\
-                   "Ruby gem to help me generate a PDF (Y/N)? "
-          )
-        end
-
+      context 'user has the expected gem installed, but an unexpected version' do
         before do
           allow(prawn_gem).to receive(:version).and_return(0)
         end
 
         specify 'user is asked to install the gem' do
-          expect(checking_ability_to_generate_resume).to \
-            output(/#{message}/).to_stdout
+          expect(cli).to receive(:request_gem_installation)
+          cli.send(:check_ability_to_generate_resume)
         end
       end
 
       context 'user does not have the gem installed' do
-        let(:checking_ability_to_generate_resume) do
-          -> { cli.send(:check_ability_to_generate_resume) }
-        end
-        let(:message) do
-          Regexp.escape(
-            yellow "May I please install version 1.0.0 of the 'Prawn'\n"\
-                   "Ruby gem to help me generate a PDF (Y/N)? "
-          )
-        end
-
         before do
           allow(Gem::Specification).to \
             receive(:find_by_name).and_raise(Gem::LoadError)
         end
 
         specify 'user is asked to install the gem' do
-          expect(checking_ability_to_generate_resume).to \
-            output(/#{message}/).to_stdout
+          expect(cli).to receive(:request_gem_installation)
+          cli.send(:check_ability_to_generate_resume)
         end
 
         context 'user agrees to install the gem' do
-          let(:checking_ability_to_generate_resume) do
-            -> { cli.send(:check_ability_to_generate_resume) }
-          end
-          let(:message) do
-            Regexp.escape(
-              green("Thank you kindly :-)") << "\n" <<
-              "Installing Prawn gem version 1.0.0...\n" <<
-              green("Prawn gem successfully installed.") << "\n"
-            )
-          end
-
           before do
             allow(cli).to receive(:permission_granted?).and_return(true)
           end
 
           it 'executes installation' do
-            expect(checking_ability_to_generate_resume).to \
-              output(/#{message}/).to_stdout
+            expect(cli).to receive(:thank_user_for_permission)
+            expect(cli).to receive(:inform_start_of_gem_installation)
+            expect(cli).to receive(:inform_of_successful_gem_installation)
+            cli.send(:check_ability_to_generate_resume)
           end
 
           context 'gem is unable to be installed' do
-            let(:checking_ability_to_generate_resume) do
-              -> { cli.send(:check_ability_to_generate_resume) }
-            end
-            let(:message) do
-              Regexp.escape(
-                green("Thank you kindly :-)") << "\n" <<
-                "Installing Prawn gem version 1.0.0...\n" <<
-                red(
-                  "Sorry, for some reason I wasn't able to install prawn.\n"\
-                  "Either try again or ask me directly for a PDF copy of "\
-                  "my resume."
-                ) << "\n"
-              )
-            end
-
             before { allow(cli).to receive(:system).and_raise }
 
             it 'prints an error message and exits' do
+              expect(cli).to receive(:thank_user_for_permission)
+              expect(cli).to receive(:inform_start_of_gem_installation)
+              expect(cli).to receive(:inform_of_gem_installation_failure)
               expect(cli).to receive(:exit)
-              expect(checking_ability_to_generate_resume).to \
-                output(/#{message}/).to_stdout
+              cli.send(:check_ability_to_generate_resume)
             end
           end
         end
 
         context 'when user does not agree to install the gem' do
-          let(:checking_ability_to_generate_resume) do
-            -> { cli.send(:check_ability_to_generate_resume) }
-          end
-          let(:message) do
-            Regexp.escape(
-              red(
-                "Sorry, I won't be able to generate a PDF without this\n"\
-                "specific version of the Prawn gem.\n"\
-                "Please ask me directly for a PDF copy of my resume."
-              ) << "\n"
-            )
-          end
           before do
             allow(cli).to receive(:permission_granted?).and_return(false)
           end
 
           it 'prints an error message and exits' do
+            expect(cli).to receive(:inform_of_failure_to_generate_resume)
             expect(cli).to receive(:exit)
-            expect(checking_ability_to_generate_resume).to \
-              output(/#{message}/).to_stdout
+            cli.send(:check_ability_to_generate_resume)
           end
         end
       end
@@ -713,32 +719,22 @@ module ResumeGenerator
 
     describe 'generating the PDF' do
       before do
+        allow(cli).to receive(:gem).with('prawn', '1.0.0')
         allow(cli).to receive(:require).with('prawn')
       end
 
       it 'tells the PDF to generate itself' do
+        expect(cli).to receive(:inform_start_of_resume_generation)
         expect(Resume).to receive(:generate)
         cli.send(:generate_resume)
       end
     end
 
     describe 'post-PDF generation' do
-      let(:cleaning_up) do
-        -> { cli.send(:clean_up) }
-      end
-      let(:message) do
-        Regexp.escape(
-          green("Resume generated successfully.") << "\n" <<
-          yellow("Would you like me to open the resume for you (Y/N)? ") <<
-          cyan(
-            "Thanks for looking at my resume. "\
-            "I hope to hear from you soon!"
-          ) << "\n"
-        )
-      end
-
       it 'shows a success message and asks to open the resume' do
-        expect(cleaning_up).to output(/#{message}/).to_stdout
+        expect(cli).to receive(:inform_of_successful_resume_generation)
+        expect(cli).to receive(:request_to_open_resume)
+        cli.send(:clean_up)
       end
 
       context 'user allows the script to open the PDF' do
@@ -748,6 +744,7 @@ module ResumeGenerator
 
         it 'attempts to open the document' do
           expect(cli).to receive(:open_document)
+          expect(cli).to receive(:print_thank_you_message)
           cli.send(:clean_up)
         end
 
@@ -781,22 +778,11 @@ module ResumeGenerator
         end
 
         context 'user is on an unknown operating system' do
-          let(:cleaning_up) do
-            -> { cli.send(:clean_up) }
-          end
-          let(:message) do
-            Regexp.escape(
-              yellow(
-               "Sorry, I can't figure out how to open the resume on\n"\
-               "this computer. Please open it yourself."
-              ) << "\n"
-            )
-          end
-
           before { stub_const('RUBY_PLATFORM', 'unknown') }
 
           it 'prints a message telling the user to open the file' do
-            expect(cleaning_up).to output(/#{message}/).to_stdout
+            expect(cli).to receive(:request_user_to_open_document)
+            cli.send(:clean_up)
           end
         end
       end
@@ -806,6 +792,7 @@ module ResumeGenerator
 
         it 'does not attempt to open the document' do
           expect(cli).to_not receive(:open_document)
+          expect(cli).to receive(:print_thank_you_message)
           cli.send(:clean_up)
         end
       end
@@ -946,7 +933,7 @@ module ResumeGenerator
           receive(:open).with(anything).and_return(placeholder_image)
       end
 
-      it 'has a background image' do
+      it 'fetches the background image of the resume' do
         expect(Resume.background_image).to eq(placeholder_image)
       end
     end
