@@ -9,3 +9,5 @@ require 'resume_generator'
 require 'rspec'
 
 include ResumeGenerator
+
+RSpec.configure { |c| c.disable_monkey_patching! }

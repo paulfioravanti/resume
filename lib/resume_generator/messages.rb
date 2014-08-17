@@ -8,8 +8,10 @@ module ResumeGenerator
 
     def request_gem_installation
       print yellow(
-        "May I please install version 1.0.0 of the 'Prawn'\n"\
-        "Ruby gem to help me generate a PDF (Y/N)? "
+        "May I please install the following Ruby gems:\n"\
+        "- prawn 1.2.1\n"\
+        "- prawn-table 0.1.0\n"\
+        "in order to help me generate a PDF (Y/N)? "\
       )
     end
 
@@ -18,7 +20,7 @@ module ResumeGenerator
     end
 
     def inform_start_of_gem_installation
-      puts 'Installing Prawn gem version 1.0.0...'
+      puts 'Installing required gems...'
     end
 
     def inform_start_of_resume_generation
@@ -27,8 +29,8 @@ module ResumeGenerator
 
     def inform_of_failure_to_generate_resume
       puts red(
-        "Sorry, I won't be able to generate a PDF without this\n"\
-        "specific version of the Prawn gem.\n"\
+        "Sorry, I won't be able to generate a PDF\n"\
+        "without these specific gem versions.\n"\
         "Please ask me directly for a PDF copy of my resume."
       )
     end
@@ -39,8 +41,8 @@ module ResumeGenerator
 
     def print_thank_you_message
       puts cyan(
-        "Thanks for looking at my resume. "\
-        "I hope to hear from you soon!"
+        "Thanks for looking at my resume. I hope to hear from you soon!\n"\
+        "Resume.pdf has been generated in the same directory as the script."
       )
     end
 
@@ -56,12 +58,13 @@ module ResumeGenerator
     end
 
     def inform_of_successful_gem_installation
-      puts green('Prawn gem successfully installed.')
+      puts green('Gems successfully installed.')
     end
 
     def inform_of_gem_installation_failure
       puts red(
-        "Sorry, for some reason I wasn't able to install prawn.\n"\
+        "Sorry, for some reason I wasn't able to\n"\
+        "install one or more required gems.\n"\
         "Either try again or ask me directly for a PDF copy of "\
         "my resume."
       )

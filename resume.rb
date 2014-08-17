@@ -59,8 +59,10 @@ module ResumeGenerator
 
     def request_gem_installation
       print yellow(
-        "May I please install version 1.0.0 of the 'Prawn'\n"\
-        "Ruby gem to help me generate a PDF (Y/N)? "
+        "May I please install the following Ruby gems:\n"\
+        "- prawn 1.2.1\n"\
+        "- prawn-table 0.1.0\n"\
+        "in order to help me generate a PDF (Y/N)? "\
       )
     end
 
@@ -69,7 +71,7 @@ module ResumeGenerator
     end
 
     def inform_start_of_gem_installation
-      puts 'Installing Prawn gem version 1.0.0...'
+      puts 'Installing required gems...'
     end
 
     def inform_start_of_resume_generation
@@ -78,8 +80,8 @@ module ResumeGenerator
 
     def inform_of_failure_to_generate_resume
       puts red(
-        "Sorry, I won't be able to generate a PDF without this\n"\
-        "specific version of the Prawn gem.\n"\
+        "Sorry, I won't be able to generate a PDF\n"\
+        "without these specific gem versions.\n"\
         "Please ask me directly for a PDF copy of my resume."
       )
     end
@@ -90,8 +92,8 @@ module ResumeGenerator
 
     def print_thank_you_message
       puts cyan(
-        "Thanks for looking at my resume. "\
-        "I hope to hear from you soon!"
+        "Thanks for looking at my resume. I hope to hear from you soon!\n"\
+        "Resume.pdf has been generated in the same directory as the script."
       )
     end
 
@@ -107,12 +109,13 @@ module ResumeGenerator
     end
 
     def inform_of_successful_gem_installation
-      puts green('Prawn gem successfully installed.')
+      puts green('Gems successfully installed.')
     end
 
     def inform_of_gem_installation_failure
       puts red(
-        "Sorry, for some reason I wasn't able to install prawn.\n"\
+        "Sorry, for some reason I wasn't able to\n"\
+        "install one or more required gems.\n"\
         "Either try again or ask me directly for a PDF copy of "\
         "my resume."
       )
@@ -135,7 +138,9 @@ module ResumeGenerator
     private
 
     def check_ability_to_generate_resume
-      return if required_gem_available?('prawn', '1.0.0')
+      return if required_gems_available?(
+        'prawn' => '1.2.1', 'prawn-table' => '0.1.0'
+      )
       request_gem_installation
       if permission_granted?
         thank_user_for_permission
@@ -148,8 +153,10 @@ module ResumeGenerator
     end
 
     def generate_resume
-      gem 'prawn', '1.0.0'
+      gem 'prawn', '1.2.1'
+      gem 'prawn-table', '0.1.0'
       require 'prawn'
+      require 'prawn/table'
       inform_start_of_resume_generation
       Resume.generate
     end
@@ -174,8 +181,14 @@ module ResumeGenerator
       end
     end
 
-    def required_gem_available?(name, version)
-      Gem::Specification.find_by_name(name).version >= Gem::Version.new(version)
+    def required_gems_available?(gems)
+      gems.each do |name, version|
+        if Gem::Specification.find_by_name(name).version <
+          Gem::Version.new(version)
+          return false
+        end
+      end
+      true
     rescue Gem::LoadError # gem not installed
       false
     end
@@ -186,7 +199,8 @@ module ResumeGenerator
 
     def install_gem
       begin
-        system('gem install prawn -v 1.0.0')
+        system('gem install prawn -v 1.2.1')
+        system('gem install prawn-table -v 0.1.0')
         inform_of_successful_gem_installation
         # Reset the dir and path values so Prawn can be required
         Gem.clear_paths
@@ -604,10 +618,12 @@ end
 module ResumeGenerator
   require 'rspec'
 
+  RSpec.configure { |c| c.disable_monkey_patching! }
+
   # Note: There are some incomprehensible hacks regarding `.and_call_original`
   # that were put in here so that SimpleCov would actually see these methods as
   # having been touched during testing.
-  describe CLI do
+  RSpec.describe CLI do
     let(:cli) { CLI.new }
     # stub out the innards of permission_granted? (i.e. calls chained to #gets)
     # so it doesn't interfere with spec operation
@@ -638,47 +654,51 @@ module ResumeGenerator
 
     describe 'PDF generator gem installation' do
       let(:prawn_gem) { double('prawn_gem') }
+      let(:prawn_table_gem) { double('prawn_table_gem') }
 
       before do
         allow(Gem::Specification).to \
           receive(:find_by_name).with('prawn').and_return(prawn_gem)
-        allow(Gem::Version).to receive(:new).with(anything).and_return(1)
+        allow(Gem::Specification).to \
+          receive(:find_by_name).with('prawn-table').and_return(prawn_table_gem)
+        allow(Gem::Version).to receive(:new).and_return(1.2, 0.1)
       end
 
-      context 'user has the expected gem installed' do
+      context 'user has the expected gems installed' do
         before do
-          allow(prawn_gem).to receive(:version).and_return(1)
+          allow(prawn_gem).to receive(:version).and_return(1.2)
+          allow(prawn_table_gem).to receive(:version).and_return(0.1)
         end
 
-        specify 'user is not asked to install the gem' do
+        specify 'user is not asked to install any gems' do
           expect(cli).to_not receive(:permission_granted?)
           cli.send(:check_ability_to_generate_resume)
         end
       end
 
-      context 'user has the expected gem installed, but an unexpected version' do
+      context 'user has an expected gem installed, but an unexpected version' do
         before do
           allow(prawn_gem).to receive(:version).and_return(0)
         end
 
-        specify 'user is asked to install the gem' do
+        specify 'user is asked to install gems' do
           expect(cli).to receive(:request_gem_installation)
           cli.send(:check_ability_to_generate_resume)
         end
       end
 
-      context 'user does not have the gem installed' do
+      context 'user does not have a required gem installed' do
         before do
           allow(Gem::Specification).to \
             receive(:find_by_name).and_raise(Gem::LoadError)
         end
 
-        specify 'user is asked to install the gem' do
+        specify 'user is asked to install the required gems' do
           expect(cli).to receive(:request_gem_installation)
           cli.send(:check_ability_to_generate_resume)
         end
 
-        context 'user agrees to install the gem' do
+        context 'user agrees to install the gems' do
           before do
             allow(cli).to receive(:permission_granted?).and_return(true)
           end
@@ -690,7 +710,7 @@ module ResumeGenerator
             cli.send(:check_ability_to_generate_resume)
           end
 
-          context 'gem is unable to be installed' do
+          context 'gems are unable to be installed' do
             before { allow(cli).to receive(:system).and_raise }
 
             it 'prints an error message and exits' do
@@ -704,7 +724,7 @@ module ResumeGenerator
           end
         end
 
-        context 'when user does not agree to install the gem' do
+        context 'when user does not agree to install the gems' do
           before do
             allow(cli).to receive(:permission_granted?).and_return(false)
           end
@@ -721,8 +741,10 @@ module ResumeGenerator
 
     describe 'generating the PDF' do
       before do
-        allow(cli).to receive(:gem).with('prawn', '1.0.0')
+        allow(cli).to receive(:gem).with('prawn', '1.2.1')
+        allow(cli).to receive(:gem).with('prawn-table', '0.1.0')
         allow(cli).to receive(:require).with('prawn')
+        allow(cli).to receive(:require).with('prawn/table')
       end
 
       it 'tells the PDF to generate itself' do
@@ -803,7 +825,7 @@ module ResumeGenerator
     end
   end
 
-  describe Decodable do
+  RSpec.describe Decodable do
     let(:decoder) { Object.new.extend(Decodable) }
 
     describe '.d' do
@@ -815,7 +837,7 @@ module ResumeGenerator
   end
 
 
-  describe Resource do
+  RSpec.describe Resource do
     describe '.for' do
       let(:image) { double('image') }
       let(:hash) do
@@ -885,7 +907,7 @@ module ResumeGenerator
     end
   end
 
-  describe ResumeGenerator do
+  RSpec.describe ResumeGenerator do
     describe 'constants' do
       let(:version) { ResumeGenerator.const_get('VERSION') }
       let(:document_name) { ResumeGenerator.const_get('DOCUMENT_NAME') }
@@ -900,9 +922,11 @@ module ResumeGenerator
     end
   end
 
-  describe Resume do
-    gem 'prawn', '1.0.0'
+  RSpec.describe Resume do
+    gem 'prawn', '1.2.1'
+    gem 'prawn-table', '0.1.0'
     require 'prawn'
+    require 'prawn/table'
 
     # Link points to a 1x1 pixel placeholder to not slow down test suite
     # Couldn't send Prawn::Document an image test double

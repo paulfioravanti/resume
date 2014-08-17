@@ -1,4 +1,4 @@
-describe ResumeGenerator do
+RSpec.describe ResumeGenerator do
   describe 'constants' do
     let(:version) { ResumeGenerator.const_get('VERSION') }
     let(:document_name) { ResumeGenerator.const_get('DOCUMENT_NAME') }

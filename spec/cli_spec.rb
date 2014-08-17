@@ -3,7 +3,7 @@ require 'spec_helper'
 # Note: There are some incomprehensible hacks regarding `.and_call_original`
 # that were put in here so that SimpleCov would actually see these methods as
 # having been touched during testing.
-describe CLI do
+RSpec.describe CLI do
   let(:cli) { CLI.new }
   # stub out the innards of permission_granted? (i.e. calls chained to #gets)
   # so it doesn't interfere with spec operation
@@ -34,47 +34,51 @@ describe CLI do
 
   describe 'PDF generator gem installation' do
     let(:prawn_gem) { double('prawn_gem') }
+    let(:prawn_table_gem) { double('prawn_table_gem') }
 
     before do
       allow(Gem::Specification).to \
         receive(:find_by_name).with('prawn').and_return(prawn_gem)
-      allow(Gem::Version).to receive(:new).with(anything).and_return(1)
+      allow(Gem::Specification).to \
+        receive(:find_by_name).with('prawn-table').and_return(prawn_table_gem)
+      allow(Gem::Version).to receive(:new).and_return(1.2, 0.1)
     end
 
-    context 'user has the expected gem installed' do
+    context 'user has the expected gems installed' do
       before do
-        allow(prawn_gem).to receive(:version).and_return(1)
+        allow(prawn_gem).to receive(:version).and_return(1.2)
+        allow(prawn_table_gem).to receive(:version).and_return(0.1)
       end
 
-      specify 'user is not asked to install the gem' do
+      specify 'user is not asked to install any gems' do
         expect(cli).to_not receive(:permission_granted?)
         cli.send(:check_ability_to_generate_resume)
       end
     end
 
-    context 'user has the expected gem installed, but an unexpected version' do
+    context 'user has an expected gem installed, but an unexpected version' do
       before do
         allow(prawn_gem).to receive(:version).and_return(0)
       end
 
-      specify 'user is asked to install the gem' do
+      specify 'user is asked to install gems' do
         expect(cli).to receive(:request_gem_installation)
         cli.send(:check_ability_to_generate_resume)
       end
     end
 
-    context 'user does not have the gem installed' do
+    context 'user does not have a required gem installed' do
       before do
         allow(Gem::Specification).to \
           receive(:find_by_name).and_raise(Gem::LoadError)
       end
 
-      specify 'user is asked to install the gem' do
+      specify 'user is asked to install the required gems' do
         expect(cli).to receive(:request_gem_installation)
         cli.send(:check_ability_to_generate_resume)
       end
 
-      context 'user agrees to install the gem' do
+      context 'user agrees to install the gems' do
         before do
           allow(cli).to receive(:permission_granted?).and_return(true)
         end
@@ -86,7 +90,7 @@ describe CLI do
           cli.send(:check_ability_to_generate_resume)
         end
 
-        context 'gem is unable to be installed' do
+        context 'gems are unable to be installed' do
           before { allow(cli).to receive(:system).and_raise }
 
           it 'prints an error message and exits' do
@@ -100,7 +104,7 @@ describe CLI do
         end
       end
 
-      context 'when user does not agree to install the gem' do
+      context 'when user does not agree to install the gems' do
         before do
           allow(cli).to receive(:permission_granted?).and_return(false)
         end
@@ -117,8 +121,10 @@ describe CLI do
 
   describe 'generating the PDF' do
     before do
-      allow(cli).to receive(:gem).with('prawn', '1.0.0')
+      allow(cli).to receive(:gem).with('prawn', '1.2.1')
+      allow(cli).to receive(:gem).with('prawn-table', '0.1.0')
       allow(cli).to receive(:require).with('prawn')
+      allow(cli).to receive(:require).with('prawn/table')
     end
 
     it 'tells the PDF to generate itself' do

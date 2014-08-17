@@ -1,4 +1,4 @@
-describe Decodable do
+RSpec.describe Decodable do
   let(:decoder) { Object.new.extend(Decodable) }
 
   describe '.d' do

@@ -1,6 +1,7 @@
 require 'prawn'
+require 'prawn/table'
 
-describe Resume do
+RSpec.describe Resume do
   # Link points to a 1x1 pixel placeholder to not slow down test suite
   # Couldn't send Prawn::Document an image test double
   let(:placeholder_image) do

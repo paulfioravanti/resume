@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Resource do
+RSpec.describe Resource do
   describe '.for' do
     let(:image) { double('image') }
     let(:hash) do
