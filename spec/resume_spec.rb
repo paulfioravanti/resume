@@ -8,7 +8,7 @@ describe Resume do
   end
 
   before do
-    allow($stdout).to receive(:write)
+    allow($stdout).to receive(:write) # suppress message cruft from stdout
   end
 
   describe ".generate" do

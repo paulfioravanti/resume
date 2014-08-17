@@ -9,7 +9,7 @@ describe CLI do
   before do
     allow(cli).to receive(:gets).and_return(user_input)
     allow(cli).to receive(:system) # stub out `gem install ...`
-    allow($stdout).to receive(:write)
+    allow($stdout).to receive(:write) # suppress message cruft from stdout
   end
 
   describe '.report' do

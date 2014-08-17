@@ -613,7 +613,7 @@ module ResumeGenerator
     before do
       allow(cli).to receive(:gets).and_return(user_input)
       allow(cli).to receive(:system) # stub out `gem install ...`
-      allow($stdout).to receive(:write)
+      allow($stdout).to receive(:write) # suppress message cruft from stdout
     end
 
     describe '.report' do
@@ -907,7 +907,7 @@ module ResumeGenerator
     end
 
     before do
-      allow($stdout).to receive(:write)
+      allow($stdout).to receive(:write) # suppress message cruft from stdout
     end
 
     describe ".generate" do
