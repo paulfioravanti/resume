@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe CLI do
-  include Colourable
-
   let(:cli) { CLI.new }
   # stub out the innards of permission_granted? (i.e. calls chained to #gets)
   # so it doesn't interfere with spec operation
