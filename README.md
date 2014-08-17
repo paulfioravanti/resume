@@ -24,7 +24,7 @@ Run the specs:
 
 - Ruby 1.9.2 or higher (1.8.7 will not work)
 - Prawn 1.0.0 (if you don't have the Prawn version 1.0.0 gem installed, you will be asked for permission to install it)
-- RSpec 2.14.1, if you want to run the specs
+- RSpec 3.0, if you want to run the specs
 
 ### Issues:
 
