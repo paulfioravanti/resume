@@ -1,5 +1,8 @@
 require 'spec_helper'
 
+# Note: There are some incomprehensible hacks regarding `.and_call_original`
+# that were put in here so that SimpleCov would actually see these methods as
+# having been touched during testing.
 describe CLI do
   let(:cli) { CLI.new }
   # stub out the innards of permission_granted? (i.e. calls chained to #gets)
@@ -89,7 +92,8 @@ describe CLI do
           it 'prints an error message and exits' do
             expect(cli).to receive(:thank_user_for_permission)
             expect(cli).to receive(:inform_start_of_gem_installation)
-            expect(cli).to receive(:inform_of_gem_installation_failure)
+            expect(cli).to \
+              receive(:inform_of_gem_installation_failure).and_call_original
             expect(cli).to receive(:exit)
             cli.send(:check_ability_to_generate_resume)
           end
@@ -102,7 +106,8 @@ describe CLI do
         end
 
         it 'prints an error message and exits' do
-          expect(cli).to receive(:inform_of_failure_to_generate_resume)
+          expect(cli).to \
+            receive(:inform_of_failure_to_generate_resume).and_call_original
           expect(cli).to receive(:exit)
           cli.send(:check_ability_to_generate_resume)
         end
@@ -117,7 +122,8 @@ describe CLI do
     end
 
     it 'tells the PDF to generate itself' do
-      expect(cli).to receive(:inform_start_of_resume_generation)
+      expect(cli).to \
+        receive(:inform_start_of_resume_generation).and_call_original
       expect(Resume).to receive(:generate)
       cli.send(:generate_resume)
     end
@@ -174,7 +180,8 @@ describe CLI do
         before { stub_const('RUBY_PLATFORM', 'unknown') }
 
         it 'prints a message telling the user to open the file' do
-          expect(cli).to receive(:request_user_to_open_document)
+          expect(cli).to \
+            receive(:request_user_to_open_document).and_call_original
           cli.send(:clean_up)
         end
       end

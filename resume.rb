@@ -604,6 +604,9 @@ end
 module ResumeGenerator
   require 'rspec'
 
+  # Note: There are some incomprehensible hacks regarding `.and_call_original`
+  # that were put in here so that SimpleCov would actually see these methods as
+  # having been touched during testing.
   describe CLI do
     let(:cli) { CLI.new }
     # stub out the innards of permission_granted? (i.e. calls chained to #gets)
@@ -639,7 +642,7 @@ module ResumeGenerator
       before do
         allow(Gem::Specification).to \
           receive(:find_by_name).with('prawn').and_return(prawn_gem)
-        allow(Gem::Version).to receive(:new).and_return(1)
+        allow(Gem::Version).to receive(:new).with(anything).and_return(1)
       end
 
       context 'user has the expected gem installed' do
@@ -693,7 +696,8 @@ module ResumeGenerator
             it 'prints an error message and exits' do
               expect(cli).to receive(:thank_user_for_permission)
               expect(cli).to receive(:inform_start_of_gem_installation)
-              expect(cli).to receive(:inform_of_gem_installation_failure)
+              expect(cli).to \
+                receive(:inform_of_gem_installation_failure).and_call_original
               expect(cli).to receive(:exit)
               cli.send(:check_ability_to_generate_resume)
             end
@@ -706,7 +710,8 @@ module ResumeGenerator
           end
 
           it 'prints an error message and exits' do
-            expect(cli).to receive(:inform_of_failure_to_generate_resume)
+            expect(cli).to \
+              receive(:inform_of_failure_to_generate_resume).and_call_original
             expect(cli).to receive(:exit)
             cli.send(:check_ability_to_generate_resume)
           end
@@ -721,7 +726,8 @@ module ResumeGenerator
       end
 
       it 'tells the PDF to generate itself' do
-        expect(cli).to receive(:inform_start_of_resume_generation)
+        expect(cli).to \
+          receive(:inform_start_of_resume_generation).and_call_original
         expect(Resume).to receive(:generate)
         cli.send(:generate_resume)
       end
@@ -778,7 +784,8 @@ module ResumeGenerator
           before { stub_const('RUBY_PLATFORM', 'unknown') }
 
           it 'prints a message telling the user to open the file' do
-            expect(cli).to receive(:request_user_to_open_document)
+            expect(cli).to \
+              receive(:request_user_to_open_document).and_call_original
             cli.send(:clean_up)
           end
         end
