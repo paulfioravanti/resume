@@ -33,6 +33,9 @@ describe CLI do
 
   describe 'PDF generator gem installation' do
     let(:prawn_gem) { double('prawn_gem') }
+    let(:checking_ability_to_generate_resume) do
+      -> { cli.send(:check_ability_to_generate_resume) }
+    end
 
     before do
       allow(Gem::Specification).to \
@@ -52,9 +55,6 @@ describe CLI do
     end
 
     context 'user has the expected gem installed, but an older version' do
-      let(:checking_ability_to_generate_resume) do
-        -> { cli.send(:check_ability_to_generate_resume) }
-      end
       let(:message) do
         Regexp.escape(
           yellow "May I please install version 1.0.0 of the 'Prawn'\n"\
@@ -73,9 +73,6 @@ describe CLI do
     end
 
     context 'user does not have the gem installed' do
-      let(:checking_ability_to_generate_resume) do
-        -> { cli.send(:check_ability_to_generate_resume) }
-      end
       let(:message) do
         Regexp.escape(
           yellow "May I please install version 1.0.0 of the 'Prawn'\n"\
@@ -94,9 +91,6 @@ describe CLI do
       end
 
       context 'user agrees to install the gem' do
-        let(:checking_ability_to_generate_resume) do
-          -> { cli.send(:check_ability_to_generate_resume) }
-        end
         let(:message) do
           Regexp.escape(
             green("Thank you kindly :-)") << "\n" <<
@@ -115,9 +109,6 @@ describe CLI do
         end
 
         context 'gem is unable to be installed' do
-          let(:checking_ability_to_generate_resume) do
-            -> { cli.send(:check_ability_to_generate_resume) }
-          end
           let(:message) do
             Regexp.escape(
               green("Thank you kindly :-)") << "\n" <<
@@ -141,9 +132,6 @@ describe CLI do
       end
 
       context 'when user does not agree to install the gem' do
-        let(:checking_ability_to_generate_resume) do
-          -> { cli.send(:check_ability_to_generate_resume) }
-        end
         let(:message) do
           Regexp.escape(
             red(
