@@ -6,32 +6,25 @@ module ResumeGenerator
       Prawn::Document.class_eval do
         include ResumeHelper
       end
-      Prawn::Document.generate(
-        "#{DOCUMENT_NAME}.pdf",
+      Prawn::Document.generate("#{DOCUMENT_NAME}.pdf", pdf_options) do
+        name
+        headline
+        social_media_icons
+        employment_history
+        education_history
+      end
+    end
+
+    def self.pdf_options
+      {
         margin_top: 0.75,
         margin_bottom: 0.75,
         margin_left: 1,
         margin_right: 1,
         background: background_image,
-        repeat: true) do
-
-        CLI.report "Generating PDF. "\
-                   "This shouldn't take longer than a few seconds..."
-
-        name
-        headline
-
-        CLI.report 'Creating social media links section...'
-
-        social_media_icons
-
-        CLI.report 'Creating employment history section...'
-
-        employment_history
-
-        CLI.report('Creating education history section...')
-        education_history
-      end
+        repeat: true
+      }
     end
+    private_class_method :pdf_options
   end
 end

@@ -9,11 +9,10 @@ module ResumeGenerator
   module ResumeHelper
     include Decodable, Sociable, Employable, Educatable
 
-    RESUME =
-      JSON.parse(
-        open('resources/resume.json').read,
-        symbolize_names: true
-      )[:resume]
+    RESUME = JSON.parse(
+      open('resources/resume.json').read,
+      symbolize_names: true
+    )[:resume]
 
     def self.included(base)
       Resume.extend(ClassMethods)
@@ -47,6 +46,7 @@ module ResumeGenerator
     end
 
     def social_media_icons
+      CLI.report 'Creating social media links section...'
       social_media = RESUME[:social_media]
       move_down 5
       resources = resources_for(social_media)
@@ -62,6 +62,7 @@ module ResumeGenerator
     end
 
     def employment_history
+      CLI.report 'Creating employment history section...'
       heading d('RW1wbG95bWVudCBIaXN0b3J5')
       entries = RESUME[:entries]
       rc(entries[:rc])
@@ -76,6 +77,7 @@ module ResumeGenerator
     end
 
     def education_history
+      CLI.report('Creating education history section...')
       heading d('RWR1Y2F0aW9u')
       entries = RESUME[:entries]
       mit(entries[:mit])
