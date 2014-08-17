@@ -15,7 +15,8 @@ describe Resume do
     let(:filename) { "#{ResumeGenerator::DOCUMENT_NAME}.pdf" }
 
     before do
-      allow(Resume).to receive(:background_image).and_return(placeholder_image)
+      allow(Resume).to \
+        receive(:background_image).and_return(placeholder_image)
       allow(Resource).to \
         receive(:open).with(anything).and_return(placeholder_image)
       Resume.generate

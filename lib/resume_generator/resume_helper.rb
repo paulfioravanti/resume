@@ -47,9 +47,8 @@ module ResumeGenerator
 
     def social_media_icons
       CLI.report 'Creating social media links section...'
-      social_media = RESUME[:social_media]
       move_down 5
-      resources = resources_for(social_media)
+      resources = resources_for(RESUME[:social_media])
       x_position = 0
       social_media_icon_for(resources.first, x_position)
       x_position += 45
