@@ -1,7 +1,10 @@
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
+if ENV['TRAVIS']
+  require "codeclimate-test-reporter"
+  CodeClimate::TestReporter.start
+else
+  require 'simplecov'
+end
 
-require 'simplecov'
 require 'resume_generator'
 require 'rspec'
 
