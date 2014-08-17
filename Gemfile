@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby File.read('.ruby-version').strip.split('-').last
+ruby File.read('.ruby-version').strip
 
 gemspec
 
