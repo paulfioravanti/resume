@@ -16,6 +16,10 @@
           "image": "http://farm4.staticflickr.com/3687/8809717292_4938937a94_m.jpg",
           "link": "aHR0cDovL2xpbmtlZGluLmNvbS9pbi9wYXVsZmlvcmF2YW50aQ=="
         },
+        "twitter": {
+          "image": "http://farm3.staticflickr.com/2837/8799235993_26a7d17540_m.jpg",
+          "link": "aHR0cHM6Ly90d2l0dGVyLmNvbS9wZWZpb3JhdmFudGk="
+        },
         "github": {
           "image": "http://farm4.staticflickr.com/3828/8799239149_d23e4acff0_m.jpg",
           "link": "aHR0cDovL2dpdGh1Yi5jb20vcGF1bGZpb3JhdmFudGk="
@@ -35,14 +39,6 @@
         "code_school": {
           "image": "http://farm4.staticflickr.com/3714/9015339024_0651daf2c4_m.jpg",
           "link": "aHR0cDovL3d3dy5jb2Rlc2Nob29sLmNvbS91c2Vycy9wYXVsZmlvcmF2YW50aQ=="
-        },
-        "twitter": {
-          "image": "http://farm3.staticflickr.com/2837/8799235993_26a7d17540_m.jpg",
-          "link": "aHR0cHM6Ly90d2l0dGVyLmNvbS9wZWZpb3JhdmFudGk="
-        },
-        "blog": {
-          "image": "http://farm4.staticflickr.com/3752/8809826162_e4d765d15b_m.jpg",
-          "link": "aHR0cDovL3BhdWxmaW9yYXZhbnRpLmNvbS9hYm91dA=="
         }
       },
       "properties": {
@@ -58,7 +54,7 @@
       "rc": {
         "position": "U2VuaW9yIERldmVsb3Blcg==",
         "organisation": "UmF0ZUNpdHk=",
-        "period": "SnVseSAyMDEzIC0gUHJlc2VudCB8",
+        "period": "SnVseSAyMDEzIC0gUHJlc2VudCB8IA==",
         "location": {
           "name": "U3lkbmV5LCBBdXN0cmFsaWE=",
           "link": "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9xPTYxK0xhdmVuZGVyK1N0K01pbHNvbnMrUG9pbnQrTlNXKzIwNjEmaGw9ZW4mbGw9LTMzLjg1MDYwMiwxNTEuMjEzMTYmc3BuPTAuMDI3MjY1LDAuMDM4OTY3JnNsbD0tMzMuODQzNjU5LDE1MS4yMDk5NDkmc3Nwbj0wLjAwNjgxNywwLjAwOTc0MiZobmVhcj02MStMYXZlbmRlcitTdCwrTWlsc29ucytQb2ludCtOZXcrU291dGgrV2FsZXMrMjA2MSZ0PW0mej0xNQ=="
@@ -88,7 +84,7 @@
       "fl": {
         "position": "UnVieSBEZXZlbG9wZXI=",
         "organisation": "RnJlZWxhbmNl",
-        "period": "U2VwdGVtYmVyIDIwMTIg4oCTIEp1bHkgMjAxMyB8ICA=",
+        "period": "U2VwdGVtYmVyIDIwMTIg4oCTIEp1bHkgMjAxMyB8IA==",
         "location": {
           "name": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",
           "link": "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9mPXEmc291cmNlPXNfcSZobD1lbiZnZW9jb2RlPSZxPWFkZWxhaWRlLCthdXN0cmFsaWEmYXE9JnNsbD0tMzQuOTYxNjkyLDEzOC42MjEzOTkmc3Nwbj0wLjA1NjgzNiwwLjA3MTU4MyZ2cHNyYz00JmllPVVURjgmaHE9JmhuZWFyPUFkZWxhaWRlK1NvdXRoK0F1c3RyYWxpYSwrQXVzdHJhbGlhJnQ9bSZ6PTkmaXdsb2M9QQ=="
@@ -124,7 +120,7 @@
       "gw": {
         "position": "UHJlLXNhbGVzIENvbnN1bHRhbnQ=",
         "organisation": "R3VpZGV3aXJlIFNvZnR3YXJl",
-        "period": "SmFudWFyeSAyMDA5IOKAkyBTZXB0ZW1iZXIgMjAxMSB8ICA=",
+        "period": "SmFudWFyeSAyMDA5IOKAkyBTZXB0ZW1iZXIgMjAxMSB8IA==",
         "location": {
           "name": "VG9reW8sIEphcGFu",
           "link": "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9mPXEmc291cmNlPXNfcSZobD1lbiZnZW9jb2RlPSZxPSVFMyU4MCU5MjEwMC0wMDA2KyslRTYlOUQlQjElRTQlQkElQUMlRTklODMlQkQlRTUlOEQlODMlRTQlQkIlQTMlRTclOTQlQjAlRTUlOEMlQkElRTYlOUMlODklRTYlQTUlQkQlRTclOTQlQkEyLTctMSsrJUU2JTlDJTg5JUU2JUE1JUJEJUU3JTk0JUJBJUUzJTgyJUE0JUUzJTgzJTg4JUUzJTgyJUI3JUUzJTgyJUEyKzEyJUU5JTlBJThFJmFxPSZzbGw9LTM0LjkyODYyMSwxMzguNTk5OTU5JnNzcG49MS44MTk0MzYsMi4yOTA2NDkmdnBzcmM9MCZnPWFkZWxhaWRlLCthdXN0cmFsaWEmaWU9VVRGOCZocT0lRTMlODAlOTIxMDAtMDAwNisrJUU2JTlEJUIxJUU0JUJBJUFDJUU5JTgzJUJEJUU1JThEJTgzJUU0JUJCJUEzJUU3JTk0JUIwJUU1JThDJUJBJUU2JTlDJTg5JUU2JUE1JUJEJUU3JTk0JUJBMi03LTErKyVFNiU5QyU4OSVFNiVBNSVCRCVFNyU5NCVCQSVFMyU4MiVBNCVFMyU4MyU4OCVFMyU4MiVCNyVFMyU4MiVBMisxMiVFOSU5QSU4RSZ0PW0mej0xNSZpd2xvYz1BJmNpZD0xNzQ4MjYwNDQzMTMwNjkxMzEzMw=="
@@ -159,7 +155,7 @@
       "rnt": {
         "position": "SW1wbGVtZW50YXRpb24gQ29uc3VsdGFudCwgUHJvZmVzc2lvbmFsIFNlcnZpY2Vz",
         "organisation": "UmlnaHQgTm93IFRlY2hub2xvZ2llcw==",
-        "period": "SnVseSAyMDA3IOKAkyBBdWd1c3QgMjAwOCB8ICA=",
+        "period": "SnVseSAyMDA3IOKAkyBBdWd1c3QgMjAwOCB8IA==",
         "location": {
           "name": "VG9reW8sIEphcGFu",
           "link": "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20vbWFwcz9mPXEmc291cmNlPXNfcSZobD1lbiZnZW9jb2RlPSZxPSVFMyU4MCU5MjEwNS02MDI3JUU2JTlEJUIxJUU0JUJBJUFDJUU5JTgzJUJEJUU2JUI4JUFGJUU1JThDJUJBJUU4JTk5JThFJUUzJTgzJThFJUU5JTk2JTgwNC0zLTErJUU1JTlGJThFJUU1JUIxJUIxJUUzJTgzJTg4JUUzJTgzJUE5JUUzJTgyJUI5JUUzJTgzJTg4JUUzJTgyJUJGJUUzJTgzJUFGJUUzJTgzJUJDKzI3JUU5JTlBJThFJmFxPSZzbGw9MzUuNjY0Njg4LDEzOS43NDMzMDQmc3Nwbj0wLjAyODE3MiwwLjAzNTc5MSZ2cHNyYz02JmllPVVURjgmaHE9JmhuZWFyPUphcGFuLCtUJUM1JThEa3klQzUlOEQtdG8sK01pbmF0by1rdSwrVG9yYW5vbW9uLCslRUYlQkMlOTQlRTQlQjglODElRTclOUIlQUUlRUYlQkMlOTMlRTIlODglOTIlRUYlQkMlOTErJUU1JTlGJThFJUU1JUIxJUIxJUUzJTgzJTg4JUUzJTgzJUE5JUUzJTgyJUI5JUUzJTgzJTg4JUUzJTgyJUJGJUUzJTgzJUFGJUUzJTgzJUJDJmxsPTM1LjY2NDY4OCwxMzkuNzQzMjYxJnNwbj0wLjAyODE3MiwwLjAzNTc5MSZ0PW0mej0xNSZpd2xvYz1B"
@@ -194,7 +190,7 @@
       "sra": {
         "position": "U29mdHdhcmUgRW5naW5lZXI=",
         "organisation": "U29mdHdhcmUgUmVzZWFyY2ggQXNzb2NpYXRlcyAoU1JBKQ==",
-        "period": "QXByaWwgMjAwNiDigJMgSnVuZSAyMDA3IHwgIA==",
+        "period": "QXByaWwgMjAwNiDigJMgSnVuZSAyMDA3IHwg",
         "location": {
           "name": "VG9reW8sIEphcGFu",
           "link": "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZobD1lbiZnZW9jb2RlPSZxPSVFMyU4MCU5MjE3MS04NTEzJUU2JTlEJUIxJUU0JUJBJUFDJUU5JTgzJUJEJUU4JUIxJThBJUU1JUIzJUI2JUU1JThDJUJBJUU1JThEJTk3JUU2JUIxJUEwJUU4JUEyJThCMi0zMi04JmFxPSZzbGw9MzUuNzI2NjAxLDEzOS43MTU1MDgmc3Nwbj0wLjAwNzAzOCwwLjAwODk0OCZ2cHNyYz0wJmllPVVURjgmaHE9JmhuZWFyPUphcGFuLCtUJUM1JThEa3klQzUlOEQtdG8sK1Rvc2hpbWEta3UsK01pbmFtaWlrZWJ1a3VybywrJUVGJUJDJTkyJUU0JUI4JTgxJUU3JTlCJUFFJUVGJUJDJTkzJUVGJUJDJTkyJUUyJTg4JTkyJUVGJUJDJTk4JnQ9bSZ6PTE3Jml3bG9jPUE="
@@ -218,7 +214,7 @@
       "jet": {
         "position": "Q29vcmRpbmF0b3Igb2YgSW50ZXJuYXRpb25hbCBSZWxhdGlvbnMgKENJUik=",
         "organisation": "SmFwYW4gRXhjaGFuZ2UgYW5kIFRlYWNoaW5nIFByb2dyYW1tZSAoSkVUKQ==",
-        "period": "SnVseSAyMDAxIOKAkyBKdWx5IDIwMDQgfCAg",
+        "period": "SnVseSAyMDAxIOKAkyBKdWx5IDIwMDQgfCA=",
         "location": {
           "name": "S29jaGksIEphcGFu",
           "link": "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZobD1lbiZnZW9jb2RlPSZxPSVFMyU4MCU5Mjc4MC0wODUwJUU5JUFCJTk4JUU3JTlGJUE1JUU1JUI4JTgyJUU0JUI4JUI4JUUzJTgzJThFJUU1JTg2JTg1MSVFNCVCOCU4MSVFNyU5QiVBRTclRTclOTUlQUE1MiVFNSU4RiVCNyZhcT0mc2xsPS0zNC45NjE2OTIsMTM4LjYyMTM5OSZzc3BuPTAuMDU2ODM2LDAuMDcxNTgzJnZwc3JjPTYmaWU9VVRGOCZocT0maG5lYXI9SmFwYW4sK0slQzUlOERjaGkta2VuLCtLJUM1JThEY2hpLXNoaSwrTWFydW5vdWNoaSwrJUVGJUJDJTkxJUU0JUI4JTgxJUU3JTlCJUFFJUVGJUJDJTk3JUUyJTg4JTkyJUVGJUJDJTk1JUVGJUJDJTkyJmxsPTMzLjU1OTQ1NiwxMzMuNTI4MzA0JnNwbj0wLjAxNDQ0OCwwLjAxNzg5NiZ0PW0mej0xNiZpd2xvYz1B"
@@ -242,7 +238,7 @@
       "satc": {
         "position": "SW50ZXJuYXRpb25hbCBNYXJrZXRpbmcgQXNzaXN0YW50IOKAkyBBc2lhIGFuZCBKYXBhbg==",
         "organisation": "U291dGggQXVzdHJhbGlhbiBUb3VyaXNtIENvbW1pc3Npb24=",
-        "period": "TWF5IDIwMDAg4oCTIE1heSAyMDAxIHwgIA==",
+        "period": "TWF5IDIwMDAg4oCTIE1heSAyMDAxIHwg",
         "location": {
           "name": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",
           "link": "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZobD1lbiZnZW9jb2RlPSZxPTUwK0dyZW5mZWxsK1N0LCtBZGVsYWlkZStTQSZhcT0mc2xsPS0zNC45MjQyMjMsMTM4LjYwMTcxMyZzc3BuPTAuMDU3MTQzLDAuMDcxNTgzJnZwc3JjPTYmZz01MCtHcmVuZmVsbCtTdCwrQWRlbGFpZGUrU0EmaWU9VVRGOCZocT0maG5lYXI9NTArR3JlbmZlbGwrU3QsK0FkZWxhaWRlK1NvdXRoK0F1c3RyYWxpYSs1MDAwJmxsPS0zNC45MjQwODIsMTM4LjYwMTY5MiZzcG49MC4wMTQyMTUsMC4wMTc4OTYmdD1tJno9MTYmaXdsb2M9QQ=="
@@ -266,7 +262,7 @@
       "mit": {
         "position": "TWFzdGVycyBvZiBJbmZvcm1hdGlvbiBUZWNobm9sb2d5",
         "organisation": "VW5pdmVyc2l0eSBvZiBTb3V0aCBBdXN0cmFsaWE=",
-        "period": "MjAwNC0yMDA1IHw=",
+        "period": "MjAwNC0yMDA1IHwg",
         "location": {
           "name": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",
           "link": "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZobD1lbiZnZW9jb2RlPSZxPTU1K05vcnRoK1RlcnJhY2UsK0FkZWxhaWRlK1NBKzUwMDAmc2xsPS0zNC45NjE2OTIsMTM4LjYyMTM5OSZzc3BuPTAuMDU2ODM2LDAuMDcxNTgzJnZwc3JjPTYmaWU9VVRGOCZocT0maG5lYXI9NTUrTm9ydGgrVGVycmFjZSwrQWRlbGFpZGUsK1NvdXRoK0F1c3RyYWxpYSs1MDAwJmxsPS0zNC45MjIxODIsMTM4LjU5MDg1NiZzcG49MC4wMjg0MzIsMC4wMzU3OTEmdD1tJno9MTUmaXdsb2M9QQ=="
@@ -289,7 +285,7 @@
       "bib": {
         "position": "QmFjaGVsb3Igb2YgSW50ZXJuYXRpb25hbCBCdXNpbmVzcw==",
         "organisation": "RmxpbmRlcnMgVW5pdmVyc2l0eQ==",
-        "period": "MTk5Ny0xOTk5IHw=",
+        "period": "MTk5Ny0xOTk5IHwg",
         "location": {
           "name": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",
           "link": "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZobD1lbiZnZW9jb2RlPSZxPVN0dXJ0K1JkLCtCZWRmb3JkK1BhcmsrU0ErNTA0MiZhcT0mc2xsPS0zNC45MjIxODIsMTM4LjU5MDg1NiZzc3BuPTAuMDI4NDMyLDAuMDM1NzkxJnZwc3JjPTYmaWU9VVRGOCZocT0maG5lYXI9U3R1cnQrUmQsK0JlZGZvcmQrUGFyaytTb3V0aCtBdXN0cmFsaWErNTA0MiZsbD0tMzUuMDE2NzgyLDEzOC41Njc5ODImc3BuPTAuMDU2Nzk4LDAuMDcxNTgzJnQ9bSZ6PTE0Jml3bG9jPUE="
@@ -313,7 +309,7 @@
       "ryu": {
         "position": "U3R1ZGVudCBFeGNoYW5nZSBQcm9ncmFtbWU=",
         "organisation": "Unl1a29rdSBVbml2ZXJzaXR5",
-        "period": "U2VwIDE5OTkgLSBGZWIgMjAwMCB8",
+        "period": "U2VwIDE5OTkgLSBGZWIgMjAwMCB8IA==",
         "location": {
           "name": "S3lvdG8sIEphcGFu",
           "link": "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZobD1lbiZnZW9jb2RlPSZxPSVFNCVCQSVBQyVFOSU4MyVCRCVFNSVCQSU5QyVFNCVCQSVBQyVFOSU4MyVCRCVFNSVCOCU4MiVFNCVCQyU4RiVFOCVBNiU4QiVFNSU4QyVCQSVFNiVCNyVCMSVFOCU4RCU4OSVFNSVBMSU5QSVFNiU5QyVBQyVFNyU5NCVCQSVFRiVCQyU5NiVFRiVCQyU5NyZhcT0mc2xsPS0zNS4wMTY3ODIsMTM4LjU2Nzk4MiZzc3BuPTAuMDU2Nzk4LDAuMDcxNTgzJnZwc3JjPTYmZz1TdHVydCtSZCwrQmVkZm9yZCtQYXJrK1NvdXRoK0F1c3RyYWxpYSs1MDQyJmllPVVURjgmaHE9JmhuZWFyPUphcGFuLCtLeSVDNSU4RHRvLWZ1LCtLeSVDNSU4RHRvLXNoaSwrRnVzaGltaS1rdSwrRnVrYWt1c2ErVHN1a2Ftb3RvY2glQzUlOEQsKyVFRiVCQyU5NiVFRiVCQyU5NyZsbD0zNC45NjM5NzQsMTM1Ljc2Nzk3JnNwbj0wLjAwNzEwNCwwLjAwODk0OCZ0PW0mej0xNyZpd2xvYz1B"
@@ -336,7 +332,7 @@
       "tafe": {
         "position": "Q2VydGlmaWNhdGUgSUkgaW4gVG91cmlzbQ==",
         "organisation": "QWRlbGFpZGUgVEFGRQ==",
-        "period": "TWF5IDIwMDAgLSBNYXkgMjAwMSB8",
+        "period": "TWF5IDIwMDAgLSBNYXkgMjAwMSB8IA==",
         "location": {
           "name": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",
           "link": "aHR0cHM6Ly9tYXBzLmdvb2dsZS5jb20uYXUvbWFwcz9mPXEmc291cmNlPXNfcSZobD1lbiZnZW9jb2RlPSZxPTEyMCtDdXJyaWUrU3RyZWV0K0FERUxBSURFK1NBKzUwMDAmYXE9JnNsbD0zNC45NjM5NzQsMTM1Ljc2Nzk3JnNzcG49MC4wMDcxMDQsMC4wMDg5NDgmdnBzcmM9NiZpZT1VVEY4JmhxPSZobmVhcj0xMjArQ3VycmllK1N0LCtBZGVsYWlkZStTb3V0aCtBdXN0cmFsaWErNTAwMCZ0PW0mbGw9LTM0LjkyNDU0LDEzOC41OTU1MTImc3BuPTAuMDE0MjE1LDAuMDE3ODk2Jno9MTYmaXdsb2M9QQ=="
