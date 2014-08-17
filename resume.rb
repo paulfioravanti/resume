@@ -1,8 +1,4 @@
 # encoding: utf-8
-require 'base64'
-require 'open-uri'
-require 'json'
-
 ################################################################################
 ### This resume lives online at https://github.com/paulfioravanti/resume
 ### in case you want to see a more readable, structured version of the files.
@@ -22,10 +18,14 @@ require 'json'
 ###    $ rspec resume.rb
 ###
 ################################################################################
+require 'base64'
+require 'open-uri'
+require 'json'
+
 module ResumeGenerator
   # This const would only ever be defined when this file's specs
-  # are run in the repo with the structured version.
-  VERSION = '0.0.1' unless const_defined?(:VERSION)
+  # are run in the repo with the structured version of the resume.
+  VERSION = '0.0.2' unless const_defined?(:VERSION)
   DOCUMENT_NAME = 'Resume'
 
   module Colourable
