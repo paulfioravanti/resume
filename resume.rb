@@ -635,9 +635,6 @@ module ResumeGenerator
 
     describe 'PDF generator gem installation' do
       let(:prawn_gem) { double('prawn_gem') }
-      let(:checking_ability_to_generate_resume) do
-        -> { cli.send(:check_ability_to_generate_resume) }
-      end
 
       before do
         allow(Gem::Specification).to \

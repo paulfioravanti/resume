@@ -31,14 +31,11 @@ describe CLI do
 
   describe 'PDF generator gem installation' do
     let(:prawn_gem) { double('prawn_gem') }
-    let(:checking_ability_to_generate_resume) do
-      -> { cli.send(:check_ability_to_generate_resume) }
-    end
 
     before do
       allow(Gem::Specification).to \
         receive(:find_by_name).with('prawn').and_return(prawn_gem)
-      allow(Gem::Version).to receive(:new).and_return(1)
+      allow(Gem::Version).to receive(:new).with(anything).and_return(1)
     end
 
     context 'user has the expected gem installed' do
