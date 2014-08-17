@@ -7,6 +7,10 @@ describe Resume do
     open('http://farm4.staticflickr.com/3722/10753699026_a1603247cf_m.jpg')
   end
 
+  before do
+    allow($stdout).to receive(:write)
+  end
+
   describe ".generate" do
     let(:filename) { "#{ResumeGenerator::DOCUMENT_NAME}.pdf" }
 
