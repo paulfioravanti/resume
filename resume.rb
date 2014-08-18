@@ -55,6 +55,18 @@ module ResumeGenerator
   module Messages
     include Colourable
 
+    def inform_creation_of_social_media_links
+      puts 'Creating social media links...'
+    end
+
+    def inform_creation_of_employment_history
+      puts 'Creating employment history section...'
+    end
+
+    def inform_creation_of_education_history
+      puts 'Creating education history section...'
+    end
+
     private
 
     def request_gem_installation
@@ -125,10 +137,6 @@ module ResumeGenerator
   class CLI
     include Messages
 
-    def self.report(string)
-      puts string
-    end
-
     def start
       check_ability_to_generate_resume
       generate_resume
@@ -158,7 +166,7 @@ module ResumeGenerator
       require 'prawn'
       require 'prawn/table'
       inform_start_of_resume_generation
-      Resume.generate
+      Resume.generate(self)
     end
 
     def clean_up
@@ -543,7 +551,6 @@ module ResumeGenerator
     end
 
     def social_media_icons
-      CLI.report 'Creating social media links section...'
       move_down 5
       resources = resources_for(RESUME[:social_media])
       x_position = 0
@@ -558,7 +565,6 @@ module ResumeGenerator
     end
 
     def employment_history
-      CLI.report 'Creating employment history section...'
       heading d('RW1wbG95bWVudCBIaXN0b3J5')
       entries = RESUME[:entries]
       rc(entries[:rc])
@@ -573,7 +579,6 @@ module ResumeGenerator
     end
 
     def education_history
-      CLI.report('Creating education history section...')
       heading d('RWR1Y2F0aW9u')
       entries = RESUME[:entries]
       mit(entries[:mit])
@@ -584,15 +589,18 @@ module ResumeGenerator
   end
 
   class Resume
-    def self.generate
+    def self.generate(cli)
       Prawn::Document.class_eval do
         include ResumeHelper
       end
       Prawn::Document.generate("#{DOCUMENT_NAME}.pdf", pdf_options) do
         name
         headline
+        cli.inform_creation_of_social_media_links
         social_media_icons
+        cli.inform_creation_of_employment_history
         employment_history
+        cli.inform_creation_of_education_history
         education_history
       end
     end
@@ -633,14 +641,6 @@ module ResumeGenerator
       allow(cli).to receive(:gets).and_return(user_input)
       allow(cli).to receive(:system) # stub out `gem install ...`
       allow($stdout).to receive(:write) # suppress message cruft from stdout
-    end
-
-    describe '.report' do
-      let(:reporting_to_cli) { -> { CLI.report('hello') } }
-
-      it 'outputs the passed in message to stdout' do
-        expect(reporting_to_cli).to output("hello\n").to_stdout
-      end
     end
 
     describe '#start' do
@@ -836,6 +836,34 @@ module ResumeGenerator
     end
   end
 
+  RSpec.describe Messages do
+    let(:klass) { Class.new { include Messages }.new }
+    let(:outputting_message) { -> { message } }
+
+    describe '#inform_creation_of_social_media_links' do
+      let(:message) { klass.inform_creation_of_social_media_links }
+
+      it 'outputs a message to stdout' do
+        expect(outputting_message).to output.to_stdout
+      end
+    end
+
+    describe '#inform_creation_of_employment_history' do
+      let(:message) { klass.inform_creation_of_employment_history }
+
+      it 'outputs a message to stdout' do
+        expect(outputting_message).to output.to_stdout
+      end
+    end
+
+    describe '#inform_creation_of_education_history' do
+      let(:message) { klass.inform_creation_of_education_history }
+
+      it 'outputs a message to stdout' do
+        expect(outputting_message).to output.to_stdout
+      end
+    end
+  end
 
   RSpec.describe Resource do
     describe '.for' do
@@ -940,17 +968,21 @@ module ResumeGenerator
 
     describe ".generate" do
       let(:filename) { "#{ResumeGenerator::DOCUMENT_NAME}.pdf" }
+      let(:cli) { double('cli').as_null_object }
 
       before do
         allow(Resume).to \
           receive(:background_image).and_return(placeholder_image)
         allow(Resource).to \
           receive(:open).with(anything).and_return(placeholder_image)
-        Resume.generate
+        Resume.generate(cli)
       end
       after { File.delete(filename) }
 
-      it 'generates a pdf resume' do
+      it 'generates a pdf resume and notifies the creation of each part' do
+        expect(cli).to have_received(:inform_creation_of_social_media_links)
+        expect(cli).to have_received(:inform_creation_of_employment_history)
+        expect(cli).to have_received(:inform_creation_of_education_history)
         expect(File.exist?(filename)).to be true
       end
     end
