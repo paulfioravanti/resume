@@ -15,14 +15,6 @@ RSpec.describe CLI do
     allow($stdout).to receive(:write) # suppress message cruft from stdout
   end
 
-  describe '.report' do
-    let(:reporting_to_cli) { -> { CLI.report('hello') } }
-
-    it 'outputs the passed in message to stdout' do
-      expect(reporting_to_cli).to output("hello\n").to_stdout
-    end
-  end
-
   describe '#start' do
     it 'runs the script' do
       expect(cli).to receive(:check_ability_to_generate_resume)

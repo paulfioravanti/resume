@@ -2,15 +2,18 @@ require 'resume_helper'
 
 module ResumeGenerator
   class Resume
-    def self.generate
+    def self.generate(cli)
       Prawn::Document.class_eval do
         include ResumeHelper
       end
       Prawn::Document.generate("#{DOCUMENT_NAME}.pdf", pdf_options) do
         name
         headline
+        cli.inform_creation_of_social_media_links
         social_media_icons
+        cli.inform_creation_of_employment_history
         employment_history
+        cli.inform_creation_of_education_history
         education_history
       end
     end

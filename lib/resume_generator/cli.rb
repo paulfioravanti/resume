@@ -8,10 +8,6 @@ module ResumeGenerator
   class CLI
     include Messages
 
-    def self.report(string)
-      puts string
-    end
-
     def start
       check_ability_to_generate_resume
       generate_resume
@@ -41,7 +37,7 @@ module ResumeGenerator
       require 'prawn'
       require 'prawn/table'
       inform_start_of_resume_generation
-      Resume.generate
+      Resume.generate(self)
     end
 
     def clean_up

@@ -4,6 +4,18 @@ module ResumeGenerator
   module Messages
     include Colourable
 
+    def inform_creation_of_social_media_links
+      puts 'Creating social media links...'
+    end
+
+    def inform_creation_of_employment_history
+      puts 'Creating employment history section...'
+    end
+
+    def inform_creation_of_education_history
+      puts 'Creating education history section...'
+    end
+
     private
 
     def request_gem_installation

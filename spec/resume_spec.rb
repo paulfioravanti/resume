@@ -14,17 +14,21 @@ RSpec.describe Resume do
 
   describe ".generate" do
     let(:filename) { "#{ResumeGenerator::DOCUMENT_NAME}.pdf" }
+    let(:cli) { double('cli').as_null_object }
 
     before do
       allow(Resume).to \
         receive(:background_image).and_return(placeholder_image)
       allow(Resource).to \
         receive(:open).with(anything).and_return(placeholder_image)
-      Resume.generate
+      Resume.generate(cli)
     end
     after { File.delete(filename) }
 
-    it 'generates a pdf resume' do
+    it 'generates a pdf resume and notifies the creation of each part' do
+      expect(cli).to have_received(:inform_creation_of_social_media_links)
+      expect(cli).to have_received(:inform_creation_of_employment_history)
+      expect(cli).to have_received(:inform_creation_of_education_history)
       expect(File.exist?(filename)).to be true
     end
   end
