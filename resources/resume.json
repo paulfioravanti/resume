@@ -248,7 +248,9 @@
       },
       "mit": {
         "position": "TWFzdGVycyBvZiBJbmZvcm1hdGlvbiBUZWNobm9sb2d5",
+        "position_size": 11,
         "organisation": "VW5pdmVyc2l0eSBvZiBTb3V0aCBBdXN0cmFsaWE=",
+        "organisation_size": 10,
         "period": "MjAwNC0yMDA1IHwg",
         "location": {
           "name": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",
@@ -271,7 +273,9 @@
       },
       "bib": {
         "position": "QmFjaGVsb3Igb2YgSW50ZXJuYXRpb25hbCBCdXNpbmVzcw==",
+        "position_size": 11,
         "organisation": "RmxpbmRlcnMgVW5pdmVyc2l0eQ==",
+        "organisation_size": 10,
         "period": "MTk5Ny0xOTk5IHwg",
         "location": {
           "name": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",
@@ -295,7 +299,9 @@
       },
       "ryu": {
         "position": "U3R1ZGVudCBFeGNoYW5nZSBQcm9ncmFtbWU=",
+        "position_size": 11,
         "organisation": "Unl1a29rdSBVbml2ZXJzaXR5",
+        "organisation_size": 10,
         "period": "U2VwIDE5OTkgLSBGZWIgMjAwMCB8IA==",
         "location": {
           "name": "S3lvdG8sIEphcGFu",
@@ -318,7 +324,9 @@
       },
       "tafe": {
         "position": "Q2VydGlmaWNhdGUgSUkgaW4gVG91cmlzbQ==",
+        "position_size": 11,
         "organisation": "QWRlbGFpZGUgVEFGRQ==",
+        "organisation_size": 10,
         "period": "TWF5IDIwMDAgLSBNYXkgMjAwMSB8IA==",
         "location": {
           "name": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",

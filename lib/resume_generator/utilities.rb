@@ -47,47 +47,46 @@ module ResumeGenerator
 
     def position(entry)
       formatted_text(
-        formatted_position(d(entry[:position]))
+        formatted_entry(
+          d(entry[:position]), entry[:position_size] || 12
+        )
       )
     end
 
     def position_at(entry)
       formatted_text_box(
-        formatted_position(d(entry[:position])),
+        formatted_entry(
+          d(entry[:position]), entry[:position_size] || 12
+        ),
         at: [entry[:at], cursor]
       )
       move_down 14
     end
 
-    def formatted_position(string)
-      [
-        {
-          text: string,
-          styles: [:bold]
-        }
-      ]
-    end
-
     def organisation(entry)
       formatted_text(
-        formatted_organisation(d(entry[:organisation]))
+        formatted_entry(
+          d(entry[:organisation]), entry[:organisation_size] || 11
+        )
       )
     end
 
     def organisation_at(entry)
       formatted_text_box(
-        formatted_organisation(d(entry[:organisation])),
+        formatted_entry(
+          d(entry[:organisation]), entry[:organisation_size] || 11
+        ),
         at: [entry[:at], cursor]
       )
       move_down 13
     end
 
-    def formatted_organisation(string)
+    def formatted_entry(string, size)
       [
         {
           text: string,
           styles: [:bold],
-          size: 11
+          size: size
         }
       ]
     end
