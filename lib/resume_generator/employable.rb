@@ -53,7 +53,7 @@ module ResumeGenerator
     end
 
     def summary(string)
-      text d(string)
+      text(d(string), inline_format: true)
     end
 
     def profile(items)
