@@ -12,8 +12,7 @@ module ResumeGenerator
 
     def fl(entry)
       header_text_for(entry)
-      organisation_logo_for(entry, :ruby)
-      organisation_logo_for(entry, :rails, 33)
+      organisation_logo_for(entry, :fl)
       content_for(entry, 15)
     end
 
