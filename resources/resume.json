@@ -18,7 +18,7 @@
         },
         "twitter": {
           "image": "http://farm3.staticflickr.com/2837/8799235993_26a7d17540_m.jpg",
-          "link": "aHR0cHM6Ly90d2l0dGVyLmNvbS9wZWZpb3JhdmFudGk="
+          "link": "aHR0cHM6Ly90d2l0dGVyLmNvbS9wYXVsX2Zpb3JhdmFudGk="
         },
         "github": {
           "image": "http://farm4.staticflickr.com/3828/8799239149_d23e4acff0_m.jpg",
@@ -39,6 +39,10 @@
         "code_school": {
           "image": "http://farm4.staticflickr.com/3714/9015339024_0651daf2c4_m.jpg",
           "link": "aHR0cDovL3d3dy5jb2Rlc2Nob29sLmNvbS91c2Vycy9wYXVsZmlvcmF2YW50aQ=="
+        },
+        "duolingo": {
+          "image": "http://farm4.staticflickr.com/3924/14820544427_61dc0701fa_t.jpg",
+          "link": "aHR0cHM6Ly93d3cuZHVvbGluZ28uY29tL3BhdWxmaW9yYXZhbnRp"
         }
       },
       "properties": {
