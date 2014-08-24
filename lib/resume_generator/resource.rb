@@ -5,17 +5,17 @@ module ResumeGenerator
     attr_reader :image, :link, :width, :height, :fit, :align,
                 :move_up, :bars, :size, :origin, :at
 
-    def self.for(hash)
-      hash[:image] = open(hash[:image])
-      hash[:link] = d(hash[:link])
-      hash[:align] = hash[:align].to_sym
-      new(hash)
+    def self.for(params)
+      params[:image] = open(params[:image])
+      params[:link] = d(params[:link])
+      params[:align] = params[:align].to_sym
+      new(params)
     end
 
     private
 
-    def initialize(options)
-      options.each do |attribute, value|
+    def initialize(params)
+      params.each do |attribute, value|
         instance_variable_set("@#{attribute}", value)
       end
     end
