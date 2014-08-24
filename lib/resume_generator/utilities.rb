@@ -1,4 +1,5 @@
 module ResumeGenerator
+  # Bag O' Methods Module
   module Utilities
     private
 
@@ -11,11 +12,7 @@ module ResumeGenerator
 
     def social_media_icon_for(resource, x_position)
       bounding_box([x_position, cursor], width: resource.width) do
-        image(
-          resource.image,
-          fit: resource.fit,
-          align: resource.align
-        )
+        image(resource.image, fit: resource.fit, align: resource.align)
         move_up 35
         transparent_link(resource)
       end
@@ -51,7 +48,7 @@ module ResumeGenerator
       table_data = items.reduce([]) do |data, item|
         data << ['•', d(item)]
       end
-      table(table_data, cell_style: { borders: [], height: "21" })
+      table(table_data, cell_style: { borders: [], height: 21 })
     end
 
     def formatted_text_fields_for(entry)
@@ -76,7 +73,7 @@ module ResumeGenerator
     end
 
     def logo_link_for(entry)
-      logo = logo_resource(entry)
+      logo = Resource.for(entry[:logo].merge(at: entry[:at]))
       move_up entry[:y_logo_start] || 40
       bounding_box([logo.origin, cursor],
         width: logo.width, height: logo.height) do
@@ -84,11 +81,6 @@ module ResumeGenerator
         move_up logo.move_up
         transparent_link(logo)
       end
-    end
-
-    def logo_resource(entry)
-      logo = entry[:logo].merge(at: entry[:at])
-      Resource.for(logo)
     end
 
     def transparent_link(resource)
