@@ -2,6 +2,31 @@ module ResumeGenerator
   module Utilities
     private
 
+    def resources_for(social_media)
+      social_media[:resources].values.map do |social_medium|
+        social_medium.merge!(social_media[:properties])
+        Resource.for(social_medium)
+      end
+    end
+
+    def social_media_icon_for(resource, x_position)
+      bounding_box([x_position, cursor], width: resource.width) do
+        image(
+          resource.image,
+          fit: resource.fit,
+          align: resource.align
+        )
+        move_up 35
+        transparent_link(resource)
+      end
+    end
+
+    def listing_for(entry)
+      header_for(entry)
+      logo_link_for(entry)
+      details_for(entry) if entry.has_key?(:summary)
+    end
+
     def header_for(entry)
       move_down entry[:y_header_start] || 15
       if entry[:at]
@@ -9,6 +34,25 @@ module ResumeGenerator
       else
         formatted_text_fields_for(entry)
       end
+    end
+
+    def details_for(entry)
+      move_down entry[:y_details_start] || 10
+      summary(entry[:summary])
+      profile(entry[:profile])
+    end
+
+    def summary(string)
+      text(d(string), inline_format: true)
+    end
+
+    def profile(items)
+      return unless items
+      table_data = []
+      items.each do |item|
+        table_data << ['•', d(item)]
+      end
+      table(table_data, cell_style: { borders: [], height: "21" })
     end
 
     def formatted_text_fields_for(entry)

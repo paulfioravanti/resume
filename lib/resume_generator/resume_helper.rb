@@ -1,13 +1,11 @@
 require 'json'
 require 'open-uri'
 require 'decodable'
-require 'sociable'
-require 'employable'
-require 'educatable'
+require 'utilities'
 
 module ResumeGenerator
   module ResumeHelper
-    include Decodable, Sociable, Employable, Educatable
+    include Decodable, Utilities
 
     RESUME = JSON.parse(
       open('resources/resume.json').read,
@@ -69,13 +67,9 @@ module ResumeGenerator
     def employment_history
       heading d('RW1wbG95bWVudCBIaXN0b3J5')
       entries = RESUME[:entries]
-      employment_listing_for(entries[:rc])
-      employment_listing_for(entries[:fl])
-      employment_listing_for(entries[:gw])
-      employment_listing_for(entries[:rnt])
-      employment_listing_for(entries[:sra])
-      employment_listing_for(entries[:jet])
-      employment_listing_for(entries[:satc])
+      [:rc, :fl, :gw, :rnt, :sra, :jet, :satc].each do |entry|
+        listing_for(entries[entry])
+      end
       move_down 10
       stroke_horizontal_rule { color '666666' }
     end
@@ -83,10 +77,9 @@ module ResumeGenerator
     def education_history
       heading d('RWR1Y2F0aW9u')
       entries = RESUME[:entries]
-      education_listing_for(entries[:mit])
-      education_listing_for(entries[:bib])
-      education_listing_for(entries[:ryu])
-      education_listing_for(entries[:tafe])
+      [:mit, :bib, :ryu, :tafe].each do |entry|
+        listing_for(entries[entry])
+      end
     end
   end
 end
