@@ -5,7 +5,7 @@ module ResumeGenerator
     include Utilities
 
     def mit(entry)
-      header_text_for(entry)
+      header_text_for(entry, 5)
       organisation_logo_for(entry, :mit)
     end
 

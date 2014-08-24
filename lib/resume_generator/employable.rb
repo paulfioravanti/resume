@@ -5,7 +5,7 @@ module ResumeGenerator
     include Utilities
 
     def rc(entry)
-      header_text_for(entry, 10)
+      header_text_for(entry, 5)
       organisation_logo_for(entry, :rc)
       content_for(entry)
     end
@@ -45,6 +45,8 @@ module ResumeGenerator
       organisation_logo_for(entry, :satc)
       content_for(entry)
     end
+
+    private
 
     def content_for(entry, start_point = 10)
       move_down start_point

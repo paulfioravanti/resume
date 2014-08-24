@@ -54,6 +54,47 @@
         "size": 40
       }
     },
+    "tech_skills": {
+      "content": [
+        [
+          "QmFjayBFbmQ6",
+          "UnVieSwgUmFpbHMsIFBvc3RncmVTUUwsIFJ1YnlNb3Rpb24="
+        ],
+        [
+          "RnJvbnQgZW5kOg==",
+          "SmF2YXNjcmlwdC9KUXVlcnksIENTUy9TQ1NTLCBIVE1ML0hhbWwvRVJi"
+        ],
+        [
+          "VGVzdGluZzo=",
+          "UlNwZWMsIENhcHliYXJhLCBQb2x0ZXJnZWlzdCwgSmFzbWluZQ=="
+        ],
+        [
+          "VG9vbHM6",
+          "R2l0LCBIb21lYnJldywgVmlt"
+        ],
+        [
+          "U2VydmljZXM6",
+          "VHJlbGxvLCBHaXRodWIsIFRyYXZpcyBDSSwgQ29kZSBDbGltYXRlLCBDb2Rlc2hpcCwgSGVyb2t1LCBTbGFjaw=="
+        ],
+        [
+          "UHJvY2Vzc2VzOg==",
+          "QWdpbGUsIFNjcnVtLCBUREQsIFBhaXIgUHJvZ3JhbW1pbmcsIENvbnRpbnVvdXMgRGVwbG95bWVudA=="
+        ],
+        [
+          "Q29tbXVuaXR5Og==",
+          "UmVndWxhciBSdWJ5IG9uIFJhaWxzIG1lbnRvciBhdCA8dT48YSBocmVmPSdodHRwOi8vcmFpbHNpbnN0YWxsZmVzdC5vcmcvJz5JbnN0YWxsRmVzdDwvYT48L3U+IGFuZCA8dT48YSBocmVmPSdodHRwOi8vd3d3LnJlaW50ZXJhY3RpdmUubmV0L2NvbW11bml0eS9kZXZlbG9wbWVudF9odWInPkRldmVsb3BtZW50IEh1YjwvYT48L3U+Lg=="
+        ]
+      ],
+      "properties": {
+        "column_widths": [80, 460],
+        "cell_style": {
+          "border_color": "ECECEC",
+          "background_color": "ECECEC",
+          "height": "21",
+          "inline_format": true
+        }
+      }
+    },
     "entries": {
       "rc": {
         "position": "U2VuaW9yIERldmVsb3Blcg==",
@@ -79,7 +120,7 @@
         },
         "summary": "UnVieSBvbiBSYWlscyBkZXZlbG9wZXIgZm9yIFJhdGVDaXR5IGZpbmFuY2lhbCBwcm9kdWN0cyBhbmQgc2VydmljZXMgY29tcGFyaXNvbiB3ZWJzaXRlLg==",
         "profile": [
-          "Q29uc3RhbnQgZGVsaXZlcnkgb2YgbmV3IGZlYXR1cmVzIGZvciBjb3JlIHByb2R1Y3QsIHdpdGggdGlnaHQgZGV2ZWxvcG1lbnQgZmVlZGJhY2sgbG9vcHMgb2Ygb25lIHdlZWssIG1lYXN1cmVkIGFuZCBtYW5hZ2VkIHRyYW5zcGFyZW50bHkgaW4gVHJlbGxvIGFuZCBkYWlseSBzdGFuZC11cCBtZWV0aW5ncw==",
+          "V2Vla2x5IGRlbGl2ZXJ5IG9mIG5ldyBmZWF0dXJlcyBmb3IgY29yZSBwcm9kdWN0LCBmcm9tIHVzZXIgc3RvcnkgdG8gVEREIHRvIHByb2R1Y3Rpb24=",
           "TWFpbnRlbmFuY2UgYW5kIGltcHJvdmVtZW50IG9mIGNvZGUgYW5kIHRlc3QgY292ZXJhZ2UgZm9yIGN1cnJlbnQgZmVhdHVyZXM=",
           "UHJvZHVjdCB1cGdyYWRlLCByZS13cml0ZSwgYW5kIG1pZ3JhdGlvbiB0byBuZXdlciBSYWlscyB2ZXJzaW9ucw==",
           "UGVlciByZXZpZXcgYW5kIHN0cmljdCBxdWFsaXR5IGNvbnRyb2wgb2YgY29kZQ==",

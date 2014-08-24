@@ -34,12 +34,8 @@ module ResumeGenerator
       headline = RESUME[:headline]
       formatted_text(
         [
-          {
-            text: d(headline[:ruby]), color: '85200C'
-          },
-          {
-            text: d(headline[:other])
-          }
+          { text: d(headline[:ruby]), color: '85200C' },
+          { text: d(headline[:other]) }
         ],
         size: 14
       )
@@ -60,56 +56,14 @@ module ResumeGenerator
     end
 
     def technical_skills
-      # tech_skills = RESUME[:tech_skills]
-      move_down 10
-      formatted_text(
-        [
-          {
-            text: "Technical Skills",
-            styles: [:bold],
-            color: '666666'
-          }
-        ]
-      )
+      heading d("VGVjaG5pY2FsIFNraWxscw==")
       move_down 5
-      table(
-        [
-          [
-            "Back End:",
-            "Ruby, Rails, PostgreSQL, RubyMotion"
-          ],
-          [
-            "Front end:",
-            "Javascript/JQuery, CSS/SCSS, HTML/Haml"
-          ],
-          [
-            "Testing:",
-            "RSpec, Capybara, Poltergeist, Jasmine"
-          ],
-          [
-            "Tools:",
-            "Git, Homebrew, Vim"
-          ],
-          [
-            "Services:",
-            "Trello, Github, Travis CI, Code Climate, Codeship, Heroku, Slack"
-          ],
-          [
-            "Processes:",
-            "Agile, Scrum, TDD, Pair Programming, Continuous Deployment"
-          ],
-          [
-            "Community:",
-            "Regular Ruby on Rails mentor at InstallFest and Development Hub"
-          ]
-        ],
-        column_widths: [80, 460],
-        cell_style: {
-          border_color: "ECECEC",
-          background_color: "ECECEC",
-          height: "21"
-        }
-      )
+      tech_skills = RESUME[:tech_skills]
+      table_data = []
+      tech_skills[:content].each do |title, entry|
+        table_data << [d(title), d(entry)]
+      end
+      table(table_data, tech_skills[:properties])
     end
 
     def employment_history
