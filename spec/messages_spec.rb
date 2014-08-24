@@ -10,6 +10,14 @@ RSpec.describe Messages do
     end
   end
 
+  describe '#inform_creation_of_technical_skills' do
+    let(:message) { messagable.inform_creation_of_technical_skills }
+
+    it 'outputs a message to stdout' do
+      expect(outputting_message).to output.to_stdout
+    end
+  end
+
   describe '#inform_creation_of_employment_history' do
     let(:message) { messagable.inform_creation_of_employment_history }
 
