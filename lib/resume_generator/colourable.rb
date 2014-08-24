@@ -2,24 +2,24 @@ module ResumeGenerator
   module Colourable
     private
 
-    def colorize(text, color_code)
-      "\e[#{color_code}m#{text}\e[0m"
+    def colourize(text, colour_code)
+      "\e[#{colour_code}m#{text}\e[0m"
     end
 
     def red(text)
-      colorize(text, 31)
+      colourize(text, 31)
     end
 
     def yellow(text)
-      colorize(text, 33)
+      colourize(text, 33)
     end
 
     def green(text)
-      colorize(text, 32)
+      colourize(text, 32)
     end
 
     def cyan(text)
-      colorize(text, 36)
+      colourize(text, 36)
     end
   end
 end
