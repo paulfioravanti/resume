@@ -5,8 +5,11 @@ module ResumeGenerator
 
     def header_text_for(entry, y_start = 15)
       move_down y_start
-      return formatted_text_boxes_for(entry) if entry[:at]
-      formatted_text_fields_for(entry)
+      if entry[:at]
+        formatted_text_boxes_for(entry)
+      else
+        formatted_text_fields_for(entry)
+      end
     end
 
     def formatted_text_fields_for(entry)
@@ -16,8 +19,8 @@ module ResumeGenerator
     end
 
     def formatted_text_boxes_for(entry)
-      position_at(entry)
-      organisation_at(entry)
+      formatted_entry_for(entry[:position], 12, entry[:at], 14)
+      formatted_entry_for(entry[:organisation], 11, entry[:at], 13)
       period_and_location_at(entry)
     end
 
@@ -54,26 +57,10 @@ module ResumeGenerator
       )
     end
 
-    def position_at(entry)
-      formatted_text_box(
-        formatted_entry(d(entry[:position]), 12),
-        at: [entry[:at], cursor]
-      )
-      move_down 14
-    end
-
     def organisation(entry)
       formatted_text(
         formatted_entry(d(entry[:organisation]), 11)
       )
-    end
-
-    def organisation_at(entry)
-      formatted_text_box(
-        formatted_entry(d(entry[:organisation]), 11),
-        at: [entry[:at], cursor]
-      )
-      move_down 13
     end
 
     def formatted_entry(string, size)
@@ -84,6 +71,14 @@ module ResumeGenerator
           size: size
         }
       ]
+    end
+
+    def formatted_entry_for(item, size, at, reset_point)
+      formatted_text_box(
+        formatted_entry(d(item), size),
+        at: [at, cursor]
+      )
+      move_down reset_point
     end
 
     def period_and_location(entry)
