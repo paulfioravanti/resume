@@ -57,9 +57,8 @@ module ResumeGenerator
       heading d("VGVjaG5pY2FsIFNraWxscw==")
       move_down 5
       tech_skills = RESUME[:tech_skills]
-      table_data = []
-      tech_skills[:content].each do |title, entry|
-        table_data << [d(title), d(entry)]
+      table_data = tech_skills[:content].reduce([]) do |data, entry|
+        data << [d(entry.first), d(entry.last)]
       end
       table(table_data, tech_skills[:properties])
     end

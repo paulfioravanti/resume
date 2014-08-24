@@ -48,34 +48,41 @@ module ResumeGenerator
 
     def profile(items)
       return unless items
-      table_data = []
-      items.each do |item|
-        table_data << ['•', d(item)]
+      table_data = items.reduce([]) do |data, item|
+        data << ['•', d(item)]
       end
       table(table_data, cell_style: { borders: [], height: "21" })
     end
 
     def formatted_text_fields_for(entry)
-      position(entry)
-      organisation(entry)
-      period_and_location(entry)
+      formatted_entry(d(entry[:position]), 12)
+      formatted_entry(d(entry[:organisation]), 11)
+      period_and_location(
+        d(entry[:period]),
+        d(entry[:location][:name]),
+        d(entry[:location][:link])
+      )
     end
 
     def formatted_text_boxes_for(entry)
-      formatted_entry_for(entry[:position], 12, entry[:at], 14)
-      formatted_entry_for(entry[:organisation], 11, entry[:at], 13)
-      period_and_location_at(entry)
+      formatted_entry_for(d(entry[:position]), 12, entry[:at], 14)
+      formatted_entry_for(d(entry[:organisation]), 11, entry[:at], 13)
+      period_and_location_at(
+        d(entry[:period]),
+        d(entry[:location][:name]),
+        d(entry[:location][:link]),
+        [entry[:at], cursor]
+      )
     end
 
     def logo_link_for(entry)
-      resource = logo_resource(entry)
+      logo = logo_resource(entry)
       move_up entry[:y_logo_start] || 40
-      bounding_box([resource.origin, cursor],
-                   width: resource.width,
-                   height: resource.height) do
-        image resource.image, fit: resource.fit, align: resource.align
-        move_up resource.move_up
-        transparent_link(resource)
+      bounding_box([logo.origin, cursor],
+        width: logo.width, height: logo.height) do
+        image logo.image, fit: logo.fit, align: logo.align
+        move_up logo.move_up
+        transparent_link(logo)
       end
     end
 
@@ -111,66 +118,58 @@ module ResumeGenerator
       )
     end
 
-    def position(entry)
+    def formatted_entry(item, size)
       formatted_text(
-        formatted_entry(d(entry[:position]), 12)
+        *formatted_entry_args_for(item, size),
       )
-    end
-
-    def organisation(entry)
-      formatted_text(
-        formatted_entry(d(entry[:organisation]), 11)
-      )
-    end
-
-    def formatted_entry(string, size)
-      [
-        {
-          text: string,
-          styles: [:bold],
-          size: size
-        }
-      ]
     end
 
     def formatted_entry_for(item, size, at, reset_point)
       formatted_text_box(
-        formatted_entry(d(item), size),
-        at: [at, cursor]
+        *formatted_entry_args_for(item, size, [at, cursor])
       )
       move_down reset_point
     end
 
-    def period_and_location(entry)
+    def period_and_location(period, location, link)
       formatted_text(
-        [
-          {
-            text: d(entry[:period])
-          },
-          {
-            text: d(entry[:location][:name]),
-            link: d(entry[:location][:link])
-          }
-        ],
-        color: '666666',
-        size: 10
+        *period_and_location_args_for(period, location, link)
       )
     end
 
-    def period_and_location_at(entry)
+    def period_and_location_at(period, location, link, at)
       formatted_text_box(
+        *period_and_location_args_for(period, location, link, at)
+      )
+    end
+
+    def formatted_entry_args_for(string, size, at = nil)
+      [
         [
           {
-            text: d(entry[:period]), color: '666666', size: 10
+            text: string,
+            styles: [:bold],
+            size: size
+          }
+        ],
+        at: at
+      ]
+    end
+
+    def period_and_location_args_for(period, name, link, at = nil)
+      [
+        [
+          {
+            text: period, color: '666666', size: 10
           },
           {
-            text: d(entry[:location][:name]),
-            link: d(entry[:location][:link]),
+            text: name,
+            link: link,
             color: '666666', size: 10
           }
         ],
-        at: [entry[:at], cursor]
-      )
+        at: at
+      ]
     end
   end
 end
