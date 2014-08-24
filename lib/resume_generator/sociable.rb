@@ -4,6 +4,8 @@ module ResumeGenerator
   module Sociable
     include Utilities
 
+    private
+
     def resources_for(social_media)
       social_media[:resources].values.map do |social_medium|
         social_medium.merge!(social_media[:properties])

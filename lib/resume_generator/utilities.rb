@@ -1,5 +1,8 @@
 module ResumeGenerator
   module Utilities
+
+    private
+
     def header_text_for(entry, y_start = 15)
       move_down y_start
       return formatted_text_boxes_for(entry) if entry[:at]
@@ -47,17 +50,13 @@ module ResumeGenerator
 
     def position(entry)
       formatted_text(
-        formatted_entry(
-          d(entry[:position]), entry[:position_size] || 12
-        )
+        formatted_entry(d(entry[:position]), 12)
       )
     end
 
     def position_at(entry)
       formatted_text_box(
-        formatted_entry(
-          d(entry[:position]), entry[:position_size] || 12
-        ),
+        formatted_entry(d(entry[:position]), 12),
         at: [entry[:at], cursor]
       )
       move_down 14
@@ -65,17 +64,13 @@ module ResumeGenerator
 
     def organisation(entry)
       formatted_text(
-        formatted_entry(
-          d(entry[:organisation]), entry[:organisation_size] || 11
-        )
+        formatted_entry(d(entry[:organisation]), 11)
       )
     end
 
     def organisation_at(entry)
       formatted_text_box(
-        formatted_entry(
-          d(entry[:organisation]), entry[:organisation_size] || 11
-        ),
+        formatted_entry(d(entry[:organisation]), 11),
         at: [entry[:at], cursor]
       )
       move_down 13
