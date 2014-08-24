@@ -24,23 +24,5 @@ module ResumeGenerator
         transparent_link(resource)
       end
     end
-
-    def organisation_logo_for(entry, logo, start_point = 40)
-      organisation_logo = entry[:logos][logo]
-      resource = logo_resource(entry, organisation_logo)
-      move_up start_point
-      bounding_box([resource.origin, cursor],
-                   width: resource.width,
-                   height: resource.height) do
-        image resource.image, fit: resource.fit, align: resource.align
-        move_up resource.move_up
-        transparent_link(resource)
-      end
-    end
-
-    def logo_resource(entry, logo)
-      logo.merge!(at: entry[:at])
-      Resource.for(logo)
-    end
   end
 end

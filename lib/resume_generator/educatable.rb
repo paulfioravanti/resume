@@ -1,31 +1,15 @@
 require 'utilities'
 
 module ResumeGenerator
+  # Methods are deliberately named obscurely to negate keyword indexing in
+  # online code repositories, but they represent each entry in the
+  # Education section
   module Educatable
     include Utilities
 
-    def mit(entry)
-      header_text_for(entry, 5)
-      organisation_logo_for(entry, :mit)
-    end
-
-    def bib(entry)
-      move_up 38
-      header_text_for(entry, 0)
-      move_up 30
-      organisation_logo_for(entry, :bib, 0)
-    end
-
-    def ryu(entry)
-      header_text_for(entry, 20)
-      organisation_logo_for(entry, :ryu)
-    end
-
-    def tafe(entry)
-      move_up 38
-      header_text_for(entry, 0)
-      move_up 23
-      organisation_logo_for(entry, :tafe, 0)
+    def education_listing_for(entry)
+      header_for(entry)
+      logo_link_for(entry)
     end
   end
 end

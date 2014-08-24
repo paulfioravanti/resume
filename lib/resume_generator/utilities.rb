@@ -1,10 +1,9 @@
 module ResumeGenerator
   module Utilities
-
     private
 
-    def header_text_for(entry, y_start = 15)
-      move_down y_start
+    def header_for(entry)
+      move_down entry[:y_header_start] || 15
       if entry[:at]
         formatted_text_boxes_for(entry)
       else
@@ -22,6 +21,23 @@ module ResumeGenerator
       formatted_entry_for(entry[:position], 12, entry[:at], 14)
       formatted_entry_for(entry[:organisation], 11, entry[:at], 13)
       period_and_location_at(entry)
+    end
+
+    def logo_link_for(entry)
+      resource = logo_resource(entry)
+      move_up entry[:y_logo_start] || 40
+      bounding_box([resource.origin, cursor],
+                   width: resource.width,
+                   height: resource.height) do
+        image resource.image, fit: resource.fit, align: resource.align
+        move_up resource.move_up
+        transparent_link(resource)
+      end
+    end
+
+    def logo_resource(entry)
+      logo = entry[:logo].merge(at: entry[:at])
+      Resource.for(logo)
     end
 
     def transparent_link(resource)

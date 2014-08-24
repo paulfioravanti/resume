@@ -1,55 +1,22 @@
 require 'utilities'
 
 module ResumeGenerator
+  # Methods are deliberately named obscurely to negate keyword indexing in
+  # online code repositories, but they represent each entry in the
+  # Employment History section
   module Employable
     include Utilities
 
-    def rc(entry)
-      header_text_for(entry, 5)
-      organisation_logo_for(entry, :rc)
-      content_for(entry)
-    end
-
-    def fl(entry)
-      header_text_for(entry)
-      organisation_logo_for(entry, :fl)
-      content_for(entry, 15)
-    end
-
-    def gw(entry)
-      header_text_for(entry)
-      organisation_logo_for(entry, :gw)
-      content_for(entry)
-    end
-
-    def rnt(entry)
-      header_text_for(entry)
-      organisation_logo_for(entry, :rnt)
-      content_for(entry)
-    end
-
-    def sra(entry)
-      header_text_for(entry)
-      organisation_logo_for(entry, :sra)
-      content_for(entry)
-    end
-
-    def jet(entry)
-      header_text_for(entry)
-      organisation_logo_for(entry, :jet)
-      content_for(entry)
-    end
-
-    def satc(entry)
-      header_text_for(entry)
-      organisation_logo_for(entry, :satc)
-      content_for(entry)
+    def employment_listing_for(entry)
+      header_for(entry)
+      logo_link_for(entry)
+      details_for(entry)
     end
 
     private
 
-    def content_for(entry, start_point = 10)
-      move_down start_point
+    def details_for(entry)
+      move_down entry[:y_details_start] || 10
       summary(entry[:summary])
       profile(entry[:profile])
     end

@@ -69,13 +69,13 @@ module ResumeGenerator
     def employment_history
       heading d('RW1wbG95bWVudCBIaXN0b3J5')
       entries = RESUME[:entries]
-      rc(entries[:rc])
-      fl(entries[:fl])
-      gw(entries[:gw])
-      rnt(entries[:rnt])
-      sra(entries[:sra])
-      jet(entries[:jet])
-      satc(entries[:satc])
+      employment_listing_for(entries[:rc])
+      employment_listing_for(entries[:fl])
+      employment_listing_for(entries[:gw])
+      employment_listing_for(entries[:rnt])
+      employment_listing_for(entries[:sra])
+      employment_listing_for(entries[:jet])
+      employment_listing_for(entries[:satc])
       move_down 10
       stroke_horizontal_rule { color '666666' }
     end
@@ -83,10 +83,10 @@ module ResumeGenerator
     def education_history
       heading d('RWR1Y2F0aW9u')
       entries = RESUME[:entries]
-      mit(entries[:mit])
-      bib(entries[:bib])
-      ryu(entries[:ryu])
-      tafe(entries[:tafe])
+      education_listing_for(entries[:mit])
+      education_listing_for(entries[:bib])
+      education_listing_for(entries[:ryu])
+      education_listing_for(entries[:tafe])
     end
   end
 end
