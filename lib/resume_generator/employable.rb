@@ -62,7 +62,7 @@ module ResumeGenerator
       items.each do |item|
         table_data << ['•', d(item)]
       end
-      table(table_data, cell_style: { borders: [] })
+      table(table_data, cell_style: { borders: [], height: "21" })
     end
   end
 end

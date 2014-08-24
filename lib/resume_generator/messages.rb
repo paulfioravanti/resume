@@ -8,6 +8,10 @@ module ResumeGenerator
       puts 'Creating social media links...'
     end
 
+    def inform_creation_of_technical_skills
+      puts 'Creating technical skills section...'
+    end
+
     def inform_creation_of_employment_history
       puts 'Creating employment history section...'
     end

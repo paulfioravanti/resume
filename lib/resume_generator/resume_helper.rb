@@ -59,6 +59,59 @@ module ResumeGenerator
       stroke_horizontal_rule { color '666666' }
     end
 
+    def technical_skills
+      # tech_skills = RESUME[:tech_skills]
+      move_down 10
+      formatted_text(
+        [
+          {
+            text: "Technical Skills",
+            styles: [:bold],
+            color: '666666'
+          }
+        ]
+      )
+      move_down 5
+      table(
+        [
+          [
+            "Back End:",
+            "Ruby, Rails, PostgreSQL, RubyMotion"
+          ],
+          [
+            "Front end:",
+            "Javascript/JQuery, CSS/SCSS, HTML/Haml"
+          ],
+          [
+            "Testing:",
+            "RSpec, Capybara, Poltergeist, Jasmine"
+          ],
+          [
+            "Tools:",
+            "Git, Homebrew, Vim"
+          ],
+          [
+            "Services:",
+            "Trello, Github, Travis CI, Code Climate, Codeship, Heroku, Slack"
+          ],
+          [
+            "Processes:",
+            "Agile, Scrum, TDD, Pair Programming, Continuous Deployment"
+          ],
+          [
+            "Community:",
+            "Regular Ruby on Rails mentor at InstallFest and Development Hub"
+          ]
+        ],
+        column_widths: [80, 460],
+        cell_style: {
+          border_color: "ECECEC",
+          background_color: "ECECEC",
+          height: "21"
+        }
+      )
+    end
+
     def employment_history
       heading d('RW1wbG95bWVudCBIaXN0b3J5')
       entries = RESUME[:entries]

@@ -11,6 +11,8 @@ module ResumeGenerator
         headline
         cli.inform_creation_of_social_media_links
         social_media_icons
+        cli.inform_creation_of_technical_skills
+        technical_skills
         cli.inform_creation_of_employment_history
         employment_history
         cli.inform_creation_of_education_history
