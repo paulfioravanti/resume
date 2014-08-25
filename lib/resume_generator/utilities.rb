@@ -87,14 +87,12 @@ module ResumeGenerator
       formatted_text_box_entry_for(d(entry[:organisation]), 11, entry[:at])
       move_down 13
       formatted_text_box(
-        *[
-           period_and_location_args_for(
-             d(entry[:period]),
-             d(entry[:location][:name]),
-             d(entry[:location][:link])
-           ),
-           at: [entry[:at], cursor]
-        ]
+        period_and_location_args_for(
+          d(entry[:period]),
+          d(entry[:location][:name]),
+          d(entry[:location][:link])
+        ),
+        at: [entry[:at], cursor]
       )
     end
 
