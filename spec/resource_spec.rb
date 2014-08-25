@@ -64,7 +64,7 @@ RSpec.describe Resource do
       expect(resource.origin).to eq(415)
     end
 
-    it 'has an at ' do
+    it 'has an at value' do
       expect(resource.at).to eq(280)
     end
   end

@@ -31,24 +31,24 @@ module ResumeGenerator
   module Colourable
     private
 
-    def colorize(text, color_code)
-      "\e[#{color_code}m#{text}\e[0m"
+    def colourize(text, colour_code:)
+      "\e[#{colour_code}m#{text}\e[0m"
     end
 
     def red(text)
-      colorize(text, 31)
+      colourize(text, colour_code: 31)
     end
 
     def yellow(text)
-      colorize(text, 33)
+      colourize(text, colour_code: 33)
     end
 
     def green(text)
-      colorize(text, 32)
+      colourize(text, colour_code: 32)
     end
 
     def cyan(text)
-      colorize(text, 36)
+      colourize(text, colour_code: 36)
     end
   end
 
@@ -57,6 +57,10 @@ module ResumeGenerator
 
     def inform_creation_of_social_media_links
       puts 'Creating social media links...'
+    end
+
+    def inform_creation_of_technical_skills
+      puts 'Creating technical skills section...'
     end
 
     def inform_creation_of_employment_history
@@ -220,7 +224,9 @@ module ResumeGenerator
   end
 
   module Decodable
-    def d(string) # decode string
+    # This is just a helper method due to the sheer amount of decoding that
+    # occurs throughout the code
+    def d(string)
       Base64.strict_decode64(string)
     end
   end
@@ -228,42 +234,126 @@ module ResumeGenerator
   class Resource
     extend Decodable
 
-    attr_reader :image, :link, :width, :height, :fit, :align, :move_up, :bars,
-                :size, :origin, :at
+    attr_reader :image, :link, :width, :height, :fit, :align,
+                :move_up, :bars, :size, :origin, :at
 
-    def self.for(hash)
-      hash[:image] = open(hash[:image])
-      hash[:link] = d(hash[:link])
-      hash[:align] = hash[:align].to_sym
-      new(hash)
+    def self.for(params)
+      params[:image] = open(params[:image])
+      params[:link] = d(params[:link])
+      params[:align] = params[:align].to_sym
+      new(params)
     end
 
     private
 
-    def initialize(options)
-      options.each do |attribute, value|
+    def initialize(params)
+      params.each do |attribute, value|
         instance_variable_set("@#{attribute}", value)
       end
     end
   end
 
+  # Bag O' Methods Module.
   module Utilities
-    def header_text_for(entry, y_start = 15)
-      move_down y_start
-      return formatted_text_boxes_for(entry) if entry[:at]
-      formatted_text_fields_for(entry)
+    private
+
+    def social_media_icon_set_for(social_media)
+      resources = resources_for(social_media)
+      x_position = 0
+      social_media_icon_for(resources.first, x_position)
+      x_position += 45
+      resources[1..-1].each do |resource|
+        move_up 46.25
+        social_media_icon_for(resource, x_position)
+        x_position += 45
+      end
     end
 
-    def formatted_text_fields_for(entry)
-      position(entry)
-      organisation(entry)
-      period_and_location(entry)
+    def resources_for(social_media)
+      social_media[:resources].values.map do |social_medium|
+        Resource.for(social_medium.merge(social_media[:properties]))
+      end
     end
 
-    def formatted_text_boxes_for(entry)
-      position_at(entry)
-      organisation_at(entry)
-      period_and_location_at(entry)
+    def social_media_icon_for(resource, x_position)
+      bounding_box([x_position, cursor], width: resource.width) do
+        image(resource.image, fit: resource.fit, align: resource.align)
+        move_up 35
+        transparent_link(resource)
+      end
+    end
+
+    def showcase_table_for(skills)
+      table_data = skills[:content].reduce([]) do |data, entry|
+        data << [d(entry.first), d(entry.last)]
+      end
+      table(table_data, skills[:properties])
+    end
+
+    def listing_for(entry)
+      header_for(entry)
+      logo_link_for(entry)
+      details_for(entry) if entry.has_key?(:summary)
+    end
+
+    def header_for(entry)
+      move_down entry[:y_header_start] || 15
+      if entry[:at]
+        text_box_header_for(entry)
+      else
+        text_header_for(entry)
+      end
+    end
+
+    def details_for(entry)
+      move_down entry[:y_details_start] || 10
+      summary(entry[:summary])
+      profile(entry[:profile])
+    end
+
+    def summary(string)
+      text(d(string), inline_format: true)
+    end
+
+    def profile(items)
+      return unless items
+      table_data = items.reduce([]) do |data, item|
+        data << ['•', d(item)]
+      end
+      table(table_data, cell_style: { borders: [], height: 21 })
+    end
+
+    def text_header_for(entry)
+      formatted_text_entry_for(d(entry[:position]), 12)
+      formatted_text_entry_for(d(entry[:organisation]), 11)
+      formatted_text_period_and_location(
+        d(entry[:period]),
+        d(entry[:location][:name]),
+        d(entry[:location][:link])
+      )
+    end
+
+    def text_box_header_for(entry)
+      at = entry[:at]
+      formatted_text_box_entry_for(d(entry[:position]), 12, at, 14)
+      formatted_text_box_entry_for(d(entry[:organisation]), 11, at, 13)
+      formatted_text_box_period_and_location(
+        d(entry[:period]),
+        d(entry[:location][:name]),
+        d(entry[:location][:link]),
+        at
+      )
+    end
+
+    def logo_link_for(entry)
+      logo = Resource.for(entry[:logo].merge(at: entry[:at]))
+      move_up entry[:y_logo_start] || 40
+      bounding_box([logo.origin, cursor],
+        width: logo.width, height: logo.height) do
+        image logo.image, fit: logo.fit, align: logo.align
+        move_up logo.move_up
+        transparent_link(logo)
+      end
     end
 
     def transparent_link(resource)
@@ -293,229 +383,49 @@ module ResumeGenerator
       )
     end
 
-    def position(entry)
+    def formatted_text_entry_for(item, size)
       formatted_text(
-        formatted_position(d(entry[:position]))
+        [formatted_entry_args_for(item, size)]
       )
     end
 
-    def position_at(entry)
+    def formatted_text_box_entry_for(item, size, at, value)
       formatted_text_box(
-        formatted_position(d(entry[:position])),
-        at: [entry[:at], cursor]
+        [formatted_entry_args_for(item, size)], at: [at, cursor]
       )
-      move_down 14
+      move_down value
     end
 
-    def formatted_position(string)
+    def formatted_entry_args_for(string, size)
+      { text: string, styles: [:bold], size: size }
+    end
+
+    def formatted_text_period_and_location(period, name, link)
+      formatted_text(
+        period_and_location_args_for(period, name, link)
+      )
+    end
+
+    def formatted_text_box_period_and_location(period, name, link, at)
+      formatted_text_box(
+        period_and_location_args_for(period, name, link),
+        at: [at, cursor]
+      )
+    end
+
+    def period_and_location_args_for(period, name, link)
       [
-        {
-          text: string,
-          styles: [:bold]
-        }
+        { text: period, color: '666666', size: 10 },
+        { text: name, link: link, color: '666666', size: 10 }
       ]
-    end
-
-    def organisation(entry)
-      formatted_text(
-        formatted_organisation(d(entry[:organisation]))
-      )
-    end
-
-    def organisation_at(entry)
-      formatted_text_box(
-        formatted_organisation(d(entry[:organisation])),
-        at: [entry[:at], cursor]
-      )
-      move_down 13
-    end
-
-    def formatted_organisation(string)
-      [
-        {
-          text: string,
-          styles: [:bold],
-          size: 11
-        }
-      ]
-    end
-
-    def period_and_location(entry)
-      formatted_text(
-        [
-          {
-            text: d(entry[:period])
-          },
-          {
-            text: d(entry[:location][:name]),
-            link: d(entry[:location][:link])
-          }
-        ],
-        color: '666666',
-        size: 10
-      )
-    end
-
-    def period_and_location_at(entry)
-      formatted_text_box(
-        [
-          {
-            text: d(entry[:period]), color: '666666', size: 10
-          },
-          {
-            text: d(entry[:location][:name]),
-            link: d(entry[:location][:link]),
-            color: '666666', size: 10
-          }
-        ],
-        at: [entry[:at], cursor]
-      )
-    end
-  end
-
-  module Sociable
-    include Utilities
-
-    def resources_for(social_media)
-      social_media[:resources].values.map do |social_medium|
-        social_medium.merge!(social_media[:properties])
-        Resource.for(social_medium)
-      end
-    end
-
-    def social_media_icon_for(resource, x_position)
-      bounding_box([x_position, cursor], width: resource.width) do
-        image(
-          resource.image,
-          fit: resource.fit,
-          align: resource.align
-        )
-        move_up 35
-        transparent_link(resource)
-      end
-    end
-
-    def organisation_logo_for(entry, logo, start_point = 40)
-      organisation_logo = entry[:logos][logo]
-      resource = logo_resource(entry, organisation_logo)
-      move_up start_point
-      bounding_box([resource.origin, cursor],
-                   width: resource.width,
-                   height: resource.height) do
-        image resource.image, fit: resource.fit, align: resource.align
-        move_up resource.move_up
-        transparent_link(resource)
-      end
-    end
-
-    def logo_resource(entry, logo)
-      logo.merge!(at: entry[:at])
-      Resource.for(logo)
-    end
-  end
-
-  module Employable
-    include Utilities
-
-    def rc(entry)
-      header_text_for(entry, 10)
-      organisation_logo_for(entry, :rc)
-      content_for(entry)
-    end
-
-    def fl(entry)
-      header_text_for(entry)
-      organisation_logo_for(entry, :ruby)
-      organisation_logo_for(entry, :rails, 33)
-      content_for(entry, 15)
-    end
-
-    def gw(entry)
-      header_text_for(entry)
-      organisation_logo_for(entry, :gw)
-      content_for(entry)
-    end
-
-    def rnt(entry)
-      header_text_for(entry)
-      organisation_logo_for(entry, :rnt)
-      content_for(entry)
-    end
-
-    def sra(entry)
-      header_text_for(entry)
-      organisation_logo_for(entry, :sra)
-      content_for(entry)
-    end
-
-    def jet(entry)
-      header_text_for(entry)
-      organisation_logo_for(entry, :jet)
-      content_for(entry)
-    end
-
-    def satc(entry)
-      header_text_for(entry)
-      organisation_logo_for(entry, :satc)
-      content_for(entry)
-    end
-
-    def content_for(entry, start_point = 10)
-      move_down start_point
-      summary(entry[:summary])
-      profile(entry[:profile])
-    end
-
-    def summary(string)
-      text d(string)
-    end
-
-    def profile(items)
-      return unless items
-      table_data = []
-      items.each do |item|
-        table_data << ['•', d(item)]
-      end
-      table(table_data, cell_style: { borders: [] })
-    end
-  end
-
-  module Educatable
-    include Utilities
-
-    def mit(entry)
-      header_text_for(entry)
-      organisation_logo_for(entry, :mit)
-    end
-
-    def bib(entry)
-      move_up 38
-      header_text_for(entry, 0)
-      move_up 30
-      organisation_logo_for(entry, :bib, 0)
-    end
-
-    def ryu(entry)
-      header_text_for(entry, 20)
-      organisation_logo_for(entry, :ryu)
-    end
-
-    def tafe(entry)
-      move_up 38
-      header_text_for(entry, 0)
-      move_up 23
-      organisation_logo_for(entry, :tafe, 0)
     end
   end
 
   module ResumeHelper
-    include Decodable, Sociable, Employable, Educatable
+    include Decodable, Utilities
 
     RESUME = JSON.parse(
-      open(
-        "https://raw.github.com/paulfioravanti/"\
-        "resume/master/resources/resume.json"
-      ).read,
+      open('resources/resume.json').read,
       symbolize_names: true
     )[:resume]
 
@@ -539,12 +449,8 @@ module ResumeGenerator
       headline = RESUME[:headline]
       formatted_text(
         [
-          {
-            text: d(headline[:ruby]), color: '85200C'
-          },
-          {
-            text: d(headline[:other])
-          }
+          { text: d(headline[:ruby]), color: '85200C' },
+          { text: d(headline[:other]) }
         ],
         size: 14
       )
@@ -552,28 +458,22 @@ module ResumeGenerator
 
     def social_media_icons
       move_down 5
-      resources = resources_for(RESUME[:social_media])
-      x_position = 0
-      social_media_icon_for(resources.first, x_position)
-      x_position += 45
-      resources[1..-1].each do |resource|
-        move_up 46.25
-        social_media_icon_for(resource, x_position)
-        x_position += 45
-      end
+      social_media_icon_set_for(RESUME[:social_media])
       stroke_horizontal_rule { color '666666' }
+    end
+
+    def technical_skills
+      heading d("VGVjaG5pY2FsIFNraWxscw==")
+      move_down 5
+      showcase_table_for(RESUME[:tech_skills])
     end
 
     def employment_history
       heading d('RW1wbG95bWVudCBIaXN0b3J5')
       entries = RESUME[:entries]
-      rc(entries[:rc])
-      fl(entries[:fl])
-      gw(entries[:gw])
-      rnt(entries[:rnt])
-      sra(entries[:sra])
-      jet(entries[:jet])
-      satc(entries[:satc])
+      [:rc, :fl, :gw, :rnt, :sra, :jet, :satc].each do |entry|
+        listing_for(entries[entry])
+      end
       move_down 10
       stroke_horizontal_rule { color '666666' }
     end
@@ -581,10 +481,9 @@ module ResumeGenerator
     def education_history
       heading d('RWR1Y2F0aW9u')
       entries = RESUME[:entries]
-      mit(entries[:mit])
-      bib(entries[:bib])
-      ryu(entries[:ryu])
-      tafe(entries[:tafe])
+      [:mit, :bib, :ryu, :tafe].each do |entry|
+        listing_for(entries[entry])
+      end
     end
   end
 
@@ -598,6 +497,8 @@ module ResumeGenerator
         headline
         cli.inform_creation_of_social_media_links
         social_media_icons
+        cli.inform_creation_of_technical_skills
+        technical_skills
         cli.inform_creation_of_employment_history
         employment_history
         cli.inform_creation_of_education_history
@@ -848,6 +749,14 @@ module ResumeGenerator
       end
     end
 
+    describe '#inform_creation_of_technical_skills' do
+      let(:message) { messagable.inform_creation_of_technical_skills }
+
+      it 'outputs a message to stdout' do
+        expect(outputting_message).to output.to_stdout
+      end
+    end
+
     describe '#inform_creation_of_employment_history' do
       let(:message) { messagable.inform_creation_of_employment_history }
 
@@ -929,7 +838,7 @@ module ResumeGenerator
         expect(resource.origin).to eq(415)
       end
 
-      it 'has an at ' do
+      it 'has an at value' do
         expect(resource.at).to eq(280)
       end
     end
