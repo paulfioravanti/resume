@@ -80,15 +80,14 @@ module ResumeGenerator
     end
 
     def text_box_header_for(entry)
-      formatted_text_box_entry_for(d(entry[:position]), 12, entry[:at])
-      move_down 14
-      formatted_text_box_entry_for(d(entry[:organisation]), 11, entry[:at])
-      move_down 13
+      at = entry[:at]
+      formatted_text_box_entry_for(d(entry[:position]), 12, at, 14)
+      formatted_text_box_entry_for(d(entry[:organisation]), 11, at, 13)
       formatted_text_box_period_and_location(
         d(entry[:period]),
         d(entry[:location][:name]),
         d(entry[:location][:link]),
-        entry[:at]
+        at
       )
     end
 
@@ -136,10 +135,11 @@ module ResumeGenerator
       )
     end
 
-    def formatted_text_box_entry_for(item, size, at)
+    def formatted_text_box_entry_for(item, size, at, value)
       formatted_text_box(
         [formatted_entry_args_for(item, size)], at: [at, cursor]
       )
+      move_down value
     end
 
     def formatted_entry_args_for(string, size)
