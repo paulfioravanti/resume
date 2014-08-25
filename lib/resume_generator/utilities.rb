@@ -72,12 +72,10 @@ module ResumeGenerator
     def text_header_for(entry)
       formatted_text_entry_for(d(entry[:position]), 12)
       formatted_text_entry_for(d(entry[:organisation]), 11)
-      formatted_text(
-        period_and_location_args_for(
-          d(entry[:period]),
-          d(entry[:location][:name]),
-          d(entry[:location][:link])
-        )
+      formatted_text_period_and_location(
+        d(entry[:period]),
+        d(entry[:location][:name]),
+        d(entry[:location][:link])
       )
     end
 
@@ -86,13 +84,11 @@ module ResumeGenerator
       move_down 14
       formatted_text_box_entry_for(d(entry[:organisation]), 11, entry[:at])
       move_down 13
-      formatted_text_box(
-        period_and_location_args_for(
-          d(entry[:period]),
-          d(entry[:location][:name]),
-          d(entry[:location][:link])
-        ),
-        at: [entry[:at], cursor]
+      formatted_text_box_period_and_location(
+        d(entry[:period]),
+        d(entry[:location][:name]),
+        d(entry[:location][:link]),
+        entry[:at]
       )
     end
 
@@ -147,23 +143,26 @@ module ResumeGenerator
     end
 
     def formatted_entry_args_for(string, size)
-      {
-        text: string,
-        styles: [:bold],
-        size: size
-      }
+      { text: string, styles: [:bold], size: size }
+    end
+
+    def formatted_text_period_and_location(period, name, link)
+      formatted_text(
+        period_and_location_args_for(period, name, link)
+      )
+    end
+
+    def formatted_text_box_period_and_location(period, name, link, at)
+      formatted_text_box(
+        period_and_location_args_for(period, name, link),
+        at: [at, cursor]
+      )
     end
 
     def period_and_location_args_for(period, name, link)
       [
-        {
-          text: period, color: '666666', size: 10
-        },
-        {
-          text: name,
-          link: link,
-          color: '666666', size: 10
-        }
+        { text: period, color: '666666', size: 10 },
+        { text: name, link: link, color: '666666', size: 10 }
       ]
     end
   end
