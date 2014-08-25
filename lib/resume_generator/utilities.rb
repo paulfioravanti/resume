@@ -70,12 +70,8 @@ module ResumeGenerator
     end
 
     def text_header_for(entry)
-      formatted_text(
-        formatted_entry_args_for(d(entry[:position]), 12),
-      )
-      formatted_text(
-        formatted_entry_args_for(d(entry[:organisation]), 11),
-      )
+      formatted_text_entry_for(d(entry[:position]), 12)
+      formatted_text_entry_for(d(entry[:organisation]), 11)
       formatted_text(
         period_and_location_args_for(
           d(entry[:period]),
@@ -86,19 +82,9 @@ module ResumeGenerator
     end
 
     def text_box_header_for(entry)
-      formatted_text_box(
-        *[
-           formatted_entry_args_for(d(entry[:position]), 12),
-           at: [entry[:at], cursor]
-         ]
-      )
+      formatted_text_box_entry_for(d(entry[:position]), 12, entry[:at])
       move_down 14
-      formatted_text_box(
-        *[
-           formatted_entry_args_for(d(entry[:organisation]), 11),
-           at: [entry[:at], cursor]
-         ]
-      )
+      formatted_text_box_entry_for(d(entry[:organisation]), 11, entry[:at])
       move_down 13
       formatted_text_box(
         *[
@@ -150,14 +136,24 @@ module ResumeGenerator
       )
     end
 
+    def formatted_text_entry_for(item, size)
+      formatted_text(
+        [formatted_entry_args_for(item, size)]
+      )
+    end
+
+    def formatted_text_box_entry_for(item, size, at)
+      formatted_text_box(
+        [formatted_entry_args_for(item, size)], at: [at, cursor]
+      )
+    end
+
     def formatted_entry_args_for(string, size)
-      [
-        {
-          text: string,
-          styles: [:bold],
-          size: size
-        }
-      ]
+      {
+        text: string,
+        styles: [:bold],
+        size: size
+      }
     end
 
     def period_and_location_args_for(period, name, link)
