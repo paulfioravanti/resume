@@ -1,12 +1,23 @@
 module ResumeGenerator
-  # Bag O' Methods Module
+  # Bag O' Methods Module.
   module Utilities
     private
 
+    def social_media_icon_set_for(social_media)
+      resources = resources_for(social_media)
+      x_position = 0
+      social_media_icon_for(resources.first, x_position)
+      x_position += 45
+      resources[1..-1].each do |resource|
+        move_up 46.25
+        social_media_icon_for(resource, x_position)
+        x_position += 45
+      end
+    end
+
     def resources_for(social_media)
       social_media[:resources].values.map do |social_medium|
-        social_medium.merge!(social_media[:properties])
-        Resource.for(social_medium)
+        Resource.for(social_medium.merge(social_media[:properties]))
       end
     end
 
@@ -18,6 +29,13 @@ module ResumeGenerator
       end
     end
 
+    def showcase_table_for(skills)
+      table_data = skills[:content].reduce([]) do |data, entry|
+        data << [d(entry.first), d(entry.last)]
+      end
+      table(table_data, skills[:properties])
+    end
+
     def listing_for(entry)
       header_for(entry)
       logo_link_for(entry)
@@ -27,9 +45,9 @@ module ResumeGenerator
     def header_for(entry)
       move_down entry[:y_header_start] || 15
       if entry[:at]
-        formatted_text_boxes_for(entry)
+        text_box_header_for(entry)
       else
-        formatted_text_fields_for(entry)
+        text_header_for(entry)
       end
     end
 
@@ -51,24 +69,46 @@ module ResumeGenerator
       table(table_data, cell_style: { borders: [], height: 21 })
     end
 
-    def formatted_text_fields_for(entry)
-      formatted_entry(d(entry[:position]), 12)
-      formatted_entry(d(entry[:organisation]), 11)
-      period_and_location(
-        d(entry[:period]),
-        d(entry[:location][:name]),
-        d(entry[:location][:link])
+    def text_header_for(entry)
+      formatted_text(
+        formatted_entry_args_for(d(entry[:position]), 12),
+      )
+      formatted_text(
+        formatted_entry_args_for(d(entry[:organisation]), 11),
+      )
+      formatted_text(
+        period_and_location_args_for(
+          d(entry[:period]),
+          d(entry[:location][:name]),
+          d(entry[:location][:link])
+        )
       )
     end
 
-    def formatted_text_boxes_for(entry)
-      formatted_entry_for(d(entry[:position]), 12, entry[:at], 14)
-      formatted_entry_for(d(entry[:organisation]), 11, entry[:at], 13)
-      period_and_location_at(
-        d(entry[:period]),
-        d(entry[:location][:name]),
-        d(entry[:location][:link]),
-        [entry[:at], cursor]
+    def text_box_header_for(entry)
+      formatted_text_box(
+        *[
+           formatted_entry_args_for(d(entry[:position]), 12),
+           at: [entry[:at], cursor]
+         ]
+      )
+      move_down 14
+      formatted_text_box(
+        *[
+           formatted_entry_args_for(d(entry[:organisation]), 11),
+           at: [entry[:at], cursor]
+         ]
+      )
+      move_down 13
+      formatted_text_box(
+        *[
+           period_and_location_args_for(
+             d(entry[:period]),
+             d(entry[:location][:name]),
+             d(entry[:location][:link])
+           ),
+           at: [entry[:at], cursor]
+        ]
       )
     end
 
@@ -110,57 +150,26 @@ module ResumeGenerator
       )
     end
 
-    def formatted_entry(item, size)
-      formatted_text(
-        *formatted_entry_args_for(item, size),
-      )
-    end
-
-    def formatted_entry_for(item, size, at, reset_point)
-      formatted_text_box(
-        *formatted_entry_args_for(item, size, [at, cursor])
-      )
-      move_down reset_point
-    end
-
-    def period_and_location(period, location, link)
-      formatted_text(
-        *period_and_location_args_for(period, location, link)
-      )
-    end
-
-    def period_and_location_at(period, location, link, at)
-      formatted_text_box(
-        *period_and_location_args_for(period, location, link, at)
-      )
-    end
-
-    def formatted_entry_args_for(string, size, at = nil)
+    def formatted_entry_args_for(string, size)
       [
-        [
-          {
-            text: string,
-            styles: [:bold],
-            size: size
-          }
-        ],
-        at: at
+        {
+          text: string,
+          styles: [:bold],
+          size: size
+        }
       ]
     end
 
-    def period_and_location_args_for(period, name, link, at = nil)
+    def period_and_location_args_for(period, name, link)
       [
-        [
-          {
-            text: period, color: '666666', size: 10
-          },
-          {
-            text: name,
-            link: link,
-            color: '666666', size: 10
-          }
-        ],
-        at: at
+        {
+          text: period, color: '666666', size: 10
+        },
+        {
+          text: name,
+          link: link,
+          color: '666666', size: 10
+        }
       ]
     end
   end
