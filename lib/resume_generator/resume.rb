@@ -2,6 +2,8 @@ require 'resume_helper'
 
 module ResumeGenerator
   class Resume
+    extend Decodable
+
     def self.generate(cli)
       Prawn::Document.class_eval do
         include ResumeHelper
@@ -27,7 +29,13 @@ module ResumeGenerator
         margin_left: 1,
         margin_right: 1,
         background: background_image,
-        repeat: true
+        repeat: true,
+        info: {
+          Title: DOCUMENT_NAME,
+          Author: d("UGF1bCBGaW9yYXZhbnRp"),
+          Creator: d("UGF1bCBGaW9yYXZhbnRp"),
+          CreationDate: Time.now
+        }
       }
     end
     private_class_method :pdf_options
