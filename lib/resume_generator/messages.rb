@@ -58,7 +58,8 @@ module ResumeGenerator
     def print_thank_you_message
       puts cyan(
         "Thanks for looking at my resume. I hope to hear from you soon!\n"\
-        "Resume.pdf has been generated in the same directory as the script."
+        "#{DOCUMENT_NAME}.pdf has been generated in the same\n"\
+        "directory you ran the script."
       )
     end
 

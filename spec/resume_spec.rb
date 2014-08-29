@@ -12,7 +12,7 @@ RSpec.describe Resume do
     allow($stdout).to receive(:write) # suppress message cruft from stdout
   end
 
-  describe ".generate" do
+  describe ".create" do
     let(:filename) { "#{ResumeGenerator::DOCUMENT_NAME}.pdf" }
     let(:cli) { double('cli').as_null_object }
 
@@ -21,7 +21,7 @@ RSpec.describe Resume do
         receive(:background_image).and_return(placeholder_image)
       allow(Resource).to \
         receive(:open).with(anything).and_return(placeholder_image)
-      Resume.generate(cli)
+      Resume.create(cli)
     end
     after { File.delete(filename) }
 
@@ -30,17 +30,6 @@ RSpec.describe Resume do
       expect(cli).to have_received(:inform_creation_of_employment_history)
       expect(cli).to have_received(:inform_creation_of_education_history)
       expect(File.exist?(filename)).to be true
-    end
-  end
-
-  describe ".background_image" do
-    before do
-      allow(Resume).to \
-        receive(:open).with(anything).and_return(placeholder_image)
-    end
-
-    it 'fetches the background image of the resume' do
-      expect(Resume.background_image).to eq(placeholder_image)
     end
   end
 end

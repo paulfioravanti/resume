@@ -3,7 +3,7 @@ require 'messages'
 require 'resume'
 
 module ResumeGenerator
-  DOCUMENT_NAME = 'Resume'
+  DOCUMENT_NAME = 'Paul_Fioravanti_Resume'
 
   class CLI
     include Messages
@@ -34,10 +34,8 @@ module ResumeGenerator
     def generate_resume
       gem 'prawn', '1.2.1'
       gem 'prawn-table', '0.1.0'
-      require 'prawn'
-      require 'prawn/table'
       inform_start_of_resume_generation
-      Resume.generate(self)
+      Resume.create(self)
     end
 
     def clean_up
