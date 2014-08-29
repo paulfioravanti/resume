@@ -1,7 +1,10 @@
 require 'resource'
+require 'utilities'
 
 module ResumeGenerator
   class SocialMediaIconSet
+    include Utilities
+
     attr_accessor :x_position
     attr_reader :pdf, :data
 
@@ -36,23 +39,9 @@ module ResumeGenerator
       pdf.bounding_box([x_position, pdf.cursor], width: resource.width) do
         pdf.image(resource.image, fit: resource.fit, align: resource.align)
         pdf.move_up 35
-        transparent_link(resource)
+        transparent_link(pdf, resource)
       end
       self.x_position += 45
-    end
-
-    def transparent_link(resource)
-      pdf.transparent(0) do
-        pdf.formatted_text(
-          [
-            {
-              text: '|' * resource.bars,
-              size: resource.size,
-              link: resource.link
-            }
-          ], align: resource.align
-        )
-      end
     end
   end
 end

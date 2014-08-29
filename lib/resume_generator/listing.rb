@@ -1,9 +1,10 @@
 require 'decodable'
 require 'resource'
+require 'utilities'
 
 module ResumeGenerator
   class Listing
-    include Decodable
+    include Decodable, Utilities
 
     attr_reader :pdf, :data
 
@@ -80,21 +81,7 @@ module ResumeGenerator
         width: logo.width, height: logo.height) do
         pdf.image(logo.image, fit: logo.fit, align: logo.align)
         pdf.move_up logo.move_up
-        transparent_link(logo)
-      end
-    end
-
-    def transparent_link(resource)
-      pdf.transparent(0) do
-        pdf.formatted_text(
-          [
-            {
-              text: '|' * resource.bars,
-              size: resource.size,
-              link: resource.link
-            }
-          ], align: resource.align
-        )
+        transparent_link(pdf, logo)
       end
     end
 
