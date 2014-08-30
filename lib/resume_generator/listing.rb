@@ -1,6 +1,7 @@
 require 'decodable'
 require 'resource'
 require 'utilities'
+require 'logo_link'
 
 module ResumeGenerator
   class Listing
@@ -19,7 +20,7 @@ module ResumeGenerator
 
     def generate
       header
-      logo_link
+      LogoLink.generate(pdf, data)
       details if data.has_key?(:summary)
     end
 
@@ -72,17 +73,6 @@ module ResumeGenerator
         d(data[:location][:link]),
         at
       )
-    end
-
-    def logo_link
-      logo = Resource.for(data[:logo].merge(at: data[:at]))
-      pdf.move_up data[:y_logo_start] || 40
-      pdf.bounding_box([logo.origin, pdf.cursor],
-        width: logo.width, height: logo.height) do
-        pdf.image(logo.image, fit: logo.fit, align: logo.align)
-        pdf.move_up logo.move_up
-        transparent_link(pdf, logo)
-      end
     end
 
     def formatted_text_entry_for(item, size)
