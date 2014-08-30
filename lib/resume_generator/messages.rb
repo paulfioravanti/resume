@@ -55,10 +55,10 @@ module ResumeGenerator
       puts green('Resume generated successfully.')
     end
 
-    def print_thank_you_message
+    def print_thank_you_message(document_name)
       puts cyan(
         "Thanks for looking at my resume. I hope to hear from you soon!\n"\
-        "#{DOCUMENT_NAME}.pdf has been generated in the same\n"\
+        "#{document_name}.pdf has been generated in the same\n"\
         "directory you ran the script."
       )
     end

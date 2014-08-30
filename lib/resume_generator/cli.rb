@@ -42,7 +42,7 @@ module ResumeGenerator
       inform_of_successful_resume_generation
       request_to_open_resume
       open_document if permission_granted?
-      print_thank_you_message
+      print_thank_you_message(d(DOCUMENT_NAME))
     end
 
     def open_document
