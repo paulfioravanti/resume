@@ -14,19 +14,23 @@ module ResumeGenerator
       formatted_text_entry_for(d(data[:organisation]), 11)
     end
 
+    def period_and_location
+      formatted_text_period_and_location(
+        d(data[:period]),
+        d(data[:location][:name]),
+        d(data[:location][:link])
+      )
+    end
+
     def formatted_text_entry_for(item, size)
       pdf.formatted_text(
         [formatted_entry_args_for(item, size)]
       )
     end
 
-    def period_and_location
+    def formatted_text_period_and_location(period, name, link)
       pdf.formatted_text(
-        period_and_location_args_for(
-          d(data[:period]),
-          d(data[:location][:name]),
-          d(data[:location][:link])
-        )
+        period_and_location_args_for(period, name, link)
       )
     end
   end
