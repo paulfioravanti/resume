@@ -135,9 +135,14 @@ RSpec.describe CLI do
     end
 
     context 'user allows the script to open the PDF' do
-      let(:document_name) { ResumeGenerator::DOCUMENT_NAME }
+      let(:document_name) { 'Decoded Document Name' }
 
-      before { allow(cli).to receive(:permission_granted?).and_return(true) }
+      before do
+        allow(cli).to \
+          receive(:d).with(ResumeGenerator::DOCUMENT_NAME).
+            and_return(document_name)
+        allow(cli).to receive(:permission_granted?).and_return(true)
+      end
 
       it 'attempts to open the document' do
         expect(cli).to receive(:open_document)
@@ -149,7 +154,8 @@ RSpec.describe CLI do
         before { stub_const('RUBY_PLATFORM', 'darwin') }
 
         it 'opens the file using the open command' do
-          expect(cli).to receive(:system).with("open #{document_name}.pdf")
+          expect(cli).to \
+            receive(:system).with("open #{document_name}.pdf")
           cli.send(:clean_up)
         end
       end
@@ -169,7 +175,8 @@ RSpec.describe CLI do
 
         it 'opens the file using the cmd command' do
           expect(cli).to \
-            receive(:system).with("cmd /c \"start #{document_name}.pdf\"")
+            receive(:system).
+              with("cmd /c \"start #{document_name}.pdf\"")
           cli.send(:clean_up)
         end
       end
