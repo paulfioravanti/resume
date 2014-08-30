@@ -13,6 +13,9 @@ module ResumeGenerator
     def initialize(pdf, data)
       @pdf = pdf
       @data = data
+      # Different rendering behaviour needed depending on whether the header is
+      # being drawn from left to right on the page or specifically placed at
+      # a location
       if data[:at]
         extend FormattedTextBoxEntry
       else
