@@ -14,15 +14,6 @@ module ResumeGenerator
       formatted_text_box_entry_for(d(data[:organisation]), 11, data[:at], 13)
     end
 
-    def period_and_location
-      formatted_text_box_period_and_location(
-        d(data[:period]),
-        d(data[:location][:name]),
-        d(data[:location][:link]),
-        data[:at]
-      )
-    end
-
     def formatted_text_box_entry_for(item, size, at, value)
       pdf.formatted_text_box(
         [formatted_entry_args_for(item, size)], at: [at, pdf.cursor]
@@ -30,10 +21,14 @@ module ResumeGenerator
       pdf.move_down value
     end
 
-    def formatted_text_box_period_and_location(period, name, link, at)
+    def period_and_location
       pdf.formatted_text_box(
-        period_and_location_args_for(period, name, link),
-        at: [at, pdf.cursor]
+        period_and_location_args_for(
+          d(data[:period]),
+          d(data[:location][:name]),
+          d(data[:location][:link]),
+        ),
+        at: [data[:at], pdf.cursor]
       )
     end
   end
