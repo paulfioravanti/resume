@@ -20,16 +20,20 @@ module ResumeGenerator
     end
 
     def generate
-      pdf.move_up y_logo_start
+      move_up(y_logo_start)
       pdf.bounding_box([logo.origin, pdf.cursor],
         width: logo.width, height: logo.height) do
         render_image
-        pdf.move_up logo.move_up
+        move_up(logo.move_up)
         transparent_link(pdf, logo)
       end
     end
 
     private
+
+    def move_up(value)
+      pdf.move_up value
+    end
 
     def render_image
       pdf.image(logo.image, fit: logo.fit, align: logo.align)
