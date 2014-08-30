@@ -3,10 +3,10 @@ require 'messages'
 require 'resume'
 
 module ResumeGenerator
-  DOCUMENT_NAME = 'Paul_Fioravanti_Resume'
+  DOCUMENT_NAME = 'UGF1bF9GaW9yYXZhbnRpX1Jlc3VtZQ=='
 
   class CLI
-    include Messages
+    include Decodable, Messages
 
     def start
       check_ability_to_generate_resume
@@ -48,11 +48,11 @@ module ResumeGenerator
     def open_document
       case RUBY_PLATFORM
       when %r(darwin)
-        system("open #{DOCUMENT_NAME}.pdf")
+        system("open #{d(DOCUMENT_NAME)}.pdf")
       when %r(linux)
-        system("xdg-open #{DOCUMENT_NAME}.pdf")
+        system("xdg-open #{d(DOCUMENT_NAME)}.pdf")
       when %r(windows)
-        system("cmd /c \"start #{DOCUMENT_NAME}.pdf\"")
+        system("cmd /c \"start #{d(DOCUMENT_NAME)}.pdf\"")
       else
         request_user_to_open_document
       end

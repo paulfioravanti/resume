@@ -16,7 +16,7 @@ module ResumeGenerator
     )[:resume]
 
     def self.create(cli)
-      generate("#{DOCUMENT_NAME}.pdf", pdf_options) do
+      generate("#{d(DOCUMENT_NAME)}.pdf", pdf_options) do
         name
         headline
         cli.inform_creation_of_social_media_links
@@ -39,7 +39,7 @@ module ResumeGenerator
         background: open(RESUME[:background_image]),
         repeat: true,
         info: {
-          Title: DOCUMENT_NAME,
+          Title: d(DOCUMENT_NAME),
           Author: d('UGF1bCBGaW9yYXZhbnRp'),
           Creator: d('UGF1bCBGaW9yYXZhbnRp'),
           CreationDate: Time.now
