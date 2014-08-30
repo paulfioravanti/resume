@@ -34,8 +34,10 @@ module ResumeGenerator
     def generate_resume
       gem 'prawn', '1.2.1'
       gem 'prawn-table', '0.1.0'
+      require 'prawn'
+      require 'prawn/table'
       inform_start_of_resume_generation
-      Resume.create(self)
+      Resume.generate(self)
     end
 
     def clean_up

@@ -1,6 +1,3 @@
-require 'resource'
-require 'utilities'
-
 module ResumeGenerator
   class LogoLink
     include Utilities

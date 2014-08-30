@@ -1,4 +1,3 @@
-require 'resource'
 require 'utilities'
 
 module ResumeGenerator

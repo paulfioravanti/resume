@@ -1,5 +1,3 @@
-require 'decodable'
-
 module ResumeGenerator
   module FormattedTextBoxEntry
     include Decodable

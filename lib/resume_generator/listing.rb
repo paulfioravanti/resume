@@ -1,6 +1,3 @@
-require 'decodable'
-require 'resource'
-require 'utilities'
 require 'logo_link'
 require 'header'
 

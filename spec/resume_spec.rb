@@ -12,7 +12,7 @@ RSpec.describe Resume do
     allow($stdout).to receive(:write) # suppress message cruft from stdout
   end
 
-  describe ".create" do
+  describe ".generate" do
     # Needed to check that the expected filename gets generated
     include Decodable
 
@@ -24,7 +24,7 @@ RSpec.describe Resume do
         receive(:background_image).and_return(placeholder_image)
       allow(Resource).to \
         receive(:open).with(anything).and_return(placeholder_image)
-      Resume.create(cli)
+      Resume.generate(cli)
     end
     after { File.delete(filename) }
 

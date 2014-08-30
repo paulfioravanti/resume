@@ -1,5 +1,3 @@
-require 'colourable'
-
 module ResumeGenerator
   module Messages
     include Colourable

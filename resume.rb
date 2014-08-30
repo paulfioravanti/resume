@@ -4,9 +4,11 @@
 ### in case you want to see a more readable, structured version of the files.
 ###
 ### Instructions:
-### 1. Make sure you run this with Ruby 1.9.2 or greater (1.8.7 will not work)
-### 2. Please let the script install the Prawn gem for PDF generation if you
-###    don't have it already.  Otherwise, contact me directly for the PDF file.
+### 1. Make sure you run this with Ruby 2.0 or greater
+###    (lesser versions will not work)
+### 2. Please let the script install some Prawn gems for PDF generation if you
+###    don't have them already (prawn 1.2.1 and prawn-table 0.1.0)
+###    Otherwise, contact me directly for the PDF file.
 ### 3. The script will pull down some small images from Flickr, so please ensure
 ###    you have an internet connection.
 ### 4. Run the script:
@@ -25,8 +27,8 @@ require 'json'
 module ResumeGenerator
   # This const would only ever be defined when this file's specs
   # are run in the repo with the structured version of the resume.
-  VERSION = '0.2' unless const_defined?(:VERSION)
-  DOCUMENT_NAME = 'Resume'
+  VERSION = '0.3' unless const_defined?(:VERSION)
+  DOCUMENT_NAME = 'UGF1bF9GaW9yYXZhbnRpX1Jlc3VtZQ=='
 
   module Colourable
     private
@@ -106,10 +108,11 @@ module ResumeGenerator
       puts green('Resume generated successfully.')
     end
 
-    def print_thank_you_message
+    def print_thank_you_message(document_name)
       puts cyan(
         "Thanks for looking at my resume. I hope to hear from you soon!\n"\
-        "Resume.pdf has been generated in the same directory as the script."
+        "#{document_name}.pdf has been generated in the same\n"\
+        "directory you ran the script."
       )
     end
 
@@ -138,8 +141,20 @@ module ResumeGenerator
     end
   end
 
+  module Decodable
+    def self.included(base)
+      # Allow #d to be available on the class level as well
+      base.extend self
+    end
+    # This is just a helper method due to the sheer amount of decoding that
+    # occurs throughout the code
+    def d(string)
+      Base64.strict_decode64(string)
+    end
+  end
+
   class CLI
-    include Messages
+    include Decodable, Messages
 
     def start
       check_ability_to_generate_resume
@@ -177,17 +192,17 @@ module ResumeGenerator
       inform_of_successful_resume_generation
       request_to_open_resume
       open_document if permission_granted?
-      print_thank_you_message
+      print_thank_you_message(d(DOCUMENT_NAME))
     end
 
     def open_document
       case RUBY_PLATFORM
       when %r(darwin)
-        system("open #{DOCUMENT_NAME}.pdf")
+        system("open #{d(DOCUMENT_NAME)}.pdf")
       when %r(linux)
-        system("xdg-open #{DOCUMENT_NAME}.pdf")
+        system("xdg-open #{d(DOCUMENT_NAME)}.pdf")
       when %r(windows)
-        system("cmd /c \"start #{DOCUMENT_NAME}.pdf\"")
+        system("cmd /c \"start #{d(DOCUMENT_NAME)}.pdf\"")
       else
         request_user_to_open_document
       end
@@ -223,142 +238,34 @@ module ResumeGenerator
     end
   end
 
-  module Decodable
-    # This is just a helper method due to the sheer amount of decoding that
-    # occurs throughout the code
-    def d(string)
-      Base64.strict_decode64(string)
-    end
-  end
-
   class Resource
     extend Decodable
 
     attr_reader :image, :link, :width, :height, :fit, :align,
                 :move_up, :bars, :size, :origin, :at
 
-    def self.for(params)
-      params[:image] = open(params[:image])
-      params[:link] = d(params[:link])
-      params[:align] = params[:align].to_sym
-      new(params)
+    def self.for(data)
+      data[:image] = open(data[:image])
+      data[:link] = d(data[:link])
+      data[:align] = data[:align].to_sym
+      new(data)
     end
 
     private
 
-    def initialize(params)
-      params.each do |attribute, value|
+    def initialize(data)
+      data.each do |attribute, value|
         instance_variable_set("@#{attribute}", value)
       end
     end
   end
 
-  # Bag O' Methods Module.
   module Utilities
     private
 
-    def social_media_icon_set_for(social_media)
-      resources = resources_for(social_media)
-      x_position = 0
-      social_media_icon_for(resources.first, x_position)
-      x_position += 45
-      resources[1..-1].each do |resource|
-        move_up 46.25
-        social_media_icon_for(resource, x_position)
-        x_position += 45
-      end
-    end
-
-    def resources_for(social_media)
-      social_media[:resources].values.map do |social_medium|
-        Resource.for(social_medium.merge(social_media[:properties]))
-      end
-    end
-
-    def social_media_icon_for(resource, x_position)
-      bounding_box([x_position, cursor], width: resource.width) do
-        image(resource.image, fit: resource.fit, align: resource.align)
-        move_up 35
-        transparent_link(resource)
-      end
-    end
-
-    def showcase_table_for(skills)
-      table_data = skills[:content].reduce([]) do |data, entry|
-        data << [d(entry.first), d(entry.last)]
-      end
-      table(table_data, skills[:properties])
-    end
-
-    def listing_for(entry)
-      header_for(entry)
-      logo_link_for(entry)
-      details_for(entry) if entry.has_key?(:summary)
-    end
-
-    def header_for(entry)
-      move_down entry[:y_header_start] || 15
-      if entry[:at]
-        text_box_header_for(entry)
-      else
-        text_header_for(entry)
-      end
-    end
-
-    def details_for(entry)
-      move_down entry[:y_details_start] || 10
-      summary(entry[:summary])
-      profile(entry[:profile])
-    end
-
-    def summary(string)
-      text(d(string), inline_format: true)
-    end
-
-    def profile(items)
-      return unless items
-      table_data = items.reduce([]) do |data, item|
-        data << ['•', d(item)]
-      end
-      table(table_data, cell_style: { borders: [], height: 21 })
-    end
-
-    def text_header_for(entry)
-      formatted_text_entry_for(d(entry[:position]), 12)
-      formatted_text_entry_for(d(entry[:organisation]), 11)
-      formatted_text_period_and_location(
-        d(entry[:period]),
-        d(entry[:location][:name]),
-        d(entry[:location][:link])
-      )
-    end
-
-    def text_box_header_for(entry)
-      at = entry[:at]
-      formatted_text_box_entry_for(d(entry[:position]), 12, at, 14)
-      formatted_text_box_entry_for(d(entry[:organisation]), 11, at, 13)
-      formatted_text_box_period_and_location(
-        d(entry[:period]),
-        d(entry[:location][:name]),
-        d(entry[:location][:link]),
-        at
-      )
-    end
-
-    def logo_link_for(entry)
-      logo = Resource.for(entry[:logo].merge(at: entry[:at]))
-      move_up entry[:y_logo_start] || 40
-      bounding_box([logo.origin, cursor],
-        width: logo.width, height: logo.height) do
-        image logo.image, fit: logo.fit, align: logo.align
-        move_up logo.move_up
-        transparent_link(logo)
-      end
-    end
-
-    def transparent_link(resource)
-      transparent(0) do
-        formatted_text(
+    def transparent_link(pdf, resource)
+      pdf.transparent(0) do
+        pdf.formatted_text(
           [
             {
               text: '|' * resource.bars,
@@ -369,48 +276,152 @@ module ResumeGenerator
         )
       end
     end
+  end
 
-    def heading(string)
-      move_down 10
-      formatted_text(
-        [
-          {
-            text: string,
-            styles: [:bold],
-            color: '666666'
-          }
-        ]
+  class SocialMediaIconSet
+    include Utilities
+
+    attr_accessor :x_position
+    attr_reader :pdf, :data
+
+    def self.generate(pdf, data)
+      new(pdf, data).generate
+    end
+
+    def initialize(pdf, data)
+      @pdf = pdf
+      @data = data
+      @x_position = 0
+    end
+
+    def generate
+      resources = social_media_resources
+      social_media_icon_for(resources.first)
+      resources[1..-1].each do |resource|
+        pdf.move_up 46.25
+        social_media_icon_for(resource)
+      end
+    end
+
+    private
+
+    def social_media_resources
+      data[:resources].values.map do |social_medium|
+        Resource.for(social_medium.merge(data[:properties]))
+      end
+    end
+
+    def social_media_icon_for(resource)
+      pdf.bounding_box([x_position, pdf.cursor], width: resource.width) do
+        pdf.image(resource.image, fit: resource.fit, align: resource.align)
+        pdf.move_up 35
+        transparent_link(pdf, resource)
+      end
+      self.x_position += 45
+    end
+  end
+
+  module FormattedTextEntry
+    include Decodable
+
+    private
+
+    def position
+      formatted_text_entry_for(d(data[:position]), 12)
+    end
+
+    def organisation
+      formatted_text_entry_for(d(data[:organisation]), 11)
+    end
+
+    def period_and_location
+      formatted_text_period_and_location(
+        d(data[:period]),
+        d(data[:location][:name]),
+        d(data[:location][:link])
       )
     end
 
     def formatted_text_entry_for(item, size)
-      formatted_text(
+      pdf.formatted_text(
         [formatted_entry_args_for(item, size)]
       )
     end
 
-    def formatted_text_box_entry_for(item, size, at, value)
-      formatted_text_box(
-        [formatted_entry_args_for(item, size)], at: [at, cursor]
-      )
-      move_down value
-    end
-
-    def formatted_entry_args_for(string, size)
-      { text: string, styles: [:bold], size: size }
-    end
-
     def formatted_text_period_and_location(period, name, link)
-      formatted_text(
+      pdf.formatted_text(
         period_and_location_args_for(period, name, link)
       )
     end
+  end
+
+  module FormattedTextBoxEntry
+    include Decodable
+
+    private
+
+    def position
+      formatted_text_box_entry_for(d(data[:position]), 12, data[:at], 14)
+    end
+
+    def organisation
+      formatted_text_box_entry_for(d(data[:organisation]), 11, data[:at], 13)
+    end
+
+    def period_and_location
+      formatted_text_box_period_and_location(
+        d(data[:period]),
+        d(data[:location][:name]),
+        d(data[:location][:link]),
+        data[:at]
+      )
+    end
+
+    def formatted_text_box_entry_for(item, size, at, value)
+      pdf.formatted_text_box(
+        [formatted_entry_args_for(item, size)], at: [at, pdf.cursor]
+      )
+      pdf.move_down value
+    end
 
     def formatted_text_box_period_and_location(period, name, link, at)
-      formatted_text_box(
+      pdf.formatted_text_box(
         period_and_location_args_for(period, name, link),
-        at: [at, cursor]
+        at: [at, pdf.cursor]
       )
+    end
+  end
+
+  class Header
+    attr_reader :pdf, :data
+
+    def self.generate(pdf, data)
+      new(pdf, data).generate
+    end
+
+    def initialize(pdf, data)
+      @pdf = pdf
+      @data = data
+      # Different rendering behaviour needed depending on whether the header is
+      # being drawn from left to right on the page or specifically placed at
+      # a location
+      if data[:at]
+        extend FormattedTextBoxEntry
+      else
+        extend FormattedTextEntry
+      end
+    end
+
+    def generate
+      position
+      organisation
+      period_and_location
+    end
+
+    private
+
+    def formatted_entry_args_for(string, size)
+      { text: string, styles: [:bold], size: size }
     end
 
     def period_and_location_args_for(period, name, link)
@@ -421,80 +432,108 @@ module ResumeGenerator
     end
   end
 
-  module ResumeHelper
+  class LogoLink
+    include Utilities
+
+    attr_reader :pdf, :logo, :y_logo_start
+
+    def self.generate(pdf, data)
+      logo = Resource.for(data[:logo].merge(at: data[:at]))
+      y_logo_start = data[:y_logo_start] || 40
+      new(pdf, logo, y_logo_start).generate
+    end
+
+    def initialize(pdf, logo, y_logo_start)
+      @pdf = pdf
+      @logo = logo
+      @y_logo_start = y_logo_start
+    end
+
+    def generate
+      move_up(y_logo_start)
+      render_logo_link
+    end
+
+    private
+
+    def move_up(value)
+      pdf.move_up value
+    end
+
+    def render_logo_link
+      pdf.bounding_box([logo.origin, pdf.cursor],
+        width: logo.width, height: logo.height) do
+        render_image
+        move_up(logo.move_up)
+        transparent_link(pdf, logo)
+      end
+    end
+
+    def render_image
+      pdf.image(logo.image, fit: logo.fit, align: logo.align)
+    end
+  end
+
+  class Listing
     include Decodable, Utilities
+
+    attr_reader :pdf, :data
+
+    def self.generate(pdf, data)
+      new(pdf, data).generate
+    end
+
+    def initialize(pdf, data)
+      @pdf = pdf
+      @data = data
+    end
+
+    def generate
+      pdf.move_down data[:y_header_start] || 15
+      Header.generate(pdf, data)
+      LogoLink.generate(pdf, data)
+      details if data.has_key?(:summary)
+    end
+
+    private
+
+    def details
+      pdf.move_down data[:y_details_start] || 10
+      summary(data[:summary])
+      profile(data[:profile])
+    end
+
+    def summary(string)
+      pdf.text(d(string), inline_format: true)
+    end
+
+    def profile(items)
+      return unless items
+      table_data = items.reduce([]) do |data, item|
+        data << ['•', d(item)]
+      end
+      pdf.table(table_data, cell_style: { borders: [], height: 21 })
+    end
+  end
+
+  # Resume cannot be declared as a Prawn::Document (ie inherit from it)
+  # because at the time someone runs the script, it is not certain that they
+  # have any of the required Prawn gems installed. Explicit declaration of this
+  # kind of inheritance hierarchy in advance as it will result in an
+  # uninitialized constant ResumeGenerator::Prawn error
+  class Resume
+    include Decodable
 
     RESUME = JSON.parse(
       open('resources/resume.json').read,
       symbolize_names: true
     )[:resume]
 
-    def self.included(base)
-      Resume.extend(ClassMethods)
-    end
-
-    module ClassMethods
-      def background_image
-        open(RESUME[:background_image])
-      end
-    end
-
-    private
-
-    def name
-      font('Times-Roman', size: 20) { text d(RESUME[:name]) }
-    end
-
-    def headline
-      headline = RESUME[:headline]
-      formatted_text(
-        [
-          { text: d(headline[:ruby]), color: '85200C' },
-          { text: d(headline[:other]) }
-        ],
-        size: 14
-      )
-    end
-
-    def social_media_icons
-      move_down 5
-      social_media_icon_set_for(RESUME[:social_media])
-      stroke_horizontal_rule { color '666666' }
-    end
-
-    def technical_skills
-      heading d("VGVjaG5pY2FsIFNraWxscw==")
-      move_down 5
-      showcase_table_for(RESUME[:tech_skills])
-    end
-
-    def employment_history
-      heading d('RW1wbG95bWVudCBIaXN0b3J5')
-      entries = RESUME[:entries]
-      [:rc, :fl, :gw, :rnt, :sra, :jet, :satc].each do |entry|
-        listing_for(entries[entry])
-      end
-      move_down 10
-      stroke_horizontal_rule { color '666666' }
-    end
-
-    def education_history
-      heading d('RWR1Y2F0aW9u')
-      entries = RESUME[:entries]
-      [:mit, :bib, :ryu, :tafe].each do |entry|
-        listing_for(entries[entry])
-      end
-    end
-  end
-
-  class Resume
-    extend Decodable
-
     def self.generate(cli)
       Prawn::Document.class_eval do
         include ResumeHelper
       end
-      Prawn::Document.generate("#{DOCUMENT_NAME}.pdf", pdf_options) do
+      Prawn::Document.generate("#{d(DOCUMENT_NAME)}.pdf", pdf_options) do
         name
         headline
         cli.inform_creation_of_social_media_links
@@ -514,17 +553,77 @@ module ResumeGenerator
         margin_bottom: 0.75,
         margin_left: 1,
         margin_right: 1,
-        background: background_image,
+        background: open(RESUME[:background_image]),
         repeat: true,
         info: {
-          Title: DOCUMENT_NAME,
-          Author: d("UGF1bCBGaW9yYXZhbnRp"),
-          Creator: d("UGF1bCBGaW9yYXZhbnRp"),
+          Title: d(DOCUMENT_NAME),
+          Author: d('UGF1bCBGaW9yYXZhbnRp'),
+          Creator: d('UGF1bCBGaW9yYXZhbnRp'),
           CreationDate: Time.now
         }
       }
     end
     private_class_method :pdf_options
+
+    module ResumeHelper
+      include Decodable
+
+      private
+
+      def name
+        font('Times-Roman', size: 20) { text d(RESUME[:name]) }
+      end
+
+      def headline
+        headline = RESUME[:headline]
+        formatted_text(
+          [
+            { text: d(headline[:ruby]), color: '85200C' },
+            { text: d(headline[:other]) }
+          ],
+          size: 14
+        )
+      end
+
+      def social_media_icons
+        move_down 5
+        SocialMediaIconSet.generate(self, RESUME[:social_media])
+        stroke_horizontal_rule { color '666666' }
+      end
+
+      def technical_skills
+        heading d('VGVjaG5pY2FsIFNraWxscw==')
+        move_down 5
+        skills = RESUME[:tech_skills]
+        table_data = skills[:content].reduce([]) do |data, entry|
+          data << [d(entry.first), d(entry.last)]
+        end
+        table(table_data, skills[:properties])
+      end
+
+      def employment_history
+        heading d('RW1wbG95bWVudCBIaXN0b3J5')
+        entries = RESUME[:entries]
+        [:rc, :fl, :gw, :rnt, :sra, :jet, :satc].each do |entry|
+          Listing.generate(self, entries[entry])
+        end
+        move_down 10
+        stroke_horizontal_rule { color '666666' }
+      end
+
+      def education_history
+        heading d('RWR1Y2F0aW9u')
+        entries = RESUME[:entries]
+        [:mit, :bib, :ryu, :tafe].each do |entry|
+          Listing.generate(self, entries[entry])
+        end
+      end
+
+      def heading(string)
+        move_down 10
+        formatted_text([{ text: string, styles: [:bold], color: '666666' }])
+      end
+    end
   end
 end
 
@@ -672,9 +771,14 @@ module ResumeGenerator
       end
 
       context 'user allows the script to open the PDF' do
-        let(:document_name) { ResumeGenerator::DOCUMENT_NAME }
+        let(:document_name) { 'Decoded Document Name' }
 
-        before { allow(cli).to receive(:permission_granted?).and_return(true) }
+        before do
+          allow(cli).to \
+            receive(:d).with(ResumeGenerator::DOCUMENT_NAME).
+              and_return(document_name)
+          allow(cli).to receive(:permission_granted?).and_return(true)
+        end
 
         it 'attempts to open the document' do
           expect(cli).to receive(:open_document)
@@ -884,7 +988,10 @@ module ResumeGenerator
     end
 
     describe ".generate" do
-      let(:filename) { "#{ResumeGenerator::DOCUMENT_NAME}.pdf" }
+      # Needed to check that the expected filename gets generated
+      include Decodable
+
+      let(:filename) { "#{d(ResumeGenerator::DOCUMENT_NAME)}.pdf" }
       let(:cli) { double('cli').as_null_object }
 
       before do
@@ -901,17 +1008,6 @@ module ResumeGenerator
         expect(cli).to have_received(:inform_creation_of_employment_history)
         expect(cli).to have_received(:inform_creation_of_education_history)
         expect(File.exist?(filename)).to be true
-      end
-    end
-
-    describe ".background_image" do
-      before do
-        allow(Resume).to \
-          receive(:open).with(anything).and_return(placeholder_image)
-      end
-
-      it 'fetches the background image of the resume' do
-        expect(Resume.background_image).to eq(placeholder_image)
       end
     end
   end
