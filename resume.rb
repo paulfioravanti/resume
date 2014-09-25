@@ -7,7 +7,7 @@
 ### 1. Make sure you run this with Ruby 2.0 or greater
 ###    (lesser versions will not work)
 ### 2. Please let the script install some Prawn gems for PDF generation if you
-###    don't have them already (prawn 1.2.1 and prawn-table 0.1.0)
+###    don't have them already (prawn 1.2.1 and prawn-table 0.1.2)
 ###    Otherwise, contact me directly for the PDF file.
 ### 3. The script will pull down some small images from Flickr, so please ensure
 ###    you have an internet connection.
@@ -79,7 +79,7 @@ module ResumeGenerator
       print yellow(
         "May I please install the following Ruby gems:\n"\
         "- prawn 1.2.1\n"\
-        "- prawn-table 0.1.0\n"\
+        "- prawn-table 0.1.2\n"\
         "in order to help me generate a PDF (Y/N)? "\
       )
     end
@@ -166,7 +166,7 @@ module ResumeGenerator
 
     def check_ability_to_generate_resume
       return if required_gems_available?(
-        'prawn' => '1.2.1', 'prawn-table' => '0.1.0'
+        'prawn' => '1.2.1', 'prawn-table' => '0.1.2'
       )
       request_gem_installation
       if permission_granted?
@@ -181,7 +181,7 @@ module ResumeGenerator
 
     def generate_resume
       gem 'prawn', '1.2.1'
-      gem 'prawn-table', '0.1.0'
+      gem 'prawn-table', '0.1.2'
       require 'prawn'
       require 'prawn/table'
       inform_start_of_resume_generation
@@ -227,7 +227,7 @@ module ResumeGenerator
     def install_gem
       begin
         system('gem install prawn -v 1.2.1')
-        system('gem install prawn-table -v 0.1.0')
+        system('gem install prawn-table -v 0.1.2')
         inform_of_successful_gem_installation
         # Reset the dir and path values so Prawn can be required
         Gem.clear_paths
@@ -750,7 +750,7 @@ module ResumeGenerator
     describe 'generating the PDF' do
       before do
         allow(cli).to receive(:gem).with('prawn', '1.2.1')
-        allow(cli).to receive(:gem).with('prawn-table', '0.1.0')
+        allow(cli).to receive(:gem).with('prawn-table', '0.1.2')
         allow(cli).to receive(:require).with('prawn')
         allow(cli).to receive(:require).with('prawn/table')
       end
@@ -973,7 +973,7 @@ module ResumeGenerator
 
   RSpec.describe Resume do
     gem 'prawn', '1.2.1'
-    gem 'prawn-table', '0.1.0'
+    gem 'prawn-table', '0.1.2'
     require 'prawn'
     require 'prawn/table'
 

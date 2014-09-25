@@ -24,7 +24,7 @@ module ResumeGenerator
       print yellow(
         "May I please install the following Ruby gems:\n"\
         "- prawn 1.2.1\n"\
-        "- prawn-table 0.1.0\n"\
+        "- prawn-table 0.1.2\n"\
         "in order to help me generate a PDF (Y/N)? "\
       )
     end

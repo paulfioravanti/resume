@@ -18,7 +18,7 @@ module ResumeGenerator
 
     def check_ability_to_generate_resume
       return if required_gems_available?(
-        'prawn' => '1.2.1', 'prawn-table' => '0.1.0'
+        'prawn' => '1.2.1', 'prawn-table' => '0.1.2'
       )
       request_gem_installation
       if permission_granted?
@@ -33,7 +33,7 @@ module ResumeGenerator
 
     def generate_resume
       gem 'prawn', '1.2.1'
-      gem 'prawn-table', '0.1.0'
+      gem 'prawn-table', '0.1.2'
       require 'prawn'
       require 'prawn/table'
       inform_start_of_resume_generation
@@ -79,7 +79,7 @@ module ResumeGenerator
     def install_gem
       begin
         system('gem install prawn -v 1.2.1')
-        system('gem install prawn-table -v 0.1.0')
+        system('gem install prawn-table -v 0.1.2')
         inform_of_successful_gem_installation
         # Reset the dir and path values so Prawn can be required
         Gem.clear_paths
