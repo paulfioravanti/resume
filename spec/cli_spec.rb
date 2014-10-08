@@ -113,8 +113,8 @@ RSpec.describe CLI do
 
   describe 'generating the PDF' do
     before do
-      allow(cli).to receive(:gem).with('prawn', '1.2.1')
-      allow(cli).to receive(:gem).with('prawn-table', '0.1.2')
+      allow(cli).to receive(:gem).with('prawn', PRAWN_VERSION)
+      allow(cli).to receive(:gem).with('prawn-table', PRAWN_TABLE_VERSION)
       allow(cli).to receive(:require).with('prawn')
       allow(cli).to receive(:require).with('prawn/table')
     end
