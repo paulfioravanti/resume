@@ -23,8 +23,8 @@ module ResumeGenerator
     def request_gem_installation
       print yellow(
         "May I please install the following Ruby gems:\n"\
-        "- prawn 1.2.1\n"\
-        "- prawn-table 0.1.2\n"\
+        "- prawn #{PRAWN_VERSION}\n"\
+        "- prawn-table #{PRAWN_TABLE_VERSION}\n"\
         "in order to help me generate a PDF (Y/N)? "\
       )
     end

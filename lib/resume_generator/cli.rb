@@ -4,6 +4,8 @@ require 'resume'
 
 module ResumeGenerator
   DOCUMENT_NAME = 'UGF1bF9GaW9yYXZhbnRpX1Jlc3VtZQ=='
+  PRAWN_VERSION = '1.2.1'
+  PRAWN_TABLE_VERSION = '0.1.2'
 
   class CLI
     include Decodable, Messages
@@ -18,7 +20,7 @@ module ResumeGenerator
 
     def check_ability_to_generate_resume
       return if required_gems_available?(
-        'prawn' => '1.2.1', 'prawn-table' => '0.1.2'
+        'prawn' => PRAWN_VERSION, 'prawn-table' => PRAWN_TABLE_VERSION
       )
       request_gem_installation
       if permission_granted?
@@ -32,8 +34,8 @@ module ResumeGenerator
     end
 
     def generate_resume
-      gem 'prawn', '1.2.1'
-      gem 'prawn-table', '0.1.2'
+      gem 'prawn', PRAWN_VERSION
+      gem 'prawn-table', PRAWN_TABLE_VERSION
       require 'prawn'
       require 'prawn/table'
       inform_start_of_resume_generation
@@ -78,8 +80,8 @@ module ResumeGenerator
 
     def install_gem
       begin
-        system('gem install prawn -v 1.2.1')
-        system('gem install prawn-table -v 0.1.2')
+        system("gem install prawn -v #{PRAWN_VERSION}")
+        system("gem install prawn-table -v #{PRAWN_TABLE_VERSION}")
         inform_of_successful_gem_installation
         # Reset the dir and path values so Prawn can be required
         Gem.clear_paths

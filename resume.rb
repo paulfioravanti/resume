@@ -6,11 +6,14 @@
 ### Instructions:
 ### 1. Make sure you run this with Ruby 2.0 or greater
 ###    (lesser versions will not work)
+###
 ### 2. Please let the script install some Prawn gems for PDF generation if you
-###    don't have them already (prawn 1.2.1 and prawn-table 0.1.2)
+###    don't have them already (prawn and prawn-table)
 ###    Otherwise, contact me directly for the PDF file.
+###
 ### 3. The script will pull down some small images from Flickr, so please ensure
 ###    you have an internet connection.
+###
 ### 4. Run the script:
 ###
 ###    $ ruby resume.rb
@@ -26,9 +29,11 @@ require 'json'
 
 module ResumeGenerator
   # This const would only ever be defined when this file's specs
-  # are run in the repo with the structured version of the resume.
-  VERSION = '0.3' unless const_defined?(:VERSION)
+  # are run in the repo with the structured version of the resume: an edge case
+  VERSION = '0.4' unless const_defined?(:VERSION)
   DOCUMENT_NAME = 'UGF1bF9GaW9yYXZhbnRpX1Jlc3VtZQ=='
+  PRAWN_VERSION = '1.2.1'
+  PRAWN_TABLE_VERSION = '0.1.2'
 
   module Colourable
     private
@@ -78,8 +83,8 @@ module ResumeGenerator
     def request_gem_installation
       print yellow(
         "May I please install the following Ruby gems:\n"\
-        "- prawn 1.2.1\n"\
-        "- prawn-table 0.1.2\n"\
+        "- prawn #{PRAWN_VERSION}\n"\
+        "- prawn-table #{PRAWN_TABLE_VERSION}\n"\
         "in order to help me generate a PDF (Y/N)? "\
       )
     end
@@ -166,7 +171,7 @@ module ResumeGenerator
 
     def check_ability_to_generate_resume
       return if required_gems_available?(
-        'prawn' => '1.2.1', 'prawn-table' => '0.1.2'
+        'prawn' => PRAWN_VERSION, 'prawn-table' => PRAWN_TABLE_VERSION
       )
       request_gem_installation
       if permission_granted?
@@ -180,8 +185,8 @@ module ResumeGenerator
     end
 
     def generate_resume
-      gem 'prawn', '1.2.1'
-      gem 'prawn-table', '0.1.2'
+      gem 'prawn', PRAWN_VERSION
+      gem 'prawn-table', PRAWN_TABLE_VERSION 
       require 'prawn'
       require 'prawn/table'
       inform_start_of_resume_generation
@@ -226,8 +231,8 @@ module ResumeGenerator
 
     def install_gem
       begin
-        system('gem install prawn -v 1.2.1')
-        system('gem install prawn-table -v 0.1.2')
+        system("gem install prawn -v #{PRAWN_VERSION}")
+        system("gem install prawn-table -v #{PRAWN_TABLE_VERSION}")
         inform_of_successful_gem_installation
         # Reset the dir and path values so Prawn can be required
         Gem.clear_paths
