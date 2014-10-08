@@ -4,8 +4,8 @@ require 'resume'
 
 module ResumeGenerator
   DOCUMENT_NAME = 'UGF1bF9GaW9yYXZhbnRpX1Jlc3VtZQ=='
-  PRAWN_VERSION = '1.2.1'
-  PRAWN_TABLE_VERSION = '0.1.2'
+  PRAWN_VERSION = '1.3.0'
+  PRAWN_TABLE_VERSION = '0.2.0'
 
   class CLI
     include Decodable, Messages

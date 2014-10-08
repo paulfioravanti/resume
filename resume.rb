@@ -186,7 +186,7 @@ module ResumeGenerator
 
     def generate_resume
       gem 'prawn', PRAWN_VERSION
-      gem 'prawn-table', PRAWN_TABLE_VERSION 
+      gem 'prawn-table', PRAWN_TABLE_VERSION
       require 'prawn'
       require 'prawn/table'
       inform_start_of_resume_generation
@@ -754,8 +754,8 @@ module ResumeGenerator
 
     describe 'generating the PDF' do
       before do
-        allow(cli).to receive(:gem).with('prawn', '1.2.1')
-        allow(cli).to receive(:gem).with('prawn-table', '0.1.2')
+        allow(cli).to receive(:gem).with('prawn', PRAWN_VERSION)
+        allow(cli).to receive(:gem).with('prawn-table', PRAWN_TABLE_VERSION)
         allow(cli).to receive(:require).with('prawn')
         allow(cli).to receive(:require).with('prawn/table')
       end
@@ -977,8 +977,8 @@ module ResumeGenerator
   end
 
   RSpec.describe Resume do
-    gem 'prawn', '1.2.1'
-    gem 'prawn-table', '0.1.2'
+    gem 'prawn', PRAWN_VERSION
+    gem 'prawn-table', PRAWN_TABLE_VERSION
     require 'prawn'
     require 'prawn/table'
 
