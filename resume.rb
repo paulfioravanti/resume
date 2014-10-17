@@ -34,6 +34,9 @@ module ResumeGenerator
   DOCUMENT_NAME = 'UGF1bF9GaW9yYXZhbnRpX1Jlc3VtZQ=='
   PRAWN_VERSION = '1.3.0'
   PRAWN_TABLE_VERSION = '0.2.0'
+  RESUME_DATA =
+    "https://raw.githubusercontent.com/paulfioravanti"\
+    "/resume/master/resources/resume.json"
 
   module Colourable
     private
@@ -530,7 +533,7 @@ module ResumeGenerator
     include Decodable
 
     RESUME = JSON.parse(
-      open('resources/resume.json').read,
+      open(RESUME_DATA).read,
       symbolize_names: true
     )[:resume]
 
