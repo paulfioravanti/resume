@@ -4,7 +4,7 @@
 ### in case you want to see a more readable, structured version of the files.
 ###
 ### Instructions:
-### 1. Make sure you run this with Ruby 2.0 or greater
+### 1. Make sure you run this with Ruby 2.1 or greater
 ###    (lesser versions will not work)
 ###
 ### 2. Please let the script install some Prawn gems for PDF generation if you

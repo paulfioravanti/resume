@@ -26,10 +26,10 @@ If you have SimpleCov installed, view the test coverage report located at:
 
 ### Dependencies
 
-- Ruby 2.0 or higher (lesser versions will not work)
-- Prawn 1.2.1 and Prawn-Table 0.1.0 (if you don't have either specific versions of the gems, you will be asked for permission to install them)
-- RSpec 3.0, if you want to run the specs
-- SimpleCov 0.9.0 if you want to view the coverage report locally
+- Ruby 2.1 or higher (lesser versions will not work)
+- Prawn 1.3.0 and Prawn-Table 0.22.0 (if you don't have either specific versions of the gems, you will be asked for permission to install them)
+- RSpec 3.1, if you want to run the specs
+- SimpleCov 0.9.1 if you want to view the coverage report locally
 
 ### Issues:
 
