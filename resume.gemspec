@@ -20,5 +20,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rubygems-tasks', '~> 0.2'
   gem.add_development_dependency 'yard', '~> 0.8'
   gem.add_development_dependency 'prawn', '1.3.0'
-  gem.add_development_dependency 'prawn-table', '0.2.0'
+  gem.add_development_dependency 'prawn-table', '0.2.1'
 end
