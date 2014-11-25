@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-- 2.1.2
+- 2.1.5
 script:
 - bundle exec rspec one_sheet/resume.rb --format progress
 - bundle exec rspec spec/ --no-drb --format progress
