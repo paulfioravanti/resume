@@ -21,7 +21,7 @@ GEM
       ttfunk (~> 1.4.0)
     prawn-table (0.2.1)
     rainbow (2.0.0)
-    rake (10.3.2)
+    rake (10.4.0)
     reek (1.4.0)
       rainbow (>= 1.99, < 3.0)
       ruby2ruby (>= 2.0.8, < 3.0)
