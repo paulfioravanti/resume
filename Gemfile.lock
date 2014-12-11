@@ -38,7 +38,7 @@ GEM
     procto (0.0.2)
     rainbow (2.0.0)
     rake (10.4.2)
-    reek (1.5.0)
+    reek (1.5.1)
       parser (~> 2.2.0.pre.7)
       rainbow (>= 1.99, < 3.0)
       unparser (~> 0.1.16)
