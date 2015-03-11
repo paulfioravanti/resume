@@ -30,9 +30,9 @@ require 'json'
 module ResumeGenerator
   # This const would only ever be defined when this file's specs
   # are run in the repo with the structured version of the resume: an edge case
-  VERSION = '0.4' unless const_defined?(:VERSION)
+  VERSION = '0.5' unless const_defined?(:VERSION)
   DOCUMENT_NAME = 'UGF1bF9GaW9yYXZhbnRpX1Jlc3VtZQ=='
-  PRAWN_VERSION = '1.3.0'
+  PRAWN_VERSION = '2.0.0'
   PRAWN_TABLE_VERSION = '0.2.1'
 
   module Colourable
@@ -515,7 +515,7 @@ module ResumeGenerator
     def profile(items)
       return unless items
       table_data = items.reduce([]) do |data, item|
-        data << ['•', d(item)]
+        data << ['-', d(item)]
       end
       pdf.table(table_data, cell_style: { borders: [], height: 21 })
     end

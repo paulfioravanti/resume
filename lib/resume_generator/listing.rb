@@ -38,7 +38,7 @@ module ResumeGenerator
     def profile(items)
       return unless items
       table_data = items.reduce([]) do |data, item|
-        data << ['•', d(item)]
+        data << ['-', d(item)]
       end
       pdf.table(table_data, cell_style: { borders: [], height: 21 })
     end
