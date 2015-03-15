@@ -93,7 +93,7 @@ module ResumeGenerator
       def employment_history
         heading d('RW1wbG95bWVudCBIaXN0b3J5')
         entries = RESUME[:entries]
-        [:rc, :fl, :gw, :rnt, :sra, :jet, :satc].each do |entry|
+        [:re, :rc, :fl, :gw, :rnt, :sra, :jet, :satc].each do |entry|
           Listing.generate(self, entries[entry])
         end
         move_down 10

@@ -4,7 +4,7 @@
 ### in case you want to see a more readable, structured version of the files.
 ###
 ### Instructions:
-### 1. Make sure you run this with Ruby 2.1 or greater
+### 1. Make sure you run this with Ruby 2.2 or greater
 ###    (lesser versions will not work)
 ###
 ### 2. Please let the script install some Prawn gems for PDF generation if you
@@ -612,7 +612,7 @@ module ResumeGenerator
       def employment_history
         heading d('RW1wbG95bWVudCBIaXN0b3J5')
         entries = RESUME[:entries]
-        [:rc, :fl, :gw, :rnt, :sra, :jet, :satc].each do |entry|
+        [:re, :rc, :fl, :gw, :rnt, :sra, :jet, :satc].each do |entry|
           Listing.generate(self, entries[entry])
         end
         move_down 10
