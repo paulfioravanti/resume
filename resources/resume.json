@@ -43,6 +43,10 @@
         "duolingo": {
           "image": "http://farm4.staticflickr.com/3924/14820544427_61dc0701fa_t.jpg",
           "link": "aHR0cHM6Ly93d3cuZHVvbGluZ28uY29tL3BhdWxmaW9yYXZhbnRp"
+        },
+        "meetup": {
+          "image": "http://farm9.staticflickr.com/8609/16631740869_c9b3411324_t.jpg",
+          "link": "aHR0cDovL3d3dy5tZWV0dXAuY29tL21lbWJlcnMvNTg2NjUxNDIv"
         }
       },
       "properties": {
