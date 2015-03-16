@@ -37,7 +37,7 @@ GEM
     procto (0.0.2)
     rainbow (2.0.0)
     rake (10.4.2)
-    reek (2.0.1)
+    reek (2.0.2)
       parser (~> 2.2)
       rainbow (~> 2.0)
       require_all (~> 1.3)
