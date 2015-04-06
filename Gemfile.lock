@@ -56,7 +56,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
-    ruby-progressbar (1.7.4)
+    ruby-progressbar (1.7.5)
     rubygems-tasks (0.2.4)
     simplecov (0.9.2)
       docile (~> 1.1.0)
