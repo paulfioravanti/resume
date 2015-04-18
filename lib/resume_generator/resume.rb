@@ -8,13 +8,13 @@ module ResumeGenerator
   # Resume cannot be declared as a Prawn::Document (ie inherit from it)
   # because at the time someone runs the script, it is not certain that they
   # have any of the required Prawn gems installed. Explicit declaration of this
-  # kind of inheritance hierarchy in advance as it will result in an
+  # kind of inheritance hierarchy in advance will result in an
   # uninitialized constant ResumeGenerator::Prawn error.
   class Resume
     include Decodable
 
     RESUME = JSON.parse(
-      open('resources/resume.json').read,
+      open("resources/resume.en.json").read,
       symbolize_names: true
     )[:resume]
 
@@ -60,57 +60,62 @@ module ResumeGenerator
       private
 
       def name
-        font('Times-Roman', size: 20) { text d(RESUME[:name]) }
+        name = RESUME[:name]
+        font(name[:font_name], size: name[:font_size]) do
+          text d(name[:text])
+        end
       end
 
       def headline
         headline = RESUME[:headline]
         formatted_text(
           [
-            { text: d(headline[:ruby]), color: '85200C' },
+            { text: d(headline[:ruby]), color: headline[:ruby_font_colour] },
             { text: d(headline[:other]) }
           ],
-          size: 14
+          size: headline[:font_size]
         )
       end
 
       def social_media_icons
-        move_down 5
         SocialMediaIconSet.generate(self, RESUME[:social_media])
-        stroke_horizontal_rule { color '666666' }
       end
 
       def technical_skills
-        heading d('VGVjaG5pY2FsIFNraWxscw==')
-        move_down 5
-        skills = RESUME[:tech_skills]
-        table_data = skills[:content].reduce([]) do |data, entry|
+        tech_skills = RESUME[:tech_skills]
+        heading_for(tech_skills)
+        move_down tech_skills[:content_top_padding]
+        table_data = tech_skills[:content].reduce([]) do |data, entry|
           data << [d(entry.first), d(entry.last)]
         end
-        table(table_data, skills[:properties])
+        table(table_data, tech_skills[:properties])
       end
 
       def employment_history
-        heading d('RW1wbG95bWVudCBIaXN0b3J5')
-        entries = RESUME[:entries]
-        [:re, :rc, :fl, :gw, :rnt, :sra, :jet, :satc].each do |entry|
-          Listing.generate(self, entries[entry])
+        history = RESUME[:employment_history]
+        heading_for(history)
+        history[:entries].each do |_, entry|
+          Listing.generate(self, entry)
         end
-        move_down 10
-        stroke_horizontal_rule { color '666666' }
+        move_down history[:bottom_padding]
+        stroke_horizontal_rule { color history[:horizontal_rule_colour] }
       end
 
       def education_history
-        heading d('RWR1Y2F0aW9u')
-        entries = RESUME[:entries]
-        [:mit, :bib, :ryu, :tafe].each do |entry|
-          Listing.generate(self, entries[entry])
+        history = RESUME[:education_history]
+        heading_for(history)
+        history[:entries].each do |_, entry|
+          Listing.generate(self, entry)
         end
       end
 
-      def heading(string)
-        move_down 10
-        formatted_text([{ text: string, styles: [:bold], color: '666666' }])
+      def heading_for(section)
+        move_down section[:top_padding]
+        formatted_text([{
+          text: d(section[:heading]),
+          styles: section[:heading_styles].map(&:to_sym),
+          color: section[:heading_colour]
+        }])
       end
     end
   end

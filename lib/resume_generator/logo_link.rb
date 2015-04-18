@@ -31,7 +31,7 @@ module ResumeGenerator
       pdf.bounding_box([logo.origin, pdf.cursor],
         width: logo.width, height: logo.height) do
         render_image
-        move_up(logo.move_up)
+        move_up(logo.link_overlay_start)
         transparent_link(pdf, logo)
       end
     end

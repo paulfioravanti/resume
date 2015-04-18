@@ -17,7 +17,7 @@ module ResumeGenerator
     end
 
     def generate
-      pdf.move_down data[:y_header_start] || 15
+      pdf.move_down data[:top_padding]
       Header.generate(pdf, data)
       LogoLink.generate(pdf, data)
       details if data.has_key?(:summary)
@@ -26,7 +26,7 @@ module ResumeGenerator
     private
 
     def details
-      pdf.move_down data[:y_details_start] || 10
+      pdf.move_down data[:summary_top_padding]
       summary(data[:summary])
       profile(data[:profile])
     end
@@ -40,7 +40,13 @@ module ResumeGenerator
       table_data = items.reduce([]) do |data, item|
         data << ['-', d(item)]
       end
-      pdf.table(table_data, cell_style: { borders: [], height: 21 })
+      pdf.table(
+        table_data,
+        cell_style: {
+          borders: data[:table_cell_borders],
+          height: data[:table_cell_height]
+        }
+      )
     end
   end
 end
