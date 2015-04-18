@@ -391,7 +391,11 @@
         "bib": {
           "top_padding": -38,
           "position": "QmFjaGVsb3Igb2YgSW50ZXJuYXRpb25hbCBCdXNpbmVzcw==",
+          "position_text_box_size": 12,
+          "position_text_box_bottom_padding": 14,
           "organisation": "RmxpbmRlcnMgVW5pdmVyc2l0eQ==",
+          "organisation_text_box_size": 11,
+          "organisation_text_box_bottom_padding": 13,
           "period": "MTk5Ny0xOTk5IHwg",
           "location": {
             "name": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",
@@ -441,7 +445,11 @@
         "tafe": {
           "top_padding": -38,
           "position": "Q2VydGlmaWNhdGUgSUkgaW4gVG91cmlzbQ==",
+          "position_text_box_size": 12,
+          "position_text_box_bottom_padding": 14,
           "organisation": "QWRlbGFpZGUgVEFGRQ==",
+          "organisation_text_box_size": 11,
+          "organisation_text_box_bottom_padding": 13,
           "period": "TWF5IDIwMDAgLSBNYXkgMjAwMSB8IA==",
           "location": {
             "name": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",
