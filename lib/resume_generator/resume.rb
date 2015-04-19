@@ -13,17 +13,24 @@ module ResumeGenerator
   class Resume
     include Decodable
 
-    RESUME = JSON.parse(
-      open("resources/resume.en.json").read,
-      symbolize_names: true
-    )[:resume]
-    DOCUMENT_NAME = RESUME[:document_name]
+    def self.resume
+      @@resume ||= JSON.parse(
+        open("resources/resume.#{ResumeGenerator.language}.json").read,
+        symbolize_names: true
+      )[:resume]
+    end
 
     def self.generate(cli)
       Prawn::Document.class_eval do
         include ResumeHelper
+
+        def resume
+          Resume.resume
+        end
       end
-      Prawn::Document.generate("#{d(DOCUMENT_NAME)}.pdf", pdf_options) do
+
+      Prawn::Document.generate(
+        "#{d(resume[:document_name])}.pdf", pdf_options) do
         name
         headline
         cli.inform_creation_of_social_media_links
@@ -39,16 +46,16 @@ module ResumeGenerator
 
     def self.pdf_options
       {
-        margin_top: RESUME[:margin_top],
-        margin_bottom: RESUME[:margin_bottom],
-        margin_left: RESUME[:margin_left],
-        margin_right: RESUME[:margin_right],
-        background: open(RESUME[:background_image]),
-        repeat: RESUME[:repeat],
+        margin_top: resume[:margin_top],
+        margin_bottom: resume[:margin_bottom],
+        margin_left: resume[:margin_left],
+        margin_right: resume[:margin_right],
+        background: open(resume[:background_image]),
+        repeat: resume[:repeat],
         info: {
-          Title: d(DOCUMENT_NAME),
-          Author: d('UGF1bCBGaW9yYXZhbnRp'),
-          Creator: d('UGF1bCBGaW9yYXZhbnRp'),
+          Title: d(resume[:document_name]),
+          Author: d(resume[:author]),
+          Creator: d(resume[:author]),
           CreationDate: Time.now
         }
       }
@@ -61,14 +68,14 @@ module ResumeGenerator
       private
 
       def name
-        name = RESUME[:name]
+        name = resume[:name]
         font(name[:font_name], size: name[:font_size]) do
           text d(name[:text])
         end
       end
 
       def headline
-        headline = RESUME[:headline]
+        headline = resume[:headline]
         formatted_text(
           [
             { text: d(headline[:ruby]), color: headline[:ruby_font_colour] },
@@ -79,11 +86,11 @@ module ResumeGenerator
       end
 
       def social_media_icons
-        SocialMediaIconSet.generate(self, RESUME[:social_media])
+        SocialMediaIconSet.generate(self, resume[:social_media])
       end
 
       def technical_skills
-        tech_skills = RESUME[:tech_skills]
+        tech_skills = resume[:tech_skills]
         heading_for(tech_skills)
         move_down tech_skills[:content_top_padding]
         table_data = tech_skills[:content].reduce([]) do |data, entry|
@@ -93,7 +100,7 @@ module ResumeGenerator
       end
 
       def employment_history
-        history = RESUME[:employment_history]
+        history = resume[:employment_history]
         heading_for(history)
         history[:entries].each do |_, entry|
           Listing.generate(self, entry)
@@ -103,7 +110,7 @@ module ResumeGenerator
       end
 
       def education_history
-        history = RESUME[:education_history]
+        history = resume[:education_history]
         heading_for(history)
         history[:entries].each do |_, entry|
           Listing.generate(self, entry)

@@ -128,6 +128,18 @@ RSpec.describe CLI do
   end
 
   describe 'post-PDF generation' do
+    let(:resume) { double('resume') }
+    let(:encoded_filename) { 'Encoded Document Name' }
+    let(:decoded_filename) { 'Decoded Document Name' }
+
+    before do
+      allow(Resume).to receive(:resume).and_return(resume)
+      allow(resume).to \
+        receive(:[]).with(:document_name).and_return(encoded_filename)
+      allow(cli).to \
+        receive(:d).with(encoded_filename).and_return(decoded_filename)
+    end
+
     it 'shows a success message and asks to open the resume' do
       expect(cli).to receive(:inform_of_successful_resume_generation)
       expect(cli).to receive(:request_to_open_resume)
@@ -138,9 +150,9 @@ RSpec.describe CLI do
       let(:document_name) { 'Decoded Document Name' }
 
       before do
-        allow(cli).to \
-          receive(:d).with(ResumeGenerator::Resume::DOCUMENT_NAME).
-            and_return(document_name)
+        # allow(cli).to \
+        #   receive(:d).with(ResumeGenerator::Resume::DOCUMENT_NAME).
+        #     and_return(document_name)
         allow(cli).to receive(:permission_granted?).and_return(true)
       end
 
