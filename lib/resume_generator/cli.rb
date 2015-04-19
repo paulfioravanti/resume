@@ -3,7 +3,7 @@ require 'messages'
 require 'resume'
 
 module ResumeGenerator
-  DOCUMENT_NAME = 'UGF1bF9GaW9yYXZhbnRpX1Jlc3VtZQ=='
+  # DOCUMENT_NAME = 'UGF1bF9GaW9yYXZhbnRpX1Jlc3VtZQ=='
   PRAWN_VERSION = '2.0.0'
   PRAWN_TABLE_VERSION = '0.2.1'
 
@@ -46,17 +46,17 @@ module ResumeGenerator
       inform_of_successful_resume_generation
       request_to_open_resume
       open_document if permission_granted?
-      print_thank_you_message(d(DOCUMENT_NAME))
+      print_thank_you_message(d(Resume::DOCUMENT_NAME))
     end
 
     def open_document
       case RUBY_PLATFORM
       when %r(darwin)
-        system("open #{d(DOCUMENT_NAME)}.pdf")
+        system("open #{d(Resume::DOCUMENT_NAME)}.pdf")
       when %r(linux)
-        system("xdg-open #{d(DOCUMENT_NAME)}.pdf")
+        system("xdg-open #{d(Resume::DOCUMENT_NAME)}.pdf")
       when %r(windows)
-        system("cmd /c \"start #{d(DOCUMENT_NAME)}.pdf\"")
+        system("cmd /c \"start #{d(Resume::DOCUMENT_NAME)}.pdf\"")
       else
         request_user_to_open_document
       end

@@ -1,6 +1,12 @@
 {
   "resume": {
+    "document_name": "UGF1bF9GaW9yYXZhbnRpX1Jlc3VtZQ==",
+    "margin_top": 0.75,
+    "margin_bottom": 0.75,
+    "margin_left": 1,
+    "margin_right": 1,
     "background_image": "http://farm6.staticflickr.com/5453/8801916021_3ac1df6072_o_d.jpg",
+    "repeat": true,
     "name": {
       "text": "UGF1bCBGaW9yYXZhbnRp",
       "font_name": "Times-Roman",
@@ -142,6 +148,7 @@
           },
           "location_font_colour": "666666",
           "location_font_size": 10,
+          "y_logo_start": 40,
           "logo": {
             "image": "http://farm8.staticflickr.com/7584/16817331742_687c931b33_m.jpg",
             "link": "aHR0cHM6Ly9yZWludGVyYWN0aXZlLm5ldA==",
@@ -174,6 +181,7 @@
           },
           "location_font_colour": "666666",
           "location_font_size": 10,
+          "y_logo_start": 40,
           "logo": {
             "image": "http://farm3.staticflickr.com/2830/10899782725_cd77e50d44_m.jpg",
             "link": "aHR0cDovL3d3dy5yYXRlY2l0eS5jb20uYXUv",
@@ -211,6 +219,7 @@
           },
           "location_font_colour": "666666",
           "location_font_size": 10,
+          "y_logo_start": 40,
           "logo": {
             "image": "http://farm4.staticflickr.com/3904/15003967841_65c79a6a7b_m.jpg",
             "link": "aHR0cDovL21ham9yYW4uY28v",
@@ -243,6 +252,7 @@
           },
           "location_font_colour": "666666",
           "location_font_size": 10,
+          "y_logo_start": 40,
           "logo": {
             "image": "http://farm8.staticflickr.com/7376/8812488914_f0bfd0a841_m.jpg",
             "link": "aHR0cDovL3d3dy5ndWlkZXdpcmUuY29tLw==",
@@ -282,6 +292,7 @@
           },
           "location_font_colour": "666666",
           "location_font_size": 10,
+          "y_logo_start": 40,
           "logo": {
             "image": "http://farm8.staticflickr.com/7326/8801904137_e6008ee907_m.jpg",
             "link": "aHR0cDovL3d3dy5vcmFjbGUuY29tL3VzL3Byb2R1Y3RzL2FwcGxpY2F0aW9ucy9yaWdodG5vdy9vdmVydmlldy9pbmRleC5odG1s",
@@ -321,6 +332,7 @@
           },
           "location_font_colour": "666666",
           "location_font_size": 10,
+          "y_logo_start": 40,
           "logo": {
             "image": "http://farm4.staticflickr.com/3801/8801903945_723a5d7276_m.jpg",
             "link": "aHR0cDovL3d3dy5zcmEuY28uanAvaW5kZXgtZW4uc2h0bWw=",
@@ -353,6 +365,7 @@
           },
           "location_font_colour": "666666",
           "location_font_size": 10,
+          "y_logo_start": 40,
           "logo": {
             "image": "http://farm4.staticflickr.com/3690/8801904135_37197a468c_m.jpg",
             "link": "aHR0cDovL3d3dy5qZXRwcm9ncmFtbWUub3JnL2UvYXNwaXJpbmcvcG9zaXRpb25zLmh0bWw=",
@@ -385,6 +398,7 @@
           },
           "location_font_colour": "666666",
           "location_font_size": 10,
+          "y_logo_start": 40,
           "logo": {
             "image": "http://farm4.staticflickr.com/3804/8801903991_103f5a47f8_m.jpg",
             "link": "aHR0cDovL3d3dy5zb3V0aGF1c3RyYWxpYS5jb20v",
@@ -427,6 +441,7 @@
           },
           "location_font_colour": "666666",
           "location_font_size": 10,
+          "y_logo_start": 40,
           "logo": {
             "image": "http://farm4.staticflickr.com/3792/8812488692_96818be468_m.jpg",
             "link": "aHR0cHM6Ly93d3cudW5pc2EuZWR1LmF1Lw==",
@@ -491,6 +506,7 @@
           },
           "location_font_colour": "666666",
           "location_font_size": 10,
+          "y_logo_start": 40,
           "logo": {
             "image": "http://farm8.staticflickr.com/7428/8812488856_c4c1b1f418_m.jpg",
             "link": "aHR0cDovL3d3dy5yeXVrb2t1LmFjLmpwL2VuZ2xpc2gyL2luZGV4LnBocA==",

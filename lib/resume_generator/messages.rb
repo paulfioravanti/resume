@@ -1,4 +1,6 @@
 module ResumeGenerator
+  # TODO: Move the content of these messages out into the JSON to allow
+  # them to also be multilingual...?
   module Messages
     include Colourable
 
