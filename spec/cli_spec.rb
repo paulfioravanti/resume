@@ -139,7 +139,7 @@ RSpec.describe CLI do
 
       before do
         allow(cli).to \
-          receive(:d).with(ResumeGenerator::DOCUMENT_NAME).
+          receive(:d).with(ResumeGenerator::Resume::DOCUMENT_NAME).
             and_return(document_name)
         allow(cli).to receive(:permission_granted?).and_return(true)
       end

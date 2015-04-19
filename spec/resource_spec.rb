@@ -11,7 +11,7 @@ RSpec.describe Resource do
         height: 35,
         fit: [35, 35],
         align: "center",
-        move_up: 35,
+        link_overlay_start: 35,
         bars: 3,
         size: 40,
         origin: 415,
@@ -48,8 +48,8 @@ RSpec.describe Resource do
       expect(resource.align).to eq(:center)
     end
 
-    it 'has a move_up' do
-      expect(resource.move_up).to eq(35)
+    it 'has a link_overlay_start' do
+      expect(resource.link_overlay_start).to eq(35)
     end
 
     it 'has a bars' do

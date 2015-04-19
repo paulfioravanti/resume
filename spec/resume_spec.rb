@@ -16,7 +16,7 @@ RSpec.describe Resume do
     # Needed to check that the expected filename gets generated
     include Decodable
 
-    let(:filename) { "#{d(ResumeGenerator::DOCUMENT_NAME)}.pdf" }
+    let(:filename) { "#{d(ResumeGenerator::Resume::DOCUMENT_NAME)}.pdf" }
     let(:cli) { double('cli').as_null_object }
 
     before do
