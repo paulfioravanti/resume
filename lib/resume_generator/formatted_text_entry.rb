@@ -5,11 +5,17 @@ module ResumeGenerator
     private
 
     def position
-      formatted_text_entry_for(d(data[:position]), 12)
+      formatted_text_entry_for(
+        d(data[:position]),
+        data[:position_text_box_size]
+      )
     end
 
     def organisation
-      formatted_text_entry_for(d(data[:organisation]), 11)
+      formatted_text_entry_for(
+        d(data[:organisation]),
+        data[:organisation_text_box_size]
+      )
     end
 
     def period_and_location
@@ -26,9 +32,9 @@ module ResumeGenerator
       )
     end
 
-    def formatted_text_period_and_location(period, name, link)
+    def formatted_text_period_and_location(period, location, link)
       pdf.formatted_text(
-        period_and_location_args_for(period, name, link)
+        period_and_location_args_for(period, location, link)
       )
     end
   end

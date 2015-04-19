@@ -35,10 +35,19 @@ module ResumeGenerator
       { text: string, styles: [:bold], size: size }
     end
 
-    def period_and_location_args_for(period, name, link)
+    def period_and_location_args_for(period, location, location_link)
       [
-        { text: period, color: '666666', size: 10 },
-        { text: name, link: link, color: '666666', size: 10 }
+        {
+          text: period,
+          color: data[:period_font_colour],
+          size: data[:period_font_size]
+        },
+        {
+          text: location,
+          link: location_link,
+          color: data[:location_font_colour],
+          size: data[:location_font_size]
+        }
       ]
     end
   end
