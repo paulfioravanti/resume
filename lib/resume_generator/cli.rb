@@ -6,7 +6,7 @@ require 'resume'
 module ResumeGenerator
   PRAWN_VERSION = '2.0.0'
   PRAWN_TABLE_VERSION = '0.2.1'
-  SUPPORTED_LANGUAGES = ['en', 'ja']
+  SUPPORTED_LANGUAGES = [:en, :ja]
 
   def self.language
     @@language
@@ -22,19 +22,20 @@ module ResumeGenerator
     attr_reader :language
 
     def self.start(args)
-      ResumeGenerator.language = 'en'
+      ResumeGenerator.language = :en
       opt_parser = OptionParser.new do |opts|
         opts.banner = 'Usage: ./bin/resume [options]'
         opts.separator ''
         opts.separator 'Specific options:'
 
         opts.on('-l', '--language LANGUAGE',
-                'Select the language of the resume') do |language|
+                'Select the language of the resume') do |lang|
+          language = lang.to_sym
           if SUPPORTED_LANGUAGES.include?(language)
             ResumeGenerator.language = language
           else
-            puts "Language '#{language}' is not supported.\n"\
-              "Supported languages are: #{SUPPORTED_LANGUAGES.join(', ')}"
+            puts "Language '#{lang}' is not supported.\n"\
+                 "Supported languages are: #{SUPPORTED_LANGUAGES.join(', ')}"
             exit
           end
         end
@@ -54,6 +55,10 @@ module ResumeGenerator
       end
       opt_parser.parse!(args)
       new.start
+    end
+
+    def initialize
+      @language = ResumeGenerator.language
     end
 
     def start
@@ -92,7 +97,7 @@ module ResumeGenerator
       inform_of_successful_resume_generation
       request_to_open_resume
       open_document if permission_granted?
-      print_thank_you_message(d(Resume.resume[:document_name]))
+      print_thank_you_message
     end
 
     def open_document

@@ -1,90 +1,115 @@
 module ResumeGenerator
-  # TODO: Move the content of these messages out into the JSON to allow
-  # them to also be multilingual...?
   module Messages
     include Colourable
 
+    def messages
+      {
+        en: {
+          inform_creation_of_social_media_links:
+            'Creating social media links...',
+          inform_creation_of_technical_skills:
+            'Creating technical skills section...',
+          inform_creation_of_employment_history:
+            'Creating employment history section...',
+          inform_creation_of_education_history:
+            'Creating education history section...',
+          request_gem_installation:
+            "May I please install the following Ruby gems:\n"\
+            "- prawn #{ResumeGenerator::PRAWN_VERSION}\n"\
+            "- prawn-table #{ResumeGenerator::PRAWN_TABLE_VERSION}\n"\
+            "in order to help me generate a PDF (Y/N)? ",
+          thank_user_for_permission:
+            'Thank you kindly :-)',
+          inform_start_of_gem_installation:
+            'Installing required gems...',
+          inform_start_of_resume_generation:
+            "Generating PDF. This shouldn't take longer than a few seconds...",
+          inform_of_failure_to_generate_resume:
+            "Sorry, I won't be able to generate a PDF\n"\
+            "without these specific gem versions.\n"\
+            "Please ask me directly for a PDF copy of my resume.",
+          inform_of_successful_resume_generation:
+            'Resume generated successfully.',
+          print_thank_you_message:
+            "Thanks for looking at my resume. I hope to hear from you soon!\n"\
+            "#{Resume.filename} has been generated in the same\n"\
+            "directory you ran the script.",
+          request_to_open_resume:
+            'Would you like me to open the resume for you (Y/N)? ',
+          request_user_to_open_document:
+            "Sorry, I can't figure out how to open the resume on\n"\
+            "this computer. Please open it yourself.",
+          inform_of_successful_gem_installation:
+            'Gems successfully installed.',
+          inform_of_gem_installation_failure:
+            "Sorry, for some reason I wasn't able to\n"\
+            "install one or more required gems.\n"\
+            "Either try again or ask me directly for a PDF copy of "\
+            "my resume."
+        }
+      }
+    end
+
     def inform_creation_of_social_media_links
-      puts 'Creating social media links...'
+      puts messages[language][__method__]
     end
 
     def inform_creation_of_technical_skills
-      puts 'Creating technical skills section...'
+      puts messages[language][__method__]
     end
 
     def inform_creation_of_employment_history
-      puts 'Creating employment history section...'
+      puts messages[language][__method__]
     end
 
     def inform_creation_of_education_history
-      puts 'Creating education history section...'
+      puts messages[language][__method__]
     end
 
     private
 
     def request_gem_installation
-      print yellow(
-        "May I please install the following Ruby gems:\n"\
-        "- prawn #{PRAWN_VERSION}\n"\
-        "- prawn-table #{PRAWN_TABLE_VERSION}\n"\
-        "in order to help me generate a PDF (Y/N)? "\
-      )
+      print yellow(messages[language][__method__])
     end
 
     def thank_user_for_permission
-      puts green('Thank you kindly :-)')
+      puts green(messages[language][__method__])
     end
 
     def inform_start_of_gem_installation
-      puts 'Installing required gems...'
+      puts messages[language][__method__]
     end
 
     def inform_start_of_resume_generation
-      puts "Generating PDF. This shouldn't take longer than a few seconds..."
+      puts messages[language][__method__]
     end
 
     def inform_of_failure_to_generate_resume
-      puts red(
-        "Sorry, I won't be able to generate a PDF\n"\
-        "without these specific gem versions.\n"\
-        "Please ask me directly for a PDF copy of my resume."
-      )
+      puts red(messages[language][__method__])
     end
 
     def inform_of_successful_resume_generation
-      puts green('Resume generated successfully.')
+      puts green(messages[language][__method__])
     end
 
-    def print_thank_you_message(document_name)
-      puts cyan(
-        "Thanks for looking at my resume. I hope to hear from you soon!\n"\
-        "#{document_name}.pdf has been generated in the same\n"\
-        "directory you ran the script."
-      )
+    def print_thank_you_message
+      puts cyan(messages[language][__method__])
     end
 
     def request_to_open_resume
-      print yellow 'Would you like me to open the resume for you (Y/N)? '
+      print yellow(messages[language][__method__])
     end
 
     def request_user_to_open_document
-      puts yellow(
-        "Sorry, I can't figure out how to open the resume on\n"\
-        "this computer. Please open it yourself."
-      )
+      puts yellow(messages[language][__method__])
     end
 
     def inform_of_successful_gem_installation
-      puts green('Gems successfully installed.')
+      puts green(messages[language][__method__])
     end
 
     def inform_of_gem_installation_failure
-      puts red(
-        "Sorry, for some reason I wasn't able to\n"\
-        "install one or more required gems.\n"\
-        "Either try again or ask me directly for a PDF copy of "\
-        "my resume."
-      )
+      puts red(messages[language][__method__])
     end
   end
 end
