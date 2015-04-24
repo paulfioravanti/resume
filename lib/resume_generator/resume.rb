@@ -20,17 +20,14 @@ module ResumeGenerator
       )[:resume]
     end
 
+    def self.filename
+      @@filename ||=
+        "#{d(resume[:document_name])}_#{ResumeGenerator.language}.pdf"
+    end
+
     def self.generate(cli)
-      Prawn::Document.class_eval do
-        include ResumeHelper
-
-        def resume
-          Resume.resume
-        end
-      end
-
-      Prawn::Document.generate(
-        "#{d(resume[:document_name])}.pdf", pdf_options) do
+      patch_prawn_document
+      Prawn::Document.generate(filename, pdf_options) do
         name
         headline
         cli.inform_creation_of_social_media_links
@@ -43,6 +40,17 @@ module ResumeGenerator
         education_history
       end
     end
+
+    def self.patch_prawn_document
+      Prawn::Document.class_eval do
+        include ResumeHelper
+
+        def resume
+          Resume.resume
+        end
+      end
+    end
+    private_class_method :patch_prawn_document
 
     def self.pdf_options
       {
@@ -69,7 +77,7 @@ module ResumeGenerator
 
       def name
         name = resume[:name]
-        font(name[:font_name], size: name[:font_size]) do
+        font(name[:font], size: name[:size]) do
           text d(name[:text])
         end
       end
@@ -78,10 +86,13 @@ module ResumeGenerator
         headline = resume[:headline]
         formatted_text(
           [
-            { text: d(headline[:ruby]), color: headline[:ruby_font_colour] },
-            { text: d(headline[:other]) }
+            {
+              text: d(headline[:ruby][:text]),
+              color: headline[:ruby][:colour]
+            },
+            { text: d(headline[:other][:text]) }
           ],
-          size: headline[:font_size]
+          size: headline[:size]
         )
       end
 

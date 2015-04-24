@@ -10,14 +10,18 @@
     "repeat": true,
     "name": {
       "text": "UGF1bCBGaW9yYXZhbnRp",
-      "font_name": "Times-Roman",
-      "font_size": 20
+      "font": "Times-Roman",
+      "size": 20
     },
     "headline": {
-      "ruby": "UnVieSBEZXZlbG9wZXIg",
-      "ruby_font_colour": "85200C",
-      "other": "YW5kIEluZm9ybWF0aW9uIFRlY2hub2xvZ3kgU2VydmljZXMgUHJvZmVzc2lvbmFs",
-      "font_size": 14
+      "ruby": {
+        "text": "UnVieSBEZXZlbG9wZXIg",
+        "colour": "85200C"
+      },
+      "other": {
+        "text": "YW5kIEluZm9ybWF0aW9uIFRlY2hub2xvZ3kgU2VydmljZXMgUHJvZmVzc2lvbmFs"
+      },
+      "size": 14
     },
     "social_media": {
       "left_padding": 0,
