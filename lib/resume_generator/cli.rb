@@ -72,13 +72,14 @@ module ResumeGenerator
 
     def check_ability_to_generate_resume
       return if required_gems_available?(
-        'prawn' => PRAWN_VERSION, 'prawn-table' => PRAWN_TABLE_VERSION
+        'prawn' => PRAWN_VERSION,
+        'prawn-table' => PRAWN_TABLE_VERSION
       )
       request_gem_installation
       if permission_granted?
         thank_user_for_permission
         inform_start_of_gem_installation
-        install_gem
+        install_gems
       else
         inform_of_failure_to_generate_resume
         exit
@@ -130,17 +131,20 @@ module ResumeGenerator
       gets.chomp.match(%r{\Ay(es)?\z}i)
     end
 
-    def install_gem
-      begin
-        system("gem install prawn -v #{PRAWN_VERSION}")
-        system("gem install prawn-table -v #{PRAWN_TABLE_VERSION}")
+    def install_gems
+      if successfully_installed?
         inform_of_successful_gem_installation
         # Reset the dir and path values so Prawn can be required
         Gem.clear_paths
-      rescue
+      else
         inform_of_gem_installation_failure
         exit
       end
+    end
+
+    def successfully_installed?
+      system('gem', 'install', 'prawn', '-v', PRAWN_VERSION) &&
+      system('gem', 'install', 'prawn-table', '-v', PRAWN_TABLE_VERSION)
     end
   end
 end
