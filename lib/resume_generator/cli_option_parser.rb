@@ -5,7 +5,7 @@ module ResumeGenerator
     SUPPORTED_LANGUAGES = [:en, :ja]
 
     def self.generate
-      OptionParser.new do |opts|
+      opt_parser = OptionParser.new do |opts|
         opts.banner = 'Usage: ./bin/resume [options]'
         opts.separator ''
         opts.separator 'Specific options:'
@@ -35,6 +35,10 @@ module ResumeGenerator
           exit
         end
       end
+      unless ResumeGenerator.class_variable_defined?(:@@language)
+        ResumeGenerator.language = :en
+      end
+      opt_parser
     end
   end
 end

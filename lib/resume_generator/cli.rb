@@ -21,7 +21,6 @@ module ResumeGenerator
     attr_reader :language
 
     def self.start(args)
-      ResumeGenerator.language = :en
       opt_parser = CLIOptionParser.generate
       opt_parser.parse!(args)
       new.start
