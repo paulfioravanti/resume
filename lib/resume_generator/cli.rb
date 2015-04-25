@@ -1,12 +1,11 @@
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'resume')
-require 'optparse'
 require 'messages'
 require 'resume'
+require 'cli_option_parser'
 
 module ResumeGenerator
   PRAWN_VERSION = '2.0.0'
   PRAWN_TABLE_VERSION = '0.2.1'
-  SUPPORTED_LANGUAGES = [:en, :ja]
 
   def self.language
     @@language
@@ -23,36 +22,7 @@ module ResumeGenerator
 
     def self.start(args)
       ResumeGenerator.language = :en
-      opt_parser = OptionParser.new do |opts|
-        opts.banner = 'Usage: ./bin/resume [options]'
-        opts.separator ''
-        opts.separator 'Specific options:'
-
-        opts.on('-l', '--language LANGUAGE',
-                'Select the language of the resume') do |lang|
-          language = lang.to_sym
-          if SUPPORTED_LANGUAGES.include?(language)
-            ResumeGenerator.language = language
-          else
-            puts "Language '#{lang}' is not supported.\n"\
-                 "Supported languages are: #{SUPPORTED_LANGUAGES.join(', ')}"
-            exit
-          end
-        end
-
-        opts.separator ''
-        opts.separator 'Common options:'
-
-        opts.on_tail('-h', '--help', 'Show this message') do
-          puts opts
-          exit
-        end
-
-        opts.on_tail('-v', '--version', 'Show version') do
-          puts ResumeGenerator::VERSION
-          exit
-        end
-      end
+      opt_parser = CLIOptionParser.generate
       opt_parser.parse!(args)
       new.start
     end
