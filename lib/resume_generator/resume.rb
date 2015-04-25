@@ -39,6 +39,9 @@ module ResumeGenerator
         cli.inform_creation_of_education_history
         education_history
       end
+    rescue SocketError
+      cli.inform_of_network_connection_issue
+      exit
     end
 
     def self.patch_prawn_document

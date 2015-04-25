@@ -49,7 +49,10 @@ module ResumeGenerator
             "Sorry, for some reason I wasn't able to\n"\
             "install one or more required gems.\n"\
             "Either try again or ask me directly for a PDF copy of "\
-            "my resume."
+            "my resume.",
+          inform_of_network_connection_issue:
+            "Sorry, it seems I can't get an outside connection.\n"\
+            "Please check your internet settings and try again."
         }
       }[language]
     end
@@ -68,6 +71,10 @@ module ResumeGenerator
 
     def inform_creation_of_education_history
       puts messages[__method__]
+    end
+
+    def inform_of_network_connection_issue
+      puts red(messages[__method__])
     end
 
     private
