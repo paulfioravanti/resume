@@ -19,6 +19,7 @@ module ResumeGenerator
     include Decodable, Messages
 
     attr_reader :language
+    attr_reader :gems
 
     def self.start(args)
       opt_parser = CLIOptionParser.generate
@@ -28,6 +29,10 @@ module ResumeGenerator
 
     def initialize
       @language = ResumeGenerator.language
+      @gems = {
+        'prawn' => PRAWN_VERSION,
+        'prawn-table' => PRAWN_TABLE_VERSION
+      }
       initialize_messages
     end
 
@@ -40,10 +45,7 @@ module ResumeGenerator
     private
 
     def check_ability_to_generate_resume
-      return if required_gems_available?(
-        'prawn' => PRAWN_VERSION,
-        'prawn-table' => PRAWN_TABLE_VERSION
-      )
+      return if required_gems_available?
       request_gem_installation
       if permission_granted?
         thank_user_for_permission
@@ -84,7 +86,7 @@ module ResumeGenerator
       end
     end
 
-    def required_gems_available?(gems)
+    def required_gems_available?
       gems.each do |name, version|
         if Gem::Specification.find_by_name(name).version <
           Gem::Version.new(version)
