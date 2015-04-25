@@ -3,6 +3,7 @@ require 'messages'
 require 'resume'
 require 'cli_option_parser'
 require 'gem_installer'
+require 'file_system'
 
 module ResumeGenerator
   PRAWN_VERSION = '2.0.0'
@@ -67,26 +68,12 @@ module ResumeGenerator
     def clean_up
       inform_of_successful_resume_generation
       request_to_open_resume
-      open_document if permission_granted?
+      FileSystem.open_document(self) if permission_granted?
       print_thank_you_message
-    end
-
-    def open_document
-      case RUBY_PLATFORM
-      when %r(darwin)
-        system("open #{Resume.filename}")
-      when %r(linux)
-        system("xdg-open #{Resume.filename}")
-      when %r(windows)
-        system("cmd /c \"start #{Resume.filename}\"")
-      else
-        request_user_to_open_document
-      end
     end
 
     def permission_granted?
       gets.chomp.match(%r{\Ay(es)?\z}i)
     end
-
   end
 end
