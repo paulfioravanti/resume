@@ -21,7 +21,6 @@ module ResumeGenerator
     include Decodable, Messages
 
     attr_reader :language
-    attr_reader :gems
 
     def self.start(args)
       opt_parser = CLIOptionParser.generate
