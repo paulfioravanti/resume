@@ -36,7 +36,7 @@ module ResumeGenerator
     def start
       install_gems
       generate_resume
-      clean_up
+      open_resume
     end
 
     private
@@ -62,10 +62,10 @@ module ResumeGenerator
       require 'prawn/table'
       inform_start_of_resume_generation
       Resume.generate(self)
+      inform_of_successful_resume_generation
     end
 
-    def clean_up
-      inform_of_successful_resume_generation
+    def open_resume
       request_to_open_resume
       FileSystem.open_document(self) if permission_granted?
       print_thank_you_message
