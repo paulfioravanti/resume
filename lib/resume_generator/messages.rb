@@ -2,8 +2,12 @@ module ResumeGenerator
   module Messages
     include Colourable
 
-    def messages
-      {
+    def self.included(base)
+      base.send(:attr_reader, :messages)
+    end
+
+    def initialize_messages
+      @messages = {
         en: {
           inform_creation_of_social_media_links:
             'Creating social media links...',
@@ -47,69 +51,69 @@ module ResumeGenerator
             "Either try again or ask me directly for a PDF copy of "\
             "my resume."
         }
-      }
+      }[language]
     end
 
     def inform_creation_of_social_media_links
-      puts messages[language][__method__]
+      puts messages[__method__]
     end
 
     def inform_creation_of_technical_skills
-      puts messages[language][__method__]
+      puts messages[__method__]
     end
 
     def inform_creation_of_employment_history
-      puts messages[language][__method__]
+      puts messages[__method__]
     end
 
     def inform_creation_of_education_history
-      puts messages[language][__method__]
+      puts messages[__method__]
     end
 
     private
 
     def request_gem_installation
-      print yellow(messages[language][__method__])
+      print yellow(messages[__method__])
     end
 
     def thank_user_for_permission
-      puts green(messages[language][__method__])
+      puts green(messages[__method__])
     end
 
     def inform_start_of_gem_installation
-      puts messages[language][__method__]
+      puts messages[__method__]
     end
 
     def inform_start_of_resume_generation
-      puts messages[language][__method__]
+      puts messages[__method__]
     end
 
     def inform_of_failure_to_generate_resume
-      puts red(messages[language][__method__])
+      puts red(messages[__method__])
     end
 
     def inform_of_successful_resume_generation
-      puts green(messages[language][__method__])
+      puts green(messages[__method__])
     end
 
     def print_thank_you_message
-      puts cyan(messages[language][__method__])
+      puts cyan(messages[__method__])
     end
 
     def request_to_open_resume
-      print yellow(messages[language][__method__])
+      print yellow(messages[__method__])
     end
 
     def request_user_to_open_document
-      puts yellow(messages[language][__method__])
+      puts yellow(messages[__method__])
     end
 
     def inform_of_successful_gem_installation
-      puts green(messages[language][__method__])
+      puts green(messages[__method__])
     end
 
     def inform_of_gem_installation_failure
-      puts red(messages[language][__method__])
+      puts red(messages[__method__])
     end
   end
 end

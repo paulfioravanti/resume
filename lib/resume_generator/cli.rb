@@ -59,6 +59,7 @@ module ResumeGenerator
 
     def initialize
       @language = ResumeGenerator.language
+      initialize_messages
     end
 
     def start
