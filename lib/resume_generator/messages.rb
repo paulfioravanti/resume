@@ -77,6 +77,14 @@ module ResumeGenerator
       puts red(messages[__method__])
     end
 
+    def inform_of_successful_gem_installation
+      puts green(messages[__method__])
+    end
+
+    def inform_of_gem_installation_failure
+      puts red(messages[__method__])
+    end
+
     private
 
     def request_gem_installation
@@ -113,14 +121,6 @@ module ResumeGenerator
 
     def request_user_to_open_document
       puts yellow(messages[__method__])
-    end
-
-    def inform_of_successful_gem_installation
-      puts green(messages[__method__])
-    end
-
-    def inform_of_gem_installation_failure
-      puts red(messages[__method__])
     end
   end
 end

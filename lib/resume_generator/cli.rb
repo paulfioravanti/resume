@@ -2,6 +2,7 @@ $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'resume')
 require 'messages'
 require 'resume'
 require 'cli_option_parser'
+require 'gem_installer'
 
 module ResumeGenerator
   PRAWN_VERSION = '2.0.0'
@@ -29,28 +30,25 @@ module ResumeGenerator
 
     def initialize
       @language = ResumeGenerator.language
-      @gems = {
-        'prawn' => PRAWN_VERSION,
-        'prawn-table' => PRAWN_TABLE_VERSION
-      }
       initialize_messages
     end
 
     def start
-      check_ability_to_generate_resume
+      install_gems
       generate_resume
       clean_up
     end
 
     private
 
-    def check_ability_to_generate_resume
-      return if required_gems_available?
+    def install_gems
+      installer = GemInstaller.new(self)
+      return if installer.required_gems_available?
       request_gem_installation
       if permission_granted?
         thank_user_for_permission
         inform_start_of_gem_installation
-        install_gems
+        installer.install_gems
       else
         inform_of_failure_to_generate_resume
         exit
@@ -86,36 +84,9 @@ module ResumeGenerator
       end
     end
 
-    def required_gems_available?
-      gems.each do |name, version|
-        if Gem::Specification.find_by_name(name).version <
-          Gem::Version.new(version)
-          return false
-        end
-      end
-      true
-    rescue Gem::LoadError # gem not installed
-      false
-    end
-
     def permission_granted?
       gets.chomp.match(%r{\Ay(es)?\z}i)
     end
 
-    def install_gems
-      if successfully_installed?
-        inform_of_successful_gem_installation
-        # Reset the dir and path values so Prawn can be required
-        Gem.clear_paths
-      else
-        inform_of_gem_installation_failure
-        exit
-      end
-    end
-
-    def successfully_installed?
-      system('gem', 'install', 'prawn', '-v', PRAWN_VERSION) &&
-      system('gem', 'install', 'prawn-table', '-v', PRAWN_TABLE_VERSION)
-    end
   end
 end
