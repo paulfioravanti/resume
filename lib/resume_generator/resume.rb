@@ -4,6 +4,7 @@ require 'decodable'
 require 'name'
 require 'headline'
 require 'social_media_icon_set'
+require 'technical_skills'
 require 'listing'
 
 module ResumeGenerator
@@ -93,13 +94,7 @@ module ResumeGenerator
       end
 
       def technical_skills
-        tech_skills = resume[:tech_skills]
-        heading_for(tech_skills)
-        move_down tech_skills[:content_top_padding]
-        table_data = tech_skills[:content].reduce([]) do |data, entry|
-          data << [d(entry.first), d(entry.last)]
-        end
-        table(table_data, tech_skills[:properties])
+        TechnicalSkills.generate(self, resume[:tech_skills])
       end
 
       def employment_history
