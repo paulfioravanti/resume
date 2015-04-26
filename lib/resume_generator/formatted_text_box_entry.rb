@@ -11,7 +11,7 @@ module ResumeGenerator
           styles: position[:styles].map(&:to_sym),
           size: position[:size]
         }],
-        at: [position[:at_x_position], pdf.cursor]
+        at: [at_x_position, pdf.cursor]
       )
       pdf.move_down position[:bottom_padding]
     end
@@ -23,7 +23,7 @@ module ResumeGenerator
           styles: organisation[:styles].map(&:to_sym),
           size: organisation[:size]
         }],
-        at: [organisation[:at_x_position], pdf.cursor]
+        at: [at_x_position, pdf.cursor]
       )
       pdf.move_down organisation[:bottom_padding]
     end
@@ -43,7 +43,7 @@ module ResumeGenerator
             size: location[:size]
           }
         ],
-        at: [period[:at_x_position], pdf.cursor]
+        at: [at_x_position, pdf.cursor]
       )
     end
   end

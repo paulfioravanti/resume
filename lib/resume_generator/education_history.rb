@@ -33,8 +33,7 @@ module ResumeGenerator
     end
 
     def generate_content
-      # data[:entries].each do |_, entry|
-      [content[:entries].to_a.last].each do |_, entry| #FIXME
+      content[:entries].each do |_, entry|
         Entry.generate(pdf, entry)
       end
     end
