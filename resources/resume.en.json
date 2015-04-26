@@ -181,10 +181,6 @@
               "size": 33,
               "align": "left"
             },
-            "cell_style": {
-              "borders": [],
-              "height": 21
-            },
             "summary": {
               "top_padding": 10,
               "text": "UnVieSBvbiBSYWlscyBkZXZlbG9wZXIgYW5kIGNvbnN1bHRhbnQgZm9yIGEgd2lkZSB2YXJpZXR5IG9mIGNsaWVudCBwcm9qZWN0cy4="
@@ -226,10 +222,6 @@
               "size": 43,
               "align": "left"
             },
-            "cell_style": {
-              "borders": [],
-              "height": 21
-            },
             "summary": {
               "top_padding": 10,
               "text": "UnVieSBvbiBSYWlscyBkZXZlbG9wZXIgZm9yIFJhdGVDaXR5IGZpbmFuY2lhbCBwcm9kdWN0cyBhbmQgc2VydmljZXMgY29tcGFyaXNvbiB3ZWJzaXRlLg=="
@@ -238,7 +230,11 @@
               "V2Vla2x5IGRlbGl2ZXJ5IG9mIG5ldyBmZWF0dXJlcyBmb3IgY29yZSBwcm9kdWN0LCBmcm9tIHVzZXIgc3RvcnkgdG8gVEREIHRvIHByb2R1Y3Rpb24=",
               "TWFpbnRlbmFuY2UgYW5kIGltcHJvdmVtZW50IG9mIGNvZGUgYW5kIHRlc3QgY292ZXJhZ2UgZm9yIGN1cnJlbnQgZmVhdHVyZXM=",
               "UHJvZHVjdCB1cGdyYWRlLCByZS13cml0ZSwgYW5kIG1pZ3JhdGlvbiB0byBuZXdlciBSYWlscyB2ZXJzaW9ucw=="
-            ]
+            ],
+            "cell_style": {
+              "borders": [],
+              "height": 21
+            }
           },
           "fl": {
             "top_padding": 15,
@@ -275,10 +271,6 @@
               "bars": 10,
               "size": 43,
               "align": "left"
-            },
-            "cell_style": {
-              "borders": [],
-              "height": 21
             },
             "summary": {
               "top_padding": 15,
@@ -321,10 +313,6 @@
               "size": 41,
               "align": "left"
             },
-            "cell_style": {
-              "borders": [],
-              "height": 21
-            },
             "summary": {
               "top_padding": 10,
               "text": "QnVzaW5lc3MgYW5kIElULWZvY3VzZWQgY29tcGxleCBzYWxlcyBvZiBHdWlkZXdpcmUgQ2xhaW1DZW50ZXIgaW5zdXJhbmNlIGNsYWltIGhhbmRsaW5nIHN5c3RlbSB0byBQcm9wZXJ0eSAmIENhc3VhbHR5IGluc3VyYW5jZSBjb21wYW5pZXMu"
@@ -335,7 +323,11 @@
               "QXNzaXN0IGxvY2FsIFN5c3RlbXMgSW50ZWdyYXRvciBwYXJ0bmVyIGNvbXBhbmllcyBpbiB0aGVpciBHdWlkZXdpcmUgcHJvamVjdCBwcm9wb3NhbHM=",
               "Q29uZHVjdCBidXNpbmVzcyBwcm9jZXNzIGNvbnN1bHRpbmcgd29ya3Nob3BzIGZvciBwcm9zcGVjdHMvY3VzdG9tZXJz",
               "UHJlcGFyZSB3cml0dGVuIHJlc3BvbnNlcyB0byBjdXN0b21lciBSRlAvUkZJcw=="
-            ]
+            ],
+            "cell_style": {
+              "borders": [],
+              "height": 21
+            }
           },
           "rnt": {
             "top_padding": 15,
@@ -373,10 +365,6 @@
               "size": 43,
               "align": "left"
             },
-            "cell_style": {
-              "borders": [],
-              "height": 21
-            },
             "summary": {
               "top_padding": 10,
               "text": "UG9zdC1zYWxlcyBwcm9kdWN0IGltcGxlbWVudGF0aW9uIG9mIFJpZ2h0IE5vdyBDUk0gcHJvZHVjdCAobm93IE9yYWNsZSBTZXJ2aWNlIENsb3VkKS4="
@@ -387,7 +375,11 @@
               "Q29uZHVjdCBpbmNlcHRpb24tcGhhc2UgcmVxdWlyZW1lbnRzIHdvcmtzaG9wcyBmb3IgYnVzaW5lc3MgcHJvY2Vzc2Vz",
               "TWFuYWdlLCBRQSwgYW5kIGxvY2FsaXplIGN1c3RvbWl6YXRpb24gd29yayBwZXJmb3JtZWQgYnkgZW5naW5lZXJz",
               "V29yayB3aXRoIGN1c3RvbWVyIHN1cHBvcnQgdG8gaGFuZGxlIGltcGxlbWVudGF0aW9uLXJlbGF0ZWQgc3VwcG9ydCBpbmNpZGVudHM="
-            ]
+            ],
+            "cell_style": {
+              "borders": [],
+              "height": 21
+            }
           },
           "sra": {
             "top_padding": 15,
@@ -424,10 +416,6 @@
               "bars": 10,
               "size": 43,
               "align": "left"
-            },
-            "cell_style": {
-              "borders": [],
-              "height": 21
             },
             "summary": {
               "top_padding": 10,
@@ -470,10 +458,6 @@
               "size": 36,
               "align": "left"
             },
-            "cell_style": {
-              "borders": [],
-              "height": 21
-            },
             "summary": {
               "top_padding": 10,
               "text": "RW5nbGlzaC9KYXBhbmVzZSB0cmFuc2xhdGlvbiBhbmQgaW50ZXJwcmV0aW5nIGF0IGdvdmVybm1lbnQgb2ZmaWNlcywgYXMgd2VsbCBhcyBwbGFubmluZy9pbXBsZW1lbnRpbmcgZ3Jhc3Nyb290cyBjb21tdW5pdHkgYWN0aXZpdGllcyBhbmQgaW50ZXJuYXRpb25hbCBleGNoYW5nZSBwcm9qZWN0cy4="
@@ -514,10 +498,6 @@
               "bars": 8,
               "size": 43,
               "align": "left"
-            },
-            "cell_style": {
-              "borders": [],
-              "height": 21
             },
             "summary": {
               "top_padding": 10,
@@ -571,10 +551,6 @@
               "bars": 3,
               "size": 43,
               "align": "left"
-            },
-            "cell_style": {
-              "borders": [],
-              "height": 21
             }
           },
           "bib": {
@@ -615,10 +591,6 @@
               "bars": 3,
               "size": 43,
               "align": "left"
-            },
-            "cell_style": {
-              "borders": [],
-              "height": 21
             }
           },
           "ryu": {
@@ -656,10 +628,6 @@
               "bars": 3,
               "size": 40,
               "align": "left"
-            },
-            "cell_style": {
-              "borders": [],
-              "height": 21
             }
           },
           "tafe": {
@@ -700,10 +668,6 @@
               "bars": 5,
               "size": 28,
               "align": "left"
-            },
-            "cell_style": {
-              "borders": [],
-              "height": 21
             }
           }
         }
