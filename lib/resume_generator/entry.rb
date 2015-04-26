@@ -5,46 +5,46 @@ module ResumeGenerator
   class Entry
     include Decoder, Utilities
 
-    attr_reader :pdf, :data
+    attr_reader :pdf, :entry
 
-    def self.generate(pdf, data)
-      new(pdf, data).generate
+    def self.generate(pdf, entry)
+      new(pdf, entry).generate
     end
 
-    def initialize(pdf, data)
+    def initialize(pdf, entry)
       @pdf = pdf
-      @data = data
+      @entry = entry
     end
 
     def generate
-      pdf.move_down data[:top_padding]
-      Header.generate(pdf, data)
-      LogoLink.generate(pdf, data)
-      details if data.has_key?(:summary)
+      pdf.move_down entry[:top_padding]
+      Header.generate(pdf, entry)
+      LogoLink.generate(pdf, entry)
+      details if entry.has_key?(:summary)
     end
 
     private
 
     def details
-      pdf.move_down data[:summary_top_padding]
-      summary(data[:summary])
-      profile(data[:profile])
+      pdf.move_down entry[:summary][:top_padding]
+      summary
+      profile
     end
 
-    def summary(string)
-      pdf.text(d(string), inline_format: true)
+    def summary
+      pdf.text(d(entry[:summary][:text]), inline_format: true)
     end
 
-    def profile(items)
-      return unless items
+    def profile
+      return unless items = entry[:profile]
       table_data = items.reduce([]) do |data, item|
         data << ['-', d(item)]
       end
       pdf.table(
         table_data,
         cell_style: {
-          borders: data[:table_cell_borders],
-          height: data[:table_cell_height]
+          borders: entry[:cell_style][:borders],
+          height: entry[:cell_style][:height]
         }
       )
     end

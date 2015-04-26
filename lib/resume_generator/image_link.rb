@@ -3,7 +3,7 @@ module ResumeGenerator
     extend Decoder
 
     attr_reader :image, :link, :width, :height, :fit, :align,
-                :link_overlay_start, :bars, :size, :origin, :at
+                :link_overlay_start, :bars, :size, :origin, :at, :y_start
 
     def self.for(data)
       data[:image] = open(data[:image])

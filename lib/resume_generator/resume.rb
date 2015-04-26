@@ -39,8 +39,8 @@ module ResumeGenerator
         TechnicalSkills.generate(self, Resume.data[:technical_skills])
         cli.inform_creation_of_employment_history
         EmploymentHistory.generate(self, Resume.data[:employment_history])
-        cli.inform_creation_of_education_history
-        EducationHistory.generate(self, Resume.data[:education_history])
+        # cli.inform_creation_of_education_history
+        # EducationHistory.generate(self, Resume.data[:education_history])
       end
     rescue SocketError
       cli.inform_of_network_connection_issue

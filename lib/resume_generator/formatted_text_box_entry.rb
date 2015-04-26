@@ -4,44 +4,46 @@ module ResumeGenerator
 
     private
 
-    def position
-      formatted_text_box_entry_for(
-        d(data[:position]),
-        data[:position_text_box_size],
-        data[:at],
-        data[:position_text_box_bottom_padding]
-      )
-    end
-
-    def organisation
-      formatted_text_box_entry_for(
-        d(data[:organisation]),
-        data[:organisation_text_box_size],
-        data[:at],
-        data[:organisation_text_box_bottom_padding]
-      )
-    end
-
-    def period_and_location
-      formatted_text_box_period_and_location(
-        d(data[:period]),
-        d(data[:location][:name]),
-        d(data[:location][:link]),
-        data[:at]
-      )
-    end
-
-    def formatted_text_box_entry_for(item, size, at, bottom_padding)
+    def generate_position
       pdf.formatted_text_box(
-        [formatted_entry_args_for(item, size)], at: [at, pdf.cursor]
+        [{
+          text: d(position[:text]),
+          styles: position[:styles].map(&:to_sym),
+          size: position[:size]
+        }],
+        at: [position[:at_x_position], pdf.cursor]
       )
-      pdf.move_down bottom_padding
+      pdf.move_down position[:bottom_padding]
     end
 
-    def formatted_text_box_period_and_location(period, name, link, at)
+    def generate_organisation
       pdf.formatted_text_box(
-        period_and_location_args_for(period, name, link),
-        at: [at, pdf.cursor]
+        [{
+          text: d(organisation[:text]),
+          styles: organisation[:styles].map(&:to_sym),
+          size: organisation[:size]
+        }],
+        at: [organisation[:at_x_position], pdf.cursor]
+      )
+      pdf.move_down organisation[:bottom_padding]
+    end
+
+    def generate_period_and_location
+      pdf.formatted_text_box(
+        [
+          {
+            text: d(period[:text]),
+            color: period[:colour],
+            size: period[:size]
+          },
+          {
+            text: d(location[:text]),
+            link: d(location[:link]),
+            color: location[:colour],
+            size: location[:size]
+          }
+        ],
+        at: [period[:at_x_position], pdf.cursor]
       )
     end
   end

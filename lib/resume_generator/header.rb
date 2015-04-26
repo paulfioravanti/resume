@@ -4,19 +4,31 @@ require 'formatted_text_box_entry'
 module ResumeGenerator
   class Header
 
-    attr_reader :pdf, :data
+    attr_reader :pdf, :position, :organisation,
+                :period, :location, :at_x_position
 
     def self.generate(pdf, data)
-      new(pdf, data).generate
+      new(
+        pdf,
+        data[:position],
+        data[:organisation],
+        data[:period],
+        data[:location],
+        data[:at_x_position]
+      ).generate
     end
 
-    def initialize(pdf, data)
+    def initialize(pdf, position, organisation, period, location, at_x_position)
       @pdf = pdf
-      @data = data
+      @position = position
+      @organisation = organisation
+      @period = period
+      @location = location
+      @at_x_position = at_x_position
       # Different rendering behaviour needed depending on whether the header is
       # being drawn from left to right on the page or specifically placed at
       # a location
-      if data[:at]
+      if at_x_position
         extend FormattedTextBoxEntry
       else
         extend FormattedTextEntry
@@ -24,31 +36,9 @@ module ResumeGenerator
     end
 
     def generate
-      position
-      organisation
-      period_and_location
-    end
-
-    private
-
-    def formatted_entry_args_for(string, size)
-      { text: string, styles: [:bold], size: size }
-    end
-
-    def period_and_location_args_for(period, location, location_link)
-      [
-        {
-          text: period,
-          color: data[:period_font_colour],
-          size: data[:period_font_size]
-        },
-        {
-          text: location,
-          link: location_link,
-          color: data[:location_font_colour],
-          size: data[:location_font_size]
-        }
-      ]
+      generate_position
+      generate_organisation
+      generate_period_and_location
     end
   end
 end

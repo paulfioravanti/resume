@@ -4,7 +4,7 @@ module ResumeGenerator
   class EducationHistory
     include Decoder
 
-    attr_reader :pdf, :data
+    attr_reader :pdf, :heading, :content
 
     def self.generate(pdf, data)
       new(pdf, data).generate
@@ -12,27 +12,29 @@ module ResumeGenerator
 
     def initialize(pdf, data)
       @pdf = pdf
-      @data = data
+      @heading = data[:heading]
+      @content = data[:content]
     end
 
     def generate
-      heading
-      content
+      generate_heading
+      generate_content
     end
 
     private
 
-    def heading
-      pdf.move_down data[:top_padding]
+    def generate_heading
+      pdf.move_down heading[:top_padding]
       pdf.formatted_text([{
-        text: d(data[:heading]),
-        styles: data[:heading_styles].map(&:to_sym),
-        color: data[:heading_colour]
+        text: d(heading[:text]),
+        styles: heading[:styles].map(&:to_sym),
+        color: heading[:colour]
       }])
     end
 
-    def content
-      data[:entries].each do |_, entry|
+    def generate_content
+      # data[:entries].each do |_, entry|
+      [content[:entries].to_a.last].each do |_, entry| #FIXME
         Entry.generate(pdf, entry)
       end
     end
