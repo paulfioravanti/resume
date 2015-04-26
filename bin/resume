@@ -2,4 +2,4 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'resume_generator'
 
-ResumeGenerator::CLI.start(ARGV)
+ResumeGenerator::CLI::CLI.start(ARGV)
