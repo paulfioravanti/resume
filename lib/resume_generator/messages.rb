@@ -1,6 +1,6 @@
 module ResumeGenerator
   module Messages
-    include Colourable
+    include Colours
 
     def self.included(base)
       base.send(:attr_reader, :messages)

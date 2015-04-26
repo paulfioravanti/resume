@@ -1,6 +1,6 @@
 $LOAD_PATH << File.join(File.dirname(__FILE__), 'resume_generator')
 
-require 'colourable'
+require 'colours'
 require 'cli/cli'
 require 'decoder'
 require 'image_link'

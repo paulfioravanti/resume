@@ -1,5 +1,5 @@
 module ResumeGenerator
-  module Colourable
+  module Colours
     private
 
     def colourize(text, colour_code:)
