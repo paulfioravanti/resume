@@ -36,7 +36,7 @@ module ResumeGenerator
         cli.inform_creation_of_social_media_links
         SocialMediaIconSet.generate(self, Resume.data[:social_media])
         cli.inform_creation_of_technical_skills
-        TechnicalSkills.generate(self, Resume.data[:tech_skills])
+        TechnicalSkills.generate(self, Resume.data[:technical_skills])
         cli.inform_creation_of_employment_history
         EmploymentHistory.generate(self, Resume.data[:employment_history])
         cli.inform_creation_of_education_history
