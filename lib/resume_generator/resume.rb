@@ -5,6 +5,8 @@ require 'name'
 require 'headline'
 require 'social_media_icon_set'
 require 'technical_skills'
+require 'employment_history'
+require 'education_history'
 require 'listing'
 
 module ResumeGenerator
@@ -98,30 +100,11 @@ module ResumeGenerator
       end
 
       def employment_history
-        history = resume[:employment_history]
-        heading_for(history)
-        history[:entries].each do |_, entry|
-          Listing.generate(self, entry)
-        end
-        move_down history[:bottom_padding]
-        stroke_horizontal_rule { color history[:horizontal_rule_colour] }
+        EmploymentHistory.generate(self, resume[:employment_history])
       end
 
       def education_history
-        history = resume[:education_history]
-        heading_for(history)
-        history[:entries].each do |_, entry|
-          Listing.generate(self, entry)
-        end
-      end
-
-      def heading_for(section)
-        move_down section[:top_padding]
-        formatted_text([{
-          text: d(section[:heading]),
-          styles: section[:heading_styles].map(&:to_sym),
-          color: section[:heading_colour]
-        }])
+        EducationHistory.generate(self, resume[:education_history])
       end
     end
   end
