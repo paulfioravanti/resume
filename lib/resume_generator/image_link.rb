@@ -1,5 +1,5 @@
 module ResumeGenerator
-  class Resource
+  class ImageLink
     extend Decoder
 
     attr_reader :image, :link, :width, :height, :fit, :align,

@@ -32,7 +32,7 @@ module ResumeGenerator
 
     def social_media_resources
       data[:resources].values.map do |social_medium|
-        Resource.for(social_medium.merge(data[:icon_properties]))
+        ImageLink.for(social_medium.merge(data[:icon_properties]))
       end
     end
 
