@@ -2,6 +2,7 @@ require 'json'
 require 'open-uri'
 require 'decodable'
 require 'name'
+require 'headline'
 require 'social_media_icon_set'
 require 'listing'
 
@@ -84,17 +85,7 @@ module ResumeGenerator
       end
 
       def headline
-        headline = resume[:headline]
-        formatted_text(
-          [
-            {
-              text: d(headline[:ruby][:text]),
-              color: headline[:ruby][:colour]
-            },
-            { text: d(headline[:other][:text]) }
-          ],
-          size: headline[:size]
-        )
+        Headline.generate(self, resume[:headline])
       end
 
       def social_media_icons
