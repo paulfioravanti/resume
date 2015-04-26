@@ -14,11 +14,11 @@
       "size": 20
     },
     "headline": {
-      "ruby": {
+      "primary": {
         "text": "UnVieSBEZXZlbG9wZXIg",
         "colour": "85200C"
       },
-      "other": {
+      "secondary": {
         "text": "YW5kIEluZm9ybWF0aW9uIFRlY2hub2xvZ3kgU2VydmljZXMgUHJvZmVzc2lvbmFs"
       },
       "size": 14

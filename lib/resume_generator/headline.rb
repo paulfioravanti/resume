@@ -17,10 +17,10 @@ module ResumeGenerator
       pdf.formatted_text(
         [
           {
-            text: d(data[:ruby][:text]),
-            color: data[:ruby][:colour]
+            text: d(data[:primary][:text]),
+            color: data[:primary][:colour]
           },
-          { text: d(data[:other][:text]) }
+          { text: d(data[:secondary][:text]) }
         ],
         size: data[:size]
       )
