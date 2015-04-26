@@ -1,6 +1,7 @@
 require 'json'
 require 'open-uri'
 require 'decodable'
+require 'name'
 require 'social_media_icon_set'
 require 'listing'
 
@@ -79,10 +80,7 @@ module ResumeGenerator
       private
 
       def name
-        name = resume[:name]
-        font(name[:font], size: name[:size]) do
-          text d(name[:text])
-        end
+        Name.generate(self, resume[:name])
       end
 
       def headline
