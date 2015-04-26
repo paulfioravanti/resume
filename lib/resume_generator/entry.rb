@@ -2,7 +2,7 @@ require 'logo_link'
 require 'header'
 
 module ResumeGenerator
-  class Listing
+  class Entry
     include Decoder, Utilities
 
     attr_reader :pdf, :data

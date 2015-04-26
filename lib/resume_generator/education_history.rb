@@ -1,4 +1,4 @@
-require 'listing'
+require 'entry'
 
 module ResumeGenerator
   class EducationHistory
@@ -33,7 +33,7 @@ module ResumeGenerator
 
     def content
       data[:entries].each do |_, entry|
-        Listing.generate(pdf, entry)
+        Entry.generate(pdf, entry)
       end
     end
   end

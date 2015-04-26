@@ -1,4 +1,4 @@
-require 'listing'
+require 'entry'
 
 module ResumeGenerator
   class EmploymentHistory
@@ -34,7 +34,7 @@ module ResumeGenerator
 
     def generate_content
       content[:entries].each do |_, entry|
-        Listing.generate(pdf, entry)
+        Entry.generate(pdf, entry)
       end
       pdf.move_down content[:bottom_padding]
       pdf.stroke_horizontal_rule { color content[:horizontal_rule_colour] }
