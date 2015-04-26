@@ -2,7 +2,7 @@ require 'optparse'
 
 module ResumeGenerator
   class CLIOptionParser
-    SUPPORTED_LANGUAGES = [:en, :ja]
+    SUPPORTED_LOCALES = [:en, :ja]
 
     def self.generate
       opt_parser = OptionParser.new do |opts|
@@ -10,14 +10,14 @@ module ResumeGenerator
         opts.separator ''
         opts.separator 'Specific options:'
 
-        opts.on('-l', '--language LANGUAGE',
-                'Select the language of the resume') do |lang|
-          language = lang.to_sym
-          if SUPPORTED_LANGUAGES.include?(language)
-            ResumeGenerator.language = language
+        opts.on('-l', '--locale LOCALE',
+                'Select the locale of the resume') do |locale|
+          locale = locale.to_sym
+          if SUPPORTED_LOCALES.include?(locale)
+            ResumeGenerator.locale = locale
           else
-            puts "Language '#{lang}' is not supported.\n"\
-                 "Supported languages are: #{SUPPORTED_LANGUAGES.join(', ')}"
+            puts "Locale '#{locale}' is not supported.\n"\
+                 "Supported locales are: #{SUPPORTED_LOCALES.join(', ')}"
             exit
           end
         end
@@ -35,8 +35,8 @@ module ResumeGenerator
           exit
         end
       end
-      unless ResumeGenerator.class_variable_defined?(:@@language)
-        ResumeGenerator.language = :en
+      unless ResumeGenerator.class_variable_defined?(:@@locale)
+        ResumeGenerator.locale = :en
       end
       opt_parser
     end

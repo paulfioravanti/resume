@@ -15,14 +15,14 @@ module ResumeGenerator
 
     def self.resume
       @@resume ||= JSON.parse(
-        open("resources/resume.#{ResumeGenerator.language}.json").read,
+        open("resources/resume.#{ResumeGenerator.locale}.json").read,
         symbolize_names: true
       )[:resume]
     end
 
     def self.filename
       @@filename ||=
-        "#{d(resume[:document_name])}_#{ResumeGenerator.language}.pdf"
+        "#{d(resume[:document_name])}_#{ResumeGenerator.locale}.pdf"
     end
 
     def self.generate(cli)

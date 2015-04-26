@@ -54,7 +54,7 @@ module ResumeGenerator
             "Sorry, it seems I can't get an outside connection.\n"\
             "Please check your internet settings and try again."
         }
-      }[language]
+      }[locale]
     end
 
     def inform_creation_of_social_media_links

@@ -9,18 +9,18 @@ module ResumeGenerator
   PRAWN_VERSION = '2.0.0'
   PRAWN_TABLE_VERSION = '0.2.1'
 
-  def self.language
-    @@language
+  def self.locale
+    @@locale
   end
 
-  def self.language=(language)
-    @@language = language
+  def self.locale=(locale)
+    @@locale = locale
   end
 
   class CLI
     include Decodable, Messages
 
-    attr_reader :language
+    attr_reader :locale
 
     def self.start(args)
       opt_parser = CLIOptionParser.generate
@@ -29,7 +29,7 @@ module ResumeGenerator
     end
 
     def initialize
-      @language = ResumeGenerator.language
+      @locale = ResumeGenerator.locale
       initialize_messages
     end
 
