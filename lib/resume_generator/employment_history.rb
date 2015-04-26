@@ -1,3 +1,5 @@
+require 'listing'
+
 module ResumeGenerator
   class EmploymentHistory
     include Decoder
