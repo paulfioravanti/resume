@@ -31,34 +31,22 @@ module ResumeGenerator
     end
 
     def self.generate(cli)
-      patch_prawn_document
       Prawn::Document.generate(filename, pdf_options) do
-        name
-        headline
+        Name.generate(self, Resume.resume[:name])
+        Headline.generate(self, Resume.resume[:headline])
         cli.inform_creation_of_social_media_links
-        social_media_icons
+        SocialMediaIconSet.generate(self, Resume.resume[:social_media])
         cli.inform_creation_of_technical_skills
-        technical_skills
+        TechnicalSkills.generate(self, Resume.resume[:tech_skills])
         cli.inform_creation_of_employment_history
-        employment_history
+        EmploymentHistory.generate(self, Resume.resume[:employment_history])
         cli.inform_creation_of_education_history
-        education_history
+        EducationHistory.generate(self, Resume.resume[:education_history])
       end
     rescue SocketError
       cli.inform_of_network_connection_issue
       exit
     end
-
-    def self.patch_prawn_document
-      Prawn::Document.class_eval do
-        include ResumeHelper
-
-        def resume
-          Resume.resume
-        end
-      end
-    end
-    private_class_method :patch_prawn_document
 
     def self.pdf_options
       {
@@ -77,35 +65,5 @@ module ResumeGenerator
       }
     end
     private_class_method :pdf_options
-
-    module ResumeHelper
-      include Decoder
-
-      private
-
-      def name
-        Name.generate(self, resume[:name])
-      end
-
-      def headline
-        Headline.generate(self, resume[:headline])
-      end
-
-      def social_media_icons
-        SocialMediaIconSet.generate(self, resume[:social_media])
-      end
-
-      def technical_skills
-        TechnicalSkills.generate(self, resume[:tech_skills])
-      end
-
-      def employment_history
-        EmploymentHistory.generate(self, resume[:employment_history])
-      end
-
-      def education_history
-        EducationHistory.generate(self, resume[:education_history])
-      end
-    end
   end
 end
