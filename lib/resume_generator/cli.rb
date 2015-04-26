@@ -18,7 +18,7 @@ module ResumeGenerator
   end
 
   class CLI
-    include Decodable, Messages
+    include Decoder, Messages
 
     attr_reader :locale
 

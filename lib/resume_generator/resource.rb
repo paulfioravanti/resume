@@ -1,6 +1,6 @@
 module ResumeGenerator
   class Resource
-    extend Decodable
+    extend Decoder
 
     attr_reader :image, :link, :width, :height, :fit, :align,
                 :link_overlay_start, :bars, :size, :origin, :at

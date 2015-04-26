@@ -1,6 +1,6 @@
 require 'json'
 require 'open-uri'
-require 'decodable'
+require 'decoder'
 require 'name'
 require 'headline'
 require 'social_media_icon_set'
@@ -16,7 +16,7 @@ module ResumeGenerator
   # kind of inheritance hierarchy in advance will result in an
   # uninitialized constant ResumeGenerator::Prawn error.
   class Resume
-    include Decodable
+    include Decoder
 
     def self.resume
       @@resume ||= JSON.parse(
@@ -79,7 +79,7 @@ module ResumeGenerator
     private_class_method :pdf_options
 
     module ResumeHelper
-      include Decodable
+      include Decoder
 
       private
 

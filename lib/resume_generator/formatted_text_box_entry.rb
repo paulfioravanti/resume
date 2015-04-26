@@ -1,6 +1,6 @@
 module ResumeGenerator
   module FormattedTextBoxEntry
-    include Decodable
+    include Decoder
 
     private
 

@@ -3,7 +3,7 @@ require 'header'
 
 module ResumeGenerator
   class Listing
-    include Decodable, Utilities
+    include Decoder, Utilities
 
     attr_reader :pdf, :data
 
