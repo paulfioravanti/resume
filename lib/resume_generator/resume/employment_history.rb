@@ -1,4 +1,4 @@
-require 'resume/entry'
+require 'resume/entry/entry'
 
 module ResumeGenerator
   module Resume
