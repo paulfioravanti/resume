@@ -1,6 +1,6 @@
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..', '..', 'resume')
 require 'cli/messages'
-require 'resume'
+require 'resume/resume'
 require 'cli/resume_option_parser'
 require 'cli/gem_installer'
 require 'cli/file_system'
@@ -62,7 +62,7 @@ module ResumeGenerator
         require 'prawn'
         require 'prawn/table'
         inform_start_of_resume_generation
-        Resume.generate(self)
+        Resume::Resume.generate(self)
         inform_of_successful_resume_generation
       end
 
