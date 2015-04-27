@@ -33,7 +33,7 @@ module ResumeGenerator
 
       def generate_content
         content[:entries].each do |_, entry|
-          Entry.generate(pdf, entry)
+          Entry::Entry.generate(pdf, entry)
         end
       end
     end
