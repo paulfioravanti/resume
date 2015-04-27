@@ -1,4 +1,5 @@
 require_relative 'utilities'
+require_relative 'image_link'
 
 module ResumeGenerator
   module Resume

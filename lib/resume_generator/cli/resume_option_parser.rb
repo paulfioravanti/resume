@@ -1,3 +1,4 @@
+require_relative '../../resume_generator'
 require 'optparse'
 
 module ResumeGenerator

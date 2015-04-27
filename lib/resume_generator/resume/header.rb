@@ -1,3 +1,6 @@
+require_relative 'entry/formatted_text_entry'
+require_relative 'entry/formatted_text_box_entry'
+
 module ResumeGenerator
   module Resume
     class Header

@@ -1,4 +1,5 @@
 require_relative 'colours'
+require_relative '../../resume_generator/resume/resume'
 
 module ResumeGenerator
   module CLI

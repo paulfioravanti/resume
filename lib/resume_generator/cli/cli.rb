@@ -1,4 +1,7 @@
+require_relative 'resume_option_parser'
 require_relative 'messages'
+require_relative 'gem_installer'
+require_relative 'file_system'
 
 module ResumeGenerator
   module CLI

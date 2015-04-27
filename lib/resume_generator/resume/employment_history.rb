@@ -1,3 +1,5 @@
+require_relative 'entry/entry'
+
 module ResumeGenerator
   module Resume
     class EmploymentHistory
