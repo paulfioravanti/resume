@@ -1,9 +1,9 @@
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..', '..', 'resume')
-require 'messages'
+require 'cli/messages'
 require 'resume'
 require 'cli/resume_option_parser'
-require 'gem_installer'
-require 'file_system'
+require 'cli/gem_installer'
+require 'cli/file_system'
 
 module ResumeGenerator
   PRAWN_VERSION = '2.0.0'
