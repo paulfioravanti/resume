@@ -4,11 +4,11 @@ module ResumeGenerator
       def self.open_document(cli)
         case RUBY_PLATFORM
         when %r(darwin)
-          system("open #{Resume::Resume.filename}")
+          system("open #{Resume::Document.filename}")
         when %r(linux)
-          system("xdg-open #{Resume::Resume.filename}")
+          system("xdg-open #{Resume::Document.filename}")
         when %r(windows)
-          system("cmd /c \"start #{Resume::Resume.filename}\"")
+          system("cmd /c \"start #{Resume::Document.filename}\"")
         else
           cli.request_user_to_open_document
         end

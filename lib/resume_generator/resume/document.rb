@@ -15,7 +15,7 @@ module ResumeGenerator
   # kind of inheritance hierarchy in advance will result in an
   # uninitialized constant ResumeGenerator::Prawn error.
   module Resume
-    class Resume
+    class Document
       include Decoder
 
       def self.data
@@ -32,16 +32,16 @@ module ResumeGenerator
 
       def self.generate(cli)
         Prawn::Document.generate(filename, pdf_options) do
-          Name.generate(self, Resume.data[:name])
-          Headline.generate(self, Resume.data[:headline])
+          Name.generate(self, Document.data[:name])
+          Headline.generate(self, Document.data[:headline])
           cli.inform_creation_of_social_media_links
-          SocialMediaIconSet.generate(self, Resume.data[:social_media])
+          SocialMediaIconSet.generate(self, Document.data[:social_media])
           cli.inform_creation_of_technical_skills
-          TechnicalSkills.generate(self, Resume.data[:technical_skills])
+          TechnicalSkills.generate(self, Document.data[:technical_skills])
           cli.inform_creation_of_employment_history
-          EmploymentHistory.generate(self, Resume.data[:employment_history])
+          EmploymentHistory.generate(self, Document.data[:employment_history])
           cli.inform_creation_of_education_history
-          EducationHistory.generate(self, Resume.data[:education_history])
+          EducationHistory.generate(self, Document.data[:education_history])
         end
       rescue SocketError
         cli.inform_of_network_connection_issue

@@ -49,7 +49,7 @@ module ResumeGenerator
         require 'prawn'
         require 'prawn/table'
         inform_start_of_resume_generation
-        Resume::Resume.generate(self)
+        Resume::Document.generate(self)
         inform_of_successful_resume_generation
       end
 
