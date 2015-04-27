@@ -1,4 +1,4 @@
-require 'resume/utilities'
+require_relative 'utilities'
 
 module ResumeGenerator
   module Resume

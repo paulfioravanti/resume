@@ -1,5 +1,4 @@
-require 'resume/logo_link'
-require 'resume/header'
+require_relative '../utilities'
 
 module ResumeGenerator
   module Resume

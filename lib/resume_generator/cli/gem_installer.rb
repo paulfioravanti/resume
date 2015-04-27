@@ -42,3 +42,4 @@ module ResumeGenerator
     end
   end
 end
+

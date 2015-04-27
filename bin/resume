@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+# require_relative '../lib/resume_generator/cli/cli'
 require 'resume_generator'
 
 ResumeGenerator::CLI::CLI.start(ARGV)

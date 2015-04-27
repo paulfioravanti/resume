@@ -1,12 +1,5 @@
 require 'json'
 require 'open-uri'
-require 'decoder'
-require 'resume/name'
-require 'resume/headline'
-require 'resume/social_media_icon_set'
-require 'resume/technical_skills'
-require 'resume/employment_history'
-require 'resume/education_history'
 
 module ResumeGenerator
   # Resume cannot be declared as a Prawn::Document (ie inherit from it)

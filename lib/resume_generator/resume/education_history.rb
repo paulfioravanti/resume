@@ -1,5 +1,3 @@
-require 'resume/entry/entry'
-
 module ResumeGenerator
   module Resume
     class EducationHistory

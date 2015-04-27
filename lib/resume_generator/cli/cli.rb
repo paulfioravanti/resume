@@ -1,14 +1,9 @@
-$LOAD_PATH << File.join(File.dirname(__FILE__), '..', '..', 'resume')
-require 'cli/messages'
-require 'resume/resume'
-require 'cli/resume_option_parser'
-require 'cli/gem_installer'
-require 'cli/file_system'
+require_relative 'messages'
 
 module ResumeGenerator
   module CLI
     class CLI
-      include Decoder, Messages
+      include Messages
 
       attr_reader :locale
 
@@ -67,3 +62,4 @@ module ResumeGenerator
     end
   end
 end
+

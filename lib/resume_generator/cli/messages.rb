@@ -1,3 +1,5 @@
+require_relative 'colours'
+
 module ResumeGenerator
   module CLI
     module Messages
@@ -126,3 +128,4 @@ module ResumeGenerator
     end
   end
 end
+
