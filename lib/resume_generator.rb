@@ -1,5 +1,5 @@
 require 'resume_generator/cli'
-# require 'resume_generator/decoder'
+require 'resume_generator/decoder'
 require 'resume_generator/resume'
 require 'resume_generator/version'
 
