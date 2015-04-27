@@ -1,5 +1,5 @@
-require_relative '../header'
-require_relative '../logo_link'
+require_relative 'header'
+require_relative 'logo_link'
 
 module ResumeGenerator
   module Resume
