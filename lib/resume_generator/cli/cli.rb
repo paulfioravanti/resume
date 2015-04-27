@@ -6,17 +6,6 @@ require 'cli/gem_installer'
 require 'cli/file_system'
 
 module ResumeGenerator
-  PRAWN_VERSION = '2.0.0'
-  PRAWN_TABLE_VERSION = '0.2.1'
-
-  def self.locale
-    @@locale
-  end
-
-  def self.locale=(locale)
-    @@locale = locale
-  end
-
   module CLI
     class CLI
       include Decoder, Messages
