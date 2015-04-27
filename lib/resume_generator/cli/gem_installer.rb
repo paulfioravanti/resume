@@ -2,10 +2,10 @@ module ResumeGenerator
   module CLI
     class GemInstaller
 
-      attr_reader :cli, :gems
+      attr_reader :app, :gems
 
-      def initialize(cli)
-        @cli = cli
+      def initialize(app)
+        @app = app
         @gems = {
           'prawn' => PRAWN_VERSION,
           'prawn-table' => PRAWN_TABLE_VERSION
@@ -26,11 +26,11 @@ module ResumeGenerator
 
       def install_gems
         if gems_successfully_installed?
-          cli.inform_of_successful_gem_installation
+          app.inform_of_successful_gem_installation
           # Reset the dir and path values so Prawn can be required
           Gem.clear_paths
         else
-          cli.inform_of_gem_installation_failure
+          app.inform_of_gem_installation_failure
           exit
         end
       end

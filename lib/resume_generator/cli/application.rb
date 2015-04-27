@@ -5,7 +5,7 @@ require_relative 'file_system'
 
 module ResumeGenerator
   module CLI
-    class CLI
+    class Application
       include Messages
 
       attr_reader :locale

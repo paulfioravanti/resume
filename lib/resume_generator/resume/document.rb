@@ -30,21 +30,21 @@ module ResumeGenerator
           "#{d(data[:document_name])}_#{ResumeGenerator.locale}.pdf"
       end
 
-      def self.generate(cli)
+      def self.generate(app)
         Prawn::Document.generate(filename, pdf_options) do
           Name.generate(self, Document.data[:name])
           Headline.generate(self, Document.data[:headline])
-          cli.inform_creation_of_social_media_links
+          app.inform_creation_of_social_media_links
           SocialMediaIconSet.generate(self, Document.data[:social_media])
-          cli.inform_creation_of_technical_skills
+          app.inform_creation_of_technical_skills
           TechnicalSkills.generate(self, Document.data[:technical_skills])
-          cli.inform_creation_of_employment_history
+          app.inform_creation_of_employment_history
           EmploymentHistory.generate(self, Document.data[:employment_history])
-          cli.inform_creation_of_education_history
+          app.inform_creation_of_education_history
           EducationHistory.generate(self, Document.data[:education_history])
         end
       rescue SocketError
-        cli.inform_of_network_connection_issue
+        app.inform_of_network_connection_issue
         exit
       end
 
