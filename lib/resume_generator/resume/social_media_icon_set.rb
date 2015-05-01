@@ -6,7 +6,9 @@ module ResumeGenerator
     class SocialMediaIconSet
       include Utilities
 
-      attr_reader :pdf, :icon_set
+      attr_reader :pdf, :x_position, :top_padding, :padded_icon_width,
+                  :padded_icon_height, :horizontal_rule_colour, :icons,
+                  :icon_properties
       attr_accessor :x_position
 
       def self.generate(pdf, icon_set)
@@ -15,36 +17,45 @@ module ResumeGenerator
 
       def initialize(pdf, icon_set)
         @pdf = pdf
-        @icon_set = icon_set
-        @x_position = icon_set[:left_padding]
+        @x_position = icon_set[:x_position]
+        @top_padding = icon_set[:top_padding]
+        @padded_icon_width = icon_set[:padded_icon_width]
+        @padded_icon_height = icon_set[:padded_icon_height]
+        @horizontal_rule_colour = icon_set[:horizontal_rule_colour]
+        @icons = icon_set[:icons]
+        @icon_properties = icon_set[:icon_properties]
       end
 
       def generate
-        pdf.move_down icon_set[:top_padding]
-        resources = social_media_resources
-        social_media_icon_for(resources.first)
-        resources[1..-1].each do |resource|
-          pdf.move_up icon_set[:padded_icon_height]
-          social_media_icon_for(resource)
+        pdf.move_down(top_padding)
+        image_links = social_media_image_links
+        generate_social_media_icon_for(image_links.first)
+        image_links[1..-1].each do |image_link|
+          pdf.move_up(padded_icon_height)
+          generate_social_media_icon_for(image_link)
         end
-        pdf.stroke_horizontal_rule { color icon_set[:horizontal_rule_colour] }
+        pdf.stroke_horizontal_rule { color horizontal_rule_colour }
       end
 
       private
 
-      def social_media_resources
-        icon_set[:icons].values.map do |social_medium|
-          ImageLink.for(social_medium.merge(icon_set[:icon_properties]))
+      def social_media_image_links
+        icons.values.map do |icon|
+          ImageLink.for(icon.merge(icon_properties))
         end
       end
 
-      def social_media_icon_for(resource)
-        pdf.bounding_box([x_position, pdf.cursor], width: resource.width) do
-          pdf.image(resource.image, fit: resource.fit, align: resource.align)
-          pdf.move_up resource.link_overlay_start
-          transparent_link(pdf, resource)
+      def generate_social_media_icon_for(image_link)
+        pdf.bounding_box([x_position, pdf.cursor], width: image_link.width) do
+          pdf.image(
+            image_link.image,
+            fit: image_link.fit,
+            align: image_link.align
+          )
+          pdf.move_up image_link.link_overlay_start
+          transparent_link(pdf, image_link)
         end
-        self.x_position += icon_set[:padded_icon_width]
+        self.x_position += padded_icon_width
       end
     end
   end

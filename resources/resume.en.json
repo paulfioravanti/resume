@@ -24,7 +24,7 @@
       }
     },
     "social_media_icon_set": {
-      "left_padding": 0,
+      "x_position": 0,
       "top_padding": 5,
       "padded_icon_width": 45,
       "padded_icon_height": 46.25,
