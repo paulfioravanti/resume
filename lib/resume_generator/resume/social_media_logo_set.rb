@@ -25,10 +25,10 @@ module ResumeGenerator
 
       def generate
         pdf.move_down(top_padding)
-        generate_social_media_logo_for(logos.first)
+        generate_logo_for(logos.first)
         logos[1..-1].each do |logo|
           pdf.move_up(padded_logo_height)
-          generate_social_media_logo_for(logo)
+          generate_logo_for(logo)
         end
         pdf.stroke_horizontal_rule { color horizontal_rule_colour }
       end
@@ -53,7 +53,7 @@ module ResumeGenerator
         end
       end
 
-      def generate_social_media_logo_for(logo)
+      def generate_logo_for(logo)
         pdf.bounding_box([x_position, pdf.cursor], width: logo.width) do
           pdf.image(
             logo.image,

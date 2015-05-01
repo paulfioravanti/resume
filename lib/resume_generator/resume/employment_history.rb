@@ -1,4 +1,4 @@
-require_relative 'entry/entry'
+require_relative 'entry/content'
 
 module ResumeGenerator
   module Resume
@@ -8,13 +8,13 @@ module ResumeGenerator
       attr_reader :pdf, :heading, :content
 
       def self.generate(pdf, data)
-        new(pdf, data).generate
+        new(pdf, data[:heading], data[:content]).generate
       end
 
-      def initialize(pdf, data)
+      def initialize(pdf, heading, content)
         @pdf = pdf
-        @heading = data[:heading]
-        @content = data[:content]
+        @heading = heading
+        @content = content
       end
 
       def generate
@@ -34,8 +34,8 @@ module ResumeGenerator
       end
 
       def generate_content
-        content[:entries].each do |_, entry|
-          Entry::Entry.generate(pdf, entry)
+        content[:entries].values.each do |entry|
+          Entry::Content.generate(pdf, entry)
         end
         pdf.move_down content[:bottom_padding]
         pdf.stroke_horizontal_rule { color content[:horizontal_rule_colour] }

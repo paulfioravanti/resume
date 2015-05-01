@@ -4,7 +4,7 @@ require_relative 'company_logo'
 module ResumeGenerator
   module Resume
     module Entry
-      class Entry
+      class Content
         include Decoder, Utilities
 
         attr_reader :pdf, :entry

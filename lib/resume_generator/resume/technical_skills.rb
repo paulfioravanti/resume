@@ -6,13 +6,13 @@ module ResumeGenerator
       attr_reader :pdf, :heading, :content
 
       def self.generate(pdf, data)
-        new(pdf, data).generate
+        new(pdf, data[:heading], data[:content]).generate
       end
 
-      def initialize(pdf, data)
+      def initialize(pdf, heading, content)
         @pdf = pdf
-        @heading = data[:heading]
-        @content = data[:content]
+        @heading = heading
+        @content = content
       end
 
       def generate
