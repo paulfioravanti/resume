@@ -1,4 +1,4 @@
-require_relative 'parser'
+require_relative 'option_parser'
 require_relative 'messages'
 require_relative 'gem_installer'
 require_relative 'file_system'
@@ -11,8 +11,7 @@ module ResumeGenerator
       attr_reader :locale
 
       def self.start(args)
-        opt_parser = Parser.generate
-        opt_parser.parse!(args)
+        OptionParser.parse!(args)
         new.start
       end
 
