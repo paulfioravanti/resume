@@ -3,27 +3,29 @@ module ResumeGenerator
     class Headline
       include Decoder
 
-      attr_reader :pdf, :data
+      attr_reader :pdf, :primary, :secondary, :size
 
-      def self.generate(pdf, data)
-        new(pdf, data).generate
+      def self.generate(pdf, headline)
+        new(pdf, headline).generate
       end
 
-      def initialize(pdf, data)
+      def initialize(pdf, headline)
         @pdf = pdf
-        @data = data
+        @primary = headline[:primary]
+        @secondary = headline[:secondary]
+        @size = headline[:size]
       end
 
       def generate
         pdf.formatted_text(
           [
             {
-              text: d(data[:primary][:text]),
-              color: data[:primary][:colour]
+              text: d(primary[:text]),
+              color: primary[:colour]
             },
-            { text: d(data[:secondary][:text]) }
+            { text: d(secondary[:text]) }
           ],
-          size: data[:size]
+          size: size
         )
       end
     end

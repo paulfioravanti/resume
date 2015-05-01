@@ -3,20 +3,20 @@ module ResumeGenerator
     class Name
       include Decoder
 
-      attr_reader :pdf, :data
+      attr_reader :pdf, :name
 
-      def self.generate(pdf, data)
-        new(pdf, data).generate
+      def self.generate(pdf, name)
+        new(pdf, name).generate
       end
 
-      def initialize(pdf, data)
+      def initialize(pdf, name)
         @pdf = pdf
-        @data = data
+        @name = name
       end
 
       def generate
-        pdf.font(data[:font], size: data[:size]) do
-          pdf.text d(data[:text])
+        pdf.font(name[:font], size: name[:size]) do
+          pdf.text d(name[:text])
         end
       end
     end
