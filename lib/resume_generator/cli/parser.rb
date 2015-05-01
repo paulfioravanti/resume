@@ -3,7 +3,7 @@ require 'optparse'
 
 module ResumeGenerator
   module CLI
-    class ResumeOptionParser
+    class Parser
       SUPPORTED_LOCALES = [:en, :ja]
 
       def self.generate
