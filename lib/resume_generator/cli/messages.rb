@@ -1,5 +1,5 @@
 require_relative 'colours'
-require_relative '../../resume_generator/resume/document'
+require_relative '../../resume_generator/resume/generator'
 
 module ResumeGenerator
   module CLI
@@ -40,7 +40,7 @@ module ResumeGenerator
               'Resume generated successfully.',
             print_thank_you_message:
               "Thanks for looking at my resume. I hope to hear from you soon!\n"\
-              "#{Resume::Document.filename} has been generated in the same\n"\
+              "#{Resume::Generator.filename} has been generated in the same\n"\
               "directory you ran the script.",
             request_to_open_resume:
               'Would you like me to open the resume for you (Y/N)? ',
