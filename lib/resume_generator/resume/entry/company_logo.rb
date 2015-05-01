@@ -1,7 +1,7 @@
 module ResumeGenerator
   module Resume
     module Entry
-      class LogoLink
+      class CompanyLogo
         include Utilities
 
         attr_reader :pdf, :logo

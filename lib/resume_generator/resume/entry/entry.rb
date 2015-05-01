@@ -1,5 +1,5 @@
 require_relative 'header'
-require_relative 'logo_link'
+require_relative 'company_logo'
 
 module ResumeGenerator
   module Resume
@@ -21,7 +21,7 @@ module ResumeGenerator
         def generate
           pdf.move_down entry[:top_padding]
           Header.generate(pdf, entry)
-          LogoLink.generate(pdf, entry)
+          CompanyLogo.generate(pdf, entry)
           details if entry.has_key?(:summary)
         end
 
