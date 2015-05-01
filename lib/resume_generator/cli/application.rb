@@ -9,6 +9,7 @@ module ResumeGenerator
       include Messages
 
       attr_reader :locale
+      attr_accessor :filename
 
       def self.start(args)
         OptionParser.parse!(args)

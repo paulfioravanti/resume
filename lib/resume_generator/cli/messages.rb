@@ -40,7 +40,7 @@ module ResumeGenerator
               'Resume generated successfully.',
             print_thank_you_message:
               "Thanks for looking at my resume. I hope to hear from you soon!\n"\
-              "#{Resume::Generator.filename} has been generated in the same\n"\
+              "#{filename} has been generated in the same\n"\
               "directory you ran the script.",
             request_to_open_resume:
               'Would you like me to open the resume for you (Y/N)? ',

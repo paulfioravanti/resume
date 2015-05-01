@@ -19,44 +19,52 @@ module ResumeGenerator
     class Generator
       include Decoder
 
-      def self.data
-        @resume ||= JSON.parse(
+      attr_reader :resume, :app
+
+      def self.start(app)
+        resume = JSON.parse(
           open("resources/resume.#{ResumeGenerator.locale}.json").read,
           symbolize_names: true
         )[:resume]
-      end
-
-      def self.filename
-        @filename ||=
-          "#{d(data[:document_name])}_#{ResumeGenerator.locale}.pdf"
-      end
-
-      def self.start(app)
-        Prawn::Document.generate(filename, pdf_options) do
-          Document.generate(self, app)
-        end
+        app.filename =
+          "#{d(resume[:document_name])}_#{ResumeGenerator.locale}.pdf"
+        new(resume, app).start
       rescue SocketError
         app.inform_of_network_connection_issue
         exit
       end
 
-      def self.pdf_options
+      def start
+        Prawn::Document.generate(app.filename, pdf_options) do |pdf|
+          pdf.instance_exec(resume, app) do |resume, app|
+            Document.generate(self, resume, app)
+          end
+        end
+      end
+
+      private
+
+      def initialize(resume, app)
+        @resume = resume
+        @app = app
+      end
+
+      def pdf_options
         {
-          margin_top: data[:margin_top],
-          margin_bottom: data[:margin_bottom],
-          margin_left: data[:margin_left],
-          margin_right: data[:margin_right],
-          background: open(data[:background_image]),
-          repeat: data[:repeat],
+          margin_top: resume[:margin_top],
+          margin_bottom: resume[:margin_bottom],
+          margin_left: resume[:margin_left],
+          margin_right: resume[:margin_right],
+          background: open(resume[:background_image]),
+          repeat: resume[:repeat],
           info: {
-            Title: d(data[:document_name]),
-            Author: d(data[:author]),
-            Creator: d(data[:author]),
+            Title: d(resume[:document_name]),
+            Author: d(resume[:author]),
+            Creator: d(resume[:author]),
             CreationDate: Time.now
           }
         }
       end
-      private_class_method :pdf_options
     end
   end
 end
