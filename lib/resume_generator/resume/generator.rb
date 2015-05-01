@@ -8,6 +8,7 @@ require_relative 'technical_skills'
 require_relative 'employment_history'
 require_relative 'education_history'
 require_relative 'document'
+require_relative 'pdf_options'
 
 module ResumeGenerator
   module Resume
@@ -35,7 +36,7 @@ module ResumeGenerator
       end
 
       def start
-        Prawn::Document.generate(app.filename, pdf_options) do |pdf|
+        Prawn::Document.generate(app.filename, PDFOptions.for(resume)) do |pdf|
           pdf.instance_exec(resume, app) do |resume, app|
             Document.generate(self, resume, app)
           end
@@ -47,23 +48,6 @@ module ResumeGenerator
       def initialize(resume, app)
         @resume = resume
         @app = app
-      end
-
-      def pdf_options
-        {
-          margin_top: resume[:margin_top],
-          margin_bottom: resume[:margin_bottom],
-          margin_left: resume[:margin_left],
-          margin_right: resume[:margin_right],
-          background: open(resume[:background_image]),
-          repeat: resume[:repeat],
-          info: {
-            Title: d(resume[:document_name]),
-            Author: d(resume[:author]),
-            Creator: d(resume[:author]),
-            CreationDate: Time.now
-          }
-        }
       end
     end
   end
