@@ -1,6 +1,3 @@
-require_relative 'formatted_text_entry'
-require_relative 'formatted_text_box_entry'
-
 module ResumeGenerator
   module Resume
     module Entry
