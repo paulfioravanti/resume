@@ -23,13 +23,13 @@
         "text": "YW5kIEluZm9ybWF0aW9uIFRlY2hub2xvZ3kgU2VydmljZXMgUHJvZmVzc2lvbmFs"
       }
     },
-    "social_media": {
+    "social_media_icon_set": {
       "left_padding": 0,
       "top_padding": 5,
       "padded_icon_width": 45,
       "padded_icon_height": 46.25,
       "horizontal_rule_colour": "666666",
-      "resources": {
+      "icons": {
         "email": {
           "image": "http://farm3.staticflickr.com/2826/8753727736_2a7a294527_m.jpg",
           "link": "bWFpbHRvOnBhdWwuZmlvcmF2YW50aUBnbWFpbC5jb20="

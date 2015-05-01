@@ -6,35 +6,35 @@ module ResumeGenerator
     class SocialMediaIconSet
       include Utilities
 
+      attr_reader :pdf, :icon_set
       attr_accessor :x_position
-      attr_reader :pdf, :data
 
-      def self.generate(pdf, data)
-        new(pdf, data).generate
+      def self.generate(pdf, icon_set)
+        new(pdf, icon_set).generate
       end
 
-      def initialize(pdf, data)
+      def initialize(pdf, icon_set)
         @pdf = pdf
-        @data = data
-        @x_position = data[:left_padding]
+        @icon_set = icon_set
+        @x_position = icon_set[:left_padding]
       end
 
       def generate
-        pdf.move_down data[:top_padding]
+        pdf.move_down icon_set[:top_padding]
         resources = social_media_resources
         social_media_icon_for(resources.first)
         resources[1..-1].each do |resource|
-          pdf.move_up data[:padded_icon_height]
+          pdf.move_up icon_set[:padded_icon_height]
           social_media_icon_for(resource)
         end
-        pdf.stroke_horizontal_rule { color data[:horizontal_rule_colour] }
+        pdf.stroke_horizontal_rule { color icon_set[:horizontal_rule_colour] }
       end
 
       private
 
       def social_media_resources
-        data[:resources].values.map do |social_medium|
-          ImageLink.for(social_medium.merge(data[:icon_properties]))
+        icon_set[:icons].values.map do |social_medium|
+          ImageLink.for(social_medium.merge(icon_set[:icon_properties]))
         end
       end
 
@@ -44,7 +44,7 @@ module ResumeGenerator
           pdf.move_up resource.link_overlay_start
           transparent_link(pdf, resource)
         end
-        self.x_position += data[:padded_icon_width]
+        self.x_position += icon_set[:padded_icon_width]
       end
     end
   end

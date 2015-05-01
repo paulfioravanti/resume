@@ -33,8 +33,8 @@ module ResumeGenerator
 
       def generate_content
         pdf.move_down content[:top_padding]
-        skills = content[:skills].reduce([]) do |data, entry|
-          data << [d(entry.first), d(entry.last)]
+        skills = content[:skills].reduce([]) do |entries, entry|
+          entries << [d(entry.first), d(entry.last)]
         end
         pdf.table(skills, content[:properties])
       end

@@ -35,7 +35,9 @@ module ResumeGenerator
           Name.generate(self, Document.data[:name])
           Headline.generate(self, Document.data[:headline])
           app.inform_creation_of_social_media_links
-          SocialMediaIconSet.generate(self, Document.data[:social_media])
+          SocialMediaIconSet.generate(
+            self, Document.data[:social_media_icon_set]
+          )
           app.inform_creation_of_technical_skills
           TechnicalSkills.generate(self, Document.data[:technical_skills])
           app.inform_creation_of_employment_history
