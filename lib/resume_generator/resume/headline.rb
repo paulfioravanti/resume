@@ -9,14 +9,6 @@ module ResumeGenerator
         new(pdf, headline).generate
       end
 
-      def initialize(pdf, headline)
-        @pdf = pdf
-        @primary_text = headline[:primary][:text]
-        @primary_colour = headline[:primary][:colour]
-        @secondary_text = headline[:secondary][:text]
-        @size = headline[:size]
-      end
-
       def generate
         pdf.formatted_text(
           [
@@ -25,6 +17,16 @@ module ResumeGenerator
           ],
           size: size
         )
+      end
+
+      private
+
+      def initialize(pdf, headline)
+        @pdf = pdf
+        @primary_text = headline[:primary][:text]
+        @primary_colour = headline[:primary][:colour]
+        @secondary_text = headline[:secondary][:text]
+        @size = headline[:size]
       end
     end
   end
