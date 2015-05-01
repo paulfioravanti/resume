@@ -1,5 +1,5 @@
 require_relative 'utilities'
-require_relative 'image_link'
+require_relative 'logo'
 
 module ResumeGenerator
   module Resume
@@ -7,8 +7,7 @@ module ResumeGenerator
       include Utilities
 
       attr_reader :pdf, :x_position, :top_padding, :padded_logo_width,
-                  :padded_logo_height, :horizontal_rule_colour, :logos,
-                  :logo_properties
+                  :padded_logo_height, :horizontal_rule_colour, :logos
       attr_accessor :x_position
 
       def self.generate(pdf, logo_set)
@@ -17,11 +16,10 @@ module ResumeGenerator
 
       def generate
         pdf.move_down(top_padding)
-        logo_links = social_media_logo_links
-        generate_social_media_logo_for(logo_links.first)
-        logo_links[1..-1].each do |logo_link|
+        generate_social_media_logo_for(logos.first)
+        logos[1..-1].each do |logo|
           pdf.move_up(padded_logo_height)
-          generate_social_media_logo_for(logo_link)
+          generate_social_media_logo_for(logo)
         end
         pdf.stroke_horizontal_rule { color horizontal_rule_colour }
       end
@@ -35,25 +33,24 @@ module ResumeGenerator
         @padded_logo_width = logo_set[:padded_logo_width]
         @padded_logo_height = logo_set[:padded_logo_height]
         @horizontal_rule_colour = logo_set[:horizontal_rule_colour]
-        @logos = logo_set[:logos]
-        @logo_properties = logo_set[:logo_properties]
+        @logos = logos_for(logo_set[:logos].values, logo_set[:logo_properties])
       end
 
-      def social_media_logo_links
-        logos.values.map do |logo|
-          ImageLink.for(logo.merge(logo_properties))
+      def logos_for(logo_set, general_properties)
+        logo_set.map do |logo_properties|
+          Logo.for(logo_properties.merge(general_properties))
         end
       end
 
-      def generate_social_media_logo_for(image_link)
-        pdf.bounding_box([x_position, pdf.cursor], width: image_link.width) do
+      def generate_social_media_logo_for(logo)
+        pdf.bounding_box([x_position, pdf.cursor], width: logo.width) do
           pdf.image(
-            image_link.image,
-            fit: image_link.fit,
-            align: image_link.align
+            logo.image,
+            fit: logo.fit,
+            align: logo.align
           )
-          pdf.move_up image_link.link_overlay_start
-          transparent_link(pdf, image_link)
+          pdf.move_up logo.link_overlay_start
+          transparent_link(pdf, logo)
         end
         self.x_position += padded_logo_width
       end

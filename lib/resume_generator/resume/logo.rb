@@ -1,6 +1,6 @@
 module ResumeGenerator
   module Resume
-    class ImageLink
+    class Logo
       extend Decoder
 
       attr_reader :image, :link, :width, :height, :fit, :align,

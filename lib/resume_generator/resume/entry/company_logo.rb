@@ -7,7 +7,7 @@ module ResumeGenerator
         attr_reader :pdf, :logo
 
         def self.generate(pdf, data)
-          logo = ImageLink.for(data[:logo])
+          logo = Logo.for(data[:logo])
           new(pdf, logo).generate
         end
 
