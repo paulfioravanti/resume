@@ -1,3 +1,5 @@
+require_relative 'entry/heading'
+
 module ResumeGenerator
   module Resume
     class TechnicalSkills
@@ -23,12 +25,7 @@ module ResumeGenerator
       private
 
       def generate_heading
-        pdf.move_down heading[:top_padding]
-        pdf.formatted_text([{
-          text: d(heading[:text]),
-          styles: heading[:styles].map(&:to_sym),
-          color: heading[:colour]
-        }])
+        Entry::Heading.generate(pdf, heading)
       end
 
       def generate_content

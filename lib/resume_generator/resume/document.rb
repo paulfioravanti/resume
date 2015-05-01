@@ -9,12 +9,12 @@ require_relative 'employment_history'
 require_relative 'education_history'
 
 module ResumeGenerator
-  # Resume cannot be declared as a Prawn::Document (ie inherit from it)
-  # because at the time someone runs the script, it is not certain that they
-  # have any of the required Prawn gems installed. Explicit declaration of this
-  # kind of inheritance hierarchy in advance will result in an
-  # uninitialized constant ResumeGenerator::Prawn error.
   module Resume
+    # This class cannot be declared as a Prawn::Document (ie inherit from it)
+    # because at the time someone runs the script, it is not certain that they
+    # have any of the required Prawn gems installed. Explicit declaration of this
+    # kind of inheritance hierarchy in advance will result in an
+    # uninitialized constant error.
     class Document
       include Decoder
 
