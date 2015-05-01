@@ -6,7 +6,12 @@ module ResumeGenerator
       attr_reader :pdf, :primary_text, :primary_colour, :secondary_text, :size
 
       def self.generate(pdf, headline)
-        new(pdf, headline).generate
+        new(pdf,
+          headline[:primary][:text],
+          headline[:primary][:colour],
+          headline[:secondary][:text],
+          headline[:size],
+        ).generate
       end
 
       def generate
@@ -21,12 +26,12 @@ module ResumeGenerator
 
       private
 
-      def initialize(pdf, headline)
+      def initialize(pdf, primary_text, primary_colour, secondary_text, size)
         @pdf = pdf
-        @primary_text = headline[:primary][:text]
-        @primary_colour = headline[:primary][:colour]
-        @secondary_text = headline[:secondary][:text]
-        @size = headline[:size]
+        @primary_text = primary_text
+        @primary_colour = primary_colour
+        @secondary_text = secondary_text
+        @size = size
       end
     end
   end

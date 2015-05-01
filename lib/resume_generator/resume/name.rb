@@ -6,7 +6,7 @@ module ResumeGenerator
       attr_reader :pdf, :font, :size, :text
 
       def self.generate(pdf, name)
-        new(pdf, name).generate
+        new(pdf, name[:font], name[:size], name[:text]).generate
       end
 
       def generate
@@ -17,11 +17,11 @@ module ResumeGenerator
 
       private
 
-      def initialize(pdf, name)
+      def initialize(pdf, name, size, text)
         @pdf = pdf
-        @font = name[:font]
-        @size = name[:size]
-        @text = name[:text]
+        @font = name
+        @size = size
+        @text = text
       end
     end
   end
