@@ -590,14 +590,17 @@
               "text": "MTk5Ny0xOTk5IHwg",
               "styles": [],
               "colour": "666666",
-              "size": 10
+              "size": 10,
+              "bottom_padding": 0
             },
             "location": {
               "text": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",
               "link": "aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9tYXBzL3BsYWNlL0AtMzUuMDI0NDk1LDEzOC41NzEzMjgsMTd6L2RhdGE9ITNtMSE0YjEhNG0yITNtMSExczB4NmFiMGQwOTFkNmU5OGQ5ZjoweGYwMzM2NTU0NWJhYzhhMD9obD1lbg==",
               "styles": [],
               "colour": "666666",
-              "size": 10
+              "size": 10,
+              "bottom_padding": 0
+            },
             },
             "logo": {
               "y_start": 30,
@@ -671,14 +674,18 @@
               "text": "TWF5IDIwMDAgLSBNYXkgMjAwMSB8IA==",
               "styles": [],
               "colour": "666666",
-              "size": 10
+              "size": 10,
+              "bottom_padding": 0
+            },
             },
             "location": {
               "text": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",
               "link": "aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9tYXBzL3BsYWNlL0AtMzQuOTI0MDY4LDEzOC41OTQ4MDksMTd6L2RhdGE9ITNtMSE0YjEhNG0yITNtMSExczB4NmFiMGNlZDNlMDA5Y2UyYjoweDEwOTQzZTcwNTllM2FiZGE/aGw9ZW4=",
               "styles": [],
               "colour": "666666",
-              "size": 10
+              "size": 10,
+              "bottom_padding": 0
+            },
             },
             "logo": {
               "y_start": 23,
