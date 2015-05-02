@@ -11,8 +11,8 @@ module ResumeGenerator
       attr_reader :locale
       attr_accessor :filename
 
-      def self.start(args)
-        Parser.parse!(args)
+      def self.start
+        Parser.parse!(ARGV)
         new.start
       end
 
