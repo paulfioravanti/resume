@@ -601,7 +601,6 @@
               "size": 10,
               "bottom_padding": 0
             },
-            },
             "logo": {
               "y_start": 30,
               "image": "http://farm4.staticflickr.com/3707/8812488974_71c6981155_m.jpg",
@@ -677,7 +676,6 @@
               "size": 10,
               "bottom_padding": 0
             },
-            },
             "location": {
               "text": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",
               "link": "aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9tYXBzL3BsYWNlL0AtMzQuOTI0MDY4LDEzOC41OTQ4MDksMTd6L2RhdGE9ITNtMSE0YjEhNG0yITNtMSExczB4NmFiMGNlZDNlMDA5Y2UyYjoweDEwOTQzZTcwNTllM2FiZGE/aGw9ZW4=",
@@ -685,7 +683,6 @@
               "colour": "666666",
               "size": 10,
               "bottom_padding": 0
-            },
             },
             "logo": {
               "y_start": 23,

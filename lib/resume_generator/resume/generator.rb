@@ -30,7 +30,8 @@ module ResumeGenerator
         app.filename =
           "#{d(resume[:document_name])}_#{ResumeGenerator.locale}.pdf"
         new(resume, app).start
-      rescue SocketError
+      rescue => ex
+        raise ex
         app.inform_of_network_connection_issue
         exit
       end

@@ -18,19 +18,11 @@ module ResumeGenerator
           ).generate
         end
 
-        def initialize(pdf, position, organisation, period, location, at_x_position)
-          @pdf = pdf
-          @position = position
-          @organisation = organisation
-          @period = period
-          @location = location
-          @at_x_position = at_x_position
-        end
 
         def generate
           # Different rendering behaviour needed depending on whether the header
           # is being drawn from left to right on the page or specifically placed
-          # at a location
+          # at a location on the x-axis
           if at_x_position
             formatted_text_box_header
           else
@@ -39,6 +31,15 @@ module ResumeGenerator
         end
 
         private
+
+        def initialize(pdf, position, organisation, period, location, at_x_position)
+          @pdf = pdf
+          @position = position
+          @organisation = organisation
+          @period = period
+          @location = location
+          @at_x_position = at_x_position
+        end
 
         def formatted_text_header
           pdf.formatted_text([properties_for(position)])
