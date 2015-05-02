@@ -42,36 +42,25 @@ module ResumeGenerator
         end
 
         def formatted_text_header
-          pdf.formatted_text([properties_for(position)])
-          pdf.formatted_text([properties_for(organisation)])
-          pdf.formatted_text([
-            properties_for(period),
-            properties_for(location)
-          ])
+          header_sections.each do |sections|
+            pdf.formatted_text(
+              sections.map { |section| properties_for(section) }
+            )
+          end
         end
 
         def formatted_text_box_header
-          [position, organisation].each do |section|
+          header_sections.each do |sections|
             pdf.formatted_text_box(
-              [properties_for(section)],
+              sections.map { |section| properties_for(section) },
               at: [at_x_position, pdf.cursor]
             )
-            pdf.move_down section[:bottom_padding]
+            pdf.move_down sections.first[:bottom_padding]
           end
-          # pdf.formatted_text_box(
-          #   [properties_for(position)],
-          #   at: [at_x_position, pdf.cursor]
-          # )
-          # pdf.move_down position[:bottom_padding]
-          # pdf.formatted_text_box(
-          #   [properties_for(organisation)],
-          #   at: [at_x_position, pdf.cursor]
-          # )
-          # pdf.move_down organisation[:bottom_padding]
-          pdf.formatted_text_box(
-            [properties_for(period), properties_for(location)],
-            at: [at_x_position, pdf.cursor]
-          )
+        end
+
+        def header_sections
+          [[position], [organisation], [period, location]]
         end
 
         def properties_for(section)
