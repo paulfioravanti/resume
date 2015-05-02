@@ -1,4 +1,3 @@
-require_relative 'colours'
 require_relative '../../resume_generator/resume/generator'
 
 module ResumeGenerator
@@ -38,10 +37,6 @@ module ResumeGenerator
               "Please ask me directly for a PDF copy of my resume.",
             inform_of_successful_resume_generation:
               'Resume generated successfully.',
-            print_thank_you_message:
-              "Thanks for looking at my resume. I hope to hear from you soon!\n"\
-              "#{filename} has been generated in the same\n"\
-              "directory you ran the script.",
             request_to_open_resume:
               'Would you like me to open the resume for you (Y/N)? ',
             request_user_to_open_document:
@@ -167,7 +162,11 @@ module ResumeGenerator
       end
 
       def print_thank_you_message
-        puts cyan(messages[__method__])
+        puts cyan(
+          "Thanks for looking at my resume. I hope to hear from you soon!\n"\
+          "#{filename} has been generated in the same\n"\
+          "directory you ran this script."
+        )
       end
 
       def request_to_open_resume

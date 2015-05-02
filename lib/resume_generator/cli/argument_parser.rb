@@ -1,4 +1,5 @@
 require_relative '../../resume_generator'
+require_relative 'colours'
 require 'optparse'
 require 'forwardable'
 
@@ -6,6 +7,7 @@ module ResumeGenerator
   module CLI
     class ArgumentParser
       extend Forwardable
+      include Colours
 
       attr_reader :supported_locales, :parser
       attr_accessor :locale
@@ -43,8 +45,10 @@ module ResumeGenerator
           if supported_locales.include?(locale)
             self.locale = locale
           else
-            puts "Locale '#{locale}' is not supported.\n"\
-                 "Supported locales are: #{supported_locales.join(', ')}"
+            puts red("Locale '#{locale}' is not supported.")
+            puts yellow(
+              "Supported locales are: #{supported_locales.join(', ')}"
+            )
             exit
           end
         end
