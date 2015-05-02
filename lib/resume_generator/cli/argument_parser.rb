@@ -1,9 +1,12 @@
 require_relative '../../resume_generator'
 require 'optparse'
+require 'forwardable'
 
 module ResumeGenerator
   module CLI
     class ArgumentParser
+      extend Forwardable
+
       attr_reader :supported_locales, :parser
       attr_accessor :locale
 
@@ -13,9 +16,7 @@ module ResumeGenerator
         @parser = initialize_parser
       end
 
-      def parse!
-        parser.parse!
-      end
+      def_delegator :@parser, :parse!
 
       private
 
