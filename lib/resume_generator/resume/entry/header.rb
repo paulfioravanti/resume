@@ -18,7 +18,6 @@ module ResumeGenerator
           ).generate
         end
 
-
         def generate
           # Different rendering behaviour needed depending on whether the header
           # is being drawn from left to right on the page or specifically placed
