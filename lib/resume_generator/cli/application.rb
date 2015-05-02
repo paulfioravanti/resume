@@ -1,4 +1,4 @@
-require_relative 'parser'
+require_relative 'argument_parser'
 require_relative 'messages'
 require_relative 'gem_installer'
 require_relative 'file_system'
@@ -12,8 +12,9 @@ module ResumeGenerator
       attr_accessor :filename
 
       def self.start
-        Parser.parse!(ARGV)
-        new.start
+        parser = ArgumentParser.new
+        parser.parse!
+        new(parser.locale).start
       end
 
       def start
@@ -24,8 +25,8 @@ module ResumeGenerator
 
       private
 
-      def initialize
-        @locale = ResumeGenerator.locale
+      def initialize(locale)
+        @locale = locale
         initialize_messages
       end
 

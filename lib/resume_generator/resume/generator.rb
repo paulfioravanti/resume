@@ -24,11 +24,11 @@ module ResumeGenerator
 
       def self.start(app)
         resume = JSON.parse(
-          open("resources/resume.#{ResumeGenerator.locale}.json").read,
+          open("resources/resume.#{app.locale}.json").read,
           symbolize_names: true
         )[:resume]
         app.filename =
-          "#{d(resume[:document_name])}_#{ResumeGenerator.locale}.pdf"
+          "#{d(resume[:document_name])}_#{app.locale}.pdf"
         new(resume, app).start
       rescue SocketError
         app.inform_of_network_connection_issue
