@@ -16,11 +16,6 @@ module ResumeGenerator
         new.start
       end
 
-      def initialize
-        @locale = ResumeGenerator.locale
-        initialize_messages
-      end
-
       def start
         install_gems
         generate_resume
@@ -28,6 +23,11 @@ module ResumeGenerator
       end
 
       private
+
+      def initialize
+        @locale = ResumeGenerator.locale
+        initialize_messages
+      end
 
       def install_gems
         installer = GemInstaller.new(self)
