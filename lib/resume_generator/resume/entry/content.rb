@@ -13,11 +13,6 @@ module ResumeGenerator
           new(pdf, entry).generate
         end
 
-        def initialize(pdf, entry)
-          @pdf = pdf
-          @entry = entry
-        end
-
         def generate
           pdf.move_down entry[:top_padding]
           Header.generate(pdf, entry)
@@ -26,6 +21,11 @@ module ResumeGenerator
         end
 
         private
+
+        def initialize(pdf, entry)
+          @pdf = pdf
+          @entry = entry
+        end
 
         def details
           pdf.move_down entry[:summary][:top_padding]
