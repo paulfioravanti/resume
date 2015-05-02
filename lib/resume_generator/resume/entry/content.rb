@@ -38,7 +38,8 @@ module ResumeGenerator
         end
 
         def profile
-          return unless items = entry[:profile]
+          items = entry[:profile]
+          return unless items
           table_data = items.reduce([]) do |data, item|
             data << ['-', d(item)]
           end
