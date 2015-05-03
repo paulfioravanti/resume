@@ -1,10 +1,10 @@
 PATH
   remote: .
   specs:
-    resume (0.5)
+    resume (0.6)
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     abstract_type (0.0.7)
     adamantium (0.2.0)
