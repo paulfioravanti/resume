@@ -22,8 +22,8 @@ module ResumeGenerator
               'Creating education history section...',
             request_gem_installation:
               "May I please install the following Ruby gems:\n"\
-              "- prawn #{ResumeGenerator::PRAWN_VERSION}\n"\
-              "- prawn-table #{ResumeGenerator::PRAWN_TABLE_VERSION}\n"\
+              "- prawn #{PRAWN_VERSION}\n"\
+              "- prawn-table #{PRAWN_TABLE_VERSION}\n"\
               "in order to help me generate a PDF (Y/N)? ",
             thank_user_for_permission:
               'Thank you kindly :-)',
