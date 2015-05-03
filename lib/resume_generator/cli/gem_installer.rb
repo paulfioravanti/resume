@@ -36,8 +36,9 @@ module ResumeGenerator
       end
 
       def gems_successfully_installed?
-        system('gem', 'install', 'prawn', '-v', PRAWN_VERSION) &&
-        system('gem', 'install', 'prawn-table', '-v', PRAWN_TABLE_VERSION)
+        gems.all? do |gem, version|
+          system('gem', 'install', gem, '-v', version)
+        end
       end
     end
   end
