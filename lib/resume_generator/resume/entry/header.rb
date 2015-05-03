@@ -10,10 +10,10 @@ module ResumeGenerator
         def self.generate(pdf, entry)
           new(
             pdf,
-            position: entry[:position],
-            organisation: entry[:organisation],
-            period: entry[:period],
-            location: entry[:location],
+            entry[:position],
+            entry[:organisation],
+            entry[:period],
+            entry[:location],
             at_x_position: entry[:at_x_position]
           ).generate
         end
@@ -31,8 +31,12 @@ module ResumeGenerator
 
         private
 
-        def initialize(pdf, options)
+        def initialize(pdf, position, organisation, period, location, options)
           @pdf = pdf
+          @position = position
+          @organisation = organisation
+          @period = period
+          @location = location
           options.each do |attribute, value|
             instance_variable_set("@#{attribute}", value)
           end
