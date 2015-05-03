@@ -1,4 +1,4 @@
-require_relative '../../resume_generator/resume/generator'
+require_relative '../../resume_generator/resume/document'
 
 module ResumeGenerator
   module CLI
@@ -163,9 +163,12 @@ module ResumeGenerator
 
       def print_thank_you_message
         puts cyan(
-          "Thanks for looking at my resume. I hope to hear from you soon!\n"\
-          "#{filename} has been generated in the same\n"\
-          "directory you ran this script."
+          {
+            en: "Thanks for looking at my resume."\
+                "I hope to hear from you soon!\n"\
+                "#{filename} has been generated in the same\n"\
+                "directory you ran this script."
+          }[locale]
         )
       end
 
