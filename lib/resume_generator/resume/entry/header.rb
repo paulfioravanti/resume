@@ -7,14 +7,14 @@ module ResumeGenerator
         attr_reader :pdf, :position, :organisation,
                     :period, :location, :at_x_position
 
-        def self.generate(pdf, data)
+        def self.generate(pdf, entry)
           new(
             pdf,
-            position: data[:position],
-            organisation: data[:organisation],
-            period: data[:period],
-            location: data[:location],
-            at_x_position: data[:at_x_position]
+            position: entry[:position],
+            organisation: entry[:organisation],
+            period: entry[:period],
+            location: entry[:location],
+            at_x_position: entry[:at_x_position]
           ).generate
         end
 
