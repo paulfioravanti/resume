@@ -1,4 +1,4 @@
-require File.expand_path('../lib/resume_generator/version', __FILE__)
+require_relative 'lib/resume_generator'
 
 Gem::Specification.new do |gem|
   gem.name          = 'resume'
