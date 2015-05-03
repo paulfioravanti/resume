@@ -18,6 +18,12 @@ module ResumeGenerator
       def parse!
         parser.parse!(ARGV)
         self.locale ||= :en
+      rescue OptionParser::InvalidOption
+        inform_of_invalid_options
+        exit
+      rescue OptionParser::MissingArgument
+        inform_of_missing_arguments
+        exit
       end
 
       private
@@ -41,14 +47,10 @@ module ResumeGenerator
       def locale_option(opts)
         opts.on('-l', '--locale LOCALE',
                 'Select the locale of the resume') do |locale|
-          locale = locale.to_sym
-          if supported_locales.include?(locale)
-            self.locale = locale
+          if supported_locales.include?(locale.to_sym)
+            self.locale = locale.to_sym
           else
-            puts red("Locale '#{locale}' is not supported.")
-            puts yellow(
-              "Supported locales are: #{supported_locales.join(', ')}"
-            )
+            inform_locale_not_supported(locale)
             exit
           end
         end
@@ -66,6 +68,23 @@ module ResumeGenerator
           puts ResumeGenerator::VERSION
           exit
         end
+      end
+
+      def inform_locale_not_supported(locale)
+        puts red("Locale '#{locale}' is not supported.")
+        puts yellow(
+          "Supported locales are: #{supported_locales.join(', ')}"
+        )
+      end
+
+      def inform_of_invalid_options
+        puts red('You have some invalid options.')
+        puts parser.help
+      end
+
+      def inform_of_missing_arguments
+        puts red('You have a missing argument in one of your options.')
+        puts parser.help
       end
     end
   end
