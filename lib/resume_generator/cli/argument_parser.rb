@@ -1,24 +1,24 @@
 require_relative '../../resume_generator'
 require_relative 'colours'
 require 'optparse'
-require 'forwardable'
 
 module ResumeGenerator
   module CLI
     class ArgumentParser
-      extend Forwardable
       include Colours
 
       attr_reader :supported_locales, :parser
       attr_accessor :locale
 
       def initialize
-        @locale = :en
         @supported_locales = [:en, :ja]
         @parser = initialize_parser
       end
 
-      def_delegator :@parser, :parse!
+      def parse!
+        parser.parse!(ARGV)
+        self.locale ||= :en
+      end
 
       private
 
