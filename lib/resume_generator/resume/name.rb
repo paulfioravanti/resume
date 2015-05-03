@@ -6,22 +6,27 @@ module ResumeGenerator
       attr_reader :pdf, :font, :size, :text
 
       def self.generate(pdf, name)
-        new(pdf, name[:font], name[:size], name[:text]).generate
+        new(
+          pdf,
+          font: name[:font],
+          size: name[:size],
+          text: d(name[:text])
+        ).generate
       end
 
       def generate
         pdf.font(font, size: size) do
-          pdf.text d(text)
+          pdf.text(text)
         end
       end
 
       private
 
-      def initialize(pdf, name, size, text)
+      def initialize(pdf, options)
         @pdf = pdf
-        @font = name
-        @size = size
-        @text = text
+        options.each do |attribute, value|
+          instance_variable_set("@#{attribute}", value)
+        end
       end
     end
   end

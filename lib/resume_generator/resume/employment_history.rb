@@ -3,7 +3,6 @@ require_relative 'entry/content'
 module ResumeGenerator
   module Resume
     class EmploymentHistory
-      include Decoder
 
       attr_reader :pdf, :heading, :content
 

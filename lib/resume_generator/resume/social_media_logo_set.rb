@@ -13,13 +13,13 @@ module ResumeGenerator
       def self.generate(pdf, logo_set)
         new(
           pdf,
-          logo_set[:x_position],
-          logo_set[:top_padding],
-          logo_set[:padded_logo_width],
-          logo_set[:padded_logo_height],
-          logo_set[:horizontal_rule_colour],
           logo_set[:logos].values,
-          logo_set[:logo_properties]
+          logo_set[:logo_properties],
+          x_position: logo_set[:x_position],
+          top_padding: logo_set[:top_padding],
+          padded_logo_width: logo_set[:padded_logo_width],
+          padded_logo_height: logo_set[:padded_logo_height],
+          horizontal_rule_colour: logo_set[:horizontal_rule_colour],
         ).generate
       end
 
@@ -35,16 +35,12 @@ module ResumeGenerator
 
       private
 
-      def initialize(pdf, x_position, top_padding, padded_logo_width,
-                     padded_logo_height, horizontal_rule_colour,
-                     logo_values, logo_properties)
+      def initialize(pdf, logo_values, logo_properties, options)
         @pdf = pdf
-        @x_position = x_position
-        @top_padding = top_padding
-        @padded_logo_width = padded_logo_width
-        @padded_logo_height = padded_logo_height
-        @horizontal_rule_colour = horizontal_rule_colour
         @logos = logos_for(logo_values, logo_properties)
+        options.each do |attribute, value|
+          instance_variable_set("@#{attribute}", value)
+        end
       end
 
       def logos_for(logo_set, general_properties)

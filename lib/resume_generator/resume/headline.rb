@@ -6,19 +6,20 @@ module ResumeGenerator
       attr_reader :pdf, :primary_text, :primary_colour, :secondary_text, :size
 
       def self.generate(pdf, headline)
-        new(pdf,
-          headline[:primary][:text],
-          headline[:primary][:colour],
-          headline[:secondary][:text],
-          headline[:size],
+        new(
+          pdf,
+          primary_text: d(headline[:primary][:text]),
+          primary_colour: headline[:primary][:colour],
+          secondary_text: d(headline[:secondary][:text]),
+          size: headline[:size],
         ).generate
       end
 
       def generate
         pdf.formatted_text(
           [
-            { text: d(primary_text), color: primary_colour },
-            { text: d(secondary_text) }
+            { text: primary_text, color: primary_colour },
+            { text: secondary_text }
           ],
           size: size
         )
@@ -26,12 +27,11 @@ module ResumeGenerator
 
       private
 
-      def initialize(pdf, primary_text, primary_colour, secondary_text, size)
+      def initialize(pdf, options)
         @pdf = pdf
-        @primary_text = primary_text
-        @primary_colour = primary_colour
-        @secondary_text = secondary_text
-        @size = size
+        options.each do |attribute, value|
+          instance_variable_set("@#{attribute}", value)
+        end
       end
     end
   end

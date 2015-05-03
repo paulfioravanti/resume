@@ -10,11 +10,11 @@ module ResumeGenerator
         def self.generate(pdf, data)
           new(
             pdf,
-            data[:position],
-            data[:organisation],
-            data[:period],
-            data[:location],
-            data[:at_x_position]
+            position: data[:position],
+            organisation: data[:organisation],
+            period: data[:period],
+            location: data[:location],
+            at_x_position: data[:at_x_position]
           ).generate
         end
 
@@ -31,13 +31,11 @@ module ResumeGenerator
 
         private
 
-        def initialize(pdf, position, organisation, period, location, at_x_position)
+        def initialize(pdf, options)
           @pdf = pdf
-          @position = position
-          @organisation = organisation
-          @period = period
-          @location = location
-          @at_x_position = at_x_position
+          options.each do |attribute, value|
+            instance_variable_set("@#{attribute}", value)
+          end
         end
 
         def formatted_text_header

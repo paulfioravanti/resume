@@ -2,17 +2,17 @@ module ResumeGenerator
   module Resume
     module Entry
       class Heading
-        extend Decoder
+        include Decoder
 
         attr_reader :pdf, :top_padding, :text, :styles, :colour
 
         def self.generate(pdf, heading)
           new(
             pdf,
-            heading[:top_padding],
-            d(heading[:text]),
-            heading[:styles].map(&:to_sym),
-            heading[:colour]
+            top_padding: heading[:top_padding],
+            text: d(heading[:text]),
+            styles: heading[:styles].map(&:to_sym),
+            colour: heading[:colour]
           ).generate
         end
 
@@ -27,12 +27,11 @@ module ResumeGenerator
 
         private
 
-        def initialize(pdf, top_padding, text, styles, colour)
+        def initialize(pdf, options)
           @pdf = pdf
-          @top_padding = top_padding
-          @text = text
-          @styles = styles
-          @colour = colour
+          options.each do |attribute, value|
+            instance_variable_set("@#{attribute}", value)
+          end
         end
       end
     end

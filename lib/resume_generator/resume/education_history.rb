@@ -1,7 +1,6 @@
 module ResumeGenerator
   module Resume
     class EducationHistory
-      include Decoder
 
       attr_reader :pdf, :heading, :content
 

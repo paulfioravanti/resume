@@ -1,7 +1,7 @@
 module ResumeGenerator
   module Resume
     class Logo
-      extend Decoder
+      include Decoder
 
       attr_reader :image, :link, :width, :height, :fit, :align,
                   :link_overlay_start, :bars, :size, :origin, :at, :y_start

@@ -3,16 +3,16 @@ module ResumeGenerator
     module Utilities
       private
 
-      def transparent_link(pdf, resource)
+      def transparent_link(pdf, logo)
         pdf.transparent(0) do
           pdf.formatted_text(
             [
               {
-                text: '|' * resource.bars,
-                size: resource.size,
-                link: resource.link
+                text: '|' * logo.bars,
+                size: logo.size,
+                link: logo.link
               }
-            ], align: resource.align
+            ], align: logo.align
           )
         end
       end
