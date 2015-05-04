@@ -1,8 +1,10 @@
+require 'singleton'
+
 module ResumeGenerator
   module Resume
     module Entry
       class Header
-        include Decoder
+        include Singleton, Decoder
 
         attr_reader :pdf, :position, :organisation,
                     :period, :location, :at_x_position
@@ -18,6 +20,17 @@ module ResumeGenerator
           ).generate
         end
 
+        def initialize(pdf, position, organisation, period, location, options)
+          @pdf = pdf
+          @position = position
+          @organisation = organisation
+          @period = period
+          @location = location
+          options.each do |attribute, value|
+            instance_variable_set("@#{attribute}", value)
+          end
+        end
+
         def generate
           # Different rendering behaviour needed depending on whether the header
           # is being drawn from left to right on the page or specifically placed
@@ -30,17 +43,6 @@ module ResumeGenerator
         end
 
         private
-
-        def initialize(pdf, position, organisation, period, location, options)
-          @pdf = pdf
-          @position = position
-          @organisation = organisation
-          @period = period
-          @location = location
-          options.each do |attribute, value|
-            instance_variable_set("@#{attribute}", value)
-          end
-        end
 
         def formatted_text_header
           header_sections.each do |sections|

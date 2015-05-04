@@ -1,8 +1,10 @@
+require 'singleton'
+
 module ResumeGenerator
   module Resume
     module Entry
       class Heading
-        include Decoder
+        include Singleton, Decoder
 
         attr_reader :pdf, :top_padding, :text, :styles, :colour
 
@@ -16,6 +18,13 @@ module ResumeGenerator
           ).generate
         end
 
+        def initialize(pdf, options)
+          @pdf = pdf
+          options.each do |attribute, value|
+            instance_variable_set("@#{attribute}", value)
+          end
+        end
+
         def generate
           pdf.move_down(top_padding)
           pdf.formatted_text([{
@@ -23,15 +32,6 @@ module ResumeGenerator
             styles: styles,
             color: colour
           }])
-        end
-
-        private
-
-        def initialize(pdf, options)
-          @pdf = pdf
-          options.each do |attribute, value|
-            instance_variable_set("@#{attribute}", value)
-          end
         end
       end
     end

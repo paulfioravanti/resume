@@ -1,7 +1,9 @@
+require 'singleton'
+
 module ResumeGenerator
   module Resume
     class Name
-      include Decoder
+      include Singleton, Decoder
 
       attr_reader :pdf, :font, :size, :text
 
@@ -14,18 +16,16 @@ module ResumeGenerator
         ).generate
       end
 
-      def generate
-        pdf.font(font, size: size) do
-          pdf.text(text)
-        end
-      end
-
-      private
-
       def initialize(pdf, options)
         @pdf = pdf
         options.each do |attribute, value|
           instance_variable_set("@#{attribute}", value)
+        end
+      end
+
+      def generate
+        pdf.font(font, size: size) do
+          pdf.text(text)
         end
       end
     end

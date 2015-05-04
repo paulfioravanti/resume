@@ -1,10 +1,11 @@
 require_relative 'transparent_link'
 require_relative 'logo'
+require 'singleton'
 
 module ResumeGenerator
   module Resume
     class SocialMediaLogoSet
-      include TransparentLink
+      include Singleton, TransparentLink
 
       attr_reader :pdf, :x_position, :top_padding, :padded_logo_width,
                   :padded_logo_height, :horizontal_rule_colour, :logos
@@ -23,6 +24,14 @@ module ResumeGenerator
         ).generate
       end
 
+      def initialize(pdf, logo_values, logo_properties, options)
+        @pdf = pdf
+        @logos = logos_for(logo_values, logo_properties)
+        options.each do |attribute, value|
+          instance_variable_set("@#{attribute}", value)
+        end
+      end
+
       def generate
         pdf.move_down(top_padding)
         generate_logo_for(logos.first)
@@ -34,14 +43,6 @@ module ResumeGenerator
       end
 
       private
-
-      def initialize(pdf, logo_values, logo_properties, options)
-        @pdf = pdf
-        @logos = logos_for(logo_values, logo_properties)
-        options.each do |attribute, value|
-          instance_variable_set("@#{attribute}", value)
-        end
-      end
 
       def logos_for(logo_set, general_properties)
         logo_set.map do |logo_properties|

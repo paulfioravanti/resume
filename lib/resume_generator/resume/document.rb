@@ -1,5 +1,6 @@
 require 'json'
 require 'open-uri'
+require 'singleton'
 require_relative '../decoder'
 require_relative 'name'
 require_relative 'headline'
@@ -18,7 +19,7 @@ module ResumeGenerator
     # kind of inheritance hierarchy in advance will result in an
     # uninitialized constant error.
     class Document
-      include Decoder
+      include Singleton, Decoder
 
       attr_reader :resume, :app
 
@@ -35,19 +36,17 @@ module ResumeGenerator
         exit
       end
 
+      def initialize(resume, app)
+        @resume = resume
+        @app = app
+      end
+
       def generate
         Prawn::Document.generate(app.filename, PDFOptions.for(resume)) do |pdf|
           pdf.instance_exec(resume, app) do |resume, app|
             Manifest.process(self, resume, app)
           end
         end
-      end
-
-      private
-
-      def initialize(resume, app)
-        @resume = resume
-        @app = app
       end
     end
   end

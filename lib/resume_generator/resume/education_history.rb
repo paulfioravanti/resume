@@ -1,11 +1,20 @@
+require 'singleton'
+
 module ResumeGenerator
   module Resume
     class EducationHistory
+      include Singleton
 
       attr_reader :pdf, :heading, :content
 
       def self.generate(pdf, data)
         new(pdf, data[:heading], data[:content]).generate
+      end
+
+      def initialize(pdf, heading, content)
+        @pdf = pdf
+        @heading = heading
+        @content = content
       end
 
       def generate
@@ -14,12 +23,6 @@ module ResumeGenerator
       end
 
       private
-
-      def initialize(pdf, heading, content)
-        @pdf = pdf
-        @heading = heading
-        @content = content
-      end
 
       def generate_heading
         Entry::Heading.generate(pdf, heading)
