@@ -1,10 +1,10 @@
-require_relative 'utilities'
+require_relative 'transparent_link'
 require_relative 'logo'
 
 module ResumeGenerator
   module Resume
     class SocialMediaLogoSet
-      include Utilities
+      include TransparentLink
 
       attr_reader :pdf, :x_position, :top_padding, :padded_logo_width,
                   :padded_logo_height, :horizontal_rule_colour, :logos

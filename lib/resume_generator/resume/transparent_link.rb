@@ -1,6 +1,6 @@
 module ResumeGenerator
   module Resume
-    module Utilities
+    module TransparentLink
       private
 
       def transparent_link(pdf, logo)

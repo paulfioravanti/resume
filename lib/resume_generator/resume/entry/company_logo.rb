@@ -2,7 +2,7 @@ module ResumeGenerator
   module Resume
     module Entry
       class CompanyLogo
-        include Utilities
+        include TransparentLink
 
         attr_reader :pdf, :logo
 

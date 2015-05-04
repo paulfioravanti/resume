@@ -5,7 +5,7 @@ module ResumeGenerator
   module Resume
     module Entry
       class Content
-        include Decoder, Utilities
+        include Decoder, TransparentLink
 
         attr_reader :pdf, :entry
 
