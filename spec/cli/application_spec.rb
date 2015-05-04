@@ -4,90 +4,44 @@ require 'resume_generator/cli/application'
 RSpec.describe ResumeGenerator::CLI::Application do
 
   describe '.start' do
-  end
-
-  describe 'PDF generator gem installation' do
-    # let(:prawn_gem) { double('prawn_gem') }
-    # let(:prawn_table_gem) { double('prawn_table_gem') }
+    let(:locale) { :en }
+    let(:argument_parser) { double('argument_parser', locale: locale) }
+    let(:application) { double('application') }
 
     before do
-      # allow(Gem::Specification).to \
-      #   receive(:find_by_name).with('prawn').and_return(prawn_gem)
-      # allow(Gem::Specification).to \
-      #   receive(:find_by_name).with('prawn-table').and_return(prawn_table_gem)
-      # allow(Gem::Version).to receive(:new).and_return(1.2, 0.1)
+      # We don't need to parse any arguments; just hand the locale
+      # straight to the application
+      allow(argument_parser).to receive(:parse!)
     end
 
-    context 'user has the expected gems installed' do
-      before do
-        # allow(prawn_gem).to receive(:version).and_return(1.2)
-        # allow(prawn_table_gem).to receive(:version).and_return(0.1)
-      end
+    it 'creates a new Application, passing in the locale, and calls #start' do
+      expect(ResumeGenerator::CLI::Application).to \
+        receive(:new).with(locale).and_return(application)
+      expect(application).to receive(:start)
+      ResumeGenerator::CLI::Application.start
+    end
+  end
 
+  describe '#start' do
+    let(:application) { described_class.new(:en) }
+
+    context 'user has the required gems installed' do
       specify 'user is not asked to install any gems' do
-        # expect(cli).to_not receive(:permission_granted?)
-        # cli.send(:check_ability_to_generate_resume)
+        application
       end
     end
 
-    context 'user has an expected gem installed, but an unexpected version' do
-      before do
-        # allow(prawn_gem).to receive(:version).and_return(0)
-      end
-
-      specify 'user is asked to install gems' do
-        # expect(cli).to receive(:request_gem_installation)
-        # cli.send(:check_ability_to_generate_resume)
-      end
-    end
-
-    context 'user does not have a required gem installed' do
-      before do
-        # allow(Gem::Specification).to \
-        #   receive(:find_by_name).and_raise(Gem::LoadError)
-      end
-
+    context 'user does not have the required gems installed' do
       specify 'user is asked to install the required gems' do
-        # expect(cli).to receive(:request_gem_installation)
-        # cli.send(:check_ability_to_generate_resume)
       end
 
       context 'user agrees to install the gems' do
-        before do
-          # allow(cli).to receive(:permission_granted?).and_return(true)
-        end
-
-        it 'executes installation' do
-          # expect(cli).to receive(:thank_user_for_permission)
-          # expect(cli).to receive(:inform_start_of_gem_installation)
-          # expect(cli).to receive(:inform_of_successful_gem_installation)
-          # cli.send(:check_ability_to_generate_resume)
-        end
-
-        context 'gems are unable to be installed' do
-          # before { allow(cli).to receive(:system).and_raise }
-
-          it 'prints an error message and exits' do
-            # expect(cli).to receive(:thank_user_for_permission)
-            # expect(cli).to receive(:inform_start_of_gem_installation)
-            # expect(cli).to \
-            #   receive(:inform_of_gem_installation_failure).and_call_original
-            # expect(cli).to receive(:exit)
-            # cli.send(:check_ability_to_generate_resume)
-          end
+        it 'attempts to install the gems, and continues resume generation' do
         end
       end
 
       context 'when user does not agree to install the gems' do
-        before do
-          # allow(cli).to receive(:permission_granted?).and_return(false)
-        end
-
-        it 'prints an error message and exits' do
-          # expect(cli).to \
-          #   receive(:inform_of_failure_to_generate_resume).and_call_original
-          # expect(cli).to receive(:exit)
-          # cli.send(:check_ability_to_generate_resume)
+        it 'informs the user it cannot generate the resume and exits' do
         end
       end
     end
