@@ -1,10 +1,8 @@
-require 'singleton'
-
 module ResumeGenerator
   module Resume
     module Entry
       class CompanyLogo
-        include Singleton, TransparentLink
+        include TransparentLink
 
         attr_reader :pdf, :logo
 
@@ -12,6 +10,8 @@ module ResumeGenerator
           logo = Logo.for(data[:logo])
           new(pdf, logo).generate
         end
+
+        private_class_method :new
 
         def initialize(pdf, logo)
           @pdf = pdf

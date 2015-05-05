@@ -2,12 +2,11 @@ require_relative 'argument_parser'
 require_relative 'messages'
 require_relative 'gem_installer'
 require_relative 'file_system'
-require 'singleton'
 
 module ResumeGenerator
   module CLI
     class Application
-      include Singleton, Messages
+      include Messages
 
       attr_reader :locale
       attr_accessor :filename
@@ -17,6 +16,8 @@ module ResumeGenerator
         parser.parse!
         new(parser.locale).start
       end
+
+      private_class_method :new
 
       def initialize(locale)
         @locale = locale

@@ -1,10 +1,8 @@
-require 'singleton'
-
 module ResumeGenerator
   module Resume
     module Entry
       class Heading
-        include Singleton, Decoder
+        include Decoder
 
         attr_reader :pdf, :top_padding, :text, :styles, :colour
 
@@ -17,6 +15,8 @@ module ResumeGenerator
             colour: heading[:colour]
           ).generate
         end
+
+        private_class_method :new
 
         def initialize(pdf, options)
           @pdf = pdf

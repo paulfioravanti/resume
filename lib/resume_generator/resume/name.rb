@@ -1,9 +1,7 @@
-require 'singleton'
-
 module ResumeGenerator
   module Resume
     class Name
-      include Singleton, Decoder
+      include Decoder
 
       attr_reader :pdf, :font, :size, :text
 
@@ -15,6 +13,8 @@ module ResumeGenerator
           text: d(name[:text])
         ).generate
       end
+
+      private_class_method :new
 
       def initialize(pdf, options)
         @pdf = pdf

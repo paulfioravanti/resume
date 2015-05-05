@@ -1,9 +1,7 @@
-require 'singleton'
-
 module ResumeGenerator
   module Resume
     class Logo
-      include Singleton, Decoder
+      include Decoder
 
       attr_reader :image, :link, :width, :height, :fit, :align,
                   :link_overlay_start, :bars, :size, :origin, :at, :y_start
@@ -14,6 +12,8 @@ module ResumeGenerator
         data[:align] = data[:align].to_sym
         new(data)
       end
+
+      private_class_method :new
 
       def initialize(data)
         data.each do |attribute, value|

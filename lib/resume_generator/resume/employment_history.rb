@@ -1,16 +1,16 @@
 require_relative 'entry/content'
-require 'singleton'
 
 module ResumeGenerator
   module Resume
     class EmploymentHistory
-      include Singleton
 
       attr_reader :pdf, :heading, :content
 
       def self.generate(pdf, data)
         new(pdf, data[:heading], data[:content]).generate
       end
+
+      private_class_method :new
 
       def initialize(pdf, heading, content)
         @pdf = pdf

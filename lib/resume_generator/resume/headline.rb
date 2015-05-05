@@ -1,9 +1,7 @@
-require 'singleton'
-
 module ResumeGenerator
   module Resume
     class Headline
-      include Singleton, Decoder
+      include Decoder
 
       attr_reader :pdf, :primary_text, :primary_colour, :secondary_text, :size
 
@@ -16,6 +14,8 @@ module ResumeGenerator
           size: headline[:size],
         ).generate
       end
+
+      private_class_method :new
 
       def initialize(pdf, options)
         @pdf = pdf

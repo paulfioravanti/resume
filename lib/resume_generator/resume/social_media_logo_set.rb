@@ -1,11 +1,10 @@
 require_relative 'transparent_link'
 require_relative 'logo'
-require 'singleton'
 
 module ResumeGenerator
   module Resume
     class SocialMediaLogoSet
-      include Singleton, TransparentLink
+      include TransparentLink
 
       attr_reader :pdf, :x_position, :top_padding, :padded_logo_width,
                   :padded_logo_height, :horizontal_rule_colour, :logos
@@ -23,6 +22,8 @@ module ResumeGenerator
           horizontal_rule_colour: logo_set[:horizontal_rule_colour],
         ).generate
       end
+
+      private_class_method :new
 
       def initialize(pdf, logo_values, logo_properties, options)
         @pdf = pdf

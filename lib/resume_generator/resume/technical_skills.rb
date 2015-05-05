@@ -1,16 +1,17 @@
 require_relative 'entry/heading'
-require 'singleton'
 
 module ResumeGenerator
   module Resume
     class TechnicalSkills
-      include Singleton, Decoder
+      include Decoder
 
       attr_reader :pdf, :heading, :content
 
       def self.generate(pdf, data)
         new(pdf, data[:heading], data[:content]).generate
       end
+
+      private_class_method :new
 
       def initialize(pdf, heading, content)
         @pdf = pdf

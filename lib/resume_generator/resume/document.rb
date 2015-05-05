@@ -1,6 +1,5 @@
 require 'json'
 require 'open-uri'
-require 'singleton'
 require_relative '../decoder'
 require_relative 'name'
 require_relative 'headline'
@@ -19,7 +18,7 @@ module ResumeGenerator
     # kind of inheritance hierarchy in advance will result in an
     # uninitialized constant error.
     class Document
-      include Singleton, Decoder
+      include Decoder
 
       attr_reader :resume, :app
 
@@ -35,6 +34,8 @@ module ResumeGenerator
         app.inform_of_network_connection_issue
         exit
       end
+
+      private_class_method :new
 
       def initialize(resume, app)
         @resume = resume

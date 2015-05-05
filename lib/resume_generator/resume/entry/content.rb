@@ -1,18 +1,19 @@
 require_relative 'header'
 require_relative 'company_logo'
-require 'singleton'
 
 module ResumeGenerator
   module Resume
     module Entry
       class Content
-        include Singleton, Decoder, TransparentLink
+        include Decoder, TransparentLink
 
         attr_reader :pdf, :entry
 
         def self.generate(pdf, entry)
           new(pdf, entry).generate
         end
+
+        private_class_method :new
 
         def initialize(pdf, entry)
           @pdf = pdf

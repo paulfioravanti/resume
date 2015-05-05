@@ -1,10 +1,8 @@
-require 'singleton'
-
 module ResumeGenerator
   module Resume
     module Entry
       class Header
-        include Singleton, Decoder
+        include Decoder
 
         attr_reader :pdf, :position, :organisation,
                     :period, :location, :at_x_position
@@ -19,6 +17,8 @@ module ResumeGenerator
             at_x_position: entry[:at_x_position]
           ).generate
         end
+
+        private_class_method :new
 
         def initialize(pdf, position, organisation, period, location, options)
           @pdf = pdf
