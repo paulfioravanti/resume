@@ -35,6 +35,8 @@ module ResumeGenerator
         end
       end
 
+      private
+
       def gems_successfully_installed?
         gems.all? do |gem, version|
           system('gem', 'install', gem, '-v', version)
