@@ -35,8 +35,6 @@ module ResumeGenerator
         exit
       end
 
-      private_class_method :new
-
       def initialize(resume, app)
         @resume = resume
         @app = app
