@@ -17,8 +17,6 @@ module ResumeGenerator
         new(parser.locale).start
       end
 
-      private_class_method :new
-
       def initialize(locale)
         @locale = locale
         initialize_messages
