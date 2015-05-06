@@ -12,7 +12,10 @@ RSpec.describe ResumeGenerator::CLI::ArgumentParser do
     context 'when no locale option is specified' do
       let(:default_locale) { :en }
 
-      before { argument_parser.parse! }
+      before do
+        stub_const('ARGV', [])
+        argument_parser.parse!
+      end
 
       it 'sets the default locale' do
         expect(argument_parser.locale).to eq(default_locale)
