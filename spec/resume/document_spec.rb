@@ -1,5 +1,3 @@
-require 'prawn'
-require 'prawn/table'
 require 'resume_generator/resume/document'
 require 'resume_generator/cli/application'
 

@@ -6,4 +6,26 @@ else
 end
 
 require 'rspec'
-RSpec.configure { |c| c.disable_monkey_patching! }
+require 'resume_generator/cli/colours'
+
+RSpec.configure do |config|
+  include ResumeGenerator::CLI::Colours
+
+  config.disable_monkey_patching!
+  config.before(:suite) do
+    begin
+      require 'prawn'
+      require 'prawn/table'
+    rescue LoadError
+      puts red(
+        'You need to have the prawn and prawn-table gems installed in '\
+        'order to run the specs.'
+      )
+      puts yellow(
+        'Either install them yourself or run the resume and it will '\
+        'install them for you.'
+      )
+      exit
+    end
+  end
+end
