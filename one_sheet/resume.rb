@@ -32,7 +32,7 @@ module ResumeGenerator
   # are run in the repo with the structured version of the resume: an edge case
   VERSION = '0.5' unless const_defined?(:VERSION)
   DOCUMENT_NAME = 'UGF1bF9GaW9yYXZhbnRpX1Jlc3VtZQ=='
-  PRAWN_VERSION = '2.0.0'
+  PRAWN_VERSION = '2.0.1'
   PRAWN_TABLE_VERSION = '0.2.1'
 
   module Colourable

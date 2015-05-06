@@ -7,7 +7,7 @@ RSpec.describe ResumeGenerator::CLI::GemInstaller do
   let(:gem_installer) { described_class.new(app) }
 
   before do
-    stub_const('PRAWN_VERSION', '2.0.0')
+    stub_const('PRAWN_VERSION', '2.0.1')
     stub_const('PRAWN_TABLE_VERSION', '0.2.1')
     allow($stdout).to receive(:write) # suppress message cruft from stdout
   end
