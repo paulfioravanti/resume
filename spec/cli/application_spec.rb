@@ -2,16 +2,19 @@ require 'spec_helper'
 require 'resume_generator/cli/application'
 
 RSpec.describe ResumeGenerator::CLI::Application do
+  let(:locale) { :en }
 
   describe '.start' do
-    let(:locale) { :en }
-    let(:argument_parser) { double('argument_parser', locale: locale) }
+    let(:argument_parser) do
+      double('argument_parser', parse!: true, locale: locale)
+    end
     let(:application) { double('application') }
 
     before do
-      # We don't need to parse any arguments; just hand the locale
-      # straight to the application
-      allow(argument_parser).to receive(:parse!)
+      stub_const(
+        'ResumeGenerator::CLI::ArgumentParser',
+        double('ArgumentParser', new: argument_parser)
+      )
     end
 
     it 'creates a new Application, passing in the locale, and calls #start' do
@@ -20,59 +23,130 @@ RSpec.describe ResumeGenerator::CLI::Application do
       expect(application).to receive(:start)
       described_class.start
     end
+  end
 
-    context 'user has the required gems installed' do
+  describe '#start' do
+    let(:application) { described_class.new(locale) }
+
+    describe 'install gems' do
+      let(:gem_installer) { double('gem_installer') }
+
       before do
-        # allow(cli).to receive(:gem).with('prawn', PRAWN_VERSION)
-        # allow(cli).to receive(:gem).with('prawn-table', PRAWN_TABLE_VERSION)
-        # allow(cli).to receive(:require).with('prawn')
-        # allow(cli).to receive(:require).with('prawn/table')
+        stub_const(
+          'ResumeGenerator::CLI::GemInstaller',
+          double('GemInstaller', new: gem_installer)
+        )
       end
 
-      it 'does not ask the user to install any gems' do
+      context 'when required gems are already installed' do
+        before do
+          allow(gem_installer).to \
+            receive(:required_gems_available?).and_return(true)
+          allow(application).to receive(:generate_resume)
+          allow(application).to receive(:open_resume)
+        end
 
-      end
-
-      it 'informs the user that it will generate the resume' do
-
-      end
-
-      it 'generates the resume' do
-
-      end
-
-      it 'informs the user that the resume has been generated' do
-
-      end
-
-      it 'asks the user to open the resume' do
-
-      end
-
-      context 'user grants permission to open the resume' do
-        it 'opens the document and thanks the user' do
-
+        it 'does not request to install any gems' do
+          expect(application).to_not receive(:request_gem_installation)
+          application.start
         end
       end
 
-      context 'user does not grant permission to open the resume' do
-        it 'does not open the document and thanks the user' do
+      context 'when the required gems are not installed' do
+        before do
+          allow(gem_installer).to \
+            receive(:required_gems_available?).and_return(false)
+          expect(application).to receive(:request_gem_installation)
+        end
 
+        context 'when permission is granted to install the gems' do
+          before do
+            allow(application).to receive(:gets).and_return('yes')
+            allow(application).to receive(:generate_resume)
+            allow(application).to receive(:open_resume)
+          end
+
+          it 'attempts to install the gems' do
+            expect(application).to receive(:thank_user_for_permission)
+            expect(application).to receive(:inform_start_of_gem_installation)
+            expect(gem_installer).to receive(:install_gems)
+            application.start
+          end
+        end
+
+        context 'when permission is not granted to install the gems' do
+          let(:starting_the_application) { -> { application.start } }
+
+          before do
+            allow(application).to receive(:gets).and_return('no')
+          end
+
+          it 'informs the user it cannot generate the resume and exits' do
+            expect(application).to \
+              receive(:inform_of_failure_to_generate_resume)
+            expect(starting_the_application).to raise_error(SystemExit)
+          end
         end
       end
     end
 
-    context 'user does not have the required gems installed' do
-      specify 'user is asked to install the required gems' do
+    describe 'generate resume' do
+      let(:resume) { double('Resume::Document') }
+
+      before do
+        stub_const('PRAWN_VERSION', '2.0.0')
+        stub_const('PRAWN_TABLE_VERSION', '0.2.1')
+        stub_const('ResumeGenerator::Resume::Document', resume)
+        allow(application).to receive(:install_gems)
+        allow(application).to receive(:gem).with('prawn', PRAWN_VERSION)
+        allow(application).to \
+          receive(:gem).with('prawn-table', PRAWN_TABLE_VERSION)
+        allow(application).to receive(:require).with('prawn')
+        allow(application).to receive(:require).with('prawn/table')
+        allow(application).to receive(:open_resume)
       end
 
-      context 'user agrees to install the gems' do
-        it 'attempts to install the gems, and continues resume generation' do
+      it 'generates the resume' do
+        expect(application).to \
+          receive(:inform_start_of_resume_generation)
+        expect(resume).to receive(:generate).with(application)
+        expect(application).to \
+          receive(:inform_of_successful_resume_generation)
+        application.start
+      end
+    end
+
+    describe 'open resume' do
+      let(:file_system) { double('FileSystem') }
+
+      before do
+        stub_const('ResumeGenerator::CLI::FileSystem', file_system)
+        allow(application).to receive(:install_gems)
+        allow(application).to receive(:generate_resume)
+        expect(application).to receive(:request_to_open_resume)
+      end
+
+      context 'when permission is granted to open the resume' do
+        before do
+          allow(application).to receive(:gets).and_return('yes')
+        end
+
+        it 'attempts to open the resume and thanks the reader' do
+          expect(file_system).to receive(:open_document).with(application)
+          expect(application).to receive(:print_thank_you_message)
+          application.start
         end
       end
 
-      context 'user does not agree to install the gems' do
-        it 'informs the user it cannot generate the resume and exits' do
+      context 'when permission is not granted to open the resume' do
+        before do
+          allow(application).to receive(:gets).and_return('no')
+        end
+
+        it 'does not open the resume and thanks the reader' do
+          expect(file_system).to_not receive(:open_document)
+          expect(application).to receive(:print_thank_you_message)
+          application.start
         end
       end
     end
