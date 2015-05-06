@@ -5,6 +5,10 @@ RSpec.describe ResumeGenerator::CLI::ArgumentParser do
   let(:argument_parser) { described_class.new }
 
   describe '#parse!' do
+    before do
+      allow($stdout).to receive(:write) # suppress message cruft from stdout
+    end
+
     context 'when no locale option is specified' do
       let(:default_locale) { :en }
 
@@ -28,7 +32,8 @@ RSpec.describe ResumeGenerator::CLI::ArgumentParser do
 
       it 'informs the user of the supported locales and exits' do
         expect(argument_parser).to \
-          receive(:inform_locale_not_supported).with(unsupported_locale)
+          receive(:inform_locale_not_supported).with(unsupported_locale).
+            and_call_original
         expect(parsing_options).to raise_error(SystemExit)
       end
     end
@@ -135,7 +140,7 @@ RSpec.describe ResumeGenerator::CLI::ArgumentParser do
 
       it 'informs the user that there is an invalid option and exits' do
         expect(argument_parser).to \
-          receive(:inform_of_invalid_options)
+          receive(:inform_of_invalid_options).and_call_original
         expect(parsing_options).to raise_error(SystemExit)
       end
     end
@@ -149,7 +154,7 @@ RSpec.describe ResumeGenerator::CLI::ArgumentParser do
 
       it 'informs the user that there is a missing argument and exits' do
         expect(argument_parser).to \
-          receive(:inform_of_missing_arguments)
+          receive(:inform_of_missing_arguments).and_call_original
         expect(parsing_options).to raise_error(SystemExit)
       end
     end

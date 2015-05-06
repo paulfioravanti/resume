@@ -1,10 +1,15 @@
 require 'prawn'
 require 'prawn/table'
 require 'resume_generator/resume/document'
+require 'resume_generator/cli/application'
 
 RSpec.describe ResumeGenerator::Resume::Document do
   let(:locale) { :en }
-  let(:app) { double('app', locale: locale) }
+  let(:app) { ResumeGenerator::CLI::Application.new(:en) }
+
+  before do
+    allow($stdout).to receive(:write) # suppress message cruft from stdout
+  end
 
   describe '.generate' do
     context 'when a network connection cannot be made' do
@@ -15,7 +20,8 @@ RSpec.describe ResumeGenerator::Resume::Document do
       end
 
       it 'informs the user of the network connection issue and exits' do
-        expect(app).to receive(:inform_of_network_connection_issue)
+        expect(app).to \
+          receive(:inform_of_network_connection_issue).and_call_original
         expect(generating_the_resume).to raise_error(SystemExit)
       end
     end
@@ -79,10 +85,14 @@ RSpec.describe ResumeGenerator::Resume::Document do
     after { File.delete(filename) }
 
     it 'generates a pdf resume and notifies the creation of each part' do
-      expect(app).to receive(:inform_creation_of_social_media_links)
-      expect(app).to receive(:inform_creation_of_technical_skills)
-      expect(app).to receive(:inform_creation_of_employment_history)
-      expect(app).to receive(:inform_creation_of_education_history)
+      expect(app).to \
+        receive(:inform_creation_of_social_media_links).and_call_original
+      expect(app).to \
+        receive(:inform_creation_of_technical_skills).and_call_original
+      expect(app).to \
+        receive(:inform_creation_of_employment_history).and_call_original
+      expect(app).to \
+        receive(:inform_creation_of_education_history).and_call_original
       document.generate
       expect(File.exist?(filename)).to be true
     end

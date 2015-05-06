@@ -1,10 +1,17 @@
 require 'spec_helper'
 require 'resume_generator/cli/file_system'
+require 'resume_generator/cli/application'
 
 RSpec.describe ResumeGenerator::CLI::FileSystem do
   describe '.open_document' do
     let(:resume_name) { 'My Resume.pdf' }
-    let(:app) { double('app', filename: resume_name) }
+    # let(:app) { double('app', filename: resume_name) }
+    let(:app) { ResumeGenerator::CLI::Application.new(:en) }
+
+    before do
+      allow(app).to receive(:filename).and_return(resume_name)
+      allow($stdout).to receive(:write) # suppress message cruft from stdout
+    end
 
     context 'when run on Mac OS' do
       let(:mac_open_file_args) { ['open', app.filename] }
@@ -48,7 +55,8 @@ RSpec.describe ResumeGenerator::CLI::FileSystem do
       before { stub_const('RUBY_PLATFORM', 'unknown') }
 
       it 'requests the user to open the document themself' do
-        expect(app).to receive(:request_user_to_open_document)
+        expect(app).to \
+          receive(:request_user_to_open_document).and_call_original
         described_class.open_document(app)
       end
     end

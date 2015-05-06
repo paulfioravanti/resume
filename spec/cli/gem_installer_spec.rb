@@ -1,13 +1,15 @@
 require 'spec_helper'
 require 'resume_generator/cli/gem_installer'
+require 'resume_generator/cli/application'
 
 RSpec.describe ResumeGenerator::CLI::GemInstaller do
-  let(:app) { double('app') }
+  let(:app) { ResumeGenerator::CLI::Application.new(:en) }
   let(:gem_installer) { described_class.new(app) }
 
   before do
     stub_const('PRAWN_VERSION', '2.0.0')
     stub_const('PRAWN_TABLE_VERSION', '0.2.1')
+    allow($stdout).to receive(:write) # suppress message cruft from stdout
   end
 
   describe '#required_gems_available?' do
@@ -83,7 +85,7 @@ RSpec.describe ResumeGenerator::CLI::GemInstaller do
 
       it 'informs the user of the failure and exits' do
         expect(app).to \
-          receive(:inform_of_gem_installation_failure)
+          receive(:inform_of_gem_installation_failure).and_call_original
         expect(installing_gems).to raise_error(SystemExit)
       end
     end
@@ -102,7 +104,8 @@ RSpec.describe ResumeGenerator::CLI::GemInstaller do
       end
 
       it 'informs the user of successful installation and resets gem paths' do
-        expect(app).to receive(:inform_of_successful_gem_installation)
+        expect(app).to \
+          receive(:inform_of_successful_gem_installation).and_call_original
         expect(Gem).to receive(:clear_paths)
         gem_installer.install_gems
       end

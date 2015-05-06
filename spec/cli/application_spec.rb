@@ -4,6 +4,10 @@ require 'resume_generator/cli/application'
 RSpec.describe ResumeGenerator::CLI::Application do
   let(:locale) { :en }
 
+  before do
+    allow($stdout).to receive(:write) # suppress message cruft from stdout
+  end
+
   describe '.start' do
     let(:argument_parser) do
       double('argument_parser', parse!: true, locale: locale)
@@ -56,7 +60,8 @@ RSpec.describe ResumeGenerator::CLI::Application do
         before do
           allow(gem_installer).to \
             receive(:required_gems_available?).and_return(false)
-          expect(application).to receive(:request_gem_installation)
+          expect(application).to \
+            receive(:request_gem_installation).and_call_original
         end
 
         context 'when permission is granted to install the gems' do
@@ -67,8 +72,10 @@ RSpec.describe ResumeGenerator::CLI::Application do
           end
 
           it 'attempts to install the gems' do
-            expect(application).to receive(:thank_user_for_permission)
-            expect(application).to receive(:inform_start_of_gem_installation)
+            expect(application).to \
+              receive(:thank_user_for_permission).and_call_original
+            expect(application).to \
+              receive(:inform_start_of_gem_installation).and_call_original
             expect(gem_installer).to receive(:install_gems)
             application.start
           end
@@ -83,7 +90,7 @@ RSpec.describe ResumeGenerator::CLI::Application do
 
           it 'informs the user it cannot generate the resume and exits' do
             expect(application).to \
-              receive(:inform_of_failure_to_generate_resume)
+              receive(:inform_of_failure_to_generate_resume).and_call_original
             expect(starting_the_application).to raise_error(SystemExit)
           end
         end
@@ -107,10 +114,10 @@ RSpec.describe ResumeGenerator::CLI::Application do
 
       it 'generates the resume' do
         expect(application).to \
-          receive(:inform_start_of_resume_generation)
+          receive(:inform_start_of_resume_generation).and_call_original
         expect(resume).to receive(:generate).with(application)
         expect(application).to \
-          receive(:inform_of_successful_resume_generation)
+          receive(:inform_of_successful_resume_generation).and_call_original
         application.start
       end
     end
@@ -122,7 +129,8 @@ RSpec.describe ResumeGenerator::CLI::Application do
         stub_const('ResumeGenerator::CLI::FileSystem', file_system)
         allow(application).to receive(:install_gems)
         allow(application).to receive(:generate_resume)
-        expect(application).to receive(:request_to_open_resume)
+        expect(application).to \
+          receive(:request_to_open_resume).and_call_original
       end
 
       context 'when permission is granted to open the resume' do
@@ -132,7 +140,8 @@ RSpec.describe ResumeGenerator::CLI::Application do
 
         it 'attempts to open the resume and thanks the reader' do
           expect(file_system).to receive(:open_document).with(application)
-          expect(application).to receive(:print_thank_you_message)
+          expect(application).to \
+            receive(:print_thank_you_message).and_call_original
           application.start
         end
       end
@@ -144,7 +153,8 @@ RSpec.describe ResumeGenerator::CLI::Application do
 
         it 'does not open the resume and thanks the reader' do
           expect(file_system).to_not receive(:open_document)
-          expect(application).to receive(:print_thank_you_message)
+          expect(application).to \
+            receive(:print_thank_you_message).and_call_original
           application.start
         end
       end
