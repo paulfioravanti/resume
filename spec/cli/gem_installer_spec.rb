@@ -41,12 +41,15 @@ RSpec.describe ResumeGenerator::CLI::GemInstaller do
 
     context 'when all required gems are already installed' do
       let(:prawn_gem) do
-        double('prawn_gem', version: Gem::Version.new(PRAWN_VERSION))
+        double(
+          'prawn_gem',
+          version: Gem::Version.new(ResumeGenerator::PRAWN_VERSION)
+        )
       end
       let(:prawn_table_gem) do
         double(
           'prawn_table_gem',
-          version: Gem::Version.new(PRAWN_TABLE_VERSION)
+          version: Gem::Version.new(ResumeGenerator::PRAWN_TABLE_VERSION)
         )
       end
 
@@ -67,7 +70,7 @@ RSpec.describe ResumeGenerator::CLI::GemInstaller do
 
   describe '#install_gems' do
     let(:install_prawn_args) do
-      ['gem', 'install', 'prawn', '-v', PRAWN_VERSION]
+      ['gem', 'install', 'prawn', '-v', ResumeGenerator::PRAWN_VERSION]
     end
 
     context 'when the installation of a gem fails' do
@@ -87,7 +90,8 @@ RSpec.describe ResumeGenerator::CLI::GemInstaller do
 
     context 'when gems are able to be successfully installed' do
       let(:install_prawn_table_args) do
-        ['gem', 'install', 'prawn-table', '-v', PRAWN_TABLE_VERSION]
+        ['gem', 'install', 'prawn-table',
+         '-v', ResumeGenerator::PRAWN_TABLE_VERSION]
       end
 
       before do
@@ -98,8 +102,7 @@ RSpec.describe ResumeGenerator::CLI::GemInstaller do
       end
 
       it 'informs the user of successful installation and resets gem paths' do
-        expect(app).to \
-          receive(:inform_of_successful_gem_installation)
+        expect(app).to receive(:inform_of_successful_gem_installation)
         expect(Gem).to receive(:clear_paths)
         gem_installer.install_gems
       end
