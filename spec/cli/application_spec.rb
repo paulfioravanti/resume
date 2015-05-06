@@ -95,7 +95,7 @@ RSpec.describe ResumeGenerator::CLI::Application do
 
       before do
         stub_const('PRAWN_VERSION', '2.0.0')
-        stub_const('PRAWN_TABLE_VERSION', '2.1')
+        stub_const('PRAWN_TABLE_VERSION', '0.2.1')
         stub_const('ResumeGenerator::Resume::Document', resume)
         allow(application).to receive(:install_gems)
         allow(application).to receive(:gem).with('prawn', PRAWN_VERSION)
