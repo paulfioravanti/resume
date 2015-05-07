@@ -1,5 +1,6 @@
 require 'json'
 require 'open-uri'
+require 'socket'
 require_relative '../decoder'
 require_relative 'name'
 require_relative 'headline'
@@ -41,8 +42,6 @@ module ResumeGenerator
       end
 
       def generate
-        # gem 'prawn', PRAWN_VERSION
-        # gem 'prawn-table', PRAWN_TABLE_VERSION
         require 'prawn'
         require 'prawn/table'
         Prawn::Document.generate(app.filename, PDFOptions.for(resume)) do |pdf|
