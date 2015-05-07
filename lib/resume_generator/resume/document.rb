@@ -41,6 +41,10 @@ module ResumeGenerator
       end
 
       def generate
+        # gem 'prawn', PRAWN_VERSION
+        # gem 'prawn-table', PRAWN_TABLE_VERSION
+        require 'prawn'
+        require 'prawn/table'
         Prawn::Document.generate(app.filename, PDFOptions.for(resume)) do |pdf|
           pdf.instance_exec(resume, app) do |resume, app|
             Manifest.process(self, resume, app)

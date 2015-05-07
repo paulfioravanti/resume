@@ -45,10 +45,6 @@ module ResumeGenerator
       end
 
       def generate_resume
-        gem 'prawn', PRAWN_VERSION
-        gem 'prawn-table', PRAWN_TABLE_VERSION
-        require 'prawn'
-        require 'prawn/table'
         inform_start_of_resume_generation
         Resume::Document.generate(self)
         inform_of_successful_resume_generation

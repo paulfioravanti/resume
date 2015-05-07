@@ -101,14 +101,8 @@ RSpec.describe ResumeGenerator::CLI::Application do
       let(:resume) { double('Resume::Document') }
 
       before do
-        stub_const('ResumeGenerator::Resume::Document', resume)
         allow(application).to receive(:install_gems)
-        allow(application).to \
-          receive(:gem).with('prawn', ResumeGenerator::PRAWN_VERSION)
-        allow(application).to receive(:gem).
-          with('prawn-table', ResumeGenerator::PRAWN_TABLE_VERSION)
-        allow(application).to receive(:require).with('prawn')
-        allow(application).to receive(:require).with('prawn/table')
+        stub_const('ResumeGenerator::Resume::Document', resume)
         allow(application).to receive(:open_resume)
       end
 
