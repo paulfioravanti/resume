@@ -110,54 +110,7 @@ module ResumeGenerator
             inform_of_network_connection_issue:
               "Sorry, it seems I can't get an outside connection.\n"\
               "Please check your internet settings and try again."
-          },
-          # TODO: Actually localise these messages
-          # ja: {
-          #   inform_creation_of_social_media_links:
-          #     'Creating social media links...',
-          #   inform_creation_of_technical_skills:
-          #     'Creating technical skills section...',
-          #   inform_creation_of_employment_history:
-          #     'Creating employment history section...',
-          #   inform_creation_of_education_history:
-          #     'Creating education history section...',
-          #   request_gem_installation:
-          #     "May I please install the following Ruby gems:\n"\
-          #     "- prawn #{ResumeGenerator::PRAWN_VERSION}\n"\
-          #     "- prawn-table #{ResumeGenerator::PRAWN_TABLE_VERSION}\n"\
-          #     "in order to help me generate a PDF (Y/N)? ",
-          #   thank_user_for_permission:
-          #     'Thank you kindly :-)',
-          #   inform_start_of_gem_installation:
-          #     'Installing required gems...',
-          #   inform_start_of_resume_generation:
-          #     "Generating PDF. This shouldn't take longer than a few seconds...",
-          #   inform_of_failure_to_generate_resume:
-          #     "Sorry, I won't be able to generate a PDF\n"\
-          #     "without these specific gem versions.\n"\
-          #     "Please ask me directly for a PDF copy of my resume.",
-          #   inform_of_successful_resume_generation:
-          #     'Resume generated successfully.',
-          #   print_thank_you_message:
-          #     "Thanks for looking at my resume. I hope to hear from you soon!\n"\
-          #     "#{filename} has been generated in the same\n"\
-          #     "directory you ran the script.",
-          #   request_to_open_resume:
-          #     'Would you like me to open the resume for you (Y/N)? ',
-          #   request_user_to_open_document:
-          #     "Sorry, I can't figure out how to open the resume on\n"\
-          #     "this computer. Please open it yourself.",
-          #   inform_of_successful_gem_installation:
-          #     'Gems successfully installed.',
-          #   inform_of_gem_installation_failure:
-          #     "Sorry, for some reason I wasn't able to\n"\
-          #     "install one or more required gems.\n"\
-          #     "Either try again or ask me directly for a PDF copy of "\
-          #     "my resume.",
-          #   inform_of_network_connection_issue:
-          #     "Sorry, it seems I can't get an outside connection.\n"\
-          #     "Please check your internet settings and try again."
-          # }
+          }
         }[locale]
       end
 
@@ -242,7 +195,7 @@ module ResumeGenerator
       attr_accessor :locale
 
       def initialize
-        @supported_locales = [:en, :ja]
+        @supported_locales = [:en]
         @parser = initialize_parser
       end
 
@@ -963,8 +916,8 @@ module ResumeGenerator
 
     # This class cannot be declared as a Prawn::Document (ie inherit from it)
     # because at the time someone runs the script, it is not certain that they
-    # have any of the required Prawn gems installed. Explicit declaration of this
-    # kind of inheritance hierarchy in advance will result in an
+    # have any of the required Prawn gems installed. Explicit declaration of
+    # this kind of inheritance hierarchy in advance will result in an
     # uninitialized constant error.
     class Document
       include Decoder
@@ -974,8 +927,9 @@ module ResumeGenerator
       def self.generate(app)
         resume = JSON.parse(
           open(
-            #{}"https://raw.githubusercontent.com/paulfioravanti"\
-            #{}"/resume/master/resources/resume.#{app.locale}.json"
+            # FIXME: Change this back when brought into master branch
+            #"https://raw.githubusercontent.com/paulfioravanti"\
+            #"/resume/master/resources/resume.#{app.locale}.json"
             "https://raw.githubusercontent.com/paulfioravanti/resume/refactor/resources/resume.#{app.locale}.json"
           ).read,
           symbolize_names: true
@@ -1551,7 +1505,8 @@ module ResumeGenerator
         let(:resume) { double('resume') }
         let(:resume_json) { double('resume_json') }
         let(:path) do
-          #{}"resources/resume.#{app.locale}.json"
+          # FIXME: Change this link when code merged into master
+          # "https://raw.githubusercontent.com/paulfioravanti/resume/master/resources/resume.#{app.locale}.json"
           "https://raw.githubusercontent.com/paulfioravanti/resume/refactor/resources/resume.#{app.locale}.json"
         end
         let(:encoded_filename) { '3nC0D3d F1l3N4M3' }
@@ -1591,6 +1546,8 @@ module ResumeGenerator
       end
       let(:resume) do
         JSON.parse(
+          # FIXME: Change this link when code merged into master
+          # open( "https://raw.githubusercontent.com/paulfioravanti/resume/master/resources/resume.#{app.locale}.json").read,
           open( "https://raw.githubusercontent.com/paulfioravanti/resume/refactor/resources/resume.#{app.locale}.json").read,
           symbolize_names: true
         )[:resume]

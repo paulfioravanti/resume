@@ -5,7 +5,6 @@ require 'resume_generator/cli/application'
 RSpec.describe ResumeGenerator::CLI::FileSystem do
   describe '.open_document' do
     let(:resume_name) { 'My Resume.pdf' }
-    # let(:app) { double('app', filename: resume_name) }
     let(:app) { ResumeGenerator::CLI::Application.new(:en) }
 
     before do

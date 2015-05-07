@@ -11,7 +11,7 @@ module ResumeGenerator
       attr_accessor :locale
 
       def initialize
-        @supported_locales = [:en, :ja]
+        @supported_locales = [:en]
         @parser = initialize_parser
       end
 
