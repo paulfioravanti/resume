@@ -4,6 +4,7 @@ module ResumeGenerator
       include Decoder
 
       def self.for(resume)
+        author = d(resume[:author])
         {
           margin_top: resume[:margin_top],
           margin_bottom: resume[:margin_bottom],
@@ -13,8 +14,8 @@ module ResumeGenerator
           repeat: resume[:repeat],
           info: {
             Title: d(resume[:document_name]),
-            Author: d(resume[:author]),
-            Creator: d(resume[:author]),
+            Author: author,
+            Creator: author,
             CreationDate: Time.now
           }
         }
