@@ -25,127 +25,373 @@
 require 'base64'
 require 'open-uri'
 require 'json'
+require 'optparse'
+require 'socket'
 
 module ResumeGenerator
-  # This const would only ever be defined when this file's specs
+  # These consts would only ever be defined when this file's specs
   # are run in the repo with the structured version of the resume: an edge case
-  VERSION = '0.5' unless const_defined?(:VERSION)
-  DOCUMENT_NAME = 'UGF1bF9GaW9yYXZhbnRpX1Jlc3VtZQ=='
-  PRAWN_VERSION = '2.0.1'
-  PRAWN_TABLE_VERSION = '0.2.1'
+  VERSION = '0.6' unless const_defined?(:VERSION)
+  PRAWN_VERSION = '2.0.1' unless const_defined?(:PRAWN_VERSION)
+  PRAWN_TABLE_VERSION = '0.2.1' unless const_defined?(:PRAWN_TABLE_VERSION)
 
-  module Colourable
-    private
+  module CLI
+    module Colours
+      private
 
-    def colourize(text, colour_code:)
-      "\e[#{colour_code}m#{text}\e[0m"
+      def colourize(text, colour_code:)
+        "\e[#{colour_code}m#{text}\e[0m"
+      end
+
+      def red(text)
+        colourize(text, colour_code: 31)
+      end
+
+      def yellow(text)
+        colourize(text, colour_code: 33)
+      end
+
+      def green(text)
+        colourize(text, colour_code: 32)
+      end
+
+      def cyan(text)
+        colourize(text, colour_code: 36)
+      end
     end
 
-    def red(text)
-      colourize(text, colour_code: 31)
+    module Messages
+      include Colours
+
+      def self.included(base)
+        base.send(:attr_reader, :messages)
+      end
+
+      def initialize_messages
+        @messages = {
+          en: {
+            inform_creation_of_social_media_links:
+              'Creating social media links...',
+            inform_creation_of_technical_skills:
+              'Creating technical skills section...',
+            inform_creation_of_employment_history:
+              'Creating employment history section...',
+            inform_creation_of_education_history:
+              'Creating education history section...',
+            request_gem_installation:
+              "May I please install the following Ruby gems:\n"\
+              "- prawn #{PRAWN_VERSION}\n"\
+              "- prawn-table #{PRAWN_TABLE_VERSION}\n"\
+              "in order to help me generate a PDF (Y/N)? ",
+            thank_user_for_permission:
+              'Thank you kindly :-)',
+            inform_start_of_gem_installation:
+              'Installing required gems...',
+            inform_start_of_resume_generation:
+              "Generating PDF. This shouldn't take longer than a few seconds...",
+            inform_of_failure_to_generate_resume:
+              "Sorry, I won't be able to generate a PDF\n"\
+              "without these specific gem versions.\n"\
+              "Please ask me directly for a PDF copy of my resume.",
+            inform_of_successful_resume_generation:
+              'Resume generated successfully.',
+            request_to_open_resume:
+              'Would you like me to open the resume for you (Y/N)? ',
+            request_user_to_open_document:
+              "Sorry, I can't figure out how to open the resume on\n"\
+              "this computer. Please open it yourself.",
+            inform_of_successful_gem_installation:
+              'Gems successfully installed.',
+            inform_of_gem_installation_failure:
+              "Sorry, for some reason I wasn't able to\n"\
+              "install one or more required gems.\n"\
+              "Either try again or ask me directly for a PDF copy of "\
+              "my resume.",
+            inform_of_network_connection_issue:
+              "Sorry, it seems I can't get an outside connection.\n"\
+              "Please check your internet settings and try again."
+          }
+        }[locale]
+      end
+
+      def inform_creation_of_social_media_links
+        puts messages[__method__]
+      end
+
+      def inform_creation_of_technical_skills
+        puts messages[__method__]
+      end
+
+      def inform_creation_of_employment_history
+        puts messages[__method__]
+      end
+
+      def inform_creation_of_education_history
+        puts messages[__method__]
+      end
+
+      def inform_of_network_connection_issue
+        puts red(messages[__method__])
+      end
+
+      def inform_of_successful_gem_installation
+        puts green(messages[__method__])
+      end
+
+      def inform_of_gem_installation_failure
+        puts red(messages[__method__])
+      end
+
+      def request_user_to_open_document
+        puts yellow(messages[__method__])
+      end
+
+      private
+
+      def request_gem_installation
+        print yellow(messages[__method__])
+      end
+
+      def thank_user_for_permission
+        puts green(messages[__method__])
+      end
+
+      def inform_start_of_gem_installation
+        puts messages[__method__]
+      end
+
+      def inform_start_of_resume_generation
+        puts messages[__method__]
+      end
+
+      def inform_of_failure_to_generate_resume
+        puts red(messages[__method__])
+      end
+
+      def inform_of_successful_resume_generation
+        puts green(messages[__method__])
+      end
+
+      def print_thank_you_message
+        # This is in its own method because it needs to know about the filename
+        # which is only known once we know the resume can be generated and
+        # its data is fetched.
+        puts cyan(
+          {
+            en: "Thanks for looking at my resume."\
+                "I hope to hear from you soon!\n"\
+                "#{filename} has been generated in the same\n"\
+                "directory you ran this script."
+          }[locale]
+        )
+      end
+
+      def request_to_open_resume
+        print yellow(messages[__method__])
+      end
     end
 
-    def yellow(text)
-      colourize(text, colour_code: 33)
+    class ArgumentParser
+      include Colours
+
+      attr_reader :supported_locales, :parser
+      attr_accessor :locale
+
+      def initialize
+        @supported_locales = [:en]
+        @parser = initialize_parser
+      end
+
+      def parse!
+        parser.parse!(ARGV)
+        self.locale ||= :en
+      rescue OptionParser::InvalidOption
+        inform_of_invalid_options
+        exit
+      rescue OptionParser::MissingArgument
+        inform_of_missing_arguments
+        exit
+      end
+
+      private
+
+      def initialize_parser
+        OptionParser.new do |opts|
+          opts.banner = 'Usage: ./bin/resume [options]'
+          opts.separator ''
+          opts.separator 'Specific options:'
+
+          locale_option(opts)
+
+          opts.separator ''
+          opts.separator 'Common options:'
+
+          help_option(opts)
+          version_option(opts)
+        end
+      end
+
+      def locale_option(opts)
+        opts.on('-l', '--locale LOCALE',
+                'Select the locale of the resume') do |locale|
+          if supported_locales.include?(locale.to_sym)
+            self.locale = locale.to_sym
+          else
+            inform_locale_not_supported(locale)
+            exit
+          end
+        end
+      end
+
+      def help_option(opts)
+        opts.on_tail('-h', '--help', 'Show this message') do
+          puts opts
+          exit
+        end
+      end
+
+      def version_option(opts)
+        opts.on_tail('-v', '--version', 'Show version') do
+          puts ResumeGenerator::VERSION
+          exit
+        end
+      end
+
+      def inform_locale_not_supported(locale)
+        puts red("Locale '#{locale}' is not supported.")
+        puts yellow(
+          "Supported locales are: #{supported_locales.join(', ')}"
+        )
+      end
+
+      def inform_of_invalid_options
+        puts red('You have some invalid options.')
+        puts parser.help
+      end
+
+      def inform_of_missing_arguments
+        puts red('You have a missing argument in one of your options.')
+        puts parser.help
+      end
     end
 
-    def green(text)
-      colourize(text, colour_code: 32)
+    class GemInstaller
+
+      attr_reader :app, :gems
+
+      def initialize(app)
+        @app = app
+        @gems = {
+          'prawn' => PRAWN_VERSION,
+          'prawn-table' => PRAWN_TABLE_VERSION
+        }
+      end
+
+      def required_gems_available?
+        gems.each do |name, version|
+          if Gem::Specification.find_by_name(name).version <
+            Gem::Version.new(version)
+            return false
+          end
+        end
+        true
+      rescue Gem::LoadError # gem not installed
+        false
+      end
+
+      def install_gems
+        if gems_successfully_installed?
+          app.inform_of_successful_gem_installation
+          # Reset the dir and path values so Prawn can be required
+          Gem.clear_paths
+        else
+          app.inform_of_gem_installation_failure
+          exit
+        end
+      end
+
+      private
+
+      def gems_successfully_installed?
+        gems.all? do |gem, version|
+          system('gem', 'install', gem, '-v', version)
+        end
+      end
     end
 
-    def cyan(text)
-      colourize(text, colour_code: 36)
+    class FileSystem
+      def self.open_document(app)
+        case RUBY_PLATFORM
+        when %r(darwin)
+          system('open', app.filename)
+        when %r(linux)
+          system('xdg-open', app.filename)
+        when %r(windows)
+          system('cmd', '/c', "\"start #{app.filename}\"")
+        else
+          app.request_user_to_open_document
+        end
+      end
+    end
+
+    class Application
+      include Messages
+
+      attr_reader :locale
+      attr_accessor :filename
+
+      def self.start
+        parser = ArgumentParser.new
+        parser.parse!
+        new(parser.locale).start
+      end
+
+      def initialize(locale)
+        @locale = locale
+        initialize_messages
+      end
+
+      def start
+        install_gems
+        generate_resume
+        open_resume
+      end
+
+      private
+
+      def install_gems
+        installer = GemInstaller.new(self)
+        return if installer.required_gems_available?
+        request_gem_installation
+        if permission_granted?
+          thank_user_for_permission
+          inform_start_of_gem_installation
+          installer.install_gems
+        else
+          inform_of_failure_to_generate_resume
+          exit
+        end
+      end
+
+      def generate_resume
+        inform_start_of_resume_generation
+        Resume::Document.generate(self)
+        inform_of_successful_resume_generation
+      end
+
+      def open_resume
+        request_to_open_resume
+        FileSystem.open_document(self) if permission_granted?
+        print_thank_you_message
+      end
+
+      def permission_granted?
+        gets.chomp.match(%r{\Ay(es)?\z}i)
+      end
     end
   end
 
-  module Messages
-    include Colourable
-
-    def inform_creation_of_social_media_links
-      puts 'Creating social media links...'
-    end
-
-    def inform_creation_of_technical_skills
-      puts 'Creating technical skills section...'
-    end
-
-    def inform_creation_of_employment_history
-      puts 'Creating employment history section...'
-    end
-
-    def inform_creation_of_education_history
-      puts 'Creating education history section...'
-    end
-
-    private
-
-    def request_gem_installation
-      print yellow(
-        "May I please install the following Ruby gems:\n"\
-        "- prawn #{PRAWN_VERSION}\n"\
-        "- prawn-table #{PRAWN_TABLE_VERSION}\n"\
-        "in order to help me generate a PDF (Y/N)? "\
-      )
-    end
-
-    def thank_user_for_permission
-      puts green('Thank you kindly :-)')
-    end
-
-    def inform_start_of_gem_installation
-      puts 'Installing required gems...'
-    end
-
-    def inform_start_of_resume_generation
-      puts "Generating PDF. This shouldn't take longer than a few seconds..."
-    end
-
-    def inform_of_failure_to_generate_resume
-      puts red(
-        "Sorry, I won't be able to generate a PDF\n"\
-        "without these specific gem versions.\n"\
-        "Please ask me directly for a PDF copy of my resume."
-      )
-    end
-
-    def inform_of_successful_resume_generation
-      puts green('Resume generated successfully.')
-    end
-
-    def print_thank_you_message(document_name)
-      puts cyan(
-        "Thanks for looking at my resume. I hope to hear from you soon!\n"\
-        "#{document_name}.pdf has been generated in the same\n"\
-        "directory you ran the script."
-      )
-    end
-
-    def request_to_open_resume
-      print yellow 'Would you like me to open the resume for you (Y/N)? '
-    end
-
-    def request_user_to_open_document
-      puts yellow(
-        "Sorry, I can't figure out how to open the resume on\n"\
-        "this computer. Please open it yourself."
-      )
-    end
-
-    def inform_of_successful_gem_installation
-      puts green('Gems successfully installed.')
-    end
-
-    def inform_of_gem_installation_failure
-      puts red(
-        "Sorry, for some reason I wasn't able to\n"\
-        "install one or more required gems.\n"\
-        "Either try again or ask me directly for a PDF copy of "\
-        "my resume."
-      )
-    end
-  end
-
-  module Decodable
+  module Decoder
     def self.included(base)
       # Allow #d to be available on the class level as well
       base.extend self
@@ -153,884 +399,1181 @@ module ResumeGenerator
     # This is just a helper method due to the sheer amount of decoding that
     # occurs throughout the code
     def d(string)
+      return if string.nil?
       # Force encoding to UTF-8 is needed for strings that had UTF-8 characters
       # in them when they were originally encoded
       Base64.strict_decode64(string).force_encoding('utf-8')
     end
   end
 
-  class CLI
-    include Decodable, Messages
+  module Resume
+    class Name
+      include Decoder
 
-    def start
-      check_ability_to_generate_resume
-      generate_resume
-      clean_up
-    end
+      attr_reader :pdf, :font, :size, :text
 
-    private
-
-    def check_ability_to_generate_resume
-      return if required_gems_available?(
-        'prawn' => PRAWN_VERSION, 'prawn-table' => PRAWN_TABLE_VERSION
-      )
-      request_gem_installation
-      if permission_granted?
-        thank_user_for_permission
-        inform_start_of_gem_installation
-        install_gem
-      else
-        inform_of_failure_to_generate_resume
-        exit
+      def self.generate(pdf, name)
+        new(
+          pdf,
+          font: name[:font],
+          size: name[:size],
+          text: d(name[:text])
+        ).generate
       end
-    end
 
-    def generate_resume
-      gem 'prawn', PRAWN_VERSION
-      gem 'prawn-table', PRAWN_TABLE_VERSION
-      require 'prawn'
-      require 'prawn/table'
-      inform_start_of_resume_generation
-      Resume.generate(self)
-    end
+      private_class_method :new
 
-    def clean_up
-      inform_of_successful_resume_generation
-      request_to_open_resume
-      open_document if permission_granted?
-      print_thank_you_message(d(DOCUMENT_NAME))
-    end
-
-    def open_document
-      case RUBY_PLATFORM
-      when %r(darwin)
-        system("open #{d(DOCUMENT_NAME)}.pdf")
-      when %r(linux)
-        system("xdg-open #{d(DOCUMENT_NAME)}.pdf")
-      when %r(windows)
-        system("cmd /c \"start #{d(DOCUMENT_NAME)}.pdf\"")
-      else
-        request_user_to_open_document
-      end
-    end
-
-    def required_gems_available?(gems)
-      gems.each do |name, version|
-        if Gem::Specification.find_by_name(name).version <
-          Gem::Version.new(version)
-          return false
+      def initialize(pdf, options)
+        @pdf = pdf
+        options.each do |attribute, value|
+          instance_variable_set("@#{attribute}", value)
         end
       end
-      true
-    rescue Gem::LoadError # gem not installed
-      false
-    end
 
-    def permission_granted?
-      gets.chomp.match(%r{\Ay(es)?\z}i)
-    end
-
-    def install_gem
-      begin
-        system("gem install prawn -v #{PRAWN_VERSION}")
-        system("gem install prawn-table -v #{PRAWN_TABLE_VERSION}")
-        inform_of_successful_gem_installation
-        # Reset the dir and path values so Prawn can be required
-        Gem.clear_paths
-      rescue
-        inform_of_gem_installation_failure
-        exit
+      def generate
+        pdf.font(font, size: size) do
+          pdf.text(text)
+        end
       end
     end
-  end
 
-  class Resource
-    extend Decodable
+    class Headline
+      include Decoder
 
-    attr_reader :image, :link, :width, :height, :fit, :align,
-                :move_up, :bars, :size, :origin, :at
+      attr_reader :pdf, :primary_text, :primary_colour, :secondary_text, :size
 
-    def self.for(data)
-      data[:image] = open(data[:image])
-      data[:link] = d(data[:link])
-      data[:align] = data[:align].to_sym
-      new(data)
-    end
-
-    private
-
-    def initialize(data)
-      data.each do |attribute, value|
-        instance_variable_set("@#{attribute}", value)
+      def self.generate(pdf, headline)
+        new(
+          pdf,
+          primary_text: d(headline[:primary][:text]),
+          primary_colour: headline[:primary][:colour],
+          secondary_text: d(headline[:secondary][:text]),
+          size: headline[:size],
+        ).generate
       end
-    end
-  end
 
-  module Utilities
-    private
+      private_class_method :new
 
-    def transparent_link(pdf, resource)
-      pdf.transparent(0) do
+      def initialize(pdf, options)
+        @pdf = pdf
+        options.each do |attribute, value|
+          instance_variable_set("@#{attribute}", value)
+        end
+      end
+
+      def generate
         pdf.formatted_text(
           [
-            {
-              text: '|' * resource.bars,
-              size: resource.size,
-              link: resource.link
-            }
-          ], align: resource.align
+            { text: primary_text, color: primary_colour },
+            { text: secondary_text }
+          ],
+          size: size
         )
       end
     end
-  end
 
-  class SocialMediaIconSet
-    include Utilities
+    module TransparentLink
+      private
 
-    attr_accessor :x_position
-    attr_reader :pdf, :data
-
-    def self.generate(pdf, data)
-      new(pdf, data).generate
-    end
-
-    def initialize(pdf, data)
-      @pdf = pdf
-      @data = data
-      @x_position = 0
-    end
-
-    def generate
-      resources = social_media_resources
-      social_media_icon_for(resources.first)
-      resources[1..-1].each do |resource|
-        pdf.move_up 46.25
-        social_media_icon_for(resource)
+      def transparent_link(pdf, logo)
+        pdf.transparent(0) do
+          pdf.formatted_text(
+            [
+              {
+                text: '|' * logo.bars,
+                size: logo.size,
+                link: logo.link
+              }
+            ], align: logo.align
+          )
+        end
       end
     end
 
-    private
+    class Logo
+      include Decoder
 
-    def social_media_resources
-      data[:resources].values.map do |social_medium|
-        Resource.for(social_medium.merge(data[:properties]))
+      attr_reader :image, :link, :width, :height, :fit, :align,
+                  :link_overlay_start, :bars, :size, :origin, :at, :y_start
+
+      def self.for(data)
+        data[:image] = open(data[:image])
+        data[:link] = d(data[:link])
+        data[:align] = data[:align].to_sym
+        new(data)
+      end
+
+      private_class_method :new
+
+      def initialize(data)
+        data.each do |attribute, value|
+          instance_variable_set("@#{attribute}", value)
+        end
       end
     end
 
-    def social_media_icon_for(resource)
-      pdf.bounding_box([x_position, pdf.cursor], width: resource.width) do
-        pdf.image(resource.image, fit: resource.fit, align: resource.align)
-        pdf.move_up 35
-        transparent_link(pdf, resource)
+    class SocialMediaLogoSet
+      include TransparentLink
+
+      attr_reader :pdf, :x_position, :top_padding, :padded_logo_width,
+                  :padded_logo_height, :horizontal_rule_colour, :logos
+      attr_accessor :x_position
+
+      def self.generate(pdf, logo_set)
+        new(
+          pdf,
+          logo_set[:logos].values,
+          logo_set[:logo_properties],
+          x_position: logo_set[:x_position],
+          top_padding: logo_set[:top_padding],
+          padded_logo_width: logo_set[:padded_logo_width],
+          padded_logo_height: logo_set[:padded_logo_height],
+          horizontal_rule_colour: logo_set[:horizontal_rule_colour],
+        ).generate
       end
-      self.x_position += 45
-    end
-  end
 
-  module FormattedTextEntry
-    include Decodable
+      private_class_method :new
 
-    private
-
-    def position
-      formatted_text_entry_for(d(data[:position]), 12)
-    end
-
-    def organisation
-      formatted_text_entry_for(d(data[:organisation]), 11)
-    end
-
-    def period_and_location
-      formatted_text_period_and_location(
-        d(data[:period]),
-        d(data[:location][:name]),
-        d(data[:location][:link])
-      )
-    end
-
-    def formatted_text_entry_for(item, size)
-      pdf.formatted_text(
-        [formatted_entry_args_for(item, size)]
-      )
-    end
-
-    def formatted_text_period_and_location(period, name, link)
-      pdf.formatted_text(
-        period_and_location_args_for(period, name, link)
-      )
-    end
-  end
-
-  module FormattedTextBoxEntry
-    include Decodable
-
-    private
-
-    def position
-      formatted_text_box_entry_for(d(data[:position]), 12, data[:at], 14)
-    end
-
-    def organisation
-      formatted_text_box_entry_for(d(data[:organisation]), 11, data[:at], 13)
-    end
-
-    def period_and_location
-      formatted_text_box_period_and_location(
-        d(data[:period]),
-        d(data[:location][:name]),
-        d(data[:location][:link]),
-        data[:at]
-      )
-    end
-
-    def formatted_text_box_entry_for(item, size, at, value)
-      pdf.formatted_text_box(
-        [formatted_entry_args_for(item, size)], at: [at, pdf.cursor]
-      )
-      pdf.move_down value
-    end
-
-    def formatted_text_box_period_and_location(period, name, link, at)
-      pdf.formatted_text_box(
-        period_and_location_args_for(period, name, link),
-        at: [at, pdf.cursor]
-      )
-    end
-  end
-
-  class Header
-    attr_reader :pdf, :data
-
-    def self.generate(pdf, data)
-      new(pdf, data).generate
-    end
-
-    def initialize(pdf, data)
-      @pdf = pdf
-      @data = data
-      # Different rendering behaviour needed depending on whether the header is
-      # being drawn from left to right on the page or specifically placed at
-      # a location
-      if data[:at]
-        extend FormattedTextBoxEntry
-      else
-        extend FormattedTextEntry
+      def initialize(pdf, logo_values, logo_properties, options)
+        @pdf = pdf
+        @logos = logos_for(logo_values, logo_properties)
+        options.each do |attribute, value|
+          instance_variable_set("@#{attribute}", value)
+        end
       end
-    end
 
-    def generate
-      position
-      organisation
-      period_and_location
-    end
-
-    private
-
-    def formatted_entry_args_for(string, size)
-      { text: string, styles: [:bold], size: size }
-    end
-
-    def period_and_location_args_for(period, name, link)
-      [
-        { text: period, color: '666666', size: 10 },
-        { text: name, link: link, color: '666666', size: 10 }
-      ]
-    end
-  end
-
-  class LogoLink
-    include Utilities
-
-    attr_reader :pdf, :logo, :y_logo_start
-
-    def self.generate(pdf, data)
-      logo = Resource.for(data[:logo].merge(at: data[:at]))
-      y_logo_start = data[:y_logo_start] || 40
-      new(pdf, logo, y_logo_start).generate
-    end
-
-    def initialize(pdf, logo, y_logo_start)
-      @pdf = pdf
-      @logo = logo
-      @y_logo_start = y_logo_start
-    end
-
-    def generate
-      move_up(y_logo_start)
-      render_logo_link
-    end
-
-    private
-
-    def move_up(value)
-      pdf.move_up value
-    end
-
-    def render_logo_link
-      pdf.bounding_box([logo.origin, pdf.cursor],
-        width: logo.width, height: logo.height) do
-        render_image
-        move_up(logo.move_up)
-        transparent_link(pdf, logo)
+      def generate
+        pdf.move_down(top_padding)
+        generate_logo_for(logos.first)
+        logos[1..-1].each do |logo|
+          pdf.move_up(padded_logo_height)
+          generate_logo_for(logo)
+        end
+        pdf.stroke_horizontal_rule { color horizontal_rule_colour }
       end
-    end
-
-    def render_image
-      pdf.image(logo.image, fit: logo.fit, align: logo.align)
-    end
-  end
-
-  class Listing
-    include Decodable, Utilities
-
-    attr_reader :pdf, :data
-
-    def self.generate(pdf, data)
-      new(pdf, data).generate
-    end
-
-    def initialize(pdf, data)
-      @pdf = pdf
-      @data = data
-    end
-
-    def generate
-      pdf.move_down data[:y_header_start] || 15
-      Header.generate(pdf, data)
-      LogoLink.generate(pdf, data)
-      details if data.has_key?(:summary)
-    end
-
-    private
-
-    def details
-      pdf.move_down data[:y_details_start] || 10
-      summary(data[:summary])
-      profile(data[:profile])
-    end
-
-    def summary(string)
-      pdf.text(d(string), inline_format: true)
-    end
-
-    def profile(items)
-      return unless items
-      table_data = items.reduce([]) do |data, item|
-        data << ['-', d(item)]
-      end
-      pdf.table(table_data, cell_style: { borders: [], height: 21 })
-    end
-  end
-
-  # Resume cannot be declared as a Prawn::Document (ie inherit from it)
-  # because at the time someone runs the script, it is not certain that they
-  # have any of the required Prawn gems installed. Explicit declaration of this
-  # kind of inheritance hierarchy in advance as it will result in an
-  # uninitialized constant ResumeGenerator::Prawn error
-  class Resume
-    include Decodable
-
-    RESUME = JSON.parse(
-      open(
-        "https://raw.githubusercontent.com/paulfioravanti"\
-        "/resume/master/resources/resume.json"
-      ).read,
-      symbolize_names: true
-    )[:resume]
-
-    def self.generate(cli)
-      Prawn::Document.class_eval do
-        include ResumeHelper
-      end
-      Prawn::Document.generate("#{d(DOCUMENT_NAME)}.pdf", pdf_options) do
-        name
-        headline
-        cli.inform_creation_of_social_media_links
-        social_media_icons
-        cli.inform_creation_of_technical_skills
-        technical_skills
-        cli.inform_creation_of_employment_history
-        employment_history
-        cli.inform_creation_of_education_history
-        education_history
-      end
-    end
-
-    def self.pdf_options
-      {
-        margin_top: 0.75,
-        margin_bottom: 0.75,
-        margin_left: 1,
-        margin_right: 1,
-        background: open(RESUME[:background_image]),
-        repeat: true,
-        info: {
-          Title: d(DOCUMENT_NAME),
-          Author: d('UGF1bCBGaW9yYXZhbnRp'),
-          Creator: d('UGF1bCBGaW9yYXZhbnRp'),
-          CreationDate: Time.now
-        }
-      }
-    end
-    private_class_method :pdf_options
-
-    module ResumeHelper
-      include Decodable
 
       private
 
-      def name
-        font('Times-Roman', size: 20) { text d(RESUME[:name]) }
+      def logos_for(logo_set, general_properties)
+        logo_set.map do |logo_properties|
+          Logo.for(logo_properties.merge(general_properties))
+        end
       end
 
-      def headline
-        headline = RESUME[:headline]
-        formatted_text(
-          [
-            { text: d(headline[:ruby]), color: '85200C' },
-            { text: d(headline[:other]) }
-          ],
-          size: 14
+      def generate_logo_for(logo)
+        pdf.bounding_box([x_position, pdf.cursor], width: logo.width) do
+          pdf.image(
+            logo.image,
+            fit: logo.fit,
+            align: logo.align
+          )
+          pdf.move_up logo.link_overlay_start
+          transparent_link(pdf, logo)
+        end
+        self.x_position += padded_logo_width
+      end
+    end
+
+    module Entry
+      class Heading
+        include Decoder
+
+        attr_reader :pdf, :top_padding, :text, :styles, :colour
+
+        def self.generate(pdf, heading)
+          new(
+            pdf,
+            top_padding: heading[:top_padding],
+            text: d(heading[:text]),
+            styles: heading[:styles].map(&:to_sym),
+            colour: heading[:colour]
+          ).generate
+        end
+
+        private_class_method :new
+
+        def initialize(pdf, options)
+          @pdf = pdf
+          options.each do |attribute, value|
+            instance_variable_set("@#{attribute}", value)
+          end
+        end
+
+        def generate
+          pdf.move_down(top_padding)
+          pdf.formatted_text([{
+            text: text,
+            styles: styles,
+            color: colour
+          }])
+        end
+      end
+
+      class Header
+        include Decoder
+
+        attr_reader :pdf, :position, :organisation,
+                    :period, :location, :at_x_position
+
+        def self.generate(pdf, entry)
+          new(
+            pdf,
+            entry[:position],
+            entry[:organisation],
+            entry[:period],
+            entry[:location],
+            at_x_position: entry[:at_x_position]
+          ).generate
+        end
+
+        private_class_method :new
+
+        def initialize(pdf, position, organisation, period, location, options)
+          @pdf = pdf
+          @position = position
+          @organisation = organisation
+          @period = period
+          @location = location
+          options.each do |attribute, value|
+            instance_variable_set("@#{attribute}", value)
+          end
+        end
+
+        def generate
+          # Different rendering behaviour needed depending on whether the header
+          # is being drawn from left to right on the page or specifically placed
+          # at a location on the x-axis
+          if at_x_position
+            formatted_text_box_header
+          else
+            formatted_text_header
+          end
+        end
+
+        private
+
+        def formatted_text_header
+          header_sections.each do |sections|
+            pdf.formatted_text(
+              sections.map { |section| properties_for(section) }
+            )
+          end
+        end
+
+        def formatted_text_box_header
+          header_sections.each do |sections|
+            pdf.formatted_text_box(
+              sections.map { |section| properties_for(section) },
+              at: [at_x_position, pdf.cursor]
+            )
+            pdf.move_down sections.first[:bottom_padding]
+          end
+        end
+
+        def header_sections
+          [[position], [organisation], [period, location]]
+        end
+
+        def properties_for(section)
+          {
+            text: d(section[:text]),
+            styles: section[:styles].map(&:to_sym),
+            size: section[:size],
+            color: section[:colour],
+            link: d(section[:link]),
+          }
+        end
+      end
+
+      class CompanyLogo
+        include TransparentLink
+
+        attr_reader :pdf, :logo
+
+        def self.generate(pdf, data)
+          logo = Logo.for(data[:logo])
+          new(pdf, logo).generate
+        end
+
+        private_class_method :new
+
+        def initialize(pdf, logo)
+          @pdf = pdf
+          @logo = logo
+        end
+
+        def generate
+          pdf.move_up logo.y_start
+          pdf.bounding_box(
+            [logo.origin, pdf.cursor], width: logo.width, height: logo.height
+          ) do
+            render_image_link
+          end
+        end
+
+        private
+
+        def render_image_link
+          pdf.image(logo.image, fit: logo.fit, align: logo.align)
+          pdf.move_up logo.link_overlay_start
+          transparent_link(pdf, logo)
+        end
+      end
+
+      class Content
+        include Decoder, TransparentLink
+
+        attr_reader :pdf, :entry
+
+        def self.generate(pdf, entry)
+          new(pdf, entry).generate
+        end
+
+        private_class_method :new
+
+        def initialize(pdf, entry)
+          @pdf = pdf
+          @entry = entry
+        end
+
+        def generate
+          pdf.move_down entry[:top_padding]
+          Header.generate(pdf, entry)
+          CompanyLogo.generate(pdf, entry)
+          details if entry.has_key?(:summary)
+        end
+
+        private
+
+        def details
+          pdf.move_down entry[:summary][:top_padding]
+          summary
+          profile
+        end
+
+        def summary
+          pdf.text(d(entry[:summary][:text]), inline_format: true)
+        end
+
+        def profile
+          items = entry[:profile]
+          return unless items
+          table_data = items.reduce([]) do |data, item|
+            data << ['-', d(item)]
+          end
+          pdf.table(
+            table_data,
+            cell_style: {
+              borders: entry[:cell_style][:borders],
+              height: entry[:cell_style][:height]
+            }
+          )
+        end
+      end
+    end
+
+    class TechnicalSkills
+      include Decoder
+
+      attr_reader :pdf, :heading, :content
+
+      def self.generate(pdf, data)
+        new(pdf, data[:heading], data[:content]).generate
+      end
+
+      private_class_method :new
+
+      def initialize(pdf, heading, content)
+        @pdf = pdf
+        @heading = heading
+        @content = content
+      end
+
+      def generate
+        generate_heading
+        generate_content
+      end
+
+      private
+
+      def generate_heading
+        Entry::Heading.generate(pdf, heading)
+      end
+
+      def generate_content
+        pdf.move_down content[:top_padding]
+        skills = content[:skills].reduce([]) do |entries, entry|
+          entries << [d(entry.first), d(entry.last)]
+        end
+        pdf.table(skills, content[:properties])
+      end
+    end
+
+    class EmploymentHistory
+
+      attr_reader :pdf, :heading, :content
+
+      def self.generate(pdf, data)
+        new(pdf, data[:heading], data[:content]).generate
+      end
+
+      private_class_method :new
+
+      def initialize(pdf, heading, content)
+        @pdf = pdf
+        @heading = heading
+        @content = content
+      end
+
+      def generate
+        generate_heading
+        generate_content
+      end
+
+      private
+
+      def generate_heading
+        Entry::Heading.generate(pdf, heading)
+      end
+
+      def generate_content
+        content[:entries].values.each do |entry|
+          Entry::Content.generate(pdf, entry)
+        end
+        pdf.move_down content[:bottom_padding]
+        pdf.stroke_horizontal_rule { color content[:horizontal_rule_colour] }
+      end
+    end
+
+    class EducationHistory
+
+      attr_reader :pdf, :heading, :content
+
+      def self.generate(pdf, data)
+        new(pdf, data[:heading], data[:content]).generate
+      end
+
+      private_class_method :new
+
+      def initialize(pdf, heading, content)
+        @pdf = pdf
+        @heading = heading
+        @content = content
+      end
+
+      def generate
+        generate_heading
+        generate_content
+      end
+
+      private
+
+      def generate_heading
+        Entry::Heading.generate(pdf, heading)
+      end
+
+      def generate_content
+        content[:entries].values.each do |entry|
+          Entry::Content.generate(pdf, entry)
+        end
+      end
+    end
+
+    class Manifest
+      def self.process(pdf, resume, app)
+        Name.generate(pdf, resume[:name])
+        Headline.generate(pdf, resume[:headline])
+        app.inform_creation_of_social_media_links
+        SocialMediaLogoSet.generate(
+          pdf, resume[:social_media_logo_set]
         )
+        app.inform_creation_of_technical_skills
+        TechnicalSkills.generate(pdf, resume[:technical_skills])
+        app.inform_creation_of_employment_history
+        EmploymentHistory.generate(pdf, resume[:employment_history])
+        app.inform_creation_of_education_history
+        EducationHistory.generate(pdf, resume[:education_history])
+      end
+    end
+
+    class PDFOptions
+      include Decoder
+
+      def self.for(resume)
+        {
+          margin_top: resume[:margin_top],
+          margin_bottom: resume[:margin_bottom],
+          margin_left: resume[:margin_left],
+          margin_right: resume[:margin_right],
+          background: open(resume[:background_image]),
+          repeat: resume[:repeat],
+          info: {
+            Title: d(resume[:document_name]),
+            Author: d(resume[:author]),
+            Creator: d(resume[:author]),
+            CreationDate: Time.now
+          }
+        }
+      end
+    end
+
+    # This class cannot be declared as a Prawn::Document (ie inherit from it)
+    # because at the time someone runs the script, it is not certain that they
+    # have any of the required Prawn gems installed. Explicit declaration of
+    # this kind of inheritance hierarchy in advance will result in an
+    # uninitialized constant error.
+    class Document
+      include Decoder
+
+      attr_reader :resume, :app
+
+      def self.generate(app)
+        resume = JSON.parse(
+          open(
+            "https://raw.githubusercontent.com/paulfioravanti"\
+            "/resume/master/resources/resume.#{app.locale}.json"
+          ).read,
+          symbolize_names: true
+        )[:resume]
+        app.filename =
+          "#{d(resume[:document_name])}_#{app.locale}.pdf"
+        new(resume, app).generate
+      rescue SocketError
+        app.inform_of_network_connection_issue
+        exit
       end
 
-      def social_media_icons
-        move_down 5
-        SocialMediaIconSet.generate(self, RESUME[:social_media])
-        stroke_horizontal_rule { color '666666' }
+      def initialize(resume, app)
+        @resume = resume
+        @app = app
       end
 
-      def technical_skills
-        heading d('VGVjaG5pY2FsIFNraWxscw==')
-        move_down 5
-        skills = RESUME[:tech_skills]
-        table_data = skills[:content].reduce([]) do |data, entry|
-          data << [d(entry.first), d(entry.last)]
+      def generate
+        require 'prawn'
+        require 'prawn/table'
+        Prawn::Document.generate(app.filename, PDFOptions.for(resume)) do |pdf|
+          pdf.instance_exec(resume, app) do |resume, app|
+            Manifest.process(self, resume, app)
+          end
         end
-        table(table_data, skills[:properties])
-      end
-
-      def employment_history
-        heading d('RW1wbG95bWVudCBIaXN0b3J5')
-        entries = RESUME[:entries]
-        [:re, :rc, :fl, :gw, :rnt, :sra, :jet, :satc].each do |entry|
-          Listing.generate(self, entries[entry])
-        end
-        move_down 10
-        stroke_horizontal_rule { color '666666' }
-      end
-
-      def education_history
-        heading d('RWR1Y2F0aW9u')
-        entries = RESUME[:entries]
-        [:mit, :bib, :ryu, :tafe].each do |entry|
-          Listing.generate(self, entries[entry])
-        end
-      end
-
-      def heading(string)
-        move_down 10
-        formatted_text([{ text: string, styles: [:bold], color: '666666' }])
       end
     end
   end
 end
 
 if __FILE__ == $0
-  ResumeGenerator::CLI.new.start
+  ResumeGenerator::CLI::Application.start
 end
 
 module ResumeGenerator
   require 'rspec'
 
-  RSpec.configure { |c| c.disable_monkey_patching! }
+  RSpec.configure do |config|
+    include ResumeGenerator::CLI::Colours
 
-  # Note: There are some incomprehensible hacks regarding `.and_call_original`
-  # that were put in here so that SimpleCov would actually see these methods as
-  # having been touched during testing.
-  RSpec.describe CLI do
-    let(:cli) { CLI.new }
-    # stub out the innards of permission_granted? (i.e. calls chained to #gets)
-    # so it doesn't interfere with spec operation
-    let(:user_input) { double('user_input', chomp: self, match: true) }
+    config.disable_monkey_patching!
+    config.before(:suite) do
+      begin
+        require 'prawn'
+        require 'prawn/table'
+      rescue LoadError
+        puts red(
+          'You need to have the prawn and prawn-table gems installed in '\
+          'order to run the specs.'
+        )
+        puts yellow(
+          'Either install them yourself or run the resume and it will '\
+          'install them for you.'
+        )
+        exit
+      end
+    end
+  end
+
+  RSpec.describe CLI::Application do
+    let(:locale) { :en }
 
     before do
-      allow(cli).to receive(:gets).and_return(user_input)
-      allow(cli).to receive(:system) # stub out `gem install ...`
       allow($stdout).to receive(:write) # suppress message cruft from stdout
     end
 
-    describe '#start' do
-      it 'runs the script' do
-        expect(cli).to receive(:check_ability_to_generate_resume)
-        expect(cli).to receive(:generate_resume)
-        expect(cli).to receive(:clean_up)
-        cli.start
+    describe '.start' do
+      let(:argument_parser) do
+        double('argument_parser', parse!: true, locale: locale)
+      end
+      let(:application) { double('application') }
+
+      before do
+        stub_const(
+          'ResumeGenerator::CLI::ArgumentParser',
+          double('ArgumentParser', new: argument_parser)
+        )
+      end
+
+      it 'creates a new Application, passing in the locale, and calls #start' do
+        expect(described_class).to \
+          receive(:new).with(locale).and_return(application)
+        expect(application).to receive(:start)
+        described_class.start
       end
     end
 
-    describe 'PDF generator gem installation' do
-      let(:prawn_gem) { double('prawn_gem') }
-      let(:prawn_table_gem) { double('prawn_table_gem') }
+    describe '#start' do
+      let(:application) { described_class.new(locale) }
+
+      describe 'install gems' do
+        let(:gem_installer) { double('gem_installer') }
+
+        before do
+          stub_const(
+            'ResumeGenerator::CLI::GemInstaller',
+            double('GemInstaller', new: gem_installer)
+          )
+        end
+
+        context 'when required gems are already installed' do
+          before do
+            allow(gem_installer).to \
+              receive(:required_gems_available?).and_return(true)
+            allow(application).to receive(:generate_resume)
+            allow(application).to receive(:open_resume)
+          end
+
+          it 'does not request to install any gems' do
+            expect(application).to_not receive(:request_gem_installation)
+            application.start
+          end
+        end
+
+        context 'when the required gems are not installed' do
+          before do
+            allow(gem_installer).to \
+              receive(:required_gems_available?).and_return(false)
+            expect(application).to \
+              receive(:request_gem_installation).and_call_original
+          end
+
+          context 'when permission is granted to install the gems' do
+            before do
+              allow(application).to receive(:gets).and_return('yes')
+              allow(application).to receive(:generate_resume)
+              allow(application).to receive(:open_resume)
+            end
+
+            it 'attempts to install the gems' do
+              expect(application).to \
+                receive(:thank_user_for_permission).and_call_original
+              expect(application).to \
+                receive(:inform_start_of_gem_installation).and_call_original
+              expect(gem_installer).to receive(:install_gems)
+              application.start
+            end
+          end
+
+          context 'when permission is not granted to install the gems' do
+            let(:starting_the_application) { -> { application.start } }
+
+            before do
+              allow(application).to receive(:gets).and_return('no')
+            end
+
+            it 'informs the user it cannot generate the resume and exits' do
+              expect(application).to \
+                receive(:inform_of_failure_to_generate_resume).and_call_original
+              expect(starting_the_application).to raise_error(SystemExit)
+            end
+          end
+        end
+      end
+
+      describe 'generate resume' do
+        let(:resume) { double('Resume::Document') }
+
+        before do
+          allow(application).to receive(:install_gems)
+          stub_const('ResumeGenerator::Resume::Document', resume)
+          allow(application).to receive(:open_resume)
+        end
+
+        it 'generates the resume' do
+          expect(application).to \
+            receive(:inform_start_of_resume_generation).and_call_original
+          expect(resume).to receive(:generate).with(application)
+          expect(application).to \
+            receive(:inform_of_successful_resume_generation).and_call_original
+          application.start
+        end
+      end
+
+      describe 'open resume' do
+        let(:file_system) { double('FileSystem') }
+
+        before do
+          stub_const('ResumeGenerator::CLI::FileSystem', file_system)
+          allow(application).to receive(:install_gems)
+          allow(application).to receive(:generate_resume)
+          expect(application).to \
+            receive(:request_to_open_resume).and_call_original
+        end
+
+        context 'when permission is granted to open the resume' do
+          before do
+            allow(application).to receive(:gets).and_return('yes')
+          end
+
+          it 'attempts to open the resume and thanks the reader' do
+            expect(file_system).to receive(:open_document).with(application)
+            expect(application).to \
+              receive(:print_thank_you_message).and_call_original
+            application.start
+          end
+        end
+
+        context 'when permission is not granted to open the resume' do
+          before do
+            allow(application).to receive(:gets).and_return('no')
+          end
+
+          it 'does not open the resume and thanks the reader' do
+            expect(file_system).to_not receive(:open_document)
+            expect(application).to \
+              receive(:print_thank_you_message).and_call_original
+            application.start
+          end
+        end
+      end
+    end
+  end
+
+  RSpec.describe CLI::ArgumentParser do
+    let(:argument_parser) { described_class.new }
+
+    describe '#parse!' do
+      before do
+        allow($stdout).to receive(:write) # suppress message cruft from stdout
+      end
+
+      context 'when no locale option is specified' do
+        let(:default_locale) { :en }
+
+        before do
+          stub_const('ARGV', [])
+          argument_parser.parse!
+        end
+
+        it 'sets the default locale' do
+          expect(argument_parser.locale).to eq(default_locale)
+        end
+      end
+
+      context 'when an unsupported locale option is specified' do
+        let(:supported_locales) { [:en, :ja] }
+        let(:unsupported_locale) { 'eo' }
+        let(:parsing_options) { -> { argument_parser.parse! } }
+
+        before do
+          allow(argument_parser).to \
+            receive(:supported_locales).and_return(supported_locales)
+          stub_const('ARGV', ['-l', unsupported_locale])
+        end
+
+        it 'informs the user of the supported locales and exits' do
+          expect(argument_parser).to \
+            receive(:inform_locale_not_supported).with(unsupported_locale).
+              and_call_original
+          expect(parsing_options).to raise_error(SystemExit)
+        end
+      end
+
+      context 'when a supported locale option is specified' do
+        let(:supported_locales) { [:en, :ja] }
+        let(:supported_locale) { 'ja' }
+
+        before do
+          allow(argument_parser).to \
+            receive(:supported_locales).and_return(supported_locales)
+        end
+
+        context 'using the abbreviated option name' do
+          before do
+            stub_const('ARGV', ['-l', supported_locale])
+            argument_parser.parse!
+          end
+
+          it 'sets the locale to the specified locale' do
+            expect(argument_parser.locale).to eq(supported_locale.to_sym)
+          end
+        end
+
+        context 'using the full option name' do
+          before do
+            stub_const('ARGV', ['--locale', supported_locale])
+            argument_parser.parse!
+          end
+
+          it 'sets the locale to the specified locale' do
+            expect(argument_parser.locale).to eq(supported_locale.to_sym)
+          end
+        end
+      end
+
+      context 'when the version option is specified' do
+        let(:version) { '1.0' }
+        let(:parsing_options) { -> { argument_parser.parse! } }
+
+        before do
+          stub_const('ResumeGenerator::VERSION', version)
+        end
+
+        context 'using the abbreviated option name' do
+          before do
+            stub_const('ARGV', ['-v'])
+          end
+
+          it 'informs the user of the version number and exits' do
+            expect(parsing_options).to \
+              output(argument_parser.parser.version).to_stdout.and \
+                raise_error(SystemExit)
+          end
+        end
+
+        context 'using the full option name' do
+          before do
+            stub_const('ARGV', ['--version'])
+          end
+
+          it 'informs the user of the version number and exits' do
+            expect(parsing_options).to \
+              output(argument_parser.parser.version).to_stdout.and \
+                raise_error(SystemExit)
+          end
+        end
+      end
+
+      context 'when the help option is specified' do
+        let(:parsing_options) { -> { argument_parser.parse! } }
+
+        context 'using the abbreviated option name' do
+          before do
+            stub_const('ARGV', ['-h'])
+          end
+
+          it 'informs the user of the application options and exits' do
+            expect(parsing_options).to \
+              output(argument_parser.parser.help).to_stdout.and \
+                raise_error(SystemExit)
+          end
+        end
+
+        context 'using the full option name' do
+          before do
+            stub_const('ARGV', ['--help'])
+          end
+
+          it 'informs the user of the application options and exits' do
+            expect(parsing_options).to \
+              output(argument_parser.parser.help).to_stdout.and \
+                raise_error(SystemExit)
+          end
+        end
+      end
+
+      context 'when an invalid option is specified' do
+        let(:parsing_options) { -> { argument_parser.parse! } }
+
+        before do
+          stub_const('ARGV', ['-invalid'])
+        end
+
+        it 'informs the user that there is an invalid option and exits' do
+          expect(argument_parser).to \
+            receive(:inform_of_invalid_options).and_call_original
+          expect(parsing_options).to raise_error(SystemExit)
+        end
+      end
+
+      context 'when a specified valid option has a missing argument' do
+        let(:parsing_options) { -> { argument_parser.parse! } }
+
+        before do
+          stub_const('ARGV', ['-l'])
+        end
+
+        it 'informs the user that there is a missing argument and exits' do
+          expect(argument_parser).to \
+            receive(:inform_of_missing_arguments).and_call_original
+          expect(parsing_options).to raise_error(SystemExit)
+        end
+      end
+    end
+  end
+
+  RSpec.describe CLI::FileSystem do
+    describe '.open_document' do
+      let(:resume_name) { 'My Resume.pdf' }
+      let(:app) { CLI::Application.new(:en) }
 
       before do
-        allow(Gem::Specification).to \
-          receive(:find_by_name).with('prawn').and_return(prawn_gem)
-        allow(Gem::Specification).to \
-          receive(:find_by_name).with('prawn-table').and_return(prawn_table_gem)
-        allow(Gem::Version).to receive(:new).and_return(1.2, 0.1)
+        allow(app).to receive(:filename).and_return(resume_name)
+        allow($stdout).to receive(:write) # suppress message cruft from stdout
       end
 
-      context 'user has the expected gems installed' do
-        before do
-          allow(prawn_gem).to receive(:version).and_return(1.2)
-          allow(prawn_table_gem).to receive(:version).and_return(0.1)
-        end
+      context 'when run on Mac OS' do
+        let(:mac_open_file_args) { ['open', app.filename] }
 
-        specify 'user is not asked to install any gems' do
-          expect(cli).to_not receive(:permission_granted?)
-          cli.send(:check_ability_to_generate_resume)
+        before { stub_const('RUBY_PLATFORM', 'darwin') }
+
+        it 'opens the file using the open command' do
+          expect(described_class).to \
+            receive(:system).with(*mac_open_file_args)
+          described_class.open_document(app)
         end
       end
 
-      context 'user has an expected gem installed, but an unexpected version' do
-        before do
-          allow(prawn_gem).to receive(:version).and_return(0)
-        end
+      context 'when run on Linux' do
+        let(:linux_open_file_args) { ['xdg-open', app.filename] }
 
-        specify 'user is asked to install gems' do
-          expect(cli).to receive(:request_gem_installation)
-          cli.send(:check_ability_to_generate_resume)
+        before { stub_const('RUBY_PLATFORM', 'linux') }
+
+        it 'opens the file using the xdg-open command' do
+          expect(described_class).to \
+            receive(:system).with(*linux_open_file_args)
+          described_class.open_document(app)
         end
       end
 
-      context 'user does not have a required gem installed' do
+      context 'when run on Windows' do
+        let(:windows_open_file_args) do
+          ['cmd', '/c', "\"start #{app.filename}\""]
+        end
+
+        before { stub_const('RUBY_PLATFORM', 'windows') }
+
+        it 'opens the file using the cmd /c command' do
+          expect(described_class).to \
+            receive(:system).with(*windows_open_file_args)
+          described_class.open_document(app)
+        end
+      end
+
+      context 'when run on an unknown operating system' do
+        before { stub_const('RUBY_PLATFORM', 'unknown') }
+
+        it 'requests the user to open the document themself' do
+          expect(app).to \
+            receive(:request_user_to_open_document).and_call_original
+          described_class.open_document(app)
+        end
+      end
+    end
+  end
+
+  RSpec.describe CLI::GemInstaller do
+    let(:app) { CLI::Application.new(:en) }
+    let(:gem_installer) { described_class.new(app) }
+
+    before do
+      stub_const('PRAWN_VERSION', '2.0.1')
+      stub_const('PRAWN_TABLE_VERSION', '0.2.1')
+      allow($stdout).to receive(:write) # suppress message cruft from stdout
+    end
+
+    describe '#required_gems_available?' do
+      let(:required_gems_available) { gem_installer.required_gems_available? }
+
+      context 'when a required gem is not installed' do
         before do
           allow(Gem::Specification).to \
             receive(:find_by_name).and_raise(Gem::LoadError)
         end
 
-        specify 'user is asked to install the required gems' do
-          expect(cli).to receive(:request_gem_installation)
-          cli.send(:check_ability_to_generate_resume)
-        end
-
-        context 'user agrees to install the gems' do
-          before do
-            allow(cli).to receive(:permission_granted?).and_return(true)
-          end
-
-          it 'executes installation' do
-            expect(cli).to receive(:thank_user_for_permission)
-            expect(cli).to receive(:inform_start_of_gem_installation)
-            expect(cli).to receive(:inform_of_successful_gem_installation)
-            cli.send(:check_ability_to_generate_resume)
-          end
-
-          context 'gems are unable to be installed' do
-            before { allow(cli).to receive(:system).and_raise }
-
-            it 'prints an error message and exits' do
-              expect(cli).to receive(:thank_user_for_permission)
-              expect(cli).to receive(:inform_start_of_gem_installation)
-              expect(cli).to \
-                receive(:inform_of_gem_installation_failure).and_call_original
-              expect(cli).to receive(:exit)
-              cli.send(:check_ability_to_generate_resume)
-            end
-          end
-        end
-
-        context 'when user does not agree to install the gems' do
-          before do
-            allow(cli).to receive(:permission_granted?).and_return(false)
-          end
-
-          it 'prints an error message and exits' do
-            expect(cli).to \
-              receive(:inform_of_failure_to_generate_resume).and_call_original
-            expect(cli).to receive(:exit)
-            cli.send(:check_ability_to_generate_resume)
-          end
+        it 'returns false' do
+          expect(required_gems_available).to be false
         end
       end
-    end
 
-    describe 'generating the PDF' do
-      before do
-        allow(cli).to receive(:gem).with('prawn', PRAWN_VERSION)
-        allow(cli).to receive(:gem).with('prawn-table', PRAWN_TABLE_VERSION)
-        allow(cli).to receive(:require).with('prawn')
-        allow(cli).to receive(:require).with('prawn/table')
-      end
-
-      it 'tells the PDF to generate itself' do
-        expect(cli).to \
-          receive(:inform_start_of_resume_generation).and_call_original
-        expect(Resume).to receive(:generate)
-        cli.send(:generate_resume)
-      end
-    end
-
-    describe 'post-PDF generation' do
-      it 'shows a success message and asks to open the resume' do
-        expect(cli).to receive(:inform_of_successful_resume_generation)
-        expect(cli).to receive(:request_to_open_resume)
-        cli.send(:clean_up)
-      end
-
-      context 'user allows the script to open the PDF' do
-        let(:document_name) { 'Decoded Document Name' }
+      context 'when the specific version of a required gem is not installed' do
+        let(:prawn_gem) do
+          double('prawn_gem', version: Gem::Version.new('1.0.0'))
+        end
 
         before do
-          allow(cli).to \
-            receive(:d).with(ResumeGenerator::DOCUMENT_NAME).
-              and_return(document_name)
-          allow(cli).to receive(:permission_granted?).and_return(true)
+          allow(Gem::Specification).to \
+            receive(:find_by_name).with('prawn').and_return(prawn_gem)
         end
 
-        it 'attempts to open the document' do
-          expect(cli).to receive(:open_document)
-          expect(cli).to receive(:print_thank_you_message)
-          cli.send(:clean_up)
-        end
-
-        context 'user is on a mac' do
-          before { stub_const('RUBY_PLATFORM', 'darwin') }
-
-          it 'opens the file using the open command' do
-            expect(cli).to receive(:system).with("open #{document_name}.pdf")
-            cli.send(:clean_up)
-          end
-        end
-
-        context 'user is on linux' do
-          before { stub_const('RUBY_PLATFORM', 'linux') }
-
-          it 'opens the file using the xdg-open command' do
-            expect(cli).to \
-              receive(:system).with("xdg-open #{document_name}.pdf")
-            cli.send(:clean_up)
-          end
-        end
-
-        context 'user is on windows' do
-          before { stub_const('RUBY_PLATFORM', 'windows') }
-
-          it 'opens the file using the cmd command' do
-            expect(cli).to \
-              receive(:system).with("cmd /c \"start #{document_name}.pdf\"")
-            cli.send(:clean_up)
-          end
-        end
-
-        context 'user is on an unknown operating system' do
-          before { stub_const('RUBY_PLATFORM', 'unknown') }
-
-          it 'prints a message telling the user to open the file' do
-            expect(cli).to \
-              receive(:request_user_to_open_document).and_call_original
-            cli.send(:clean_up)
-          end
+        it 'returns false' do
+          expect(required_gems_available).to be false
         end
       end
 
-      context 'user does not allow script to open PDF' do
-        before { allow(cli).to receive(:permission_granted?).and_return(false) }
+      context 'when all required gems are already installed' do
+        let(:prawn_gem) do
+          double(
+            'prawn_gem',
+            version: Gem::Version.new(PRAWN_VERSION)
+          )
+        end
+        let(:prawn_table_gem) do
+          double(
+            'prawn_table_gem',
+            version: Gem::Version.new(PRAWN_TABLE_VERSION)
+          )
+        end
 
-        it 'does not attempt to open the document' do
-          expect(cli).to_not receive(:open_document)
-          expect(cli).to receive(:print_thank_you_message)
-          cli.send(:clean_up)
+        before do
+          allow(Gem::Specification).to \
+            receive(:find_by_name).with('prawn').
+              and_return(prawn_gem)
+          allow(Gem::Specification).to \
+            receive(:find_by_name).with('prawn-table').
+              and_return(prawn_table_gem)
+        end
+
+        it 'returns true' do
+          expect(required_gems_available).to be true
+        end
+      end
+    end
+
+    describe '#install_gems' do
+      let(:install_prawn_args) do
+        ['gem', 'install', 'prawn', '-v', PRAWN_VERSION]
+      end
+
+      context 'when the installation of a gem fails' do
+        let(:installing_gems) { -> { gem_installer.install_gems } }
+
+        before do
+          allow(gem_installer).to \
+            receive(:system).with(*install_prawn_args).and_return(false)
+        end
+
+        it 'informs the user of the failure and exits' do
+          expect(app).to \
+            receive(:inform_of_gem_installation_failure).and_call_original
+          expect(installing_gems).to raise_error(SystemExit)
+        end
+      end
+
+      context 'when gems are able to be successfully installed' do
+        let(:install_prawn_table_args) do
+          ['gem', 'install', 'prawn-table', '-v', PRAWN_TABLE_VERSION]
+        end
+
+        before do
+          allow(gem_installer).to \
+            receive(:system).with(*install_prawn_args).and_return(true)
+          allow(gem_installer).to \
+            receive(:system).with(*install_prawn_table_args).and_return(true)
+        end
+
+        it 'informs the user of successful installation and resets gem paths' do
+          expect(app).to \
+            receive(:inform_of_successful_gem_installation).and_call_original
+          expect(Gem).to receive(:clear_paths)
+          gem_installer.install_gems
         end
       end
     end
   end
 
-  RSpec.describe Decodable do
-    let(:decoder) { Object.new.extend(Decodable) }
-
-    describe '.d' do
-      # This represents any Base64 encoded string
-      let(:encoded_string) { 'xxx' }
-      # This could be a string like 'Hello' or if the original string had UTF-8
-      # characters, it could be something like
-      # '\xE3\x81\x93\xE3\x82\x93\xE3\x81\xAB\xE3\x81\xA1\xE3\x81\xAF'
-      let(:ascii_string) { 'yyy' }
-      let(:utf8_string) { 'zzz' }
-      let(:decoded_string) { decoder.d(encoded_string) }
-
-      before do
-        allow(Base64).to \
-          receive(:strict_decode64).with(encoded_string).and_return(ascii_string)
-        allow(ascii_string).to \
-          receive(:force_encoding).with('utf-8').and_return(utf8_string)
-      end
-
-      it 'converts the ASCII string into UTF-8' do
-        expect(decoded_string).to eq(utf8_string)
-      end
-    end
-  end
-
-  RSpec.describe Messages do
-    let(:messagable) { Class.new { include Messages }.new }
-    let(:outputting_message) { -> { message } }
-
-    describe '#inform_creation_of_social_media_links' do
-      let(:message) { messagable.inform_creation_of_social_media_links }
-
-      it 'outputs a message to stdout' do
-        expect(outputting_message).to output.to_stdout
-      end
-    end
-
-    describe '#inform_creation_of_technical_skills' do
-      let(:message) { messagable.inform_creation_of_technical_skills }
-
-      it 'outputs a message to stdout' do
-        expect(outputting_message).to output.to_stdout
-      end
-    end
-
-    describe '#inform_creation_of_employment_history' do
-      let(:message) { messagable.inform_creation_of_employment_history }
-
-      it 'outputs a message to stdout' do
-        expect(outputting_message).to output.to_stdout
-      end
-    end
-
-    describe '#inform_creation_of_education_history' do
-      let(:message) { messagable.inform_creation_of_education_history }
-
-      it 'outputs a message to stdout' do
-        expect(outputting_message).to output.to_stdout
-      end
-    end
-  end
-
-  RSpec.describe Resource do
-    describe '.for' do
-      let(:image) { double('image') }
-      let(:hash) do
-        {
-          image: "http://farm.staticflickr.com/example.jpg",
-          link: "d3d3LmV4YW1wbGUuY29t",
-          width: 35,
-          height: 35,
-          fit: [35, 35],
-          align: "center",
-          move_up: 35,
-          bars: 3,
-          size: 40,
-          origin: 415,
-          at: 280
-        }
-      end
-      let(:resource) { Resource.for(hash) }
-
-      before do
-        allow(Resource).to receive(:open).with(hash[:image]).and_return(image)
-      end
-
-      it 'has an image' do
-        expect(resource.image).to eq(image)
-      end
-
-      it 'has a link' do
-        expect(resource.link).to eq('www.example.com')
-      end
-
-      it 'has a width' do
-        expect(resource.width).to eq(35)
-      end
-
-      it 'has a height' do
-        expect(resource.height).to eq(35)
-      end
-
-      it 'has a fit' do
-        expect(resource.fit).to eq([35, 35])
-      end
-
-      it 'has an align' do
-        expect(resource.align).to eq(:center)
-      end
-
-      it 'has a move_up' do
-        expect(resource.move_up).to eq(35)
-      end
-
-      it 'has a bars' do
-        expect(resource.bars).to eq(3)
-      end
-
-      it 'has a size' do
-        expect(resource.size).to eq(40)
-      end
-
-      it 'has an origin' do
-        expect(resource.origin).to eq(415)
-      end
-
-      it 'has an at value' do
-        expect(resource.at).to eq(280)
-      end
-    end
-  end
-
-  RSpec.describe ResumeGenerator do
-    describe 'constants' do
-      let(:version) { ResumeGenerator.const_get('VERSION') }
-      let(:document_name) { ResumeGenerator.const_get('DOCUMENT_NAME') }
-
-      it 'has a VERSION constant' do
-        expect(version).to_not be_empty
-      end
-
-      it 'has a DOCUMENT_NAME constant' do
-        expect(document_name).to_not be_empty
-      end
-    end
-  end
-
-  RSpec.describe Resume do
-    gem 'prawn', PRAWN_VERSION
-    gem 'prawn-table', PRAWN_TABLE_VERSION
-    require 'prawn'
-    require 'prawn/table'
-
-    # Link points to a 1x1 pixel placeholder to not slow down test suite
-    # Couldn't send Prawn::Document an image test double
-    let(:placeholder_image) do
-      open('http://farm4.staticflickr.com/3722/10753699026_a1603247cf_m.jpg')
-    end
+  RSpec.describe Resume::Document do
+    let(:locale) { :en }
+    let(:app) { CLI::Application.new(:en) }
 
     before do
       allow($stdout).to receive(:write) # suppress message cruft from stdout
     end
 
-    describe ".generate" do
-      # Needed to check that the expected filename gets generated
-      include Decodable
+    describe '.generate' do
+      context 'when a network connection cannot be made' do
+        let(:generating_the_resume) { -> { described_class.generate(app) } }
 
-      let(:filename) { "#{d(ResumeGenerator::DOCUMENT_NAME)}.pdf" }
-      let(:cli) { double('cli').as_null_object }
+        before do
+          allow(JSON).to receive(:parse).and_raise(SocketError)
+        end
+
+        it 'informs the user of the network connection issue and exits' do
+          expect(app).to \
+            receive(:inform_of_network_connection_issue).and_call_original
+          expect(generating_the_resume).to raise_error(SystemExit)
+        end
+      end
+
+      context 'when a network connection can be made' do
+        let(:document) { double('document') }
+        let(:resume) { double('resume') }
+        let(:resume_json) { double('resume_json') }
+        let(:path) do
+          "https://raw.githubusercontent.com/paulfioravanti/resume/master/resources/resume.#{app.locale}.json"
+        end
+        let(:encoded_filename) { '3nC0D3d F1l3N4M3' }
+        let(:decoded_filename) { 'Decoded Filename' }
+        let(:app_filename) { "#{decoded_filename}_#{app.locale}.pdf" }
+
+        before do
+          allow(described_class).to \
+            receive(:open).with(path).and_return(resume_json)
+          allow(resume_json).to receive(:read).and_return(resume_json)
+          allow(JSON).to \
+            receive(:parse).with(resume_json, { symbolize_names: true }).
+              and_return(resume)
+          allow(resume).to \
+            receive(:[]).with(:resume).and_return(resume)
+          allow(resume).to \
+            receive(:[]).with(:document_name).and_return(encoded_filename)
+          allow(described_class).to \
+            receive(:d).with(encoded_filename).and_return(decoded_filename)
+        end
+
+        it 'creates a new Document and calls #generate' do
+          expect(app).to receive(:filename=).with(app_filename)
+          expect(described_class).to \
+            receive(:new).with(resume, app).and_return(document)
+          expect(document).to receive(:generate)
+          described_class.generate(app)
+        end
+      end
+    end
+
+    describe '#generate' do
+      # Link points to a 1x1 pixel placeholder to not slow down test suite
+      # Couldn't send Prawn::Document an image test double
+      let(:placeholder_image) do
+        open('http://farm4.staticflickr.com/3722/10753699026_a1603247cf_m.jpg')
+      end
+      let(:resume) do
+        JSON.parse(
+          open(
+            "https://raw.githubusercontent.com/paulfioravanti/resume/master/"\
+            "resources/resume.#{app.locale}.json"
+          ).read,
+          symbolize_names: true
+        )[:resume]
+      end
+      let(:filename) { 'My Resume.pdf' }
+      let(:document) { described_class.new(resume, app) }
 
       before do
-        allow(Resume).to \
-          receive(:background_image).and_return(placeholder_image)
-        allow(Resource).to \
+        allow(app).to receive(:filename).and_return(filename)
+        allow(Resume::Logo).to \
           receive(:open).with(anything).and_return(placeholder_image)
-        Resume.generate(cli)
+        allow(Resume::PDFOptions).to \
+          receive(:open).with(anything).and_return(placeholder_image)
       end
       after { File.delete(filename) }
 
       it 'generates a pdf resume and notifies the creation of each part' do
-        expect(cli).to have_received(:inform_creation_of_social_media_links)
-        expect(cli).to have_received(:inform_creation_of_employment_history)
-        expect(cli).to have_received(:inform_creation_of_education_history)
+        expect(app).to \
+          receive(:inform_creation_of_social_media_links).and_call_original
+        expect(app).to \
+          receive(:inform_creation_of_technical_skills).and_call_original
+        expect(app).to \
+          receive(:inform_creation_of_employment_history).and_call_original
+        expect(app).to \
+          receive(:inform_creation_of_education_history).and_call_original
+        document.generate
         expect(File.exist?(filename)).to be true
       end
     end
