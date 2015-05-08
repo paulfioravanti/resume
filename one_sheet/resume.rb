@@ -218,7 +218,7 @@ module ResumeGenerator
 
       def initialize_parser
         OptionParser.new do |opts|
-          opts.banner = 'Usage: ./bin/resume [options]'
+          opts.banner = 'Usage: ruby resume.rb [options]'
           opts.separator ''
           opts.separator 'Specific options:'
 
