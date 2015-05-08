@@ -446,10 +446,11 @@ module ResumeGenerator
       attr_reader :pdf, :primary_text, :primary_colour, :secondary_text, :size
 
       def self.generate(pdf, headline)
+        primary_header = headline[:primary]
         new(
           pdf,
-          primary_text: d(headline[:primary][:text]),
-          primary_colour: headline[:primary][:colour],
+          primary_text: d(primary_header[:text]),
+          primary_colour: primary_header[:colour],
           secondary_text: d(headline[:secondary][:text]),
           size: headline[:size],
         ).generate
