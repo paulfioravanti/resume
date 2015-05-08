@@ -1,3 +1,4 @@
+require 'forwardable'
 require_relative 'argument_parser'
 require_relative 'messages'
 require_relative 'gem_installer'
@@ -7,8 +8,9 @@ module ResumeGenerator
   module CLI
     class Application
       include Messages
+      extend Forwardable
 
-      attr_reader :locale
+      attr_reader :locale, :installer
       attr_accessor :filename
 
       def self.start
@@ -19,11 +21,14 @@ module ResumeGenerator
 
       def initialize(locale)
         @locale = locale
+        @installer = GemInstaller.new(self)
         initialize_messages
       end
 
+      def_delegators :@installer, :installation_required?, :install
+
       def start
-        install_gems
+        install_gems if installation_required?
         generate_resume
         open_resume
       end
@@ -31,13 +36,9 @@ module ResumeGenerator
       private
 
       def install_gems
-        installer = GemInstaller.new(self)
-        return if installer.required_gems_available?
         request_gem_installation
         if permission_granted?
-          thank_user_for_permission
-          inform_start_of_gem_installation
-          installer.install_gems
+          install
         else
           inform_of_failure_to_generate_resume
           exit

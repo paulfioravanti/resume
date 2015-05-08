@@ -56,6 +56,14 @@ module ResumeGenerator
         }[locale]
       end
 
+      def thank_user_for_permission
+        puts green(messages[__method__])
+      end
+
+      def inform_start_of_gem_installation
+        puts messages[__method__]
+      end
+
       def inform_creation_of_social_media_links
         puts messages[__method__]
       end
@@ -92,14 +100,6 @@ module ResumeGenerator
 
       def request_gem_installation
         print yellow(messages[__method__])
-      end
-
-      def thank_user_for_permission
-        puts green(messages[__method__])
-      end
-
-      def inform_start_of_gem_installation
-        puts messages[__method__]
       end
 
       def inform_start_of_resume_generation

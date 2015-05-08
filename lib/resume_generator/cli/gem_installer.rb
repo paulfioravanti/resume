@@ -12,19 +12,21 @@ module ResumeGenerator
         }
       end
 
-      def required_gems_available?
+      def installation_required?
         gems.each do |name, version|
           if Gem::Specification.find_by_name(name).version <
             Gem::Version.new(version)
-            return false
+            return true
           end
         end
-        true
-      rescue Gem::LoadError # gem not installed
         false
+      rescue Gem::LoadError # gem not installed
+        true
       end
 
-      def install_gems
+      def install
+        app.thank_user_for_permission
+        app.inform_start_of_gem_installation
         if gems_successfully_installed?
           app.inform_of_successful_gem_installation
           # Reset the dir and path values so Prawn can be required
