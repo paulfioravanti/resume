@@ -1,11 +1,9 @@
 .DS_Store
 *.pdf
-strings.rb
+strings_*.rb
 
 Gemfile.lock
 doc/
 pkg/
 vendor/cache/*.gem
 coverage/
-
-resume.rb.txt
