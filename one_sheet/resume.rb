@@ -27,6 +27,7 @@ require 'open-uri'
 require 'json'
 require 'optparse'
 require 'socket'
+require 'forwardable'
 
 module ResumeGenerator
   # These consts would only ever be defined when this file's specs
@@ -114,6 +115,14 @@ module ResumeGenerator
         }[locale]
       end
 
+      def thank_user_for_permission
+        puts green(messages[__method__])
+      end
+
+      def inform_start_of_gem_installation
+        puts messages[__method__]
+      end
+
       def inform_creation_of_social_media_links
         puts messages[__method__]
       end
@@ -150,14 +159,6 @@ module ResumeGenerator
 
       def request_gem_installation
         print yellow(messages[__method__])
-      end
-
-      def thank_user_for_permission
-        puts green(messages[__method__])
-      end
-
-      def inform_start_of_gem_installation
-        puts messages[__method__]
       end
 
       def inform_start_of_resume_generation
@@ -287,19 +288,21 @@ module ResumeGenerator
         }
       end
 
-      def required_gems_available?
+      def installation_required?
         gems.each do |name, version|
           if Gem::Specification.find_by_name(name).version <
             Gem::Version.new(version)
-            return false
+            return true
           end
         end
-        true
-      rescue Gem::LoadError # gem not installed
         false
+      rescue Gem::LoadError # gem not installed
+        true
       end
 
-      def install_gems
+      def install
+        app.thank_user_for_permission
+        app.inform_start_of_gem_installation
         if gems_successfully_installed?
           app.inform_of_successful_gem_installation
           # Reset the dir and path values so Prawn can be required
@@ -336,6 +339,7 @@ module ResumeGenerator
 
     class Application
       include Messages
+      extend Forwardable
 
       attr_reader :locale
       attr_accessor :filename
@@ -348,11 +352,14 @@ module ResumeGenerator
 
       def initialize(locale)
         @locale = locale
+        @installer = GemInstaller.new(self)
         initialize_messages
       end
 
+      def_delegators :@installer, :installation_required?, :install
+
       def start
-        install_gems
+        install_gems if installation_required?
         generate_resume
         open_resume
       end
@@ -360,13 +367,9 @@ module ResumeGenerator
       private
 
       def install_gems
-        installer = GemInstaller.new(self)
-        return if installer.required_gems_available?
         request_gem_installation
         if permission_granted?
-          thank_user_for_permission
-          inform_start_of_gem_installation
-          installer.install_gems
+          install
         else
           inform_of_failure_to_generate_resume
           exit
@@ -1034,13 +1037,13 @@ module ResumeGenerator
         context 'when required gems are already installed' do
           before do
             allow(gem_installer).to \
-              receive(:required_gems_available?).and_return(true)
+              receive(:installation_required?).and_return(false)
             allow(application).to receive(:generate_resume)
             allow(application).to receive(:open_resume)
           end
 
           it 'does not request to install any gems' do
-            expect(application).to_not receive(:request_gem_installation)
+            expect(application).to_not receive(:install_gems)
             application.start
           end
         end
@@ -1048,7 +1051,7 @@ module ResumeGenerator
         context 'when the required gems are not installed' do
           before do
             allow(gem_installer).to \
-              receive(:required_gems_available?).and_return(false)
+              receive(:installation_required?).and_return(true)
             expect(application).to \
               receive(:request_gem_installation).and_call_original
           end
@@ -1061,11 +1064,7 @@ module ResumeGenerator
             end
 
             it 'attempts to install the gems' do
-              expect(application).to \
-                receive(:thank_user_for_permission).and_call_original
-              expect(application).to \
-                receive(:inform_start_of_gem_installation).and_call_original
-              expect(gem_installer).to receive(:install_gems)
+              expect(gem_installer).to receive(:install)
               application.start
             end
           end
@@ -1378,8 +1377,8 @@ module ResumeGenerator
       allow($stdout).to receive(:write) # suppress message cruft from stdout
     end
 
-    describe '#required_gems_available?' do
-      let(:required_gems_available) { gem_installer.required_gems_available? }
+    describe '#installation_required?' do
+      let(:installation_required) { gem_installer.installation_required? }
 
       context 'when a required gem is not installed' do
         before do
@@ -1387,8 +1386,8 @@ module ResumeGenerator
             receive(:find_by_name).and_raise(Gem::LoadError)
         end
 
-        it 'returns false' do
-          expect(required_gems_available).to be false
+        it 'returns true' do
+          expect(installation_required).to be true
         end
       end
 
@@ -1402,8 +1401,8 @@ module ResumeGenerator
             receive(:find_by_name).with('prawn').and_return(prawn_gem)
         end
 
-        it 'returns false' do
-          expect(required_gems_available).to be false
+        it 'returns true' do
+          expect(installation_required).to be true
         end
       end
 
@@ -1430,19 +1429,26 @@ module ResumeGenerator
               and_return(prawn_table_gem)
         end
 
-        it 'returns true' do
-          expect(required_gems_available).to be true
+        it 'returns false' do
+          expect(installation_required).to be false
         end
       end
     end
 
-    describe '#install_gems' do
+    describe '#install' do
       let(:install_prawn_args) do
         ['gem', 'install', 'prawn', '-v', PRAWN_VERSION]
       end
 
+      before do
+        expect(app).to \
+          receive(:thank_user_for_permission).and_call_original
+        expect(app).to \
+          receive(:inform_start_of_gem_installation).and_call_original
+      end
+
       context 'when the installation of a gem fails' do
-        let(:installing_gems) { -> { gem_installer.install_gems } }
+        let(:installing_gems) { -> { gem_installer.install } }
 
         before do
           allow(gem_installer).to \
@@ -1472,7 +1478,7 @@ module ResumeGenerator
           expect(app).to \
             receive(:inform_of_successful_gem_installation).and_call_original
           expect(Gem).to receive(:clear_paths)
-          gem_installer.install_gems
+          gem_installer.install
         end
       end
     end

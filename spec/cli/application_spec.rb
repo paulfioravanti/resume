@@ -45,13 +45,13 @@ RSpec.describe ResumeGenerator::CLI::Application do
       context 'when required gems are already installed' do
         before do
           allow(gem_installer).to \
-            receive(:required_gems_available?).and_return(true)
+            receive(:installation_required?).and_return(false)
           allow(application).to receive(:generate_resume)
           allow(application).to receive(:open_resume)
         end
 
         it 'does not request to install any gems' do
-          expect(application).to_not receive(:request_gem_installation)
+          expect(application).to_not receive(:install_gems)
           application.start
         end
       end
@@ -59,7 +59,7 @@ RSpec.describe ResumeGenerator::CLI::Application do
       context 'when the required gems are not installed' do
         before do
           allow(gem_installer).to \
-            receive(:required_gems_available?).and_return(false)
+            receive(:installation_required?).and_return(true)
           expect(application).to \
             receive(:request_gem_installation).and_call_original
         end
@@ -72,11 +72,7 @@ RSpec.describe ResumeGenerator::CLI::Application do
           end
 
           it 'attempts to install the gems' do
-            expect(application).to \
-              receive(:thank_user_for_permission).and_call_original
-            expect(application).to \
-              receive(:inform_start_of_gem_installation).and_call_original
-            expect(gem_installer).to receive(:install_gems)
+            expect(gem_installer).to receive(:install)
             application.start
           end
         end

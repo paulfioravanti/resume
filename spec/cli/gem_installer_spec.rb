@@ -12,8 +12,8 @@ RSpec.describe ResumeGenerator::CLI::GemInstaller do
     allow($stdout).to receive(:write) # suppress message cruft from stdout
   end
 
-  describe '#required_gems_available?' do
-    let(:required_gems_available) { gem_installer.required_gems_available? }
+  describe '#installation_required?' do
+    let(:installation_required) { gem_installer.installation_required? }
 
     context 'when a required gem is not installed' do
       before do
@@ -21,8 +21,8 @@ RSpec.describe ResumeGenerator::CLI::GemInstaller do
           receive(:find_by_name).and_raise(Gem::LoadError)
       end
 
-      it 'returns false' do
-        expect(required_gems_available).to be false
+      it 'returns true' do
+        expect(installation_required).to be true
       end
     end
 
@@ -36,8 +36,8 @@ RSpec.describe ResumeGenerator::CLI::GemInstaller do
           receive(:find_by_name).with('prawn').and_return(prawn_gem)
       end
 
-      it 'returns false' do
-        expect(required_gems_available).to be false
+      it 'returns true' do
+        expect(installation_required).to be true
       end
     end
 
@@ -64,19 +64,26 @@ RSpec.describe ResumeGenerator::CLI::GemInstaller do
             and_return(prawn_table_gem)
       end
 
-      it 'returns true' do
-        expect(required_gems_available).to be true
+      it 'returns false' do
+        expect(installation_required).to be false
       end
     end
   end
 
-  describe '#install_gems' do
+  describe '#install' do
     let(:install_prawn_args) do
       ['gem', 'install', 'prawn', '-v', ResumeGenerator::PRAWN_VERSION]
     end
 
+    before do
+      expect(app).to \
+        receive(:thank_user_for_permission).and_call_original
+      expect(app).to \
+        receive(:inform_start_of_gem_installation).and_call_original
+    end
+
     context 'when the installation of a gem fails' do
-      let(:installing_gems) { -> { gem_installer.install_gems } }
+      let(:installing_gems) { -> { gem_installer.install } }
 
       before do
         allow(gem_installer).to \
@@ -107,7 +114,7 @@ RSpec.describe ResumeGenerator::CLI::GemInstaller do
         expect(app).to \
           receive(:inform_of_successful_gem_installation).and_call_original
         expect(Gem).to receive(:clear_paths)
-        gem_installer.install_gems
+        gem_installer.install
       end
     end
   end
