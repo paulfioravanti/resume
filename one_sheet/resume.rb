@@ -931,15 +931,16 @@ module ResumeGenerator
       attr_reader :resume, :app
 
       def self.generate(app)
+        locale = app.locale
         resume = JSON.parse(
           open(
             "https://raw.githubusercontent.com/paulfioravanti"\
-            "/resume/master/resources/resume.#{app.locale}.json"
+            "/resume/master/resources/resume.#{locale}.json"
           ).read,
           symbolize_names: true
         )[:resume]
         app.filename =
-          "#{d(resume[:document_name])}_#{app.locale}.pdf"
+          "#{d(resume[:document_name])}_#{locale}.pdf"
         new(resume, app).generate
       rescue SocketError
         app.inform_of_network_connection_issue
