@@ -10,7 +10,7 @@ module ResumeGenerator
       include Messages
       extend Forwardable
 
-      attr_reader :locale, :installer
+      attr_reader :locale
       attr_accessor :filename
 
       def self.start
