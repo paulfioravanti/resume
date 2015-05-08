@@ -4,6 +4,7 @@ require 'resume_generator/cli/application'
 RSpec.describe ResumeGenerator::Resume::Document do
   let(:locale) { :en }
   let(:app) { ResumeGenerator::CLI::Application.new(:en) }
+  let(:resume_data_path) { "resources/resume.#{app.locale}.json" }
 
   before do
     allow($stdout).to receive(:write) # suppress message cruft from stdout
@@ -28,14 +29,13 @@ RSpec.describe ResumeGenerator::Resume::Document do
       let(:document) { double('document') }
       let(:resume) { double('resume') }
       let(:resume_json) { double('resume_json') }
-      let(:path) { "resources/resume.#{app.locale}.json" }
       let(:encoded_filename) { '3nC0D3d F1l3N4M3' }
       let(:decoded_filename) { 'Decoded Filename' }
       let(:app_filename) { "#{decoded_filename}_#{app.locale}.pdf" }
 
       before do
         allow(described_class).to \
-          receive(:open).with(path).and_return(resume_json)
+          receive(:open).with(resume_data_path).and_return(resume_json)
         allow(resume_json).to receive(:read).and_return(resume_json)
         allow(JSON).to \
           receive(:parse).with(resume_json, { symbolize_names: true }).
@@ -65,10 +65,7 @@ RSpec.describe ResumeGenerator::Resume::Document do
       open('http://farm4.staticflickr.com/3722/10753699026_a1603247cf_m.jpg')
     end
     let(:resume) do
-      JSON.parse(
-        open("resources/resume.#{app.locale}.json").read,
-        symbolize_names: true
-      )[:resume]
+      JSON.parse(open(resume_data_path).read, symbolize_names: true)[:resume]
     end
     let(:filename) { 'My Resume.pdf' }
     let(:document) { described_class.new(resume, app) }
