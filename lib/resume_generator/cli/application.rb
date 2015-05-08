@@ -15,7 +15,7 @@ module ResumeGenerator
 
       def self.start
         parser = ArgumentParser.new
-        parser.parse!
+        parser.parse
         new(parser.locale).start
       end
 

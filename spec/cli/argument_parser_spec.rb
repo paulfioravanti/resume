@@ -4,7 +4,7 @@ require 'resume_generator/cli/argument_parser'
 RSpec.describe ResumeGenerator::CLI::ArgumentParser do
   let(:argument_parser) { described_class.new }
 
-  describe '#parse!' do
+  describe '#parse' do
     before do
       allow($stdout).to receive(:write) # suppress message cruft from stdout
     end
@@ -14,7 +14,7 @@ RSpec.describe ResumeGenerator::CLI::ArgumentParser do
 
       before do
         stub_const('ARGV', [])
-        argument_parser.parse!
+        argument_parser.parse
       end
 
       it 'sets the default locale' do
@@ -25,7 +25,7 @@ RSpec.describe ResumeGenerator::CLI::ArgumentParser do
     context 'when an unsupported locale option is specified' do
       let(:supported_locales) { [:en, :ja] }
       let(:unsupported_locale) { 'eo' }
-      let(:parsing_options) { -> { argument_parser.parse! } }
+      let(:parsing_options) { -> { argument_parser.parse } }
 
       before do
         allow(argument_parser).to \
@@ -53,7 +53,7 @@ RSpec.describe ResumeGenerator::CLI::ArgumentParser do
       context 'using the abbreviated option name' do
         before do
           stub_const('ARGV', ['-l', supported_locale])
-          argument_parser.parse!
+          argument_parser.parse
         end
 
         it 'sets the locale to the specified locale' do
@@ -64,7 +64,7 @@ RSpec.describe ResumeGenerator::CLI::ArgumentParser do
       context 'using the full option name' do
         before do
           stub_const('ARGV', ['--locale', supported_locale])
-          argument_parser.parse!
+          argument_parser.parse
         end
 
         it 'sets the locale to the specified locale' do
@@ -75,7 +75,7 @@ RSpec.describe ResumeGenerator::CLI::ArgumentParser do
 
     context 'when the version option is specified' do
       let(:version) { '1.0' }
-      let(:parsing_options) { -> { argument_parser.parse! } }
+      let(:parsing_options) { -> { argument_parser.parse } }
 
       before do
         stub_const('ResumeGenerator::VERSION', version)
@@ -107,7 +107,7 @@ RSpec.describe ResumeGenerator::CLI::ArgumentParser do
     end
 
     context 'when the help option is specified' do
-      let(:parsing_options) { -> { argument_parser.parse! } }
+      let(:parsing_options) { -> { argument_parser.parse } }
 
       context 'using the abbreviated option name' do
         before do
@@ -135,7 +135,7 @@ RSpec.describe ResumeGenerator::CLI::ArgumentParser do
     end
 
     context 'when an invalid option is specified' do
-      let(:parsing_options) { -> { argument_parser.parse! } }
+      let(:parsing_options) { -> { argument_parser.parse } }
 
       before do
         stub_const('ARGV', ['-invalid'])
@@ -149,7 +149,7 @@ RSpec.describe ResumeGenerator::CLI::ArgumentParser do
     end
 
     context 'when a specified valid option has a missing argument' do
-      let(:parsing_options) { -> { argument_parser.parse! } }
+      let(:parsing_options) { -> { argument_parser.parse } }
 
       before do
         stub_const('ARGV', ['-l'])

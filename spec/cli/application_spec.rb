@@ -10,7 +10,7 @@ RSpec.describe ResumeGenerator::CLI::Application do
 
   describe '.start' do
     let(:argument_parser) do
-      double('argument_parser', parse!: true, locale: locale)
+      double('argument_parser', parse: true, locale: locale)
     end
     let(:application) { double('application') }
 

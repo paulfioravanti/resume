@@ -15,8 +15,8 @@ module ResumeGenerator
         @parser = initialize_parser
       end
 
-      def parse!
-        parser.parse!(ARGV)
+      def parse
+        parser.parse(ARGV)
         self.locale ||= :en
       rescue OptionParser::InvalidOption
         inform_of_invalid_options
