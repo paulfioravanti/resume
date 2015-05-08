@@ -41,6 +41,7 @@ module ResumeGenerator
 
         def profile
           items = entry[:profile]
+          cell_style = entry[:cell_style]
           return unless items
           table_data = items.reduce([]) do |data, item|
             data << ['-', d(item)]
@@ -48,8 +49,8 @@ module ResumeGenerator
           pdf.table(
             table_data,
             cell_style: {
-              borders: entry[:cell_style][:borders],
-              height: entry[:cell_style][:height]
+              borders: cell_style[:borders],
+              height: cell_style[:height]
             }
           )
         end
