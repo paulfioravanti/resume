@@ -173,6 +173,9 @@ module ResumeGenerator
       end
 
       def print_thank_you_message
+        # This is in its own method because it needs to know about the filename
+        # which is only known once we know the resume can be generated and
+        # its data is fetched.
         puts cyan(
           {
             en: "Thanks for looking at my resume."\
