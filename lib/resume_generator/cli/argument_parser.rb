@@ -16,7 +16,7 @@ module ResumeGenerator
       end
 
       def parse
-        parser.parse(ARGV)
+        parser.parse!(ARGV)
         self.locale ||= :en
       rescue OptionParser::InvalidOption
         inform_of_invalid_options
@@ -47,8 +47,9 @@ module ResumeGenerator
       def locale_option(opts)
         opts.on('-l', '--locale LOCALE',
                 'Select the locale of the resume') do |locale|
-          if supported_locales.include?(locale.to_sym)
-            self.locale = locale.to_sym
+          resume_locale = locale.to_sym
+          if supported_locales.include?(resume_locale)
+            self.locale = resume_locale
           else
             inform_locale_not_supported(locale)
             exit

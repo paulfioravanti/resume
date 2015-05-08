@@ -204,7 +204,7 @@ module ResumeGenerator
       end
 
       def parse
-        parser.parse(ARGV)
+        parser.parse!(ARGV)
         self.locale ||= :en
       rescue OptionParser::InvalidOption
         inform_of_invalid_options
