@@ -203,8 +203,8 @@ module ResumeGenerator
         @parser = initialize_parser
       end
 
-      def parse!
-        parser.parse!(ARGV)
+      def parse
+        parser.parse(ARGV)
         self.locale ||= :en
       rescue OptionParser::InvalidOption
         inform_of_invalid_options
@@ -346,7 +346,7 @@ module ResumeGenerator
 
       def self.start
         parser = ArgumentParser.new
-        parser.parse!
+        parser.parse
         new(parser.locale).start
       end
 
@@ -1002,7 +1002,7 @@ module ResumeGenerator
 
     describe '.start' do
       let(:argument_parser) do
-        double('argument_parser', parse!: true, locale: locale)
+        double('argument_parser', parse: true, locale: locale)
       end
       let(:application) { double('application') }
 
@@ -1147,7 +1147,7 @@ module ResumeGenerator
   RSpec.describe CLI::ArgumentParser do
     let(:argument_parser) { described_class.new }
 
-    describe '#parse!' do
+    describe '#parse' do
       before do
         allow($stdout).to receive(:write) # suppress message cruft from stdout
       end
@@ -1157,7 +1157,7 @@ module ResumeGenerator
 
         before do
           stub_const('ARGV', [])
-          argument_parser.parse!
+          argument_parser.parse
         end
 
         it 'sets the default locale' do
@@ -1168,7 +1168,7 @@ module ResumeGenerator
       context 'when an unsupported locale option is specified' do
         let(:supported_locales) { [:en, :ja] }
         let(:unsupported_locale) { 'eo' }
-        let(:parsing_options) { -> { argument_parser.parse! } }
+        let(:parsing_options) { -> { argument_parser.parse } }
 
         before do
           allow(argument_parser).to \
@@ -1196,7 +1196,7 @@ module ResumeGenerator
         context 'using the abbreviated option name' do
           before do
             stub_const('ARGV', ['-l', supported_locale])
-            argument_parser.parse!
+            argument_parser.parse
           end
 
           it 'sets the locale to the specified locale' do
@@ -1207,7 +1207,7 @@ module ResumeGenerator
         context 'using the full option name' do
           before do
             stub_const('ARGV', ['--locale', supported_locale])
-            argument_parser.parse!
+            argument_parser.parse
           end
 
           it 'sets the locale to the specified locale' do
@@ -1218,7 +1218,7 @@ module ResumeGenerator
 
       context 'when the version option is specified' do
         let(:version) { '1.0' }
-        let(:parsing_options) { -> { argument_parser.parse! } }
+        let(:parsing_options) { -> { argument_parser.parse } }
 
         before do
           stub_const('ResumeGenerator::VERSION', version)
@@ -1250,7 +1250,7 @@ module ResumeGenerator
       end
 
       context 'when the help option is specified' do
-        let(:parsing_options) { -> { argument_parser.parse! } }
+        let(:parsing_options) { -> { argument_parser.parse } }
 
         context 'using the abbreviated option name' do
           before do
@@ -1278,7 +1278,7 @@ module ResumeGenerator
       end
 
       context 'when an invalid option is specified' do
-        let(:parsing_options) { -> { argument_parser.parse! } }
+        let(:parsing_options) { -> { argument_parser.parse } }
 
         before do
           stub_const('ARGV', ['-invalid'])
@@ -1292,7 +1292,7 @@ module ResumeGenerator
       end
 
       context 'when a specified valid option has a missing argument' do
-        let(:parsing_options) { -> { argument_parser.parse! } }
+        let(:parsing_options) { -> { argument_parser.parse } }
 
         before do
           stub_const('ARGV', ['-l'])
