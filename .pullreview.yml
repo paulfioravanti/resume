@@ -1,0 +1,5 @@
+---
+rules:
+  ignore:
+  - use_a_logger
+  - extra_blank_line_detected_at_body_end

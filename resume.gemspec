@@ -1,4 +1,4 @@
-require File.expand_path('../lib/resume_generator/version', __FILE__)
+require_relative 'lib/resume_generator'
 
 Gem::Specification.new do |gem|
   gem.name          = 'resume'
@@ -19,6 +19,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rspec', '~> 3.2'
   gem.add_development_dependency 'rubygems-tasks', '~> 0.2'
   gem.add_development_dependency 'yard', '~> 0.8'
-  gem.add_development_dependency 'prawn', '2.0.0'
+  gem.add_development_dependency 'prawn', '2.0.1'
   gem.add_development_dependency 'prawn-table', '0.2.1'
 end

@@ -1,8 +1,6 @@
-$LOAD_PATH << File.join(File.dirname(__FILE__), 'resume_generator')
+module ResumeGenerator
+  VERSION = '0.6'
+  PRAWN_VERSION = '2.0.1'
+  PRAWN_TABLE_VERSION = '0.2.1'
+end
 
-require 'colourable'
-require 'cli'
-require 'decodable'
-require 'resource'
-require 'resume'
-require 'version'

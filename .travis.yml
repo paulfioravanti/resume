@@ -2,7 +2,8 @@ language: ruby
 rvm:
 - 2.2.2
 script:
-- bundle exec rspec one_sheet/resume.rb --format progress
+# FIXME: Have this moved over to use the new resume when merged into master
+- bundle exec rspec one_sheet/new_resume.rb --format progress
 - bundle exec rspec spec/ --no-drb --format progress
 env:
   global:

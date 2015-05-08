@@ -4,8 +4,7 @@
 ### in case you want to see a more readable, structured version of the files.
 ###
 ### Instructions:
-### 1. Make sure you run this with Ruby 2.2 or greater
-###    (lesser versions will not work)
+### 1. Make sure you run this with Ruby 2.2.2
 ###
 ### 2. Please let the script install some Prawn gems for PDF generation if you
 ###    don't have them already (prawn and prawn-table)
@@ -32,7 +31,7 @@ module ResumeGenerator
   # are run in the repo with the structured version of the resume: an edge case
   VERSION = '0.5' unless const_defined?(:VERSION)
   DOCUMENT_NAME = 'UGF1bF9GaW9yYXZhbnRpX1Jlc3VtZQ=='
-  PRAWN_VERSION = '2.0.0'
+  PRAWN_VERSION = '2.0.1'
   PRAWN_TABLE_VERSION = '0.2.1'
 
   module Colourable
