@@ -8,6 +8,9 @@
     "margin_right": 1,
     "background_image": "http://farm6.staticflickr.com/5453/8801916021_3ac1df6072_o_d.jpg",
     "repeat": true,
+    "font": {
+      "name": "Helvetica"
+    },
     "name": {
       "text": "UGF1bCBGaW9yYXZhbnRp",
       "font": "Times-Roman",

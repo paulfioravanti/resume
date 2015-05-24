@@ -1,7 +1,16 @@
+require_relative 'font'
+require_relative 'name'
+require_relative 'headline'
+require_relative 'social_media_logo_set'
+require_relative 'technical_skills'
+require_relative 'employment_history'
+require_relative 'education_history'
+
 module ResumeGenerator
   module Resume
     class Manifest
       def self.process(pdf, resume, app)
+        Font.configure(pdf, resume[:font])
         Name.generate(pdf, resume[:name])
         Headline.generate(pdf, resume[:headline])
         app.inform_creation_of_social_media_links

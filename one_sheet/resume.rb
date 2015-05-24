@@ -411,6 +411,12 @@ module ResumeGenerator
   end
 
   module Resume
+    class Font
+      def self.configure(pdf, font)
+        pdf.font font[:name]
+      end
+    end
+
     class Name
       include Decoder
 
@@ -887,6 +893,7 @@ module ResumeGenerator
 
     class Manifest
       def self.process(pdf, resume, app)
+        Font.configure(pdf, resume[:font])
         Name.generate(pdf, resume[:name])
         Headline.generate(pdf, resume[:headline])
         app.inform_creation_of_social_media_links
