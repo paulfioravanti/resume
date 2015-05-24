@@ -3,7 +3,7 @@ require 'resume_generator/cli/application'
 
 RSpec.describe ResumeGenerator::Resume::Document do
   let(:locale) { :en }
-  let(:app) { ResumeGenerator::CLI::Application.new(:en) }
+  let(:app) { ResumeGenerator::CLI::Application.new(locale) }
   let(:resume_data_path) { "resources/resume.#{app.locale}.json" }
 
   before do

@@ -1491,7 +1491,7 @@ module ResumeGenerator
 
   RSpec.describe Resume::Document do
     let(:locale) { :en }
-    let(:app) { CLI::Application.new(:en) }
+    let(:app) { CLI::Application.new(locale) }
     let(:resume_data_path) do
       "https://raw.githubusercontent.com/paulfioravanti/resume/master/"\
       "resources/resume.#{app.locale}.json"
