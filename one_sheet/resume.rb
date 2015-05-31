@@ -29,7 +29,7 @@ require 'optparse'
 require 'socket'
 require 'forwardable'
 
-module ResumeGenerator
+module Resume
   # These consts would only ever be defined when this file's specs
   # are run in the repo with the structured version of the resume: an edge case
   VERSION = '0.6' unless const_defined?(:VERSION)
@@ -253,7 +253,7 @@ module ResumeGenerator
 
       def version_option(opts)
         opts.on_tail('-v', '--version', 'Show version') do
-          puts ResumeGenerator::VERSION
+          puts Resume::VERSION
           exit
         end
       end
@@ -379,7 +379,7 @@ module ResumeGenerator
 
       def generate_resume
         inform_start_of_resume_generation
-        Resume::Document.generate(self)
+        PDF::Document.generate(self)
         inform_of_successful_resume_generation
       end
 
@@ -410,7 +410,7 @@ module ResumeGenerator
     alias_method :d, :decode
   end
 
-  module Resume
+  module PDF
     class Font
       def self.configure(pdf, font)
         pdf.font font[:name]
@@ -909,7 +909,7 @@ module ResumeGenerator
       end
     end
 
-    class PDFOptions
+    class Options
       include Decoder
 
       def self.for(resume)
@@ -966,7 +966,7 @@ module ResumeGenerator
       def generate
         require 'prawn'
         require 'prawn/table'
-        Prawn::Document.generate(app.filename, PDFOptions.for(resume)) do |pdf|
+        Prawn::Document.generate(app.filename, Options.for(resume)) do |pdf|
           pdf.instance_exec(resume, app) do |resume, app|
             Manifest.process(self, resume, app)
           end
@@ -977,14 +977,14 @@ module ResumeGenerator
 end
 
 if __FILE__ == $0
-  ResumeGenerator::CLI::Application.start
+  Resume::CLI::Application.start
 end
 
-module ResumeGenerator
+module Resume
   require 'rspec'
 
   RSpec.configure do |config|
-    include ResumeGenerator::CLI::Colours
+    include Resume::CLI::Colours
 
     config.disable_monkey_patching!
     config.before(:suite) do
@@ -1020,7 +1020,7 @@ module ResumeGenerator
 
       before do
         stub_const(
-          'ResumeGenerator::CLI::ArgumentParser',
+          'Resume::CLI::ArgumentParser',
           double('ArgumentParser', new: argument_parser)
         )
       end
@@ -1041,7 +1041,7 @@ module ResumeGenerator
 
         before do
           stub_const(
-            'ResumeGenerator::CLI::GemInstaller',
+            'Resume::CLI::GemInstaller',
             double('GemInstaller', new: gem_installer)
           )
         end
@@ -1098,11 +1098,11 @@ module ResumeGenerator
       end
 
       describe 'generate resume' do
-        let(:resume) { double('Resume::Document') }
+        let(:resume) { double('PDF::Document') }
 
         before do
           allow(application).to receive(:install_gems)
-          stub_const('ResumeGenerator::Resume::Document', resume)
+          stub_const('Resume::PDF::Document', resume)
           allow(application).to receive(:open_resume)
         end
 
@@ -1120,7 +1120,7 @@ module ResumeGenerator
         let(:file_system) { double('FileSystem') }
 
         before do
-          stub_const('ResumeGenerator::CLI::FileSystem', file_system)
+          stub_const('Resume::CLI::FileSystem', file_system)
           allow(application).to receive(:install_gems)
           allow(application).to receive(:generate_resume)
           expect(application).to \
@@ -1233,7 +1233,7 @@ module ResumeGenerator
         let(:parsing_options) { -> { argument_parser.parse } }
 
         before do
-          stub_const('ResumeGenerator::VERSION', version)
+          stub_const('Resume::VERSION', version)
         end
 
         context 'using the abbreviated option name' do
@@ -1496,7 +1496,7 @@ module ResumeGenerator
     end
   end
 
-  RSpec.describe Resume::Document do
+  RSpec.describe PDF::Document do
     let(:locale) { :en }
     let(:app) { CLI::Application.new(locale) }
     let(:resume_data_path) do
@@ -1570,9 +1570,9 @@ module ResumeGenerator
 
       before do
         allow(app).to receive(:filename).and_return(filename)
-        allow(Resume::Logo).to \
+        allow(PDF::Logo).to \
           receive(:open).with(anything).and_return(placeholder_image)
-        allow(Resume::PDFOptions).to \
+        allow(PDF::Options).to \
           receive(:open).with(anything).and_return(placeholder_image)
       end
       after { File.delete(filename) }

@@ -6,8 +6,8 @@ require_relative 'technical_skills'
 require_relative 'employment_history'
 require_relative 'education_history'
 
-module ResumeGenerator
-  module Resume
+module Resume
+  module PDF
     class Manifest
       def self.process(pdf, resume, app)
         Font.configure(pdf, resume[:font])

@@ -1,8 +1,8 @@
 require_relative 'transparent_link'
 require_relative 'logo'
 
-module ResumeGenerator
-  module Resume
+module Resume
+  module PDF
     class SocialMediaLogoSet
       include TransparentLink
 

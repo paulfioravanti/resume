@@ -6,10 +6,10 @@ else
 end
 
 require 'rspec'
-require 'resume_generator/cli/colours'
+require 'resume/cli/colours'
 
 RSpec.configure do |config|
-  include ResumeGenerator::CLI::Colours
+  include Resume::CLI::Colours
 
   config.disable_monkey_patching!
   config.before(:suite) do

@@ -1,6 +1,8 @@
-module ResumeGenerator
-  module Resume
-    class EducationHistory
+require_relative 'entry/content'
+
+module Resume
+  module PDF
+    class EmploymentHistory
 
       attr_reader :pdf, :heading, :content
 
@@ -31,6 +33,8 @@ module ResumeGenerator
         content[:entries].values.each do |entry|
           Entry::Content.generate(pdf, entry)
         end
+        pdf.move_down content[:bottom_padding]
+        pdf.stroke_horizontal_rule { color content[:horizontal_rule_colour] }
       end
     end
   end

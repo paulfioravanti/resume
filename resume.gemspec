@@ -1,8 +1,8 @@
-require_relative 'lib/resume_generator'
+require_relative 'lib/resume'
 
 Gem::Specification.new do |gem|
   gem.name          = 'resume'
-  gem.version       = ResumeGenerator::VERSION
+  gem.version       = Resume::VERSION
   gem.summary       = %q{Resume Generator}
   gem.description   = %q{Generates my resume using the Prawn PDF library}
   gem.license       = 'MIT'

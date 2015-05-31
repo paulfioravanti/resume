@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'resume_generator/cli/application'
+require 'resume/cli/application'
 
-RSpec.describe ResumeGenerator::CLI::Application do
+RSpec.describe Resume::CLI::Application do
   let(:locale) { :en }
 
   before do
@@ -16,7 +16,7 @@ RSpec.describe ResumeGenerator::CLI::Application do
 
     before do
       stub_const(
-        'ResumeGenerator::CLI::ArgumentParser',
+        'Resume::CLI::ArgumentParser',
         double('ArgumentParser', new: argument_parser)
       )
     end
@@ -37,7 +37,7 @@ RSpec.describe ResumeGenerator::CLI::Application do
 
       before do
         stub_const(
-          'ResumeGenerator::CLI::GemInstaller',
+          'Resume::CLI::GemInstaller',
           double('GemInstaller', new: gem_installer)
         )
       end
@@ -98,7 +98,7 @@ RSpec.describe ResumeGenerator::CLI::Application do
 
       before do
         allow(application).to receive(:install_gems)
-        stub_const('ResumeGenerator::Resume::Document', resume)
+        stub_const('Resume::PDF::Document', resume)
         allow(application).to receive(:open_resume)
       end
 
@@ -116,7 +116,7 @@ RSpec.describe ResumeGenerator::CLI::Application do
       let(:file_system) { double('FileSystem') }
 
       before do
-        stub_const('ResumeGenerator::CLI::FileSystem', file_system)
+        stub_const('Resume::CLI::FileSystem', file_system)
         allow(application).to receive(:install_gems)
         allow(application).to receive(:generate_resume)
         expect(application).to \

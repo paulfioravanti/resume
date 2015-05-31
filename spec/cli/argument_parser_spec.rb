@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'resume_generator/cli/argument_parser'
+require 'resume/cli/argument_parser'
 
-RSpec.describe ResumeGenerator::CLI::ArgumentParser do
+RSpec.describe Resume::CLI::ArgumentParser do
   let(:argument_parser) { described_class.new }
 
   describe '#parse' do
@@ -78,7 +78,7 @@ RSpec.describe ResumeGenerator::CLI::ArgumentParser do
       let(:parsing_options) { -> { argument_parser.parse } }
 
       before do
-        stub_const('ResumeGenerator::VERSION', version)
+        stub_const('Resume::VERSION', version)
       end
 
       context 'using the abbreviated option name' do

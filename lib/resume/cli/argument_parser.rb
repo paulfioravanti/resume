@@ -1,8 +1,8 @@
-require_relative '../../resume_generator'
+require_relative '../../resume'
 require_relative 'colours'
 require 'optparse'
 
-module ResumeGenerator
+module Resume
   module CLI
     class ArgumentParser
       include Colours
@@ -66,7 +66,7 @@ module ResumeGenerator
 
       def version_option(opts)
         opts.on_tail('-v', '--version', 'Show version') do
-          puts ResumeGenerator::VERSION
+          puts Resume::VERSION
           exit
         end
       end

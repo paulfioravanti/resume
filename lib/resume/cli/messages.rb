@@ -1,6 +1,6 @@
-require_relative '../../resume_generator/resume/document'
+require_relative '../../resume/pdf/document'
 
-module ResumeGenerator
+module Resume
   module CLI
     module Messages
       include Colours

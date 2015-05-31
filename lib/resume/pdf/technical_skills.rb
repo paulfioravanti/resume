@@ -1,8 +1,9 @@
-require_relative 'entry/content'
+require_relative 'entry/heading'
 
-module ResumeGenerator
-  module Resume
-    class EmploymentHistory
+module Resume
+  module PDF
+    class TechnicalSkills
+      include Decoder
 
       attr_reader :pdf, :heading, :content
 
@@ -30,11 +31,11 @@ module ResumeGenerator
       end
 
       def generate_content
-        content[:entries].values.each do |entry|
-          Entry::Content.generate(pdf, entry)
+        pdf.move_down content[:top_padding]
+        skills = content[:skills].reduce([]) do |entries, entry|
+          entries << [d(entry.first), d(entry.last)]
         end
-        pdf.move_down content[:bottom_padding]
-        pdf.stroke_horizontal_rule { color content[:horizontal_rule_colour] }
+        pdf.table(skills, content[:properties])
       end
     end
   end

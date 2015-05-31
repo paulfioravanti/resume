@@ -1,8 +1,8 @@
 require_relative 'header'
 require_relative 'company_logo'
 
-module ResumeGenerator
-  module Resume
+module Resume
+  module PDF
     module Entry
       class Content
         include Decoder, TransparentLink

@@ -1,11 +1,11 @@
 require 'spec_helper'
-require 'resume_generator/cli/file_system'
-require 'resume_generator/cli/application'
+require 'resume/cli/file_system'
+require 'resume/cli/application'
 
-RSpec.describe ResumeGenerator::CLI::FileSystem do
+RSpec.describe Resume::CLI::FileSystem do
   describe '.open_document' do
     let(:resume_name) { 'My Resume.pdf' }
-    let(:app) { ResumeGenerator::CLI::Application.new(:en) }
+    let(:app) { Resume::CLI::Application.new(:en) }
 
     before do
       allow(app).to receive(:filename).and_return(resume_name)
@@ -61,3 +61,4 @@ RSpec.describe ResumeGenerator::CLI::FileSystem do
     end
   end
 end
+

@@ -4,7 +4,7 @@ require_relative 'messages'
 require_relative 'gem_installer'
 require_relative 'file_system'
 
-module ResumeGenerator
+module Resume
   module CLI
     class Application
       include Messages
@@ -47,7 +47,7 @@ module ResumeGenerator
 
       def generate_resume
         inform_start_of_resume_generation
-        Resume::Document.generate(self)
+        PDF::Document.generate(self)
         inform_of_successful_resume_generation
       end
 

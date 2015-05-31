@@ -3,10 +3,10 @@ require 'open-uri'
 require 'socket'
 require_relative '../decoder'
 require_relative 'manifest'
-require_relative 'pdf_options'
+require_relative 'options'
 
-module ResumeGenerator
-  module Resume
+module Resume
+  module PDF
     # This class cannot be declared as a Prawn::Document (ie inherit from it)
     # because at the time someone runs the script, it is not certain that they
     # have any of the required Prawn gems installed. Explicit declaration of this
@@ -39,7 +39,7 @@ module ResumeGenerator
       def generate
         require 'prawn'
         require 'prawn/table'
-        Prawn::Document.generate(app.filename, PDFOptions.for(resume)) do |pdf|
+        Prawn::Document.generate(app.filename, Options.for(resume)) do |pdf|
           pdf.instance_exec(resume, app) do |resume, app|
             Manifest.process(self, resume, app)
           end

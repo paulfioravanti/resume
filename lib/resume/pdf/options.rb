@@ -1,6 +1,6 @@
-module ResumeGenerator
-  module Resume
-    class PDFOptions
+module Resume
+  module PDF
+    class Options
       include Decoder
 
       def self.for(resume)

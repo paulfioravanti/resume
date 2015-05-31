@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
-require_relative '../lib/resume_generator/cli/application'
+require_relative '../lib/resume/cli/application'
 
-ResumeGenerator::CLI::Application.start
+Resume::CLI::Application.start

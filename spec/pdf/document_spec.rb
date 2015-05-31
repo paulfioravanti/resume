@@ -1,9 +1,9 @@
-require 'resume_generator/resume/document'
-require 'resume_generator/cli/application'
+require 'resume/pdf/document'
+require 'resume/cli/application'
 
-RSpec.describe ResumeGenerator::Resume::Document do
+RSpec.describe Resume::PDF::Document do
   let(:locale) { :en }
-  let(:app) { ResumeGenerator::CLI::Application.new(locale) }
+  let(:app) { Resume::CLI::Application.new(locale) }
   let(:resume_data_path) { "resources/resume.#{app.locale}.json" }
 
   before do
@@ -72,9 +72,9 @@ RSpec.describe ResumeGenerator::Resume::Document do
 
     before do
       allow(app).to receive(:filename).and_return(filename)
-      allow(ResumeGenerator::Resume::Logo).to \
+      allow(Resume::PDF::Logo).to \
         receive(:open).with(anything).and_return(placeholder_image)
-      allow(ResumeGenerator::Resume::PDFOptions).to \
+      allow(Resume::PDF::Options).to \
         receive(:open).with(anything).and_return(placeholder_image)
     end
     after { File.delete(filename) }
@@ -93,3 +93,4 @@ RSpec.describe ResumeGenerator::Resume::Document do
     end
   end
 end
+

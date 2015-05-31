@@ -1,9 +1,9 @@
 require 'spec_helper'
-require 'resume_generator/cli/gem_installer'
-require 'resume_generator/cli/application'
+require 'resume/cli/gem_installer'
+require 'resume/cli/application'
 
-RSpec.describe ResumeGenerator::CLI::GemInstaller do
-  let(:app) { ResumeGenerator::CLI::Application.new(:en) }
+RSpec.describe Resume::CLI::GemInstaller do
+  let(:app) { Resume::CLI::Application.new(:en) }
   let(:gem_installer) { described_class.new(app) }
 
   before do
@@ -45,13 +45,13 @@ RSpec.describe ResumeGenerator::CLI::GemInstaller do
       let(:prawn_gem) do
         double(
           'prawn_gem',
-          version: Gem::Version.new(ResumeGenerator::PRAWN_VERSION)
+          version: Gem::Version.new(Resume::PRAWN_VERSION)
         )
       end
       let(:prawn_table_gem) do
         double(
           'prawn_table_gem',
-          version: Gem::Version.new(ResumeGenerator::PRAWN_TABLE_VERSION)
+          version: Gem::Version.new(Resume::PRAWN_TABLE_VERSION)
         )
       end
 
@@ -72,7 +72,7 @@ RSpec.describe ResumeGenerator::CLI::GemInstaller do
 
   describe '#install' do
     let(:install_prawn_args) do
-      ['gem', 'install', 'prawn', '-v', ResumeGenerator::PRAWN_VERSION]
+      ['gem', 'install', 'prawn', '-v', Resume::PRAWN_VERSION]
     end
 
     before do
@@ -100,7 +100,7 @@ RSpec.describe ResumeGenerator::CLI::GemInstaller do
     context 'when gems are able to be successfully installed' do
       let(:install_prawn_table_args) do
         ['gem', 'install', 'prawn-table',
-         '-v', ResumeGenerator::PRAWN_TABLE_VERSION]
+         '-v', Resume::PRAWN_TABLE_VERSION]
       end
 
       before do
@@ -119,3 +119,4 @@ RSpec.describe ResumeGenerator::CLI::GemInstaller do
     end
   end
 end
+

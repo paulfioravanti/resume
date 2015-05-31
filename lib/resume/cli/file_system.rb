@@ -1,4 +1,4 @@
-module ResumeGenerator
+module Resume
   module CLI
     class FileSystem
       def self.open_document(app)

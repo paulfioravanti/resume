@@ -1,5 +1,5 @@
-module ResumeGenerator
-  module Resume
+module Resume
+  module PDF
     module TransparentLink
       private
 
