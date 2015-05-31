@@ -21,4 +21,9 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'yard', '~> 0.8'
   gem.add_development_dependency 'prawn', '2.0.1'
   gem.add_development_dependency 'prawn-table', '0.2.1'
+  gem.add_development_dependency 'kramdown', '1.7.0'
+  gem.add_development_dependency 'fuubar', '2.0.0'
+  gem.add_development_dependency 'simplecov', '0.10.0'
+  gem.add_development_dependency 'reek', '2.2.1'
+  gem.add_development_dependency 'codeclimate-test-reporter', '0.4.7'
 end
