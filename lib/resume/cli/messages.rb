@@ -20,25 +20,31 @@ module Resume
               'Creating employment history section...',
             inform_creation_of_education_history:
               'Creating education history section...',
-            request_gem_installation:
-              "May I please install the following Ruby gems:\n"\
-              "- prawn #{PRAWN_VERSION}\n"\
-              "- prawn-table #{PRAWN_TABLE_VERSION}\n"\
-              "in order to help me generate a PDF (Y/N)? ",
+            inform_of_gem_dependencies:
+              "In order to help me generate a PDF, "\
+              "I need the following Ruby gems:",
+            request_installation_permission:
+              'May I please install them? (Y/N) ',
             thank_user_for_permission:
               'Thank you kindly :-)',
             inform_start_of_gem_installation:
               'Installing required gems...',
             inform_start_of_resume_generation:
-              "Generating PDF. This shouldn't take longer than a few seconds...",
+              "Generating PDF. This shouldn't take longer "\
+              "than a few seconds...",
             inform_of_failure_to_generate_resume:
-              "Sorry, I won't be able to generate a PDF\n"\
+              "Sorry, I won't be able to generate a PDF "\
               "without these specific gem versions.\n"\
               "Please ask me directly for a PDF copy of my resume.",
             inform_of_successful_resume_generation:
               'Resume generated successfully.',
             request_to_open_resume:
               'Would you like me to open the resume for you (Y/N)? ',
+            inform_thank_you_message:
+              "Thanks for looking at my resume. "\
+              "I hope to hear from you soon!\n"\
+              "My resume has been generated in the same "\
+              "directory you ran this script under the filename:",
             request_user_to_open_document:
               "Sorry, I can't figure out how to open the resume on\n"\
               "this computer. Please open it yourself.",
@@ -99,7 +105,11 @@ module Resume
       private
 
       def request_gem_installation
-        print yellow(messages[__method__])
+        puts yellow(messages[:inform_of_gem_dependencies])
+        gems.each do |name, version|
+          puts "- #{name} #{version}"
+        end
+        print yellow(messages[:request_installation_permission])
       end
 
       def inform_start_of_resume_generation
@@ -114,18 +124,8 @@ module Resume
         puts green(messages[__method__])
       end
 
-      def print_thank_you_message
-        # This is in its own method because it needs to know about the filename
-        # which is only known once we know the resume can be generated and
-        # its data is fetched.
-        puts cyan(
-          {
-            en: "Thanks for looking at my resume."\
-                "I hope to hear from you soon!\n"\
-                "#{filename} has been generated in the same\n"\
-                "directory you ran this script."
-          }[locale]
-        )
+      def thank_user_for_generating_resume
+        puts(cyan(messages[__method__]), filename)
       end
 
       def request_to_open_resume

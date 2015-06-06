@@ -11,12 +11,12 @@ module Resume
         colourize(text, colour_code: 31)
       end
 
-      def yellow(text)
-        colourize(text, colour_code: 33)
-      end
-
       def green(text)
         colourize(text, colour_code: 32)
+      end
+
+      def yellow(text)
+        colourize(text, colour_code: 33)
       end
 
       def cyan(text)

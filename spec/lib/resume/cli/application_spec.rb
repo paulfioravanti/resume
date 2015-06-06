@@ -33,7 +33,9 @@ RSpec.describe Resume::CLI::Application do
     let(:application) { described_class.new(locale) }
 
     describe 'install gems' do
-      let(:gem_installer) { double('gem_installer') }
+      let(:gem_installer) do
+        double('gem_installer', gems: { 'prawn' => '1.0.0' })
+      end
 
       before do
         stub_const(
@@ -131,7 +133,7 @@ RSpec.describe Resume::CLI::Application do
         it 'attempts to open the resume and thanks the reader' do
           expect(file_system).to receive(:open_document).with(application)
           expect(application).to \
-            receive(:print_thank_you_message).and_call_original
+            receive(:thank_user_for_generating_resume).and_call_original
           application.start
         end
       end
@@ -144,7 +146,7 @@ RSpec.describe Resume::CLI::Application do
         it 'does not open the resume and thanks the reader' do
           expect(file_system).to_not receive(:open_document)
           expect(application).to \
-            receive(:print_thank_you_message).and_call_original
+            receive(:thank_user_for_generating_resume).and_call_original
           application.start
         end
       end

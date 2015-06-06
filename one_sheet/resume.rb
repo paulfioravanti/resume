@@ -33,8 +33,6 @@ module Resume
   # These consts would only ever be defined when this file's specs
   # are run in the repo with the structured version of the resume: an edge case
   VERSION = '0.6' unless const_defined?(:VERSION)
-  PRAWN_VERSION = '2.0.1' unless const_defined?(:PRAWN_VERSION)
-  PRAWN_TABLE_VERSION = '0.2.1' unless const_defined?(:PRAWN_TABLE_VERSION)
 
   module CLI
     module Colours
@@ -48,12 +46,12 @@ module Resume
         colourize(text, colour_code: 31)
       end
 
-      def yellow(text)
-        colourize(text, colour_code: 33)
-      end
-
       def green(text)
         colourize(text, colour_code: 32)
+      end
+
+      def yellow(text)
+        colourize(text, colour_code: 33)
       end
 
       def cyan(text)
@@ -79,25 +77,31 @@ module Resume
               'Creating employment history section...',
             inform_creation_of_education_history:
               'Creating education history section...',
-            request_gem_installation:
-              "May I please install the following Ruby gems:\n"\
-              "- prawn #{PRAWN_VERSION}\n"\
-              "- prawn-table #{PRAWN_TABLE_VERSION}\n"\
-              "in order to help me generate a PDF (Y/N)? ",
+            inform_of_gem_dependencies:
+              "In order to help me generate a PDF, "\
+              "I need the following Ruby gems:",
+            request_installation_permission:
+              'May I please install them? (Y/N) ',
             thank_user_for_permission:
               'Thank you kindly :-)',
             inform_start_of_gem_installation:
               'Installing required gems...',
             inform_start_of_resume_generation:
-              "Generating PDF. This shouldn't take longer than a few seconds...",
+              "Generating PDF. This shouldn't take longer "\
+              "than a few seconds...",
             inform_of_failure_to_generate_resume:
-              "Sorry, I won't be able to generate a PDF\n"\
+              "Sorry, I won't be able to generate a PDF "\
               "without these specific gem versions.\n"\
               "Please ask me directly for a PDF copy of my resume.",
             inform_of_successful_resume_generation:
               'Resume generated successfully.',
             request_to_open_resume:
               'Would you like me to open the resume for you (Y/N)? ',
+            inform_thank_you_message:
+              "Thanks for looking at my resume. "\
+              "I hope to hear from you soon!\n"\
+              "My resume has been generated in the same "\
+              "directory you ran this script under the filename:",
             request_user_to_open_document:
               "Sorry, I can't figure out how to open the resume on\n"\
               "this computer. Please open it yourself.",
@@ -158,7 +162,11 @@ module Resume
       private
 
       def request_gem_installation
-        print yellow(messages[__method__])
+        puts yellow(messages[:inform_of_gem_dependencies])
+        gems.each do |name, version|
+          puts "- #{name} #{version}"
+        end
+        print yellow(messages[:request_installation_permission])
       end
 
       def inform_start_of_resume_generation
@@ -173,18 +181,8 @@ module Resume
         puts green(messages[__method__])
       end
 
-      def print_thank_you_message
-        # This is in its own method because it needs to know about the filename
-        # which is only known once we know the resume can be generated and
-        # its data is fetched.
-        puts cyan(
-          {
-            en: "Thanks for looking at my resume."\
-                "I hope to hear from you soon!\n"\
-                "#{filename} has been generated in the same\n"\
-                "directory you ran this script."
-          }[locale]
-        )
+      def thank_user_for_generating_resume
+        puts(cyan(messages[__method__]), filename)
       end
 
       def request_to_open_resume
@@ -282,22 +280,21 @@ module Resume
 
       def initialize(app)
         @app = app
-        @gems = {
-          'prawn' => PRAWN_VERSION,
-          'prawn-table' => PRAWN_TABLE_VERSION
-        }
+        @gems = initialize_gem_dependencies
       end
 
       def installation_required?
         gems.each do |name, version|
-          if Gem::Specification.find_by_name(name).version <
-            Gem::Version.new(version)
-            return true
+          begin
+            if already_installed?(name, version)
+              gems.delete(name) # remove dependency to install
+            end
+          rescue Gem::LoadError
+            # gem not installed: leave in the gems list
+            next
           end
         end
-        false
-      rescue Gem::LoadError # gem not installed
-        true
+        !gems.empty?
       end
 
       def install
@@ -314,6 +311,18 @@ module Resume
       end
 
       private
+
+      def initialize_gem_dependencies
+        {
+          'prawn' => '2.0.1',
+          'prawn-table' => '0.2.1'
+        }
+      end
+
+      def already_installed?(name, version)
+        Gem::Specification.find_by_name(name).version ==
+          Gem::Version.new(version)
+      end
 
       def gems_successfully_installed?
         gems.all? do |gem, version|
@@ -357,7 +366,7 @@ module Resume
         initialize_messages
       end
 
-      def_delegators :@installer, :installation_required?, :install
+      def_delegators :@installer, :installation_required?, :install, :gems
 
       def start
         install_gems if installation_required?
@@ -386,7 +395,7 @@ module Resume
       def open_resume
         request_to_open_resume
         FileSystem.open_document(self) if permission_granted?
-        print_thank_you_message
+        thank_user_for_generating_resume
       end
 
       def permission_granted?
@@ -1039,7 +1048,9 @@ module Resume
       let(:application) { described_class.new(locale) }
 
       describe 'install gems' do
-        let(:gem_installer) { double('gem_installer') }
+        let(:gem_installer) do
+          double('gem_installer', gems: { 'prawn' => '1.0.0' })
+        end
 
         before do
           stub_const(
@@ -1137,7 +1148,7 @@ module Resume
           it 'attempts to open the resume and thanks the reader' do
             expect(file_system).to receive(:open_document).with(application)
             expect(application).to \
-              receive(:print_thank_you_message).and_call_original
+              receive(:thank_user_for_generating_resume).and_call_original
             application.start
           end
         end
@@ -1150,7 +1161,7 @@ module Resume
           it 'does not open the resume and thanks the reader' do
             expect(file_system).to_not receive(:open_document)
             expect(application).to \
-              receive(:print_thank_you_message).and_call_original
+              receive(:thank_user_for_generating_resume).and_call_original
             application.start
           end
         end
@@ -1382,22 +1393,48 @@ module Resume
   end
 
   RSpec.describe CLI::GemInstaller do
-    let(:app) { CLI::Application.new(:en) }
+    let(:locale) { :en }
+    let(:app) { Resume::CLI::Application.new(locale) }
     let(:gem_installer) { described_class.new(app) }
 
     before do
-      stub_const('PRAWN_VERSION', '2.0.1')
-      stub_const('PRAWN_TABLE_VERSION', '0.2.1')
       allow($stdout).to receive(:write) # suppress message cruft from stdout
     end
 
     describe '#installation_required?' do
+      let(:gem_dependencies) do
+        { 'prawn' => '1.0.0', 'prawn-table' => '1.0.0' }
+      end
       let(:installation_required) { gem_installer.installation_required? }
 
-      context 'when a required gem is not installed' do
+      before do
+        allow(gem_installer).to \
+          receive(:gems).and_return(gem_dependencies)
+      end
+
+      context 'when no required gems are installed' do
         before do
           allow(Gem::Specification).to \
-            receive(:find_by_name).and_raise(Gem::LoadError)
+            receive(:find_by_name).with(anything).and_raise(Gem::LoadError)
+        end
+
+        it 'returns true' do
+          expect(installation_required).to be true
+        end
+      end
+
+      context 'when only some of required gems are installed' do
+        let(:prawn_gem) do
+          double('prawn_gem', version: Gem::Version.new('1.0.0'))
+        end
+
+        before do
+          allow(Gem::Specification).to \
+            receive(:find_by_name).with('prawn').
+              and_return(prawn_gem)
+          allow(Gem::Specification).to \
+            receive(:find_by_name).with('prawn-table').
+              and_raise(Gem::LoadError)
         end
 
         it 'returns true' do
@@ -1409,10 +1446,17 @@ module Resume
         let(:prawn_gem) do
           double('prawn_gem', version: Gem::Version.new('1.0.0'))
         end
+        let(:prawn_table_gem) do
+          double('prawn_table_gem', version: Gem::Version.new('0.9.0'))
+        end
 
         before do
           allow(Gem::Specification).to \
-            receive(:find_by_name).with('prawn').and_return(prawn_gem)
+            receive(:find_by_name).with('prawn').
+              and_return(prawn_gem)
+          allow(Gem::Specification).to \
+            receive(:find_by_name).with('prawn-table').
+              and_return(prawn_table_gem)
         end
 
         it 'returns true' do
@@ -1422,16 +1466,10 @@ module Resume
 
       context 'when all required gems are already installed' do
         let(:prawn_gem) do
-          double(
-            'prawn_gem',
-            version: Gem::Version.new(PRAWN_VERSION)
-          )
+          double('prawn_gem', version: Gem::Version.new('1.0.0'))
         end
         let(:prawn_table_gem) do
-          double(
-            'prawn_table_gem',
-            version: Gem::Version.new(PRAWN_TABLE_VERSION)
-          )
+          double('prawn_table_gem', version: Gem::Version.new('1.0.0'))
         end
 
         before do
@@ -1450,11 +1488,19 @@ module Resume
     end
 
     describe '#install' do
+      let(:gem_dependencies) do
+        { 'prawn' => '1.0.0', 'prawn-table' => '1.0.0' }
+      end
       let(:install_prawn_args) do
-        ['gem', 'install', 'prawn', '-v', PRAWN_VERSION]
+        ['gem', 'install', 'prawn', '-v', '1.0.0']
+      end
+      let(:install_prawn_table_args) do
+        ['gem', 'install', 'prawn-table', '-v', '1.0.0']
       end
 
       before do
+        allow(gem_installer).to \
+          receive(:gems).and_return(gem_dependencies)
         expect(app).to \
           receive(:thank_user_for_permission).and_call_original
         expect(app).to \
@@ -1465,8 +1511,10 @@ module Resume
         let(:installing_gems) { -> { gem_installer.install } }
 
         before do
-          allow(gem_installer).to \
+          expect(gem_installer).to \
             receive(:system).with(*install_prawn_args).and_return(false)
+          expect(gem_installer).to_not \
+            receive(:system).with(*install_prawn_table_args)
         end
 
         it 'informs the user of the failure and exits' do
@@ -1477,10 +1525,6 @@ module Resume
       end
 
       context 'when gems are able to be successfully installed' do
-        let(:install_prawn_table_args) do
-          ['gem', 'install', 'prawn-table', '-v', PRAWN_TABLE_VERSION]
-        end
-
         before do
           allow(gem_installer).to \
             receive(:system).with(*install_prawn_args).and_return(true)
