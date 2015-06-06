@@ -40,8 +40,8 @@ module Resume
 
       def initialize_gem_dependencies
         {
-          'prawn' => PRAWN_VERSION,
-          'prawn-table' => PRAWN_TABLE_VERSION
+          'prawn' => '2.0.1',
+          'prawn-table' => '0.2.1'
         }
       end
 
