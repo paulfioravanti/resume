@@ -20,16 +20,20 @@ module Resume
       def self.generate(app)
         locale = app.locale
         resume = JSON.parse(
-          open("resources/resume.#{locale}.json").read,
+          open(data_url(locale)).read,
           symbolize_names: true
         )[:resume]
-        app.filename =
-          "#{d(resume[:document_name])}_#{locale}.pdf"
+        app.filename = "#{d(resume[:document_name])}_#{locale}.pdf"
         new(resume, app).generate
       rescue SocketError
         app.inform_of_network_connection_issue
         exit
       end
+
+      def self.data_url(locale)
+        "resources/resume.#{locale}.json"
+      end
+      private_class_method :data_url
 
       def initialize(resume, app)
         @resume = resume
