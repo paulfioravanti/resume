@@ -3,7 +3,8 @@ require 'resume/cli/gem_installer'
 require 'resume/cli/application'
 
 RSpec.describe Resume::CLI::GemInstaller do
-  let(:app) { Resume::CLI::Application.new(:en) }
+  let(:locale) { :en }
+  let(:app) { Resume::CLI::Application.new(locale) }
   let(:gem_installer) { described_class.new(app) }
 
   before do
