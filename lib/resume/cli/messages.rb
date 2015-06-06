@@ -40,7 +40,7 @@ module Resume
               'Resume generated successfully.',
             request_to_open_resume:
               'Would you like me to open the resume for you (Y/N)? ',
-            inform_thank_you_message:
+            thank_user_for_generating_resume:
               "Thanks for looking at my resume. "\
               "I hope to hear from you soon!\n"\
               "My resume has been generated in the same "\
