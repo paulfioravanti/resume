@@ -54,7 +54,7 @@ module Resume
       def open_resume
         request_to_open_resume
         FileSystem.open_document(self) if permission_granted?
-        print_thank_you_message
+        thank_user_for_generating_resume
       end
 
       def permission_granted?
