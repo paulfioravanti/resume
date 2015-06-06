@@ -25,7 +25,7 @@ module Resume
         initialize_messages
       end
 
-      def_delegators :@installer, :installation_required?, :install
+      def_delegators :@installer, :installation_required?, :install, :gems
 
       def start
         install_gems if installation_required?
