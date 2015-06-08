@@ -20,7 +20,7 @@ module Resume
             next
           end
         end
-        !gems.empty?
+        gems.any?
       end
 
       def install
