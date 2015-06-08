@@ -20,7 +20,7 @@ module Resume
       def self.generate(app)
         locale = app.locale
         resume = JSON.parse(
-          open(data_url(locale)).read,
+          open("#{DATA_LOCATION}resume.#{locale}.json").read,
           symbolize_names: true
         )[:resume]
         app.filename = "#{d(resume[:document_name])}_#{locale}.pdf"
@@ -29,11 +29,6 @@ module Resume
         app.inform_of_network_connection_issue
         exit
       end
-
-      def self.data_url(locale)
-        "resources/resume.#{locale}.json"
-      end
-      private_class_method :data_url
 
       def initialize(resume, app)
         @resume = resume

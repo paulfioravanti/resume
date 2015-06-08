@@ -32,7 +32,12 @@ require 'forwardable'
 module Resume
   # These consts would only ever be defined when this file's specs
   # are run in the repo with the structured version of the resume: an edge case
-  VERSION = '0.6' unless const_defined?(:VERSION)
+  remove_const(:VERSION) if const_defined?(:VERSION)
+  remove_const(:DATA_LOCATION) if const_defined?(:DATA_LOCATION)
+  VERSION = '0.6'
+  DATA_LOCATION =
+    "https://raw.githubusercontent.com/paulfioravanti"\
+      "/resume/master/resources/"
 
   module CLI
     module Colours
@@ -953,7 +958,7 @@ module Resume
       def self.generate(app)
         locale = app.locale
         resume = JSON.parse(
-          open(data_url(locale)).read,
+          open("#{DATA_LOCATION}resume.#{locale}.json").read,
           symbolize_names: true
         )[:resume]
         app.filename = "#{d(resume[:document_name])}_#{locale}.pdf"
@@ -962,12 +967,6 @@ module Resume
         app.inform_of_network_connection_issue
         exit
       end
-
-      def self.data_url(locale)
-        "https://raw.githubusercontent.com/paulfioravanti"\
-          "/resume/master/resources/resume.#{locale}.json"
-      end
-      private_class_method :data_url
 
       def initialize(resume, app)
         @resume = resume
