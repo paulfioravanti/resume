@@ -67,17 +67,16 @@ class OneSheetResume
 ### Instructions:
 ### 1. Make sure you run this with Ruby 2.2.2
 ###
-### 2. Please let the script install some Ruby gems needed for PDF generation.
-###    Otherwise, contact me directly for the PDF file.
+### 2. Please ensure you have an internet connection as the script needs
+###    Ruby gems for PDF generation, small images from Flickr, and resume data
+###    from Github.  If that is not possible or you'd rather not let the script
+###    make those connections, please contact me directly for the PDF file.
 ###
-### 3. The script will pull down some small images from Flickr, so please ensure
-###    you have an internet connection.
-###
-### 4. Run the script:
+### 3. Run the script:
 ###
 ###    $ ruby resume.rb
 ###
-### 5. If you have RSpec 3.2 or above installed, run the specs:
+### 4. If you have RSpec 3.2 or above installed, run the specs:
 ###
 ###    $ rspec resume.rb
 ###
