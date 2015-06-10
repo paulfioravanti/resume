@@ -4,6 +4,10 @@ class OneSheetResume
   include Resume::CLI::Colours
 
   attr_accessor :content
+  attr_reader :cli_path, :resume_path, :pdf_path, :pdf_entry_path,
+              :spec_path, :cli_spec_path, :pdf_spec_path,
+              :cli_files, :resume_files, :pdf_files_1, :pdf_files_2,
+              :pdf_entry_files, :spec_files, :cli_spec_files, :pdf_spec_files
 
   def self.generate
     new.generate
@@ -13,42 +17,89 @@ class OneSheetResume
 
   def initialize
     @content = ''
+    @cli_path = 'lib/resume/cli/'
+    @resume_path = 'lib/resume/'
+    @pdf_path = 'lib/resume/pdf/'
+    @pdf_entry_path = "#{@pdf_path}entry/"
+    @spec_path = "spec/"
+    @cli_spec_path = "#{@spec_path}#{@cli_path}"
+    @pdf_spec_path = "#{@spec_path}#{@pdf_path}"
+    @cli_files = [
+      ['colours', 1, -3],
+      ['messages', 4, -3],
+      ['argument_parser', 6, -3],
+      ['gem_installer', 2, -3],
+      ['file_system', 2, -3],
+      ['application', 8, -2]
+    ]
+    @resume_files = [
+      ['decoder', 3, -2]
+    ]
+    @pdf_files_1 = [
+      ['font', 1, -3],
+      ['name', 2, -3],
+      ['headline', 2, -3],
+      ['transparent_link', 2, -3],
+      ['logo', 2, -3],
+      ['social_media_logo_set', 5, -3]
+    ]
+    @pdf_entry_files = [
+      ['heading', 2, -4],
+      ['header', 3, -4],
+      ['company_logo', 3, -4],
+      ['content', 6, -3]
+    ]
+    @pdf_files_2 = [
+      ['technical_skills', 4, -3],
+      ['employment_history', 4, -3],
+      ['education_history', 2, -3],
+      ['manifest', 10, -3],
+      ['options', 2, -3],
+      ['document', 9, -1],
+    ]
+    @spec_files = [
+      ['spec_helper', 8, -1]
+    ]
+    @cli_spec_files = [
+      ['application_spec', 3, -1],
+      ['argument_parser_spec', 3, -1],
+      ['file_system_spec', 4, -1],
+      ['gem_installer_spec', 4, -1]
+    ]
+    @pdf_spec_files = [
+      ['document_spec', 3, -1, '']
+    ]
   end
 
   def generate
     instructions
     requires
     open_resume_module
-    cli_colours
-    cli_messages
-    cli_argument_parser
-    cli_gem_installer
-    cli_file_system
-    cli_application
-    decoder
-    pdf_font
-    pdf_name
-    pdf_headline
-    pdf_transparent_link
-    pdf_logo
-    pdf_social_media_logo_set
-    pdf_entry_heading
-    pdf_entry_header
-    pdf_entry_company_logo
-    pdf_entry_content
-    pdf_technical_skills
-    pdf_employment_history
-    pdf_education_history
-    pdf_manifest
-    pdf_options
-    pdf_document
+    cli_files.each do |file, from_line, to_line|
+      read_file(cli_path, file, from_line, to_line)
+    end
+    resume_files.each do |file, from_line, to_line|
+      read_file(resume_path, file, from_line, to_line)
+    end
+    pdf_files_1.each do |file, from_line, to_line|
+      read_file(pdf_path, file, from_line, to_line)
+    end
+    pdf_entry_files.each do |file, from_line, to_line|
+      read_file(pdf_entry_path, file, from_line, to_line)
+    end
+    pdf_files_2.each do |file, from_line, to_line|
+      read_file(pdf_path, file, from_line, to_line)
+    end
     start_app
-    spec_helper
-    cli_application_spec
-    cli_argument_parser_spec
-    cli_file_system_spec
-    cli_gem_installer_spec
-    pdf_document_spec
+    spec_files.each do |file, from_line, to_line|
+      read_file(spec_path, file, from_line, to_line)
+    end
+    cli_spec_files.each do |file, from_line, to_line|
+      read_file(cli_spec_path, file, from_line, to_line)
+    end
+    pdf_spec_files.each do |file, from_line, to_line, line_break|
+      read_file(pdf_spec_path, file, from_line, to_line, line_break)
+    end
     output_file
     run_specs
   end
@@ -110,126 +161,9 @@ module Resume
     OPEN_MODULE
   end
 
-  def cli_colours
-    lines = File.readlines('lib/resume/cli/colours.rb')
-    # Open CLI module
-    content << lines[1..-3].join << "\n"
-  end
-
-  def cli_messages
-    lines = File.readlines('lib/resume/cli/messages.rb')
-    content << lines[4..-3].join << "\n"
-  end
-
-  def cli_argument_parser
-    lines = File.readlines('lib/resume/cli/argument_parser.rb')
-    content << lines[6..-3].join << "\n"
-  end
-
-  def cli_gem_installer
-    lines = File.readlines('lib/resume/cli/gem_installer.rb')
-    content << lines[2..-3].join << "\n"
-  end
-
-  def cli_file_system
-    lines = File.readlines('lib/resume/cli/file_system.rb')
-    content << lines[2..-3].join << "\n"
-  end
-
-  def cli_application
-    lines = File.readlines('lib/resume/cli/application.rb')
-    # Close CLI module
-    content << lines[8..-2].join << "\n"
-  end
-
-  def decoder
-    lines = File.readlines('lib/resume/decoder.rb')
-    # Open/close Decoder module
-    content << lines[3..-2].join << "\n"
-  end
-
-  def pdf_font
-    lines = File.readlines('lib/resume/pdf/font.rb')
-    # Open PDF module
-    content << lines[1..-3].join << "\n"
-  end
-
-  def pdf_name
-    lines = File.readlines('lib/resume/pdf/name.rb')
-    content << lines[2..-3].join << "\n"
-  end
-
-  def pdf_headline
-    lines = File.readlines('lib/resume/pdf/headline.rb')
-    content << lines[2..-3].join << "\n"
-  end
-
-  def pdf_transparent_link
-    lines = File.readlines('lib/resume/pdf/transparent_link.rb')
-    content << lines[2..-3].join << "\n"
-  end
-
-  def pdf_logo
-    lines = File.readlines('lib/resume/pdf/logo.rb')
-    content << lines[2..-3].join << "\n"
-  end
-
-  def pdf_social_media_logo_set
-    lines = File.readlines('lib/resume/pdf/social_media_logo_set.rb')
-    content << lines[5..-3].join << "\n"
-  end
-
-  def pdf_entry_heading
-    lines = File.readlines('lib/resume/pdf/entry/heading.rb')
-    # Open Entry module
-    content << lines[2..-4].join << "\n"
-  end
-
-  def pdf_entry_header
-    lines = File.readlines('lib/resume/pdf/entry/header.rb')
-    content << lines[3..-4].join << "\n"
-  end
-
-  def pdf_entry_company_logo
-    lines = File.readlines('lib/resume/pdf/entry/company_logo.rb')
-    content << lines[3..-4].join << "\n"
-  end
-
-  def pdf_entry_content
-    lines = File.readlines('lib/resume/pdf/entry/content.rb')
-    # Close Entry module
-    content << lines[6..-3].join << "\n"
-  end
-
-  def pdf_technical_skills
-    lines = File.readlines('lib/resume/pdf/technical_skills.rb')
-    content << lines[4..-3].join << "\n"
-  end
-
-  def pdf_employment_history
-    lines = File.readlines('lib/resume/pdf/employment_history.rb')
-    content << lines[4..-3].join << "\n"
-  end
-
-  def pdf_education_history
-    lines = File.readlines('lib/resume/pdf/education_history.rb')
-    content << lines[2..-3].join << "\n"
-  end
-
-  def pdf_manifest
-    lines = File.readlines('lib/resume/pdf/manifest.rb')
-    content << lines[10..-3].join << "\n"
-  end
-
-  def pdf_options
-    lines = File.readlines('lib/resume/pdf/options.rb')
-    # Close PDF Module
-    content << lines[2..-3].join << "\n"
-  end
-
-  def pdf_document
-    lines = File.readlines('lib/resume/pdf/document.rb')
-    content << lines[9..-1].join << "\n"
+  def read_file(path, file, from_line, to_line, line_break = "\n")
+    lines = File.readlines("#{path}#{file}.rb")
+    content << lines[from_line..to_line].join << line_break
   end
 
   def start_app
@@ -239,36 +173,6 @@ if __FILE__ == $0
 end
 
     START
-  end
-
-  def spec_helper
-    lines = File.readlines('spec/spec_helper.rb')
-    content << lines[8..-1].join << "\n"
-  end
-
-  def cli_application_spec
-    lines = File.readlines('spec/lib/resume/cli/application_spec.rb')
-    content << lines[3..-1].join << "\n"
-  end
-
-  def cli_argument_parser_spec
-    lines = File.readlines('spec/lib/resume/cli/argument_parser_spec.rb')
-    content << lines[3..-1].join << "\n"
-  end
-
-  def cli_file_system_spec
-    lines = File.readlines('spec/lib/resume/cli/file_system_spec.rb')
-    content << lines[4..-1].join << "\n"
-  end
-
-  def cli_gem_installer_spec
-    lines = File.readlines('spec/lib/resume/cli/gem_installer_spec.rb')
-    content << lines[4..-1].join << "\n"
-  end
-
-  def pdf_document_spec
-    lines = File.readlines('spec/lib/resume/pdf/document_spec.rb')
-    content << lines[3..-1].join
   end
 
   def output_file
