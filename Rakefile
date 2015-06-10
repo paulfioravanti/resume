@@ -33,3 +33,9 @@ Reek::Rake::Task.new do |t|
 end
 
 Rake.add_rakelib 'lib/tasks'
+
+require_relative 'lib/tasks/one_sheet_resume'
+desc 'Generate the one-file resume from the application'
+task :resume do
+  OneSheetResume.generate
+end
