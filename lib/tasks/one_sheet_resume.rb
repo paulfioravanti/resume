@@ -50,6 +50,7 @@ class OneSheetResume
     cli_gem_installer_spec
     pdf_document_spec
     output_file
+    run_specs
   end
 
   private
@@ -276,5 +277,10 @@ end
       file.write(content)
     end
     puts green('Successfully generated one-sheet resume')
+  end
+
+  def run_specs
+    puts yellow('Running specs...')
+    system('rspec', 'resume.rb')
   end
 end
