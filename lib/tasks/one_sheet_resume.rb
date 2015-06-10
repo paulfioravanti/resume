@@ -262,7 +262,7 @@ end
   end
 
   def cli_gem_installer_spec
-    lines = File.readlines('spec/lib/resume/cli/file_system_spec.rb')
+    lines = File.readlines('spec/lib/resume/cli/gem_installer_spec.rb')
     content << lines[4..-1].join << "\n"
   end
 
