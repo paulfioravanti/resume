@@ -16,4 +16,3 @@ module Resume
     alias_method :d, :decode
   end
 end
-

@@ -5,8 +5,8 @@ else
   require 'simplecov'
 end
 
-require 'rspec'
 require 'resume/cli/colours'
+require 'rspec'
 
 RSpec.configure do |config|
   include Resume::CLI::Colours

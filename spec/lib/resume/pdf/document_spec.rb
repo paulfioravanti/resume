@@ -93,4 +93,3 @@ RSpec.describe Resume::PDF::Document do
     end
   end
 end
-
