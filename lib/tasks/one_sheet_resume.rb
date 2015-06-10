@@ -58,14 +58,15 @@ class OneSheetResume
     content << <<-INSTRUCTIONS
 # encoding: utf-8
 ################################################################################
-### This resume lives online at https://github.com/paulfioravanti/resume
+### The modularised version of this resume lives online at
+### https://github.com/paulfioravanti/resume
 ### in case you want to see a more readable, structured version of the files.
+### This one-sheet version of the resume was generated via a Rake task.
 ###
 ### Instructions:
 ### 1. Make sure you run this with Ruby 2.2.2
 ###
-### 2. Please let the script install some Prawn gems for PDF generation if you
-###    don't have them already (prawn and prawn-table)
+### 2. Please let the script install some Ruby gems needed for PDF generation.
 ###    Otherwise, contact me directly for the PDF file.
 ###
 ### 3. The script will pull down some small images from Flickr, so please ensure
@@ -75,7 +76,7 @@ class OneSheetResume
 ###
 ###    $ ruby resume.rb
 ###
-### 5. If you have RSpec installed, run the specs:
+### 5. If you have RSpec 3.2 or above installed, run the specs:
 ###
 ###    $ rspec resume.rb
 ###
