@@ -16,6 +16,7 @@ RSpec.configure do |config|
     begin
       require 'prawn'
       require 'prawn/table'
+      # Test access to the 1x1 pixel image needed for specs
       open('http://farm4.staticflickr.com/3722/10753699026_a1603247cf_m.jpg')
     rescue LoadError
       puts red(
