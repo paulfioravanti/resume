@@ -55,8 +55,9 @@ module Resume
               "install one or more required gems.\n"\
               "Either try again or ask me directly for a PDF copy of "\
               "my resume.",
-            inform_of_network_connection_issue:
-              "Sorry, it seems I can't get an outside connection.\n"\
+            inform_of_inability_to_get_outside_connection:
+              "Sorry, it seems I can't get an outside connection.",
+            request_user_to_check_internet_settings:
               "Please check your internet settings and try again."
           }
         }[locale]
@@ -87,7 +88,8 @@ module Resume
       end
 
       def inform_of_network_connection_issue
-        puts red(messages[__method__])
+        puts red(messages[:inform_of_inability_to_get_outside_connection])
+        puts yellow(messages[:request_user_to_check_internet_settings])
       end
 
       def inform_of_successful_gem_installation
