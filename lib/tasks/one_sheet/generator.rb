@@ -1,5 +1,6 @@
 require_relative '../../resume/cli/colours'
 require_relative 'cli_files'
+require_relative 'pdf_files'
 
 module OneSheet
   class Generator
@@ -29,28 +30,6 @@ module OneSheet
       @resume_files = [
         ['decoder', 3, -2]
       ]
-      @pdf_files_1 = [
-        ['font', 1, -3],
-        ['name', 2, -3],
-        ['headline', 2, -3],
-        ['transparent_link', 2, -3],
-        ['logo', 2, -3],
-        ['social_media_logo_set', 5, -3]
-      ]
-      @pdf_entry_files = [
-        ['heading', 2, -4],
-        ['header', 3, -4],
-        ['company_logo', 3, -4],
-        ['content', 6, -3]
-      ]
-      @pdf_files_2 = [
-        ['technical_skills', 4, -3],
-        ['employment_history', 4, -3],
-        ['education_history', 2, -3],
-        ['manifest', 10, -3],
-        ['options', 2, -3],
-        ['document', 9, -1],
-      ]
       @spec_files = [
         ['spec_helper', 8, -1]
       ]
@@ -73,15 +52,7 @@ module OneSheet
       resume_files.each do |file, from_line, to_line|
         read_file(resume_path, file, from_line, to_line)
       end
-      pdf_files_1.each do |file, from_line, to_line|
-        read_file(pdf_path, file, from_line, to_line)
-      end
-      pdf_entry_files.each do |file, from_line, to_line|
-        read_file(pdf_entry_path, file, from_line, to_line)
-      end
-      pdf_files_2.each do |file, from_line, to_line|
-        read_file(pdf_path, file, from_line, to_line)
-      end
+      content << PDFFiles.read
       start_app
       spec_files.each do |file, from_line, to_line|
         read_file(spec_path, file, from_line, to_line)
@@ -160,9 +131,9 @@ module OneSheet
 
     def start_app
       content << <<-START
-  if __FILE__ == $0
-    Resume::CLI::Application.start
-  end
+if __FILE__ == $0
+  Resume::CLI::Application.start
+end
 
       START
     end
