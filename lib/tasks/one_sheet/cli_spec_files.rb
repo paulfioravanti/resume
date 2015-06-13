@@ -1,5 +1,5 @@
 module OneSheet
-  class CLIFiles
+  class CLISpecFiles
     include Readable
 
     attr_reader :path, :files
@@ -11,14 +11,12 @@ module OneSheet
 
     def initialize
       @content = ''
-      @path = 'lib/resume/cli/'
+      @path = 'spec/lib/resume/cli/'
       @files = [
-        ['colours', 1, -3],
-        ['messages', 4, -3],
-        ['argument_parser', 6, -3],
-        ['gem_installer', 2, -3],
-        ['file_system', 2, -3],
-        ['application', 8, -2]
+        ['application_spec', 3, -1],
+        ['argument_parser_spec', 3, -1],
+        ['file_system_spec', 4, -1],
+        ['gem_installer_spec', 4, -1]
       ]
     end
 

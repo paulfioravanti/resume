@@ -1,16 +1,14 @@
 require_relative '../../resume/cli/colours'
+require_relative 'readable'
 require_relative 'cli_files'
 require_relative 'pdf_files'
+require_relative 'cli_spec_files'
 
 module OneSheet
   class Generator
-    include Resume::CLI::Colours
+    include Resume::CLI::Colours, Readable
 
     attr_accessor :content
-    attr_reader :resume_path, :pdf_path, :pdf_entry_path,
-                :spec_path, :cli_spec_path, :pdf_spec_path,
-                :resume_files, :pdf_files_1, :pdf_files_2,
-                :pdf_entry_files, :spec_files, :cli_spec_files, :pdf_spec_files
 
     def self.run
       new.run
@@ -20,49 +18,19 @@ module OneSheet
 
     def initialize
       @content = ''
-      @cli_path = 'lib/resume/cli/'
-      @resume_path = 'lib/resume/'
-      @pdf_path = 'lib/resume/pdf/'
-      @pdf_entry_path = "#{@pdf_path}entry/"
-      @spec_path = "spec/"
-      @cli_spec_path = "#{@spec_path}#{@cli_path}"
-      @pdf_spec_path = "#{@spec_path}#{@pdf_path}"
-      @resume_files = [
-        ['decoder', 3, -2]
-      ]
-      @spec_files = [
-        ['spec_helper', 8, -1]
-      ]
-      @cli_spec_files = [
-        ['application_spec', 3, -1],
-        ['argument_parser_spec', 3, -1],
-        ['file_system_spec', 4, -1],
-        ['gem_installer_spec', 4, -1]
-      ]
-      @pdf_spec_files = [
-        ['document_spec', 3, -1, '']
-      ]
     end
 
     def run
       instructions
       requires
       open_resume_module
-      content << CLIFiles.read
-      resume_files.each do |file, from_line, to_line|
-        read_file(resume_path, file, from_line, to_line)
-      end
-      content << PDFFiles.read
+      read_files(CLIFiles)
+      read_file('lib/resume/', 'decoder', 3, -2)
+      read_files(PDFFiles)
       start_app
-      spec_files.each do |file, from_line, to_line|
-        read_file(spec_path, file, from_line, to_line)
-      end
-      cli_spec_files.each do |file, from_line, to_line|
-        read_file(cli_spec_path, file, from_line, to_line)
-      end
-      pdf_spec_files.each do |file, from_line, to_line, line_break|
-        read_file(pdf_spec_path, file, from_line, to_line, line_break)
-      end
+      read_file('spec/', 'spec_helper', 8, -1)
+      read_files(CLISpecFiles)
+      read_file('spec/lib/resume/pdf/', 'document_spec', 3, -1, '')
       output_file
       run_specs
     end
@@ -124,11 +92,6 @@ module OneSheet
       OPEN_MODULE
     end
 
-    def read_file(path, file, from_line, to_line, line_break = "\n")
-      lines = File.readlines("#{path}#{file}.rb")
-      content << lines[from_line..to_line].join << line_break
-    end
-
     def start_app
       content << <<-START
 if __FILE__ == $0
@@ -136,6 +99,10 @@ if __FILE__ == $0
 end
 
       START
+    end
+
+    def read_files(files)
+      content << files.read
     end
 
     def output_file
