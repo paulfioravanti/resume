@@ -1,13 +1,14 @@
 require_relative '../../resume/cli/colours'
+require_relative 'cli_files'
 
 module OneSheet
   class Generator
     include Resume::CLI::Colours
 
     attr_accessor :content
-    attr_reader :cli_path, :resume_path, :pdf_path, :pdf_entry_path,
+    attr_reader :resume_path, :pdf_path, :pdf_entry_path,
                 :spec_path, :cli_spec_path, :pdf_spec_path,
-                :cli_files, :resume_files, :pdf_files_1, :pdf_files_2,
+                :resume_files, :pdf_files_1, :pdf_files_2,
                 :pdf_entry_files, :spec_files, :cli_spec_files, :pdf_spec_files
 
     def self.run
@@ -25,14 +26,6 @@ module OneSheet
       @spec_path = "spec/"
       @cli_spec_path = "#{@spec_path}#{@cli_path}"
       @pdf_spec_path = "#{@spec_path}#{@pdf_path}"
-      @cli_files = [
-        ['colours', 1, -3],
-        ['messages', 4, -3],
-        ['argument_parser', 6, -3],
-        ['gem_installer', 2, -3],
-        ['file_system', 2, -3],
-        ['application', 8, -2]
-      ]
       @resume_files = [
         ['decoder', 3, -2]
       ]
@@ -76,9 +69,7 @@ module OneSheet
       instructions
       requires
       open_resume_module
-      cli_files.each do |file, from_line, to_line|
-        read_file(cli_path, file, from_line, to_line)
-      end
+      content << CLIFiles.read
       resume_files.each do |file, from_line, to_line|
         read_file(resume_path, file, from_line, to_line)
       end
