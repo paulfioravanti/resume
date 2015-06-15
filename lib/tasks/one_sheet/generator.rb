@@ -26,13 +26,13 @@ module OneSheet
       instructions
       requires
       open_resume_module
-      content << Files.read('lib/resume/cli/', :cli_files)
-      content << Files.read('lib/resume/', :resume_files)
+      content << Files.read(:cli_files)
+      content << Files.read(:resume_files)
       read_files(PDFFiles)
       start_app
-      content << Files.read('spec/', :spec_files)
-      content << Files.read('spec/lib/resume/cli/', :cli_spec_files)
-      content << Files.read('spec/lib/resume/pdf/', :pdf_spec_files)
+      content << Files.read(:spec_files)
+      content << Files.read(:cli_spec_files)
+      content << Files.read(:pdf_spec_files)
       output_file
       run_specs
     end

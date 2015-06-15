@@ -3,13 +3,14 @@ module OneSheet
 
     attr_reader :path, :files
 
-    def self.read(path, type)
-      new(path, type).read
+    def self.read(type)
+      new(type).read
     end
 
-    def initialize(path, type)
-      @path = path
-      @files = FILES[type]
+    def initialize(type)
+      file_type = FILES[type]
+      @files = file_type[:files]
+      @path = file_type[:path]
     end
 
     private_class_method :new
