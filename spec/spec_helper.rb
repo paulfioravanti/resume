@@ -33,7 +33,7 @@ RSpec.configure do |config|
         'You need to have an internet connection in order to run the specs.'
       )
       puts yellow(
-        'Please ensure that you have one before running the specs.'
+        'Please ensure that you have one before running them.'
       )
       exit
     end
