@@ -17,7 +17,7 @@
 ###
 ###    $ ruby resume.rb
 ###
-### 4. If you have RSpec 3.2 or above installed, run the specs:
+### 4. If you have RSpec 3.3 or above installed, run the specs:
 ###
 ###    $ rspec resume.rb
 ###
