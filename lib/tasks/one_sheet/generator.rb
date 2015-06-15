@@ -28,12 +28,12 @@ module OneSheet
       requires
       open_resume_module
       read_files(CLIFiles)
-      read_file('lib/resume/', 'decoder', 3, -2)
+      content << read_file('lib/resume/', 'decoder', 3, -2)
       read_files(PDFFiles)
       start_app
-      read_file('spec/', 'spec_helper', 8, -1)
+      content << read_file('spec/', 'spec_helper', 8, -1)
       read_files(CLISpecFiles)
-      read_file('spec/lib/resume/pdf/', 'document_spec', 3, -1, '')
+      content << read_file('spec/lib/resume/pdf/', 'document_spec', 3, -1, '')
       output_file
       run_specs
     end

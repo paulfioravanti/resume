@@ -3,14 +3,12 @@ module OneSheet
     include Readable
 
     attr_reader :path, :files
-    attr_accessor :content
 
     def self.read
       new.read
     end
 
     def initialize
-      @content = ''
       @path = 'spec/lib/resume/cli/'
       @files = FILES[:cli_spec_files]
     end
@@ -18,10 +16,9 @@ module OneSheet
     private_class_method :new
 
     def read
-      files.each do |file, from_line, to_line|
-        read_file(path, file, from_line, to_line)
+      files.reduce('') do |content, file|
+        content << read_file(path, *file)
       end
-      content
     end
   end
 end

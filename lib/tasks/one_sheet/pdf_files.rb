@@ -22,11 +22,11 @@ module OneSheet
 
     def read
       files1.each do |file, from_line, to_line|
-        read_file(path, file, from_line, to_line)
+        content << read_file(path, file, from_line, to_line)
       end
       content << PDFEntryFiles.read(path)
       files2.each do |file, from_line, to_line|
-        read_file(path, file, from_line, to_line)
+        content << read_file(path, file, from_line, to_line)
       end
       content
     end
