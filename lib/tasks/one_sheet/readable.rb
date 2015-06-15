@@ -1,5 +1,7 @@
 module OneSheet
   module Readable
+    private
+
     def read_file(path, file, from_line, to_line, line_break = "\n")
       lines = File.readlines("#{path}#{file}.rb")
       lines[from_line..to_line].join << line_break
