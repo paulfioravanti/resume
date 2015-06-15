@@ -12,7 +12,7 @@ module OneSheet
     def initialize(path)
       @content = ''
       @path = "#{path}entry/"
-      @files = pdf_entry_files
+      @files = initialize_files
     end
 
     private_class_method :new
@@ -26,7 +26,7 @@ module OneSheet
 
     private
 
-    def pdf_entry_files
+    def initialize_files
       [
         ['heading', 2, -4],
         ['header', 3, -4],

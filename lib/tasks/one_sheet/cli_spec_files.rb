@@ -12,7 +12,7 @@ module OneSheet
     def initialize
       @content = ''
       @path = 'spec/lib/resume/cli/'
-      @files = cli_spec_files
+      @files = initialize_files
     end
 
     private_class_method :new
@@ -26,7 +26,7 @@ module OneSheet
 
     private
 
-    def cli_spec_files
+    def initialize_files
       [
         ['application_spec', 3, -1],
         ['argument_parser_spec', 3, -1],

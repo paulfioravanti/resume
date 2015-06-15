@@ -12,7 +12,7 @@ module OneSheet
     def initialize
       @content = ''
       @path = 'lib/resume/cli/'
-      @files = cli_files
+      @files = initialize_files
     end
 
     private_class_method :new
@@ -26,7 +26,7 @@ module OneSheet
 
     private
 
-    def cli_files
+    def initialize_files
       [
         ['colours', 1, -3],
         ['messages', 4, -3],

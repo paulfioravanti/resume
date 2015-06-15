@@ -14,8 +14,8 @@ module OneSheet
     def initialize
       @content = ''
       @path = 'lib/resume/pdf/'
-      @files1 = pdf_files_first_batch
-      @files2 = pdf_files_second_batch
+      @files1 = initialize_first_file_batch
+      @files2 = initialize_second_file_batch
     end
 
     private_class_method :new
@@ -33,7 +33,7 @@ module OneSheet
 
     private
 
-    def pdf_files_first_batch
+    def initialize_first_file_batch
       [
         ['font', 1, -3],
         ['name', 2, -3],
@@ -44,7 +44,7 @@ module OneSheet
       ]
     end
 
-    def pdf_files_second_batch
+    def initialize_second_file_batch
       [
         ['technical_skills', 4, -3],
         ['employment_history', 4, -3],
