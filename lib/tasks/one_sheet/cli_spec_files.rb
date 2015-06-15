@@ -12,12 +12,7 @@ module OneSheet
     def initialize
       @content = ''
       @path = 'spec/lib/resume/cli/'
-      @files = [
-        ['application_spec', 3, -1],
-        ['argument_parser_spec', 3, -1],
-        ['file_system_spec', 4, -1],
-        ['gem_installer_spec', 4, -1]
-      ]
+      initialize_files
     end
 
     private_class_method :new
@@ -27,6 +22,17 @@ module OneSheet
         read_file(path, file, from_line, to_line)
       end
       content
+    end
+
+    private
+
+    def initialize_files
+      @files = [
+        ['application_spec', 3, -1],
+        ['argument_parser_spec', 3, -1],
+        ['file_system_spec', 4, -1],
+        ['gem_installer_spec', 4, -1]
+      ]
     end
   end
 end

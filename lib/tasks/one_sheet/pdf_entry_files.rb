@@ -12,12 +12,7 @@ module OneSheet
     def initialize(path)
       @content = ''
       @path = "#{path}entry/"
-      @files = [
-        ['heading', 2, -4],
-        ['header', 3, -4],
-        ['company_logo', 3, -4],
-        ['content', 6, -3]
-      ]
+      initialize_files
     end
 
     private_class_method :new
@@ -27,6 +22,17 @@ module OneSheet
         read_file(path, file, from_line, to_line)
       end
       content
+    end
+
+    private
+
+    def initialize_files
+      @files = [
+        ['heading', 2, -4],
+        ['header', 3, -4],
+        ['company_logo', 3, -4],
+        ['content', 6, -3]
+      ]
     end
   end
 end

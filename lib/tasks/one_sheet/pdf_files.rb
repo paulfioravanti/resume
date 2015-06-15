@@ -14,6 +14,25 @@ module OneSheet
     def initialize
       @content = ''
       @path = 'lib/resume/pdf/'
+      initialize_files
+    end
+
+    private_class_method :new
+
+    def read
+      files1.each do |file, from_line, to_line|
+        read_file(path, file, from_line, to_line)
+      end
+      content << PDFEntryFiles.read(path)
+      files2.each do |file, from_line, to_line|
+        read_file(path, file, from_line, to_line)
+      end
+      content
+    end
+
+    private
+
+    def initialize_files
       @files1 = [
         ['font', 1, -3],
         ['name', 2, -3],
@@ -30,19 +49,6 @@ module OneSheet
         ['options', 2, -3],
         ['document', 9, -1],
       ]
-    end
-
-    private_class_method :new
-
-    def read
-      files1.each do |file, from_line, to_line|
-        read_file(path, file, from_line, to_line)
-      end
-      content << PDFEntryFiles.read(path)
-      files2.each do |file, from_line, to_line|
-        read_file(path, file, from_line, to_line)
-      end
-      content
     end
   end
 end
