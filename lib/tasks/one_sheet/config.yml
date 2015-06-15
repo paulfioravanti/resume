@@ -1,3 +1,4 @@
+:header_file: lib/tasks/one_sheet/header.txt
 :file_types:
   - !ruby/symbol cli_files
   - !ruby/symbol resume_files
