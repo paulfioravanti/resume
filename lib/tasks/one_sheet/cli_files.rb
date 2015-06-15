@@ -1,16 +1,15 @@
 module OneSheet
   class CLIFiles
-    include Readable
 
     attr_reader :path, :files
 
-    def self.read
-      new.read
+    def self.read(path, type)
+      new(path, type).read
     end
 
-    def initialize
-      @path = 'lib/resume/cli/'
-      @files = FILES[:cli_files]
+    def initialize(path, type)
+      @path = path
+      @files = FILES[type]
     end
 
     private_class_method :new

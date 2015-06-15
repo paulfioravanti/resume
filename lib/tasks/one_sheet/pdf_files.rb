@@ -24,7 +24,7 @@ module OneSheet
       files1.each do |file, from_line, to_line|
         content << read_file(path, file, from_line, to_line)
       end
-      content << PDFEntryFiles.read(path)
+      content << Files.read("#{path}entry/", :pdf_entry_files)
       files2.each do |file, from_line, to_line|
         content << read_file(path, file, from_line, to_line)
       end
