@@ -1,27 +1,29 @@
 module OneSheet
   class CLIFiles
-    include Readable
+    # include Readable
 
     attr_reader :path, :files
-    attr_accessor :content
 
     def self.read
       new.read
     end
 
     def initialize
-      @content = ''
       @path = 'lib/resume/cli/'
       @files = FILES[:cli_files]
+    end
+
+    def read_file(path, file, from_line, to_line, line_break = "\n")
+      lines = File.readlines("#{path}#{file}.rb")
+      lines[from_line..to_line].join << line_break
     end
 
     private_class_method :new
 
     def read
-      files.each do |file, from_line, to_line|
-        read_file(path, file, from_line, to_line)
+      files.reduce('') do |content, file, range|
+        content << read_file(path, *file)
       end
-      content
     end
   end
 end
