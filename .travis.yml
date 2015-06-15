@@ -2,8 +2,8 @@ language: ruby
 rvm:
 - 2.2.2
 script:
-- bundle exec rspec one_sheet/resume.rb --format progress
 - bundle exec rspec spec/ --no-drb --format progress
+- bundle exec rake resume
 env:
   global:
   - secure: |-

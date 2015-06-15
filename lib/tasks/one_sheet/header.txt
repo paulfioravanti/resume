@@ -1,0 +1,42 @@
+# encoding: utf-8
+################################################################################
+### The modularised version of this resume lives online at
+### https://github.com/paulfioravanti/resume
+### in case you want to see a more readable, structured version of the files.
+### This one-sheet version of the resume was generated via a Rake task.
+###
+### Instructions:
+### 1. Make sure you run this with Ruby 2.2.2
+###
+### 2. Please ensure you have an internet connection as the script needs
+###    Ruby gems for PDF generation, small images from Flickr, and resume data
+###    from Github.  If that is not possible or you'd rather not let the script
+###    make those connections, please contact me directly for the PDF file.
+###
+### 3. Run the script:
+###
+###    $ ruby resume.rb
+###
+### 4. If you have RSpec 3.3 or above installed, run the specs:
+###
+###    $ rspec resume.rb
+###
+################################################################################
+require 'base64'
+require 'open-uri'
+require 'json'
+require 'optparse'
+require 'socket'
+require 'forwardable'
+
+module Resume
+  # These consts would only ever be defined when this file's specs
+  # are run in the repo with the structured version of the resume
+  # (an edge case) ie:
+  # $ bundle exec rspec spec/ && bundle exec rspec resume.rb
+  remove_const(:VERSION) if const_defined?(:VERSION)
+  remove_const(:DATA_LOCATION) if const_defined?(:DATA_LOCATION)
+  VERSION = '0.6'
+  DATA_LOCATION =
+    "https://raw.githubusercontent.com/paulfioravanti/resume/master/resources/"
+

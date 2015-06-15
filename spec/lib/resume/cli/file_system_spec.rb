@@ -61,4 +61,3 @@ RSpec.describe Resume::CLI::FileSystem do
     end
   end
 end
-

@@ -31,3 +31,11 @@ require 'reek/rake/task'
 Reek::Rake::Task.new do |t|
   t.fail_on_error = false
 end
+
+Rake.add_rakelib 'lib/tasks'
+
+require_relative 'lib/tasks/one_sheet/generator'
+desc 'Generate the one-file resume from the application'
+task :resume do
+  OneSheet::Generator.run
+end

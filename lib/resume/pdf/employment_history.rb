@@ -39,4 +39,3 @@ module Resume
     end
   end
 end
-

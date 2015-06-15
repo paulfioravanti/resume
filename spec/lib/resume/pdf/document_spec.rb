@@ -4,7 +4,7 @@ require 'resume/cli/application'
 RSpec.describe Resume::PDF::Document do
   let(:locale) { :en }
   let(:app) { Resume::CLI::Application.new(locale) }
-  let(:resume_data_path) { "resources/resume.#{app.locale}.json" }
+  let(:resume_data_path) { "#{Resume::DATA_LOCATION}resume.#{app.locale}.json" }
 
   before do
     allow($stdout).to receive(:write) # suppress message cruft from stdout
@@ -93,4 +93,3 @@ RSpec.describe Resume::PDF::Document do
     end
   end
 end
-

@@ -25,7 +25,7 @@ module Resume
         )[:resume]
         app.filename = "#{d(resume[:document_name])}_#{locale}.pdf"
         new(resume, app).generate
-      rescue SocketError
+      rescue SocketError, OpenURI::HTTPError, Errno::ECONNREFUSED
         app.inform_of_network_connection_issue
         exit
       end
@@ -47,4 +47,3 @@ module Resume
     end
   end
 end
-

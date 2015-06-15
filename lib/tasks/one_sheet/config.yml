@@ -1,0 +1,63 @@
+:header_file: lib/tasks/one_sheet/header.txt
+:file_types:
+  - !ruby/symbol cli_files
+  - !ruby/symbol resume_files
+  - !ruby/symbol pdf_files1
+  - !ruby/symbol pdf_entry_files
+  - !ruby/symbol pdf_files2
+  - !ruby/symbol spec_files
+  - !ruby/symbol cli_spec_files
+  - !ruby/symbol pdf_spec_files
+:cli_files:
+  :path: lib/resume/cli/
+  :files:
+    - [colours, 1, -3]
+    - [messages, 4, -3]
+    - [argument_parser, 6, -3]
+    - [gem_installer, 2, -3]
+    - [file_system, 2, -3]
+    - [application, 8, -2]
+:resume_files:
+  :path: lib/resume/
+  :files:
+    - [decoder, 3, -2]
+:spec_files:
+  :path: spec/
+  :files:
+    - [spec_helper, 8, -1]
+:pdf_entry_files:
+  :path: lib/resume/pdf/entry/
+  :files:
+    - [heading, 2, -4]
+    - [header, 3, -4]
+    - [company_logo, 3, -4]
+    - [content, 6, -3]
+:pdf_files1:
+  :path: lib/resume/pdf/
+  :files:
+    - [font, 1, -3]
+    - [name, 2, -3]
+    - [headline, 2, -3]
+    - [transparent_link, 2, -3]
+    - [logo, 2, -3]
+    - [social_media_logo_set, 5, -3]
+:pdf_files2:
+  :path: lib/resume/pdf/
+  :files:
+    - [technical_skills, 4, -3]
+    - [employment_history, 4, -3]
+    - [education_history, 2, -3]
+    - [manifest, 10, -3]
+    - [options, 2, -3]
+    - [document, 9, -1]
+:cli_spec_files:
+  :path: spec/lib/resume/cli/
+  :files:
+    - [application_spec, 3, -1]
+    - [argument_parser_spec, 3, -1]
+    - [file_system_spec, 4, -1]
+    - [gem_installer_spec, 4, -1]
+:pdf_spec_files:
+  :path: spec/lib/resume/pdf/
+  :files:
+    - [document_spec, 3, -1]

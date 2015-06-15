@@ -5,8 +5,8 @@ else
   require 'simplecov'
 end
 
-require 'rspec'
 require 'resume/cli/colours'
+require 'rspec'
 
 RSpec.configure do |config|
   include Resume::CLI::Colours
@@ -16,6 +16,8 @@ RSpec.configure do |config|
     begin
       require 'prawn'
       require 'prawn/table'
+      # Test access to the 1x1 pixel image needed for specs
+      open('http://farm4.staticflickr.com/3722/10753699026_a1603247cf_m.jpg')
     rescue LoadError
       puts red(
         'You need to have the prawn and prawn-table gems installed in '\
@@ -24,6 +26,14 @@ RSpec.configure do |config|
       puts yellow(
         'Either install them yourself or run the resume and it will '\
         'install them for you.'
+      )
+      exit
+    rescue OpenURI::HTTPError
+      puts red(
+        'You need to have an internet connection in order to run the specs.'
+      )
+      puts yellow(
+        'Please ensure that you have one before running them.'
       )
       exit
     end

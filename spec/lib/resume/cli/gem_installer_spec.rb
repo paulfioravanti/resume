@@ -151,4 +151,3 @@ RSpec.describe Resume::CLI::GemInstaller do
     end
   end
 end
-
