@@ -26,13 +26,14 @@ module OneSheet
       instructions
       requires
       open_resume_module
-      content << Files.read(:cli_files)
-      content << Files.read(:resume_files)
+      [:cli_files, :resume_files].each do |type|
+        content << Files.read(type)
+      end
       read_files(PDFFiles)
       start_app
-      content << Files.read(:spec_files)
-      content << Files.read(:cli_spec_files)
-      content << Files.read(:pdf_spec_files)
+      [:spec_files, :cli_spec_files, :pdf_spec_files].each do |type|
+        content << Files.read(type)
+      end
       output_file
       run_specs
     end
