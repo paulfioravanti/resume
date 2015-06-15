@@ -1,5 +1,3 @@
-require_relative 'pdf_entry_files'
-
 module OneSheet
   class PDFFiles
     include Readable

@@ -1,8 +1,7 @@
 require_relative '../../resume/cli/colours'
 require_relative 'readable'
-require_relative 'cli_files'
+require_relative 'files'
 require_relative 'pdf_files'
-require_relative 'cli_spec_files'
 require 'yaml'
 
 module OneSheet
