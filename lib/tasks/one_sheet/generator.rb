@@ -78,7 +78,9 @@ require 'forwardable'
       content << <<-OPEN_MODULE
 module Resume
   # These consts would only ever be defined when this file's specs
-  # are run in the repo with the structured version of the resume: an edge case
+  # are run in the repo with the structured version of the resume
+  # (an edge case) ie:
+  # $ bundle exec rspec spec/ && bundle exec rspec resume.rb
   remove_const(:VERSION) if const_defined?(:VERSION)
   remove_const(:DATA_LOCATION) if const_defined?(:DATA_LOCATION)
   VERSION = '0.6'
