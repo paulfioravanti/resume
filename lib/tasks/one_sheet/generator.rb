@@ -29,7 +29,7 @@ module OneSheet
       [:cli_files, :resume_files].each do |type|
         content << Files.read(type)
       end
-      read_files(PDFFiles)
+      content << PDFFiles.read
       start_app
       [:spec_files, :cli_spec_files, :pdf_spec_files].each do |type|
         content << Files.read(type)
@@ -102,10 +102,6 @@ if __FILE__ == $0
 end
 
       START_APP
-    end
-
-    def read_files(files)
-      content << files.read
     end
 
     def output_file
