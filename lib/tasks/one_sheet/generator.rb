@@ -1,16 +1,13 @@
 require_relative '../../resume/cli/colours'
-require_relative 'readable'
 require_relative 'files'
-require_relative 'pdf_files'
 require 'yaml'
 
 module OneSheet
-  FILES = YAML.load_file(File.join(__dir__, 'files.yml'))
-
   class Generator
-    include Resume::CLI::Colours, Readable
+    include Resume::CLI::Colours
 
     attr_accessor :content
+    attr_reader :config, :file_types
 
     def self.run
       new.run
@@ -19,6 +16,8 @@ module OneSheet
     private_class_method :new
 
     def initialize
+      @config = YAML.load_file(File.join(__dir__, 'config.yml'))
+      @file_types = config[:file_types]
       @content = ''
     end
 
@@ -26,14 +25,8 @@ module OneSheet
       instructions
       requires
       open_resume_module
-      [:cli_files, :resume_files].each do |type|
-        content << Files.read(type)
-      end
-      content << PDFFiles.read
+      resume_files
       start_app
-      [:spec_files, :cli_spec_files, :pdf_spec_files].each do |type|
-        content << Files.read(type)
-      end
       output_file
       run_specs
     end
@@ -95,12 +88,17 @@ module Resume
       OPEN_MODULE
     end
 
+    def resume_files
+      file_types.each do |type|
+        content << Files.read(config[type])
+      end
+    end
+
     def start_app
       content << <<-START_APP
 if __FILE__ == $0
   Resume::CLI::Application.start
 end
-
       START_APP
     end
 
