@@ -8,3 +8,4 @@ doc/
 pkg/
 vendor/cache/*.gem
 coverage/
+tmp/
