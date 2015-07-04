@@ -1,7 +1,7 @@
 require 'forwardable'
 require_relative 'argument_parser'
 require_relative 'messages'
-require_relative 'gem_installer'
+require_relative 'installer'
 require_relative 'file_system'
 
 module Resume
@@ -21,21 +21,21 @@ module Resume
 
       def initialize(locale)
         @locale = locale
-        @installer = GemInstaller.new(self)
+        @installer = Installer.new(self)
         initialize_messages
       end
 
       def_delegators :@installer, :installation_required?, :install, :gems
 
       def start
-        install_gems if installation_required?
+        install_dependencies if installation_required?
         generate_resume
         open_resume
       end
 
       private
 
-      def install_gems
+      def install_dependencies
         request_gem_installation
         if permission_granted?
           install

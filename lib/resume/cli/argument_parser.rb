@@ -11,7 +11,7 @@ module Resume
       attr_accessor :locale
 
       def initialize
-        @supported_locales = [:en]
+        @supported_locales = [:en, :ja]
         @parser = initialize_parser
       end
 

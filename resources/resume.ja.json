@@ -9,11 +9,11 @@
     "background_image": "http://farm6.staticflickr.com/5453/8801916021_3ac1df6072_o_d.jpg",
     "repeat": true,
     "font": {
-      "name": "Helvetica"
+      "name": "IPA"
     },
     "name": {
       "text": "44Od44O844Or44O744OV44Kj44Kq44Op44O044Kh44Oz44OG44Kj",
-      "font": "Times-Roman",
+      "font": "IPA",
       "size": 20
     },
     "headline": {
@@ -30,12 +30,12 @@
       "x_position": 0,
       "top_padding": 5,
       "padded_logo_width": 45,
-      "padded_logo_height": 46.25,
+      "padded_logo_height": 40,
       "horizontal_rule_colour": "666666",
       "logos": {
         "email": {
           "image": "http://farm3.staticflickr.com/2826/8753727736_2a7a294527_m.jpg",
-          "link": "bWFpbHRvOnBhdWwuZmlvcmF2YW50aUBnbWFpbC5jb20/c3ViamVjdD3ntKDmmbTjgonjgZfjgYTlsaXmrbTmm7jjgavjgaTjgYTjgaYmYm9keT3mmK/pnZ7kuIDnt5Ljgavku5XkuovjgYzjgZfjgZ/jgYTjgajmgJ3jgYTjgb7jgZnvvIE="
+          "link": "bWFpbHRvOnBhdWwuZmlvcmF2YW50aUBnbWFpbC5jb20/c3ViamVjdD1Zb3VyK3Jlc3VtZStpcythd2Vzb21lISZib2R5PUkrd2FudCt0bytnaXZlK3lvdSthK2pvYityaWdodCtub3ch"
         },
         "linked_in": {
           "image": "http://farm4.staticflickr.com/3687/8809717292_4938937a94_m.jpg",
@@ -79,7 +79,7 @@
         "fit": [35, 35],
         "align": "center",
         "link_overlay_start": 35,
-        "bars": 3,
+        "bars": 4,
         "size": 40
       }
     },

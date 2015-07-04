@@ -10,8 +10,9 @@ module Resume
   module PDF
     class Manifest
       def self.process(pdf, resume, app)
-        Font.configure(pdf, resume[:font])
+        Font.configure(pdf, resume[:font], app.locale)
         Name.generate(pdf, resume[:name])
+        # TODO: Headline needs some top padding in Japanese
         Headline.generate(pdf, resume[:headline])
         app.inform_creation_of_social_media_links
         SocialMediaLogoSet.generate(
@@ -19,10 +20,10 @@ module Resume
         )
         app.inform_creation_of_technical_skills
         TechnicalSkills.generate(pdf, resume[:technical_skills])
-        app.inform_creation_of_employment_history
-        EmploymentHistory.generate(pdf, resume[:employment_history])
-        app.inform_creation_of_education_history
-        EducationHistory.generate(pdf, resume[:education_history])
+        # app.inform_creation_of_employment_history
+        # EmploymentHistory.generate(pdf, resume[:employment_history])
+        # app.inform_creation_of_education_history
+        # EducationHistory.generate(pdf, resume[:education_history])
       end
     end
   end
