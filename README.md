@@ -24,7 +24,8 @@ If you have SimpleCov installed, view the test coverage report located at:
 
     coverage/index.html
 
-Generate the one-sheet version of the resume (the whole app and specs in a single file):
+Generate the "one-sheet" version of the resume: the whole app and specs in a single file.  
+If I sent my resume to you directly, it would have been generated from this `rake` task:
 
     $ rake resume
 
