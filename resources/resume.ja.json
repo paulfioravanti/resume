@@ -12,11 +12,12 @@
       "name": "IPA"
     },
     "name": {
-      "text": "44Od44O844Or44O744OV44Kj44Kq44Op44O044Kh44Oz44OG44Kj",
+      "text": "UGF1bCBGaW9yYXZhbnRpICjjg53jg7zjg6vjg7vjg5XjgqPjgqrjg6njg7TjgqHjg7Pjg4bjgqMp",
       "font": "IPA",
       "size": 20
     },
     "headline": {
+      "top_padding": 5,
       "size": 14,
       "primary": {
         "text": "UnVieemWi+eZuuiAhQ==",
@@ -28,9 +29,10 @@
     },
     "social_media_logo_set": {
       "x_position": 0,
-      "top_padding": 5,
+      "top_padding": 8,
       "padded_logo_width": 45,
       "padded_logo_height": 40,
+      "bottom_padding": 5,
       "horizontal_rule_colour": "666666",
       "logos": {
         "email": {
@@ -320,7 +322,7 @@
               "height": 39,
               "fit": [110, 40],
               "link_overlay_start": 32,
-              "bars": 11,
+              "bars": 8,
               "size": 41,
               "align": "left"
             },

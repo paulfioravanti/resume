@@ -30,7 +30,8 @@ module Resume
       end
 
       def generate_content
-        content[:entries].values.each do |entry|
+        # FIXME
+        content[:entries].values[3..-1].each do |entry|
           Entry::Content.generate(pdf, entry)
         end
         pdf.move_down content[:bottom_padding]

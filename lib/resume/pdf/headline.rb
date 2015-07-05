@@ -3,7 +3,8 @@ module Resume
     class Headline
       include Decoder
 
-      attr_reader :pdf, :primary_text, :primary_colour, :secondary_text, :size
+      attr_reader :pdf, :primary_text, :primary_colour,
+                  :secondary_text, :size, :top_padding
 
       def self.generate(pdf, headline)
         primary_header = headline[:primary]
@@ -13,6 +14,7 @@ module Resume
           primary_colour: primary_header[:colour],
           secondary_text: d(headline[:secondary][:text]),
           size: headline[:size],
+          top_padding: headline[:top_padding]
         ).generate
       end
 
@@ -26,6 +28,7 @@ module Resume
       end
 
       def generate
+        pdf.move_down(top_padding)
         pdf.formatted_text(
           [
             { text: primary_text, color: primary_colour },

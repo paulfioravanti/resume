@@ -17,6 +17,7 @@
       "size": 20
     },
     "headline": {
+      "top_padding": 0,
       "size": 14,
       "primary": {
         "text": "UnVieSBEZXZlbG9wZXIg",
@@ -31,6 +32,7 @@
       "top_padding": 5,
       "padded_logo_width": 45,
       "padded_logo_height": 46.25,
+      "bottom_padding": 0,
       "horizontal_rule_colour": "666666",
       "logos": {
         "email": {
@@ -320,7 +322,7 @@
               "height": 39,
               "fit": [110, 40],
               "link_overlay_start": 32,
-              "bars": 11,
+              "bars": 8,
               "size": 41,
               "align": "left"
             },

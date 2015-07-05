@@ -7,7 +7,8 @@ module Resume
       include TransparentLink
 
       attr_reader :pdf, :x_position, :top_padding, :padded_logo_width,
-                  :padded_logo_height, :horizontal_rule_colour, :logos
+                  :padded_logo_height, :horizontal_rule_colour, :logos,
+                  :bottom_padding
       attr_accessor :x_position
 
       def self.generate(pdf, logo_set)
@@ -20,6 +21,7 @@ module Resume
           padded_logo_width: logo_set[:padded_logo_width],
           padded_logo_height: logo_set[:padded_logo_height],
           horizontal_rule_colour: logo_set[:horizontal_rule_colour],
+          bottom_padding: logo_set[:bottom_padding]
         ).generate
       end
 
@@ -40,6 +42,7 @@ module Resume
           pdf.move_up(padded_logo_height)
           generate_logo_for(logo)
         end
+        pdf.move_down(bottom_padding)
         pdf.stroke_horizontal_rule { color horizontal_rule_colour }
       end
 
