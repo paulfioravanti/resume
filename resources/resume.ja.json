@@ -472,8 +472,8 @@
               "width": 75,
               "height": 35,
               "fit": [110, 35],
-              "link_overlay_start": 34,
-              "bars": 8,
+              "link_overlay_start": 40,
+              "bars": 10,
               "size": 36,
               "align": "left"
             },
