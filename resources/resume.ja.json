@@ -176,7 +176,7 @@
               "size": 10
             },
             "logo": {
-              "y_start": 40,
+              "y_start": 30,
               "image": "http://farm8.staticflickr.com/7584/16817331742_687c931b33_m.jpg",
               "link": "aHR0cHM6Ly9yZWludGVyYWN0aXZlLm5ldA==",
               "origin": 415,
@@ -219,7 +219,7 @@
               "size": 10
             },
             "logo": {
-              "y_start": 40,
+              "y_start": 35,
               "image": "http://farm3.staticflickr.com/2830/10899782725_cd77e50d44_m.jpg",
               "link": "aHR0cDovL3d3dy5yYXRlY2l0eS5jb20uYXUv",
               "origin": 415,
@@ -271,7 +271,7 @@
               "size": 10
             },
             "logo": {
-              "y_start": 40,
+              "y_start": 35,
               "image": "http://farm4.staticflickr.com/3904/15003967841_65c79a6a7b_m.jpg",
               "link": "aHR0cDovL21ham9yYW4uY28v",
               "origin": 415,
@@ -314,7 +314,7 @@
               "size": 10
             },
             "logo": {
-              "y_start": 40,
+              "y_start": 35,
               "image": "http://farm8.staticflickr.com/7376/8812488914_f0bfd0a841_m.jpg",
               "link": "aHR0cDovL3d3dy5ndWlkZXdpcmUuY29tLw==",
               "origin": 415,
@@ -368,7 +368,7 @@
               "size": 10
             },
             "logo": {
-              "y_start": 40,
+              "y_start": 35,
               "image": "http://farm8.staticflickr.com/7326/8801904137_e6008ee907_m.jpg",
               "link": "aHR0cDovL3d3dy5vcmFjbGUuY29tL3VzL3Byb2R1Y3RzL2FwcGxpY2F0aW9ucy9yaWdodG5vdy9vdmVydmlldy9pbmRleC5odG1s",
               "origin": 435,
@@ -422,7 +422,7 @@
               "size": 10
             },
             "logo": {
-              "y_start": 40,
+              "y_start": 35,
               "image": "http://farm4.staticflickr.com/3801/8801903945_723a5d7276_m.jpg",
               "link": "aHR0cDovL3d3dy5zcmEuY28uanAvaW5kZXgtZW4uc2h0bWw=",
               "origin": 415,
@@ -465,7 +465,7 @@
               "size": 10
             },
             "logo": {
-              "y_start": 40,
+              "y_start": 35,
               "image": "http://farm4.staticflickr.com/3690/8801904135_37197a468c_m.jpg",
               "link": "aHR0cDovL3d3dy5qZXRwcm9ncmFtbWUub3JnL2UvYXNwaXJpbmcvcG9zaXRpb25zLmh0bWw=",
               "origin": 435,
@@ -508,7 +508,7 @@
               "size": 10
             },
             "logo": {
-              "y_start": 40,
+              "y_start": 35,
               "image": "http://farm4.staticflickr.com/3804/8801903991_103f5a47f8_m.jpg",
               "link": "aHR0cDovL3d3dy5zb3V0aGF1c3RyYWxpYS5jb20v",
               "origin": 430,
@@ -563,15 +563,15 @@
               "size": 10
             },
             "logo": {
-              "y_start": 40,
+              "y_start": 35,
               "image": "http://farm4.staticflickr.com/3792/8812488692_96818be468_m.jpg",
               "link": "aHR0cHM6Ly93d3cudW5pc2EuZWR1LmF1Lw==",
               "origin": 210,
               "width": 35,
               "height": 40,
               "fit": [35, 40],
-              "link_overlay_start": 35,
-              "bars": 3,
+              "link_overlay_start": 40,
+              "bars": 4,
               "size": 43,
               "align": "left"
             }
@@ -607,21 +607,21 @@
               "bottom_padding": 0
             },
             "logo": {
-              "y_start": 30,
+              "y_start": 27,
               "image": "http://farm4.staticflickr.com/3707/8812488974_71c6981155_m.jpg",
               "link": "aHR0cDovL3d3dy5mbGluZGVycy5lZHUuYXUv",
               "origin": 490,
               "width": 35,
-              "height": 40,
+              "height": 45,
               "fit": [35, 40],
               "link_overlay_start": 40,
-              "bars": 3,
-              "size": 43,
+              "bars": 4,
+              "size": 44,
               "align": "left"
             }
           },
           "ryu": {
-            "top_padding": 20,
+            "top_padding": 15,
             "position": {
               "text": "U3R1ZGVudCBFeGNoYW5nZSBQcm9ncmFtbWU=",
               "styles": ["bold"],
@@ -646,7 +646,7 @@
               "size": 10
             },
             "logo": {
-              "y_start": 40,
+              "y_start": 35,
               "image": "http://farm8.staticflickr.com/7428/8812488856_c4c1b1f418_m.jpg",
               "link": "aHR0cDovL3d3dy5yeXVrb2t1LmFjLmpwL2VuZ2xpc2gyL2luZGV4LnBocA==",
               "origin": 214,
@@ -654,7 +654,7 @@
               "height": 40,
               "fit": [32, 40],
               "link_overlay_start": 40,
-              "bars": 3,
+              "bars": 4,
               "size": 40,
               "align": "left"
             }
@@ -690,15 +690,15 @@
               "bottom_padding": 0
             },
             "logo": {
-              "y_start": 23,
+              "y_start": 20,
               "image": "http://farm8.staticflickr.com/7377/8812488734_e43ce6742b_m.jpg",
               "link": "aHR0cDovL3d3dy50YWZlc2EuZWR1LmF1",
               "origin": 490,
-              "width": 37,
+              "width": 39,
               "height": 35,
               "fit": [37, 35],
               "link_overlay_start": 19,
-              "bars": 5,
+              "bars": 7,
               "size": 28,
               "align": "left"
             }
