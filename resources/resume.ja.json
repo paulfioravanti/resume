@@ -429,8 +429,8 @@
               "width": 115,
               "height": 40,
               "fit": [110, 40],
-              "link_overlay_start": 40,
-              "bars": 10,
+              "link_overlay_start": 45,
+              "bars": 13,
               "size": 43,
               "align": "left"
             },
