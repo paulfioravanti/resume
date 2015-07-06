@@ -62,52 +62,50 @@ module Resume
           },
           ja: {
             inform_creation_of_social_media_links:
-              'Creating social media links...',
+              'ソーシャルメディアリンクを作成中･･･',
             inform_creation_of_technical_skills:
-              'Creating technical skills section...',
+              'スキルセクションを作成中･･･',
             inform_creation_of_employment_history:
-              'Creating employment history section...',
+              '職歴セクションを作成中･･･',
             inform_creation_of_education_history:
-              'Creating education history section...',
+              '学歴セクションを作成中･･･',
             inform_of_gem_dependencies:
-              "In order to help me generate a PDF, "\
-              "I need the following Ruby gems:",
+              "PDFを生成するために以下のRuby gemが必要です:",
             request_installation_permission:
-              'May I please install them? (Y/N) ',
+              'インストールをしてもよろしいですか? (Y/N) ',
             thank_user_for_permission:
-              'Thank you kindly :-)',
+              'ありがとうございます(^_^)',
             inform_start_of_gem_installation:
-              'Installing required gems...',
+              'Ruby gemsをインストール中･･･',
             inform_start_of_resume_generation:
-              "Generating PDF. This shouldn't take longer "\
-              "than a few seconds...",
+              "PDFを生成中。少々お待ち下さい･･･",
             inform_of_failure_to_generate_resume:
-              "Sorry, I won't be able to generate a PDF "\
-              "without these specific gem versions.\n"\
-              "Please ask me directly for a PDF copy of my resume.",
+              "申し訳ありませんが、特定されたRuby gemがないと"\
+              "PDFが生成できません。\n"\
+              "履歴書PDFが生成できない場合は、直接にお問い合わせ下さい。",
             inform_of_successful_resume_generation:
-              'Resume generated successfully.',
+              '履歴書生成が成功しました。',
             request_to_open_resume:
-              'Would you like me to open the resume for you (Y/N)? ',
+              '履歴書を開きますか (Y/N)? ',
             thank_user_for_generating_resume:
-              "Thanks for looking at my resume. "\
-              "I hope to hear from you soon!\n"\
-              "My resume has been generated in the same "\
-              "directory you ran this script under the filename:",
+              "履歴書をご覧いただき、ありがとうございます。"\
+              "ご連絡をお待ちしております。\n"\
+              "履歴書はこのスクリプトが実行された同ディレクトリ"\
+              "に生成されました。",
             request_user_to_open_document:
-              "Sorry, I can't figure out how to open the resume on\n"\
-              "this computer. Please open it yourself.",
+              "ごめんなさい。使用されているコンピュータでの資料の開き方が"\
+              "不明なため、ご自身でご確認ください。",
             inform_of_successful_gem_installation:
-              'Gems successfully installed.',
+              'Ruby gemsのインストールが成功しました。',
             inform_of_gem_installation_failure:
-              "Sorry, for some reason I wasn't able to\n"\
-              "install one or more required gems.\n"\
-              "Either try again or ask me directly for a PDF copy of "\
-              "my resume.",
+              "ごめんなさい。理由は不明ですが、Ruby gemが"\
+              "インストールできませんでした。"\
+              "もう一度実行してみるか、または履歴書PDF版のリクエストを"\
+              "直接ご連絡下さい。",
             inform_of_inability_to_get_outside_connection:
-              "Sorry, it seems I can't get an outside connection.",
+              "インターネットに接続できません。",
             request_user_to_check_internet_settings:
-              "Please check your internet settings and try again."
+              "ネットワーク設定をご確認下さい。"
           }
         }[locale]
       end
