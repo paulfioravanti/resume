@@ -18,7 +18,7 @@ Generate the resume:
 
 Run the specs:
 
-    $ rspec spec/
+    $ bundle exec rspec spec/
 
 If you have SimpleCov installed, view the test coverage report located at:
 
