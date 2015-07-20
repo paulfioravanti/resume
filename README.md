@@ -32,7 +32,7 @@ If I sent my resume to you directly, it would have been generated from this `rak
 ### Dependencies
 
 - Ruby 2.2.2
-- Prawn 2.0.1 and Prawn-Table 0.2.1 (if you don't have either specific versions of the gems, you will be asked for permission to install them)
+- Prawn 2.0.2 and Prawn-Table 0.2.2 (if you don't have either specific versions of the gems, you will be asked for permission to install them)
 - RSpec 3.3, if you want to run the specs
 - SimpleCov 0.10 if you want to view the coverage report locally
 

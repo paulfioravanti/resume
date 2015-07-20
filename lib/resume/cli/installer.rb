@@ -40,7 +40,7 @@ module Resume
       private
 
       def initialize_gem_dependencies
-        { 'prawn' => '2.0.1', 'prawn-table' => '0.2.1' }.tap do |gems|
+        { 'prawn' => '2.0.2', 'prawn-table' => '0.2.2' }.tap do |gems|
           gems['zip'] = '2.0.2' if app.locale == :ja
         end
       end
