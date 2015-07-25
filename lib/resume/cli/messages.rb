@@ -29,6 +29,8 @@ module Resume
               'Thank you kindly :-)',
             inform_start_of_gem_installation:
               'Installing required gems...',
+            inform_start_of_font_download:
+              'Downloading fonts. This may take a while...',
             inform_start_of_resume_generation:
               "Generating PDF. This shouldn't take longer "\
               "than a few seconds...",
@@ -77,6 +79,8 @@ module Resume
               'ありがとうございます(^_^)',
             inform_start_of_gem_installation:
               'Ruby gemsをインストール中･･･',
+            inform_start_of_font_download:
+              'フォントをダウンロード中。少々時間が掛かります･･･',
             inform_start_of_resume_generation:
               "PDFを生成中。少々お待ち下さい･･･",
             inform_of_failure_to_generate_resume:
@@ -115,6 +119,10 @@ module Resume
       end
 
       def inform_start_of_gem_installation
+        puts messages[__method__]
+      end
+
+      def inform_start_of_font_download
         puts messages[__method__]
       end
 
