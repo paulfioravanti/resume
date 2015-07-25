@@ -20,9 +20,13 @@ module Resume
               'Creating employment history section...',
             inform_creation_of_education_history:
               'Creating education history section...',
-            inform_of_gem_dependencies:
+            inform_of_dependencies:
               "In order to help me generate a PDF, "\
-              "I need the following Ruby gems:",
+              "I need the following:",
+            inform_of_gem_dependencies:
+              "* Ruby gems:",
+            inform_of_font_dependencies:
+              "* Custom fonts for the resume",
             request_installation_permission:
               'May I please install them? (Y/N) ',
             thank_user_for_permission:
@@ -30,13 +34,15 @@ module Resume
             inform_start_of_gem_installation:
               'Installing required gems...',
             inform_start_of_font_download:
-              'Downloading fonts. This may take a while...',
+              "Downloading %{file_name} from\n"\
+              "%{location}\n"\
+              "This may take a while...",
             inform_start_of_resume_generation:
               "Generating PDF. This shouldn't take longer "\
               "than a few seconds...",
             inform_of_failure_to_generate_resume:
               "Sorry, I won't be able to generate a PDF "\
-              "without these specific gem versions.\n"\
+              "without installing these dependencies.\n"\
               "Please ask me directly for a PDF copy of my resume.",
             inform_of_successful_resume_generation:
               'Resume generated successfully.',
@@ -50,11 +56,11 @@ module Resume
             request_user_to_open_document:
               "Sorry, I can't figure out how to open the resume on\n"\
               "this computer. Please open it yourself.",
-            inform_of_successful_gem_installation:
-              'Gems successfully installed.',
-            inform_of_gem_installation_failure:
+            inform_of_successful_installation:
+              'Dependencies successfully installed.',
+            inform_of_installation_failure:
               "Sorry, for some reason I wasn't able to\n"\
-              "install one or more required gems.\n"\
+              "install one or more required dependencies.\n"\
               "Either try again or ask me directly for a PDF copy of "\
               "my resume.",
             inform_of_inability_to_get_outside_connection:
@@ -71,8 +77,12 @@ module Resume
               '職歴セクションを作成中･･･',
             inform_creation_of_education_history:
               '学歴セクションを作成中･･･',
+            inform_of_dependencies:
+              "PDFを生成するために以下の依存性が必要です:",
             inform_of_gem_dependencies:
-              "PDFを生成するために以下のRuby gemが必要です:",
+              "* Ruby gems:",
+            inform_of_font_dependencies:
+              "* カスタムフォント",
             request_installation_permission:
               'インストールをしてもよろしいですか? (Y/N) ',
             thank_user_for_permission:
@@ -80,11 +90,13 @@ module Resume
             inform_start_of_gem_installation:
               'Ruby gemsをインストール中･･･',
             inform_start_of_font_download:
-              'フォントをダウンロード中。少々時間が掛かります･･･',
+              "%{location}から\n"\
+              "%{file_name}のフォントファイルをダウンロード中。\n"\
+              "少々時間が掛かります･･･",
             inform_start_of_resume_generation:
               "PDFを生成中。少々お待ち下さい･･･",
             inform_of_failure_to_generate_resume:
-              "申し訳ありませんが、特定されたRuby gemがないと"\
+              "申し訳ありませんが、特定された依存性がないと"\
               "PDFが生成できません。\n"\
               "履歴書PDFが生成できない場合は、直接にお問い合わせ下さい。",
             inform_of_successful_resume_generation:
@@ -99,10 +111,10 @@ module Resume
             request_user_to_open_document:
               "ごめんなさい。使用されているコンピュータでの資料の開き方が"\
               "不明なため、ご自身でご確認ください。",
-            inform_of_successful_gem_installation:
-              'Ruby gemsのインストールが成功しました。',
-            inform_of_gem_installation_failure:
-              "ごめんなさい。理由は不明ですが、Ruby gemが"\
+            inform_of_successful_installation:
+              'インストールが成功しました。',
+            inform_of_installation_failure:
+              "ごめんなさい。理由は不明ですが、"\
               "インストールできませんでした。"\
               "もう一度実行してみるか、または履歴書PDF版のリクエストを"\
               "直接ご連絡下さい。",
@@ -122,8 +134,12 @@ module Resume
         puts messages[__method__]
       end
 
-      def inform_start_of_font_download
-        puts messages[__method__]
+      def inform_start_of_font_download(font_type)
+        puts messages[__method__] %
+          {
+            file_name: font_type[:file_name],
+            location: font_type[:location]
+          }
       end
 
       def inform_creation_of_social_media_links
@@ -147,11 +163,11 @@ module Resume
         puts yellow(messages[:request_user_to_check_internet_settings])
       end
 
-      def inform_of_successful_gem_installation
+      def inform_of_successful_installation
         puts green(messages[__method__])
       end
 
-      def inform_of_gem_installation_failure
+      def inform_of_installation_failure
         puts red(messages[__method__])
       end
 
@@ -161,10 +177,16 @@ module Resume
 
       private
 
-      def request_gem_installation
-        puts yellow(messages[:inform_of_gem_dependencies])
-        gems.each do |name, version|
-          puts "- #{name} #{version}"
+      def request_dependency_installation
+        puts yellow(messages[:inform_of_dependencies])
+        if gems.any?
+          puts yellow(messages[:inform_of_gem_dependencies])
+          gems.each do |name, version|
+            puts "  - #{name} #{version}"
+          end
+        end
+        if fonts.any?
+          puts yellow(messages[:inform_of_font_dependencies])
         end
         print yellow(messages[:request_installation_permission])
       end

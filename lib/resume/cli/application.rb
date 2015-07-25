@@ -25,7 +25,8 @@ module Resume
         initialize_messages
       end
 
-      def_delegators :@installer, :installation_required?, :install, :gems
+      def_delegators :@installer, :installation_required?,
+                                  :install, :gems, :fonts
 
       def start
         install_dependencies if installation_required?
@@ -36,7 +37,7 @@ module Resume
       private
 
       def install_dependencies
-        request_gem_installation
+        request_dependency_installation
         if permission_granted?
           install
         else
