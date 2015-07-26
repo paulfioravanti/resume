@@ -33,20 +33,20 @@ RSpec.describe Resume::CLI::Application do
     let(:application) { described_class.new(locale) }
 
     describe 'install gems' do
-      let(:gem_installer) do
-        double('gem_installer', gems: { 'prawn' => '1.0.0' })
+      let(:installer) do
+        double('installer', gems: { 'prawn' => '1.0.0' })
       end
 
       before do
         stub_const(
-          'Resume::CLI::GemInstaller',
-          double('GemInstaller', new: gem_installer)
+          'Resume::CLI::Installer',
+          double('GemInstaller', new: installer)
         )
       end
 
       context 'when required gems are already installed' do
         before do
-          allow(gem_installer).to \
+          allow(installer).to \
             receive(:installation_required?).and_return(false)
           allow(application).to receive(:generate_resume)
           allow(application).to receive(:open_resume)
@@ -60,7 +60,7 @@ RSpec.describe Resume::CLI::Application do
 
       context 'when the required gems are not installed' do
         before do
-          allow(gem_installer).to \
+          allow(installer).to \
             receive(:installation_required?).and_return(true)
           expect(application).to \
             receive(:request_gem_installation).and_call_original
@@ -74,7 +74,7 @@ RSpec.describe Resume::CLI::Application do
           end
 
           it 'attempts to install the gems' do
-            expect(gem_installer).to receive(:install)
+            expect(installer).to receive(:install)
             application.start
           end
         end

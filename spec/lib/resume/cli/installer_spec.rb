@@ -1,11 +1,11 @@
 require 'spec_helper'
-require 'resume/cli/gem_installer'
+require 'resume/cli/installer'
 require 'resume/cli/application'
 
-RSpec.describe Resume::CLI::GemInstaller do
+RSpec.describe Resume::CLI::Installer do
   let(:locale) { :en }
   let(:app) { Resume::CLI::Application.new(locale) }
-  let(:gem_installer) { described_class.new(app) }
+  let(:installer) { described_class.new(app) }
 
   before do
     allow($stdout).to receive(:write) # suppress message cruft from stdout
@@ -15,10 +15,10 @@ RSpec.describe Resume::CLI::GemInstaller do
     let(:gem_dependencies) do
       { 'prawn' => '1.0.0', 'prawn-table' => '1.0.0' }
     end
-    let(:installation_required) { gem_installer.installation_required? }
+    let(:installation_required) { installer.installation_required? }
 
     before do
-      allow(gem_installer).to \
+      allow(installer).to \
         receive(:gems).and_return(gem_dependencies)
     end
 
@@ -109,7 +109,7 @@ RSpec.describe Resume::CLI::GemInstaller do
     end
 
     before do
-      allow(gem_installer).to \
+      allow(installer).to \
         receive(:gems).and_return(gem_dependencies)
       expect(app).to \
         receive(:thank_user_for_permission).and_call_original
@@ -118,12 +118,12 @@ RSpec.describe Resume::CLI::GemInstaller do
     end
 
     context 'when the installation of a gem fails' do
-      let(:installing_gems) { -> { gem_installer.install } }
+      let(:installing_gems) { -> { installer.install } }
 
       before do
-        expect(gem_installer).to \
+        expect(installer).to \
           receive(:system).with(*install_prawn_args).and_return(false)
-        expect(gem_installer).to_not \
+        expect(installer).to_not \
           receive(:system).with(*install_prawn_table_args)
       end
 
@@ -136,9 +136,9 @@ RSpec.describe Resume::CLI::GemInstaller do
 
     context 'when gems are able to be successfully installed' do
       before do
-        expect(gem_installer).to \
+        expect(installer).to \
           receive(:system).with(*install_prawn_args).and_return(true)
-        expect(gem_installer).to \
+        expect(installer).to \
           receive(:system).with(*install_prawn_table_args).and_return(true)
       end
 
@@ -146,7 +146,7 @@ RSpec.describe Resume::CLI::GemInstaller do
         expect(app).to \
           receive(:inform_of_successful_gem_installation).and_call_original
         expect(Gem).to receive(:clear_paths)
-        gem_installer.install
+        installer.install
       end
     end
   end
