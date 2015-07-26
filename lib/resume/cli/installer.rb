@@ -13,7 +13,7 @@ module Resume
       def installation_required?
         gems.each do |name, version|
           begin
-            if already_installed?(name, version)
+            if gem_already_installed?(name, version)
               gems.delete(name) # remove dependency to install
             end
           rescue Gem::LoadError
@@ -21,7 +21,12 @@ module Resume
             next
           end
         end
-        gems.any? || fonts.any?
+        fonts.each do |font_type, font|
+          if files_present?(font[:fonts].values)
+            fonts.delete(font_type)
+          end
+        end
+        dependencies_present?
       end
 
       def install
@@ -35,6 +40,21 @@ module Resume
           app.inform_of_installation_failure
           exit
         end
+      end
+
+      def uninstall
+        app.inform_start_of_dependency_removal
+        gems.each do |gem, version|
+          system('gem', 'uninstall', '-I', gem, '-v', version)
+        end
+        fonts.values.each do |font|
+          FileUtils.rm([font[:file_name], *font[:fonts].values])
+        end
+        app.inform_of_successful_dependency_removal
+      end
+
+      def dependencies_present?
+        gems.any? || fonts.any?
       end
 
       private
@@ -60,9 +80,13 @@ module Resume
         end
       end
 
-      def already_installed?(name, version)
+      def gem_already_installed?(name, version)
         Gem::Specification.find_by_name(name).version ==
           Gem::Version.new(version)
+      end
+
+      def files_present?(files)
+        files.all? { |file| File.exist?(file) }
       end
 
       def gems_successfully_installed?
@@ -72,28 +96,30 @@ module Resume
       end
 
       def fonts_successfully_installed?
-        fonts.all? do |name, font_type|
-          app.inform_start_of_font_download(font_type)
-          font_file = font_type[:file_name]
-          # FIXME: Fix this conditional
-          unless File.exist?('IPAfont00303.zip')
-            open(font_file, 'wb') do |file|
-              open(font_type[:location]) do |uri|
-                file.write(uri.read)
-              end
-            end
+        fonts.values.all? do |font|
+          app.inform_start_of_font_download(font)
+          download_font_file(font)
+          extract_fonts(font)
+        end
+      end
+
+      def download_font_file(font)
+        open(font[:file_name], 'wb') do |file|
+          open(font[:location]) do |uri|
+            file.write(uri.read)
           end
-          require 'zip'
-          Zip::File.open(font_file) do |file|
-            file.each do |entry|
-              font_type[:fonts].each do |_, file_name|
-                if entry.name.match(file_name)
-                  # FIXME: Fix this conditional
-                  unless File.exist?(file_name)
-                    entry.extract(file_name)
-                  end
-                  break # inner loop only
-                end
+        end
+      end
+
+      def extract_fonts(font)
+        require 'zip'
+        Zip::File.open(font[:file_name]) do |file|
+          file.each do |entry|
+            font[:fonts].each do |_, file_name|
+              if entry.name.match(file_name)
+                # overwrite any existing files with true block
+                entry.extract(file_name) { true }
+                break # inner loop only
               end
             end
           end

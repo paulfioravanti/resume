@@ -46,6 +46,13 @@ module Resume
               "Please ask me directly for a PDF copy of my resume.",
             inform_of_successful_resume_generation:
               'Resume generated successfully.',
+            request_to_clean_up:
+              "Would you like me to remove all the dependencies I "\
+              "installed to generate the resume (Y/N)? ",
+            inform_start_of_dependency_removal:
+              'Removing installed dependencies...',
+            inform_of_successful_dependency_removal:
+              'Dependencies successfully removed.',
             request_to_open_resume:
               'Would you like me to open the resume for you (Y/N)? ',
             thank_user_for_generating_resume:
@@ -101,6 +108,13 @@ module Resume
               "履歴書PDFが生成できない場合は、直接にお問い合わせ下さい。",
             inform_of_successful_resume_generation:
               '履歴書生成が成功しました。',
+            request_to_clean_up:
+              "履歴書生成のためにインストールされた依存性を"\
+              "削除しますか (Y/N)? ",
+            inform_start_of_dependency_removal:
+              'インストールされた依存性を削除中･･･',
+            inform_of_successful_dependency_removal:
+              '依存性の削除が成功しました。',
             request_to_open_resume:
               '履歴書を開きますか (Y/N)? ',
             thank_user_for_generating_resume:
@@ -175,6 +189,14 @@ module Resume
         puts yellow(messages[__method__])
       end
 
+      def inform_start_of_dependency_removal
+        puts messages[__method__]
+      end
+
+      def inform_of_successful_dependency_removal
+        puts green(messages[__method__])
+      end
+
       private
 
       def request_dependency_installation
@@ -205,6 +227,10 @@ module Resume
 
       def thank_user_for_generating_resume
         puts(cyan(messages[__method__]), filename)
+      end
+
+      def request_to_clean_up
+        print yellow(messages[__method__])
       end
 
       def request_to_open_resume
