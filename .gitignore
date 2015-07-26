@@ -1,6 +1,8 @@
 .DS_Store
 *.pdf
 strings_*.rb
+*.ttf
+*.zip
 resume.rb
 
 Gemfile.lock
