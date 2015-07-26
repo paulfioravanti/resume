@@ -66,8 +66,8 @@ module Resume
               file_name: 'IPAfont00303.zip',
               location: 'http://ipafont.ipa.go.jp/ipafont/IPAfont00303.php',
               fonts: {
-                mincho: 'ipamp.ttf',
-                gothic: 'ipagp.ttf'
+                normal: 'ipamp.ttf', # mincho
+                bold: 'ipagp.ttf' # gothic
               }
             }
           }

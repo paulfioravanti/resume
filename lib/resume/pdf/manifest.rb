@@ -10,7 +10,7 @@ module Resume
   module PDF
     class Manifest
       def self.process(pdf, resume, app)
-        Font.configure(pdf, resume[:font], app.locale)
+        Font.configure(pdf, resume[:font])
         Name.generate(pdf, resume[:name])
         Headline.generate(pdf, resume[:headline])
         app.inform_creation_of_social_media_links

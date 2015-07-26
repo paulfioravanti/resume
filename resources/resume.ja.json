@@ -9,7 +9,9 @@
     "background_image": "http://farm6.staticflickr.com/5453/8801916021_3ac1df6072_o_d.jpg",
     "repeat": true,
     "font": {
-      "name": "IPA"
+      "name": "IPA",
+      "normal": "ipamp.ttf",
+      "bold": "ipagp.ttf"
     },
     "name": {
       "text": "UGF1bCBGaW9yYXZhbnRpICjjg53jg7zjg6vjg7vjg5XjgqPjgqrjg6njg7TjgqHjg7Pjg4bjgqMp",
