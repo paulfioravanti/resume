@@ -3,24 +3,39 @@ require_relative 'argument_parser'
 require_relative 'messages'
 require_relative 'installer'
 require_relative 'file_system'
+require_relative 'output'
 
 module Resume
   module CLI
     class Application
-      include Messages
+      include Messages, Decoder
       extend Forwardable
 
-      attr_reader :locale
-      attr_accessor :filename
+      attr_reader :resume, :locale, :filename
 
       def self.start
-        parser = ArgumentParser.new
-        parser.parse
-        new(parser.locale).start
+        locale = ArgumentParser.locale
+        # TODO: Extract into a service object
+        inform_of_resume_information_gathering(locale)
+        resume = JSON.parse(
+          open("#{DATA_LOCATION}resume.#{locale}.json").read,
+          symbolize_names: true
+        )[:resume]
+        new(resume, locale).start
+      rescue ArgumentError => e
+        Output.message(e)
+        exit
+      rescue SocketError, OpenURI::HTTPError, Errno::ECONNREFUSED
+        # FIXME Rescue this in custom service object and re-raise
+        # custom exception
+        inform_of_network_connection_issue(locale)
+        exit
       end
 
-      def initialize(locale)
+      def initialize(resume, locale)
+        @resume = resume
         @locale = locale
+        @filename = "#{d(resume[:document_name])}_#{locale}.pdf"
         @installer = Installer.new(self)
         initialize_messages
       end

@@ -1,14 +1,16 @@
-require_relative '../../resume'
-require_relative 'colours'
 require 'optparse'
 
 module Resume
   module CLI
     class ArgumentParser
-      include Colours
-
-      attr_reader :supported_locales, :parser
       attr_accessor :locale
+      attr_reader :supported_locales
+
+      def self.locale
+        new.parse
+      end
+
+      private_class_method :new
 
       def initialize
         @supported_locales = [:en, :ja]
@@ -17,16 +19,16 @@ module Resume
 
       def parse
         parser.parse!(ARGV)
-        self.locale ||= :en
+        locale || :en
       rescue OptionParser::InvalidOption
-        inform_of_invalid_options
-        exit
+        raise InvalidOptionError.new(parser.help)
       rescue OptionParser::MissingArgument
-        inform_of_missing_arguments
-        exit
+        raise MissingArgumentError.new(parser.help)
       end
 
       private
+
+      attr_reader :parser
 
       def initialize_parser
         OptionParser.new do |opts|
@@ -46,13 +48,13 @@ module Resume
 
       def locale_option(opts)
         opts.on('-l', '--locale LOCALE',
-                'Select the locale of the resume') do |locale|
-          resume_locale = locale.to_sym
-          if supported_locales.include?(resume_locale)
-            self.locale = resume_locale
+                "Select the locale of the resume "\
+                "(#{supported_locales.join(', ')})") do |locale|
+          locale = locale.to_sym
+          if supported_locales.include?(locale)
+            self.locale = locale
           else
-            inform_locale_not_supported(locale)
-            exit
+            raise LocaleNotSupportedError.new(locale, supported_locales)
           end
         end
       end
@@ -69,23 +71,6 @@ module Resume
           puts Resume::VERSION
           exit
         end
-      end
-
-      def inform_locale_not_supported(locale)
-        puts red("Locale '#{locale}' is not supported.")
-        puts yellow(
-          "Supported locales are: #{supported_locales.join(', ')}"
-        )
-      end
-
-      def inform_of_invalid_options
-        puts red('You have some invalid options.')
-        puts parser.help
-      end
-
-      def inform_of_missing_arguments
-        puts red('You have a missing argument in one of your options.')
-        puts parser.help
       end
     end
   end

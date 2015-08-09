@@ -11,21 +11,8 @@ module Resume
       end
 
       def installation_required?
-        gems.each do |name, version|
-          begin
-            if gem_already_installed?(name, version)
-              gems.delete(name) # remove dependency to install
-            end
-          rescue Gem::LoadError
-            # gem not installed: leave in the gems list
-            next
-          end
-        end
-        fonts.each do |font_type, font|
-          if files_present?(font[:fonts].values)
-            fonts.delete(font_type)
-          end
-        end
+        audit_gem_dependencies
+        audit_font_dependencies
         dependencies_present?
       end
 
@@ -77,6 +64,27 @@ module Resume
       def initialize_gem_dependencies
         { 'prawn' => '2.0.2', 'prawn-table' => '0.2.2' }.tap do |gems|
           gems['zip'] = '2.0.2' if fonts.any?
+        end
+      end
+
+      def audit_gem_dependencies
+        gems.each do |name, version|
+          begin
+            if gem_already_installed?(name, version)
+              gems.delete(name) # remove dependency to install
+            end
+          rescue Gem::LoadError
+            # gem not installed: leave in the gems list
+            next
+          end
+        end
+      end
+
+      def audit_font_dependencies
+        fonts.each do |font_type, font|
+          if files_present?(font[:fonts].values)
+            fonts.delete(font_type)
+          end
         end
       end
 
