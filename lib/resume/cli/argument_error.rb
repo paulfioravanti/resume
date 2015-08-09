@@ -9,7 +9,10 @@ module Resume
 
       def initialize(locale)
         @error_message =
-          I18n.t('inform_locale_not_supported', locale: locale)
+          I18n.t(
+            'inform_locale_not_supported',
+            specified_locale: locale
+          )
         @warning_message =
           I18n.t(
             'inform_of_supported_locales',

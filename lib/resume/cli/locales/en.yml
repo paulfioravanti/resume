@@ -1,6 +1,6 @@
 en:
   inform_locale_not_supported:
-    "Locale '%{locale}' is not supported."
+    "Locale '%{specified_locale}' is not supported."
   inform_of_supported_locales:
     "Supported locales are: %{supported_locales}"
   inform_of_invalid_options:

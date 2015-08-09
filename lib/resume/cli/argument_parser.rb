@@ -46,10 +46,9 @@ module Resume
         opts.on('-l', '--locale LOCALE',
                 "Select the locale of the resume "\
                 "(#{I18n.available_locales.join(', ')})") do |locale|
-          locale = locale.to_sym
-          if I18n.available_locales.include?(locale)
-            I18n.locale = locale
-          else
+          begin
+            I18n.locale = locale.to_sym
+          rescue I18n::InvalidLocale
             raise LocaleNotSupportedError.new(locale)
           end
         end
