@@ -5,10 +5,6 @@ module Resume
   module CLI
     class ArgumentParser
       def self.parse
-        # The parser is looks for the locale and determines whether
-        # it's valid or not, so it can also be responsible for setting
-        # the available locales for the app.
-        I18n.available_locales = [:en, :ja]
         new.parse
       end
 
