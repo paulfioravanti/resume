@@ -1,0 +1,7 @@
+ja:
+  inform_of_resume_information_gathering:
+    '履歴書の情報を取得中･･･'
+  inform_of_inability_to_get_outside_connection:
+    "インターネットに接続できません。"
+  request_user_to_check_internet_settings:
+    "ネットワーク設定をご確認下さい。"

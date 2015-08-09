@@ -1,25 +1,25 @@
 require 'optparse'
+require_relative 'argument_error'
 
 module Resume
   module CLI
     class ArgumentParser
-      attr_accessor :locale
-      attr_reader :supported_locales
-
-      def self.locale
+      def self.parse
+        # The parser is looks for the locale and determines whether
+        # it's valid or not, so it can also be responsible for setting
+        # the available locales for the app.
+        I18n.available_locales = [:en, :ja]
         new.parse
       end
 
       private_class_method :new
 
       def initialize
-        @supported_locales = [:en, :ja]
         @parser = initialize_parser
       end
 
       def parse
         parser.parse!(ARGV)
-        locale || :en
       rescue OptionParser::InvalidOption
         raise InvalidOptionError.new(parser.help)
       rescue OptionParser::MissingArgument
@@ -49,12 +49,12 @@ module Resume
       def locale_option(opts)
         opts.on('-l', '--locale LOCALE',
                 "Select the locale of the resume "\
-                "(#{supported_locales.join(', ')})") do |locale|
+                "(#{I18n.available_locales.join(', ')})") do |locale|
           locale = locale.to_sym
-          if supported_locales.include?(locale)
-            self.locale = locale
+          if I18n.available_locales.include?(locale)
+            I18n.locale = locale
           else
-            raise LocaleNotSupportedError.new(locale, supported_locales)
+            raise LocaleNotSupportedError.new(locale)
           end
         end
       end

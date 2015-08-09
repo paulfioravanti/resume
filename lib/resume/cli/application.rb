@@ -14,7 +14,9 @@ module Resume
       attr_reader :resume, :locale, :filename
 
       def self.start
-        locale = ArgumentParser.locale
+        I18n.load_path =
+          Dir["#{Pathname(__FILE__).dirname}/locales/*.yml"]
+        ArgumentParser.parse
         # TODO: Extract into a service object
         inform_of_resume_information_gathering(locale)
         resume = JSON.parse(
