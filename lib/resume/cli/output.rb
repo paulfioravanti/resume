@@ -16,17 +16,15 @@ module Resume
       end
 
       def message
-        output.public_methods(false).each do |method|
-          send(method)
-        end
+        output.public_methods(false).each { |method| send(method) }
       end
 
       private
 
       attr_reader :output
 
-      def danger_message
-        puts red(output.danger_message)
+      def error_message
+        puts red(output.error_message)
       end
 
       def warning_message
