@@ -13,3 +13,5 @@ en:
     "Sorry, it seems I can't get an outside connection."
   request_user_to_check_internet_settings:
     "Please check your internet settings and try again."
+  resume_filename:
+    "%{data_location}resume.%{current_locale}.json"
