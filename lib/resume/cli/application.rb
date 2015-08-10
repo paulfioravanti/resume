@@ -1,5 +1,6 @@
 require 'forwardable'
 require_relative 'argument_parser'
+require_relative 'fetch_resume_service'
 require_relative 'messages'
 require_relative 'installer'
 require_relative 'file_system'
@@ -15,20 +16,10 @@ module Resume
 
       def self.start
         ArgumentParser.parse
-        # TODO: Extract into a service object
-        inform_of_resume_information_gathering(locale)
-        resume = JSON.parse(
-          open("#{DATA_LOCATION}resume.#{locale}.json").read,
-          symbolize_names: true
-        )[:resume]
+        resume = FetchResumeService.fetch_resume
         new(resume, locale).start
-      rescue ArgumentError => e
+      rescue ArgumentError, NetworkConnectionError => e
         Output.message(e)
-        exit
-      rescue SocketError, OpenURI::HTTPError, Errno::ECONNREFUSED
-        # FIXME Rescue this in custom service object and re-raise
-        # custom exception
-        inform_of_network_connection_issue(locale)
         exit
       end
 
