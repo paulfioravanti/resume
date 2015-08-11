@@ -12,7 +12,7 @@ module Resume
       include Messages, Decoder
       extend Forwardable
 
-      attr_reader :resume, :locale, :filename
+      attr_reader :resume, :locale
 
       def self.start
         ArgumentParser.parse
@@ -25,8 +25,7 @@ module Resume
 
       def initialize(resume)
         @resume = resume
-        @filename = "#{d(resume[:document_name])}_#{locale}.pdf"
-        @installer = Installer.new(self)
+        @installer = Installer.new(resume[:dependencies])
         initialize_messages
       end
 
