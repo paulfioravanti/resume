@@ -13,15 +13,12 @@ module Resume
 
       def fetch_resume
         I18n.t('inform_of_resume_information_gathering')
-        # TODO: Remove root node: unncessarily verbose
-        JSON.parse(open(filename).read, symbolize_names: true)[:resume]
+        JSON.parse(open(filename).read, symbolize_names: true)
       rescue SocketError, OpenURI::HTTPError, Errno::ECONNREFUSED
-        raise NetworkConnectionError.new(locale)
+        raise NetworkConnectionError
       end
 
       private
-
-      attr_reader :locale, :data_location
 
       def filename
         I18n.t(
