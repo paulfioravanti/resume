@@ -17,15 +17,14 @@ module Resume
       def self.start
         ArgumentParser.parse
         resume = FetchResumeService.fetch_resume
-        new(resume, locale).start
+        new(resume).start
       rescue ArgumentError, NetworkConnectionError => e
         Output.message(e)
         exit
       end
 
-      def initialize(resume, locale)
+      def initialize(resume)
         @resume = resume
-        @locale = locale
         @filename = "#{d(resume[:document_name])}_#{locale}.pdf"
         @installer = Installer.new(self)
         initialize_messages

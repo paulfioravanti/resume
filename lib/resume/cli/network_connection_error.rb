@@ -3,7 +3,7 @@ module Resume
     class NetworkConnectionError < StandardError
       attr_reader :error_message, :warning_message
 
-      def initialize(locale)
+      def initialize
         @error_message =
           I18n.t('inform_of_inability_to_get_outside_connection')
         @warning_message =
