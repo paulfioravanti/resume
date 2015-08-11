@@ -1,13 +1,14 @@
+require 'tmpdir'
+
 module Resume
   module CLI
     class Installer
 
-      attr_reader :app, :fonts, :gems
+      attr_reader :gems, :fonts
 
-      def initialize(app)
-        @app = app
-        @fonts = initialize_font_dependencies
-        @gems = initialize_gem_dependencies
+      def initialize(dependencies)
+        @gems = dependencies[:gems]
+        @fonts = dependencies[:fonts]
       end
 
       def installation_required?
@@ -46,27 +47,6 @@ module Resume
 
       private
 
-      def initialize_font_dependencies
-        {
-          ja: {
-            ipa: {
-              file_name: 'IPAfont00303.zip',
-              location: 'http://ipafont.ipa.go.jp/ipafont/IPAfont00303.php',
-              fonts: {
-                normal: 'ipamp.ttf', # mincho
-                bold: 'ipagp.ttf' # gothic
-              }
-            }
-          }
-        }.fetch(app.locale, {})
-      end
-
-      def initialize_gem_dependencies
-        { 'prawn' => '2.0.2', 'prawn-table' => '0.2.2' }.tap do |gems|
-          gems['zip'] = '2.0.2' if fonts.any?
-        end
-      end
-
       def audit_gem_dependencies
         gems.each do |name, version|
           begin
@@ -82,7 +62,7 @@ module Resume
 
       def audit_font_dependencies
         fonts.each do |font_type, font|
-          if files_present?(font[:fonts].values)
+          if files_present?(font[:files].values)
             fonts.delete(font_type)
           end
         end
@@ -94,7 +74,9 @@ module Resume
       end
 
       def files_present?(files)
-        files.all? { |file| File.exist?(file) }
+        files.all? do |file|
+          File.exist?(File.join(Dir.tmpdir, file))
+        end
       end
 
       def gems_successfully_installed?

@@ -1,6 +1,23 @@
 {
   "document_name": "UGF1bF9GaW9yYXZhbnRpX1Jlc3VtZQ==",
   "author": "UGF1bCBGaW9yYXZhbnRp",
+  "dependencies": {
+    "gems": {
+      "prawn": "2.0.2",
+      "prawn-table": "0.2.2",
+      "zip": "2.0.2"
+    },
+    "fonts": [
+      {
+        "location": "http://ipafont.ipa.go.jp/ipafont/IPAfont00303.php",
+        "file_name": "IPAfont00303.zip",
+        "files": {
+          "normal": "ipamp.ttf",
+          "bold": "ipagp.ttf"
+        }
+      }
+    ]
+  },
   "margin_top": 0.75,
   "margin_bottom": 0.75,
   "margin_left": 1,
