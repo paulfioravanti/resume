@@ -1,11 +1,11 @@
 en:
-  inform_locale_not_supported:
+  locale_is_not_supported:
     "Locale '%{specified_locale}' is not supported."
-  inform_of_supported_locales:
+  supported_locales_are:
     "Supported locales are: %{supported_locales}"
-  inform_of_invalid_options:
+  you_have_some_invalid_options:
     'You have some invalid options.'
-  inform_of_missing_argument:
+  you_have_a_missing_argument:
     'You have a missing argument in one of your options.'
   inform_of_resume_information_gathering:
     'Gathering resume information...'

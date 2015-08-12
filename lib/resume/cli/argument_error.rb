@@ -5,37 +5,35 @@ module Resume
     class ArgumentError < StandardError; end
 
     class LocaleNotSupportedError < ArgumentError
-      attr_reader :error_message, :warning_message
+      attr_reader :error, :warning
 
       def initialize(locale)
-        @error_message =
-          I18n.t(
-            'inform_locale_not_supported',
-            specified_locale: locale
-          )
-        @warning_message =
-          I18n.t(
-            'inform_of_supported_locales',
-            supported_locales: I18n.available_locales.join(', ')
-          )
+        @error = [
+          :locale_is_not_supported,
+          { specified_locale: locale }
+        ]
+        @warning = [
+          :supported_locales_are,
+          { supported_locales: I18n.available_locales.join(', ') }
+        ]
       end
     end
 
     class InvalidOptionError < ArgumentError
-      attr_reader :error_message, :info_message
+      attr_reader :error, :info
 
-      def initialize(info_message)
-        @error_message = I18n.t('inform_of_invalid_options')
-        @info_message = info_message
+      def initialize(info)
+        @error = :you_have_some_invalid_options
+        @info = info
       end
     end
 
     class MissingArgumentError < ArgumentError
-      attr_reader :error_message, :info_message
+      attr_reader :error, :info
 
-      def initialize(info_message)
-        @error_message = I18n.t('inform_of_missing_argument')
-        @info_message = info_message
+      def initialize(info)
+        @error = :you_have_a_missing_argument
+        @info = info
       end
     end
   end

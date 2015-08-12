@@ -23,16 +23,16 @@ module Resume
 
       attr_reader :output
 
-      def error_message
-        puts red(output.error_message)
+      def error
+        puts red(I18n.t(*output.error))
       end
 
-      def warning_message
-        puts yellow(output.warning_message)
+      def warning
+        puts yellow(I18n.t(*output.warning))
       end
 
-      def info_message
-        puts output.info_message
+      def info
+        puts I18n.t(*output.info)
       end
     end
   end
