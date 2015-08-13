@@ -34,6 +34,10 @@ module Resume
       def info
         puts I18n.t(*output.info)
       end
+
+      def raw
+        puts output.raw
+      end
     end
   end
 end

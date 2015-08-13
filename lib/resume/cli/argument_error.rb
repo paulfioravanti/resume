@@ -12,28 +12,25 @@ module Resume
           :locale_is_not_supported,
           { specified_locale: locale }
         ]
-        @warning = [
-          :supported_locales_are,
-          { supported_locales: I18n.available_locales.join(', ') }
-        ]
+        @warning = :supported_locales_are
       end
     end
 
     class InvalidOptionError < ArgumentError
-      attr_reader :error, :info
+      attr_reader :error, :raw
 
-      def initialize(info)
+      def initialize(string)
         @error = :you_have_some_invalid_options
-        @info = info
+        @raw = string
       end
     end
 
     class MissingArgumentError < ArgumentError
-      attr_reader :error, :info
+      attr_reader :error, :raw
 
-      def initialize(info)
+      def initialize(string)
         @error = :you_have_a_missing_argument
-        @info = info
+        @raw = string
       end
     end
   end

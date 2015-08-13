@@ -20,11 +20,7 @@ module Resume
       private
 
       def filename
-        I18n.t(
-          'resume_filename',
-          data_location: DATA_LOCATION,
-          current_locale: I18n.locale
-        )
+        I18n.t('resume_filename')
       end
     end
   end
