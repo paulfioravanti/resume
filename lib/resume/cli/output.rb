@@ -6,12 +6,14 @@ module Resume
       include Colours
 
       def self.message(output)
-        if output.is_a?(Symbol)
-          output =
-            Struct.new(:info).send(:remove_method, :info=).new(output)
-        end
+        output = wrap(output) if output.is_a?(Symbol)
         new(output).message
       end
+
+      def self.wrap(output)
+        Struct.new(:info).send(:remove_method, :info=).new(output)
+      end
+      private_class_method :wrap
 
       private_class_method :new
 
