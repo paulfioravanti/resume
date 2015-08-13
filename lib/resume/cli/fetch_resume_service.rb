@@ -11,16 +11,15 @@ module Resume
       private_class_method :new
 
       def fetch_resume
-        I18n.t('inform_of_resume_information_gathering')
-        JSON.parse(open(filename).read, symbolize_names: true)
+        Output.message(:gathering_resume_information)
+        binding.pry
+        exit
+        JSON.parse(
+          open(I18n.t(:resume_filename)).read,
+          symbolize_names: true
+        )
       rescue SocketError, OpenURI::HTTPError, Errno::ECONNREFUSED
         raise NetworkConnectionError
-      end
-
-      private
-
-      def filename
-        I18n.t('resume_filename')
       end
     end
   end
