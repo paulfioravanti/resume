@@ -3,7 +3,6 @@ require_relative 'network_connection_error'
 module Resume
   module CLI
     class FetchResumeService
-      DATA_LOCATION = 'resources/'
 
       def self.fetch_resume
         new.fetch_resume
