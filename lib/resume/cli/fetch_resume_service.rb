@@ -12,10 +12,8 @@ module Resume
 
       def fetch_resume
         Output.message(:gathering_resume_information)
-        binding.pry
-        exit
         JSON.parse(
-          open(I18n.t(:resume_filename)).read,
+          open(Resume.filename).read,
           symbolize_names: true
         )
       rescue SocketError, OpenURI::HTTPError, Errno::ECONNREFUSED
