@@ -10,12 +10,29 @@ module Resume
 
   begin
     require 'i18n'
+    require_relative 'i18n/core_ext'
     I18n.load_path =
-      Dir["#{Pathname(__FILE__).dirname}/resume/cli/locales/*.yml"]
+      Dir["#{Pathname(__FILE__).dirname}/resume/cli/locales/*.yml.erb"]
     I18n.available_locales = [:en, :ja]
   rescue LoadError
     puts 'This app is bilingual and needs the I18n gem.'
     puts 'Please run: gem install i18n'
     exit
+  end
+end
+
+module I18n
+  module Backend
+    module Base
+      protected
+
+      def load_erb(filename)
+        begin
+          YAML.load(ERB.new(File.read(filename)).result)
+        rescue TypeError, ScriptError, StandardError => e
+          raise InvalidLocaleData.new(filename, e.inspect)
+        end
+      end
+    end
   end
 end
