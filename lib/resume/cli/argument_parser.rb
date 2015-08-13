@@ -28,14 +28,14 @@ module Resume
 
       def initialize_parser
         OptionParser.new do |opts|
-          opts.banner = 'Usage: ./bin/resume [options]'
+          opts.banner = I18n.t(:usage)
           opts.separator ''
-          opts.separator 'Specific options:'
+          opts.separator I18n.t(:specific_options)
 
           locale_option(opts)
 
           opts.separator ''
-          opts.separator 'Common options:'
+          opts.separator I18n.t(:common_options)
 
           help_option(opts)
           version_option(opts)
@@ -43,9 +43,10 @@ module Resume
       end
 
       def locale_option(opts)
-        opts.on('-l', '--locale LOCALE',
-                "Select the locale of the resume "\
-                "(#{I18n.available_locales.join(', ')})") do |locale|
+        opts.on(
+          I18n.t(:locale_short_switch),
+          I18n.t(:locale_long_switch),
+          I18n.t(:locale_switch_description)) do |locale|
           begin
             I18n.locale = locale.to_sym
           rescue I18n::InvalidLocale
