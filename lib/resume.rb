@@ -19,6 +19,10 @@ module Resume
     puts 'Please run: gem install i18n'
     exit
   end
+
+  def self.filename
+    "#{DATA_LOCATION}resume.#{I18n.locale}.json"
+  end
 end
 
 module I18n
