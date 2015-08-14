@@ -44,8 +44,8 @@ module Resume
 
       def locale_option(opts)
         opts.on(
-          I18n.t(:locale_short_switch),
-          I18n.t(:locale_long_switch),
+          I18n.t(:locale_switch_short),
+          I18n.t(:locale_switch_long),
           I18n.t(:locale_switch_description)) do |locale|
           begin
             I18n.locale = locale.to_sym
@@ -56,14 +56,20 @@ module Resume
       end
 
       def help_option(opts)
-        opts.on_tail('-h', '--help', 'Show this message') do
+        opts.on_tail(
+          I18n.t(:help_switch_short),
+          I18n.t(:help_switch_long),
+          I18n.t(:help_switch_description)) do
           puts opts
           exit
         end
       end
 
       def version_option(opts)
-        opts.on_tail('-v', '--version', 'Show version') do
+        opts.on_tail(
+          I18n.t(:version_switch_short),
+          I18n.t(:version_switch_long),
+          I18n.t(:version_switch_description)) do
           puts Resume::VERSION
           exit
         end
