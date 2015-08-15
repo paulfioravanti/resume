@@ -29,17 +29,6 @@ module Resume
         end
       end
 
-      def uninstall
-        app.inform_start_of_dependency_removal
-        gems.each do |gem, version|
-          system('gem', 'uninstall', '-I', gem, '-v', version)
-        end
-        fonts.values.each do |font|
-          FileUtils.rm([font[:file_name], *font[:fonts].values])
-        end
-        app.inform_of_successful_dependency_removal
-      end
-
       def dependencies_present?
         gems.any? || fonts.any?
       end

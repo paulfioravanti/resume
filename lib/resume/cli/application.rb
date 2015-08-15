@@ -31,12 +31,11 @@ module Resume
       def_delegators :@installer, :installation_required?,
                                   :dependencies_present?,
                                   :request_dependency_installation,
-                                  :install, :uninstall
+                                  :install
 
       def start
         install_dependencies if installation_required?
         generate_resume
-        clean_up if dependencies_present?
         open_resume
       end
 
@@ -62,11 +61,6 @@ module Resume
         request_to_open_resume
         FileSystem.open_document(self) if permission_granted?
         thank_user_for_generating_resume
-      end
-
-      def clean_up
-        request_to_clean_up
-        uninstall if permission_granted?
       end
 
       def permission_granted?
