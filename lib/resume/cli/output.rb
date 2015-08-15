@@ -5,39 +5,39 @@ module Resume
     class Output
       include Colours
 
-      def self.message(output)
-        output = { info: output } if output.is_a?(Symbol)
-        new(output).message
+      def self.message(param)
+        messages = param.respond_to?(:keys) ? param : { info: param }
+        new(messages).message
       end
 
       private_class_method :new
 
-      def initialize(output)
-        @output = output
+      def initialize(messages)
+        @messages = messages
       end
 
       def message
-        output.keys.each { |key| send(key) }
+        messages.keys.each { |key| send(key) }
       end
 
       private
 
-      attr_reader :output
+      attr_reader :messages
 
       def error
-        puts red(I18n.t(*output[:error]))
+        puts red(I18n.t(*messages[:error]))
       end
 
       def warning
-        puts yellow(I18n.t(output[:warning]))
+        puts yellow(I18n.t(messages[:warning]))
       end
 
       def info
-        puts I18n.t(output[:info])
+        puts I18n.t(messages[:info])
       end
 
       def raw
-        puts output[:raw]
+        puts messages[:raw]
       end
     end
   end
