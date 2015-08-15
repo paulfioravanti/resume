@@ -29,11 +29,11 @@ module Resume
       end
 
       def warning
-        puts yellow(I18n.t(*output[:warning]))
+        puts yellow(I18n.t(output[:warning]))
       end
 
       def info
-        puts I18n.t(*output[:info])
+        puts I18n.t(output[:info])
       end
 
       def raw
