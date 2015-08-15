@@ -8,53 +8,6 @@ module Resume
 
       def self.included(base)
         base.send(:attr_reader, :messages)
-        base.extend(ClassMethods)
-        base.send(:private_class_method, :messages)
-        base.send(
-          :private_class_method,
-          :inform_of_resume_information_gathering
-        )
-        base.send(
-          :private_class_method,
-          :inform_of_network_connection_issue
-        )
-      end
-
-      module ClassMethods
-        def messages(locale)
-          {
-            en: {
-              inform_of_resume_information_gathering:
-                'Gathering resume information...',
-              inform_of_inability_to_get_outside_connection:
-                "Sorry, it seems I can't get an outside connection.",
-              request_user_to_check_internet_settings:
-                "Please check your internet settings and try again."
-            },
-            ja: {
-              inform_of_resume_information_gathering:
-                '履歴書の情報を取得中･･･',
-              inform_of_inability_to_get_outside_connection:
-                "インターネットに接続できません。",
-              request_user_to_check_internet_settings:
-                "ネットワーク設定をご確認下さい。"
-            }
-          }[locale]
-        end
-
-        def inform_of_resume_information_gathering(locale)
-          puts messages(locale)[__method__]
-        end
-
-        def inform_of_network_connection_issue(locale)
-          extend Colours
-          puts red(
-            messages(locale)[:inform_of_inability_to_get_outside_connection]
-          )
-          puts yellow(
-            messages(locale)[:request_user_to_check_internet_settings]
-          )
-        end
       end
 
       def initialize_messages
@@ -68,15 +21,6 @@ module Resume
               'Creating employment history section...',
             inform_creation_of_education_history:
               'Creating education history section...',
-            inform_of_dependencies:
-              "In order to help me generate a PDF, "\
-              "I need the following:",
-            inform_of_gem_dependencies:
-              "* Ruby gems:",
-            inform_of_font_dependencies:
-              "* Custom fonts for the resume",
-            request_installation_permission:
-              'May I please install them? (Y/N) ',
             thank_user_for_permission:
               'Thank you kindly :-)',
             inform_start_of_gem_installation:
@@ -132,14 +76,6 @@ module Resume
               '職歴セクションを作成中･･･',
             inform_creation_of_education_history:
               '学歴セクションを作成中･･･',
-            inform_of_dependencies:
-              "PDFを生成するために以下の依存性が必要です:",
-            inform_of_gem_dependencies:
-              "* Ruby gems:",
-            inform_of_font_dependencies:
-              "* カスタムフォント",
-            request_installation_permission:
-              'インストールをしてもよろしいですか? (Y/N) ',
             thank_user_for_permission:
               'ありがとうございます(^_^)',
             inform_start_of_gem_installation:

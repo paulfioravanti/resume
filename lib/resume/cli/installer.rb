@@ -4,7 +4,7 @@ module Resume
   module CLI
     class Installer
 
-      attr_reader :gems, :fonts
+      attr_accessor :gems, :fonts
 
       def initialize(dependencies)
         @gems = dependencies[:gems]
@@ -45,13 +45,33 @@ module Resume
         gems.any? || fonts.any?
       end
 
+      def request_dependency_installation
+        Output.message(
+          warning: :i_need_the_following_to_generate_a_pdf
+        )
+        if gems.any?
+          Output.message(warning: :ruby_gems)
+          gems.each do |name, version|
+            Output.message([
+              :gem_name_and_version,
+              { name: name, version: version }
+            ])
+          end
+        end
+        if fonts.any?
+          Output.message(warning: :custom_fonts)
+        end
+        Output.message(question: :may_i_please_install_them)
+      end
+
       private
 
       def audit_gem_dependencies
         gems.each do |name, version|
           begin
             if gem_already_installed?(name, version)
-              gems.delete(name) # remove dependency to install
+              # remove dependency to install
+              self.gems -= [[name, version]]
             end
           rescue Gem::LoadError
             # gem not installed: leave in the gems list
@@ -61,7 +81,7 @@ module Resume
       end
 
       def audit_font_dependencies
-        fonts.each do |font_type, font|
+        fonts.each do |font|
           if files_present?(font[:files].values)
             fonts.delete(font_type)
           end

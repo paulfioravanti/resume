@@ -29,11 +29,15 @@ module Resume
       end
 
       def warning
-        puts yellow(I18n.t(messages[:warning]))
+        puts yellow(I18n.t(*messages[:warning]))
+      end
+
+      def question
+        print yellow(I18n.t(*messages[:question]))
       end
 
       def info
-        puts I18n.t(messages[:info])
+        puts I18n.t(*messages[:info])
       end
 
       def raw

@@ -9,7 +9,7 @@ require_relative 'output'
 module Resume
   module CLI
     class Application
-      include Messages, Decoder
+      include Decoder
       extend Forwardable
 
       attr_reader :resume, :locale
@@ -26,12 +26,12 @@ module Resume
       def initialize(resume)
         @resume = resume
         @installer = Installer.new(resume[:dependencies])
-        initialize_messages
       end
 
       def_delegators :@installer, :installation_required?,
                                   :dependencies_present?,
-                                  :install, :uninstall, :gems, :fonts
+                                  :request_dependency_installation,
+                                  :install, :uninstall
 
       def start
         install_dependencies if installation_required?
