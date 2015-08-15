@@ -15,7 +15,7 @@ module Resume
     class Document
       include Decoder
 
-      attr_reader :resume, :filename
+      attr_reader :resume, :title
 
       def self.generate(resume)
         new(resume).generate
@@ -23,17 +23,27 @@ module Resume
 
       def initialize(resume)
         @resume = resume
-        @filename = "#{d(resume[:document_name])}_#{locale}.pdf"
+        @title = d(resume[:title])
       end
 
       def generate
         require 'prawn'
         require 'prawn/table'
-        Prawn::Document.generate(filename, Options.for(resume)) do |pdf|
+        Prawn::Document.generate(filename, options) do |pdf|
           pdf.instance_exec(resume) do |resume|
             Manifest.process(self, resume)
           end
         end
+      end
+
+      private
+
+      def filename
+        "#{title}_#{I18n.locale}.pdf"
+      end
+
+      def options
+        Options.generate(title, resume[:options])
       end
     end
   end

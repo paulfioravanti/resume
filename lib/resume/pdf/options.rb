@@ -3,7 +3,7 @@ module Resume
     class Options
       include Decoder
 
-      def self.for(resume)
+      def self.generate(title, resume)
         author = d(resume[:author])
         {
           margin_top: resume[:margin_top],
@@ -13,7 +13,7 @@ module Resume
           background: open(resume[:background_image]),
           repeat: resume[:repeat],
           info: {
-            Title: d(resume[:document_name]),
+            Title: title,
             Author: author,
             Creator: author,
             CreationDate: Time.now

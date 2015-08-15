@@ -1,3 +1,4 @@
+require_relative '../output'
 require_relative 'font'
 require_relative 'name'
 require_relative 'headline'
@@ -13,15 +14,15 @@ module Resume
         Font.configure(pdf, resume[:font])
         Name.generate(pdf, resume[:name])
         Headline.generate(pdf, resume[:headline])
-        app.inform_creation_of_social_media_links
+        Output.message(:creating_social_media_links)
         SocialMediaLogoSet.generate(
           pdf, resume[:social_media_logo_set]
         )
-        app.inform_creation_of_technical_skills
+        Output.message(:creating_technical_skills_section)
         TechnicalSkills.generate(pdf, resume[:technical_skills])
-        app.inform_creation_of_employment_history
+        Output.message(:creating_employment_history_section)
         EmploymentHistory.generate(pdf, resume[:employment_history])
-        app.inform_creation_of_education_history
+        Output.message(:creating_education_history_section)
         EducationHistory.generate(pdf, resume[:education_history])
       end
     end

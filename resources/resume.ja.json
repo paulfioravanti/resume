@@ -1,6 +1,4 @@
 {
-  "document_name": "UGF1bF9GaW9yYXZhbnRpX1Jlc3VtZQ==",
-  "author": "UGF1bCBGaW9yYXZhbnRp",
   "dependencies": {
     "gems": [
       ["prawn", "2.0.2"],
@@ -18,12 +16,16 @@
       }
     ]
   },
-  "margin_top": 0.75,
-  "margin_bottom": 0.75,
-  "margin_left": 1,
-  "margin_right": 1,
-  "background_image": "http://farm6.staticflickr.com/5453/8801916021_3ac1df6072_o_d.jpg",
-  "repeat": true,
+  "title": "UGF1bF9GaW9yYXZhbnRpX1Jlc3VtZQ==",
+  "options": {
+    "author": "UGF1bCBGaW9yYXZhbnRp",
+    "margin_top": 0.75,
+    "margin_bottom": 0.75,
+    "margin_left": 1,
+    "margin_right": 1,
+    "background_image": "http://farm6.staticflickr.com/5453/8801916021_3ac1df6072_o_d.jpg",
+    "repeat": true
+  },
   "font": {
     "name": "IPA",
     "normal": "ipamp.ttf",

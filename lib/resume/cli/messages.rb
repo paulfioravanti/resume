@@ -13,14 +13,6 @@ module Resume
       def initialize_messages
         @messages = {
           en: {
-            inform_creation_of_social_media_links:
-              'Creating social media links...',
-            inform_creation_of_technical_skills:
-              'Creating technical skills section...',
-            inform_creation_of_employment_history:
-              'Creating employment history section...',
-            inform_creation_of_education_history:
-              'Creating education history section...',
             inform_of_successful_resume_generation:
               'Resume generated successfully.',
             request_to_open_resume:
@@ -35,14 +27,6 @@ module Resume
               "this computer. Please open it yourself.",
           },
           ja: {
-            inform_creation_of_social_media_links:
-              'ソーシャルメディアリンクを作成中･･･',
-            inform_creation_of_technical_skills:
-              'スキルセクションを作成中･･･',
-            inform_creation_of_employment_history:
-              '職歴セクションを作成中･･･',
-            inform_creation_of_education_history:
-              '学歴セクションを作成中･･･',
             inform_of_successful_resume_generation:
               '履歴書生成が成功しました。',
             request_to_open_resume:
@@ -57,22 +41,6 @@ module Resume
               "不明なため、ご自身でご確認ください。",
           }
         }[locale]
-      end
-
-      def inform_creation_of_social_media_links
-        puts messages[__method__]
-      end
-
-      def inform_creation_of_technical_skills
-        puts messages[__method__]
-      end
-
-      def inform_creation_of_employment_history
-        puts messages[__method__]
-      end
-
-      def inform_creation_of_education_history
-        puts messages[__method__]
       end
 
       def request_user_to_open_document

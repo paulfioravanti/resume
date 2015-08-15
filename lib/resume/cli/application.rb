@@ -1,10 +1,11 @@
 require 'forwardable'
 require_relative '../decoder'
+require_relative '../output'
 require_relative 'argument_parser'
 require_relative 'fetch_resume_service'
 require_relative 'installer'
+require_relative '../pdf/document'
 require_relative 'file_system'
-require_relative 'output'
 
 module Resume
   module CLI
@@ -46,9 +47,7 @@ module Resume
         if permission_granted?
           install
         else
-          Output.message(
-            error: :cannot_generate_pdf_without_dependencies
-          )
+          Output.message(error: :cannot_generate_pdf_without_dependencies)
           exit
         end
       end
