@@ -31,12 +31,9 @@ module Resume
           opts.banner = I18n.t(:usage)
           opts.separator ''
           opts.separator I18n.t(:specific_options)
-
           locale_option(opts)
-
           opts.separator ''
           opts.separator I18n.t(:common_options)
-
           help_option(opts)
           version_option(opts)
         end
@@ -60,7 +57,7 @@ module Resume
           I18n.t(:help_switch_short),
           I18n.t(:help_switch_long),
           I18n.t(:help_switch_description)) do
-          puts opts
+          Output.message(raw: opts.to_s)
           exit
         end
       end
@@ -70,7 +67,7 @@ module Resume
           I18n.t(:version_switch_short),
           I18n.t(:version_switch_long),
           I18n.t(:version_switch_description)) do
-          puts Resume::VERSION
+          Output.message(raw: Resume::VERSION)
           exit
         end
       end

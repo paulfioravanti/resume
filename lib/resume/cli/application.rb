@@ -19,7 +19,7 @@ module Resume
         resume = FetchResumeService.fetch_resume
         new(resume).start
       rescue ArgumentError, NetworkConnectionError => e
-        Output.message(e)
+        Output.message(e.messages)
         exit
       end
 

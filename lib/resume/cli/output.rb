@@ -6,14 +6,9 @@ module Resume
       include Colours
 
       def self.message(output)
-        output = wrap(output) if output.is_a?(Symbol)
+        output = { info: output } if output.is_a?(Symbol)
         new(output).message
       end
-
-      def self.wrap(output)
-        Struct.new(:info).send(:remove_method, :info=).new(output)
-      end
-      private_class_method :wrap
 
       private_class_method :new
 
@@ -22,7 +17,7 @@ module Resume
       end
 
       def message
-        output.public_methods(false).each { |method| send(method) }
+        output.keys.each { |key| send(key) }
       end
 
       private
@@ -30,19 +25,19 @@ module Resume
       attr_reader :output
 
       def error
-        puts red(I18n.t(*output.error))
+        puts red(I18n.t(*output[:error]))
       end
 
       def warning
-        puts yellow(I18n.t(*output.warning))
+        puts yellow(I18n.t(*output[:warning]))
       end
 
       def info
-        puts I18n.t(*output.info)
+        puts I18n.t(*output[:info])
       end
 
       def raw
-        puts output.raw
+        puts output[:raw]
       end
     end
   end
