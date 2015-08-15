@@ -4,8 +4,6 @@ module Resume
   module CLI
     class Installer
 
-      attr_accessor :gems, :fonts
-
       def initialize(dependencies)
         @gems = dependencies[:gems]
         @fonts = dependencies[:fonts]
@@ -53,6 +51,8 @@ module Resume
       end
 
       private
+
+      attr_accessor :gems, :fonts
 
       def audit_gem_dependencies
         gems.each do |name, version|

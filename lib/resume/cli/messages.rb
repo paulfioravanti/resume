@@ -24,10 +24,6 @@ module Resume
             inform_start_of_resume_generation:
               "Generating PDF. This shouldn't take longer "\
               "than a few seconds...",
-            inform_of_failure_to_generate_resume:
-              "Sorry, I won't be able to generate a PDF "\
-              "without installing these dependencies.\n"\
-              "Please ask me directly for a PDF copy of my resume.",
             inform_of_successful_resume_generation:
               'Resume generated successfully.',
             request_to_open_resume:
@@ -52,10 +48,6 @@ module Resume
               '学歴セクションを作成中･･･',
             inform_start_of_resume_generation:
               "PDFを生成中。少々お待ち下さい･･･",
-            inform_of_failure_to_generate_resume:
-              "申し訳ありませんが、特定された依存性がないと"\
-              "PDFが生成できません。\n"\
-              "履歴書PDFが生成できない場合は、直接にお問い合わせ下さい。",
             inform_of_successful_resume_generation:
               '履歴書生成が成功しました。',
             request_to_open_resume:
@@ -96,10 +88,6 @@ module Resume
 
       def inform_start_of_resume_generation
         puts messages[__method__]
-      end
-
-      def inform_of_failure_to_generate_resume
-        puts red(messages[__method__])
       end
 
       def inform_of_successful_resume_generation

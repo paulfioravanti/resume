@@ -1,3 +1,6 @@
+require 'open-uri'
+require 'json'
+require 'socket'
 require_relative 'network_connection_error'
 
 module Resume
