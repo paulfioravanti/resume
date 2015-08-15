@@ -25,23 +25,27 @@ module Resume
       attr_reader :messages
 
       def error
-        puts red(I18n.t(*messages[:error]))
+        puts red(I18n.t(*messages[__method__]))
       end
 
       def warning
-        puts yellow(I18n.t(*messages[:warning]))
+        puts yellow(I18n.t(*messages[__method__]))
       end
 
       def question
-        print yellow(I18n.t(*messages[:question]))
+        print yellow(I18n.t(*messages[__method__]))
+      end
+
+      def success
+        puts green(I18n.t(*messages[__method__]))
       end
 
       def info
-        puts I18n.t(*messages[:info])
+        puts I18n.t(*messages[__method__])
       end
 
       def raw
-        puts messages[:raw]
+        puts messages[__method__]
       end
     end
   end

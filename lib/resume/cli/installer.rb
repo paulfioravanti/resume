@@ -18,14 +18,13 @@ module Resume
       end
 
       def install
-        app.thank_user_for_permission
-        app.inform_start_of_gem_installation
+        Output.message(success: :thank_you_kindly)
         if gems_successfully_installed? && fonts_successfully_installed?
-          app.inform_of_successful_installation
+          Output.message(success: :dependencies_successfully_installed)
           # Reset the dir and path values so Prawn can be required
           Gem.clear_paths
         else
-          app.inform_of_installation_failure
+          Output.message(error: :dependency_installation_failed)
           exit
         end
       end
@@ -106,14 +105,18 @@ module Resume
       end
 
       def fonts_successfully_installed?
-        fonts.values.all? do |font|
-          app.inform_start_of_font_download(font)
+        fonts.all? do |font|
+          Output.message([
+            :downloading_font,
+            { file_name: font[:file_name], location: font[:location] }
+          ])
           download_font_file(font)
           extract_fonts(font)
         end
       end
 
       def download_font_file(font)
+        # TODO: Use this in the Tmp dir
         open(font[:file_name], 'wb') do |file|
           open(font[:location]) do |uri|
             file.write(uri.read)
@@ -122,10 +125,11 @@ module Resume
       end
 
       def extract_fonts(font)
+        # TODO: Extract in the tmp dir
         require 'zip'
         Zip::File.open(font[:file_name]) do |file|
           file.each do |entry|
-            font[:fonts].each do |_, file_name|
+            font[:files].each do |_, file_name|
               if entry.name.match(file_name)
                 # overwrite any existing files with true block
                 entry.extract(file_name) { true }

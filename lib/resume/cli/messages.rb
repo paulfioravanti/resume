@@ -21,14 +21,6 @@ module Resume
               'Creating employment history section...',
             inform_creation_of_education_history:
               'Creating education history section...',
-            thank_user_for_permission:
-              'Thank you kindly :-)',
-            inform_start_of_gem_installation:
-              'Installing required gems...',
-            inform_start_of_font_download:
-              "Downloading %{file_name} from\n"\
-              "%{location}\n"\
-              "This may take a while...",
             inform_start_of_resume_generation:
               "Generating PDF. This shouldn't take longer "\
               "than a few seconds...",
@@ -55,17 +47,6 @@ module Resume
             request_user_to_open_document:
               "Sorry, I can't figure out how to open the resume on\n"\
               "this computer. Please open it yourself.",
-            inform_of_successful_installation:
-              'Dependencies successfully installed.',
-            inform_of_installation_failure:
-              "Sorry, for some reason I wasn't able to\n"\
-              "install one or more required dependencies.\n"\
-              "Either try again or ask me directly for a PDF copy of "\
-              "my resume.",
-            inform_of_inability_to_get_outside_connection:
-              "Sorry, it seems I can't get an outside connection.",
-            request_user_to_check_internet_settings:
-              "Please check your internet settings and try again."
           },
           ja: {
             inform_creation_of_social_media_links:
@@ -76,14 +57,6 @@ module Resume
               '職歴セクションを作成中･･･',
             inform_creation_of_education_history:
               '学歴セクションを作成中･･･',
-            thank_user_for_permission:
-              'ありがとうございます(^_^)',
-            inform_start_of_gem_installation:
-              'Ruby gemsをインストール中･･･',
-            inform_start_of_font_download:
-              "%{location}から\n"\
-              "%{file_name}のフォントファイルをダウンロード中。\n"\
-              "少々時間が掛かります･･･",
             inform_start_of_resume_generation:
               "PDFを生成中。少々お待ち下さい･･･",
             inform_of_failure_to_generate_resume:
@@ -109,35 +82,8 @@ module Resume
             request_user_to_open_document:
               "ごめんなさい。使用されているコンピュータでの資料の開き方が"\
               "不明なため、ご自身でご確認ください。",
-            inform_of_successful_installation:
-              'インストールが成功しました。',
-            inform_of_installation_failure:
-              "ごめんなさい。理由は不明ですが、"\
-              "インストールできませんでした。"\
-              "もう一度実行してみるか、または履歴書PDF版のリクエストを"\
-              "直接ご連絡下さい。",
-            inform_of_inability_to_get_outside_connection:
-              "インターネットに接続できません。",
-            request_user_to_check_internet_settings:
-              "ネットワーク設定をご確認下さい。"
           }
         }[locale]
-      end
-
-      def thank_user_for_permission
-        puts green(messages[__method__])
-      end
-
-      def inform_start_of_gem_installation
-        puts messages[__method__]
-      end
-
-      def inform_start_of_font_download(font_type)
-        puts messages[__method__] %
-          {
-            file_name: font_type[:file_name],
-            location: font_type[:location]
-          }
       end
 
       def inform_creation_of_social_media_links
@@ -156,19 +102,6 @@ module Resume
         puts messages[__method__]
       end
 
-      def inform_of_network_connection_issue
-        puts red(messages[:inform_of_inability_to_get_outside_connection])
-        puts yellow(messages[:request_user_to_check_internet_settings])
-      end
-
-      def inform_of_successful_installation
-        puts green(messages[__method__])
-      end
-
-      def inform_of_installation_failure
-        puts red(messages[__method__])
-      end
-
       def request_user_to_open_document
         puts yellow(messages[__method__])
       end
@@ -182,20 +115,6 @@ module Resume
       end
 
       private
-
-      def request_dependency_installation
-        puts yellow(messages[:inform_of_dependencies])
-        if gems.any?
-          puts yellow(messages[:inform_of_gem_dependencies])
-          gems.each do |name, version|
-            puts "  - #{name} #{version}"
-          end
-        end
-        if fonts.any?
-          puts yellow(messages[:inform_of_font_dependencies])
-        end
-        print yellow(messages[:request_installation_permission])
-      end
 
       def inform_start_of_resume_generation
         puts messages[__method__]
