@@ -15,28 +15,23 @@ module Resume
     class Document
       include Decoder
 
-      attr_reader :resume, :app, :filename
+      attr_reader :resume, :filename
 
-      def self.generate(app)
-        new(resume, app).generate
-      rescue SocketError, OpenURI::HTTPError, Errno::ECONNREFUSED
-        app.inform_of_network_connection_issue
-        exit
+      def self.generate(resume)
+        new(resume).generate
       end
 
-      def initialize(resume, app)
+      def initialize(resume)
         @resume = resume
-        @app = app
-        # TODO: Put the file in i18n
         @filename = "#{d(resume[:document_name])}_#{locale}.pdf"
       end
 
       def generate
         require 'prawn'
         require 'prawn/table'
-        Prawn::Document.generate(app.filename, Options.for(resume)) do |pdf|
-          pdf.instance_exec(resume, app) do |resume, app|
-            Manifest.process(self, resume, app)
+        Prawn::Document.generate(filename, Options.for(resume)) do |pdf|
+          pdf.instance_exec(resume) do |resume|
+            Manifest.process(self, resume)
           end
         end
       end

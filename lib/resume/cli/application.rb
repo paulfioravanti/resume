@@ -54,8 +54,8 @@ module Resume
       end
 
       def generate_resume
-        inform_start_of_resume_generation
-        PDF::Document.generate(self)
+        Output.message(:generating_pdf)
+        PDF::Document.generate(resume)
         inform_of_successful_resume_generation
       end
 

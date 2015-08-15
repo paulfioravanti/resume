@@ -9,7 +9,7 @@ require_relative 'education_history'
 module Resume
   module PDF
     class Manifest
-      def self.process(pdf, resume, app)
+      def self.process(pdf, resume)
         Font.configure(pdf, resume[:font])
         Name.generate(pdf, resume[:name])
         Headline.generate(pdf, resume[:headline])

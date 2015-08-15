@@ -21,9 +21,6 @@ module Resume
               'Creating employment history section...',
             inform_creation_of_education_history:
               'Creating education history section...',
-            inform_start_of_resume_generation:
-              "Generating PDF. This shouldn't take longer "\
-              "than a few seconds...",
             inform_of_successful_resume_generation:
               'Resume generated successfully.',
             request_to_open_resume:
@@ -46,8 +43,6 @@ module Resume
               '職歴セクションを作成中･･･',
             inform_creation_of_education_history:
               '学歴セクションを作成中･･･',
-            inform_start_of_resume_generation:
-              "PDFを生成中。少々お待ち下さい･･･",
             inform_of_successful_resume_generation:
               '履歴書生成が成功しました。',
             request_to_open_resume:
@@ -85,10 +80,6 @@ module Resume
       end
 
       private
-
-      def inform_start_of_resume_generation
-        puts messages[__method__]
-      end
 
       def inform_of_successful_resume_generation
         puts green(messages[__method__])
