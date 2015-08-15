@@ -24,19 +24,3 @@ module Resume
     "#{DATA_LOCATION}resume.#{I18n.locale}.json"
   end
 end
-
-module I18n
-  module Backend
-    module Base
-      protected
-
-      def load_erb(filename)
-        begin
-          YAML.load(ERB.new(File.read(filename)).result)
-        rescue TypeError, ScriptError, StandardError => e
-          raise InvalidLocaleData.new(filename, e.inspect)
-        end
-      end
-    end
-  end
-end
