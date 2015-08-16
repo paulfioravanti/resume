@@ -1,4 +1,4 @@
-require 'i18n'
+require 'spec_helper'
 require 'i18n/core_ext'
 
 RSpec.describe I18n::Backend::Base do
