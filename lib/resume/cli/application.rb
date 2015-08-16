@@ -40,6 +40,9 @@ module Resume
         install_dependencies if installation_required?
         generate_resume
         open_resume
+      rescue DependencyInstallationError
+        Output.messages(e.messages)
+        exit
       end
 
       private
