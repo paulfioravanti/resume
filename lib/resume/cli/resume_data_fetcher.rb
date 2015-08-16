@@ -1,7 +1,7 @@
 require 'open-uri'
 require 'json'
 require 'socket'
-require_relative 'network_connection_error'
+require_relative '../network_connection_error'
 
 module Resume
   module CLI

@@ -1,6 +1,3 @@
-require 'json'
-require 'open-uri'
-require 'socket'
 require_relative '../decoder'
 require_relative 'manifest'
 require_relative 'options'

@@ -1,4 +1,5 @@
 require 'tmpdir'
+require_relative '../network_connection_error'
 
 module Resume
   module CLI
@@ -89,6 +90,8 @@ module Resume
         gems.all? do |gem, version|
           system('gem', 'install', gem, '-v', version)
         end
+      rescue SocketError, Errno::ECONNREFUSED
+        raise NetworkConnectionError
       end
 
       def fonts_successfully_installed?
@@ -109,6 +112,8 @@ module Resume
             file.write(uri.read)
           end
         end
+      rescue SocketError, OpenURI::HTTPError, Errno::ECONNREFUSED
+        raise NetworkConnectionError
       end
 
       def extract_fonts(font)
