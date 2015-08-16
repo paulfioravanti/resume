@@ -54,7 +54,7 @@ module Resume
       end
 
       def generate_resume
-        Output.message(:generating_pdf)
+        Output.message(info: :generating_pdf)
         self.filename = PDF::Document.generate(resume)
         Output.message(success: :resume_generated_successfully)
       end

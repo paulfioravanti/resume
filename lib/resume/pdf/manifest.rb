@@ -14,15 +14,15 @@ module Resume
         Font.configure(pdf, resume[:font])
         Name.generate(pdf, resume[:name])
         Headline.generate(pdf, resume[:headline])
-        Output.message(:creating_social_media_links)
+        Output.message(info: :creating_social_media_links)
         SocialMediaLogoSet.generate(
           pdf, resume[:social_media_logo_set]
         )
-        Output.message(:creating_technical_skills_section)
+        Output.message(info: :creating_technical_skills_section)
         TechnicalSkills.generate(pdf, resume[:technical_skills])
-        Output.message(:creating_employment_history_section)
+        Output.message(info: :creating_employment_history_section)
         EmploymentHistory.generate(pdf, resume[:employment_history])
-        Output.message(:creating_education_history_section)
+        Output.message(info: :creating_education_history_section)
         EducationHistory.generate(pdf, resume[:education_history])
       end
     end

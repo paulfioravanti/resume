@@ -4,8 +4,7 @@ module Resume
   class Output
     include Colours
 
-    def self.message(param)
-      messages = param.respond_to?(:keys) ? param : { info: param }
+    def self.message(messages)
       new(messages).message
     end
 
