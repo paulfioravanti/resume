@@ -57,7 +57,7 @@ module Resume
           I18n.t(:help_switch_short),
           I18n.t(:help_switch_long),
           I18n.t(:help_switch_description)) do
-          Output.message(raw: opts.to_s)
+          Output.raw(opts)
           exit
         end
       end
@@ -67,7 +67,7 @@ module Resume
           I18n.t(:version_switch_short),
           I18n.t(:version_switch_long),
           I18n.t(:version_switch_description)) do
-          Output.message(raw: Resume::VERSION)
+          Output.raw(Resume::VERSION)
           exit
         end
       end

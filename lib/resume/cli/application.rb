@@ -21,7 +21,7 @@ module Resume
         resume = ResumeDataFetcher.fetch
         new(resume).start
       rescue ArgumentError, NetworkConnectionError => e
-        Output.message(e.messages)
+        Output.messages(e.messages)
         exit
       end
 
@@ -48,23 +48,22 @@ module Resume
         if permission_granted?
           install
         else
-          Output.message(error: :cannot_generate_pdf_without_dependencies)
+          Output.error(:cannot_generate_pdf_without_dependencies)
           exit
         end
       end
 
       def generate_resume
-        Output.message(info: :generating_pdf)
+        Output.info(:generating_pdf)
         self.filename = PDF::Document.generate(resume)
-        Output.message(success: :resume_generated_successfully)
+        Output.success(:resume_generated_successfully)
       end
 
       def open_resume
-        Output.message(question: :would_you_like_me_to_open_the_resume)
+        Output.question(:would_you_like_me_to_open_the_resume)
         FileSystem.open_document(filename) if permission_granted?
-        Output.message(thanks: [
-          :thanks_for_looking_at_my_resume,
-          { filename: filename }
+        Output.thanks([
+          :thanks_for_looking_at_my_resume, { filename: filename }
         ])
       end
 

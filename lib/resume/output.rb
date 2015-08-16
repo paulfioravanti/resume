@@ -2,52 +2,37 @@ require_relative 'colours'
 
 module Resume
   class Output
-    include Colours
+    extend Colours
 
-    def self.message(messages)
-      messages.each { |m| new(*m).message }
+    def self.messages(messages)
+      messages.each { |type, key| public_send(key, type) }
     end
 
-    private_class_method :new
-
-    def initialize(type, key)
-      @type = type
-      @key = key
-    end
-
-    def message
-      send(type)
-    end
-
-    private
-
-    attr_reader :type, :key
-
-    def error
+    def self.error(key)
       puts red(I18n.t(*key))
     end
 
-    def warning
+    def self.warning(key)
       puts yellow(I18n.t(*key))
     end
 
-    def question
+    def self.question(key)
       print yellow(I18n.t(*key))
     end
 
-    def success
+    def self.success(key)
       puts green(I18n.t(*key))
     end
 
-    def thanks
+    def self.thanks(key)
       puts cyan(I18n.t(*key))
     end
 
-    def info
+    def self.info(key)
       puts I18n.t(*key)
     end
 
-    def raw
+    def self.raw(key)
       puts key # aka the message
     end
   end

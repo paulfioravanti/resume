@@ -14,7 +14,7 @@ module Resume
       private_class_method :new
 
       def fetch
-        Output.message(info: :gathering_resume_information)
+        Output.info(:gathering_resume_information)
         JSON.parse(
           open(Resume.filename).read,
           symbolize_names: true

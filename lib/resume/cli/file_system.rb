@@ -10,7 +10,7 @@ module Resume
         when %r(windows)
           system('cmd', '/c', "\"start #{filename}\"")
         else
-          Output.message(warning: :dont_know_how_to_open_resume)
+          Output.warning(:dont_know_how_to_open_resume)
         end
       end
     end

@@ -17,13 +17,13 @@ module Resume
       end
 
       def install
-        Output.message(success: :thank_you_kindly)
+        Output.success(:thank_you_kindly)
         if gems_successfully_installed? && fonts_successfully_installed?
-          Output.message(success: :dependencies_successfully_installed)
+          Output.success(:dependencies_successfully_installed)
           # Reset the dir and path values so Prawn can be required
           Gem.clear_paths
         else
-          Output.message(error: :dependency_installation_failed)
+          Output.error(:dependency_installation_failed)
           exit
         end
       end
@@ -33,20 +33,19 @@ module Resume
       end
 
       def request_dependency_installation
-        Output.message(warning: :i_need_the_following_to_generate_a_pdf)
+        Output.warning(:i_need_the_following_to_generate_a_pdf)
         if gems.any?
-          Output.message(warning: :ruby_gems)
+          Output.warning(:ruby_gems)
           gems.each do |name, version|
-            Output.message(info: [
-              :gem_name_and_version,
-              { name: name, version: version }
+            Output.info([
+              :gem_name_and_version, { name: name, version: version }
             ])
           end
         end
         if fonts.any?
-          Output.message(warning: :custom_fonts)
+          Output.warning(:custom_fonts)
         end
-        Output.message(question: :may_i_please_install_them)
+        Output.question(:may_i_please_install_them)
       end
 
       private
@@ -96,7 +95,7 @@ module Resume
 
       def fonts_successfully_installed?
         fonts.all? do |font|
-          Output.message(info: [
+          Output.info([
             :downloading_font,
             { file_name: font[:file_name], location: font[:location] }
           ])
