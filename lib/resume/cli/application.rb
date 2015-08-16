@@ -14,6 +14,7 @@ module Resume
       extend Forwardable
 
       attr_reader :resume, :locale
+      attr_accessor :filename
 
       def self.start
         ArgumentParser.parse
@@ -54,14 +55,17 @@ module Resume
 
       def generate_resume
         Output.message(:generating_pdf)
-        PDF::Document.generate(resume)
-        inform_of_successful_resume_generation
+        self.filename = PDF::Document.generate(resume)
+        Output.message(success: :resume_generated_successfully)
       end
 
       def open_resume
-        request_to_open_resume
-        FileSystem.open_document(self) if permission_granted?
-        thank_user_for_generating_resume
+        Output.message(question: :would_you_like_me_to_open_the_resume)
+        FileSystem.open_document(filename) if permission_granted?
+        Output.message(thanks: [
+          :thanks_for_looking_at_my_resume,
+          { filename: filename }
+        ])
       end
 
       def permission_granted?

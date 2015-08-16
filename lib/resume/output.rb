@@ -39,6 +39,10 @@ module Resume
       puts green(I18n.t(*messages[__method__]))
     end
 
+    def thanks
+      puts cyan(I18n.t(*messages[__method__]))
+    end
+
     def info
       puts I18n.t(*messages[__method__])
     end

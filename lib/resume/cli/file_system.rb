@@ -1,8 +1,7 @@
 module Resume
   module CLI
     class FileSystem
-      def self.open_document(app)
-        filename = app.filename
+      def self.open_document(filename)
         case RUBY_PLATFORM
         when %r(darwin)
           system('open', filename)
@@ -11,7 +10,7 @@ module Resume
         when %r(windows)
           system('cmd', '/c', "\"start #{filename}\"")
         else
-          app.request_user_to_open_document
+          Output.message(warning: :dont_know_how_to_open_resume)
         end
       end
     end
