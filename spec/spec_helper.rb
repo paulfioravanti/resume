@@ -5,15 +5,17 @@ else
   require 'simplecov'
 end
 
-require 'resume/cli/colours'
+require 'resume/colours'
 require 'rspec'
+require 'open-uri'
 
 RSpec.configure do |config|
-  include Resume::CLI::Colours
+  include Resume::Colours
 
   config.disable_monkey_patching!
   config.before(:suite) do
     begin
+      # TODO: Confirm whether Output class can be used here
       require 'prawn'
       require 'prawn/table'
       # Test access to the 1x1 pixel image needed for specs
