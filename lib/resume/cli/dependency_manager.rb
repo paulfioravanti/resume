@@ -1,12 +1,11 @@
 require 'forwardable'
-require 'tmpdir'
 require_relative '../network_connection_error'
 require_relative 'gem_installer'
 require_relative 'font_downloader'
 
 module Resume
   module CLI
-    class Installer
+    class DependencyManager
       extend Forwardable
 
       def initialize(dependencies)
@@ -14,15 +13,17 @@ module Resume
         @font_downloader = FontDownloader.new(dependencies[:fonts])
       end
 
-      def_delegators :@gem_installer, :gems,
-                                      :audit_gem_dependencies,
-                                      :output_gem_dependencies,
-                                      :gems_successfully_installed?
+      def_delegators :@gem_installer,
+                     :gems,
+                     :audit_gem_dependencies,
+                     :output_gem_dependencies,
+                     :gems_successfully_installed?
 
-      def_delegators :@font_downloader, :fonts,
-                                        :audit_font_dependencies,
-                                        :output_font_dependencies,
-                                        :fonts_successfully_downloaded?
+      def_delegators :@font_downloader,
+                     :fonts,
+                     :audit_font_dependencies,
+                     :output_font_dependencies,
+                     :fonts_successfully_downloaded?
 
       def installation_required?
         audit_gem_dependencies

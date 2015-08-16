@@ -3,7 +3,7 @@ require_relative '../decoder'
 require_relative '../output'
 require_relative 'argument_parser'
 require_relative 'resume_data_fetcher'
-require_relative 'installer'
+require_relative 'dependency_manager'
 require_relative '../pdf/document'
 require_relative 'file_system'
 
@@ -26,13 +26,15 @@ module Resume
 
       def initialize(resume)
         @resume = resume
-        @installer = Installer.new(resume[:dependencies])
+        @dependency_manager =
+          DependencyManager.new(resume[:dependencies])
       end
 
-      def_delegators :@installer, :installation_required?,
-                                  :dependencies_present?,
-                                  :request_dependency_installation,
-                                  :install
+      def_delegators :@dependency_manager,
+                     :installation_required?,
+                     :dependencies_present?,
+                     :request_dependency_installation,
+                     :install
 
       def start
         install_dependencies if installation_required?
