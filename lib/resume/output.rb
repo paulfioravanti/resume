@@ -5,49 +5,50 @@ module Resume
     include Colours
 
     def self.message(messages)
-      new(messages).message
+      messages.each { |m| new(*m).message }
     end
 
     private_class_method :new
 
-    def initialize(messages)
-      @messages = messages
+    def initialize(type, key)
+      @type = type
+      @key = key
     end
 
     def message
-      messages.keys.each { |key| send(key) }
+      send(type)
     end
 
     private
 
-    attr_reader :messages
+    attr_reader :type, :key
 
     def error
-      puts red(I18n.t(*messages[__method__]))
+      puts red(I18n.t(*key))
     end
 
     def warning
-      puts yellow(I18n.t(*messages[__method__]))
+      puts yellow(I18n.t(*key))
     end
 
     def question
-      print yellow(I18n.t(*messages[__method__]))
+      print yellow(I18n.t(*key))
     end
 
     def success
-      puts green(I18n.t(*messages[__method__]))
+      puts green(I18n.t(*key))
     end
 
     def thanks
-      puts cyan(I18n.t(*messages[__method__]))
+      puts cyan(I18n.t(*key))
     end
 
     def info
-      puts I18n.t(*messages[__method__])
+      puts I18n.t(*key)
     end
 
     def raw
-      puts messages[__method__]
+      puts key # aka the message
     end
   end
 end
