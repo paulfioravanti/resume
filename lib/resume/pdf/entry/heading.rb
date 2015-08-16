@@ -4,8 +4,6 @@ module Resume
       class Heading
         include Decoder
 
-        attr_reader :pdf, :top_padding, :text, :styles, :colour
-
         def self.generate(pdf, heading)
           new(
             pdf,
@@ -33,6 +31,10 @@ module Resume
             color: colour
           }])
         end
+
+        private
+
+        attr_reader :pdf, :top_padding, :text, :styles, :colour
       end
     end
   end

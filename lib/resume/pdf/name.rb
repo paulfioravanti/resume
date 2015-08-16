@@ -3,8 +3,6 @@ module Resume
     class Name
       include Decoder
 
-      attr_reader :pdf, :font, :size, :text
-
       def self.generate(pdf, name)
         new(
           pdf,
@@ -28,6 +26,10 @@ module Resume
           pdf.text(text)
         end
       end
+
+      private
+
+      attr_reader :pdf, :font, :size, :text
     end
   end
 end

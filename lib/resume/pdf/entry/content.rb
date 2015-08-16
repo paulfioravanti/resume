@@ -7,8 +7,6 @@ module Resume
       class Content
         include Decoder, TransparentLink
 
-        attr_reader :pdf, :entry
-
         def self.generate(pdf, entry)
           new(pdf, entry).generate
         end
@@ -28,6 +26,8 @@ module Resume
         end
 
         private
+
+        attr_reader :pdf, :entry
 
         def details
           pdf.move_down entry[:summary][:top_padding]

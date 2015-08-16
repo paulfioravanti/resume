@@ -1,3 +1,4 @@
+require 'tmpdir'
 require_relative '../network_connection_error'
 
 module Resume

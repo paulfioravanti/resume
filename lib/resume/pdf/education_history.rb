@@ -2,8 +2,6 @@ module Resume
   module PDF
     class EducationHistory
 
-      attr_reader :pdf, :heading, :content
-
       def self.generate(pdf, data)
         new(pdf, data[:heading], data[:content]).generate
       end
@@ -22,6 +20,8 @@ module Resume
       end
 
       private
+
+      attr_reader :pdf, :heading, :content
 
       def generate_heading
         Entry::Heading.generate(pdf, heading)

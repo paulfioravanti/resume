@@ -4,8 +4,6 @@ module Resume
       class CompanyLogo
         include TransparentLink
 
-        attr_reader :pdf, :logo
-
         def self.generate(pdf, data)
           logo = Logo.for(data[:logo])
           new(pdf, logo).generate
@@ -28,6 +26,8 @@ module Resume
         end
 
         private
+
+        attr_reader :pdf, :logo
 
         def render_image_link
           pdf.image(logo.image, fit: logo.fit, align: logo.align)

@@ -3,9 +3,6 @@ module Resume
     class Headline
       include Decoder
 
-      attr_reader :pdf, :primary_text, :primary_colour,
-                  :secondary_text, :size, :top_padding
-
       def self.generate(pdf, headline)
         primary_header = headline[:primary]
         new(
@@ -37,6 +34,11 @@ module Resume
           size: size
         )
       end
+
+      private
+
+      attr_reader :pdf, :primary_text, :primary_colour,
+                  :secondary_text, :size, :top_padding
     end
   end
 end

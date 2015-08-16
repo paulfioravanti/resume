@@ -6,11 +6,6 @@ module Resume
     class SocialMediaLogoSet
       include TransparentLink
 
-      attr_reader :pdf, :x_position, :top_padding, :padded_logo_width,
-                  :padded_logo_height, :horizontal_rule_colour, :logos,
-                  :bottom_padding
-      attr_accessor :x_position
-
       def self.generate(pdf, logo_set)
         new(
           pdf,
@@ -43,6 +38,11 @@ module Resume
       end
 
       private
+
+      attr_reader :pdf, :x_position, :top_padding, :padded_logo_width,
+                  :padded_logo_height, :horizontal_rule_colour, :logos,
+                  :bottom_padding
+      attr_accessor :x_position
 
       def logos_for(logo_set, general_properties)
         logo_set.map do |logo_properties|

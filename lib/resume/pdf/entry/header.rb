@@ -4,9 +4,6 @@ module Resume
       class Header
         include Decoder
 
-        attr_reader :pdf, :position, :organisation,
-                    :period, :location, :at_x_position
-
         def self.generate(pdf, entry)
           new(
             pdf,
@@ -43,6 +40,9 @@ module Resume
         end
 
         private
+
+        attr_reader :pdf, :position, :organisation,
+                    :period, :location, :at_x_position
 
         def formatted_text_header
           header_sections.each do |sections|
