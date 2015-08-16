@@ -12,7 +12,7 @@ module Resume
     require 'i18n'
     require_relative 'i18n/core_ext'
     I18n.load_path =
-      Dir["#{Pathname(__FILE__).dirname}/resume/cli/locales/*.yml.erb"]
+      Dir["#{Pathname(__FILE__).dirname}/resume/locales/*.yml.erb"]
     I18n.available_locales = [:en, :ja]
   rescue LoadError
     puts 'This app is bilingual and needs the I18n gem.'
