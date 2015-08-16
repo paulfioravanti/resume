@@ -29,7 +29,7 @@ RSpec.describe I18n::Backend::Base do
         I18n.backend.load_translations(filename)
       end
 
-      it 'loads data from a yml.erb file and interpolates the ERB' do
+      it 'loads the data into a hash and interpolates the ERB' do
         expect(translations).to eq(erb_interpolated_hash)
       end
     end
