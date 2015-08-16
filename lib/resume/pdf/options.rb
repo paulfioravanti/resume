@@ -1,3 +1,5 @@
+require_relative '../file_fetcher'
+
 module Resume
   module PDF
     class Options
@@ -10,7 +12,7 @@ module Resume
           margin_bottom: resume[:margin_bottom],
           margin_left: resume[:margin_left],
           margin_right: resume[:margin_right],
-          background: open(resume[:background_image]),
+          background: FileFetcher.fetch(resume[:background_image]),
           repeat: resume[:repeat],
           info: {
             Title: title,
