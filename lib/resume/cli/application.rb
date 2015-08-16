@@ -48,6 +48,7 @@ module Resume
       def install_dependencies
         request_dependency_installation
         if permission_granted?
+          Output.success(:thank_you_kindly)
           install
         else
           Output.error(:cannot_generate_pdf_without_dependencies)

@@ -17,7 +17,6 @@ module Resume
       end
 
       def install
-        Output.success(:thank_you_kindly)
         if gems_successfully_installed? && fonts_successfully_installed?
           Output.success(:dependencies_successfully_installed)
           # Reset the dir and path values so Prawn can be required
