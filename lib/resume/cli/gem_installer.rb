@@ -33,6 +33,7 @@ module Resume
       end
 
       def gems_successfully_installed?
+        Output.plain(:installing_ruby_gems)
         gems.all? do |gem, version|
           system('gem', 'install', gem, '-v', version)
         end
