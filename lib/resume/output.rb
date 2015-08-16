@@ -5,7 +5,7 @@ module Resume
     extend Colours
 
     def self.messages(messages)
-      messages.each { |type, key| public_send(key, type) }
+      messages.each { |type, key| public_send(type, key) }
     end
 
     def self.error(key)
@@ -32,8 +32,8 @@ module Resume
       puts I18n.t(*key)
     end
 
-    def self.raw(key)
-      puts key # aka the message
+    def self.raw(message)
+      puts message
     end
   end
 end
