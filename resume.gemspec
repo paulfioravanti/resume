@@ -28,4 +28,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'simplecov', '~> 0.10'
   gem.add_development_dependency 'reek', '~> 3.0'
   gem.add_development_dependency 'codeclimate-test-reporter', '~> 0.4'
+  gem.add_development_dependency 'i18n', '~> 0.7'
 end
