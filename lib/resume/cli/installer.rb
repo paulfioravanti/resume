@@ -32,9 +32,7 @@ module Resume
       end
 
       def request_dependency_installation
-        Output.message(
-          warning: :i_need_the_following_to_generate_a_pdf
-        )
+        Output.message(warning: :i_need_the_following_to_generate_a_pdf)
         if gems.any?
           Output.message(warning: :ruby_gems)
           gems.each do |name, version|
