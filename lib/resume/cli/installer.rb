@@ -1,14 +1,22 @@
+require 'forwardable'
 require 'tmpdir'
 require_relative '../network_connection_error'
+require_relative 'gem_installer'
 
 module Resume
   module CLI
     class Installer
+      extend Forwardable
 
       def initialize(dependencies)
-        @gems = dependencies[:gems]
+        @gem_installer = GemInstaller.new(dependencies[:gems])
         @fonts = dependencies[:fonts]
       end
+
+      def_delegators :@gem_installer, :gems,
+                                      :audit_gem_dependencies,
+                                      :output_gem_dependencies,
+                                      :gems_successfully_installed?
 
       def installation_required?
         audit_gem_dependencies
@@ -19,8 +27,6 @@ module Resume
       def install
         if gems_successfully_installed? && fonts_successfully_installed?
           Output.success(:dependencies_successfully_installed)
-          # Reset the dir and path values so Prawn can be required
-          Gem.clear_paths
         else
           Output.error(:dependency_installation_failed)
           exit
@@ -34,12 +40,7 @@ module Resume
       def request_dependency_installation
         Output.warning(:i_need_the_following_to_generate_a_pdf)
         if gems.any?
-          Output.warning(:ruby_gems)
-          gems.each do |name, version|
-            Output.plain([
-              :gem_name_and_version, { name: name, version: version }
-            ])
-          end
+          output_gem_dependencies
         end
         if fonts.any?
           Output.warning(:custom_fonts)
@@ -49,21 +50,7 @@ module Resume
 
       private
 
-      attr_accessor :gems, :fonts
-
-      def audit_gem_dependencies
-        gems.each do |name, version|
-          begin
-            if gem_already_installed?(name, version)
-              # remove dependency to install
-              self.gems -= [[name, version]]
-            end
-          rescue Gem::LoadError
-            # gem not installed: leave in the gems list
-            next
-          end
-        end
-      end
+      attr_accessor :fonts
 
       def audit_font_dependencies
         fonts.each do |font|
@@ -73,23 +60,10 @@ module Resume
         end
       end
 
-      def gem_already_installed?(name, version)
-        Gem::Specification.find_by_name(name).version ==
-          Gem::Version.new(version)
-      end
-
       def files_present?(files)
         files.all? do |file|
           File.exist?(File.join(Dir.tmpdir, file))
         end
-      end
-
-      def gems_successfully_installed?
-        gems.all? do |gem, version|
-          system('gem', 'install', gem, '-v', version)
-        end
-      rescue SocketError, Errno::ECONNREFUSED
-        raise NetworkConnectionError
       end
 
       def fonts_successfully_installed?
