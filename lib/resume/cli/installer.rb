@@ -36,7 +36,7 @@ module Resume
         if gems.any?
           Output.warning(:ruby_gems)
           gems.each do |name, version|
-            Output.info([
+            Output.plain([
               :gem_name_and_version, { name: name, version: version }
             ])
           end
@@ -94,7 +94,7 @@ module Resume
 
       def fonts_successfully_installed?
         fonts.all? do |font|
-          Output.info([
+          Output.plain([
             :downloading_font,
             { file_name: font[:file_name], location: font[:location] }
           ])

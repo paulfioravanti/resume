@@ -57,7 +57,7 @@ module Resume
       end
 
       def generate_resume
-        Output.info(:generating_pdf)
+        Output.plain(:generating_pdf)
         self.filename = PDF::Document.generate(resume).filename
         Output.success(:resume_generated_successfully)
       end
@@ -65,7 +65,7 @@ module Resume
       def open_resume
         Output.question(:would_you_like_me_to_open_the_resume)
         FileSystem.open_document(filename) if permission_granted?
-        Output.thanks([
+        Output.info([
           :thanks_for_looking_at_my_resume, { filename: filename }
         ])
       end

@@ -24,11 +24,11 @@ module Resume
       puts green(I18n.t(*key))
     end
 
-    def self.thanks(key)
+    def self.info(key)
       puts cyan(I18n.t(*key))
     end
 
-    def self.info(key)
+    def self.plain(key)
       puts I18n.t(*key)
     end
 
