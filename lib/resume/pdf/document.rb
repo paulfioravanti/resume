@@ -12,16 +12,18 @@ module Resume
     class Document
       include Decoder
 
-      attr_reader :resume, :title, :filename
+      attr_reader :filename
 
       def self.generate(resume)
-        new(resume).generate
+        title = d(resume[:title])
+        filename = "#{title}_#{I18n.locale}.pdf"
+        new(resume, title, filename).generate
       end
 
-      def initialize(resume)
+      def initialize(resume, title, filename)
         @resume = resume
-        @title = d(resume[:title])
-        @filename = "#{title}_#{I18n.locale}.pdf"
+        @title = title
+        @filename = filename
       end
 
       def generate
@@ -32,10 +34,12 @@ module Resume
             Manifest.process(self, resume)
           end
         end
-        filename
+        self
       end
 
       private
+
+      attr_reader :resume, :title
 
       def options
         Options.generate(title, resume[:options])

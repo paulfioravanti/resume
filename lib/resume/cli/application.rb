@@ -13,9 +13,6 @@ module Resume
       include Decoder
       extend Forwardable
 
-      attr_reader :resume, :locale
-      attr_accessor :filename
-
       def self.start
         ArgumentParser.parse
         resume = ResumeDataFetcher.fetch
@@ -24,6 +21,8 @@ module Resume
         Output.messages(e.messages)
         exit
       end
+
+      private_class_method :new
 
       def initialize(resume)
         @resume = resume
@@ -43,6 +42,9 @@ module Resume
 
       private
 
+      attr_reader :resume
+      attr_accessor :filename
+
       def install_dependencies
         request_dependency_installation
         if permission_granted?
@@ -55,7 +57,7 @@ module Resume
 
       def generate_resume
         Output.info(:generating_pdf)
-        self.filename = PDF::Document.generate(resume)
+        self.filename = PDF::Document.generate(resume).filename
         Output.success(:resume_generated_successfully)
       end
 
