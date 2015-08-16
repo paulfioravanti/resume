@@ -37,11 +37,7 @@ module Resume
 
       def generate
         pdf.move_down(top_padding)
-        generate_logo_for(logos.first)
-        logos[1..-1].each do |logo|
-          pdf.move_up(padded_logo_height)
-          generate_logo_for(logo)
-        end
+        generate_logos
         pdf.move_down(bottom_padding)
         pdf.stroke_horizontal_rule { color horizontal_rule_colour }
       end
@@ -51,6 +47,14 @@ module Resume
       def logos_for(logo_set, general_properties)
         logo_set.map do |logo_properties|
           Logo.for(logo_properties.merge(general_properties))
+        end
+      end
+
+      def generate_logos
+        generate_logo_for(logos.first)
+        logos[1..-1].each do |logo|
+          pdf.move_up(padded_logo_height)
+          generate_logo_for(logo)
         end
       end
 
