@@ -2,7 +2,7 @@ require 'forwardable'
 require_relative '../decoder'
 require_relative '../output'
 require_relative 'argument_parser'
-require_relative 'fetch_resume_service'
+require_relative 'resume_data_fetcher'
 require_relative 'installer'
 require_relative '../pdf/document'
 require_relative 'file_system'
@@ -18,7 +18,7 @@ module Resume
 
       def self.start
         ArgumentParser.parse
-        resume = FetchResumeService.fetch_resume
+        resume = ResumeDataFetcher.fetch
         new(resume).start
       rescue ArgumentError, NetworkConnectionError => e
         Output.message(e.messages)

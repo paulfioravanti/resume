@@ -5,15 +5,15 @@ require_relative 'network_connection_error'
 
 module Resume
   module CLI
-    class FetchResumeService
+    class ResumeDataFetcher
 
-      def self.fetch_resume
-        new.fetch_resume
+      def self.fetch
+        new.fetch
       end
 
       private_class_method :new
 
-      def fetch_resume
+      def fetch
         Output.message(info: :gathering_resume_information)
         JSON.parse(
           open(Resume.filename).read,
