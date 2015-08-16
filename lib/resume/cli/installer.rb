@@ -70,7 +70,7 @@ module Resume
       def audit_font_dependencies
         fonts.each do |font|
           if files_present?(font[:files].values)
-            fonts.delete(font_type)
+            fonts.delete(font)
           end
         end
       end
@@ -106,8 +106,7 @@ module Resume
       end
 
       def download_font_file(font)
-        # TODO: Use this in the Tmp dir
-        open(font[:file_name], 'wb') do |file|
+        open(File.join(Dir.tmpdir, font[:file_name]), 'wb') do |file|
           open(font[:location]) do |uri|
             file.write(uri.read)
           end
@@ -117,14 +116,13 @@ module Resume
       end
 
       def extract_fonts(font)
-        # TODO: Extract in the tmp dir
         require 'zip'
-        Zip::File.open(font[:file_name]) do |file|
+        Zip::File.open(File.join(Dir.tmpdir, font[:file_name])) do |file|
           file.each do |entry|
             font[:files].each do |_, file_name|
               if entry.name.match(file_name)
                 # overwrite any existing files with true block
-                entry.extract(file_name) { true }
+                entry.extract(File.join(Dir.tmpdir, file_name)) { true }
                 break # inner loop only
               end
             end
