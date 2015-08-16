@@ -1,4 +1,5 @@
 require 'i18n'
+require 'i18n/core_ext'
 
 RSpec.describe I18n::Backend::Base do
   # Since #load_erb is a protected method, this spec tests the
