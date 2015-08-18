@@ -11,7 +11,7 @@ module Resume
     def decode(string)
       # Force encoding to UTF-8 is needed for strings that had UTF-8
       # characters in them when they were originally encoded
-      Base64.strict_decode64(string).force_encoding('utf-8') if string
+      Base64.strict_decode64(string).force_encoding('utf-8')
     end
     alias_method :d, :decode
   end

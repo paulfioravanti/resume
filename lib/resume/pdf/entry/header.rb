@@ -72,7 +72,7 @@ module Resume
             styles: section[:styles].map(&:to_sym),
             size: section[:size],
             color: section[:colour],
-            link: d(section[:link]),
+            link: section[:link] ? d(section[:link]) : nil,
           }
         end
       end
