@@ -4,8 +4,8 @@ module Resume
 
     def initialize
       @messages = {
-        error: :cant_get_an_outside_connection,
-        warning: :please_check_your_internet_settings
+        error: :cant_connect_to_the_internet,
+        warning: :please_check_your_network_settings
       }
     end
   end
