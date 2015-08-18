@@ -2,10 +2,6 @@ module Resume
   module Colours
     private
 
-    def colourize(text, colour_code:)
-      "\e[#{colour_code}m#{text}\e[0m"
-    end
-
     def red(text)
       colourize(text, colour_code: 31)
     end
@@ -20,6 +16,10 @@ module Resume
 
     def cyan(text)
       colourize(text, colour_code: 36)
+    end
+
+    def colourize(text, colour_code:)
+      "\e[#{colour_code}m#{text}\e[0m"
     end
   end
 end
