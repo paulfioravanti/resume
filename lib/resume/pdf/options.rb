@@ -1,4 +1,4 @@
-require_relative '../file_fetcher'
+require_relative 'file_fetcher'
 
 module Resume
   module PDF
