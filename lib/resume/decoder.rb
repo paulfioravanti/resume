@@ -3,9 +3,14 @@ require 'base64'
 module Resume
   module Decoder
     def self.included(base)
-      # Allow #d to be available on the class level as well
+      # Allow #decode to be used as .decode at the class level as well
       base.extend self
+      base.send(:private_class_method, :decode)
+      base.send(:private_class_method, :d)
     end
+
+    private
+
     # This is just a helper method due to the sheer amount of
     # decoding that occurs throughout the code
     def decode(string)
