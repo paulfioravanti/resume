@@ -14,12 +14,13 @@ module Resume
       extend Forwardable
 
       def self.start
-        ArgumentParser.parse
-        resume = ResumeDataFetcher.fetch
-        new(resume).start
+        catch(:halt) do
+          ArgumentParser.parse
+          resume = ResumeDataFetcher.fetch
+          new(resume).start
+        end
       rescue ArgumentError, NetworkConnectionError => e
         Output.messages(e.messages)
-        exit
       end
 
       private_class_method :new
