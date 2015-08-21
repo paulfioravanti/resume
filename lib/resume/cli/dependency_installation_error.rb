@@ -3,10 +3,8 @@ module Resume
     class DependencyInstallationError < ArgumentError
       attr_reader :messages
 
-      def initialize(locale)
-        @messages = {
-          error: :dependency_installation_failed
-        }
+      def initialize(key)
+        @messages = { error: key }
       end
     end
   end

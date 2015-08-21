@@ -41,9 +41,8 @@ module Resume
         install_dependencies if installation_required?
         generate_resume
         open_resume
-      rescue DependencyInstallationError
+      rescue DependencyInstallationError => e
         Output.messages(e.messages)
-        exit
       end
 
       private
@@ -57,8 +56,9 @@ module Resume
           Output.success(:thank_you_kindly)
           install
         else
-          Output.error(:cannot_generate_pdf_without_dependencies)
-          exit
+          raise DependencyInstallationError.new(
+            :cannot_generate_pdf_without_dependencies
+          )
         end
       end
 

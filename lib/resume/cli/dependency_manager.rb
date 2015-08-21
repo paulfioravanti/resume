@@ -36,7 +36,9 @@ module Resume
         if gems_successfully_installed? && fonts_successfully_downloaded?
           Output.success(:dependencies_successfully_installed)
         else
-          raise DependencyInstallationError
+          raise DependencyInstallationError.new(
+            :dependency_installation_failure
+          )
         end
       end
 
