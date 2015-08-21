@@ -1,5 +1,6 @@
 require 'tmpdir'
 require_relative '../network_connection_error'
+require_relative '../file_fetcher'
 
 module Resume
   module CLI
@@ -21,6 +22,7 @@ module Resume
       end
 
       def fonts_successfully_downloaded?
+        return true if fonts.none?
         fonts.all? do |font|
           Output.plain([
             :downloading_font,
@@ -38,8 +40,8 @@ module Resume
       end
 
       def download_font_file(font)
-        open(tmp_filepath(font[:file_name]), 'wb') do |file|
-          open(font[:location]) do |uri|
+        File.open(tmp_filepath(font[:file_name]), 'wb') do |file|
+          FileFetcher.fetch(font[:location]) do |uri|
             file.write(uri.read)
           end
         end
