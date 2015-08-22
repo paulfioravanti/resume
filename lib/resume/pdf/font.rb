@@ -1,4 +1,4 @@
-require 'tmpdir'
+require_relative '../file_system'
 
 module Resume
   module PDF
@@ -8,8 +8,8 @@ module Resume
         unless Prawn::Font::AFM::BUILT_INS.include?(font_name)
           pdf.font_families.update(
             font_name => {
-              normal: Resume.tmp_filepath(font[:normal]),
-              bold: Resume.tmp_filepath(font[:bold])
+              normal: FileSystem.tmp_filepath(font[:normal]),
+              bold: FileSystem.tmp_filepath(font[:bold])
             }
           )
         end
