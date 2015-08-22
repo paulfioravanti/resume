@@ -17,9 +17,15 @@ module Resume
       def fetch
         Output.plain(:gathering_resume_information)
         JSON.parse(
-          FileFetcher.fetch(Resume.filename).read,
+          FileFetcher.fetch(resume_data_file).read,
           symbolize_names: true
         )
+      end
+
+      private
+
+      def resume_data_file
+        "#{DATA_LOCATION}resume.#{I18n.locale}.json"
       end
     end
   end
