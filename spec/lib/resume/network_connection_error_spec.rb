@@ -2,7 +2,7 @@ require 'resume/network_connection_error'
 
 module Resume
   RSpec.describe NetworkConnectionError do
-    let(:error) { NetworkConnectionError.new }
+    let(:error) { described_class.new }
 
     describe '#messages' do
       let(:messages) do

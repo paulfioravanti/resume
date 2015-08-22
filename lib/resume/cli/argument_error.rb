@@ -1,10 +1,10 @@
 module Resume
   module CLI
-    class ArgumentError < StandardError; end
+    class ArgumentError < StandardError
+      attr_reader :messages
+    end
 
     class LocaleNotSupportedError < ArgumentError
-      attr_reader :messages
-
       def initialize(locale)
         @messages = {
           error: [
@@ -17,8 +17,6 @@ module Resume
     end
 
     class InvalidOptionError < ArgumentError
-      attr_reader :messages
-
       def initialize(string)
         @messages = {
           error: :you_have_some_invalid_options,
@@ -28,8 +26,6 @@ module Resume
     end
 
     class MissingArgumentError < ArgumentError
-      attr_reader :messages
-
       def initialize(string)
         @messages = {
           error: :you_have_a_missing_argument,

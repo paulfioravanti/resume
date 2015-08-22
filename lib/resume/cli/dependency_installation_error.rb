@@ -1,6 +1,6 @@
 module Resume
   module CLI
-    class DependencyInstallationError < ArgumentError
+    class DependencyInstallationError < StandardError
       attr_reader :messages
 
       def initialize(key)
