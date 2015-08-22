@@ -1,11 +1,13 @@
 require 'forwardable'
 require_relative '../decoder'
 require_relative '../output'
+require_relative '../settings'
+require_relative '../dependency_prerequisite_error'
 require_relative 'argument_parser'
 require_relative 'resume_data_fetcher'
 require_relative 'dependency_manager'
 require_relative '../pdf/document'
-require_relative 'file_system'
+require_relative '../file_system'
 
 module Resume
   module CLI
@@ -14,12 +16,15 @@ module Resume
       extend Forwardable
 
       def self.start
+        Settings.configure
         catch(:halt) do
           ArgumentParser.parse
           resume = ResumeDataFetcher.fetch
           new(resume).start
         end
-      rescue ArgumentError, NetworkConnectionError => e
+      rescue DependencyPrerequisiteError,
+             ArgumentError,
+             NetworkConnectionError => e
         Output.messages(e.messages)
       end
 

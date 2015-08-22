@@ -3,7 +3,7 @@ require 'resume/output'
 
 module Resume
   RSpec.describe Output do
-    shared_context 'I18n keys' do |colour|
+    shared_context 'Colourised I18n keys' do |colour|
       let(:key) { :message }
       let(:params_to_interpolate) { { param: 'param' } }
       let(:params) { [key, params_to_interpolate] }
@@ -17,10 +17,27 @@ module Resume
 
       before do
         allow(I18n).to receive(:translate).
-          with(key, params_to_interpolate).and_return(translated_message)
+          with(key, params_to_interpolate).
+            and_return(translated_message)
         allow(described_class).to \
           receive(colour).with(translated_message).
             and_return(colourised_translated_message)
+      end
+    end
+
+    shared_context 'Raw colourised strings' do |colour|
+      let(:message) { 'The message' }
+      let(:colourised_message) do
+        "Colourised #{message}"
+      end
+      let(:message_with_new_line) do
+        "#{colourised_message}\n"
+      end
+
+      before do
+        allow(described_class).to \
+          receive(colour).with(message).
+            and_return(colourised_message)
       end
     end
 
@@ -36,7 +53,7 @@ module Resume
     end
 
     describe '.error' do
-      include_context 'I18n keys', :red
+      include_context 'Colourised I18n keys', :red
 
       let(:outputting_the_error) { -> { described_class.error(params) } }
 
@@ -47,7 +64,7 @@ module Resume
     end
 
     describe '.warning' do
-      include_context 'I18n keys', :yellow
+      include_context 'Colourised I18n keys', :yellow
 
       let(:outputting_the_warning) do
         -> { described_class.warning(params) }
@@ -60,7 +77,7 @@ module Resume
     end
 
     describe '.question' do
-      include_context 'I18n keys', :yellow
+      include_context 'Colourised I18n keys', :yellow
 
       let(:outputting_the_question) do
         -> { described_class.question(params) }
@@ -73,7 +90,7 @@ module Resume
     end
 
     describe '.success' do
-      include_context 'I18n keys', :green
+      include_context 'Colourised I18n keys', :green
 
       let(:outputting_the_success_message) do
         -> { described_class.success(params) }
@@ -86,7 +103,7 @@ module Resume
     end
 
     describe '.info' do
-      include_context 'I18n keys', :cyan
+      include_context 'Colourised I18n keys', :cyan
 
       let(:outputting_the_info_message) do
         -> { described_class.info(params) }
@@ -116,6 +133,32 @@ module Resume
       it 'outputs the values of the I18n-ised plain message to stdout' do
         expect(outputting_the_plain_message).to \
           output(translated_message_with_new_line).to_stdout
+      end
+    end
+
+    describe '.raw_error' do
+      include_context 'Raw colourised strings', :red
+
+      let(:outputting_the_raw_error) do
+        -> { described_class.raw_error(message) }
+      end
+
+      it 'outputs the colourised error message to stdout' do
+        expect(outputting_the_raw_error).to \
+          output(message_with_new_line).to_stdout
+      end
+    end
+
+    describe '.raw_warning' do
+      include_context 'Raw colourised strings', :yellow
+
+      let(:outputting_the_raw_warning) do
+        -> { described_class.raw_warning(message) }
+      end
+
+      it 'outputs the colourised warning message to stdout' do
+        expect(outputting_the_raw_warning).to \
+          output(message_with_new_line).to_stdout
       end
     end
 

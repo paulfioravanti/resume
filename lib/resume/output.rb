@@ -32,6 +32,14 @@ module Resume
       puts I18n.translate(*key)
     end
 
+    def self.raw_error(message)
+      puts red(message)
+    end
+
+    def self.raw_warning(message)
+      puts yellow(message)
+    end
+
     def self.raw(message)
       puts message
     end
