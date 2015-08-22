@@ -15,7 +15,7 @@ module Resume
       Dir["#{Pathname(__FILE__).dirname}/resume/locales/*.yml.erb"]
     I18n.available_locales = [:en, :ja]
   rescue LoadError
-    puts 'This app is bilingual and needs the I18n gem.'
+    puts 'My resume is bilingual and needs the I18n gem.'
     puts 'Please run: gem install i18n'
     exit
   end
