@@ -8,6 +8,7 @@ end
 require 'rspec'
 require 'open-uri'
 require 'resume'
+require 'resume/settings'
 require 'resume/output'
 
 module Resume
@@ -18,7 +19,10 @@ module Resume
         require 'prawn'
         require 'prawn/table'
         # Test access to the 1x1 pixel image needed for specs
-        open('http://farm4.staticflickr.com/3722/10753699026_a1603247cf_m.jpg')
+        Kernel.open(
+          'http://farm4.staticflickr.com/3722/10753699026_a1603247cf_m.jpg'
+        )
+        Settings.configure
       rescue LoadError
         Output.error(:you_need_prawn_to_run_the_specs)
         Output.warning(:please_install_them_or_run_the_resume)
