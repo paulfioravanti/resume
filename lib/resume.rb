@@ -23,4 +23,8 @@ module Resume
   def self.filename
     "#{DATA_LOCATION}resume.#{I18n.locale}.json"
   end
+
+  def self.tmp_filepath(file)
+    File.join(Dir.tmpdir, file)
+  end
 end
