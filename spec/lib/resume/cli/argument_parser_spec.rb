@@ -1,165 +1,146 @@
-# require 'spec_helper'
-# require 'resume/cli/argument_parser'
+require 'spec_helper'
+require 'resume/cli/argument_parser'
 
-# RSpec.describe Resume::CLI::ArgumentParser do
-#   let(:argument_parser) { described_class.new }
+module Resume
+  module CLI
+    RSpec.describe ArgumentParser do
+      describe '.parse' do
+        let(:parsing_options) { -> { described_class.parse } }
 
-#   describe '#parse' do
-#     before do
-#       allow($stdout).to receive(:write) # suppress message cruft from stdout
-#     end
+        context 'when no options are specified' do
+          before do
+            stub_const('ARGV', [])
+          end
 
-#     context 'when no locale option is specified' do
-#       let(:default_locale) { :en }
+          it 'does nothing and changes nothing' do
+            expect(described_class.parse).to eq([])
+            expect(I18n.locale).to eq(:en)
+          end
+        end
 
-#       before do
-#         stub_const('ARGV', [])
-#         argument_parser.parse
-#       end
+        context 'when an unsupported locale option is specified' do
+          let(:unsupported_locale) { 'eo' }
 
-#       it 'sets the default locale' do
-#         expect(argument_parser.locale).to eq(default_locale)
-#       end
-#     end
+          before do
+            stub_const('ARGV', ['-l', unsupported_locale])
+          end
 
-#     context 'when an unsupported locale option is specified' do
-#       let(:supported_locales) { [:en, :ja] }
-#       let(:unsupported_locale) { 'eo' }
-#       let(:parsing_options) { -> { argument_parser.parse } }
+          it 'raises a LocaleNotSupportedError for the locale' do
+            expect(parsing_options).to \
+              raise_error(LocaleNotSupportedError, unsupported_locale)
+          end
+        end
 
-#       before do
-#         allow(argument_parser).to \
-#           receive(:supported_locales).and_return(supported_locales)
-#         stub_const('ARGV', ['-l', unsupported_locale])
-#       end
+        context 'when an invalid option is specified' do
+          let(:invalid_option) { '-e' }
 
-#       it 'informs the user of the supported locales and exits' do
-#         expect(argument_parser).to \
-#           receive(:inform_locale_not_supported).with(unsupported_locale).
-#             and_call_original
-#         expect(parsing_options).to raise_error(SystemExit)
-#       end
-#     end
+          before do
+            stub_const('ARGV', [invalid_option])
+          end
 
-#     context 'when a supported locale option is specified' do
-#       let(:supported_locales) { [:en, :ja] }
-#       let(:supported_locale) { 'ja' }
+          it 'raises an InvalidOptionError' do
+            # can't get direct access to the help message, so just
+            # say that *something* is passed in with the exception
+            expect(parsing_options).to \
+              raise_error(InvalidOptionError, anything)
+          end
+        end
 
-#       before do
-#         allow(argument_parser).to \
-#           receive(:supported_locales).and_return(supported_locales)
-#       end
+        context 'when an argument is missing' do
+          before do
+            stub_const('ARGV', ['-l'])
+          end
 
-#       context 'using the abbreviated option name' do
-#         before do
-#           stub_const('ARGV', ['-l', supported_locale])
-#           argument_parser.parse
-#         end
+          it 'raises a MissingArgumentError' do
+            # can't get direct access to the help message, so just
+            # say that *something* is passed in with the exception
+            expect(parsing_options).to \
+              raise_error(MissingArgumentError, anything)
+          end
+        end
 
-#         it 'sets the locale to the specified locale' do
-#           expect(argument_parser.locale).to eq(supported_locale.to_sym)
-#         end
-#       end
+        context 'when a supported locale option is specified' do
+          let(:supported_locale) { 'ja' }
 
-#       context 'using the full option name' do
-#         before do
-#           stub_const('ARGV', ['--locale', supported_locale])
-#           argument_parser.parse
-#         end
+          context 'using the abbreviated option name' do
+            before do
+              stub_const('ARGV', ['-l', supported_locale])
+              described_class.parse
+            end
 
-#         it 'sets the locale to the specified locale' do
-#           expect(argument_parser.locale).to eq(supported_locale.to_sym)
-#         end
-#       end
-#     end
+            it 'sets the locale to the specified locale' do
+              expect(I18n.locale).to eq(supported_locale.to_sym)
+            end
+          end
 
-#     context 'when the version option is specified' do
-#       let(:version) { '1.0' }
-#       let(:parsing_options) { -> { argument_parser.parse } }
+          context 'using the full option name' do
+            before do
+              stub_const('ARGV', ['--locale', supported_locale])
+              described_class.parse
+            end
 
-#       before do
-#         stub_const('Resume::VERSION', version)
-#       end
+            it 'sets the locale to the specified locale' do
+              expect(I18n.locale).to eq(supported_locale.to_sym)
+            end
+          end
+        end
 
-#       context 'using the abbreviated option name' do
-#         before do
-#           stub_const('ARGV', ['-v'])
-#         end
+        context 'when the version option is specified' do
+          let(:version) { '1.0' }
 
-#         it 'informs the user of the version number and exits' do
-#           expect(parsing_options).to \
-#             output(argument_parser.parser.version).to_stdout.and \
-#               raise_error(SystemExit)
-#         end
-#       end
+          before do
+            stub_const('Resume::VERSION', version)
+          end
 
-#       context 'using the full option name' do
-#         before do
-#           stub_const('ARGV', ['--version'])
-#         end
+          context 'using the abbreviated option name' do
+            before do
+              stub_const('ARGV', ['-v'])
+            end
 
-#         it 'informs the user of the version number and exits' do
-#           expect(parsing_options).to \
-#             output(argument_parser.parser.version).to_stdout.and \
-#               raise_error(SystemExit)
-#         end
-#       end
-#     end
+            it 'informs the user of the version number and halts' do
+              expect(Output).to receive(:raw).with(version)
+              expect(parsing_options).to throw_symbol(:halt)
+            end
+          end
 
-#     context 'when the help option is specified' do
-#       let(:parsing_options) { -> { argument_parser.parse } }
+          context 'using the full option name' do
+            before do
+              stub_const('ARGV', ['--version'])
+            end
 
-#       context 'using the abbreviated option name' do
-#         before do
-#           stub_const('ARGV', ['-h'])
-#         end
+            it 'informs the user of the version number and halts' do
+              expect(Output).to receive(:raw).with(version)
+              expect(parsing_options).to throw_symbol(:halt)
+            end
+          end
+        end
 
-#         it 'informs the user of the application options and exits' do
-#           expect(parsing_options).to \
-#             output(argument_parser.parser.help).to_stdout.and \
-#               raise_error(SystemExit)
-#         end
-#       end
+        context 'when the help option is specified' do
+          # can't get direct access to the help message, so just
+          # say that *something* is output to stdout
+          context 'using the abbreviated option name' do
+            before do
+              stub_const('ARGV', ['-h'])
+            end
 
-#       context 'using the full option name' do
-#         before do
-#           stub_const('ARGV', ['--help'])
-#         end
+            it 'informs the user of the help options and halts' do
+              expect(Output).to receive(:raw).with(anything)
+              expect(parsing_options).to throw_symbol(:halt)
+            end
+          end
 
-#         it 'informs the user of the application options and exits' do
-#           expect(parsing_options).to \
-#             output(argument_parser.parser.help).to_stdout.and \
-#               raise_error(SystemExit)
-#         end
-#       end
-#     end
+          context 'using the full option name' do
+            before do
+              stub_const('ARGV', ['--help'])
+            end
 
-#     context 'when an invalid option is specified' do
-#       let(:parsing_options) { -> { argument_parser.parse } }
-
-#       before do
-#         stub_const('ARGV', ['-invalid'])
-#       end
-
-#       it 'informs the user that there is an invalid option and exits' do
-#         expect(argument_parser).to \
-#           receive(:inform_of_invalid_options).and_call_original
-#         expect(parsing_options).to raise_error(SystemExit)
-#       end
-#     end
-
-#     context 'when a specified valid option has a missing argument' do
-#       let(:parsing_options) { -> { argument_parser.parse } }
-
-#       before do
-#         stub_const('ARGV', ['-l'])
-#       end
-
-#       it 'informs the user that there is a missing argument and exits' do
-#         expect(argument_parser).to \
-#           receive(:inform_of_missing_arguments).and_call_original
-#         expect(parsing_options).to raise_error(SystemExit)
-#       end
-#     end
-#   end
-# end
+            it 'informs the user of the help options and halts' do
+              expect(Output).to receive(:raw).with(anything)
+              expect(parsing_options).to throw_symbol(:halt)
+            end
+          end
+        end
+      end
+    end
+  end
+end
