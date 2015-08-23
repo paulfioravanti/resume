@@ -11,21 +11,24 @@ require 'resume'
 require 'resume/settings'
 require 'resume/output'
 
+begin
+  Resume::Settings.configure
+rescue Resume::DependencyPrerequisiteError => e
+  Resume::Output.messages(e.messages)
+  exit
+end
+
 module Resume
   RSpec.configure do |config|
     config.disable_monkey_patching!
     config.before(:suite) do
       begin
-        Settings.configure
         require 'prawn'
         require 'prawn/table'
         # Test access to the 1x1 pixel image needed for specs
         StringIO.open(
           'http://farm4.staticflickr.com/3722/10753699026_a1603247cf_m.jpg'
         )
-      rescue DependencyPrerequisiteError => e
-        Output.messages(e.messages)
-        exit
       rescue LoadError
         Output.messages({
           error: :you_need_prawn_to_run_the_specs,
