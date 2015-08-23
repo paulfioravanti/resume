@@ -11,6 +11,8 @@ require 'resume'
 require 'resume/settings'
 require 'resume/output'
 
+# Setting configuration needs to be done at the top level in this case
+# hence it's not done within the code in the Resume namespace below.
 begin
   Resume::Settings.configure
 rescue Resume::DependencyPrerequisiteError => e
