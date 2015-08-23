@@ -8,8 +8,8 @@ module Resume
 
       context 'when development dependencies are not present' do
         before do
-          allow(Settings).to receive(:require)
-          allow(Settings).to \
+          allow(described_class).to receive(:require)
+          allow(described_class).to \
             receive(:require).with('pry-byebug').and_raise(LoadError)
         end
 
@@ -20,8 +20,8 @@ module Resume
 
       context 'when i18n gem is not present' do
         before do
-          allow(Settings).to receive(:require)
-          allow(Settings).to \
+          allow(described_class).to receive(:require)
+          allow(described_class).to \
             receive(:require).with('i18n').and_raise(LoadError)
         end
 
