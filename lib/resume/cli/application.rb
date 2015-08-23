@@ -34,6 +34,8 @@ module Resume
         @resume = resume
         @dependency_manager =
           DependencyManager.new(resume[:dependencies])
+        @title = d(resume[:title])
+        @filename = "#{title}_#{I18n.locale}.pdf"
       end
 
       def_delegators :@dependency_manager,
@@ -52,8 +54,7 @@ module Resume
 
       private
 
-      attr_reader :resume
-      attr_accessor :filename
+      attr_reader :resume, :title, :filename
 
       def install_dependencies
         request_dependency_installation
@@ -69,7 +70,7 @@ module Resume
 
       def generate_resume
         Output.plain(:generating_pdf)
-        self.filename = PDF::Document.generate(resume).filename
+        PDF::Document.generate(resume, title, filename)
         Output.success(:resume_generated_successfully)
       end
 

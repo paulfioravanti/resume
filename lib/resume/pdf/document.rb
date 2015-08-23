@@ -12,13 +12,11 @@ module Resume
     class Document
       include Decoder
 
-      attr_reader :filename
-
-      def self.generate(resume)
-        title = d(resume[:title])
-        filename = "#{title}_#{I18n.locale}.pdf"
+      def self.generate(resume, title, filename)
         new(resume, title, filename).generate
       end
+
+      private_class_method :new
 
       def initialize(resume, title, filename)
         @resume = resume
@@ -39,7 +37,7 @@ module Resume
 
       private
 
-      attr_reader :resume, :title
+      attr_reader :resume, :title, :filename
 
       def options
         Options.generate(title, resume[:options])
