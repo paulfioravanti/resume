@@ -17,6 +17,9 @@ module Resume
     end
 
     def fetch
+      # Specifically uses Kernel here in order to allow it to determine
+      # the return file type: for this resume, it could be File, TempFile,
+      # or StringIO
       Kernel.open(file, &block)
     rescue SocketError, OpenURI::HTTPError, Errno::ECONNREFUSED
       raise NetworkConnectionError
