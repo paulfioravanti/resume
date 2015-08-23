@@ -24,12 +24,16 @@ module Resume
         )
         Settings.configure
       rescue LoadError
-        Output.error(:you_need_prawn_to_run_the_specs)
-        Output.warning(:please_install_them_or_run_the_resume)
+        Output.messages({
+          error: :you_need_prawn_to_run_the_specs,
+          warning: :please_install_them_or_run_the_resume
+        })
         exit
       rescue SocketError, OpenURI::HTTPError
-        Output.error(:you_need_an_internet_connection_to_run_the_specs)
-        Output.warning(:please_ensure_you_have_one)
+        Output.messages({
+          error: :you_need_an_internet_connection_to_run_the_specs,
+          warning: :please_ensure_you_have_one
+        })
         exit
       end
     end
