@@ -11,7 +11,7 @@ module I18n
           I18n.backend.instance_variable_get(:@translations)
         end
 
-        before { I18n.backend = Simple.new }
+        before { I18n.backend = I18n::Backend::Simple.new }
 
         context 'when loading data from a yml.erb file' do
           let(:filename) { 'en.yml.erb' }
