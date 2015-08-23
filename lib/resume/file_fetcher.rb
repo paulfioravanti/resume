@@ -1,6 +1,6 @@
 require 'open-uri'
 require 'socket'
-require_relative 'network_connection_error'
+require_relative 'exceptions'
 
 module Resume
   class FileFetcher

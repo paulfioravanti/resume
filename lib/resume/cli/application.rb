@@ -2,7 +2,7 @@ require 'forwardable'
 require_relative '../decoder'
 require_relative '../output'
 require_relative '../settings'
-require_relative '../dependency_prerequisite_error'
+require_relative 'exceptions'
 require_relative 'argument_parser'
 require_relative 'resume_data_fetcher'
 require_relative 'dependency_manager'
@@ -22,9 +22,7 @@ module Resume
           resume = ResumeDataFetcher.fetch
           new(resume).start
         end
-      rescue DependencyPrerequisiteError,
-             ArgumentError,
-             NetworkConnectionError => e
+      rescue Error => e
         Output.messages(e.messages)
       end
 
@@ -48,8 +46,6 @@ module Resume
         install_dependencies if installation_required?
         generate_resume
         open_resume
-      rescue DependencyInstallationError => e
-        Output.messages(e.messages)
       end
 
       private
@@ -62,9 +58,7 @@ module Resume
           Output.success(:thank_you_kindly)
           install
         else
-          raise DependencyInstallationError.new(
-            :cannot_generate_pdf_without_dependencies
-          )
+          fail DependencyInstallationPermissionError
         end
       end
 

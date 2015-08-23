@@ -1,5 +1,5 @@
 require 'tmpdir'
-require_relative '../network_connection_error'
+require_relative 'exceptions'
 require_relative '../file_fetcher'
 
 module Resume

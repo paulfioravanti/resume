@@ -1,8 +1,7 @@
 require 'forwardable'
-require_relative '../network_connection_error'
 require_relative 'gem_installer'
 require_relative 'font_downloader'
-require_relative 'dependency_installation_error'
+require_relative 'exceptions'
 
 module Resume
   module CLI
@@ -36,9 +35,7 @@ module Resume
         if gems_successfully_installed? && fonts_successfully_downloaded?
           Output.success(:dependencies_successfully_installed)
         else
-          raise DependencyInstallationError.new(
-            :dependency_installation_failure
-          )
+          fail DependencyInstallationError
         end
       end
 

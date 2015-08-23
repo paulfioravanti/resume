@@ -1,4 +1,4 @@
-require_relative '../network_connection_error'
+require_relative 'exceptions'
 
 module Resume
   module CLI
