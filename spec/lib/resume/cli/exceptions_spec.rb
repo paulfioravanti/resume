@@ -37,7 +37,7 @@ module Resume
     end
 
     RSpec.describe LocaleNotSupportedError do
-      let(:locale) { :fr }
+      let(:locale) { 'fr' }
       let(:error) { described_class.new(locale) }
 
       describe '#messages' do

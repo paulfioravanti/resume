@@ -22,10 +22,11 @@ module Resume
 
     class LocaleNotSupportedError < Error
       def initialize(locale)
+        super(locale)
         @messages = {
           error: [
             :locale_is_not_supported,
-            { specified_locale: locale }
+            { specified_locale: message }
           ],
           warning: :supported_locales_are
         }
@@ -33,19 +34,21 @@ module Resume
     end
 
     class InvalidOptionError < Error
-      def initialize(string)
+      def initialize(error)
+        super(error)
         @messages = {
           error: :you_have_some_invalid_options,
-          raw: string
+          raw: message
         }
       end
     end
 
     class MissingArgumentError < Error
-      def initialize(string)
+      def initialize(error)
+        super(error)
         @messages = {
           error: :you_have_a_missing_argument,
-          raw: string
+          raw: message
         }
       end
     end

@@ -17,9 +17,9 @@ module Resume
       def parse
         parser.parse!(ARGV)
       rescue OptionParser::InvalidOption
-        raise InvalidOptionError.new(parser.help)
+        raise InvalidOptionError, parser.help
       rescue OptionParser::MissingArgument
-        raise MissingArgumentError.new(parser.help)
+        raise MissingArgumentError, parser.help
       end
 
       private
@@ -47,7 +47,7 @@ module Resume
           begin
             I18n.locale = locale.to_sym
           rescue I18n::InvalidLocale
-            raise LocaleNotSupportedError.new(locale)
+            raise LocaleNotSupportedError, locale
           end
         end
       end
