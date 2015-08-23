@@ -19,7 +19,7 @@ module Resume
         require 'prawn'
         require 'prawn/table'
         # Test access to the 1x1 pixel image needed for specs
-        Kernel.open(
+        StringIO.open(
           'http://farm4.staticflickr.com/3722/10753699026_a1603247cf_m.jpg'
         )
         Settings.configure
