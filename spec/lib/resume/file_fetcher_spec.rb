@@ -5,12 +5,13 @@ module Resume
     describe '.fetch' do
       let(:file) { 'filename' }
       let(:block) { Proc.new { } }
-      let(:fetch_file) { described_class.fetch(file, &block) }
-      let(:fetching_file) { -> { fetch_file } }
+      let(:fetching_file) do
+        -> { described_class.fetch(file, &block) }
+      end
 
       it 'opens up a StringIO to the file' do
         expect(Kernel).to receive(:open).with(file, &block)
-        fetch_file
+        described_class.fetch(file, &block)
       end
 
       context 'when a socket error occurs' do
