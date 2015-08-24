@@ -1,5 +1,5 @@
-require_relative 'output'
 require_relative 'exceptions'
+require_relative 'output'
 
 module Resume
   class Settings

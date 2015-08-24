@@ -1,7 +1,7 @@
 require 'forwardable'
 require_relative 'gem_installer'
 require_relative 'font_downloader'
-require_relative 'exceptions'
+require_relative '../exceptions'
 
 module Resume
   module CLI
