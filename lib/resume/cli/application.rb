@@ -33,7 +33,7 @@ module Resume
         @dependency_manager =
           DependencyManager.new(resume[:dependencies])
         @title = d(resume[:title])
-        @filename = "#{title}_#{I18n.locale}.pdf"
+        @filename = I18n.t(:filename, title: title)
       end
 
       def_delegators :@dependency_manager,
