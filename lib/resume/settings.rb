@@ -17,6 +17,8 @@ module Resume
 
     def self.configure_i18n
       require 'i18n'
+      require 'i18n/backend'
+      require 'i18n/backend/base'
       require_relative '../i18n/core_ext'
       I18n.load_path =
         Dir["#{Pathname(__FILE__).dirname}/locales/*.yml.erb"]
