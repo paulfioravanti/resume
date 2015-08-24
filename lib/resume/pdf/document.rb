@@ -32,7 +32,6 @@ module Resume
             Manifest.process(self, resume)
           end
         end
-        self
       end
 
       private
