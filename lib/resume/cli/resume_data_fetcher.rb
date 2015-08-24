@@ -1,7 +1,4 @@
-require 'open-uri'
 require 'json'
-require 'socket'
-require_relative 'exceptions'
 require_relative '../file_fetcher'
 
 module Resume
