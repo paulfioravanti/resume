@@ -24,6 +24,7 @@ module Resume
       end
 
       def output_gem_dependencies
+        return if gems.none?
         Output.warning(:ruby_gems)
         gems.each do |name, version|
           Output.plain([

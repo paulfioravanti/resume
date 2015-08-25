@@ -18,6 +18,7 @@ module Resume
       end
 
       def output_font_dependencies
+        return if fonts.none?
         Output.warning(:custom_fonts)
       end
 

@@ -31,19 +31,19 @@ module Resume
         dependencies_present?
       end
 
+      def request_dependency_installation
+        Output.warning(:i_need_the_following_to_generate_a_pdf)
+        output_gem_dependencies
+        output_font_dependencies
+        Output.question(:may_i_please_install_them)
+      end
+
       def install
         if gems_successfully_installed? && fonts_successfully_downloaded?
           Output.success(:dependencies_successfully_installed)
         else
           fail DependencyInstallationError
         end
-      end
-
-      def request_dependency_installation
-        Output.warning(:i_need_the_following_to_generate_a_pdf)
-        output_gem_dependencies if gems.any?
-        output_font_dependencies if fonts.any?
-        Output.question(:may_i_please_install_them)
       end
 
       private
