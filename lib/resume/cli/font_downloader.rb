@@ -32,6 +32,8 @@ module Resume
           download_font_file(font)
           extract_fonts(font)
         end
+      rescue NetworkConnectionError
+        false
       end
 
       private
@@ -46,8 +48,6 @@ module Resume
             file.write(uri.read)
           end
         end
-      rescue SocketError, OpenURI::HTTPError, Errno::ECONNREFUSED
-        raise NetworkConnectionError
       end
 
       def extract_fonts(font)
