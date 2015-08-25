@@ -38,7 +38,6 @@ module Resume
 
       def_delegators :@dependency_manager,
                      :installation_required?,
-                     :dependencies_present?,
                      :request_dependency_installation,
                      :install
 

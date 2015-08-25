@@ -39,15 +39,17 @@ module Resume
         end
       end
 
-      def dependencies_present?
-        gems.any? || fonts.any?
-      end
-
       def request_dependency_installation
         Output.warning(:i_need_the_following_to_generate_a_pdf)
         output_gem_dependencies if gems.any?
         output_font_dependencies if fonts.any?
         Output.question(:may_i_please_install_them)
+      end
+
+      private
+
+      def dependencies_present?
+        gems.any? || fonts.any?
       end
     end
   end
