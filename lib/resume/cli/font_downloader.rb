@@ -1,5 +1,7 @@
 require 'tmpdir'
 require_relative '../exceptions'
+require_relative '../file_system'
+require_relative '../output'
 require_relative '../file_fetcher'
 
 module Resume
