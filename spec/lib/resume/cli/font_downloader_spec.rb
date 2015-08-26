@@ -176,9 +176,15 @@ module Resume
                   { file_name: file_name, location: font_location }
                 ])
               expect(normal_font_file).to \
-                receive(:extract).with(normal_font_filepath) { true }
+                receive(:extract).
+                  with(normal_font_filepath) do |*args, &block|
+                    expect(block.call).to be true
+                  end
               expect(bold_font_file).to \
-                receive(:extract).with(bold_font_filepath) { true }
+                receive(:extract).
+                  with(bold_font_filepath) do |*args, &block|
+                    expect(block.call).to be true
+                  end
             end
 
             it 'returns true' do
