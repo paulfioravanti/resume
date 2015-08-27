@@ -6,10 +6,6 @@ module Resume
       let(:font_downloader) { described_class.new(fonts) }
 
       describe '#audit_font_dependencies' do
-        let(:audit_font_dependencies) do
-          font_downloader.audit_font_dependencies
-        end
-
         context 'when font dependencies are not present' do
           let(:fonts) { [] }
 
@@ -23,14 +19,15 @@ module Resume
         context 'when font dependencies are present' do
           let(:normal_font_name) { 'ipamp.ttf' }
           let(:bold_font_name) { 'ipagp.ttf' }
-          let(:fonts) do
-            [{
+          let(:font) do
+            {
               files: {
                 normal: normal_font_name,
                 bold: bold_font_name
               }
-            }]
+            }
           end
+          let(:fonts) { [font] }
           let(:normal_font_filepath) { "/tmp/#{normal_font_name}" }
           let(:bold_font_filepath) { "/tmp/#{bold_font_name}" }
 
@@ -43,7 +40,7 @@ module Resume
                 and_return(bold_font_filepath)
           end
 
-          context 'when all font files are available on the system' do
+          context 'when required font file is available on the system' do
             before do
               allow(File).to \
                 receive(:exist?).with(normal_font_filepath).
@@ -55,11 +52,11 @@ module Resume
             end
 
             it 'empties the list of font dependencies' do
-              expect(font_downloader.fonts).to be_empty
+              expect(font_downloader.fonts).to_not include(font)
             end
           end
 
-          context 'when any font files are missing from the system' do
+          context 'when required font file is missing from the system' do
             before do
               allow(File).to \
                 receive(:exist?).with(normal_font_filepath).
@@ -71,7 +68,7 @@ module Resume
             end
 
             it 'leaves those fonts in the dependencies list' do
-              expect(font_downloader.fonts).to eq(fonts)
+              expect(font_downloader.fonts).to include(font)
             end
           end
         end
