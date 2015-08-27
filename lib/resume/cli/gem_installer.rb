@@ -1,4 +1,5 @@
 require_relative '../exceptions'
+require_relative '../output'
 
 module Resume
   module CLI
@@ -37,12 +38,14 @@ module Resume
         return true if gems.none?
         Output.plain(:installing_ruby_gems)
         gems.all? do |gem, version|
-          system('gem', 'install', gem, '-v', version)
+          Kernel.system('gem', 'install', gem, '-v', version)
         end
       rescue SocketError, Errno::ECONNREFUSED
         raise NetworkConnectionError
       ensure
-        # Reset dir and path values so just-installed gems can be required
+        # Reset dir and path values so just-installed gems can
+        # be required, but also have this here so that the
+        # return value for this method is a boolean
         Gem.clear_paths
       end
 

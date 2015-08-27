@@ -85,7 +85,7 @@ module Resume
         end
 
         context 'when there are font dependencies' do
-          # there are fonts; we don't care what they are
+          # there are fonts: we don't care what they are
           let(:fonts) { [{}] }
 
           it 'informs that custom fonts must be installed' do
