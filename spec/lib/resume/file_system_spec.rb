@@ -54,5 +54,14 @@ module Resume
         end
       end
     end
+
+    describe '.tmp_filepath' do
+      let(:file) { 'file.txt' }
+
+      it 'returns the filepath for the file in the system temp directory' do
+        expect(File).to receive(:join).with(Dir.tmpdir, file)
+        described_class.tmp_filepath(file)
+      end
+    end
   end
 end
