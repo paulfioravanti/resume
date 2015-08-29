@@ -13,8 +13,10 @@ module Resume
 
         before do
           allow(I18n).to \
-            receive(:t).with(:resume_data_filename).
-              and_return(resume_data_filename)
+            receive(:t).with(
+              :resume_data_filename,
+              selected_locale: I18n.locale
+            ).and_return(resume_data_filename)
           allow(FileFetcher).to \
             receive(:fetch).with(resume_data_filename).
               and_return(resume_data_file)

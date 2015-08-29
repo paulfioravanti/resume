@@ -32,7 +32,7 @@ module Resume
         @dependency_manager =
           DependencyManager.new(resume[:dependencies])
         @title = Decoder.d(resume[:title])
-        @filename = I18n.t(:filename, title: title)
+        @filename = initialize_filename
       end
 
       def_delegators :@dependency_manager,
@@ -49,6 +49,10 @@ module Resume
       private
 
       attr_reader :resume, :title, :filename
+
+      def initialize_filename
+        I18n.t(:filename, title: title, selected_locale: I18n.locale)
+      end
 
       def install_dependencies
         request_dependency_installation
