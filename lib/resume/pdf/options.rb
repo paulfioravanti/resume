@@ -3,10 +3,9 @@ require_relative '../file_fetcher'
 module Resume
   module PDF
     class Options
-      include Decoder
 
       def self.generate(title, resume)
-        author = d(resume[:author])
+        author = Decoder.d(resume[:author])
         {
           margin_top: resume[:margin_top],
           margin_bottom: resume[:margin_bottom],

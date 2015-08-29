@@ -2,7 +2,6 @@ module Resume
   module PDF
     module Entry
       class Header
-        include Decoder
 
         def self.generate(pdf, entry)
           new(
@@ -68,11 +67,11 @@ module Resume
 
         def properties_for(section)
           {
-            text: d(section[:text]),
+            text: Decoder.d(section[:text]),
             styles: section[:styles].map(&:to_sym),
             size: section[:size],
             color: section[:colour],
-            link: section[:link] ? d(section[:link]) : nil,
+            link: section[:link] ? Decoder.d(section[:link]) : nil,
           }
         end
       end

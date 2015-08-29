@@ -3,14 +3,13 @@ require_relative '../file_fetcher'
 module Resume
   module PDF
     class Logo
-      include Decoder
 
       attr_reader :image, :link, :width, :height, :fit, :align,
                   :link_overlay_start, :bars, :size, :origin, :at, :y_start
 
       def self.for(data)
         data[:image] = FileFetcher.fetch(data[:image])
-        data[:link] = d(data[:link])
+        data[:link] = Decoder.d(data[:link])
         data[:align] = data[:align].to_sym
         new(data)
       end

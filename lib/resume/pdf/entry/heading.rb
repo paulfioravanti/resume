@@ -2,13 +2,12 @@ module Resume
   module PDF
     module Entry
       class Heading
-        include Decoder
 
         def self.generate(pdf, heading)
           new(
             pdf,
             top_padding: heading[:top_padding],
-            text: d(heading[:text]),
+            text: Decoder.d(heading[:text]),
             styles: heading[:styles].map(&:to_sym),
             colour: heading[:colour]
           ).generate

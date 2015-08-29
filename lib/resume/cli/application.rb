@@ -12,7 +12,6 @@ require_relative '../file_system'
 module Resume
   module CLI
     class Application
-      include Decoder
       extend Forwardable
 
       def self.start
@@ -32,7 +31,7 @@ module Resume
         @resume = resume
         @dependency_manager =
           DependencyManager.new(resume[:dependencies])
-        @title = d(resume[:title])
+        @title = Decoder.d(resume[:title])
         @filename = I18n.t(:filename, title: title)
       end
 

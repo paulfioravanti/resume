@@ -3,7 +3,6 @@ require_relative 'entry/heading'
 module Resume
   module PDF
     class TechnicalSkills
-      include Decoder
 
       def self.generate(pdf, data)
         new(pdf, data[:heading], data[:content]).generate
@@ -33,7 +32,7 @@ module Resume
       def generate_content
         pdf.move_down content[:top_padding]
         skills = content[:skills].reduce([]) do |entries, entry|
-          entries << [d(entry.first), d(entry.last)]
+          entries << [Decoder.d(entry.first), Decoder.d(entry.last)]
         end
         pdf.table(skills, content[:properties])
       end

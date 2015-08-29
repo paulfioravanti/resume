@@ -5,7 +5,7 @@ module Resume
   module PDF
     module Entry
       class Content
-        include Decoder, TransparentLink
+        include TransparentLink
 
         def self.generate(pdf, entry)
           new(pdf, entry).generate
@@ -36,7 +36,10 @@ module Resume
         end
 
         def summary
-          pdf.text(d(entry[:summary][:text]), inline_format: true)
+          pdf.text(
+            Decoder.d(entry[:summary][:text]),
+            inline_format: true
+          )
         end
 
         def profile
@@ -44,7 +47,7 @@ module Resume
           cell_style = entry[:cell_style]
           return unless items
           table_data = items.reduce([]) do |data, item|
-            data << ['-', d(item)]
+            data << ['-', Decoder.d(item)]
           end
           pdf.table(
             table_data,

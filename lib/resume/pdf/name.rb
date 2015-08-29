@@ -1,14 +1,13 @@
 module Resume
   module PDF
     class Name
-      include Decoder
 
       def self.generate(pdf, name)
         new(
           pdf,
           font: name[:font],
           size: name[:size],
-          text: d(name[:text])
+          text: Decoder.d(name[:text])
         ).generate
       end
 
