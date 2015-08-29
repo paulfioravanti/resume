@@ -29,10 +29,10 @@ module Resume
 
       def initialize(resume)
         @resume = resume
-        @dependency_manager =
-          DependencyManager.new(resume[:dependencies])
         @title = Decoder.d(resume[:title])
         @filename = initialize_filename
+        @dependency_manager =
+          DependencyManager.new(resume[:dependencies])
       end
 
       def_delegators :@dependency_manager,
@@ -79,7 +79,7 @@ module Resume
       end
 
       def permission_granted?
-        gets.chomp.match(%r{\Ay(es)?\z}i)
+        Kernel.gets.chomp.match(%r{\Ay(es)?\z}i)
       end
     end
   end
