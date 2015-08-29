@@ -60,7 +60,7 @@ module Resume
             gem_installer.audit_gem_dependencies
           end
 
-          it 'empties the list of gem dependencies' do
+          it 'removes the gem from the list of dependencies' do
             expect(gem_installer.gems).to_not include(gem)
           end
         end
@@ -96,6 +96,10 @@ module Resume
           gem_installer.gems_successfully_installed?
         end
 
+        before { allow(Gem).to receive(:clear_paths) }
+
+        after { expect(Gem).to have_received(:clear_paths) }
+
         context 'when there are no gem dependencies' do
           let(:gems) { [] }
 
@@ -107,11 +111,10 @@ module Resume
         context 'when there are gem dependencies' do
           let(:gems) { [['prawn', '1.0.0']] }
 
-          before do
-          end
-
           context 'when all gems are successfully installed' do
             before do
+              expect(Output).to \
+                receive(:plain).with(:installing_ruby_gems)
               gems.each do |gem, version|
                 allow(Kernel).to receive(:system).
                   with('gem', 'install', gem, '-v', version).
@@ -120,9 +123,23 @@ module Resume
             end
 
             it 'returns true' do
+              expect(gems_successfully_installed).to be true
+            end
+          end
+
+          context 'when a gem is not successfully installed' do
+            before do
               expect(Output).to \
                 receive(:plain).with(:installing_ruby_gems)
-              expect(gems_successfully_installed).to be true
+              gems.first.tap do |gem, version|
+                allow(Kernel).to receive(:system).
+                  with('gem', 'install', gem, '-v', version).
+                    and_return(false)
+              end
+            end
+
+            it 'returns false' do
+              expect(gems_successfully_installed).to be false
             end
           end
 
@@ -133,20 +150,28 @@ module Resume
 
             context 'when the error is a SocketError' do
               before do
+                expect(Output).to \
+                  receive(:plain).with(:installing_ruby_gems)
                 allow(Kernel).to receive(:system).and_raise(SocketError)
               end
 
               it 'raises a NetworkConnectionError' do
-                expect(Output).to \
-                  receive(:plain).with(:installing_ruby_gems)
                 expect(gem_installation).to \
                   raise_error(NetworkConnectionError)
               end
             end
 
             context 'when the error is a Errno::ECONNREFUSED error' do
-              it 'returns false' do
+              before do
+                expect(Output).to \
+                  receive(:plain).with(:installing_ruby_gems)
+                allow(Kernel).to \
+                  receive(:system).and_raise(Errno::ECONNREFUSED)
+              end
 
+              it 'raises a NetworkConnectionError' do
+                expect(gem_installation).to \
+                  raise_error(NetworkConnectionError)
               end
             end
           end
