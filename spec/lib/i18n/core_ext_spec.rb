@@ -34,6 +34,61 @@ module I18n
             expect(translations).to eq(erb_interpolated_hash)
           end
         end
+
+        context 'when an error occurs' do
+          let(:filename) { 'en.yml.erb' }
+          let(:loading_translations) do
+            -> { I18n.backend.load_translations(filename) }
+          end
+          let(:locale_error) do
+            InvalidLocaleData.new(filename, error.inspect)
+          end
+
+          context 'when a TypeError occurs' do
+            let(:error) { TypeError.new }
+
+            before do
+              allow(InvalidLocaleData).to \
+                receive(:new).with(filename, error.inspect).
+                  and_return(locale_error)
+              allow(File).to receive(:read).and_raise(error)
+            end
+
+            it 'raises an InvalidLocaleData error' do
+              expect(loading_translations).to raise_error(locale_error)
+            end
+          end
+
+          context 'when a ScriptError occurs' do
+            let(:error) { ScriptError.new }
+
+            before do
+              allow(InvalidLocaleData).to \
+                receive(:new).with(filename, error.inspect).
+                  and_return(locale_error)
+              allow(File).to receive(:read).and_raise(error)
+            end
+
+            it 'raises an InvalidLocaleData error' do
+              expect(loading_translations).to raise_error(locale_error)
+            end
+          end
+
+          context 'when a StandardError occurs' do
+            let(:error) { StandardError.new }
+
+            before do
+              allow(InvalidLocaleData).to \
+                receive(:new).with(filename, error.inspect).
+                  and_return(locale_error)
+              allow(File).to receive(:read).and_raise(error)
+            end
+
+            it 'raises an InvalidLocaleData error' do
+              expect(loading_translations).to raise_error(locale_error)
+            end
+          end
+        end
       end
     end
   end

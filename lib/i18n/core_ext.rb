@@ -10,11 +10,9 @@ module I18n
       protected
 
       def load_erb(filename)
-        begin
-          YAML.load(ERB.new(File.read(filename)).result)
-        rescue TypeError, ScriptError, StandardError => e
-          raise InvalidLocaleData.new(filename, e.inspect)
-        end
+        YAML.load(ERB.new(File.read(filename)).result)
+      rescue TypeError, ScriptError, StandardError => e
+        raise InvalidLocaleData.new(filename, e.inspect)
       end
     end
   end
