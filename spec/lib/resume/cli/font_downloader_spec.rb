@@ -133,8 +133,7 @@ module Resume
             # zip gem since it's not used to generate all resumes
             let(:font_file_filepath) { "/tmp/#{file_name}" }
             let(:font_file) { double('font_file') }
-            let(:uri) { double('uri', read: read_uri) }
-            let(:read_uri) { double('read_uri') }
+            let(:uri) { double('uri').as_null_object }
             let(:zip_file) { double('Zip::File') }
             let(:normal_font_file) do
               double('normal_font_file', name: normal_font_name)
@@ -155,7 +154,7 @@ module Resume
                   and_yield(font_file)
               allow(FileFetcher).to \
                 receive(:fetch).with(font_location).and_yield(uri)
-              allow(font_file).to receive(:write).with(read_uri)
+              allow(font_file).to receive(:write).with(uri)
               allow(font_downloader).to receive(:require).with('zip')
               stub_const('Zip::File', zip_file)
               allow(zip_file).to \
