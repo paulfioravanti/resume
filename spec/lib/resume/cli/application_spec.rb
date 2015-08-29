@@ -8,9 +8,6 @@ module Resume
         context 'when an Error is raised' do
           let(:error_messages) { double('error_messages') }
           let(:error) { Error.new }
-          let(:starting_the_app) do
-            -> { described_class.start }
-          end
 
           before do
             allow(Settings).to receive(:configure).and_raise(error)
@@ -73,9 +70,6 @@ module Resume
             context 'when permission to install gems is denied' do
               let(:error_messages) { double('error_messages') }
               let(:error) { DependencyInstallationPermissionError.new }
-              let(:starting_the_application) do
-                -> { described_class.start }
-              end
 
               before do
                 allow(Kernel).to \
@@ -93,10 +87,6 @@ module Resume
             end
 
             context 'when permission to install gems is granted' do
-              let(:start_application) do
-                described_class.start
-              end
-
               before do
                 allow(Kernel).to receive(:gets).and_return("yes\n")
               end
