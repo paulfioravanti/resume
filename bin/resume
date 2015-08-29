@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
 require_relative '../lib/resume'
-require_relative '../lib/resume/cli/application'
 
-Resume::CLI::Application.start
+Resume.generate

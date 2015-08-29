@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'resume'
 
 RSpec.describe Resume do
@@ -18,6 +19,13 @@ RSpec.describe Resume do
       it 'is present' do
         expect(constant_defined).to be true
       end
+    end
+  end
+
+  describe '.generate' do
+    it 'starts the CLI application' do
+      expect(described_class::CLI::Application).to receive(:start)
+      described_class.generate
     end
   end
 end
