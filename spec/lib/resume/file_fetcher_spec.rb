@@ -47,7 +47,6 @@ module Resume
         it 'raises a NetworkConnectionError' do
           expect(fetching_file).to raise_error(NetworkConnectionError)
         end
-
       end
     end
   end
