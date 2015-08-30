@@ -7,8 +7,10 @@ module Resume
   remove_const(:DATA_LOCATION) if const_defined?(:DATA_LOCATION)
   VERSION = '0.6'
   DATA_LOCATION =
-    "https://raw.githubusercontent.com/paulfioravanti/"\
-    "resume/master/resources/"
+    # FIXME
+    # "https://raw.githubusercontent.com/paulfioravanti/"\
+    # "resume/master/resources/"
+    'resources/'
   # FIXME: generate yaml files within this file
   LOCALE_FILES =
     Dir["#{Pathname(__FILE__).dirname}/lib/resume/locales/*.yml.erb"]
