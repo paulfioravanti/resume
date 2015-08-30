@@ -162,6 +162,19 @@ module Resume
       end
     end
 
+    describe '.raw_success' do
+      include_context 'Raw colourised strings', :green
+
+      let(:outputting_the_raw_success_message) do
+        -> { described_class.raw_success(message) }
+      end
+
+      it 'outputs the colourised warning message to stdout' do
+        expect(outputting_the_raw_success_message).to \
+          output(message_with_new_line).to_stdout
+      end
+    end
+
     describe '.raw' do
       let(:message) { 'The message' }
       let(:message_with_new_line) { "#{message}\n" }

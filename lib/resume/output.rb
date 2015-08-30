@@ -40,6 +40,10 @@ module Resume
       puts yellow(message)
     end
 
+    def self.raw_success(message)
+      puts green(message)
+    end
+
     def self.raw(message)
       puts message
     end
