@@ -2,7 +2,6 @@ module Resume
   module PDF
     module Entry
       class Heading
-
         def self.generate(pdf, heading)
           new(
             pdf,

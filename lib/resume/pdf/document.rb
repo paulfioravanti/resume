@@ -10,7 +10,6 @@ module Resume
     # installed. Explicit declaration of this kind of inheritance
     # hierarchy in advance will result in an uninitialized constant error.
     class Document
-
       def self.generate(resume, title, filename)
         new(resume, title, filename).generate
       end

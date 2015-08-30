@@ -1,63 +1,83 @@
-:header_file: lib/tasks/one_sheet/header.txt
 :file_types:
-  - !ruby/symbol cli_files
+  - !ruby/symbol header_file
+  - !ruby/symbol i18n_module
+  - !ruby/symbol resume_module
   - !ruby/symbol resume_files
-  - !ruby/symbol pdf_files1
+  - !ruby/symbol pdf_files_1
   - !ruby/symbol pdf_entry_files
-  - !ruby/symbol pdf_files2
-  - !ruby/symbol spec_files
-  - !ruby/symbol cli_spec_files
-  - !ruby/symbol pdf_spec_files
-:cli_files:
-  :path: lib/resume/cli/
+  - !ruby/symbol pdf_files_2
+  - !ruby/symbol cli_files
+  # - !ruby/symbol spec_files
+  # - !ruby/symbol cli_spec_files
+  # - !ruby/symbol pdf_spec_files
+:header_file:
+  :path: lib/tasks/one_sheet
   :files:
-    - [colours, 1, -3]
-    - [messages, 4, -3]
-    - [argument_parser, 6, -3]
-    - [installer, 2, -3]
-    - [file_system, 2, -3]
-    - [application, 8, -2]
+    - [header.txt, 0, -1]
+:i18n_module:
+  :path: lib/i18n
+  :files:
+    - [core_ext.rb, 2, -1]
+:resume_module:
+  :path: lib/tasks/one_sheet
+  :files:
+    - [resume_module.txt, 0, -1]
 :resume_files:
-  :path: lib/resume/
+  :path: lib/resume
   :files:
-    - [decoder, 3, -2]
-:spec_files:
-  :path: spec/
+    - [colours.rb, 1, -2]
+    - [decoder.rb, 3, -2]
+    - [exceptions.rb, 1, -2]
+    - [file_fetcher.rb, 5, -2]
+    - [file_system.rb, 3, -2]
+    - [output.rb, 3, -2]
+    - [settings.rb, 4, -2]
+:pdf_files_1:
+  :path: lib/resume/pdf
   :files:
-    - [spec_helper, 8, -1]
+    - [font.rb, 3, -3]
+    - [name.rb, 2, -3]
+    - [headline.rb, 2, -3]
+    - [transparent_link.rb, 2, -3]
+    - [logo.rb, 4, -3]
+    - [social_media_logo_set.rb, 5, -3]
 :pdf_entry_files:
-  :path: lib/resume/pdf/entry/
+  :path: lib/resume/pdf/entry
   :files:
-    - [heading, 2, -4]
-    - [header, 3, -4]
-    - [company_logo, 3, -4]
-    - [content, 6, -3]
-:pdf_files1:
-  :path: lib/resume/pdf/
+    - [heading.rb, 2, -4]
+    - [header.rb, 3, -4]
+    - [company_logo.rb, 3, -4]
+    - [content.rb, 6, -3]
+:pdf_files_2:
+  :path: lib/resume/pdf
   :files:
-    - [font, 1, -3]
-    - [name, 2, -3]
-    - [headline, 2, -3]
-    - [transparent_link, 2, -3]
-    - [logo, 2, -3]
-    - [social_media_logo_set, 5, -3]
-:pdf_files2:
-  :path: lib/resume/pdf/
+    - [technical_skills.rb, 4, -3]
+    - [employment_history.rb, 4, -3]
+    - [education_history.rb, 2, -3]
+    - [options.rb, 4, -3]
+    - [manifest.rb, 11, -3]
+    - [document.rb, 6, -2]
+:cli_files:
+  :path: lib/resume/cli
   :files:
-    - [technical_skills, 4, -3]
-    - [employment_history, 4, -3]
-    - [education_history, 2, -3]
-    - [manifest, 10, -3]
-    - [options, 2, -3]
-    - [document, 9, -1]
-:cli_spec_files:
-  :path: spec/lib/resume/cli/
-  :files:
-    - [application_spec, 3, -1]
-    - [argument_parser_spec, 3, -1]
-    - [file_system_spec, 4, -1]
-    - [installer_spec, 4, -1]
-:pdf_spec_files:
-  :path: spec/lib/resume/pdf/
-  :files:
-    - [document_spec, 3, -1]
+    - [argument_parser.rb, 4, -3]
+    - [resume_data_fetcher.rb, 6, -3]
+    - [font_downloader.rb, 8, -3]
+    - [gem_installer.rb, 5, -3]
+    - [dependency_manager.rb, 8, -3]
+    - [application.rb, 13, -1]
+# :spec_files:
+#   :path: spec/
+#   :files:
+#     - [spec_helper, 8, -1]
+# :cli_spec_files:
+#   :path: spec/lib/resume/cli/
+#   :files:
+#     - [application_spec, 3, -1]
+#     - [argument_parser_spec, 3, -1]
+#     - [file_system_spec, 4, -1]
+#     - [installer_spec, 4, -1]
+# :pdf_spec_files:
+#   :path: spec/lib/resume/pdf/
+#   :files:
+#     - [document_spec, 3, -1]

@@ -3,7 +3,6 @@ require_relative 'entry/heading'
 module Resume
   module PDF
     class TechnicalSkills
-
       def self.generate(pdf, data)
         new(pdf, data[:heading], data[:content]).generate
       end

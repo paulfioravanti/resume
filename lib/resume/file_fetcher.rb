@@ -4,7 +4,6 @@ require_relative 'exceptions'
 
 module Resume
   class FileFetcher
-
     def self.fetch(file, &block)
       new(file, &block).fetch
     end

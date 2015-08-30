@@ -1,10 +1,9 @@
-require_relative '../../resume/cli/colours'
+require_relative '../../resume/output'
 require_relative 'files'
 require 'yaml'
 
 module OneSheet
   class Generator
-    include Resume::CLI::Colours
 
     attr_accessor :content
     attr_reader :config, :file_types
@@ -22,18 +21,13 @@ module OneSheet
     end
 
     def run
-      resume_header
       resume_files
       start_app
       output_file
-      run_specs
+      # run_specs
     end
 
     private
-
-    def resume_header
-      content << File.readlines(config[:header_file]).join
-    end
 
     def resume_files
       file_types.each do |type|
@@ -44,7 +38,7 @@ module OneSheet
     def start_app
       content <<
         "if __FILE__ == $0\n"\
-        "  Resume::CLI::Application.start\n"\
+        "  Resume.generate\n"\
         "end\n"
     end
 
@@ -52,11 +46,11 @@ module OneSheet
       File.open('resume.rb', 'w') do |file|
         file.write(content)
       end
-      puts green('Successfully generated one-sheet resume')
+      Resume::Output.raw_success('Successfully generated one-sheet resume')
     end
 
     def run_specs
-      puts yellow('Running specs...')
+      Resume::Output.raw_warning('Running specs...')
       system('rspec', 'resume.rb')
     end
   end

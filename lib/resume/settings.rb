@@ -20,8 +20,7 @@ module Resume
       require 'i18n/backend'
       require 'i18n/backend/base'
       require_relative '../i18n/core_ext'
-      I18n.load_path =
-        Dir["#{Pathname(__FILE__).dirname}/locales/*.yml.erb"]
+      I18n.load_path = LOCALE_FILES
       I18n.available_locales = [:en, :ja]
     rescue LoadError
       raise DependencyPrerequisiteError

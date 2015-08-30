@@ -1,7 +1,6 @@
 module Resume
   module PDF
     class Name
-
       def self.generate(pdf, name)
         new(
           pdf,

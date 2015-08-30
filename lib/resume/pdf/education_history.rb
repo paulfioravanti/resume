@@ -1,7 +1,6 @@
 module Resume
   module PDF
     class EducationHistory
-
       def self.generate(pdf, data)
         new(pdf, data[:heading], data[:content]).generate
       end

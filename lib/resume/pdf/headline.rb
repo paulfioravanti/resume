@@ -1,7 +1,6 @@
 module Resume
   module PDF
     class Headline
-
       def self.generate(pdf, headline)
         primary_header = headline[:primary]
         new(

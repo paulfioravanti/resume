@@ -21,7 +21,7 @@ module OneSheet
     end
 
     def read_file(file, from_line, to_line, line_break = "\n")
-      lines = File.readlines("#{path}#{file}.rb")
+      lines = File.readlines(File.join(path, file))
       lines[from_line..to_line].join << line_break
     end
   end

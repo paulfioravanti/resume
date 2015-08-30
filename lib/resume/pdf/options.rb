@@ -3,7 +3,6 @@ require_relative '../file_fetcher'
 module Resume
   module PDF
     class Options
-
       def self.generate(title, resume)
         author = Decoder.d(resume[:author])
         {

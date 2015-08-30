@@ -3,7 +3,6 @@ require_relative 'entry/content'
 module Resume
   module PDF
     class EmploymentHistory
-
       def self.generate(pdf, data)
         new(pdf, data[:heading], data[:content]).generate
       end
