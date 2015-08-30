@@ -1,3 +1,4 @@
+require_relative '../i18n/core_ext'
 require_relative 'exceptions'
 require_relative 'output'
 
@@ -19,7 +20,6 @@ module Resume
       require 'i18n'
       require 'i18n/backend'
       require 'i18n/backend/base'
-      require_relative '../i18n/core_ext'
       I18n.load_path = LOCALE_FILES
       I18n.available_locales = [:en, :ja]
     rescue LoadError
