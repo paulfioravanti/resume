@@ -146,15 +146,11 @@ module Resume
             let(:bold_font_filepath) { "/tmp/#{bold_font_name}" }
 
             before do
+              expect(FileDownloader).to \
+                receive(:download).with(file_name, font_location, 'wb')
               allow(FileSystem).to \
                 receive(:tmp_filepath).with(file_name).
                   and_return(font_file_filepath)
-              allow(File).to \
-                receive(:open).with(font_file_filepath, 'wb').
-                  and_yield(font_file)
-              allow(FileFetcher).to \
-                receive(:fetch).with(font_location).and_yield(uri)
-              allow(font_file).to receive(:write).with(uri)
               allow(font_downloader).to receive(:require).with('zip')
               stub_const('Zip::File', zip_file)
               allow(zip_file).to \
