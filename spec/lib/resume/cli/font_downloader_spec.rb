@@ -133,7 +133,6 @@ module Resume
             # rubyzip gem since it's not used to generate all resumes
             let(:font_file_filepath) { "/tmp/#{file_name}" }
             let(:font_file) { double('font_file') }
-            let(:uri) { double('uri').as_null_object }
             let(:zip_file) { double('Zip::File') }
             let(:normal_font_file) do
               double('normal_font_file', name: normal_font_name)
