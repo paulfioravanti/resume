@@ -130,7 +130,7 @@ module Resume
           context 'when all fonts are successfully downloaded and extracted' do
             # For the most part, mocking this out is complete madness,
             # but I didn't want the test suite to be dependent on the
-            # zip gem since it's not used to generate all resumes
+            # rubyzip gem since it's not used to generate all resumes
             let(:font_file_filepath) { "/tmp/#{file_name}" }
             let(:font_file) { double('font_file') }
             let(:uri) { double('uri').as_null_object }
