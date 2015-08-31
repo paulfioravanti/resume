@@ -33,6 +33,7 @@
     - [exceptions.rb, 1, -2]
     - [file_fetcher.rb, 5, -2]
     - [file_system.rb, 3, -2]
+    - [file_downloader.rb, 4, -2]
     - [output.rb, 3, -2]
     - [settings.rb, 4, -2]
 :pdf_files_1:
