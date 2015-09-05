@@ -1,29 +1,21 @@
 require 'json'
-require_relative '../file_fetcher'
 require_relative '../output'
+require_relative '../file_fetcher'
 
 module Resume
   module CLI
-    class ResumeDataFetcher
-
+    class ResumeDataFetcher < FileFetcher
       def self.fetch
-        new.fetch
+        super("resources/resume.#{I18n.locale}.json")
       end
-
-      private_class_method :new
 
       def fetch
         Output.plain(:gathering_resume_information)
+        resume = super
         JSON.parse(
-          FileFetcher.fetch(filename).read,
+          resume.read,
           symbolize_names: true
         )
-      end
-
-      private
-
-      def filename
-        I18n.t(:resume_data_filename, selected_locale: I18n.locale)
       end
     end
   end
