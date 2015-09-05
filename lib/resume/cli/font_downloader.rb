@@ -29,7 +29,7 @@ module Resume
         fonts.all? do |font|
           Output.plain([
             :downloading_font,
-            { file_name: font[:file_name], location: font[:location] }
+            { filename: font[:filename], location: font[:location] }
           ])
           download_font_file(font)
           extract_fonts(font)
@@ -47,7 +47,7 @@ module Resume
       def download_font_file(font)
         FileFetcher.fetch(
           font[:location],
-          filename: font[:file_name],
+          filename: font[:filename],
           mode: 'wb'
         )
       end

@@ -43,15 +43,15 @@ module Resume
           context 'when required font file is available on the system' do
             before do
               allow(File).to \
-                receive(:exist?).with(normal_font_filepath).
+                receive(:file?).with(normal_font_filepath).
                   and_return(true)
               allow(File).to \
-                receive(:exist?).with(bold_font_filepath).
+                receive(:file?).with(bold_font_filepath).
                   and_return(true)
               font_downloader.audit_font_dependencies
             end
 
-            it 'empties the list of font dependencies' do
+            it 'removes the font from the list of font dependencies' do
               expect(font_downloader.fonts).to_not include(font)
             end
           end
@@ -59,10 +59,10 @@ module Resume
           context 'when required font file is missing from the system' do
             before do
               allow(File).to \
-                receive(:exist?).with(normal_font_filepath).
+                receive(:file?).with(normal_font_filepath).
                   and_return(true)
               allow(File).to \
-                receive(:exist?).with(bold_font_filepath).
+                receive(:file?).with(bold_font_filepath).
                   and_return(false)
               font_downloader.audit_font_dependencies
             end
@@ -112,13 +112,13 @@ module Resume
           let(:font_location) do
             'http://ipafont.ipa.go.jp/ipafont/IPAfont00303.php'
           end
-          let(:file_name) { 'IPAfont00303.zip' }
+          let(:filename) { 'IPAfont00303.zip' }
           let(:normal_font_name) { 'ipamp.ttf' }
           let(:bold_font_name) { 'ipagp.ttf' }
           let(:font) do
             {
               location: font_location,
-              file_name: file_name,
+              filename: filename,
               files: {
                 normal: normal_font_name,
                 bold: bold_font_name
@@ -131,7 +131,7 @@ module Resume
             # For the most part, mocking this out is complete madness,
             # but I didn't want the test suite to be dependent on the
             # rubyzip gem since it's not used to generate all resumes
-            let(:font_file_filepath) { "/tmp/#{file_name}" }
+            let(:font_file_filepath) { "/tmp/#{filename}" }
             let(:font_file) { double('font_file') }
             let(:zip_file) { double('Zip::File') }
             let(:normal_font_file) do
@@ -145,10 +145,14 @@ module Resume
             let(:bold_font_filepath) { "/tmp/#{bold_font_name}" }
 
             before do
-              expect(FileDownloader).to \
-                receive(:download).with(file_name, font_location, 'wb')
+              expect(FileFetcher).to \
+                receive(:fetch).with(
+                  font_location,
+                  filename: filename,
+                  mode: 'wb'
+                )
               allow(FileSystem).to \
-                receive(:tmp_filepath).with(file_name).
+                receive(:tmp_filepath).with(filename).
                   and_return(font_file_filepath)
               allow(font_downloader).to receive(:require).with('zip')
               stub_const('Zip::File', zip_file)
@@ -164,7 +168,7 @@ module Resume
               expect(Output).to \
                 receive(:plain).with([
                   :downloading_font,
-                  { file_name: file_name, location: font_location }
+                  { filename: filename, location: font_location }
                 ])
               expect(normal_font_file).to \
                 receive(:extract).
@@ -191,7 +195,7 @@ module Resume
               expect(Output).to \
                 receive(:plain).with([
                   :downloading_font,
-                  { file_name: file_name, location: font_location }
+                  { filename: filename, location: font_location }
                 ])
             end
 
