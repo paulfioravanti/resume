@@ -8,7 +8,7 @@
     "fonts": [
       {
         "location": "http://ipafont.ipa.go.jp/ipafont/IPAfont00303.php",
-        "file_name": "IPAfont00303.zip",
+        "filename": "IPAfont00303.zip",
         "files": {
           "normal": "ipamp.ttf",
           "bold": "ipagp.ttf"
