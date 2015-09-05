@@ -12,14 +12,6 @@ RSpec.describe Resume do
         expect(constant_defined).to be true
       end
     end
-
-    context 'for DATA_LOCATION' do
-      let(:const) { :DATA_LOCATION }
-
-      it 'is present' do
-        expect(constant_defined).to be true
-      end
-    end
   end
 
   describe '.generate' do
