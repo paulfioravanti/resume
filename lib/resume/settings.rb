@@ -1,4 +1,5 @@
 require_relative '../i18n/core_ext'
+require_relative 'file_fetcher'
 require_relative 'exceptions'
 require_relative 'output'
 
@@ -20,8 +21,14 @@ module Resume
       require 'i18n'
       require 'i18n/backend'
       require 'i18n/backend/base'
-      I18n.load_path = LOCALE_FILES
       I18n.available_locales = [:en, :ja]
+      I18n.available_locales.each do |locale|
+        I18n.load_path += [
+          FileFetcher.fetch(
+            "lib/resume/locales/#{locale}.yml.erb", mode: 'w'
+          )
+        ]
+      end
     rescue LoadError
       raise DependencyPrerequisiteError
     end
