@@ -56,11 +56,19 @@ module Resume
     end
 
     describe '.tmp_filepath' do
-      let(:file) { 'file.txt' }
+      let(:filename) { 'file.txt' }
+      let(:tmpdir) { '/tmp' }
+      let(:pathname) { instance_double('Pathname') }
+
+      before do
+        allow(Dir).to receive(:tmpdir).and_return(tmpdir)
+        allow(Pathname).to \
+          receive(:new).with(tmpdir).and_return(pathname)
+      end
 
       it 'returns the filepath for the file in the system temp directory' do
-        expect(File).to receive(:join).with(Dir.tmpdir, file)
-        described_class.tmp_filepath(file)
+        expect(pathname).to receive(:join).with(filename)
+        described_class.tmp_filepath(filename)
       end
     end
   end
