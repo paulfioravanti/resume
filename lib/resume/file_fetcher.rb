@@ -1,31 +1,72 @@
 require 'open-uri'
 require 'socket'
+require 'tmpdir'
+require 'pathname'
 require_relative 'exceptions'
+require_relative 'file_system'
 
 module Resume
   class FileFetcher
-    def self.fetch(file, &block)
-      new(file, &block).fetch
+    REMOTE_REPO =
+      # "https://raw.githubusercontent.com/paulfioravanti/resume/master"
+      "https://raw.githubusercontent.com/paulfioravanti/resume/ja-resume-refactor"
+
+    def self.fetch(pathname, filename: '', mode: 'w')
+      pathname = Pathname.new(pathname)
+      filename = pathname.basename if filename.empty?
+      new(pathname, filename, mode).fetch
     end
 
     private_class_method :new
 
-    def initialize(file, &block)
-      @file = file
-      @block = block
+    def initialize(pathname, filename, mode)
+      @pathname = pathname
+      @filename = filename
+      @mode = mode
     end
 
     def fetch
-      # Specifically uses Kernel here in order to allow it to determine
-      # the return file type: for this resume, it could be File, TempFile,
-      # or StringIO
-      Kernel.open(file, &block)
+      local_file || tmpfile || remote_file
     rescue SocketError, OpenURI::HTTPError, Errno::ECONNREFUSED
       raise NetworkConnectionError
     end
 
     private
 
-    attr_reader :file, :block
+    attr_reader :pathname, :filename, :mode
+
+    def local_file
+      File.open(pathname) if pathname.file?
+    end
+
+    def tmpfile
+      File.open(tmpfile_path) if tmpfile_path.file?
+    end
+
+    def remote_file
+      File.open(tmpfile_path, mode) do |file|
+        Kernel.open(remote_file_path) do |uri|
+          file.write(uri.read)
+        end
+      end
+      tmpfile
+    end
+
+    def tmpfile_path
+      @tmpfile_path ||= FileSystem.tmp_filepath(filename)
+    end
+
+    def remote_file_path
+      uri? ? pathname.to_path : File.join(REMOTE_REPO, pathname.to_path)
+    end
+
+    def uri?
+      uri = URI.parse(pathname.to_path)
+      %w(http https).include?(uri.scheme)
+    rescue URI::BadURIError
+      false
+    rescue URI::InvalidURIError
+      false
+    end
   end
 end
