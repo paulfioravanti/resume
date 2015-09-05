@@ -1,4 +1,5 @@
 require 'tmpdir'
+require 'pathname'
 
 module Resume
   class FileSystem
@@ -15,8 +16,8 @@ module Resume
       end
     end
 
-    def self.tmp_filepath(file)
-      File.join(Dir.tmpdir, file)
+    def self.tmp_filepath(filename)
+      Pathname.new(Dir.tmpdir).join(filename)
     end
   end
 end
