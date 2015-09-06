@@ -42,7 +42,8 @@ module Resume
               dependencies: dependencies
             }
           end
-          let(:filename) { 'Resume_title_locale.pdf' }
+          let(:locale) { :en }
+          let(:filename) { "#{title}_#{locale}.pdf" }
           let(:dependency_manager) do
             instance_double('DependencyManager')
           end
@@ -52,10 +53,7 @@ module Resume
             allow(ResumeDataFetcher).to \
               receive(:fetch).and_return(resume)
             allow(Decoder).to receive(:d).with(title).and_return(title)
-            allow(I18n).to receive(:t).with(
-              :filename,
-              { title: title, selected_locale: I18n.locale }
-            ).and_return(filename)
+            allow(I18n).to receive(:locale).and_return(locale)
             allow(DependencyManager).to \
               receive(:new).with(dependencies).
                 and_return(dependency_manager)

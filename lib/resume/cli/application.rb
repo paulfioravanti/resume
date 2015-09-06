@@ -30,7 +30,7 @@ module Resume
       def initialize(resume)
         @resume = resume
         @title = Decoder.d(resume[:title])
-        @filename = initialize_filename
+        @filename = "#{title}_#{I18n.locale}.pdf"
         @dependency_manager =
           DependencyManager.new(resume[:dependencies])
       end
@@ -49,10 +49,6 @@ module Resume
       private
 
       attr_reader :resume, :title, :filename
-
-      def initialize_filename
-        I18n.t(:filename, title: title, selected_locale: I18n.locale)
-      end
 
       def install_dependencies
         request_dependency_installation
