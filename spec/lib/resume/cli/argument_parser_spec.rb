@@ -116,14 +116,14 @@ module Resume
         end
 
         context 'when the help option is specified' do
-          # can't get direct access to the help message, so just
-          # say that *something* is output to stdout
           context 'using the abbreviated option name' do
             before do
               stub_const('ARGV', ['-h'])
             end
 
             it 'informs the user of the help options and halts' do
+              # can't get direct access to the help message, so just
+              # say that *something* is output to stdout
               expect(Output).to receive(:raw).with(anything)
               expect(parsing_options).to throw_symbol(:halt)
             end
@@ -135,6 +135,8 @@ module Resume
             end
 
             it 'informs the user of the help options and halts' do
+              # can't get direct access to the help message, so just
+              # say that *something* is output to stdout
               expect(Output).to receive(:raw).with(anything)
               expect(parsing_options).to throw_symbol(:halt)
             end

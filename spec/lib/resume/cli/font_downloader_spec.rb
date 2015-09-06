@@ -132,15 +132,20 @@ module Resume
             # but I didn't want the test suite to be dependent on the
             # rubyzip gem since it's not used to generate all resumes
             let(:font_file_filepath) { "/tmp/#{filename}" }
-            let(:font_file) { double('font_file') }
-            let(:zip_file) { double('Zip::File') }
+            let(:zip_file) do
+              class_double('Zip::File').as_stubbed_const
+            end
             let(:normal_font_file) do
-              double('normal_font_file', name: normal_font_name)
+              instance_double(
+                'Zip::File', :normal_font_file, name: normal_font_name
+              )
             end
             let(:bold_font_file) do
-              double('bold_font_file', name: bold_font_name)
+              instance_double(
+                'Zip::File', :bold_font_file, name: bold_font_name
+              )
             end
-            let(:font_zip_file) { [ normal_font_file, bold_font_file ] }
+            let(:font_zip_file) { [normal_font_file, bold_font_file] }
             let(:normal_font_filepath) { "/tmp/#{normal_font_name}" }
             let(:bold_font_filepath) { "/tmp/#{bold_font_name}" }
 
@@ -155,7 +160,6 @@ module Resume
                 receive(:tmpfile_path).with(filename).
                   and_return(font_file_filepath)
               allow(font_downloader).to receive(:require).with('zip')
-              stub_const('Zip::File', zip_file)
               allow(zip_file).to \
                 receive(:open).with(font_file_filepath).
                   and_yield(font_zip_file)

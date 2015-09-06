@@ -3,13 +3,13 @@ require 'resume/cli/dependency_manager'
 module Resume
   module CLI
     RSpec.describe DependencyManager do
-      let(:gems) { double('gems') }
-      let(:fonts) { double('fonts') }
+      let(:gems) { instance_double('Array', :gems) }
+      let(:fonts) { instance_double('Array', :fonts) }
       let(:dependencies) do
         { gems: gems, fonts: fonts }
       end
-      let(:gem_installer) { double('gem_installer') }
-      let(:font_downloader) { double('font_downloader') }
+      let(:gem_installer) { instance_double('GemInstaller') }
+      let(:font_downloader) { instance_double('FontDownloader') }
       let(:dependency_manager) do
         described_class.new(dependencies)
       end
@@ -57,7 +57,8 @@ module Resume
           context 'when font dependencies are present' do
             before do
               allow(font_downloader).to \
-                receive(:fonts).and_return([double('font')])
+                receive(:fonts).
+                  and_return([instance_double('Hash', :font)])
             end
 
             it 'returns true' do
