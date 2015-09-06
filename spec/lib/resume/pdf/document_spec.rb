@@ -7,6 +7,9 @@ module Resume
     RSpec.describe Document do
       # Suppress output from the ResumeDataFetcher
       before do
+        # Use the en locale to test document generation since it
+        # requires the least amount of outside dependencies
+        allow(I18n).to receive(:locale).and_return(:en)
         allow(Output).to \
           receive(:plain).with(:gathering_resume_information)
       end
