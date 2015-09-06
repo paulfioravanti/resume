@@ -7,10 +7,6 @@ require_relative 'file_system'
 
 module Resume
   class FileFetcher
-    REMOTE_REPO =
-      # "https://raw.githubusercontent.com/paulfioravanti/resume/master"
-      "https://raw.githubusercontent.com/paulfioravanti/resume/ja-resume-refactor"
-
     def self.fetch(path, filename: '', mode: 'w')
       pathname = Pathname.new(path)
       filename = pathname.basename.to_path if filename.empty?

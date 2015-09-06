@@ -124,7 +124,7 @@ module Resume
 
                   it 'fetches the file from the resume remote repo' do
                     expect(File).to receive(:join).with(
-                      Resume::FileFetcher::REMOTE_REPO,
+                      REMOTE_REPO,
                       path
                     )
                     described_class.fetch(path)
@@ -140,7 +140,7 @@ module Resume
 
                   it 'fetches the file from the resume remote repo' do
                     expect(File).to receive(:join).with(
-                      Resume::FileFetcher::REMOTE_REPO,
+                      REMOTE_REPO,
                       path
                     )
                     described_class.fetch(path)
