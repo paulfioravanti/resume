@@ -6,7 +6,6 @@ module Resume
     RSpec.describe Application do
       describe '.start' do
         context 'when an Error is raised' do
-          let(:error_messages) { double('error_messages') }
           let(:error) { Error.new }
 
           before do
@@ -34,7 +33,9 @@ module Resume
 
         context 'once application is initialized' do
           let(:title) { 'Resume title' }
-          let(:dependencies) { double('dependencies') }
+          let(:dependencies) do
+            instance_double('Hash', :dependencies)
+          end
           let(:resume) do
             {
               title: title,
@@ -42,7 +43,9 @@ module Resume
             }
           end
           let(:filename) { 'Resume_title_locale.pdf' }
-          let(:dependency_manager) { double('dependency_manager') }
+          let(:dependency_manager) do
+            instance_double('DependencyManager')
+          end
 
           before do
             allow(ArgumentParser).to receive(:parse)
@@ -68,7 +71,6 @@ module Resume
             end
 
             context 'when permission to install gems is denied' do
-              let(:error_messages) { double('error_messages') }
               let(:error) { DependencyInstallationPermissionError.new }
 
               before do
