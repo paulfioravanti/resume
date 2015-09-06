@@ -1,7 +1,6 @@
 require_relative '../i18n/core_ext'
 require_relative 'file_fetcher'
 require_relative 'exceptions'
-require_relative 'output'
 
 module Resume
   class Settings
