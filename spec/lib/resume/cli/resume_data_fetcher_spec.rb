@@ -8,7 +8,7 @@ module Resume
         let(:resume_data_filename) { 'resume.json' }
         # null object to return self when #read called on it
         let(:resume_data_file) do
-          double('resume_data_file').as_null_object
+          spy('resume_data_file')
         end
 
         before do
