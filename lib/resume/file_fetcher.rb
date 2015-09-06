@@ -11,9 +11,9 @@ module Resume
       # "https://raw.githubusercontent.com/paulfioravanti/resume/master"
       "https://raw.githubusercontent.com/paulfioravanti/resume/ja-resume-refactor"
 
-    def self.fetch(pathname, filename: '', mode: 'w')
-      pathname = Pathname.new(pathname)
-      filename = pathname.basename if filename.empty?
+    def self.fetch(path, filename: '', mode: 'w')
+      pathname = Pathname.new(path)
+      filename = pathname.basename.to_path if filename.empty?
       new(pathname, filename, mode).fetch
     end
 
@@ -27,8 +27,6 @@ module Resume
 
     def fetch
       local_file || tmpfile || remote_file
-    rescue SocketError, OpenURI::HTTPError, Errno::ECONNREFUSED
-      raise NetworkConnectionError
     end
 
     private
@@ -50,10 +48,12 @@ module Resume
         end
       end
       tmpfile
+    rescue SocketError, OpenURI::HTTPError, Errno::ECONNREFUSED
+      raise NetworkConnectionError
     end
 
     def tmpfile_path
-      @tmpfile_path ||= FileSystem.tmp_filepath(filename)
+      @tmpfile_path ||= FileSystem.tmpfile_path(filename)
     end
 
     def remote_file_path
@@ -63,9 +63,7 @@ module Resume
     def uri?
       uri = URI.parse(pathname.to_path)
       %w(http https).include?(uri.scheme)
-    rescue URI::BadURIError
-      false
-    rescue URI::InvalidURIError
+    rescue URI::BadURIError, URI::InvalidURIError
       false
     end
   end
