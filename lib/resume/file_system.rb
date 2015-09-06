@@ -16,7 +16,7 @@ module Resume
       end
     end
 
-    def self.tmp_filepath(filename)
+    def self.tmpfile_path(filename)
       Pathname.new(Dir.tmpdir).join(filename)
     end
   end
