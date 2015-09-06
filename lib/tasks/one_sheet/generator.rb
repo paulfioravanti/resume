@@ -24,7 +24,7 @@ module OneSheet
       resume_files
       start_app
       output_file
-      # run_specs
+      run_specs
     end
 
     private
