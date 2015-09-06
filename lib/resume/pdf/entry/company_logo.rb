@@ -1,3 +1,5 @@
+require_relative '../logo'
+
 module Resume
   module PDF
     module Entry

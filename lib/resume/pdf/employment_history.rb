@@ -1,3 +1,4 @@
+require_relative 'entry/heading'
 require_relative 'entry/content'
 
 module Resume

@@ -1,3 +1,4 @@
+require_relative '../decoder'
 require_relative '../file_fetcher'
 
 module Resume

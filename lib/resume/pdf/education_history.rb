@@ -1,3 +1,6 @@
+require_relative 'entry/heading'
+require_relative 'entry/content'
+
 module Resume
   module PDF
     class EducationHistory

@@ -1,3 +1,5 @@
+require_relative '../../decoder'
+require_relative '../transparent_link'
 require_relative 'header'
 require_relative 'company_logo'
 

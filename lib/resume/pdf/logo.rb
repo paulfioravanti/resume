@@ -1,4 +1,5 @@
 require_relative '../file_fetcher'
+require_relative '../decoder'
 
 module Resume
   module PDF
