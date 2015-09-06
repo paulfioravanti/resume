@@ -95,7 +95,8 @@
 :pdf_spec_files:
   :path: spec/lib/resume/pdf
   :files:
-    - [document_spec.rb, 5, -1]
+    - [font_spec.rb, 3, -3]
+    - [document_spec.rb, 6, -1]
 :lib_spec_files:
   :path: spec/lib
   :files:
