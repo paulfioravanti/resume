@@ -8,8 +8,8 @@ module Resume
         unless Prawn::Font::AFM::BUILT_INS.include?(font_name)
           pdf.font_families.update(
             font_name => {
-              normal: FileSystem.tmp_filepath(font[:normal]),
-              bold: FileSystem.tmp_filepath(font[:bold])
+              normal: FileSystem.tmpfile_path(font[:normal]),
+              bold: FileSystem.tmpfile_path(font[:bold])
             }
           )
         end

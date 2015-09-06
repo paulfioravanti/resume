@@ -41,7 +41,7 @@ module Resume
       private
 
       def files_present?(files)
-        files.all? { |file| File.file?(FileSystem.tmp_filepath(file)) }
+        files.all? { |file| File.file?(FileSystem.tmpfile_path(file)) }
       end
 
       def download_font_file(font)
@@ -54,12 +54,12 @@ module Resume
 
       def extract_fonts(font)
         require 'zip'
-        Zip::File.open(FileSystem.tmp_filepath(font[:filename])) do |file|
+        Zip::File.open(FileSystem.tmpfile_path(font[:filename])) do |file|
           file.each do |entry|
             font[:files].each do |_, filename|
               if entry.name.match(filename)
                 # overwrite any existing files with true block
-                entry.extract(FileSystem.tmp_filepath(filename)) { true }
+                entry.extract(FileSystem.tmpfile_path(filename)) { true }
                 break # inner loop only
               end
             end

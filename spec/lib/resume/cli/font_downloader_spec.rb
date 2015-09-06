@@ -33,10 +33,10 @@ module Resume
 
           before do
             allow(FileSystem).to \
-              receive(:tmp_filepath).with(normal_font_name).
+              receive(:tmpfile_path).with(normal_font_name).
                 and_return(normal_font_filepath)
             allow(FileSystem).to \
-              receive(:tmp_filepath).with(bold_font_name).
+              receive(:tmpfile_path).with(bold_font_name).
                 and_return(bold_font_filepath)
           end
 
@@ -152,7 +152,7 @@ module Resume
                   mode: 'wb'
                 )
               allow(FileSystem).to \
-                receive(:tmp_filepath).with(filename).
+                receive(:tmpfile_path).with(filename).
                   and_return(font_file_filepath)
               allow(font_downloader).to receive(:require).with('zip')
               stub_const('Zip::File', zip_file)
@@ -160,10 +160,10 @@ module Resume
                 receive(:open).with(font_file_filepath).
                   and_yield(font_zip_file)
               allow(FileSystem).to \
-                receive(:tmp_filepath).with(normal_font_name).
+                receive(:tmpfile_path).with(normal_font_name).
                   and_return(normal_font_filepath)
               allow(FileSystem).to \
-                receive(:tmp_filepath).with(bold_font_name).
+                receive(:tmpfile_path).with(bold_font_name).
                   and_return(bold_font_filepath)
               expect(Output).to \
                 receive(:plain).with([
