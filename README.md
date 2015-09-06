@@ -14,9 +14,15 @@ Install the gems (primarily if you want to run the specs):
 
 Generate the resume:
 
-English: `$ bin/resume`  
-Japanese: `$ bin/resume -l ja`  
-(Run `$ bin/resume -h` to see all the options)
+English:
+
+    $ bin/resume
+
+Japanese
+
+    $ bin/resume -l ja
+
+Run `$ bin/resume -h` to see all the options.
 
 Run the specs:
 
