@@ -4,10 +4,6 @@ require 'yaml'
 
 module OneSheet
   class Generator
-
-    attr_accessor :content
-    attr_reader :config, :file_types
-
     def self.run
       new.run
     end
@@ -28,6 +24,9 @@ module OneSheet
     end
 
     private
+
+    attr_accessor :content
+    attr_reader :config, :file_types
 
     def resume_files
       file_types.each do |type|
