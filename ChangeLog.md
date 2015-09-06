@@ -10,3 +10,7 @@ Some time passes.....
 
 * Probably the second major refactor of the resume to get it even more componentised
 
+### 1.0 / 2015-09-06
+
+* Added Japanese language resume and did a complete refactor of the app
+
