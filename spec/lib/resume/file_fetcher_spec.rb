@@ -4,7 +4,7 @@ module Resume
   RSpec.describe FileFetcher do
     describe '.fetch' do
       let(:basename) { 'file.txt' }
-      let(:path) { "https://www.example.com/path/to/#{basename}" }
+      let(:path) { "https://example.com/path/to/#{basename}" }
 
       describe 'data massaging before initialisation' do
         let(:mode) { 'w' }
