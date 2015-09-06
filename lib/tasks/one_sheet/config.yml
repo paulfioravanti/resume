@@ -31,11 +31,10 @@
     - [colours.rb, 1, -2]
     - [decoder.rb, 3, -2]
     - [exceptions.rb, 1, -2]
-    - [file_fetcher.rb, 5, -2]
-    - [file_system.rb, 3, -2]
-    - [file_downloader.rb, 4, -2]
+    - [file_system.rb, 4, -2]
+    - [file_fetcher.rb, 8, -2]
     - [output.rb, 3, -2]
-    - [settings.rb, 4, -2]
+    - [settings.rb, 5, -2]
 :pdf_files_1:
   :path: lib/resume/pdf
   :files:
