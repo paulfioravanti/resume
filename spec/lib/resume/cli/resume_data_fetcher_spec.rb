@@ -5,20 +5,25 @@ module Resume
   module CLI
     RSpec.describe ResumeDataFetcher do
       describe '.fetch' do
-        let(:resume_data_filename) { 'resume.json' }
-        # null object to return self when #read called on it
-        let(:resume_data_file) do
-          spy('resume_data_file')
+        let(:basename) { 'resume.en.json' }
+        let(:resume_data_path) { "resources/#{basename}" }
+        let(:pathname) do
+          instance_double(
+            'Pathname',
+            :pathname,
+            basename: instance_double('Pathname', to_path: basename),
+            to_path: resume_data_path,
+            file?: true
+          )
         end
+        let(:resume_data_file) { spy('resume_data_file') }
 
         before do
-          allow(I18n).to \
-            receive(:t).with(
-              :resume_data_filename,
-              selected_locale: I18n.locale
-            ).and_return(resume_data_filename)
-          allow(FileFetcher).to \
-            receive(:fetch).with(resume_data_filename).
+          allow(I18n).to receive(:locale).and_return(:en)
+          allow(Pathname).to \
+            receive(:new).with(resume_data_path).and_return(pathname)
+          allow(File).to \
+            receive(:open).with(pathname).
               and_return(resume_data_file)
           expect(Output).to \
             receive(:plain).with(:gathering_resume_information)
