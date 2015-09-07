@@ -16,22 +16,8 @@ module Resume
 
       describe '.generate' do
         let!(:resume) { CLI::ResumeDataFetcher.fetch }
-        # Link points to a 1x1 pixel placeholder to not slow
-        # down test suite
-        # Couldn't send Prawn::Document an image test double
-        let(:placeholder_image) do
-          open(
-            "http://farm4.staticflickr.com/3722/"\
-            "10753699026_a1603247cf_m.jpg"
-          )
-        end
         let(:title) { 'My Resume' }
         let(:filename) { 'My_Resume.pdf' }
-
-        before do
-          allow(FileFetcher).to \
-            receive(:fetch).and_return(placeholder_image)
-        end
 
         after { File.delete(filename) }
 

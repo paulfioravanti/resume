@@ -9,6 +9,7 @@ require 'rspec'
 require 'open-uri'
 require 'resume'
 require 'resume/settings'
+require 'resume/file_fetcher'
 require 'resume/output'
 
 module Resume
@@ -21,9 +22,15 @@ module Resume
         Settings.configure
         require 'prawn'
         require 'prawn/table'
-        # Test access to the 1x1 pixel image needed for specs
-        StringIO.open(
-          'http://farm4.staticflickr.com/3722/10753699026_a1603247cf_m.jpg'
+        # Grab the resume background image.  This serves two purposes:
+        # 1. Grabs the biggest image and puts it in the tmp directory
+        #    if it's not already there
+        # 2. Tests out network connection
+        # If the file is fetched locally, chances are high that the
+        # resume has already been generated once and there won't be
+        # a need to fetch the resources again.
+        FileFetcher.fetch(
+          "http://farm6.staticflickr.com/5453/8801916021_3ac1df6072_o_d.jpg"
         )
       rescue DependencyPrerequisiteError => e
         Output.messages(e.messages)
