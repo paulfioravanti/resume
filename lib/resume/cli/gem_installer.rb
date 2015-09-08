@@ -16,7 +16,7 @@ module Resume
       def audit_gem_dependencies
         gems.each do |name, version|
           # if gem not installed: leave in the gems list
-          suppress(Gem::LoadError,  -> { next }) do
+          suppress(Gem::LoadError, -> { next }) do
             if gem_already_installed?(name, version)
               # remove dependency to install
               self.gems -= [[name, version]]
