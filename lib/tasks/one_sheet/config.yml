@@ -31,10 +31,11 @@
     - [colours.rb, 1, -2]
     - [decoder.rb, 3, -2]
     - [exceptions.rb, 1, -2]
+    - [exception_suppressor.rb, 1, -2]
     - [file_system.rb, 4, -2]
     - [file_fetcher.rb, 8, -2]
     - [output.rb, 3, -2]
-    - [settings.rb, 5, -2]
+    - [settings.rb, 6, -2]
 :pdf_files_1:
   :path: lib/resume/pdf
   :files:
@@ -66,7 +67,7 @@
     - [argument_parser.rb, 4, -3]
     - [resume_data_fetcher.rb, 6, -3]
     - [font_downloader.rb, 8, -3]
-    - [gem_installer.rb, 5, -3]
+    - [gem_installer.rb, 6, -3]
     - [dependency_manager.rb, 8, -3]
     - [application.rb, 13, -1]
 :spec_files:
@@ -79,6 +80,7 @@
     - [colours_spec.rb, 3, -2]
     - [decoder_spec.rb, 3, -2]
     - [exceptions_spec.rb, 3, -2]
+    - [exception_suppressor_spec.rb, 3, -2]
     - [file_fetcher_spec.rb, 3, -2]
     - [file_system_spec.rb, 4, -2]
     - [output_spec.rb, 4, -2]
