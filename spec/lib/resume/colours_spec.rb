@@ -5,10 +5,15 @@ module Resume
     let(:colourable) do
       Class.new do
         include Colours
+
         def red_text(text); red(text); end
+
         def green_text(text); green(text); end
+
         def yellow_text(text); yellow(text); end
+
         def cyan_text(text); cyan(text); end
+
       end.new
     end
     let(:text) { 'Hello' }
