@@ -30,7 +30,7 @@ module Resume
         # resume has already been generated once and there won't be
         # a need to fetch the resources again.
         FileFetcher.fetch(
-          "http://farm6.staticflickr.com/5453/8801916021_3ac1df6072_o_d.jpg"
+          'http://farm6.staticflickr.com/5453/8801916021_3ac1df6072_o_d.jpg'
         )
       rescue DependencyPrerequisiteError => e
         Output.messages(e.messages)
