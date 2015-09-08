@@ -1,20 +1,19 @@
 require_relative '../i18n/core_ext'
 require_relative 'file_fetcher'
 require_relative 'exceptions'
+require_relative 'exception_suppressor'
 
 module Resume
   class Settings
+    extend ExceptionSuppressor
+
     def self.configure
-      configure_development_dependencies
+      # Ignore requiring gems that are used just for development
+      suppress(LoadError) do
+        require 'pry-byebug'
+      end
       configure_i18n
     end
-
-    def self.configure_development_dependencies
-      require 'pry-byebug'
-    rescue LoadError
-      # Ignore requiring gems that are just used for development
-    end
-    private_class_method :configure_development_dependencies
 
     def self.configure_i18n
       require 'i18n'

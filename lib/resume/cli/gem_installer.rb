@@ -1,9 +1,12 @@
 require_relative '../exceptions'
 require_relative '../output'
+require_relative '../exception_suppressor'
 
 module Resume
   module CLI
     class GemInstaller
+      include ExceptionSuppressor
+
       attr_reader :gems
 
       def initialize(gems)
@@ -12,14 +15,12 @@ module Resume
 
       def audit_gem_dependencies
         gems.each do |name, version|
-          begin
+          # if gem not installed: leave in the gems list
+          suppress(Gem::LoadError,  -> { next }) do
             if gem_already_installed?(name, version)
               # remove dependency to install
               self.gems -= [[name, version]]
             end
-          rescue Gem::LoadError
-            # gem not installed: leave in the gems list
-            next
           end
         end
       end
