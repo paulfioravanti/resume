@@ -44,7 +44,7 @@ module Resume
     describe '.messages' do
       let(:messages) { { error: :foo, warning: :bar } }
 
-      it "calls to output each message as its specific type" do
+      it 'calls to output each message as its specific type' do
         messages.each do |type, key|
           expect(described_class).to receive(type).with(key)
         end
