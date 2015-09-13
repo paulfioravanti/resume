@@ -19,7 +19,7 @@ module Resume
       require 'i18n'
       require 'i18n/backend'
       require 'i18n/backend/base'
-      I18n.available_locales = [:en, :ja]
+      I18n.available_locales = [:en, :it, :ja]
       I18n.available_locales.each do |locale|
         I18n.load_path += [
           FileFetcher.fetch(
