@@ -21,7 +21,9 @@ Run `$ bin/resume -h` to see all the options.
 
 Run the specs:
 
-    $ bundle exec rspec spec/
+    $ rspec spec/
+
+(Not sure why yet, but running `bundle exec rspec spec/` results in no code coverage running)
 
 If you have SimpleCov installed, view the test coverage report located at:
 
