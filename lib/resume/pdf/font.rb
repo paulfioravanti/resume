@@ -13,6 +13,9 @@ module Resume
             }
           )
         end
+        # Accented characters will bring up a warning that we don't
+        # care about
+        Prawn::Font::AFM.hide_m17n_warning = true
         pdf.font font_name
       end
     end
