@@ -7,6 +7,7 @@
 ### I don't usually write applications in one file with a few thousand lines :)
 ###
 ### Instructions:
+###
 ### 1. Make sure you run this with Ruby 2.2.3
 ###
 ### 2. Please ensure you have an internet connection as the script needs
@@ -20,6 +21,7 @@
 ### 3. Run the script:
 ###
 ###    For English: `$ ruby resume.rb`
+###    For Italian: `$ ruby resume.rb -l it`
 ###    For Japanese: `$ ruby resume.rb -l ja`
 ###    (Run `$ ruby resume.rb -h` to see all the options)
 ###
