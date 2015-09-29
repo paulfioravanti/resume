@@ -542,7 +542,7 @@
   "education_history": {
     "heading": {
       "top_padding": 10,
-      "text": "RWR1Y2F0aW9u",
+      "text": "SXN0cnV6aW9uZS9Gb3JtYXppb25l",
       "styles": ["bold"],
       "colour": "666666"
     },
@@ -551,12 +551,12 @@
         "mit": {
           "top_padding": 5,
           "position": {
-            "text": "TWFzdGVycyBvZiBJbmZvcm1hdGlvbiBUZWNobm9sb2d5",
+            "text": "TWFzdGVyIGluIFRlY25vbG9naWUgZGVsbCdJbmZvcm1hemlvbmU=",
             "styles": ["bold"],
-            "size": 12
+            "size": 11
           },
           "organisation": {
-            "text": "VW5pdmVyc2l0eSBvZiBTb3V0aCBBdXN0cmFsaWE=",
+            "text": "VW5pdmVyc2l0w6AgZGVsIFN1ZCBBdXN0cmFsaWE=",
             "styles": ["bold"],
             "size": 11
           },
@@ -568,7 +568,7 @@
           },
           "location": {
             "text": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",
-            "link": "aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9tYXBzL3BsYWNlL0AtMzQuOTIyNzI3LDEzOC41OTEzMTEsMTd6L2RhdGE9ITNtMSE0YjEhNG0yITNtMSExczB4NmFiMGNmMmY4NmZjNTcyZjoweGQwNTFkNDc5YzcxNDI1YzY/aGw9ZW4=",
+            "link": "aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9tYXBzL3BsYWNlL0AtMzQuOTIyNzI3LDEzOC41OTEzMTEsMTd6L2RhdGE9ITNtMSE0YjEhNG0yITNtMSExczB4NmFiMGNmMmY4NmZjNTcyZjoweGQwNTFkNDc5YzcxNDI1YzY/aGw9aXQ=",
             "styles": [],
             "colour": "666666",
             "size": 10
