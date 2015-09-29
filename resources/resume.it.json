@@ -674,9 +674,9 @@
           "top_padding": -38,
           "at_x_position": 280,
           "position": {
-            "text": "Q2VydGlmaWNhdGUgSUkgaW4gVG91cmlzbQ==",
+            "text": "Q2VydGlmaWNhdG8gSUkgaW4gVHVyaXNtbw==",
             "styles": ["bold"],
-            "size": 12,
+            "size": 11,
             "bottom_padding": 14
           },
           "organisation": {
@@ -686,7 +686,7 @@
             "bottom_padding": 13
           },
           "period": {
-            "text": "TWF5IDIwMDAgLSBNYXkgMjAwMSB8IA==",
+            "text": "TWFnZyAyMDAwIC0gTWFnZyAyMDAxIHwg",
             "styles": [],
             "colour": "666666",
             "size": 10,
@@ -694,7 +694,7 @@
           },
           "location": {
             "text": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",
-            "link": "aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9tYXBzL3BsYWNlL0AtMzQuOTI0MDY4LDEzOC41OTQ4MDksMTd6L2RhdGE9ITNtMSE0YjEhNG0yITNtMSExczB4NmFiMGNlZDNlMDA5Y2UyYjoweDEwOTQzZTcwNTllM2FiZGE/aGw9ZW4=",
+            "link": "aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9tYXBzL3BsYWNlL0AtMzQuOTI0MDY4LDEzOC41OTQ4MDksMTd6L2RhdGE9ITNtMSE0YjEhNG0yITNtMSExczB4NmFiMGNlZDNlMDA5Y2UyYjoweDEwOTQzZTcwNTllM2FiZGE/aGw9aXQ=",
             "styles": [],
             "colour": "666666",
             "size": 10,
