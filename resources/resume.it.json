@@ -591,13 +591,13 @@
           "top_padding": -38,
           "at_x_position": 280,
           "position": {
-            "text": "QmFjaGVsb3Igb2YgSW50ZXJuYXRpb25hbCBCdXNpbmVzcw==",
+            "text": "TGF1cmVhIGluIEFmZmFyaSBJbnRlcm5hemlvbmFsaQ==",
             "styles": ["bold"],
-            "size": 12,
+            "size": 11,
             "bottom_padding": 14
           },
           "organisation": {
-            "text": "RmxpbmRlcnMgVW5pdmVyc2l0eQ==",
+            "text": "RmxpbmRlcnMgVW5pdmVyc2l0w6A=",
             "styles": ["bold"],
             "size": 11,
             "bottom_padding": 13
@@ -611,7 +611,7 @@
           },
           "location": {
             "text": "QWRlbGFpZGUsIEF1c3RyYWxpYQ==",
-            "link": "aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9tYXBzL3BsYWNlL0AtMzUuMDI0NDk1LDEzOC41NzEzMjgsMTd6L2RhdGE9ITNtMSE0YjEhNG0yITNtMSExczB4NmFiMGQwOTFkNmU5OGQ5ZjoweGYwMzM2NTU0NWJhYzhhMD9obD1lbg==",
+            "link": "aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9tYXBzL3BsYWNlL0AtMzUuMDI0NDk1LDEzOC41NzEzMjgsMTd6L2RhdGE9ITNtMSE0YjEhNG0yITNtMSExczB4NmFiMGQwOTFkNmU5OGQ5ZjoweGYwMzM2NTU0NWJhYzhhMD9obD1pdA==",
             "styles": [],
             "colour": "666666",
             "size": 10,
@@ -634,24 +634,24 @@
         "ryu": {
           "top_padding": 20,
           "position": {
-            "text": "U3R1ZGVudCBFeGNoYW5nZSBQcm9ncmFtbWU=",
+            "text": "U3R1ZGlvIGFsbCdlc3Rlcm8=",
             "styles": ["bold"],
-            "size": 12
+            "size": 11
           },
           "organisation": {
-            "text": "Unl1a29rdSBVbml2ZXJzaXR5",
+            "text": "Unl1a29rdSBVbml2ZXJzaXTDoA==",
             "styles": ["bold"],
             "size": 11
           },
           "period": {
-            "text": "U2VwIDE5OTkgLSBGZWIgMjAwMCB8IA==",
+            "text": "U2V0dCAxOTk5IC0gRmViYnIgMjAwMCB8IA==",
             "styles": [],
             "colour": "666666",
             "size": 10
           },
           "location": {
-            "text": "S3lvdG8sIEphcGFu",
-            "link": "aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9tYXBzL3BsYWNlL0AzNC45NjM3MiwxMzUuNzY2MzM5LDE3ei9kYXRhPSEzbTEhNGIxITRtMiEzbTEhMXMweDYwMDEwZjZhNDljYTlmNDc6MHhkNTUwZjY5NzhmODJjY2FjP2hsPWVu",
+            "text": "S3lvdG8sIEdpYXBwb25l",
+            "link": "aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9tYXBzL3BsYWNlL0AzNC45NjM3MiwxMzUuNzY2MzM5LDE3ei9kYXRhPSEzbTEhNGIxITRtMiEzbTEhMXMweDYwMDEwZjZhNDljYTlmNDc6MHhkNTUwZjY5NzhmODJjY2FjP2hsPWl0",
             "styles": [],
             "colour": "666666",
             "size": 10
