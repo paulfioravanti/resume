@@ -7,7 +7,7 @@
     ],
     "fonts": [
       {
-        "location": "http://ipafont.ipa.go.jp/ipafont/IPAfont00303.php",
+        "location": "https://www.dropbox.com/s/jt84ti04akbyxmr/IPAfont00303.zip?dl=1",
         "filename": "IPAfont00303.zip",
         "files": {
           "normal": "ipamp.ttf",
