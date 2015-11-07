@@ -2,9 +2,6 @@ require 'base64'
 
 module Resume
   class Decoder
-    # Specific 4-letter words to be excluded from Base64 decoding
-    RESERVED_WORDS = ['bold', 'left']
-
     # Base64-encoded values can be found in hash and array values
     # in the JSON, so specifically target those data types for
     # manipulation, and ignore any direct references given to the

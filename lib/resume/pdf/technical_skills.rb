@@ -1,4 +1,3 @@
-require_relative '../decoder'
 require_relative 'entry/heading'
 
 module Resume

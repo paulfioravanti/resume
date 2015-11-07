@@ -52,7 +52,6 @@ module Resume
             allow(ArgumentParser).to receive(:parse)
             allow(ResumeDataFetcher).to \
               receive(:fetch).and_return(resume)
-            allow(Decoder).to receive(:d).with(title).and_return(title)
             allow(I18n).to receive(:locale).and_return(locale)
             allow(DependencyManager).to \
               receive(:new).with(dependencies).

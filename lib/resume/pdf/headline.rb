@@ -1,5 +1,3 @@
-require_relative '../decoder'
-
 module Resume
   module PDF
     class Headline
