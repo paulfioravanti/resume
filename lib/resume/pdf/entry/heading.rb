@@ -7,7 +7,7 @@ module Resume
             pdf,
             top_padding: heading[:top_padding],
             text: heading[:text],
-            styles: heading[:styles].map(&:to_sym),
+            styles: heading[:styles],
             colour: heading[:colour]
           ).generate
         end
