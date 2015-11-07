@@ -28,9 +28,9 @@ module Resume
               and_return(resume_data_file)
           expect(Output).to \
             receive(:plain).with(:gathering_resume_information)
-          allow(JSON).to receive(:parse).with(
-            resume_data_file, symbolize_names: true
-          ).and_return(json)
+          allow(JSON).to \
+            receive(:parse).with(resume_data_file, symbolize_names: true).
+              and_return(json)
         end
 
         it 'parses, decodes, and returns the JSON resume data file' do
