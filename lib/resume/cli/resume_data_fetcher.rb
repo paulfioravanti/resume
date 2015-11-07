@@ -1,6 +1,7 @@
 require 'json'
 require_relative '../file_fetcher'
 require_relative '../output'
+require_relative '../decoder'
 
 module Resume
   module CLI
