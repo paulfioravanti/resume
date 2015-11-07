@@ -4,12 +4,33 @@ module Resume
   class Decoder
     RESERVED_WORDS = ['bold', 'left']
 
+    # Base64-encoded values can be found in hash and array values
+    # in the JSON, so specifically target those data types for
+    # manipulation, and ignore any direct references given to the
+    # keys or values of the JSON hash.
+    def self.decode_content
+      Proc.new do |object|
+        case object
+        when Hash
+          object.each do |key, value|
+            object[key] = decode(value) if encoded?(value)
+          end
+        when Array
+          object.each_with_index do |value, index|
+            object[index] = decode(value) if encoded?(value)
+          end
+        else
+          object
+        end
+      end
+    end
+
     def self.decode(string)
-      return string unless encoded?(string)
       # Force encoding to UTF-8 is needed for strings that had UTF-8
       # characters in them when they were originally encoded
       Base64.strict_decode64(string).force_encoding('utf-8')
     end
+    private_class_method :decode
 
     def self.encoded?(string)
       # Checking whether a string is Base64-encoded is not an
