@@ -9,7 +9,7 @@ module Resume
 
       def self.for(data)
         data[:image] = FileFetcher.fetch(data[:image])
-        data[:link] = Decoder.d(data[:link])
+        data[:link] = data[:link]
         data[:align] = data[:align].to_sym
         new(data)
       end

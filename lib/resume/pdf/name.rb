@@ -8,7 +8,7 @@ module Resume
           pdf,
           font: name[:font],
           size: name[:size],
-          text: Decoder.d(name[:text])
+          text: name[:text]
         ).generate
       end
 

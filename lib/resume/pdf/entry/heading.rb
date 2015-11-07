@@ -8,7 +8,7 @@ module Resume
           new(
             pdf,
             top_padding: heading[:top_padding],
-            text: Decoder.d(heading[:text]),
+            text: heading[:text],
             styles: heading[:styles].map(&:to_sym),
             colour: heading[:colour]
           ).generate

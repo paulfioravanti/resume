@@ -29,7 +29,7 @@ module Resume
 
       def initialize(resume)
         @resume = resume
-        @title = Decoder.d(resume[:title])
+        @title = resume[:title]
         @filename = "#{title}_#{I18n.locale}.pdf"
         @dependency_manager =
           DependencyManager.new(resume[:dependencies])

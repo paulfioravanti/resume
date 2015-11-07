@@ -12,10 +12,31 @@ module Resume
       def fetch
         Output.plain(:gathering_resume_information)
         resume = super
-        JSON.parse(
-          resume.read,
-          symbolize_names: true
-        )
+        result = JSON.parse(resume.read, symbolize_names: true)
+        JSON.recurse_proc(result, &decode_encoded_strings)
+      end
+
+      private
+
+      # Base64-encoded values can be found in hash and array values
+      # in the JSON, so specifically target those data types for
+      # manipulation, and ignore any direct references given to the
+      # keys or values of the JSON hash.
+      def decode_encoded_strings
+        Proc.new do |object|
+          case object
+          when Hash
+            object.each do |key, value|
+              object[key] = Decoder.decode(value)
+            end
+          when Array
+            object.each_with_index do |value, index|
+              object[index] = Decoder.decode(value)
+            end
+          else
+            object
+          end
+        end
       end
     end
   end
