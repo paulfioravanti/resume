@@ -11,18 +11,11 @@ module Resume
           and_return(decoded_string)
     end
 
-    describe '.decode' do
-      it 'strictly decodes the string, forcing UTF-8 encoding' do
-        expect(decoded_string).to receive(:force_encoding).with('utf-8')
-        described_class.decode(encoded_string)
-      end
-    end
-
-    describe '.d' do
-      it 'strictly decodes the string, forcing UTF-8 encoding' do
-        expect(decoded_string).to receive(:force_encoding).with('utf-8')
-        described_class.d(encoded_string)
-      end
-    end
+    # describe '.decode' do
+    #   it 'strictly decodes the string, forcing UTF-8 encoding' do
+    #     expect(decoded_string).to receive(:force_encoding).with('utf-8')
+    #     described_class.decode(encoded_string)
+    #   end
+    # end
   end
 end
