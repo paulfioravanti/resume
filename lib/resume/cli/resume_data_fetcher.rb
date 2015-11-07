@@ -13,7 +13,7 @@ module Resume
         Output.plain(:gathering_resume_information)
         resume = super
         result = JSON.parse(resume.read, symbolize_names: true)
-        JSON.recurse_proc(result, &Decoder.decode_content)
+        JSON.recurse_proc(result, &Decoder.decode)
       end
     end
   end

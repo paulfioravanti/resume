@@ -2,22 +2,23 @@ require 'base64'
 
 module Resume
   class Decoder
+    # Specific 4-letter words to be excluded from Base64 decoding
     RESERVED_WORDS = ['bold', 'left']
 
     # Base64-encoded values can be found in hash and array values
     # in the JSON, so specifically target those data types for
     # manipulation, and ignore any direct references given to the
     # keys or values of the JSON hash.
-    def self.decode_content
+    def self.decode
       Proc.new do |object|
         case object
         when Hash
           object.each do |key, value|
-            object[key] = decode(value) if encoded?(value)
+            object[key] = decode_content(value) if encoded?(value)
           end
         when Array
           object.each_with_index do |value, index|
-            object[index] = decode(value) if encoded?(value)
+            object[index] = decode_content(value) if encoded?(value)
           end
         else
           object
@@ -25,12 +26,12 @@ module Resume
       end
     end
 
-    def self.decode(string)
+    def self.decode_content(string)
       # Force encoding to UTF-8 is needed for strings that had UTF-8
       # characters in them when they were originally encoded
       Base64.strict_decode64(string).force_encoding('utf-8')
     end
-    private_class_method :decode
+    private_class_method :decode_content
 
     def self.encoded?(string)
       # Checking whether a string is Base64-encoded is not an
