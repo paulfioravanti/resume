@@ -3,13 +3,11 @@ require 'resume'
 
 RSpec.describe Resume do
   describe 'constants' do
-    let(:constant_defined) { described_class.const_defined?(const) }
-
-    context 'for VERSION' do
-      let(:const) { :VERSION }
-
-      it 'is present' do
-        expect(constant_defined).to be true
+    [:VERSION, :REMOTE_REPO, :RESERVED_WORDS].each do |const|
+      context "for #{const}" do
+        it 'is defined' do
+          expect(described_class.const_defined?(const)).to be true
+        end
       end
     end
   end

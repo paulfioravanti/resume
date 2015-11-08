@@ -1,5 +1,3 @@
-require_relative '../decoder'
-
 module Resume
   module PDF
     class Headline
@@ -7,9 +5,9 @@ module Resume
         primary_header = headline[:primary]
         new(
           pdf,
-          primary_text: Decoder.d(primary_header[:text]),
+          primary_text: primary_header[:text],
           primary_colour: primary_header[:colour],
-          secondary_text: Decoder.d(headline[:secondary][:text]),
+          secondary_text: headline[:secondary][:text],
           size: headline[:size],
           top_padding: headline[:top_padding]
         ).generate

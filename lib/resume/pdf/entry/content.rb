@@ -1,4 +1,3 @@
-require_relative '../../decoder'
 require_relative '../transparent_link'
 require_relative 'header'
 require_relative 'company_logo'
@@ -39,7 +38,7 @@ module Resume
 
         def summary
           pdf.text(
-            Decoder.d(entry[:summary][:text]),
+            entry[:summary][:text],
             inline_format: true
           )
         end
@@ -49,7 +48,7 @@ module Resume
           cell_style = entry[:cell_style]
           return unless items
           table_data = items.reduce([]) do |data, item|
-            data << ['-', Decoder.d(item)]
+            data << ['-', item]
           end
           pdf.table(
             table_data,

@@ -2,7 +2,6 @@ require 'forwardable'
 require_relative '../settings'
 require_relative '../exceptions'
 require_relative '../output'
-require_relative '../decoder'
 require_relative '../pdf/document'
 require_relative '../file_system'
 require_relative 'argument_parser'
@@ -29,7 +28,7 @@ module Resume
 
       def initialize(resume)
         @resume = resume
-        @title = Decoder.d(resume[:title])
+        @title = resume[:title]
         @filename = "#{title}_#{I18n.locale}.pdf"
         @dependency_manager =
           DependencyManager.new(resume[:dependencies])

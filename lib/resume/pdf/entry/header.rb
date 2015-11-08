@@ -1,5 +1,3 @@
-require_relative '../../decoder'
-
 module Resume
   module PDF
     module Entry
@@ -68,11 +66,11 @@ module Resume
 
         def properties_for(section)
           {
-            text: Decoder.d(section[:text]),
+            text: section[:text],
             styles: section[:styles].map(&:to_sym),
             size: section[:size],
             color: section[:colour],
-            link: section[:link] ? Decoder.d(section[:link]) : nil,
+            link: section[:link],
           }
         end
       end

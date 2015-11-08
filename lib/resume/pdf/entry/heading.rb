@@ -1,5 +1,3 @@
-require_relative '../../decoder'
-
 module Resume
   module PDF
     module Entry
@@ -8,8 +6,8 @@ module Resume
           new(
             pdf,
             top_padding: heading[:top_padding],
-            text: Decoder.d(heading[:text]),
-            styles: heading[:styles].map(&:to_sym),
+            text: heading[:text],
+            styles: heading[:styles],
             colour: heading[:colour]
           ).generate
         end

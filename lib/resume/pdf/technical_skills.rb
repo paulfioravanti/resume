@@ -1,4 +1,3 @@
-require_relative '../decoder'
 require_relative 'entry/heading'
 
 module Resume
@@ -31,8 +30,8 @@ module Resume
 
       def generate_content
         pdf.move_down content[:top_padding]
-        skills = content[:skills].reduce([]) do |entries, entry|
-          entries << [Decoder.d(entry.first), Decoder.d(entry.last)]
+        skills = content[:skills].reduce([]) do |entries, (title, content)|
+          entries << [title, content]
         end
         pdf.table(skills, content[:properties])
       end

@@ -40,36 +40,36 @@
   :path: lib/resume/pdf
   :files:
     - [font.rb, 3, -3]
-    - [name.rb, 4, -3]
-    - [headline.rb, 4, -3]
+    - [name.rb, 2, -3]
+    - [headline.rb, 2, -3]
     - [transparent_link.rb, 2, -3]
-    - [logo.rb, 5, -3]
+    - [logo.rb, 4, -3]
     - [social_media_logo_set.rb, 5, -3]
 :pdf_entry_files:
   :path: lib/resume/pdf/entry
   :files:
-    - [heading.rb, 4, -4]
-    - [header.rb, 5, -4]
+    - [heading.rb, 2, -4]
+    - [header.rb, 3, -4]
     - [company_logo.rb, 5, -4]
-    - [content.rb, 8, -3]
+    - [content.rb, 7, -3]
 :pdf_files_2:
   :path: lib/resume/pdf
   :files:
-    - [technical_skills.rb, 5, -3]
+    - [technical_skills.rb, 4, -3]
     - [employment_history.rb, 5, -3]
     - [education_history.rb, 5, -3]
-    - [options.rb, 5, -3]
+    - [options.rb, 4, -3]
     - [manifest.rb, 11, -3]
-    - [document.rb, 6, -2]
+    - [document.rb, 5, -2]
 :cli_files:
   :path: lib/resume/cli
   :files:
     - [argument_parser.rb, 4, -3]
-    - [resume_data_fetcher.rb, 6, -3]
+    - [resume_data_fetcher.rb, 7, -3]
     - [font_downloader.rb, 8, -3]
     - [gem_installer.rb, 6, -3]
     - [dependency_manager.rb, 8, -3]
-    - [application.rb, 13, -1]
+    - [application.rb, 12, -1]
 :spec_files:
   :path: spec
   :files:

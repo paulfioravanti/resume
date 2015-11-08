@@ -17,6 +17,7 @@ module Resume
           )
         end
         let(:resume_data_file) { spy('resume_data_file') }
+        let(:json) { instance_double('Hash', :json_result) }
 
         before do
           allow(I18n).to receive(:locale).and_return(:en)
@@ -27,12 +28,14 @@ module Resume
               and_return(resume_data_file)
           expect(Output).to \
             receive(:plain).with(:gathering_resume_information)
+          allow(JSON).to \
+            receive(:parse).with(resume_data_file, symbolize_names: true).
+              and_return(json)
         end
 
-        it 'parses and returns the JSON resume data file' do
-          expect(JSON).to receive(:parse).with(
-            resume_data_file, symbolize_names: true
-          )
+        it 'parses, decodes, and returns the JSON resume data file' do
+          expect(JSON).to \
+            receive(:recurse_proc).with(json, &Decoder.decode)
           described_class.fetch
         end
       end
