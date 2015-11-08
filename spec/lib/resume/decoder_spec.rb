@@ -9,11 +9,9 @@ module Resume
         let(:object) { { key: value } }
 
         context 'when hash value is a Base64 string' do
-          let(:decoded_object) { { key: decoded_value } }
-
           context 'when hash value is not a reserved word' do
             let(:value) { 'RW5jb2RlZA==' }
-            let(:decoded_value) { 'Encoded' }
+            let(:decoded_object) { { key: 'Encoded' } }
 
             it 'decodes the hash value' do
               expect(decode_object).to eq(decoded_object)
@@ -22,14 +20,13 @@ module Resume
 
           context 'when hash value is a reserved word' do
             let(:value) { 'bold' }
-            let(:decoded_value) { value }
 
             before do
               stub_const('Resume::RESERVED_WORDS', [value])
             end
 
             it 'returns the object unchanged' do
-              expect(decode_object).to eq(decoded_object)
+              expect(decode_object).to eq(object)
             end
           end
         end
@@ -47,11 +44,10 @@ module Resume
         let(:object) { [value] }
 
         context 'when array value is a Base64 string' do
-          let(:decoded_object) { [decoded_value] }
 
           context 'when array value is not a reserved word' do
             let(:value) { 'RW5jb2RlZA==' }
-            let(:decoded_value) { 'Encoded' }
+            let(:decoded_object) { ['Encoded'] }
 
             it 'decodes the array value' do
               expect(decode_object).to eq(decoded_object)
@@ -60,14 +56,13 @@ module Resume
 
           context 'when array value is a reserved word' do
             let(:value) { 'bold' }
-            let(:decoded_value) { value }
 
             before do
               stub_const('Resume::RESERVED_WORDS', [value])
             end
 
             it 'returns the object unchanged' do
-              expect(decode_object).to eq(decoded_object)
+              expect(decode_object).to eq(object)
             end
           end
         end
