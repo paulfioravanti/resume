@@ -7,8 +7,6 @@ module Resume
                   :link_overlay_start, :bars, :size, :origin, :at, :y_start
 
       def self.for(data)
-        data[:image] = FileFetcher.fetch(data[:image])
-        data[:align] = data[:align].to_sym
         new(data)
       end
 

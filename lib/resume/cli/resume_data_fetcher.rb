@@ -14,10 +14,7 @@ module Resume
         Output.plain(:gathering_resume_information)
         resume = super
         result = JSON.parse(resume.read, symbolize_names: true)
-        json = JSON.recurse_proc(result, &Decoder.decode)
-        json[:options][:background_image] =
-          FileFetcher.fetch(json[:options][:background_image])
-        json
+        JSON.recurse_proc(result, &Decoder.decode)
       end
     end
   end

@@ -67,7 +67,7 @@ module Resume
         def properties_for(section)
           {
             text: section[:text],
-            styles: section[:styles].map(&:to_sym),
+            styles: section[:styles],
             size: section[:size],
             color: section[:colour],
             link: section[:link],
