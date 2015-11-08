@@ -43,7 +43,7 @@
     - [name.rb, 2, -3]
     - [headline.rb, 2, -3]
     - [transparent_link.rb, 2, -3]
-    - [logo.rb, 4, -3]
+    - [logo.rb, 2, -3]
     - [social_media_logo_set.rb, 5, -3]
 :pdf_entry_files:
   :path: lib/resume/pdf/entry
@@ -58,7 +58,7 @@
     - [technical_skills.rb, 4, -3]
     - [employment_history.rb, 5, -3]
     - [education_history.rb, 5, -3]
-    - [options.rb, 4, -3]
+    - [options.rb, 2, -3]
     - [manifest.rb, 11, -3]
     - [document.rb, 5, -2]
 :cli_files:

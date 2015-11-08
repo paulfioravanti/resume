@@ -1,5 +1,3 @@
-require_relative '../file_fetcher'
-
 module Resume
   module PDF
     class Options
