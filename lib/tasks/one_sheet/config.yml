@@ -29,7 +29,7 @@
   :path: lib/resume
   :files:
     - [colours.rb, 1, -2]
-    - [decoder.rb, 3, -2]
+    - [parser.rb, 3, -2]
     - [exceptions.rb, 1, -2]
     - [exception_suppressor.rb, 1, -2]
     - [file_system.rb, 4, -2]
@@ -78,7 +78,7 @@
   :path: spec/lib/resume
   :files:
     - [colours_spec.rb, 3, -2]
-    - [decoder_spec.rb, 3, -2]
+    - [parser_spec.rb, 3, -2]
     - [exceptions_spec.rb, 3, -2]
     - [exception_suppressor_spec.rb, 3, -2]
     - [file_fetcher_spec.rb, 3, -2]

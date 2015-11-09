@@ -1,12 +1,12 @@
 require 'base64'
 
 module Resume
-  class Decoder
+  class Parser
     # Base64-encoded values can be found in hash and array values
     # in the JSON, so specifically target those data types for
     # manipulation, and ignore any direct references given to the
     # keys or values of the JSON hash.
-    def self.decode
+    def self.parse
       Proc.new do |object|
         case object
         when Hash

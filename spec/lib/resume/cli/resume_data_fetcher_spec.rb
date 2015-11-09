@@ -35,7 +35,7 @@ module Resume
 
         it 'parses, decodes, and returns the JSON resume data file' do
           expect(JSON).to \
-            receive(:recurse_proc).with(json, &Decoder.decode)
+            receive(:recurse_proc).with(json, &Parser.parse)
           described_class.fetch
         end
       end

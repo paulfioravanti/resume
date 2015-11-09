@@ -1,7 +1,7 @@
 require 'json'
 require_relative '../file_fetcher'
 require_relative '../output'
-require_relative '../decoder'
+require_relative '../parser'
 
 module Resume
   module CLI
@@ -14,7 +14,7 @@ module Resume
         Output.plain(:gathering_resume_information)
         resume = super
         result = JSON.parse(resume.read, symbolize_names: true)
-        JSON.recurse_proc(result, &Decoder.decode)
+        JSON.recurse_proc(result, &Parser.parse)
       end
     end
   end

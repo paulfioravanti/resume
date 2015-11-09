@@ -1,9 +1,9 @@
-require 'resume/decoder'
+require 'resume/parser'
 
 module Resume
-  RSpec.describe Decoder do
-    describe '.decode' do
-      let(:decode_object) { described_class.decode.call(object) }
+  RSpec.describe Parser do
+    describe '.parse' do
+      let(:decode_object) { described_class.parse.call(object) }
 
       context 'when object is a Hash' do
         let(:object) { { key: value } }
