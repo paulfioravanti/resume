@@ -17,7 +17,8 @@ module Resume
     end
 
     def self.tmpfile_path(filename)
-      Pathname.new(Dir.tmpdir).join(filename)
+      # Ensure that the ?dl=1 parameter is removed
+      Pathname.new(Dir.tmpdir).join(filename.sub(/\?.+\z/, ''))
     end
   end
 end

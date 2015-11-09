@@ -11,15 +11,14 @@ module Resume
         case object
         when Hash
           object.each do |key, value|
-            case
-            when encoded?(value)
-              object[key] = decode_content(value)
-            when uri?(value)
-              object[key] = FileFetcher.fetch(value)
-            when key == :align
+            if key == :align
               # Prawn specifically requires :align values to
               # be symbols otherwise it errors out
               object[key] = value.to_sym
+            else
+              value = decode_content(value) if encoded?(value)
+              value = FileFetcher.fetch(value) if asset?(value)
+              object[key] = value
             end
           end
         when Array
@@ -57,12 +56,9 @@ module Resume
     end
     private_class_method :base64_string?
 
-    def self.uri?(string)
-      uri = URI.parse(string)
-      %w(http https).include?(uri.scheme)
-    rescue URI::BadURIError, URI::InvalidURIError
-      false
+    def self.asset?(string)
+      string =~ %r{dropbox}
     end
-    private_class_method :uri?
+    private_class_method :asset?
   end
 end
