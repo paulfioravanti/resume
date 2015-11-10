@@ -16,8 +16,12 @@ module Resume
               # be symbols otherwise it errors out
               object[key] = value.to_sym
             else
-              value = decode_content(value) if encoded?(value)
-              value = FileFetcher.fetch(value) if asset?(value)
+              if encoded?(value)
+                value = decode_content(value)
+              end
+              if asset?(value) && key != :location
+                value = FileFetcher.fetch(value)
+              end
               object[key] = value
             end
           end
