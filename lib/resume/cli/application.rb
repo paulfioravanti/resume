@@ -13,6 +13,8 @@ module Resume
     class Application
       extend Forwardable
 
+      attr_accessor :resume
+
       def self.start
         Settings.configure
         catch(:halt) do
@@ -28,8 +30,6 @@ module Resume
 
       def initialize(resume)
         @resume = resume
-        @title = resume[:title]
-        @filename = "#{title}_#{I18n.locale}.pdf"
         @dependency_manager =
           DependencyManager.new(resume[:dependencies])
       end
@@ -47,12 +47,14 @@ module Resume
 
       private
 
-      attr_reader :resume, :title, :filename
+      attr_accessor :title, :filename
 
       def install_dependencies
         request_dependency_installation
         if permission_granted?
           Output.success(:thank_you_kindly)
+          self.resume = JSON.recurse_proc(resume, &Parser.parse)
+          self.resume[:decoded] = true
           install
         else
           fail DependencyInstallationPermissionError
@@ -60,7 +62,13 @@ module Resume
       end
 
       def generate_resume
+        # TODO: Extract this out into a service class
+        unless resume[:decoded]
+          self.resume = JSON.recurse_proc(resume, &Parser.parse)
+        end
         Output.plain(:generating_pdf)
+        self.title = resume[:title]
+        self.filename = "#{title}_#{I18n.locale}.pdf"
         PDF::Document.generate(resume, title, filename)
         Output.success(:resume_generated_successfully)
       end

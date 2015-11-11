@@ -27,15 +27,12 @@ module Resume
       def fonts_successfully_downloaded?
         return true if fonts.none?
         fonts.all? do |font|
-          Output.plain([
-            :downloading_font,
-            { filename: font[:filename], location: font[:location] }
-          ])
-          download_font_file(font)
+          # Output.plain(:downloading_font)
+          # download_font_file(font)
           extract_fonts(font)
         end
-      rescue NetworkConnectionError
-        false
+      # rescue NetworkConnectionError
+      #   false
       end
 
       private
@@ -44,13 +41,13 @@ module Resume
         files.all? { |file| File.file?(FileSystem.tmpfile_path(file)) }
       end
 
-      def download_font_file(font)
-        FileFetcher.fetch(
-          font[:location],
-          filename: font[:filename],
-          mode: 'wb'
-        )
-      end
+      # def download_font_file(font)
+      #   FileFetcher.fetch(
+      #     font[:location],
+      #     filename: font[:filename],
+      #     mode: 'wb'
+      #   )
+      # end
 
       def extract_fonts(font)
         require 'zip'

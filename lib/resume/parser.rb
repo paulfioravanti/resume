@@ -1,4 +1,6 @@
 require 'base64'
+require_relative 'output'
+require_relative 'file_fetcher'
 
 module Resume
   class Parser
@@ -19,8 +21,9 @@ module Resume
               if encoded?(value)
                 value = decode_content(value)
               end
-              if asset?(value) && key != :location
-                value = FileFetcher.fetch(value)
+              if asset?(value)
+                Output.plain(:downloading_font) if key == :location
+                value = FileFetcher.fetch(value, mode: 'wb')
               end
               object[key] = value
             end
