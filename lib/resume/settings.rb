@@ -22,9 +22,7 @@ module Resume
       I18n.available_locales = [:en, :it, :ja]
       I18n.available_locales.each do |locale|
         I18n.load_path += [
-          FileFetcher.fetch(
-            "lib/resume/locales/#{locale}.yml.erb", mode: 'w'
-          )
+          FileFetcher.fetch("lib/resume/locales/#{locale}.yml.erb")
         ]
       end
     rescue LoadError

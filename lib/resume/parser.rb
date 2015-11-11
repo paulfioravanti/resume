@@ -23,7 +23,7 @@ module Resume
               end
               if asset?(value)
                 Output.plain(:downloading_font) if key == :location
-                value = FileFetcher.fetch(value, mode: 'wb')
+                value = FileFetcher.fetch(value)
               end
               object[key] = value
             end

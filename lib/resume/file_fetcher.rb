@@ -7,18 +7,17 @@ require_relative 'file_system'
 
 module Resume
   class FileFetcher
-    def self.fetch(path, filename: '', mode: 'w')
+    def self.fetch(path, filename: '')
       pathname = Pathname.new(path)
       filename = pathname.basename.to_path if filename.empty?
-      new(pathname, filename, mode).fetch
+      new(pathname, filename).fetch
     end
 
     private_class_method :new
 
-    def initialize(pathname, filename, mode)
+    def initialize(pathname, filename)
       @pathname = pathname
       @filename = filename
-      @mode = mode
     end
 
     def fetch
@@ -27,7 +26,7 @@ module Resume
 
     private
 
-    attr_reader :pathname, :filename, :mode
+    attr_reader :pathname, :filename
 
     def local_file
       File.open(pathname) if pathname.file?
@@ -38,7 +37,7 @@ module Resume
     end
 
     def remote_file
-      File.open(tmpfile_path, mode) do |file|
+      File.open(tmpfile_path, 'wb') do |file|
         Kernel.open(remote_file_path) do |uri|
           file.write(uri.read)
         end

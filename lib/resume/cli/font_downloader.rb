@@ -41,14 +41,6 @@ module Resume
         files.all? { |file| File.file?(FileSystem.tmpfile_path(file)) }
       end
 
-      # def download_font_file(font)
-      #   FileFetcher.fetch(
-      #     font[:location],
-      #     filename: font[:filename],
-      #     mode: 'wb'
-      #   )
-      # end
-
       def extract_fonts(font)
         require 'zip'
         Zip::File.open(FileSystem.tmpfile_path(font[:filename])) do |file|
