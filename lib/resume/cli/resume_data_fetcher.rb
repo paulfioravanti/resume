@@ -13,9 +13,7 @@ module Resume
       def fetch
         Output.plain(:gathering_resume_information)
         resume = super
-        # result = JSON.parse(resume.read, symbolize_names: true)
         JSON.parse(resume.read, symbolize_names: true)
-        # JSON.recurse_proc(result, &Parser.parse)
       end
     end
   end

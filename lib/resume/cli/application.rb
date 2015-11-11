@@ -4,6 +4,7 @@ require_relative '../exceptions'
 require_relative '../output'
 require_relative '../pdf/document'
 require_relative '../file_system'
+require_relative '../parser'
 require_relative 'argument_parser'
 require_relative 'resume_data_fetcher'
 require_relative 'dependency_manager'
@@ -47,14 +48,12 @@ module Resume
 
       private
 
-      attr_accessor :title, :filename
+      attr_accessor :filename
 
       def install_dependencies
         request_dependency_installation
         if permission_granted?
           Output.success(:thank_you_kindly)
-          self.resume = JSON.recurse_proc(resume, &Parser.parse)
-          self.resume[:decoded] = true
           install
         else
           fail DependencyInstallationPermissionError
@@ -62,13 +61,10 @@ module Resume
       end
 
       def generate_resume
-        # TODO: Extract this out into a service class
-        unless resume[:decoded]
-          self.resume = JSON.recurse_proc(resume, &Parser.parse)
-        end
-        Output.plain(:generating_pdf)
-        self.title = resume[:title]
+        self.resume = Parser.parse(resume)
+        title = resume[:title]
         self.filename = "#{title}_#{I18n.locale}.pdf"
+        Output.plain(:generating_pdf)
         PDF::Document.generate(resume, title, filename)
         Output.success(:resume_generated_successfully)
       end
