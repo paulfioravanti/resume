@@ -4,7 +4,7 @@ require_relative 'output'
 require_relative 'file_fetcher'
 
 module Resume
-  class Parser
+  class ContentParser
     def self.decode_content(string)
       # Force encoding to UTF-8 is needed for strings that had UTF-8
       # characters in them when they were originally encoded
@@ -30,7 +30,7 @@ module Resume
               object[key] = value.to_sym
             else
               if encoded?(value)
-                value = Parser.decode_content(value)
+                value = ContentParser.decode_content(value)
               end
               if asset?(value)
                 next if key == :location
@@ -42,7 +42,7 @@ module Resume
         when Array
           object.each_with_index do |value, index|
            if encoded?(value)
-             object[index] = Parser.decode_content(value)
+             object[index] = ContentParser.decode_content(value)
            end
           end
         else

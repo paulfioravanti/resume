@@ -4,7 +4,7 @@ require_relative '../exceptions'
 require_relative '../output'
 require_relative '../pdf/document'
 require_relative '../file_system'
-require_relative '../parser'
+require_relative '../content_parser'
 require_relative 'argument_parser'
 require_relative 'resume_data_fetcher'
 require_relative 'dependency_manager'
@@ -61,7 +61,7 @@ module Resume
       end
 
       def generate_resume
-        self.resume = Parser.parse(resume)
+        self.resume = ContentParser.parse(resume)
         title = resume[:title]
         self.filename = "#{title}_#{I18n.locale}.pdf"
         Output.plain(:generating_pdf)

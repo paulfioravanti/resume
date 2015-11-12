@@ -1,7 +1,7 @@
-require 'resume/parser'
+require 'resume/content_parser'
 
 module Resume
-  RSpec.describe Parser do
+  RSpec.describe ContentParser do
     describe '.parse' do
       let(:decode_object) { described_class.parse.call(object) }
 

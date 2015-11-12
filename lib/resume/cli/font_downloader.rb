@@ -3,6 +3,7 @@ require_relative '../output'
 require_relative '../exceptions'
 require_relative '../file_system'
 require_relative '../file_fetcher'
+require_relative '../content_parser'
 
 module Resume
   module CLI
@@ -43,7 +44,7 @@ module Resume
 
       def download_font_file(font_location)
         FileFetcher.fetch(
-          Parser.decode_content(font_location)
+          ContentParser.decode_content(font_location)
         )
       end
 
