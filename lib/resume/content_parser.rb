@@ -2,6 +2,7 @@ require 'json'
 require 'base64'
 require_relative 'output'
 require_relative 'file_fetcher'
+require_relative 'file_system'
 
 module Resume
   class ContentParser
@@ -28,12 +29,18 @@ module Resume
               # Prawn specifically requires :align values to
               # be symbols otherwise it errors out
               object[key] = value.to_sym
+            elsif key == :font && value.is_a?(Hash)
+              [:normal, :bold].each do |property|
+                if value.has_key?(property)
+                  value[property] =
+                    FileSystem.tmpfile_path(value[property])
+                end
+              end
             else
               if encoded?(value)
                 value = ContentParser.decode_content(value)
               end
               if asset?(value)
-                next if key == :location
                 value = FileFetcher.fetch(value)
               end
               object[key] = value
