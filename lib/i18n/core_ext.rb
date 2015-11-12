@@ -3,7 +3,8 @@ require 'erb'
 # The Ruby I18n module doesn't allow for ERB-interpolated YAML files
 # to be used by default, so adding this method is the least intrusive
 # way to be able to do so.
-# Method implementation is based off of the load_yml method
+# Method implementation based off I18n::Backend::Base#load_yml:
+# https://github.com/svenfuchs/i18n/blob/master/lib/i18n/backend/base.rb#L180
 module I18n
   module Backend
     module Base
