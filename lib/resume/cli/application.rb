@@ -14,8 +14,6 @@ module Resume
     class Application
       extend Forwardable
 
-      attr_accessor :resume
-
       def self.start
         Settings.configure
         catch(:halt) do
@@ -48,7 +46,7 @@ module Resume
 
       private
 
-      attr_accessor :filename
+      attr_accessor :resume, :filename
 
       def install_dependencies
         request_dependency_installation
