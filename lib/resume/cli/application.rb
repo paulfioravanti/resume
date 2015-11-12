@@ -1,5 +1,5 @@
 require 'forwardable'
-require_relative '../settings'
+require_relative 'settings'
 require_relative '../exceptions'
 require_relative '../output'
 require_relative '../pdf/document'
