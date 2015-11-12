@@ -46,7 +46,7 @@ module Resume
 
       private
 
-      attr_accessor :resume, :filename
+      attr_accessor :resume, :title, :filename
 
       def install_dependencies
         request_dependency_installation
@@ -59,12 +59,16 @@ module Resume
       end
 
       def generate_resume
-        self.resume = ContentParser.parse(resume)
-        title = resume[:title]
-        self.filename = "#{title}_#{I18n.locale}.pdf"
+        prepare_resume_data
         Output.plain(:generating_pdf)
         PDF::Document.generate(resume, title, filename)
         Output.success(:resume_generated_successfully)
+      end
+
+      def prepare_resume_data
+        self.resume = ContentParser.parse(resume)
+        self.title = resume[:title]
+        self.filename = "#{title}_#{I18n.locale}.pdf"
       end
 
       def open_resume
