@@ -1,6 +1,10 @@
 module Resume
   module Colours
-    private
+    def self.extended(base)
+      instance_methods(false).each do |method|
+        base.send(:private_class_method, method)
+      end
+    end
 
     def red(text)
       colourize(text, colour_code: 31)

@@ -4,17 +4,16 @@ module Resume
   RSpec.describe Colours do
     let(:colourable) do
       Class.new do
-        include Colours
+        extend Colours
 
-        def red_text(text); red(text); end
+        def self.red_text(text); red(text); end
 
-        def green_text(text); green(text); end
+        def self.green_text(text); green(text); end
 
-        def yellow_text(text); yellow(text); end
+        def self.yellow_text(text); yellow(text); end
 
-        def cyan_text(text); cyan(text); end
-
-      end.new
+        def self.cyan_text(text); cyan(text); end
+      end
     end
     let(:text) { 'Hello' }
 
