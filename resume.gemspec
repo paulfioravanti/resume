@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'bundler', '~> 1.10'
   gem.add_development_dependency 'rake', '~> 10.4'
-  gem.add_development_dependency 'rspec', '~> 3.3'
+  gem.add_development_dependency 'rspec', '~> 3.4'
   gem.add_development_dependency 'guard-rspec', '~> 4.6'
   gem.add_development_dependency 'pry-byebug', '~> 3.1'
   gem.add_development_dependency 'rubygems-tasks', '~> 0.2'
@@ -26,7 +26,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'kramdown', '~> 1.8'
   gem.add_development_dependency 'fuubar', '2.0.0'
   gem.add_development_dependency 'simplecov', '~> 0.10'
-  gem.add_development_dependency 'reek', '~> 3.0'
+  gem.add_development_dependency 'reek', '~> 3.6'
   gem.add_development_dependency 'codeclimate-test-reporter', '~> 0.4'
   gem.add_development_dependency 'i18n', '~> 0.7'
 end
