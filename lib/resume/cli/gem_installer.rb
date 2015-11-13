@@ -1,6 +1,6 @@
-require_relative '../exceptions'
 require_relative '../output'
-require_relative '../exception_suppressor'
+require_relative 'exceptions'
+require_relative 'exception_suppressor'
 
 module Resume
   module CLI

@@ -8,8 +8,9 @@ end
 require 'rspec'
 require 'open-uri'
 require 'resume'
-require 'resume/settings'
-require 'resume/file_fetcher'
+require 'resume/cli/settings'
+require 'resume/cli/content_parser'
+require 'resume/cli/file_fetcher'
 require 'resume/output'
 
 module Resume
@@ -19,7 +20,7 @@ module Resume
     config.disable_monkey_patching!
     config.before(:suite) do
       begin
-        Settings.configure
+        CLI::Settings.configure
         require 'prawn'
         require 'prawn/table'
         # Grab the resume background image.  This serves two purposes:
@@ -29,8 +30,11 @@ module Resume
         # If the file is fetched locally, chances are high that the
         # resume has already been generated once and there won't be
         # a need to fetch the resources again.
-        FileFetcher.fetch(
-          'http://farm6.staticflickr.com/5453/8801916021_3ac1df6072_o_d.jpg'
+        CLI::FileFetcher.fetch(
+          CLI::ContentParser.decode_content(
+            "aHR0cHM6Ly9kbC5kcm9wYm94dXNlcmNvbnRlbnQuY29tL3UvNjg3"\
+            "ODA1Mi9yZXN1bWVfYXNzZXRzL2JhY2tncm91bmQuanBnP2RsPTE="
+          )
         )
       rescue DependencyPrerequisiteError => e
         Output.messages(e.messages)

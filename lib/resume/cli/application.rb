@@ -1,12 +1,13 @@
 require 'forwardable'
-require_relative '../settings'
-require_relative '../exceptions'
 require_relative '../output'
 require_relative '../pdf/document'
-require_relative '../file_system'
+require_relative 'settings'
 require_relative 'argument_parser'
 require_relative 'resume_data_fetcher'
+require_relative 'exceptions'
 require_relative 'dependency_manager'
+require_relative 'content_parser'
+require_relative 'file_system'
 
 module Resume
   module CLI
@@ -28,8 +29,6 @@ module Resume
 
       def initialize(resume)
         @resume = resume
-        @title = resume[:title]
-        @filename = "#{title}_#{I18n.locale}.pdf"
         @dependency_manager =
           DependencyManager.new(resume[:dependencies])
       end
@@ -47,7 +46,7 @@ module Resume
 
       private
 
-      attr_reader :resume, :title, :filename
+      attr_accessor :resume, :title, :filename
 
       def install_dependencies
         request_dependency_installation
@@ -60,9 +59,16 @@ module Resume
       end
 
       def generate_resume
+        prepare_resume_data
         Output.plain(:generating_pdf)
         PDF::Document.generate(resume, title, filename)
         Output.success(:resume_generated_successfully)
+      end
+
+      def prepare_resume_data
+        self.resume = ContentParser.parse(resume)
+        self.title = resume[:title]
+        self.filename = "#{title}_#{I18n.locale}.pdf"
       end
 
       def open_resume

@@ -1,8 +1,9 @@
 require 'tmpdir'
 require_relative '../output'
-require_relative '../exceptions'
-require_relative '../file_system'
-require_relative '../file_fetcher'
+require_relative 'exceptions'
+require_relative 'file_system'
+require_relative 'file_fetcher'
+require_relative 'content_parser'
 
 module Resume
   module CLI
@@ -27,11 +28,8 @@ module Resume
       def fonts_successfully_downloaded?
         return true if fonts.none?
         fonts.all? do |font|
-          Output.plain([
-            :downloading_font,
-            { filename: font[:filename], location: font[:location] }
-          ])
-          download_font_file(font)
+          Output.plain(:downloading_font)
+          download_font_file(font[:location])
           extract_fonts(font)
         end
       rescue NetworkConnectionError
@@ -44,11 +42,9 @@ module Resume
         files.all? { |file| File.file?(FileSystem.tmpfile_path(file)) }
       end
 
-      def download_font_file(font)
+      def download_font_file(font_location)
         FileFetcher.fetch(
-          font[:location],
-          filename: font[:filename],
-          mode: 'wb'
+          ContentParser.decode_content(font_location)
         )
       end
 

@@ -1,23 +1,4 @@
 en:
-  usage: 'Usage: ./bin/resume [options]'
-  specific_options: 'Specific options:'
-  common_options: 'Common options:'
-  locale_switch_short: -l
-  locale_switch_long: --locale LOCALE
-  locale_switch_description:
-    Select the locale of the resume (<%= I18n.available_locales.join(', ') %>)
-  help_switch_short: -h
-  help_switch_long: --help
-  help_switch_description: Show this message
-  version_switch_short: -v
-  version_switch_long: --version
-  version_switch_description: Show version
-  locale_is_not_supported: "Locale '%{specified_locale}' is not supported."
-  supported_locales_are:
-    'Supported locales are: <%= I18n.available_locales.join(', ') %>'
-  you_have_some_invalid_options: You have some invalid options.
-  you_have_a_missing_argument:
-    You have a missing argument in one of your options.
   gathering_resume_information: Gathering resume information...
   cant_connect_to_the_internet: Can't connect to the internet.
   please_check_your_network_settings:
@@ -30,10 +11,7 @@ en:
   may_i_please_install_them: 'May I please install them? (Y/N) '
   thank_you_kindly: 'Thank you kindly :-)'
   installing_ruby_gems: Installing Ruby gems...
-  downloading_font: |
-    Downloading %{filename} from
-    %{location}
-    This may take a while...
+  downloading_font: Downloading font file. This may take a while...
   dependencies_successfully_installed: Dependencies successfully installed.
   dependency_installation_failed: |-
     Sorry, for some reason I wasn't able to
