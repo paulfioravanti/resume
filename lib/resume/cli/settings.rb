@@ -1,6 +1,6 @@
 require_relative '../../i18n/core_ext'
-require_relative '../exceptions'
-require_relative '../exception_suppressor'
+require_relative 'exceptions'
+require_relative 'exception_suppressor'
 require_relative 'file_fetcher'
 
 module Resume

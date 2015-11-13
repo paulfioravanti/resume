@@ -2,7 +2,7 @@ require 'open-uri'
 require 'socket'
 require 'tmpdir'
 require 'pathname'
-require_relative '../exceptions'
+require_relative 'exceptions'
 require_relative 'file_system'
 
 module Resume

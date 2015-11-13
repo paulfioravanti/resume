@@ -1,5 +1,5 @@
 require 'optparse'
-require_relative '../exceptions'
+require_relative 'exceptions'
 
 module Resume
   module CLI
