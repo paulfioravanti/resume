@@ -40,7 +40,7 @@ module Resume
                 and_return(bold_font_filepath)
           end
 
-          context 'when required font file is available on the system' do
+          context 'when required font file available on the system' do
             before do
               allow(File).to \
                 receive(:file?).with(normal_font_filepath).
@@ -56,7 +56,7 @@ module Resume
             end
           end
 
-          context 'when required font file is missing from the system' do
+          context 'when required font file missing from the system' do
             before do
               allow(File).to \
                 receive(:file?).with(normal_font_filepath).
@@ -110,7 +110,11 @@ module Resume
 
         context 'when there are font dependencies' do
           let(:font_location) do
-            'http://ipafont.ipa.go.jp/ipafont/IPAfont00303.php'
+            "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy94eHg"\
+            "vZm9udHMuemlwP2RsPTE="
+          end
+          let(:decoded_font_location) do
+            'https://www.dropbox.com/s/xxx/fonts.zip?dl=1'
           end
           let(:filename) { 'IPAfont00303.zip' }
           let(:normal_font_name) { 'ipamp.ttf' }
@@ -127,7 +131,7 @@ module Resume
           end
           let(:fonts) { [font] }
 
-          context 'when all fonts are successfully downloaded and extracted' do
+          context 'all fonts successfully downloaded and extracted' do
             # For the most part, mocking this out is complete madness,
             # but I didn't want the test suite to be dependent on the
             # rubyzip gem since it's not used to generate all resumes
@@ -150,12 +154,10 @@ module Resume
             let(:bold_font_filepath) { "/tmp/#{bold_font_name}" }
 
             before do
+              expect(Output).to \
+                receive(:plain).with(:downloading_font)
               expect(FileFetcher).to \
-                receive(:fetch).with(
-                  font_location,
-                  filename: filename,
-                  mode: 'wb'
-                )
+                receive(:fetch).with(decoded_font_location)
               allow(FileSystem).to \
                 receive(:tmpfile_path).with(filename).
                   and_return(font_file_filepath)
@@ -169,11 +171,6 @@ module Resume
               allow(FileSystem).to \
                 receive(:tmpfile_path).with(bold_font_name).
                   and_return(bold_font_filepath)
-              expect(Output).to \
-                receive(:plain).with([
-                  :downloading_font,
-                  { filename: filename, location: font_location }
-                ])
               expect(normal_font_file).to \
                 receive(:extract).
                   with(normal_font_filepath) do |*args, &block|
@@ -193,14 +190,11 @@ module Resume
 
           context 'when an error occurs during font download' do
             before do
-              allow(font_downloader).to \
-                receive(:download_font_file).with(font).
-                  and_raise(NetworkConnectionError)
               expect(Output).to \
-                receive(:plain).with([
-                  :downloading_font,
-                  { filename: filename, location: font_location }
-                ])
+                receive(:plain).with(:downloading_font)
+              allow(font_downloader).to \
+                receive(:download_font_file).with(font_location).
+                  and_raise(NetworkConnectionError)
             end
 
             it 'returns false' do
