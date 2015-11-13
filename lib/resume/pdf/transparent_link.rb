@@ -5,8 +5,6 @@ module Resume
         base.send(:private_class_method, :transparent_link)
       end
 
-      private
-
       def transparent_link(pdf, logo)
         pdf.transparent(0) do
           pdf.formatted_text(
