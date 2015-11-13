@@ -1,4 +1,3 @@
-require_relative '../../i18n/core_ext'
 require_relative 'exceptions'
 require_relative 'exception_suppressor'
 require_relative 'file_fetcher'
@@ -18,12 +17,10 @@ module Resume
 
       def self.configure_i18n
         require 'i18n'
-        require 'i18n/backend'
-        require 'i18n/backend/base'
         I18n.available_locales = [:en, :it, :ja]
         I18n.available_locales.each do |locale|
           I18n.load_path += [
-            FileFetcher.fetch("lib/resume/locales/#{locale}.yml.erb")
+            FileFetcher.fetch("lib/resume/locales/#{locale}.yml")
           ]
         end
       rescue LoadError
