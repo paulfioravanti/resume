@@ -2,12 +2,12 @@ require 'forwardable'
 require_relative '../output'
 require_relative '../pdf/document'
 require_relative 'settings'
-require_relative 'exceptions'
-require_relative 'file_system'
-require_relative 'content_parser'
 require_relative 'argument_parser'
 require_relative 'resume_data_fetcher'
+require_relative 'exceptions'
 require_relative 'dependency_manager'
+require_relative 'content_parser'
+require_relative 'file_system'
 
 module Resume
   module CLI
