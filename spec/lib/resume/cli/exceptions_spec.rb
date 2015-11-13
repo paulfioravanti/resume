@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'resume/cli/exceptions'
 
 module Resume
@@ -78,11 +79,9 @@ module Resume
       describe '#messages' do
         let(:messages) do
           {
-            error: [
-              :locale_is_not_supported,
-              { specified_locale: locale }
-            ],
-            warning: :supported_locales_are
+            raw_error: "Locale '#{locale}' is not supported",
+            raw_warning: "Supported locales are: "\
+                         "#{I18n.available_locales.join(', ')}"
           }
         end
 
@@ -99,7 +98,7 @@ module Resume
       describe '#messages' do
         let(:messages) do
           {
-            error: :you_have_some_invalid_options,
+            raw_error: 'You have some invalid options.',
             raw: options
           }
         end
@@ -117,7 +116,8 @@ module Resume
       describe '#messages' do
         let(:messages) do
           {
-            error: :you_have_a_missing_argument,
+            raw_error: "You have a missing argument in "\
+                       "one of your options.",
             raw: options
           }
         end
