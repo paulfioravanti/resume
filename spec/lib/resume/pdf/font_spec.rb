@@ -13,17 +13,17 @@ module Resume
           )
         end
         let(:font_name) { 'My Font' }
-        let(:normal_font_file) { 'normal.ttf' }
-        let(:bold_font_file) { 'bold.ttf' }
+        let(:normal_font_file_path) { "/tmp/normal.ttf" }
+        let(:bold_font_file_path) { "/tmp/bold.ttf" }
         let(:font) do
           {
             name: font_name,
-            normal: normal_font_file,
-            bold: bold_font_file
+            normal: normal_font_file_path,
+            bold: bold_font_file_path
           }
         end
 
-        context 'when selected font is included in Prawn font built-ins' do
+        context 'when font is included in Prawn font built-ins' do
           let(:built_ins) { [font_name] }
 
           before do
@@ -31,33 +31,29 @@ module Resume
           end
 
           it 'sets the PDF font to the selected font' do
+            expect(Prawn::Font::AFM).to \
+              receive(:hide_m17n_warning=).with(true)
             expect(pdf).to receive(:font).with(font_name)
             described_class.configure(pdf, font)
           end
         end
 
-        context 'when selected font is not included in Prawn font built-ins' do
+        context 'when font is not included in Prawn font built-ins' do
           let(:built_ins) { ['SomeOtherFont'] }
-          let(:normal_font_file_path) { "/tmp/#{normal_font_file}" }
-          let(:bold_font_file_path) { "/tmp/#{normal_font_file}" }
 
           before do
             stub_const('Prawn::Font::AFM::BUILT_INS', built_ins)
-            allow(FileSystem).to \
-              receive(:tmpfile_path).with(normal_font_file).
-                and_return(normal_font_file_path)
-            allow(FileSystem).to \
-              receive(:tmpfile_path).with(bold_font_file).
-                and_return(bold_font_file_path)
           end
 
-          it 'updates the PDF font families with the font and sets it' do
+          it 'updates the PDF font families with the new font' do
             expect(font_families).to receive(:update).with(
               font_name => {
                 normal: normal_font_file_path,
                 bold: bold_font_file_path
               }
             )
+            expect(Prawn::Font::AFM).to \
+              receive(:hide_m17n_warning=).with(true)
             expect(pdf).to receive(:font).with(font_name)
             described_class.configure(pdf, font)
           end
