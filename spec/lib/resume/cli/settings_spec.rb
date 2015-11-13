@@ -14,7 +14,7 @@ module Resume
               receive(:require).with('pry-byebug').and_raise(LoadError)
           end
 
-          it 'ignores requiring gems that are just used in development' do
+          it 'ignores requiring gems used only in development' do
             expect(configuration).to_not raise_error
           end
         end
@@ -27,7 +27,8 @@ module Resume
           end
 
           it 'raises a DependencyPrerequisiteError' do
-            expect(configuration).to raise_error(DependencyPrerequisiteError)
+            expect(configuration).to \
+              raise_error(DependencyPrerequisiteError)
           end
         end
       end
