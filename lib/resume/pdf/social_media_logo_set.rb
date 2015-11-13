@@ -1,5 +1,4 @@
 require_relative 'transparent_link'
-require_relative 'logo'
 
 module Resume
   module PDF
@@ -46,7 +45,7 @@ module Resume
 
       def logos_for(logo_set, general_properties)
         logo_set.map do |logo_properties|
-          Logo.for(logo_properties.merge(general_properties))
+          OpenStruct.new(logo_properties.merge(general_properties)).freeze
         end
       end
 

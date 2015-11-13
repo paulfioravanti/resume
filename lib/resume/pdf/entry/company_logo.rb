@@ -1,5 +1,3 @@
-require_relative '../logo'
-
 module Resume
   module PDF
     module Entry
@@ -7,7 +5,7 @@ module Resume
         include TransparentLink
 
         def self.generate(pdf, data)
-          logo = Logo.for(data[:logo])
+          logo = OpenStruct.new(data[:logo]).freeze
           new(pdf, logo).generate
         end
 
