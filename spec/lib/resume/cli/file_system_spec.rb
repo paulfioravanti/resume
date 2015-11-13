@@ -67,7 +67,7 @@ module Resume
             receive(:new).with(tmpdir).and_return(pathname)
         end
 
-        it 'returns the filepath for the file in the system temp directory' do
+        it 'returns the filepath for the file in system temp dir' do
           expect(pathname).to receive(:join).with(filename)
           described_class.tmpfile_path(filename)
         end
