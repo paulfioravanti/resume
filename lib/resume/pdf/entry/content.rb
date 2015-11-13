@@ -1,4 +1,3 @@
-require_relative '../transparent_link'
 require_relative 'header'
 require_relative 'company_logo'
 
@@ -6,8 +5,6 @@ module Resume
   module PDF
     module Entry
       class Content
-        include TransparentLink
-
         def self.generate(pdf, entry)
           pdf.move_down entry[:top_padding]
           Header.generate(pdf, entry)

@@ -38,7 +38,7 @@
     - [heading.rb, 2, -4]
     - [header.rb, 3, -4]
     - [company_logo.rb, 3, -4]
-    - [content.rb, 7, -3]
+    - [content.rb, 6, -3]
 :pdf_files_2:
   :path: lib/resume/pdf
   :files:
