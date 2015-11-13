@@ -1,6 +1,5 @@
 :file_types:
   - !ruby/symbol header_file
-  - !ruby/symbol i18n_module
   - !ruby/symbol resume_module
   - !ruby/symbol resume_files
   - !ruby/symbol pdf_files_1
@@ -12,15 +11,10 @@
   - !ruby/symbol cli_spec_files
   - !ruby/symbol pdf_spec_files
   - !ruby/symbol lib_spec_files
-  - !ruby/symbol i18n_spec_files
 :header_file:
   :path: lib/tasks/one_sheet
   :files:
     - [header.txt, 0, -1]
-:i18n_module:
-  :path: lib/i18n
-  :files:
-    - [core_ext.rb, 2, -1]
 :resume_module:
   :path: lib/tasks/one_sheet
   :files:
@@ -103,7 +97,3 @@
   :path: spec/lib
   :files:
     - [resume_spec.rb, 3, -1]
-:i18n_spec_files:
-  :path: spec/lib/i18n
-  :files:
-    - [core_ext_spec.rb, 3, -1]
