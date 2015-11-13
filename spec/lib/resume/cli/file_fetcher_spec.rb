@@ -8,15 +8,13 @@ module Resume
         let(:path) { "https://example.com/path/to/#{basename}" }
 
         describe 'data massaging before initialisation' do
-          let(:mode) { 'w' }
           let(:file_fetcher) { instance_double('FileFetcher') }
 
-          context 'when filename and mode parameters are not provided' do
+          context 'when filename is not provided' do
             before do
               allow(described_class).to receive(:new).with(
                 Pathname.new(path),
-                basename,
-                mode
+                basename
               ).and_return(file_fetcher)
             end
 
@@ -26,19 +24,18 @@ module Resume
             end
           end
 
-          context 'when filename and mode parameters are provided' do
+          context 'when filename parameter is provided' do
             let(:filename) { 'some_other_file.txt' }
-            let(:mode) { 'wb' }
 
             before do
               allow(described_class).to \
-                receive(:new).with(Pathname.new(path), filename, mode).
+                receive(:new).with(Pathname.new(path), filename).
                   and_return(file_fetcher)
             end
 
-            it 'passes those values to the initializer' do
+            it 'passes the value to the initializer' do
               expect(file_fetcher).to receive(:fetch)
-              described_class.fetch(path, filename: filename, mode: mode)
+              described_class.fetch(path, filename: filename)
             end
           end
         end
@@ -53,7 +50,6 @@ module Resume
               file?: local_file_present
             )
           end
-          let(:mode) { 'w' }
           let(:file) { instance_double('File') }
 
           before do
@@ -105,11 +101,11 @@ module Resume
               context 'when remote file needs to be fetched' do
                 before do
                   allow(File).to \
-                    receive(:open).with(tmpfile_path, mode).
+                    receive(:open).with(tmpfile_path, 'wb').
                       and_yield(file)
                 end
 
-                context 'when an error occurs during filename uri parsing' do
+                context 'when an error occurs during uri parsing' do
                   before do
                     # Don't follow through with attempting to fetch the
                     # remote file
@@ -123,7 +119,7 @@ module Resume
                           and_raise(URI::BadURIError)
                     end
 
-                    it 'fetches the file from the resume remote repo' do
+                    it 'fetches the file from the remote repo' do
                       expect(File).to receive(:join).with(
                         REMOTE_REPO,
                         path
@@ -139,7 +135,7 @@ module Resume
                           and_raise(URI::InvalidURIError)
                     end
 
-                    it 'fetches the file from the resume remote repo' do
+                    it 'fetches the file from the remote repo' do
                       expect(File).to receive(:join).with(
                         REMOTE_REPO,
                         path
@@ -156,7 +152,7 @@ module Resume
                   end
                 end
 
-                context 'when an error occurs when fetching the remote file ' do
+                context 'when an error occurs fetching remote file ' do
                   let(:fetching_file) do
                     -> { described_class.fetch(path) }
                   end
@@ -164,7 +160,8 @@ module Resume
                   context 'when a socket error occurs' do
                     before do
                       allow(Kernel).to \
-                        receive(:open).with(path).and_raise(SocketError)
+                        receive(:open).with(path).
+                          and_raise(SocketError)
                     end
 
                     it 'raises a NetworkConnectionError' do
