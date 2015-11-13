@@ -1,7 +1,7 @@
 require 'json'
 require 'base64'
 require_relative '../output'
-require_relative '../file_fetcher'
+require_relative 'file_fetcher'
 require_relative 'file_system'
 
 module Resume
