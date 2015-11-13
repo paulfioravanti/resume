@@ -28,22 +28,21 @@ module Resume
 
       def initialize_parser
         OptionParser.new do |opts|
-          opts.banner = I18n.t(:usage)
+          opts.banner = 'Usage: ./bin/resume [options]'
           opts.separator ''
-          opts.separator I18n.t(:specific_options)
+          opts.separator 'Specific options:'
           locale_option(opts)
           opts.separator ''
-          opts.separator I18n.t(:common_options)
+          opts.separator 'Common options:'
           help_option(opts)
           version_option(opts)
         end
       end
 
       def locale_option(opts)
-        opts.on(
-          I18n.t(:locale_switch_short),
-          I18n.t(:locale_switch_long),
-          I18n.t(:locale_switch_description)) do |locale|
+        opts.on('-l', '--locale LOCALE',
+          "Select the locale of the resume "\
+          "(#{I18n.available_locales.join(', ')})") do |locale|
           begin
             I18n.locale = locale.to_sym
           rescue I18n::InvalidLocale
@@ -53,20 +52,14 @@ module Resume
       end
 
       def help_option(opts)
-        opts.on_tail(
-          I18n.t(:help_switch_short),
-          I18n.t(:help_switch_long),
-          I18n.t(:help_switch_description)) do
+        opts.on_tail('-h', '--help', 'Show this message') do
           Output.raw(opts)
           throw :halt
         end
       end
 
       def version_option(opts)
-        opts.on_tail(
-          I18n.t(:version_switch_short),
-          I18n.t(:version_switch_long),
-          I18n.t(:version_switch_description)) do
+        opts.on_tail('-v', '--version', 'Show version') do
           Output.raw(Resume::VERSION)
           throw :halt
         end
