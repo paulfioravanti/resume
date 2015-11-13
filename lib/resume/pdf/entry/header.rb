@@ -3,68 +3,44 @@ module Resume
     module Entry
       class Header
         def self.generate(pdf, entry)
-          new(
-            pdf,
-            entry[:position],
-            entry[:organisation],
-            entry[:period],
-            entry[:location],
-            at_x_position: entry[:at_x_position]
-          ).generate
-        end
-
-        private_class_method :new
-
-        def initialize(pdf, position, organisation, period, location, options)
-          @pdf = pdf
-          @position = position
-          @organisation = organisation
-          @period = period
-          @location = location
-          options.each do |attribute, value|
-            instance_variable_set("@#{attribute}", value)
-          end
-        end
-
-        def generate
-          # Different rendering behaviour needed depending on whether the header
-          # is being drawn from left to right on the page or specifically placed
-          # at a location on the x-axis
-          if at_x_position
-            formatted_text_box_header
+          # Different rendering behaviour needed depending on whether
+          # the header is being drawn from left to right on the page
+          # or specifically placed at a location on the x-axis
+          header_sections = [
+            [entry[:position]],
+            [entry[:organisation]],
+            [entry[:period], entry[:location]]
+          ]
+          if entry[:at_x_position]
+            formatted_text_box_header(
+              header_sections, pdf, entry[:at_x_position]
+            )
           else
-            formatted_text_header
+            formatted_text_header(header_sections, pdf)
           end
         end
 
-        private
+        def self.formatted_text_box_header(header_sections, pdf, x_position)
+          header_sections.each do |sections|
+            pdf.formatted_text_box(
+              sections.map { |section| properties_for(section) },
+              at: [x_position, pdf.cursor]
+            )
+            pdf.move_down sections.first[:bottom_padding]
+          end
+        end
+        private_class_method :formatted_text_box_header
 
-        attr_reader :pdf, :position, :organisation,
-                    :period, :location, :at_x_position
-
-        def formatted_text_header
+        def self.formatted_text_header(header_sections, pdf)
           header_sections.each do |sections|
             pdf.formatted_text(
               sections.map { |section| properties_for(section) }
             )
           end
         end
+        private_class_method :formatted_text_header
 
-        def formatted_text_box_header
-          header_sections.each do |sections|
-            pdf.formatted_text_box(
-              sections.map { |section| properties_for(section) },
-              at: [at_x_position, pdf.cursor]
-            )
-            pdf.move_down sections.first[:bottom_padding]
-          end
-        end
-
-        def header_sections
-          [[position], [organisation], [period, location]]
-        end
-
-        def properties_for(section)
+        def self.properties_for(section)
           {
             text: section[:text],
             styles: section[:styles],
@@ -73,6 +49,7 @@ module Resume
             link: section[:link],
           }
         end
+        private_class_method :properties_for
       end
     end
   end

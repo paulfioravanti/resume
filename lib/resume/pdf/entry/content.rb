@@ -1,4 +1,3 @@
-require_relative '../transparent_link'
 require_relative 'header'
 require_relative 'company_logo'
 
@@ -6,49 +5,33 @@ module Resume
   module PDF
     module Entry
       class Content
-        include TransparentLink
-
         def self.generate(pdf, entry)
-          new(pdf, entry).generate
-        end
-
-        private_class_method :new
-
-        def initialize(pdf, entry)
-          @pdf = pdf
-          @entry = entry
-        end
-
-        def generate
           pdf.move_down entry[:top_padding]
           Header.generate(pdf, entry)
-          CompanyLogo.generate(pdf, entry)
-          details if entry.has_key?(:summary)
+          CompanyLogo.generate(pdf, entry[:logo])
+          details(pdf, entry) if entry.has_key?(:summary)
         end
 
-        private
-
-        attr_reader :pdf, :entry
-
-        def details
+        def self.details(pdf, entry)
           pdf.move_down entry[:summary][:top_padding]
-          summary
-          profile
+          summary(pdf, entry)
+          profile(pdf, entry)
         end
+        private_class_method :details
 
-        def summary
+        def self.summary(pdf, entry)
           pdf.text(
             entry[:summary][:text],
             inline_format: true
           )
         end
+        private_class_method :summary
 
-        def profile
-          items = entry[:profile]
+        def self.profile(pdf, entry)
+          return unless job_content = entry[:profile]
           cell_style = entry[:cell_style]
-          return unless items
-          table_data = items.reduce([]) do |data, item|
-            data << ['-', item]
+          table_data = job_content.reduce([]) do |content, responsibility|
+            content << ['-', responsibility]
           end
           pdf.table(
             table_data,
@@ -58,6 +41,7 @@ module Resume
             }
           )
         end
+        private_class_method :profile
       end
     end
   end

@@ -49,7 +49,7 @@ module Resume
       end
 
       def tmpfile_path
-        @tmpfile_path ||= CLI::FileSystem.tmpfile_path(filename)
+        @tmpfile_path ||= FileSystem.tmpfile_path(filename)
       end
 
       def remote_file_path
