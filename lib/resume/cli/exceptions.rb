@@ -45,11 +45,9 @@ module Resume
       def initialize(locale)
         super(locale)
         @messages = {
-          error: [
-            :locale_is_not_supported,
-            { specified_locale: message }
-          ],
-          warning: :supported_locales_are
+          raw_error: "Locale '#{locale}' is not supported",
+          raw_warning: "Supported locales are: "\
+                       "#{I18n.available_locales.join(', ')}"
         }
       end
     end
@@ -58,7 +56,7 @@ module Resume
       def initialize(error)
         super(error)
         @messages = {
-          error: :you_have_some_invalid_options,
+          raw_error: 'You have some invalid options.',
           raw: message
         }
       end
@@ -68,7 +66,8 @@ module Resume
       def initialize(error)
         super(error)
         @messages = {
-          error: :you_have_a_missing_argument,
+          raw_error: "You have a missing argument in "\
+                     "one of your options.",
           raw: message
         }
       end
