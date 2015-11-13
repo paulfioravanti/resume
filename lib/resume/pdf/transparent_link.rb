@@ -1,6 +1,10 @@
 module Resume
   module PDF
     module TransparentLink
+      def self.extended(base)
+        base.send(:private_class_method, :transparent_link)
+      end
+
       private
 
       def transparent_link(pdf, logo)

@@ -45,9 +45,8 @@
     - [technical_skills.rb, 4, -3]
     - [employment_history.rb, 5, -3]
     - [education_history.rb, 5, -3]
-    - [options.rb, 2, -3]
     - [manifest.rb, 11, -3]
-    - [document.rb, 5, -2]
+    - [document.rb, 4, -2]
 :cli_files:
   :path: lib/resume/cli
   :files:

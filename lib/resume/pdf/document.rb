@@ -1,5 +1,4 @@
 require_relative 'manifest'
-require_relative 'options'
 
 module Resume
   module PDF
@@ -10,34 +9,33 @@ module Resume
     # hierarchy in advance will result in an uninitialized constant error.
     class Document
       def self.generate(resume, title, filename)
-        new(resume, title, filename).generate
-      end
-
-      private_class_method :new
-
-      def initialize(resume, title, filename)
-        @resume = resume
-        @title = title
-        @filename = filename
-      end
-
-      def generate
         require 'prawn'
         require 'prawn/table'
-        Prawn::Document.generate(filename, options) do |pdf|
-          pdf.instance_exec(resume) do |resume|
-            Manifest.process(self, resume)
+        Prawn::Document.generate(filename, options(title, resume)) do |pdf|
+          pdf.instance_exec(resume) do |document|
+            Manifest.process(self, document)
           end
         end
       end
 
-      private
-
-      attr_reader :resume, :title, :filename
-
-      def options
-        Options.generate(title, resume[:options])
+      def self.options(title, resume)
+        author = resume[:author]
+        {
+          margin_top: resume[:margin_top],
+          margin_bottom: resume[:margin_bottom],
+          margin_left: resume[:margin_left],
+          margin_right: resume[:margin_right],
+          background: resume[:background_image],
+          repeat: resume[:repeat],
+          info: {
+            Title: title,
+            Author: author,
+            Creator: author,
+            CreationDate: Time.now
+          }
+        }
       end
+      private_class_method :options
     end
   end
 end
