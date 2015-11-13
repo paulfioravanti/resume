@@ -23,17 +23,11 @@
   :path: lib/resume
   :files:
     - [colours.rb, 1, -2]
-    - [parser.rb, 3, -2]
-    - [exceptions.rb, 1, -2]
-    - [exception_suppressor.rb, 1, -2]
-    - [file_system.rb, 4, -2]
-    - [file_fetcher.rb, 8, -2]
     - [output.rb, 3, -2]
-    - [settings.rb, 6, -2]
 :pdf_files_1:
   :path: lib/resume/pdf
   :files:
-    - [font.rb, 3, -3]
+    - [font.rb, 1, -3]
     - [name.rb, 2, -3]
     - [headline.rb, 2, -3]
     - [transparent_link.rb, 2, -3]
@@ -58,41 +52,47 @@
 :cli_files:
   :path: lib/resume/cli
   :files:
-    - [argument_parser.rb, 4, -3]
-    - [resume_data_fetcher.rb, 7, -3]
-    - [font_downloader.rb, 8, -3]
+    - [exception_suppressor.rb, 1, -3]
+    - [exceptions.rb, 2, -3]
+    - [file_system.rb, 5, -3]
+    - [file_fetcher.rb, 9, -3]
+    - [content_parser.rb, 7, -3]
+    - [settings.rb, 6, -3]
+    - [argument_parser.rb, 5, -3]
+    - [resume_data_fetcher.rb, 6, -3]
+    - [font_downloader.rb, 9, -3]
     - [gem_installer.rb, 6, -3]
     - [dependency_manager.rb, 8, -3]
-    - [application.rb, 12, -1]
+    - [application.rb, 13, -1]
 :spec_files:
   :path: spec
   :files:
-    - [spec_helper.rb, 13, -2]
+    - [spec_helper.rb, 15, -2]
 :resume_spec_files:
   :path: spec/lib/resume
   :files:
     - [colours_spec.rb, 3, -2]
-    - [parser_spec.rb, 3, -2]
-    - [exceptions_spec.rb, 3, -2]
-    - [exception_suppressor_spec.rb, 3, -2]
-    - [file_fetcher_spec.rb, 3, -2]
-    - [file_system_spec.rb, 4, -2]
     - [output_spec.rb, 4, -2]
-    - [settings_spec.rb, 4, -2]
 :cli_spec_files:
   :path: spec/lib/resume/cli
   :files:
     - [application_spec.rb, 4, -3]
     - [argument_parser_spec.rb, 5, -3]
+    - [content_parser_spec.rb, 4, -3]
     - [dependency_manager_spec.rb, 4, -3]
+    - [exceptions_spec.rb, 5, -3]
+    - [exception_suppressor_spec.rb, 4, -3]
+    - [file_fetcher_spec.rb, 4, -3]
+    - [file_system_spec.rb, 5, -3]
     - [font_downloader_spec.rb, 4, -3]
     - [gem_installer_spec.rb, 4, -3]
-    - [resume_data_fetcher_spec.rb, 5, -2]
+    - [resume_data_fetcher_spec.rb, 5, -3]
+    - [settings_spec.rb, 5, -2]
 :pdf_spec_files:
   :path: spec/lib/resume/pdf
   :files:
     - [font_spec.rb, 3, -3]
-    - [document_spec.rb, 6, -1]
+    - [document_spec.rb, 7, -1]
 :lib_spec_files:
   :path: spec/lib
   :files:
