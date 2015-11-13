@@ -1,11 +1,11 @@
 require 'spec_helper'
 require 'resume/cli/resume_data_fetcher'
+require 'resume/cli/content_parser'
 require 'resume/pdf/document'
 
 module Resume
   module PDF
     RSpec.describe Document do
-      # Suppress output from the ResumeDataFetcher
       before do
         # Use the en locale to test document generation since it
         # requires the least amount of outside dependencies
@@ -15,7 +15,9 @@ module Resume
       end
 
       describe '.generate' do
-        let!(:resume) { CLI::ResumeDataFetcher.fetch }
+        let!(:resume) do
+          CLI::ContentParser.parse(CLI::ResumeDataFetcher.fetch)
+        end
         let(:title) { 'My Resume' }
         let(:filename) { 'My_Resume.pdf' }
 
