@@ -16,7 +16,7 @@ module Resume
         JSON.recurse_proc(resume, &decode_and_fetch_assets)
       end
 
-      # Base64-encoded values can be found in hash and array values
+      # Values that need parsing can be found in hash and array values
       # in the JSON, so specifically target those data types for
       # manipulation, and ignore any direct references given to the
       # keys or values of the JSON hash.
@@ -24,40 +24,61 @@ module Resume
         Proc.new do |object|
           case object
           when Hash
-            object.each do |key, value|
-              if key == :align
-                # Prawn specifically requires :align values to
-                # be symbols otherwise it errors out
-                object[key] = value.to_sym
-              elsif key == :font && value.is_a?(Hash)
-                [:normal, :bold].each do |property|
-                  if value.has_key?(property)
-                    value[property] =
-                      FileSystem.tmpfile_path(value[property])
-                  end
-                end
-              else
-                if encoded?(value)
-                  value = ContentParser.decode_content(value)
-                end
-                if asset?(value)
-                  value = FileFetcher.fetch(value)
-                end
-                object[key] = value
-              end
-            end
+            parse_hash(object)
           when Array
-            object.each_with_index do |value, index|
-             if encoded?(value)
-               object[index] = ContentParser.decode_content(value)
-             end
-            end
+            parse_array(object)
           else
             object
           end
         end
       end
       private_class_method :decode_and_fetch_assets
+
+      def self.parse_hash(hash)
+        hash.each do |key, value|
+          if key == :align
+            # Prawn specifically requires :align values to
+            # be symbols otherwise it errors out
+            hash[key] = value.to_sym
+          elsif font_values_hash?(key, value)
+            substitute_filenames_for_filepaths(value)
+          else
+            if encoded?(value)
+              value = ContentParser.decode_content(value)
+            end
+            if asset?(value)
+              value = FileFetcher.fetch(value)
+            end
+            hash[key] = value
+          end
+        end
+      end
+      private_class_method :parse_hash
+
+      # This is the hash that tells Prawn what the fonts to be used
+      # are called and where they are located
+      def self.font_values_hash?(key, value)
+        key == :font && value.is_a?(Hash)
+      end
+      private_class_method :font_values_hash?
+
+      def self.substitute_filenames_for_filepaths(value)
+        [:normal, :bold].each do |property|
+          if value.has_key?(property)
+            value[property] =
+              FileSystem.tmpfile_path(value[property])
+          end
+        end
+      end
+      private_class_method :substitute_filenames_for_filepaths
+
+      def self.parse_array(array)
+        array.each_with_index do |value, index|
+          if encoded?(value)
+            array[index] = ContentParser.decode_content(value)
+          end
+        end
+      end
 
       def self.encoded?(string)
         # Checking whether a string is Base64-encoded is not an
