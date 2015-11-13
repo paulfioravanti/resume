@@ -14,3 +14,9 @@ Some time passes.....
 
 * Added Japanese language resume and did a complete refactor of the app
 
+### 1.1 / 2015-11-12
+
+Refactored to get any non-Prawn-related code out of the PDF classes.
+All processing of the resume data hash (decoding of Base 64 values, fetching
+of images etc) happens before the resume is generated.
+
