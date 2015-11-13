@@ -1,7 +1,7 @@
 require 'tmpdir'
 require_relative '../output'
 require_relative '../exceptions'
-require_relative '../file_system'
+require_relative 'file_system'
 require_relative '../file_fetcher'
 require_relative 'content_parser'
 

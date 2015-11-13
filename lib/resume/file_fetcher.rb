@@ -3,7 +3,7 @@ require 'socket'
 require 'tmpdir'
 require 'pathname'
 require_relative 'exceptions'
-require_relative 'file_system'
+require_relative 'cli/file_system'
 
 module Resume
   class FileFetcher
@@ -48,7 +48,7 @@ module Resume
     end
 
     def tmpfile_path
-      @tmpfile_path ||= FileSystem.tmpfile_path(filename)
+      @tmpfile_path ||= CLI::FileSystem.tmpfile_path(filename)
     end
 
     def remote_file_path
