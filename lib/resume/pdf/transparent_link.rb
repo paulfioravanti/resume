@@ -8,11 +8,11 @@ module Resume
           pdf.formatted_text(
             [
               {
-                text: '|' * logo.bars,
-                size: logo.size,
-                link: logo.link
+                text: '|' * logo[:bars],
+                size: logo[:size],
+                link: logo[:link]
               }
-            ], align: logo.align
+            ], align: logo[:align]
           )
         end
       end

@@ -22,7 +22,7 @@ module Resume
         def generate
           pdf.move_down entry[:top_padding]
           Header.generate(pdf, entry)
-          CompanyLogo.generate(pdf, entry)
+          CompanyLogo.generate(pdf, entry[:logo])
           details if entry.has_key?(:summary)
         end
 

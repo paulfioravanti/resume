@@ -45,7 +45,7 @@ module Resume
 
       def logos_for(logo_set, general_properties)
         logo_set.map do |logo_properties|
-          OpenStruct.new(logo_properties.merge(general_properties)).freeze
+          logo_properties.merge(general_properties)
         end
       end
 
@@ -58,13 +58,13 @@ module Resume
       end
 
       def generate_logo_for(logo)
-        pdf.bounding_box([x_position, pdf.cursor], width: logo.width) do
+        pdf.bounding_box([x_position, pdf.cursor], width: logo[:width]) do
           pdf.image(
-            logo.image,
-            fit: logo.fit,
-            align: logo.align
+            logo[:image],
+            fit: logo[:fit],
+            align: logo[:align]
           )
-          pdf.move_up logo.link_overlay_start
+          pdf.move_up logo[:link_overlay_start]
           transparent_link(pdf, logo)
         end
         self.x_position += padded_logo_width
