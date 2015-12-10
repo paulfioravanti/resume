@@ -25,7 +25,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'prawn-table', '0.2.2'
   gem.add_development_dependency 'kramdown', '~> 1.8'
   gem.add_development_dependency 'fuubar', '2.0.0'
-  gem.add_development_dependency 'simplecov', '~> 0.10'
+  gem.add_development_dependency 'simplecov', '~> 0.11'
   gem.add_development_dependency 'reek', '~> 3.7'
   gem.add_development_dependency 'codeclimate-test-reporter', '~> 0.4'
   gem.add_development_dependency 'i18n', '~> 0.7'
