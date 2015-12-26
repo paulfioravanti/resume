@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-- 2.2.4
+- 2.3.0
 script:
 - bundle exec rspec spec/ --no-drb --format progress
 - bundle exec rake resume
