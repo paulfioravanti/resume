@@ -13,19 +13,11 @@ module Resume
         end
 
         def self.details(pdf, entry)
-          pdf.move_down entry[:summary][:top_padding]
-          summary(pdf, entry)
+          pdf.move_down entry.dig(:summary, :top_padding)
+          pdf.text(entry.dig(:summary, :text), inline_format: true)
           profile(pdf, entry)
         end
         private_class_method :details
-
-        def self.summary(pdf, entry)
-          pdf.text(
-            entry[:summary][:text],
-            inline_format: true
-          )
-        end
-        private_class_method :summary
 
         def self.profile(pdf, entry)
           return unless job_content = entry[:profile]

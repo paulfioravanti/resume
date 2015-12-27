@@ -10,7 +10,7 @@ module Resume
               text: primary_header[:text],
               color: primary_header[:colour]
             },
-            { text: headline[:secondary][:text] }
+            { text: headline.dig(:secondary, :text) }
           ],
           size: headline[:size]
         )
