@@ -83,18 +83,6 @@ module Resume
                 expect(parse_object).to eq(parsed_object)
               end
             end
-
-            context 'when hash value is a reserved word' do
-              let(:base64_string) { 'bold' }
-
-              before do
-                stub_const('Resume::RESERVED_WORDS', [base64_string])
-              end
-
-              it 'returns the object unchanged' do
-                expect(parse_object).to eq(object)
-              end
-            end
           end
 
           context 'when hash value is an asset file' do
@@ -135,18 +123,6 @@ module Resume
 
               it 'decodes the array value' do
                 expect(parse_object).to eq(parsed_object)
-              end
-            end
-
-            context 'when array value is a reserved word' do
-              let(:value) { 'bold' }
-
-              before do
-                stub_const('Resume::RESERVED_WORDS', [value])
-              end
-
-              it 'returns the object unchanged' do
-                expect(parse_object).to eq(object)
               end
             end
           end

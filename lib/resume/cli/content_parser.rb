@@ -36,6 +36,12 @@ module Resume
 
       def self.parse_hash(hash)
         hash.each do |key, value|
+          if base64_string?(value)
+            value = ContentParser.decode_content(value)
+          end
+          if asset?(value)
+            value = FileFetcher.fetch(value)
+          end
           if key == :align
             # Prawn specifically requires :align values to
             # be symbols otherwise it errors out
@@ -47,12 +53,6 @@ module Resume
           elsif font_values_hash?(key, value)
             substitute_filenames_for_filepaths(value)
           else
-            if encoded?(value)
-              value = ContentParser.decode_content(value)
-            end
-            if asset?(value)
-              value = FileFetcher.fetch(value)
-            end
             hash[key] = value
           end
         end
@@ -83,20 +83,12 @@ module Resume
 
       def self.parse_array(array)
         array.each_with_index do |value, index|
-          if encoded?(value)
+          if base64_string?(value)
             array[index] = ContentParser.decode_content(value)
           end
         end
       end
-
-      def self.encoded?(string)
-        # Checking whether a string is Base64-encoded is not an
-        # exact science: 4 letter English words can be construed
-        # as being encoded, so logic is needed to exclude words
-        # known to not be encoded.
-        base64_string?(string) && !RESERVED_WORDS.include?(string)
-      end
-      private_class_method :encoded?
+      private_class_method :parse_array
 
       # Taken from http://stackoverflow.com/q/8571501/567863
       def self.base64_string?(string)

@@ -3,7 +3,7 @@ require 'resume'
 
 RSpec.describe Resume do
   describe 'constants' do
-    [:VERSION, :REMOTE_REPO, :RESERVED_WORDS].each do |const|
+    [:VERSION, :REMOTE_REPO].each do |const|
       context "for #{const}" do
         it 'is defined' do
           expect(described_class.const_defined?(const)).to be true

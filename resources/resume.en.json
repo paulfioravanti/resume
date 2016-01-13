@@ -101,7 +101,7 @@
     "heading": {
       "top_padding": 10,
       "text": "VGVjaG5pY2FsIFNraWxscw==",
-      "styles": ["bold"],
+      "styles": ["Ym9sZA=="],
       "colour": "666666"
     },
     "content": {
@@ -155,7 +155,7 @@
     "heading": {
       "top_padding": 10,
       "text": "RW1wbG95bWVudCBIaXN0b3J5",
-      "styles": ["bold"],
+      "styles": ["Ym9sZA=="],
       "colour": "666666"
     },
     "content": {
@@ -165,12 +165,12 @@
           "top_padding": 5,
           "position": {
             "text": "RGV2ZWxvcGVy",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 12
           },
           "organisation": {
             "text": "cmVpbnRlcmFjdGl2ZQ==",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 11
           },
           "period": {
@@ -197,7 +197,7 @@
             "link_overlay_start": 30,
             "bars": 13,
             "size": 33,
-            "align": "left"
+            "align": "bGVmdA=="
           },
           "summary": {
             "top_padding": 10,
@@ -208,12 +208,12 @@
           "top_padding": 15,
           "position": {
             "text": "U2VuaW9yIERldmVsb3Blcg==",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 12
           },
           "organisation": {
             "text": "UmF0ZUNpdHk=",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 11
           },
           "period": {
@@ -240,7 +240,7 @@
             "link_overlay_start": 40,
             "bars": 10,
             "size": 43,
-            "align": "left"
+            "align": "bGVmdA=="
           },
           "summary": {
             "top_padding": 10,
@@ -260,12 +260,12 @@
           "top_padding": 15,
           "position": {
             "text": "UnVieSBEZXZlbG9wZXI=",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 12
           },
           "organisation": {
             "text": "RnJlZWxhbmNl",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 11
           },
           "period": {
@@ -292,7 +292,7 @@
             "link_overlay_start": 40,
             "bars": 10,
             "size": 43,
-            "align": "left"
+            "align": "bGVmdA=="
           },
           "summary": {
             "top_padding": 15,
@@ -303,12 +303,12 @@
           "top_padding": 15,
           "position": {
             "text": "UHJlLXNhbGVzIENvbnN1bHRhbnQ=",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 12
           },
           "organisation": {
             "text": "R3VpZGV3aXJlIFNvZnR3YXJl",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 11
           },
           "period": {
@@ -335,7 +335,7 @@
             "link_overlay_start": 32,
             "bars": 11,
             "size": 41,
-            "align": "left"
+            "align": "bGVmdA=="
           },
           "summary": {
             "top_padding": 10,
@@ -357,12 +357,12 @@
           "top_padding": 15,
           "position": {
             "text": "SW1wbGVtZW50YXRpb24gQ29uc3VsdGFudCwgUHJvZmVzc2lvbmFsIFNlcnZpY2Vz",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 12
           },
           "organisation": {
             "text": "UmlnaHQgTm93IFRlY2hub2xvZ2llcw==",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 11
           },
           "period": {
@@ -389,7 +389,7 @@
             "link_overlay_start": 40,
             "bars": 7,
             "size": 43,
-            "align": "left"
+            "align": "bGVmdA=="
           },
           "summary": {
             "top_padding": 10,
@@ -411,12 +411,12 @@
           "top_padding": 15,
           "position": {
             "text": "U29mdHdhcmUgRW5naW5lZXI=",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 12
           },
           "organisation": {
             "text": "U29mdHdhcmUgUmVzZWFyY2ggQXNzb2NpYXRlcyAoU1JBKQ==",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 11
           },
           "period": {
@@ -443,7 +443,7 @@
             "link_overlay_start": 40,
             "bars": 10,
             "size": 43,
-            "align": "left"
+            "align": "bGVmdA=="
           },
           "summary": {
             "top_padding": 10,
@@ -454,12 +454,12 @@
           "top_padding": 15,
           "position": {
             "text": "Q29vcmRpbmF0b3Igb2YgSW50ZXJuYXRpb25hbCBSZWxhdGlvbnMgKENJUik=",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 12
           },
           "organisation": {
             "text": "SmFwYW4gRXhjaGFuZ2UgYW5kIFRlYWNoaW5nIFByb2dyYW1tZSAoSkVUKQ==",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 11
           },
           "period": {
@@ -486,7 +486,7 @@
             "link_overlay_start": 34,
             "bars": 8,
             "size": 36,
-            "align": "left"
+            "align": "bGVmdA=="
           },
           "summary": {
             "top_padding": 10,
@@ -497,12 +497,12 @@
           "top_padding": 15,
           "position": {
             "text": "SW50ZXJuYXRpb25hbCBNYXJrZXRpbmcgQXNzaXN0YW50IC0gQXNpYSBhbmQgSmFwYW4=",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 12
           },
           "organisation": {
             "text": "U291dGggQXVzdHJhbGlhbiBUb3VyaXNtIENvbW1pc3Npb24=",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 11
           },
           "period": {
@@ -529,7 +529,7 @@
             "link_overlay_start": 40,
             "bars": 8,
             "size": 43,
-            "align": "left"
+            "align": "bGVmdA=="
           },
           "summary": {
             "top_padding": 10,
@@ -543,7 +543,7 @@
     "heading": {
       "top_padding": 10,
       "text": "RWR1Y2F0aW9u",
-      "styles": ["bold"],
+      "styles": ["Ym9sZA=="],
       "colour": "666666"
     },
     "content": {
@@ -552,12 +552,12 @@
           "top_padding": 5,
           "position": {
             "text": "TWFzdGVycyBvZiBJbmZvcm1hdGlvbiBUZWNobm9sb2d5",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 12
           },
           "organisation": {
             "text": "VW5pdmVyc2l0eSBvZiBTb3V0aCBBdXN0cmFsaWE=",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 11
           },
           "period": {
@@ -584,7 +584,7 @@
             "link_overlay_start": 35,
             "bars": 3,
             "size": 43,
-            "align": "left"
+            "align": "bGVmdA=="
           }
         },
         "bib": {
@@ -592,13 +592,13 @@
           "at_x_position": 280,
           "position": {
             "text": "QmFjaGVsb3Igb2YgSW50ZXJuYXRpb25hbCBCdXNpbmVzcw==",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 12,
             "bottom_padding": 14
           },
           "organisation": {
             "text": "RmxpbmRlcnMgVW5pdmVyc2l0eQ==",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 11,
             "bottom_padding": 13
           },
@@ -628,19 +628,19 @@
             "link_overlay_start": 40,
             "bars": 3,
             "size": 43,
-            "align": "left"
+            "align": "bGVmdA=="
           }
         },
         "ryu": {
           "top_padding": 20,
           "position": {
             "text": "U3R1ZGVudCBFeGNoYW5nZSBQcm9ncmFtbWU=",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 12
           },
           "organisation": {
             "text": "Unl1a29rdSBVbml2ZXJzaXR5",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 11
           },
           "period": {
@@ -667,7 +667,7 @@
             "link_overlay_start": 40,
             "bars": 3,
             "size": 40,
-            "align": "left"
+            "align": "bGVmdA=="
           }
         },
         "tafe": {
@@ -675,13 +675,13 @@
           "at_x_position": 280,
           "position": {
             "text": "Q2VydGlmaWNhdGUgSUkgaW4gVG91cmlzbQ==",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 12,
             "bottom_padding": 14
           },
           "organisation": {
             "text": "QWRlbGFpZGUgVEFGRQ==",
-            "styles": ["bold"],
+            "styles": ["Ym9sZA=="],
             "size": 11,
             "bottom_padding": 13
           },
@@ -711,7 +711,7 @@
             "link_overlay_start": 19,
             "bars": 5,
             "size": 28,
-            "align": "left"
+            "align": "bGVmdA=="
           }
         }
       }
