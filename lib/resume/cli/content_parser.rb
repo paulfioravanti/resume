@@ -40,6 +40,10 @@ module Resume
             # Prawn specifically requires :align values to
             # be symbols otherwise it errors out
             hash[key] = value.to_sym
+          elsif styles_values_hash?(key, value)
+            # Prawn specifically requires :styles values to
+            # be symbols otherwise the styles do not take effect
+            hash[key] = value.map!(&:to_sym)
           elsif font_values_hash?(key, value)
             substitute_filenames_for_filepaths(value)
           else
@@ -61,6 +65,11 @@ module Resume
         key == :font && value.is_a?(Hash)
       end
       private_class_method :font_values_hash?
+
+      def self.styles_values_hash?(key, value)
+        key == :styles && value.is_a?(Array)
+      end
+      private_class_method :styles_values_hash?
 
       def self.substitute_filenames_for_filepaths(value)
         [:normal, :bold].each do |property|
