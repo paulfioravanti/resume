@@ -4,15 +4,11 @@
 
 This is a Ruby CLI application that generates my resume.  I made it in order to teach myself a bit about the Ruby PDF generation library [Prawn](https://github.com/prawnpdf/prawn).  [Railscast #153](http://railscasts.com/episodes/153-pdfs-with-prawn-revised) is also a good resource for learning about it.
 
-Text is deliberately obfuscated with [Base64](http://ruby-doc.org/stdlib-2.0/libdoc/base64/rdoc/Base64.html) to encourage people to generate the PDF and not read the resume content from within the code.
+Text is deliberately obfuscated in the JSON files with [Base64](http://ruby-doc.org/stdlib-2.3.0/libdoc/base64/rdoc/Base64.html) to encourage people to generate the PDF rather than attempt to read the resume content there.
 
 ## Usage
 
-Install the gems (primarily if you want to run the specs):
-
-    $ bundle install
-
-Generate the resume:
+Generate the resume in the following languages:
 
 :uk: `$ bin/resume`  
 :it: `$ bin/resume -l it`  
@@ -22,15 +18,16 @@ Run `$ bin/resume -h` to see all the options.
 
 Run the specs:
 
+    $ bundle install
     $ rspec spec/
 
-(Not sure why yet, but running `bundle exec rspec spec/` results in no code coverage running)
+(NOTE: running `bundle exec rspec spec/` currently results in no code coverage)
 
 If you have SimpleCov installed, view the test coverage report located at:
 
     coverage/index.html
 
-Generate the "one-sheet" version of the resume: the whole app and specs in a single file.  
+Generate the "one-sheet" version of the resume (the whole app and specs in a single file).  
 If I sent my resume to you directly, it would have been generated from this `rake` task:
 
     $ rake resume
@@ -44,7 +41,7 @@ If I sent my resume to you directly, it would have been generated from this `rak
 
 ### Issues:
 
-- I would have liked to use the Arial font for English, but since it's not included with Prawn by default and I did not want to include any external fonts when generating the resume in English, I stuck with Helvetica
+- I would have liked to use the Arial font for English, but since it's not included with Prawn by default and I did not want to include any external fonts when generating the resume in English (Japanese required external fonts), I stuck with Helvetica
 - It doesn't seem possible yet in Prawn to make an embedded image a clickable link.  Until support is possible (if ever), I've simply pulled in images from Flickr and overlaid a transparent text link on top to simulate clicking an image.  More discussion on this issue is at [this StackOverflow thread](http://stackoverflow.com/q/8289031/567863).
 
 ### Social
