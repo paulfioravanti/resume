@@ -75,13 +75,17 @@
         "image": "aHR0cHM6Ly9kbC5kcm9wYm94dXNlcmNvbnRlbnQuY29tL3UvNjg3ODA1Mi9yZXN1bWVfYXNzZXRzL2NvZGVzY2hvb2wuanBnP2RsPTE=",
         "link": "aHR0cDovL3d3dy5jb2Rlc2Nob29sLmNvbS91c2Vycy9wYXVsZmlvcmF2YW50aQ=="
       },
-      "ratatype": {
-        "image": "aHR0cHM6Ly9kbC5kcm9wYm94dXNlcmNvbnRlbnQuY29tL3UvNjg3ODA1Mi9yZXN1bWVfYXNzZXRzL3JhdGF0eXBlLnBuZz9kbD0x",
-        "link": "aHR0cDovL3d3dy5yYXRhdHlwZS5jb20vdTE0NDc2MA=="
-      },
       "duolingo": {
         "image": "aHR0cHM6Ly9kbC5kcm9wYm94dXNlcmNvbnRlbnQuY29tL3UvNjg3ODA1Mi9yZXN1bWVfYXNzZXRzL2R1b2xpbmdvLnBuZz9kbD0x",
         "link": "aHR0cHM6Ly93d3cuZHVvbGluZ28uY29tL3BhdWxmaW9yYXZhbnRp"
+      },
+      "memrise": {
+        "image": "aHR0cHM6Ly9kbC5kcm9wYm94dXNlcmNvbnRlbnQuY29tL3UvNjg3ODA1Mi9yZXN1bWVfYXNzZXRzL21lbXJpc2UucG5nP2RsPTE=",
+        "link": "aHR0cDovL3d3dy5tZW1yaXNlLmNvbS91c2VyL3BhdWxmaW9yYXZhbnRpL2NvdXJzZXMvbGVhcm5pbmcv"
+      },
+      "ten_fast_fingers": {
+        "image": "aHR0cHM6Ly9kbC5kcm9wYm94dXNlcmNvbnRlbnQuY29tL3UvNjg3ODA1Mi9yZXN1bWVfYXNzZXRzLzEwZmFzdGZpbmdlcnMucG5nP2RsPTE=",
+        "link": "aHR0cDovLzEwZmFzdGZpbmdlcnMuY29tL3VzZXIvODIzMTkv"
       },
       "meetup": {
         "image": "aHR0cHM6Ly9kbC5kcm9wYm94dXNlcmNvbnRlbnQuY29tL3UvNjg3ODA1Mi9yZXN1bWVfYXNzZXRzL21lZXR1cC5wbmc/ZGw9MQ==",
