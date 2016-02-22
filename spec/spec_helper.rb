@@ -1,3 +1,6 @@
+require 'resume'
+Resume.check_ruby_version
+
 if ENV['TRAVIS']
   require 'codeclimate-test-reporter'
   CodeClimate::TestReporter.start
@@ -7,7 +10,6 @@ end
 
 require 'rspec'
 require 'open-uri'
-require 'resume'
 require 'resume/cli/settings'
 require 'resume/cli/content_parser'
 require 'resume/cli/file_fetcher'
