@@ -65,7 +65,8 @@
 :spec_files:
   :path: spec
   :files:
-    - [spec_helper.rb, 15, -2]
+    # - [spec_helper.rb, 1, 1]
+    - [spec_helper.rb, 17, -2]
 :resume_spec_files:
   :path: spec/lib/resume
   :files:
@@ -94,4 +95,4 @@
 :lib_spec_files:
   :path: spec/lib
   :files:
-    - [resume_spec.rb, 3, -1]
+    - [resume_spec.rb, 4, -1]

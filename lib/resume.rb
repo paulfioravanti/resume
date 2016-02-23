@@ -23,7 +23,6 @@ module Resume
     # this with Ruby 1.8.7 and they don't have rubygems installed
     request_to_install_latest_ruby
   end
-  # private_class_method :check_ruby_version
 
   def self.request_to_install_latest_ruby
     puts "Please install Ruby version 2.3.0 or higher "\
