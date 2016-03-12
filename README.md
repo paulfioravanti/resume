@@ -21,8 +21,6 @@ Run the specs:
     $ bundle install
     $ rspec spec/
 
-(NOTE: running `bundle exec rspec spec/` currently results in no code coverage)
-
 If you have SimpleCov installed, view the test coverage report located at:
 
     coverage/index.html
