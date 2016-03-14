@@ -22,6 +22,7 @@
 :resume_files:
   :path: lib/resume
   :files:
+    - [ruby_version_checker.rb, 1, -2]
     - [colours.rb, 1, -2]
     - [output.rb, 3, -2]
 :pdf_files_1:
@@ -71,6 +72,7 @@
   :files:
     - [colours_spec.rb, 3, -2]
     - [output_spec.rb, 4, -2]
+    - [ruby_version_checker_spec.rb, 3, -2]
 :cli_spec_files:
   :path: spec/lib/resume/cli
   :files:
@@ -94,4 +96,4 @@
 :lib_spec_files:
   :path: spec/lib
   :files:
-    - [resume_spec.rb, 4, -1]
+    - [resume_spec.rb, 5, -1]
