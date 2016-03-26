@@ -1,11 +1,10 @@
+require 'simplecov'
 require 'resume/ruby_version_checker'
 Resume::RubyVersionChecker.check_ruby_version
 
 if ENV['TRAVIS']
   require 'codeclimate-test-reporter'
   CodeClimate::TestReporter.start
-else
-  require 'simplecov'
 end
 
 require 'rspec'
@@ -56,5 +55,16 @@ module Resume
         exit
       end
     end
+    # config.after(:suite) do
+    #   example_group = RSpec.describe('Code coverage')
+    #   example = example_group.example('must be 100%'){
+    #     expect(SimpleCov.result.covered_percent).to eq(100)
+    #   }
+    #   example_group.run
+
+    #   passed = example.execution_result.status == :passed
+
+    #   RSpec.configuration.reporter.example_failed example unless passed
+    # end
   end
 end
