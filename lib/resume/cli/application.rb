@@ -21,8 +21,8 @@ module Resume
           resume = ResumeDataFetcher.fetch
           new(resume).start
         end
-      rescue Error => e
-        Output.messages(e.messages)
+      rescue Error => error
+        Output.messages(error.messages)
       end
 
       private_class_method :new
