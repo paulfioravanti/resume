@@ -53,7 +53,8 @@ module Resume
       end
 
       def remote_file_path
-        uri? ? pathname.to_path : File.join(REMOTE_REPO, pathname.to_path)
+        path = pathname.to_path
+        uri? ? path : File.join(REMOTE_REPO, path)
       end
 
       def uri?
