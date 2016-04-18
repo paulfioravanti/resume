@@ -38,8 +38,8 @@ module Resume
             "ODA1Mi9yZXN1bWVfYXNzZXRzL2JhY2tncm91bmQuanBnP2RsPTE="
           )
         )
-      rescue DependencyPrerequisiteError => e
-        Output.messages(e.messages)
+      rescue DependencyPrerequisiteError => error
+        Output.messages(error.messages)
         exit
       rescue LoadError
         Output.messages({
