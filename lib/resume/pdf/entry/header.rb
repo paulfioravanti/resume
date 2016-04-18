@@ -11,9 +11,9 @@ module Resume
             [entry[:organisation]],
             [entry[:period], entry[:location]]
           ]
-          if entry[:at_x_position]
+          if x_position = entry[:at_x_position]
             formatted_text_box_header(
-              header_sections, pdf, entry[:at_x_position]
+              header_sections, pdf, x_position
             )
           else
             formatted_text_header(header_sections, pdf)
