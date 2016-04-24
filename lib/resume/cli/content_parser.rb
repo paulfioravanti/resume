@@ -42,34 +42,28 @@ module Resume
           if asset?(value)
             value = FileFetcher.fetch(value)
           end
-          if key == :align
-            # Prawn specifically requires :align values to
-            # be symbols otherwise it errors out
-            hash[key] = value.to_sym
-          elsif styles_values_hash?(key, value)
-            # Prawn specifically requires :styles values to
-            # be symbols otherwise the styles do not take effect
-            hash[key] = value.map!(&:to_sym)
-          elsif font_values_hash?(key, value)
-            substitute_filenames_for_filepaths(value)
-          else
-            hash[key] = value
-          end
+          munge_hash_value(hash, key, value)
         end
       end
       private_class_method :parse_hash
 
-      # This is the hash that tells Prawn what the fonts to be used
-      # are called and where they are located
-      def self.font_values_hash?(key, value)
-        key == :font && value.is_a?(Hash)
+      def self.munge_hash_value(hash, key, value)
+        if key == :align
+          # Prawn specifically requires :align values to
+          # be symbols otherwise it errors out
+          hash[key] = value.to_sym
+        elsif key == :styles && value.is_a?(Array)
+          # Prawn specifically requires :styles values to
+          # be symbols otherwise the styles do not take effect
+          hash[key] = value.map!(&:to_sym)
+        elsif key == :font && value.is_a?(Hash)
+          # This is the hash that tells Prawn what the fonts to be used
+          # are called and where they are located
+          substitute_filenames_for_filepaths(value)
+        else
+          hash[key] = value
+        end
       end
-      private_class_method :font_values_hash?
-
-      def self.styles_values_hash?(key, value)
-        key == :styles && value.is_a?(Array)
-      end
-      private_class_method :styles_values_hash?
 
       def self.substitute_filenames_for_filepaths(value)
         [:normal, :bold].each do |property|
