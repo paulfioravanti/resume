@@ -42,6 +42,7 @@ module Resume
                      :installation_required?,
                      :request_dependency_installation,
                      :install
+      def_delegator self, :permission_granted?
 
       def start
         install_dependencies if installation_required?
@@ -82,10 +83,6 @@ module Resume
         Output.info([
           :thanks_for_looking_at_my_resume, { filename: filename }
         ])
-      end
-
-      def permission_granted?
-        self.class.send(:permission_granted?)
       end
     end
   end

@@ -8,6 +8,8 @@ require_relative 'content_parser'
 module Resume
   module CLI
     class FontDownloader
+      extend Forwardable
+
       attr_reader :fonts
 
       def self.files_present?(files)
@@ -41,6 +43,8 @@ module Resume
         @fonts = fonts
       end
 
+      def_delegators self, :files_present?, :download_font_file
+
       def audit_font_dependencies
         fonts.each do |font|
           fonts.delete(font) if files_present?(font[:files].values)
@@ -64,14 +68,6 @@ module Resume
       end
 
       private
-
-      def files_present?(files)
-        self.class.send(:files_present?, files)
-      end
-
-      def download_font_file(font_location)
-        self.class.send(:download_font_file, font_location)
-      end
 
       def extract_fonts(font)
         require 'zip'
