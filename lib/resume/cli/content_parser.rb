@@ -6,6 +6,13 @@ require_relative 'file_system'
 module Resume
   module CLI
     class ContentParser
+      # Taken from http://stackoverflow.com/q/8571501/567863
+      BASE64_STRING_REGEX = %r{\A
+        ([A-Za-z0-9+/]{4})*
+        ([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)
+      \z}x
+      ASSET_PATH = %r{dropbox}
+
       def self.decode_content(string)
         # Force encoding to UTF-8 is needed for strings that had UTF-8
         # characters in them when they were originally encoded
@@ -36,10 +43,10 @@ module Resume
 
       def self.parse_hash(hash)
         hash.each do |key, value|
-          if base64_string?(value)
+          if value =~ BASE64_STRING_REGEX
             value = ContentParser.decode_content(value)
           end
-          if asset?(value)
+          if value =~ ASSET_PATH
             value = FileFetcher.fetch(value)
           end
           munge_hash_value(hash, key, value)
@@ -78,26 +85,12 @@ module Resume
 
       def self.parse_array(array)
         array.each_with_index do |value, index|
-          if base64_string?(value)
+          if value =~ BASE64_STRING_REGEX
             array[index] = ContentParser.decode_content(value)
           end
         end
       end
       private_class_method :parse_array
-
-      # Taken from http://stackoverflow.com/q/8571501/567863
-      def self.base64_string?(string)
-        string =~ %r{\A
-          ([A-Za-z0-9+/]{4})*
-          ([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)
-        \z}x
-      end
-      private_class_method :base64_string?
-
-      def self.asset?(string)
-        string =~ %r{dropbox}
-      end
-      private_class_method :asset?
     end
   end
 end
