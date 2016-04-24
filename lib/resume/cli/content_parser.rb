@@ -64,6 +64,7 @@ module Resume
           hash[key] = value
         end
       end
+      private_class_method :munge_hash_value
 
       def self.substitute_filenames_for_filepaths(value)
         [:normal, :bold].each do |property|
