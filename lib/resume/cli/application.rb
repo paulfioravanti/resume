@@ -14,6 +14,8 @@ module Resume
     class Application
       extend Forwardable
 
+      POSITIVE_INPUT = %r{\Ay(es)?\z}i
+
       def self.start
         Settings.configure
         catch(:halt) do
@@ -26,7 +28,7 @@ module Resume
       end
 
       def self.permission_granted?
-        Kernel.gets.chomp.match(%r{\Ay(es)?\z}i)
+        Kernel.gets.chomp.match(POSITIVE_INPUT)
       end
       private_class_method :permission_granted?
 
