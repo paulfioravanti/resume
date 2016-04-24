@@ -10,6 +10,21 @@ module Resume
     class FontDownloader
       attr_reader :fonts
 
+      def self.extract_fonts(font)
+        Zip::File.open(FileSystem.tmpfile_path(font[:filename])) do |file|
+          file.each do |entry|
+            font[:files].each do |_, filename|
+              if entry.name.match(filename)
+                # overwrite any existing files with true block
+                entry.extract(FileSystem.tmpfile_path(filename)) { true }
+                break # inner loop only
+              end
+            end
+          end
+        end
+      end
+      private_class_method :extract_fonts
+
       def initialize(fonts)
         @fonts = fonts
       end
@@ -50,17 +65,7 @@ module Resume
 
       def extract_fonts(font)
         require 'zip'
-        Zip::File.open(FileSystem.tmpfile_path(font[:filename])) do |file|
-          file.each do |entry|
-            font[:files].each do |_, filename|
-              if entry.name.match(filename)
-                # overwrite any existing files with true block
-                entry.extract(FileSystem.tmpfile_path(filename)) { true }
-                break # inner loop only
-              end
-            end
-          end
-        end
+        self.class.send(:extract_fonts, font)
       end
     end
   end
