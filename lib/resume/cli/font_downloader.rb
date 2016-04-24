@@ -12,10 +12,10 @@ module Resume
 
       attr_reader :fonts
 
-      def self.files_present?(files)
+      def self.local_files_present?(files)
         files.all? { |file| File.file?(FileSystem.tmpfile_path(file)) }
       end
-      private_class_method :files_present?
+      private_class_method :local_files_present?
 
       def self.download_font_file(font_location)
         FileFetcher.fetch(
@@ -43,11 +43,11 @@ module Resume
         @fonts = fonts
       end
 
-      def_delegators self, :files_present?, :download_font_file
+      def_delegators self, :local_files_present?, :download_font_file
 
       def audit_font_dependencies
         fonts.each do |font|
-          fonts.delete(font) if files_present?(font[:files].values)
+          fonts.delete(font) if local_files_present?(font[:files].values)
         end
       end
 
