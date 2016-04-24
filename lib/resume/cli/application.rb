@@ -25,6 +25,10 @@ module Resume
         Output.messages(error.messages)
       end
 
+      def self.permission_granted?
+        Kernel.gets.chomp.match(%r{\Ay(es)?\z}i)
+      end
+
       private_class_method :new
 
       def initialize(resume)
@@ -80,7 +84,7 @@ module Resume
       end
 
       def permission_granted?
-        Kernel.gets.chomp.match(%r{\Ay(es)?\z}i)
+        self.class.permission_granted?
       end
     end
   end
