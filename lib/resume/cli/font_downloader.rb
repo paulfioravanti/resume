@@ -10,6 +10,18 @@ module Resume
     class FontDownloader
       attr_reader :fonts
 
+      def self.files_present?(files)
+        files.all? { |file| File.file?(FileSystem.tmpfile_path(file)) }
+      end
+      private_class_method :files_present?
+
+      def self.download_font_file(font_location)
+        FileFetcher.fetch(
+          ContentParser.decode_content(font_location)
+        )
+      end
+      private_class_method :download_font_file
+
       def self.extract_fonts(font)
         Zip::File.open(FileSystem.tmpfile_path(font[:filename])) do |file|
           file.each do |entry|
@@ -54,13 +66,11 @@ module Resume
       private
 
       def files_present?(files)
-        files.all? { |file| File.file?(FileSystem.tmpfile_path(file)) }
+        self.class.send(:files_present?, files)
       end
 
       def download_font_file(font_location)
-        FileFetcher.fetch(
-          ContentParser.decode_content(font_location)
-        )
+        self.class.send(:download_font_file, font_location)
       end
 
       def extract_fonts(font)
