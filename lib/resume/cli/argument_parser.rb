@@ -5,11 +5,12 @@ module Resume
   module CLI
     class ArgumentParser
       def self.parse
+        help = parser.help
         parser.parse!(ARGV)
       rescue OptionParser::InvalidOption
-        raise InvalidOptionError, parser.help
+        raise InvalidOptionError, help
       rescue OptionParser::MissingArgument
-        raise MissingArgumentError, parser.help
+        raise MissingArgumentError, help
       end
 
       def self.parser
