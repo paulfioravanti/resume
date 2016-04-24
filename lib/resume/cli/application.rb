@@ -14,6 +14,8 @@ module Resume
     class Application
       extend Forwardable
 
+      POSITIVE_INPUT = %r{\Ay(es)?\z}i
+
       def self.start
         Settings.configure
         catch(:halt) do
@@ -24,6 +26,11 @@ module Resume
       rescue Error => error
         Output.messages(error.messages)
       end
+
+      def self.permission_granted?
+        Kernel.gets.chomp.match(POSITIVE_INPUT)
+      end
+      private_class_method :permission_granted?
 
       private_class_method :new
 
@@ -37,6 +44,7 @@ module Resume
                      :installation_required?,
                      :request_dependency_installation,
                      :install
+      def_delegator self, :permission_granted?
 
       def start
         install_dependencies if installation_required?
@@ -77,10 +85,6 @@ module Resume
         Output.info([
           :thanks_for_looking_at_my_resume, { filename: filename }
         ])
-      end
-
-      def permission_granted?
-        Kernel.gets.chomp.match(%r{\Ay(es)?\z}i)
       end
     end
   end

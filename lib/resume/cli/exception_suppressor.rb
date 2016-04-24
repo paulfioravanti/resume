@@ -7,11 +7,11 @@ module Resume
 
       private
 
-      def suppress(exception_to_ignore = StandardError, default = nil)
+      def suppress(exception_to_ignore = StandardError, default = -> {})
         yield
       rescue Exception => exception
         raise unless exception.is_a?(exception_to_ignore)
-        default.respond_to?(:call) ? default.call : default
+        default.call
       end
     end
   end

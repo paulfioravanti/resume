@@ -4,6 +4,7 @@ strings_*.rb
 *.ttf
 *.zip
 resume.rb
+reek.html
 
 Gemfile.lock
 doc/

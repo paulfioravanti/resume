@@ -5,20 +5,22 @@ module Resume
   module CLI
     class ArgumentParser
       def self.parse
+        help = parser.help
         parser.parse!(ARGV)
       rescue OptionParser::InvalidOption
-        raise InvalidOptionError, parser.help
+        raise InvalidOptionError, help
       rescue OptionParser::MissingArgument
-        raise MissingArgumentError, parser.help
+        raise MissingArgumentError, help
       end
 
       def self.parser
         OptionParser.new do |opts|
+          blank_line = opts.separator ''
           opts.banner = 'Usage: ./bin/resume [options]'
-          opts.separator ''
+          blank_line
           opts.separator 'Specific options:'
           locale_option(opts)
-          opts.separator ''
+          blank_line
           opts.separator 'Common options:'
           help_option(opts)
           version_option(opts)

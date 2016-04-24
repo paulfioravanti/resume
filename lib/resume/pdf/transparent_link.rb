@@ -18,6 +18,7 @@ module Resume
           )
         end
       end
+      module_function :transparent_link
     end
   end
 end
