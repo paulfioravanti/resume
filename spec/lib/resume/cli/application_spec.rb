@@ -144,40 +144,6 @@ module Resume
           end
         end
       end
-
-      describe '.permission_granted?' do
-        let(:permission_granted) { described_class.permission_granted? }
-
-        context 'when input is "y"' do
-          before do
-            allow(Kernel).to receive(:gets).and_return("y\n")
-          end
-
-          it 'returns true' do
-            expect(permission_granted).to be_truthy
-          end
-        end
-
-        context 'when input is "yes"' do
-          before do
-            allow(Kernel).to receive(:gets).and_return("yes\n")
-          end
-
-          it 'returns true' do
-            expect(permission_granted).to be_truthy
-          end
-        end
-
-        context 'when input is not "yes" or "y"' do
-          before do
-            allow(Kernel).to receive(:gets).and_return("no\n")
-          end
-
-          it 'returns false' do
-            expect(permission_granted).to be_falsey
-          end
-        end
-      end
     end
   end
 end

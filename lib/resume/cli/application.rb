@@ -28,6 +28,7 @@ module Resume
       def self.permission_granted?
         Kernel.gets.chomp.match(%r{\Ay(es)?\z}i)
       end
+      private_class_method :permission_granted?
 
       private_class_method :new
 
@@ -84,7 +85,7 @@ module Resume
       end
 
       def permission_granted?
-        self.class.permission_granted?
+        self.class.send(:permission_granted?)
       end
     end
   end
