@@ -47,7 +47,8 @@ module Resume
             value = ContentParser.decode_content(value)
           end
           if value =~ ASSET_PATH
-            value = FileFetcher.fetch(value)
+            hash[key] = FileFetcher.fetch(value)
+            next
           end
           munge_hash_value(hash, key, value)
         end
