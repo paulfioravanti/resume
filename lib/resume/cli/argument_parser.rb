@@ -15,11 +15,12 @@ module Resume
 
       def self.parser
         OptionParser.new do |opts|
+          blank_line = opts.separator ''
           opts.banner = 'Usage: ./bin/resume [options]'
-          opts.separator ''
+          blank_line
           opts.separator 'Specific options:'
           locale_option(opts)
-          opts.separator ''
+          blank_line
           opts.separator 'Common options:'
           help_option(opts)
           version_option(opts)
