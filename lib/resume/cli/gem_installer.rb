@@ -6,12 +6,21 @@ module Resume
   module CLI
     class GemInstaller
       include ExceptionSuppressor
+      extend Forwardable
 
       attr_reader :gems
+
+      def self.gem_already_installed?(name, version)
+        Gem::Specification.find_by_name(name).version ==
+          Gem::Version.new(version)
+      end
+      private_class_method :gem_already_installed?
 
       def initialize(gems)
         @gems = gems
       end
+
+      def_delegator self, :gem_already_installed?
 
       def audit_gem_dependencies
         gems.each do |name, version|
@@ -53,11 +62,6 @@ module Resume
       private
 
       attr_writer :gems
-
-      def gem_already_installed?(name, version)
-        Gem::Specification.find_by_name(name).version ==
-          Gem::Version.new(version)
-      end
     end
   end
 end
