@@ -30,14 +30,15 @@ module Resume
       private_class_method :entire_logo_properties
 
       def self.generate_logo_for(logo, pdf, logo_set)
+        x_position = logo_set[:x_position]
         pdf.bounding_box(
-          [logo_set[:x_position], pdf.cursor], width: logo[:width]) do
+          [x_position, pdf.cursor], width: logo[:width]) do
           pdf.image(logo[:image], fit: logo[:fit], align: logo[:align])
           pdf.move_up logo[:link_overlay_start]
           transparent_link(pdf, logo)
         end
         # Slightly cheating by keeping state in the logo set hash
-        logo_set[:x_position] += logo_set[:padded_logo_width]
+        logo_set[:x_position] = x_position + logo_set[:padded_logo_width]
       end
       private_class_method :generate_logo_for
     end
