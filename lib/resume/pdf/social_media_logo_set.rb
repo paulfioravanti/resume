@@ -38,7 +38,8 @@ module Resume
           transparent_link(pdf, logo)
         end
         # Slightly cheating by keeping state in the logo set hash
-        logo_set[:x_position] = x_position + logo_set[:padded_logo_width]
+        logo_set[:x_position] =
+          x_position + logo_set[:padded_logo_width]
       end
       private_class_method :generate_logo_for
     end
