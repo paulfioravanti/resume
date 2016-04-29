@@ -1,6 +1,6 @@
 module Resume
   class RubyVersionChecker
-    REQUIRED_RUBY_VERSION = '2.3.0'
+    REQUIRED_RUBY_VERSION = '2.3.1'
 
     # NOTE: On the one-sheet resume, this check will only work for
     # >= Ruby 2.1  Earlier versions will throw a syntax error.
@@ -19,7 +19,7 @@ module Resume
     end
 
     def self.request_to_install_latest_ruby
-      puts "Please install Ruby version 2.3.0 or higher to generate resume."
+      puts "Please install Ruby version 2.3.1 or higher to generate resume."
       require 'open3'
       puts "Your Ruby version is #{ruby_version}"
       exit
