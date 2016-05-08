@@ -29,4 +29,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'reek', '~> 4.0'
   gem.add_development_dependency 'codeclimate-test-reporter', '~> 0.5'
   gem.add_development_dependency 'i18n', '~> 0.7'
+  gem.add_development_dependency 'rubyzip', '~> 1.2'
 end
