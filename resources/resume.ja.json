@@ -3,7 +3,7 @@
     "gems": [
       ["prawn", "2.1.0"],
       ["prawn-table", "0.2.2"],
-      ["rubyzip", "1.1.7"]
+      ["rubyzip", "1.2.0"]
     ],
     "fonts": [
       {
