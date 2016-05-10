@@ -37,6 +37,12 @@ If I sent my resume to you directly, it would have been generated from this `rak
 - RSpec 3.4, if you want to run the specs
 - SimpleCov 0.10 if you want to view the coverage report locally
 
+### Presentation
+
+I did a lightning talk about this project at the Ruby on Rails Oceania Meetup
+on 10 May 2016.  
+The slide deck can be found [here](https://speakerdeck.com/paulfioravanti/resume-as-code).
+
 ### Issues:
 
 - I would have liked to use the Arial font for English, but since it's not included with Prawn by default and I did not want to include any external fonts when generating the resume in English (Japanese required external fonts), I stuck with Helvetica
