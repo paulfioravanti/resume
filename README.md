@@ -4,7 +4,7 @@
 
 This is a Ruby CLI application that generates my resume.  I made it in order to teach myself a bit about the Ruby PDF generation library [Prawn](https://github.com/prawnpdf/prawn).  [Railscast #153](http://railscasts.com/episodes/153-pdfs-with-prawn-revised) is also a good resource for learning about it.
 
-Text is deliberately obfuscated in the JSON files with [Base64](http://ruby-doc.org/stdlib-2.3.0/libdoc/base64/rdoc/Base64.html) to encourage people to generate the PDF rather than attempt to read the resume content there.
+Text is deliberately obfuscated in the JSON files that contain the resume content with [Base64](http://ruby-doc.org/stdlib-2.3.0/libdoc/base64/rdoc/Base64.html) to ensure people generate the PDF in order to be able to read anything.
 
 ## Usage
 
