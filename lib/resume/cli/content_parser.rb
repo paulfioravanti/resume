@@ -44,7 +44,7 @@ module Resume
       def self.parse_hash(hash)
         hash.each do |key, value|
           if value =~ BASE64_STRING_REGEX
-            value = ContentParser.decode_content(value)
+            value = decode_content(value)
           end
           if value =~ ASSET_PATH
             hash[key] = FileFetcher.fetch(value)
@@ -87,7 +87,7 @@ module Resume
       def self.parse_array(array)
         array.each_with_index do |value, index|
           if value =~ BASE64_STRING_REGEX
-            array[index] = ContentParser.decode_content(value)
+            array[index] = decode_content(value)
           end
         end
       end
