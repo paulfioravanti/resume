@@ -3,7 +3,9 @@ module Resume
   REMOTE_REPO =
     'https://raw.githubusercontent.com/paulfioravanti/resume/master'
 
-  def self.generate
+  module_function
+
+  def generate
     require_relative 'resume/ruby_version_checker'
     RubyVersionChecker.check_ruby_version
     require_relative 'resume/cli/application'
