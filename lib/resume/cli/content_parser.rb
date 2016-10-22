@@ -30,7 +30,7 @@ module Resume
       # manipulation, and ignore any direct references given to the
       # keys or values of the JSON hash.
       def decode_and_fetch_assets
-        Proc.new do |object|
+        proc do |object|
           case object
           when Hash
             parse_hash(object)
