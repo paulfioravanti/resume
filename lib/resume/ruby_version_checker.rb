@@ -1,15 +1,16 @@
 module Resume
-  class RubyVersionChecker
-    REQUIRED_RUBY_VERSION = '2.3.1'
+  module RubyVersionChecker
+    REQUIRED_RUBY_VERSION = "2.3.1"
+
+    module_function
 
     # NOTE: On the one-sheet resume, this check will only work for
     # >= Ruby 2.1  Earlier versions will throw a syntax error.
-    def self.check_ruby_version
+    def check_ruby_version
       # require 'rubygems' only needed for ruby pre-1.9.0
       # but it's safe for later versions (evaluates to false).
-      require 'rubygems'
-      if Gem::Version.new(RUBY_VERSION.dup) <
-        Gem::Version.new(REQUIRED_RUBY_VERSION)
+      require "rubygems"
+      if old_ruby_version?
         request_to_install_latest_ruby
       end
     rescue LoadError
@@ -18,10 +19,16 @@ module Resume
       request_to_install_latest_ruby
     end
 
-    def self.request_to_install_latest_ruby
+    def old_ruby_version?
+      Gem::Version.new(RUBY_VERSION.dup) <
+        Gem::Version.new(REQUIRED_RUBY_VERSION)
+    end
+    private_class_method :old_ruby_version?
+
+    def request_to_install_latest_ruby
       puts "Please install Ruby version 2.3.1 or higher to generate resume."
-      require 'open3'
-      puts "Your Ruby version is #{ruby_version}"
+      require "open3"
+      puts "Your Ruby version is #{user_ruby_version}"
       exit
     rescue LoadError
       # NOTE: LoadError will likely occur if someone attempts to run
@@ -30,13 +37,13 @@ module Resume
     end
     private_class_method :request_to_install_latest_ruby
 
-    def self.ruby_version
+    def user_ruby_version
       ruby_version =
-        Open3.popen3('ruby -v') do |stdin, stdout, stderr, wait_thr|
+        Open3.popen3("ruby -v") do |_stdin, stdout, _stderr, _wait_thr|
           stdout.read
         end
       ruby_version.match(/\Aruby ([\d\.][^p]+)/)[0]
     end
-    private_class_method :ruby_version
+    private_class_method :user_ruby_version
   end
 end
