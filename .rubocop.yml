@@ -141,7 +141,7 @@ Lint/RequireParentheses:
 Lint/RescueException:
   Description: 'Avoid rescuing the Exception class.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-blind-rescues'
-  Enabled: true
+  Enabled: false
 
 Lint/ShadowingOuterLocalVariable:
   Description: >-
@@ -600,7 +600,7 @@ Style/GlobalVars:
 Style/GuardClause:
   Description: 'Check for conditionals that can be replaced with guard clauses'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-nested-conditionals'
-  Enabled: true
+  Enabled: false
 
 Style/HashSyntax:
   Description: >-
