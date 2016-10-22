@@ -1,16 +1,3 @@
-:file_types:
-  - !ruby/symbol header_file
-  - !ruby/symbol resume_module
-  - !ruby/symbol resume_files
-  - !ruby/symbol pdf_files_1
-  - !ruby/symbol pdf_entry_files
-  - !ruby/symbol pdf_files_2
-  - !ruby/symbol cli_files
-  - !ruby/symbol spec_files
-  - !ruby/symbol resume_spec_files
-  - !ruby/symbol cli_spec_files
-  - !ruby/symbol pdf_spec_files
-  - !ruby/symbol lib_spec_files
 :header_file:
   :path: lib/tasks/one_sheet
   :files:

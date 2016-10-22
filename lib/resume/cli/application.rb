@@ -1,20 +1,20 @@
-require 'forwardable'
-require_relative '../output'
-require_relative '../pdf/document'
-require_relative 'settings'
-require_relative 'argument_parser'
-require_relative 'resume_data_fetcher'
-require_relative 'exceptions'
-require_relative 'dependency_manager'
-require_relative 'content_parser'
-require_relative 'file_system'
+require "forwardable"
+require_relative "../output"
+require_relative "../pdf/document"
+require_relative "settings"
+require_relative "argument_parser"
+require_relative "resume_data_fetcher"
+require_relative "exceptions"
+require_relative "dependency_manager"
+require_relative "content_parser"
+require_relative "file_system"
 
 module Resume
   module CLI
     class Application
       extend Forwardable
 
-      POSITIVE_INPUT = %r{\Ay(es)?\z}i
+      POSITIVE_INPUT = /\Ay(es)?\z/i
 
       def self.start
         Settings.configure
@@ -62,7 +62,7 @@ module Resume
           Output.success(:thank_you_kindly)
           install
         else
-          fail DependencyInstallationPermissionError
+          raise DependencyInstallationPermissionError
         end
       end
 
@@ -82,9 +82,7 @@ module Resume
       def open_resume
         Output.question(:would_you_like_me_to_open_the_resume)
         FileSystem.open_document(filename) if permission_granted?
-        Output.info([
-          :thanks_for_looking_at_my_resume, { filename: filename }
-        ])
+        Output.info([:thanks_for_looking_at_my_resume, { filename: filename }])
       end
     end
   end

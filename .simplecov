@@ -1,8 +1,6 @@
-# Only run Simplecov when not using Distributed Ruby
-# To get coverage, stop Distributed Ruby server and run rspec
-unless ENV['DRB']
+# Only run coverage when running spec suite outside of Guard
+unless ENV["NO_COVERAGE"]
   SimpleCov.start do
-    add_filter '/spec/'
     SimpleCov.minimum_coverage 100
   end
 end
