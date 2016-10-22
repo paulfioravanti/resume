@@ -173,9 +173,7 @@ module Resume
                   context "when a http error occurs" do
                     before do
                       allow(Kernel).to receive(:open).with(path).
-                        and_raise(OpenURI::HTTPError.new(
-                          "some error", file)
-                        )
+                        and_raise(OpenURI::HTTPError.new("some error", file))
                     end
 
                     it "raises a NetworkConnectionError" do
