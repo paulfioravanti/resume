@@ -4,12 +4,12 @@ en:
   please_check_your_network_settings:
     Please check your network settings and try again.
   i_need_the_following_to_generate_a_pdf:
-    'In order to help me generate a PDF, I need the following:'
-  ruby_gems: '* Ruby gems:'
-  gem_name_and_version: '  - %{name} %{version}'
-  custom_fonts: '* Custom fonts for the resume'
-  may_i_please_install_them: 'May I please install them? (Y/N) '
-  thank_you_kindly: 'Thank you kindly :-)'
+    "In order to help me generate a PDF, I need the following:"
+  ruby_gems: "* Ruby gems:"
+  gem_name_and_version: "  - %{name} %{version}"
+  custom_fonts: "* Custom fonts for the resume"
+  may_i_please_install_them: "May I please install them? (Y/N) "
+  thank_you_kindly: "Thank you kindly :-)"
   installing_ruby_gems: Installing Ruby gems...
   downloading_font: Downloading font file. This may take a while...
   dependencies_successfully_installed: Dependencies successfully installed.
@@ -31,7 +31,7 @@ en:
   creating_education_history_section: Creating education history section...
   resume_generated_successfully: Resume generated successfully.
   would_you_like_me_to_open_the_resume:
-    'Would you like me to open the resume for you (Y/N)? '
+    "Would you like me to open the resume for you (Y/N)? "
   thanks_for_looking_at_my_resume: |-
     Thanks for looking at my resume. I hope to hear from you soon!
     My resume has been generated in the same

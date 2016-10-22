@@ -1,4 +1,4 @@
-require 'resume/colours'
+require "resume/colours"
 
 module Resume
   RSpec.describe Colours do

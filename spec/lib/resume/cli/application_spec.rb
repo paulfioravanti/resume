@@ -1,40 +1,40 @@
-require 'spec_helper'
-require 'resume/cli/application'
+require "spec_helper"
+require "resume/cli/application"
 
 module Resume
   module CLI
     RSpec.describe Application do
-      describe '.start' do
-        context 'when an Error is raised' do
+      describe ".start" do
+        context "when an Error is raised" do
           let(:error) { Error.new }
 
           before do
             allow(Settings).to receive(:configure).and_raise(error)
           end
 
-          it 'outputs the error messages' do
+          it "outputs the error messages" do
             expect(Output).to \
               receive(:messages).with(error.messages)
             described_class.start
           end
         end
 
-        context 'when a halt is thrown' do
+        context "when a halt is thrown" do
           before do
             allow(Settings).to receive(:configure)
             allow(ArgumentParser).to receive(:parse).and_throw(:halt)
           end
 
-          it 'halts operation at the point halt is thrown' do
+          it "halts operation at the point halt is thrown" do
             expect(ResumeDataFetcher).to_not receive(:fetch)
             described_class.start
           end
         end
 
-        context 'once application is initialized' do
-          let(:title) { 'Resume title' }
+        context "once application is initialized" do
+          let(:title) { "Resume title" }
           let(:dependencies) do
-            instance_double('Hash', :dependencies)
+            instance_double("Hash", :dependencies)
           end
           let(:resume) do
             {
@@ -45,7 +45,7 @@ module Resume
           let(:locale) { :en }
           let(:filename) { "#{title}_#{locale}.pdf" }
           let(:dependency_manager) do
-            instance_double('DependencyManager')
+            instance_double("DependencyManager")
           end
 
           before do
@@ -59,7 +59,7 @@ module Resume
             allow(Output).to receive(:messages)
           end
 
-          context 'when gem installation is required' do
+          context "when gem installation is required" do
             before do
               allow(dependency_manager).to \
                 receive(:installation_required?).and_return(true)
@@ -67,7 +67,7 @@ module Resume
                 receive(:request_dependency_installation)
             end
 
-            context 'when permission to install gems is denied' do
+            context "when permission to install gems is denied" do
               let(:error) { DependencyInstallationPermissionError.new }
 
               before do
@@ -78,19 +78,19 @@ module Resume
                 allow(Kernel).to receive(:gets).and_return("no\n")
               end
 
-              it 'outputs the error messages' do
+              it "outputs the error messages" do
                 expect(Output).to \
                   receive(:messages).with(error.messages)
                 described_class.start
               end
             end
 
-            context 'when permission to install gems is granted' do
+            context "when permission to install gems is granted" do
               before do
                 allow(Kernel).to receive(:gets).and_return("yes\n")
               end
 
-              it 'thanks the user and installs the dependencies' do
+              it "thanks the user and installs the dependencies" do
                 expect(Output).to \
                   receive(:success).with(:thank_you_kindly)
                 expect(dependency_manager).to \
@@ -100,7 +100,7 @@ module Resume
             end
           end
 
-          context 'when gem installation is not required' do
+          context "when gem installation is not required" do
             before do
               allow(dependency_manager).to \
                 receive(:installation_required?).and_return(false)
@@ -119,23 +119,23 @@ module Resume
                 ])
             end
 
-            context 'when permission to open the resume is denied' do
+            context "when permission to open the resume is denied" do
               before do
                 allow(Kernel).to receive(:gets).and_return("no\n")
               end
 
-              it 'does not open the document' do
+              it "does not open the document" do
                 expect(FileSystem).to_not receive(:open_document)
                 described_class.start
               end
             end
 
-            context 'when permission to open the resume is given' do
+            context "when permission to open the resume is given" do
               before do
                 allow(Kernel).to receive(:gets).and_return("yes\n")
               end
 
-              it 'attempts to open the document' do
+              it "attempts to open the document" do
                 expect(FileSystem).to \
                   receive(:open_document).with(filename)
                 described_class.start

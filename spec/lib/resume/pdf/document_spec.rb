@@ -1,7 +1,7 @@
-require 'spec_helper'
-require 'resume/cli/resume_data_fetcher'
-require 'resume/cli/content_parser'
-require 'resume/pdf/document'
+require "spec_helper"
+require "resume/cli/resume_data_fetcher"
+require "resume/cli/content_parser"
+require "resume/pdf/document"
 
 module Resume
   module PDF
@@ -14,16 +14,16 @@ module Resume
           receive(:plain).with(:gathering_resume_information)
       end
 
-      describe '.generate' do
+      describe ".generate" do
         let!(:resume) do
           CLI::ContentParser.parse(CLI::ResumeDataFetcher.fetch)
         end
-        let(:title) { 'My Resume' }
-        let(:filename) { 'My_Resume.pdf' }
+        let(:title) { "My Resume" }
+        let(:filename) { "My_Resume.pdf" }
 
         after { File.delete(filename) }
 
-        it 'generates a pdf resume with progress notifications' do
+        it "generates a pdf resume with progress notifications" do
           expect(Output).to \
             receive(:plain).with(:creating_social_media_links)
           expect(Output).to \
