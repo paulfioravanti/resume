@@ -5,7 +5,6 @@ require_relative "exception_suppressor"
 module Resume
   module CLI
     class GemInstaller
-      include ExceptionSuppressor
       extend Forwardable
 
       attr_reader :gems
@@ -25,7 +24,7 @@ module Resume
       def audit_gem_dependencies
         gems.each do |name, version|
           # if gem not installed: leave in the gems list
-          suppress(Gem::LoadError, -> { next }) do
+          ExceptionSuppressor.suppress(Gem::LoadError, -> { next }) do
             if gem_already_installed?(name, version)
               # remove dependency to install
               self.gems -= [[name, version]]

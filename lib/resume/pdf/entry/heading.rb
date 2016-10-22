@@ -1,8 +1,10 @@
 module Resume
   module PDF
     module Entry
-      class Heading
-        def self.generate(pdf, heading)
+      module Heading
+        module_function
+
+        def generate(pdf, heading)
           pdf.move_down(heading[:top_padding])
           pdf.formatted_text(
             [

@@ -3,23 +3,6 @@ require 'resume/cli/exception_suppressor'
 module Resume
   module CLI
     RSpec.describe ExceptionSuppressor do
-      let(:suppressable) do
-        Class.new do
-          include ExceptionSuppressor
-
-          def suppress_exception_both_params(exception_to_ignore, default, &block)
-            suppress(exception_to_ignore, default, &block)
-          end
-
-          def suppress_exception_one_param(exception_to_ignore, &block)
-            suppress(exception_to_ignore, &block)
-          end
-
-          def suppress_exception_without_params(&block)
-            suppress(&block)
-          end
-        end.new
-      end
       let(:suppressing_exception) do
         -> { suppress_exception }
       end
@@ -27,7 +10,7 @@ module Resume
       describe '#suppress_exception_with_both_params' do
         let(:exception) { SystemExit }
         let(:suppress_exception) do
-          suppressable.suppress_exception_both_params(exception, default) do
+          described_class.suppress(exception, default) do
             raise exception_to_raise
           end
         end
@@ -56,7 +39,7 @@ module Resume
       describe '#suppress_exception_with_one_param' do
         let(:exception) { SystemExit }
         let(:suppress_exception) do
-          suppressable.suppress_exception_one_param(exception) do
+          described_class.suppress(exception) do
             raise exception_to_raise
           end
         end
@@ -81,7 +64,7 @@ module Resume
 
       describe '#suppress_exception_without_params' do
         let(:suppress_exception) do
-          suppressable.suppress_exception_without_params do
+          described_class.suppress do
             raise exception_to_raise
           end
         end

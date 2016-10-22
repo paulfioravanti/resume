@@ -3,8 +3,10 @@ require "pathname"
 
 module Resume
   module CLI
-    class FileSystem
-      def self.open_document(filename)
+    module FileSystem
+      module_function
+
+      def open_document(filename)
         case RUBY_PLATFORM
         when /darwin/
           system("open", filename)
@@ -17,7 +19,7 @@ module Resume
         end
       end
 
-      def self.tmpfile_path(filename)
+      def tmpfile_path(filename)
         # Ensure that the ?dl=1 parameter is removed
         Pathname.new(Dir.tmpdir).join(filename.sub(/\?.+\z/, ""))
       end

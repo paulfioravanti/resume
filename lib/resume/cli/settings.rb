@@ -4,18 +4,18 @@ require_relative "file_fetcher"
 
 module Resume
   module CLI
-    class Settings
-      extend ExceptionSuppressor
+    module Settings
+      module_function
 
-      def self.configure
+      def configure
         # Ignore requiring gems that are used just for development
-        suppress(LoadError) do
+        ExceptionSuppressor.suppress(LoadError) do
           require "pry-byebug"
         end
         configure_i18n
       end
 
-      def self.configure_i18n
+      def configure_i18n
         require "i18n"
         I18n.available_locales = [:en, :it, :ja]
         I18n.available_locales.each do |locale|

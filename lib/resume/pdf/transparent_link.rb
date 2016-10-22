@@ -1,11 +1,9 @@
 module Resume
   module PDF
     module TransparentLink
-      def self.extended(base)
-        base.send(:private_class_method, :transparent_link)
-      end
+      module_function
 
-      def transparent_link(pdf, logo)
+      def generate(pdf, logo)
         pdf.transparent(0) do
           pdf.formatted_text(
             [
@@ -18,7 +16,6 @@ module Resume
           )
         end
       end
-      module_function :transparent_link
     end
   end
 end

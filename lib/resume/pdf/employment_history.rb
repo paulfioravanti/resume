@@ -3,8 +3,10 @@ require_relative "entry/content"
 
 module Resume
   module PDF
-    class EmploymentHistory
-      def self.generate(pdf, employment_history)
+    module EmploymentHistory
+      module_function
+
+      def generate(pdf, employment_history)
         Entry::Heading.generate(pdf, employment_history[:heading])
         content = employment_history[:content]
         content[:entries].values.each do |entry|

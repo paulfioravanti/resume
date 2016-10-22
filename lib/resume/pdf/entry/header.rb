@@ -1,8 +1,10 @@
 module Resume
   module PDF
     module Entry
-      class Header
-        def self.generate(pdf, entry)
+      module Header
+        module_function
+
+        def generate(pdf, entry)
           # Different rendering behaviour needed depending on whether
           # the header is being drawn from left to right on the page
           # or specifically placed at a location on the x-axis
@@ -20,7 +22,7 @@ module Resume
           end
         end
 
-        def self.formatted_text_box_header(header_sections, pdf, x_position)
+        def formatted_text_box_header(header_sections, pdf, x_position)
           header_sections.each do |sections|
             pdf.formatted_text_box(
               sections.map { |section| properties_for(section) },
@@ -31,7 +33,7 @@ module Resume
         end
         private_class_method :formatted_text_box_header
 
-        def self.formatted_text_header(header_sections, pdf)
+        def formatted_text_header(header_sections, pdf)
           header_sections.each do |sections|
             pdf.formatted_text(
               sections.map { |section| properties_for(section) }
@@ -40,7 +42,7 @@ module Resume
         end
         private_class_method :formatted_text_header
 
-        def self.properties_for(section)
+        def properties_for(section)
           {
             text: section[:text],
             styles: section[:styles],
