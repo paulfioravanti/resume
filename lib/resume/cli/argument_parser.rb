@@ -1,5 +1,5 @@
-require 'optparse'
-require_relative 'exceptions'
+require "optparse"
+require_relative "exceptions"
 
 module Resume
   module CLI
@@ -28,7 +28,9 @@ module Resume
       private_class_method :parser
 
       def self.locale_option(opts)
-        opts.on("-l", "--locale LOCALE",
+        opts.on(
+          "-l",
+          "--locale LOCALE",
           "Select the locale of the resume "\
           "(#{I18n.available_locales.join(', ')})") do |locale|
           begin
