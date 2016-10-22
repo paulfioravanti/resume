@@ -28,7 +28,7 @@ module Resume
         let(:exception) { SystemExit }
         let(:suppress_exception) do
           suppressable.suppress_exception_both_params(exception, default) do
-            fail exception_to_raise
+            raise exception_to_raise
           end
         end
 
@@ -57,7 +57,7 @@ module Resume
         let(:exception) { SystemExit }
         let(:suppress_exception) do
           suppressable.suppress_exception_one_param(exception) do
-            fail exception_to_raise
+            raise exception_to_raise
           end
         end
 
@@ -82,7 +82,7 @@ module Resume
       describe '#suppress_exception_without_params' do
         let(:suppress_exception) do
           suppressable.suppress_exception_without_params do
-            fail exception_to_raise
+            raise exception_to_raise
           end
         end
 

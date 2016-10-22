@@ -72,7 +72,7 @@ module Resume
 
               before do
                 allow(Kernel).to \
-                  receive(:fail).
+                  receive(:raise).
                     with(DependencyInstallationPermissionError).
                       and_return(error)
                 allow(Kernel).to receive(:gets).and_return("no\n")

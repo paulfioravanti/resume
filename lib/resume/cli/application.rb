@@ -62,7 +62,7 @@ module Resume
           Output.success(:thank_you_kindly)
           install
         else
-          fail DependencyInstallationPermissionError
+          raise DependencyInstallationPermissionError
         end
       end
 

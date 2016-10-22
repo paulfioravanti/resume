@@ -122,7 +122,7 @@ module Resume
                 receive(:fonts_successfully_downloaded?).and_return(false)
             end
 
-            it 'fails with a DependencyInstallationError' do
+            it 'raises a DependencyInstallationError' do
               expect(installing).to \
                 raise_error(DependencyInstallationError)
             end
@@ -135,7 +135,7 @@ module Resume
               receive(:gems_successfully_installed?).and_return(false)
           end
 
-          it 'fails with a DependencyInstallationError' do
+          it 'raises a DependencyInstallationError' do
             expect(installing).to \
               raise_error(DependencyInstallationError)
           end
