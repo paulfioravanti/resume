@@ -19,7 +19,7 @@ module Resume
         allow(I18n).to receive(:translate).
           with(key, params_to_interpolate).
             and_return(translated_message)
-        allow(described_class).to \
+        allow(Colours).to \
           receive(colour).with(translated_message).
             and_return(colourised_translated_message)
       end
@@ -35,7 +35,7 @@ module Resume
       end
 
       before do
-        allow(described_class).to \
+        allow(Colours).to \
           receive(colour).with(message).
             and_return(colourised_message)
       end

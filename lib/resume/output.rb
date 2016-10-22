@@ -1,50 +1,50 @@
-require_relative 'colours'
+require_relative "colours"
 
 module Resume
-  class Output
-    extend Colours
+  module Output
+    module_function
 
-    def self.messages(messages)
+    def messages(messages)
       messages.each { |type, key| public_send(type, key) }
     end
 
-    def self.error(key)
-      puts red(I18n.translate(*key))
+    def error(key)
+      puts Colours.red(I18n.translate(*key))
     end
 
-    def self.warning(key)
-      puts yellow(I18n.translate(*key))
+    def warning(key)
+      puts Colours.yellow(I18n.translate(*key))
     end
 
-    def self.question(key)
-      print yellow(I18n.translate(*key))
+    def question(key)
+      print Colours.yellow(I18n.translate(*key))
     end
 
-    def self.success(key)
-      puts green(I18n.translate(*key))
+    def success(key)
+      puts Colours.green(I18n.translate(*key))
     end
 
-    def self.info(key)
-      puts cyan(I18n.translate(*key))
+    def info(key)
+      puts Colours.cyan(I18n.translate(*key))
     end
 
-    def self.plain(key)
+    def plain(key)
       puts I18n.translate(*key)
     end
 
-    def self.raw_error(message)
-      puts red(message)
+    def raw_error(message)
+      puts Colours.red(message)
     end
 
-    def self.raw_warning(message)
-      puts yellow(message)
+    def raw_warning(message)
+      puts Colours.yellow(message)
     end
 
-    def self.raw_success(message)
-      puts green(message)
+    def raw_success(message)
+      puts Colours.green(message)
     end
 
-    def self.raw(message)
+    def raw(message)
       puts message
     end
   end
