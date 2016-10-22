@@ -1,16 +1,16 @@
-require 'resume/cli/file_fetcher'
+require "resume/cli/file_fetcher"
 
 module Resume
   module CLI
     RSpec.describe FileFetcher do
-      describe '.fetch' do
-        let(:basename) { 'file.txt' }
+      describe ".fetch" do
+        let(:basename) { "file.txt" }
         let(:path) { "https://example.com/path/to/#{basename}" }
 
-        describe 'data massaging before initialisation' do
-          let(:file_fetcher) { instance_double('FileFetcher') }
+        describe "data massaging before initialisation" do
+          let(:file_fetcher) { instance_double("FileFetcher") }
 
-          context 'when filename is not provided' do
+          context "when filename is not provided" do
             before do
               allow(described_class).to receive(:new).with(
                 Pathname.new(path),
@@ -18,14 +18,14 @@ module Resume
               ).and_return(file_fetcher)
             end
 
-            it 'provides default values to the initializer' do
+            it "provides default values to the initializer" do
               expect(file_fetcher).to receive(:fetch)
               described_class.fetch(path)
             end
           end
 
-          context 'when filename parameter is provided' do
-            let(:filename) { 'some_other_file.txt' }
+          context "when filename parameter is provided" do
+            let(:filename) { "some_other_file.txt" }
 
             before do
               allow(described_class).to \
@@ -33,47 +33,47 @@ module Resume
                   and_return(file_fetcher)
             end
 
-            it 'passes the value to the initializer' do
+            it "passes the value to the initializer" do
               expect(file_fetcher).to receive(:fetch)
               described_class.fetch(path, filename: filename)
             end
           end
         end
 
-        describe 'calling #fetch' do
+        describe "calling #fetch" do
           let(:pathname) do
             instance_double(
-              'Pathname',
+              "Pathname",
               :pathname,
-              basename: instance_double('Pathname', to_path: basename),
+              basename: instance_double("Pathname", to_path: basename),
               to_path: path,
               file?: local_file_present
             )
           end
-          let(:file) { instance_double('File') }
+          let(:file) { instance_double("File") }
 
           before do
             allow(Pathname).to \
               receive(:new).with(path).and_return(pathname)
           end
 
-          context 'when local file is present' do
+          context "when local file is present" do
             let(:local_file_present) { true }
 
-            it 'fetches the local file' do
+            it "fetches the local file" do
               expect(File).to \
                 receive(:open).with(pathname).and_return(file)
               described_class.fetch(path)
             end
           end
 
-          context 'when local file is not present' do
+          context "when local file is not present" do
             let(:local_file_present) { false }
             let(:tmpfile_path) do
-              instance_double('Pathname', file?: tmpfile_present)
+              instance_double("Pathname", file?: tmpfile_present)
             end
 
-            context 'when temp file is present' do
+            context "when temp file is present" do
               let(:tmpfile_present) { true }
 
               before do
@@ -82,14 +82,14 @@ module Resume
                     and_return(tmpfile_path)
               end
 
-              it 'fetches the temp file' do
+              it "fetches the temp file" do
                 expect(File).to \
                   receive(:open).with(tmpfile_path).and_return(file)
                 described_class.fetch(path)
               end
             end
 
-            context 'when temp file is not present' do
+            context "when temp file is not present" do
               let(:tmpfile_present) { false }
 
               before do
@@ -98,28 +98,28 @@ module Resume
                     and_return(tmpfile_path)
               end
 
-              context 'when remote file needs to be fetched' do
+              context "when remote file needs to be fetched" do
                 before do
                   allow(File).to \
-                    receive(:open).with(tmpfile_path, 'wb').
+                    receive(:open).with(tmpfile_path, "wb").
                       and_yield(file)
                 end
 
-                context 'when an error occurs during uri parsing' do
+                context "when an error occurs during uri parsing" do
                   before do
                     # Don't follow through with attempting to fetch the
                     # remote file
                     allow(Kernel).to receive(:open)
                   end
 
-                  context 'when a URI::BadURIError is raised' do
+                  context "when a URI::BadURIError is raised" do
                     before do
                       allow(URI).to \
                         receive(:parse).with(path).
                           and_raise(URI::BadURIError)
                     end
 
-                    it 'fetches the file from the remote repo' do
+                    it "fetches the file from the remote repo" do
                       expect(File).to receive(:join).with(
                         REMOTE_REPO,
                         path
@@ -128,14 +128,14 @@ module Resume
                     end
                   end
 
-                  context 'when a URI::InvalidURIError is raised' do
+                  context "when a URI::InvalidURIError is raised" do
                     before do
                       allow(URI).to \
                         receive(:parse).with(path).
                           and_raise(URI::InvalidURIError)
                     end
 
-                    it 'fetches the file from the remote repo' do
+                    it "fetches the file from the remote repo" do
                       expect(File).to receive(:join).with(
                         REMOTE_REPO,
                         path
@@ -145,61 +145,59 @@ module Resume
                   end
                 end
 
-                context 'when filename is a URI' do
-                  it 'fetches the file from the URI' do
+                context "when filename is a URI" do
+                  it "fetches the file from the URI" do
                     expect(Kernel).to receive(:open).with(path)
                     described_class.fetch(path)
                   end
                 end
 
-                context 'when an error occurs fetching remote file ' do
+                context "when an error occurs fetching remote file " do
                   let(:fetching_file) do
                     -> { described_class.fetch(path) }
                   end
 
-                  context 'when a socket error occurs' do
+                  context "when a socket error occurs" do
                     before do
                       allow(Kernel).to \
                         receive(:open).with(path).
                           and_raise(SocketError)
                     end
 
-                    it 'raises a NetworkConnectionError' do
+                    it "raises a NetworkConnectionError" do
                       expect(fetching_file).to \
                         raise_error(NetworkConnectionError)
                     end
                   end
 
-                  context 'when a http error occurs' do
+                  context "when a http error occurs" do
                     before do
                       allow(Kernel).to receive(:open).with(path).
-                        and_raise(OpenURI::HTTPError.new(
-                          'some error', file)
-                        )
+                        and_raise(OpenURI::HTTPError.new("some error", file))
                     end
 
-                    it 'raises a NetworkConnectionError' do
+                    it "raises a NetworkConnectionError" do
                       expect(fetching_file).to \
                         raise_error(NetworkConnectionError)
                     end
                   end
 
-                  context 'when a network connection error occurs' do
+                  context "when a network connection error occurs" do
                     before do
                       allow(Kernel).to \
                         receive(:open).with(path).
                           and_raise(Errno::ECONNREFUSED)
                     end
 
-                    it 'raises a NetworkConnectionError' do
+                    it "raises a NetworkConnectionError" do
                       expect(fetching_file).to \
                         raise_error(NetworkConnectionError)
                     end
                   end
                 end
 
-                context 'when remote file is fetched successfully' do
-                  let(:uri) { spy('uri') }
+                context "when remote file is fetched successfully" do
+                  let(:uri) { spy("uri") }
 
                   before do
                     allow(Kernel).to \
@@ -211,7 +209,7 @@ module Resume
                       receive(:file?).and_return(false, true)
                   end
 
-                  it 'returns the newly created temp file' do
+                  it "returns the newly created temp file" do
                     expect(file).to receive(:write).with(uri)
                     expect(File).to receive(:open).with(tmpfile_path)
                     described_class.fetch(path)

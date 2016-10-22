@@ -4,12 +4,12 @@ it:
   please_check_your_network_settings:
     Si prega di controllare le impostazioni del network e riprovare.
   i_need_the_following_to_generate_a_pdf:
-    'Per generare un PDF, ho bisogno di i seguenti:'
-  ruby_gems: '* Ruby gems:'
-  gem_name_and_version: '  - %{name} %{version}'
-  custom_fonts: '* Font custom per il curriculum'
-  may_i_please_install_them: 'Mi permetto di installarli? (Y/N) '
-  thank_you_kindly: 'Grazie di cuore :-)'
+    "Per generare un PDF, ho bisogno di i seguenti:"
+  ruby_gems: "* Ruby gems:"
+  gem_name_and_version: "  - %{name} %{version}"
+  custom_fonts: "* Font custom per il curriculum"
+  may_i_please_install_them: "Mi permetto di installarli? (Y/N) "
+  thank_you_kindly: "Grazie di cuore :-)"
   installing_ruby_gems: Installazione i Ruby gems...
   downloading_font: |
     Downloading %{filename} da
@@ -35,7 +35,7 @@ it:
   creating_education_history_section: Creando la sezione di istruzione/formazione...
   resume_generated_successfully: Il curriculum è generato con successo.
   would_you_like_me_to_open_the_resume:
-    'Vuoi aprire ora il curriculum (Y/N)? '
+    "Vuoi aprire ora il curriculum (Y/N)? "
   thanks_for_looking_at_my_resume: |-
     Grazie per guardare il mio curriculum. Spero di sentirti presto!
     Il mio curriculum è stato generato nella stessa directory di questo script,

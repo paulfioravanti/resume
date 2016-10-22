@@ -7,7 +7,7 @@ module Resume
     # NOTE: On the one-sheet resume, this check will only work for
     # >= Ruby 2.1  Earlier versions will throw a syntax error.
     def check_ruby_version
-      # require 'rubygems' only needed for ruby pre-1.9.0
+      # require "rubygems" only needed for ruby pre-1.9.0
       # but it's safe for later versions (evaluates to false).
       require "rubygems"
       request_to_install_latest_ruby if old_ruby_version?

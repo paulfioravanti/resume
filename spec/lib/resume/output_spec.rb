@@ -1,5 +1,5 @@
-require 'spec_helper'
-require 'resume/output'
+require "spec_helper"
+require "resume/output"
 
 module Resume
   RSpec.describe Output do
