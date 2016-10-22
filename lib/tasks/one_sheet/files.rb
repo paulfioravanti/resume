@@ -1,12 +1,14 @@
 module OneSheet
-  class Files
-    def self.read(type)
-      type[:files].reduce('') do |content, file|
+  module Files
+    module_function
+
+    def read(type)
+      type[:files].reduce("") do |content, file|
         content << read_file(type[:path], file)
       end
     end
 
-    def self.read_file(path, file)
+    def read_file(path, file)
       lines = File.readlines(File.join(path, file[:file]))
       lines[file[:from_line]..file[:to_line]].join << "\n"
     end

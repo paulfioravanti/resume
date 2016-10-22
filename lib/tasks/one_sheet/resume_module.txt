@@ -6,11 +6,13 @@ module Resume
   remove_const(:VERSION) if const_defined?(:VERSION)
   remove_const(:REMOTE_REPO) if const_defined?(:REMOTE_REPO)
   remove_const(:REQUIRED_RUBY_VERSION) if const_defined?(:REQUIRED_RUBY_VERSION)
-  VERSION = '1.2'
+  VERSION = "1.2"
   REMOTE_REPO =
-    'https://raw.githubusercontent.com/paulfioravanti/resume/master'
+    "https://raw.githubusercontent.com/paulfioravanti/resume/master"
 
-  def self.generate
+  module_function
+
+  def generate
     RubyVersionChecker.check_ruby_version
     CLI::Application.start
   end

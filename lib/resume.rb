@@ -1,14 +1,14 @@
 module Resume
-  VERSION = '1.2'
+  VERSION = "1.2"
   REMOTE_REPO =
-    'https://raw.githubusercontent.com/paulfioravanti/resume/master'
+    "https://raw.githubusercontent.com/paulfioravanti/resume/master"
 
   module_function
 
   def generate
-    require_relative 'resume/ruby_version_checker'
+    require_relative "resume/ruby_version_checker"
     RubyVersionChecker.check_ruby_version
-    require_relative 'resume/cli/application'
+    require_relative "resume/cli/application"
     CLI::Application.start
   end
 end

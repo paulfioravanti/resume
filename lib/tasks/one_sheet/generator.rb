@@ -1,56 +1,47 @@
-require_relative '../../resume/output'
-require_relative 'files'
-require 'yaml'
+require_relative "../../resume/output"
+require_relative "files"
+require "yaml"
 
 module OneSheet
-  class Generator
-    def self.run
-      new.run
-    end
-
-    private_class_method :new
-
-    def initialize
-      @config = YAML.load_file(File.join(__dir__, 'config.yml'))
-      @file_types = config[:file_types]
-      @content = ''
-    end
+  module Generator
+    module_function
 
     def run
-      resume_files
-      start_app
-      output_file
+      Resume::Output.raw_warning("Generating one-sheet resume...")
+      resume = document_content << executable
+      output_file(resume)
       run_specs
     end
 
-    private
-
-    attr_accessor :content
-    attr_reader :config, :file_types
-
-    def resume_files
-      file_types.each do |type|
-        content << Files.read(config[type])
+    def document_content
+      config = YAML.load_file(File.join(__dir__, "config.yml"))
+      config.keys.reduce("") do |content, file_type|
+        content << Files.read(config[file_type])
       end
     end
+    private_class_method :document_content
 
-    def start_app
-      content <<
-        "if __FILE__ == $0\n"\
-        "  Resume.generate\n"\
-        "end\n"
+    def executable
+      <<~EXECUTABLE
+        if __FILE__ == $0
+          Resume.generate
+        end
+      EXECUTABLE
     end
+    private_class_method :executable
 
-    def output_file
-      File.open('resume.rb', 'w') do |file|
-        file.write(content)
+    def output_file(resume)
+      File.open("resume.rb", "w") do |file|
+        file.write(resume)
       end
-      Resume::Output.raw_success('Successfully generated one-sheet resume')
+      Resume::Output.raw_success("Successfully generated one-sheet resume")
     end
+    private_class_method :output_file
 
     def run_specs
-      Resume::Output.raw_warning('Running specs...')
-      system('rspec', 'resume.rb')
+      Resume::Output.raw_warning("Running specs...")
+      system("rspec", "resume.rb")
     end
+    private_class_method :run_specs
   end
 end

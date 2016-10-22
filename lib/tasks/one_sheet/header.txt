@@ -35,14 +35,14 @@
 ### of lines of code :)
 ################################################################################
 
-require 'yaml'
-require 'erb'
-require 'tmpdir'
-require 'base64'
-require 'open-uri'
-require 'json'
-require 'optparse'
-require 'socket'
-require 'forwardable'
-require 'pathname'
-require 'rspec'
+require "yaml"
+require "erb"
+require "tmpdir"
+require "base64"
+require "open-uri"
+require "json"
+require "optparse"
+require "socket"
+require "forwardable"
+require "pathname"
+require "rspec"
