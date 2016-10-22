@@ -11,7 +11,7 @@ module Resume
             [entry[:organisation]],
             [entry[:period], entry[:location]]
           ]
-          if x_position = entry[:at_x_position]
+          if (x_position = entry[:at_x_position])
             formatted_text_box_header(
               header_sections, pdf, x_position
             )
@@ -46,7 +46,7 @@ module Resume
             styles: section[:styles],
             size: section[:size],
             color: section[:colour],
-            link: section[:link],
+            link: section[:link]
           }
         end
         private_class_method :properties_for

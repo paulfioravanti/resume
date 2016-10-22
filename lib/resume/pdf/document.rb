@@ -1,4 +1,4 @@
-require_relative 'manifest'
+require_relative "manifest"
 
 module Resume
   module PDF
@@ -9,8 +9,8 @@ module Resume
     # hierarchy in advance will result in an uninitialized constant error.
     class Document
       def self.generate(resume, title, filename)
-        require 'prawn'
-        require 'prawn/table'
+        require "prawn"
+        require "prawn/table"
         Prawn::Document.generate(filename, options(title, resume)) do |pdf|
           pdf.instance_exec(resume) do |document|
             Manifest.process(self, document)

@@ -1,9 +1,9 @@
-require 'tmpdir'
-require_relative '../output'
-require_relative 'exceptions'
-require_relative 'file_system'
-require_relative 'file_fetcher'
-require_relative 'content_parser'
+require "tmpdir"
+require_relative "../output"
+require_relative "exceptions"
+require_relative "file_system"
+require_relative "file_fetcher"
+require_relative "content_parser"
 
 module Resume
   module CLI
@@ -28,11 +28,10 @@ module Resume
         Zip::File.open(FileSystem.tmpfile_path(font[:filename])) do |file|
           file.each do |entry|
             font[:files].each do |_, filename|
-              if entry.name.match(filename)
-                # overwrite any existing files with true block
-                entry.extract(FileSystem.tmpfile_path(filename)) { true }
-                break # inner loop only
-              end
+              next unless entry.name.match(filename)
+              # overwrite any existing files with true block
+              entry.extract(FileSystem.tmpfile_path(filename)) { true }
+              break # inner loop only
             end
           end
         end
@@ -70,7 +69,7 @@ module Resume
       private
 
       def extract_fonts(font)
-        require 'zip'
+        require "zip"
         self.class.send(:extract_fonts, font)
       end
     end

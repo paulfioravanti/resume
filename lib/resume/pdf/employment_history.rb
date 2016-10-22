@@ -1,5 +1,5 @@
-require_relative 'entry/heading'
-require_relative 'entry/content'
+require_relative "entry/heading"
+require_relative "entry/content"
 
 module Resume
   module PDF

@@ -1,5 +1,5 @@
-require_relative 'header'
-require_relative 'company_logo'
+require_relative "header"
+require_relative "company_logo"
 
 module Resume
   module PDF
@@ -20,10 +20,10 @@ module Resume
         private_class_method :details
 
         def self.profile(pdf, entry)
-          return unless job_content = entry[:profile]
+          return unless (job_content = entry[:profile])
           cell_style = entry[:cell_style]
           table_data = job_content.reduce([]) do |content, responsibility|
-            content << ['-', responsibility]
+            content << ["-", responsibility]
           end
           pdf.table(
             table_data,

@@ -10,7 +10,7 @@ module Resume
           pdf.formatted_text(
             [
               {
-                text: '|' * logo[:bars],
+                text: "|" * logo[:bars],
                 size: logo[:size],
                 link: logo[:link]
               }

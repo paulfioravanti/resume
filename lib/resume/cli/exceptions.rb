@@ -8,8 +8,8 @@ module Resume
       def initialize
         @messages = {
           raw_error:
-            'My resume and the specs are bilingual and need the I18n gem.',
-          raw_warning: 'Please run: gem install i18n'
+            "My resume and the specs are bilingual and need the I18n gem.",
+          raw_warning: "Please run: gem install i18n"
         }
       end
     end
@@ -56,7 +56,7 @@ module Resume
       def initialize(error)
         super(error)
         @messages = {
-          raw_error: 'You have some invalid options.',
+          raw_error: "You have some invalid options.",
           raw: message
         }
       end
