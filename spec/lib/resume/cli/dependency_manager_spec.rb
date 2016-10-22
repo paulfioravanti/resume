@@ -1,15 +1,15 @@
-require 'resume/cli/dependency_manager'
+require "resume/cli/dependency_manager"
 
 module Resume
   module CLI
     RSpec.describe DependencyManager do
-      let(:gems) { instance_double('Array', :gems) }
-      let(:fonts) { instance_double('Array', :fonts) }
+      let(:gems) { instance_double("Array", :gems) }
+      let(:fonts) { instance_double("Array", :fonts) }
       let(:dependencies) do
         { gems: gems, fonts: fonts }
       end
-      let(:gem_installer) { instance_double('GemInstaller') }
-      let(:font_downloader) { instance_double('FontDownloader') }
+      let(:gem_installer) { instance_double("GemInstaller") }
+      let(:font_downloader) { instance_double("FontDownloader") }
       let(:dependency_manager) do
         described_class.new(dependencies)
       end
@@ -21,7 +21,7 @@ module Resume
           receive(:new).with(fonts).and_return(font_downloader)
       end
 
-      describe '#installation_required?' do
+      describe "#installation_required?" do
         let(:installation_required) do
           dependency_manager.installation_required?
         end
@@ -38,49 +38,49 @@ module Resume
             have_received(:audit_font_dependencies)
         end
 
-        context 'when gem dependencies are present' do
+        context "when gem dependencies are present" do
           before do
             allow(gem_installer).to \
-              receive(:gems).and_return(['foo', '1.0.0'])
+              receive(:gems).and_return(["foo", "1.0.0"])
           end
 
-          it 'returns true' do
+          it "returns true" do
             expect(installation_required).to be true
           end
         end
 
-        context 'when gem dependencies are not present' do
+        context "when gem dependencies are not present" do
           before do
             allow(gem_installer).to receive(:gems).and_return([])
           end
 
-          context 'when font dependencies are present' do
+          context "when font dependencies are present" do
             before do
               allow(font_downloader).to \
                 receive(:fonts).
-                  and_return([instance_double('Hash', :font)])
+                  and_return([instance_double("Hash", :font)])
             end
 
-            it 'returns true' do
+            it "returns true" do
               expect(installation_required).to be true
             end
           end
 
-          context 'when font dependencies are not present' do
+          context "when font dependencies are not present" do
             before do
               allow(font_downloader).to \
                 receive(:fonts).and_return([])
             end
 
-            it 'returns false' do
+            it "returns false" do
               expect(installation_required).to be false
             end
           end
         end
       end
 
-      describe '#request_dependency_installation' do
-        it 'informs of the dependencies and asks to install them' do
+      describe "#request_dependency_installation" do
+        it "informs of the dependencies and asks to install them" do
           expect(Output).to \
             receive(:warning).
               with(:i_need_the_following_to_generate_a_pdf)
@@ -93,22 +93,22 @@ module Resume
         end
       end
 
-      describe '#install' do
+      describe "#install" do
         let(:installing) { -> { dependency_manager.install } }
 
-        context 'when gems are sucessfully installed' do
+        context "when gems are sucessfully installed" do
           before do
             allow(gem_installer).to \
               receive(:gems_successfully_installed?).and_return(true)
           end
 
-          context 'when fonts are sucessfully installed' do
+          context "when fonts are sucessfully installed" do
             before do
               allow(font_downloader).to \
                 receive(:fonts_successfully_downloaded?).and_return(true)
             end
 
-            it 'outputs that dependencies were successfully installed' do
+            it "outputs that dependencies were successfully installed" do
               expect(Output).to \
                 receive(:success).
                   with(:dependencies_successfully_installed)
@@ -116,26 +116,26 @@ module Resume
             end
           end
 
-          context 'when fonts are not sucessfully installed' do
+          context "when fonts are not sucessfully installed" do
             before do
               allow(font_downloader).to \
                 receive(:fonts_successfully_downloaded?).and_return(false)
             end
 
-            it 'raises a DependencyInstallationError' do
+            it "raises a DependencyInstallationError" do
               expect(installing).to \
                 raise_error(DependencyInstallationError)
             end
           end
         end
 
-        context 'when gems are not sucessfully installed' do
+        context "when gems are not sucessfully installed" do
           before do
             allow(gem_installer).to \
               receive(:gems_successfully_installed?).and_return(false)
           end
 
-          it 'raises a DependencyInstallationError' do
+          it "raises a DependencyInstallationError" do
             expect(installing).to \
               raise_error(DependencyInstallationError)
           end
