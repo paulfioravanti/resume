@@ -15,13 +15,12 @@ module Resume
 
       def self.parser
         OptionParser.new do |opts|
-          blank_line = opts.separator ''
-          opts.banner = 'Usage: ./bin/resume [options]'
-          blank_line
-          opts.separator 'Specific options:'
+          opts.banner = "Usage: ./bin/resume [options]"
+          opts.separator("")
+          opts.separator "Specific options:"
           locale_option(opts)
-          blank_line
-          opts.separator 'Common options:'
+          opts.separator("")
+          opts.separator "Common options:"
           help_option(opts)
           version_option(opts)
         end
@@ -29,7 +28,7 @@ module Resume
       private_class_method :parser
 
       def self.locale_option(opts)
-        opts.on('-l', '--locale LOCALE',
+        opts.on("-l", "--locale LOCALE",
           "Select the locale of the resume "\
           "(#{I18n.available_locales.join(', ')})") do |locale|
           begin
@@ -42,7 +41,7 @@ module Resume
       private_class_method :locale_option
 
       def self.help_option(opts)
-        opts.on_tail('-h', '--help', 'Show this message') do
+        opts.on_tail("-h", "--help", "Show this message") do
           Output.raw(opts)
           throw :halt
         end
@@ -50,7 +49,7 @@ module Resume
       private_class_method :help_option
 
       def self.version_option(opts)
-        opts.on_tail('-v', '--version', 'Show version') do
+        opts.on_tail("-v", "--version", "Show version") do
           Output.raw(Resume::VERSION)
           throw :halt
         end

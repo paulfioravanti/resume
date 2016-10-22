@@ -1,10 +1,6 @@
 module Resume
   module Colours
-    def self.extended(base)
-      instance_methods(false).each do |method|
-        base.send(:private_class_method, method)
-      end
-    end
+    module_function
 
     def red(text)
       colourize(text, colour_code: 31)
@@ -25,5 +21,6 @@ module Resume
     def colourize(text, colour_code:)
       "\e[#{colour_code}m#{text}\e[0m"
     end
+    private_class_method :colourize
   end
 end
