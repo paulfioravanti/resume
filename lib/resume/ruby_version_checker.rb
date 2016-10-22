@@ -10,9 +10,7 @@ module Resume
       # require 'rubygems' only needed for ruby pre-1.9.0
       # but it's safe for later versions (evaluates to false).
       require "rubygems"
-      if old_ruby_version?
-        request_to_install_latest_ruby
-      end
+      request_to_install_latest_ruby if old_ruby_version?
     rescue LoadError
       # NOTE: LoadError could occur if someone attempts to run
       # this with Ruby 1.8.7 and they don't have rubygems installed
