@@ -998,7 +998,8 @@ Style/SpecialGlobalVars:
 Style/StringLiterals:
   Description: 'Checks if uses of quotes match the configured preference.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#consistent-string-literals'
-  Enabled: false
+  Enabled: true
+  EnforcedStyle: double_quotes
 
 Style/StringLiteralsInInterpolation:
   Description: >-
