@@ -1,12 +1,12 @@
+# References:
+# - https://docs.travis-ci.com/user/caching/#Bundler
 language: ruby
+cache: bundler
 rvm:
 - 2.3.1
+addons:
+  code_climate:
+    repo_token: $CODECLIMATE_REPO_TOKEN
 script:
 - bundle exec rspec spec/ --no-drb --format progress
 - bundle exec rake resume
-env:
-  global:
-  - secure: |-
-      IIBXub6BG+Sb8n6N+gMli+iETv9p0atS5la2evNOU2YbsKZBTuNnKHDsUF/1wgOXbJ6HjiG
-      2Nfn8xJAIXZ0cKtulnxbTnEqINl4Jfy0RFotk9xinJeC48Pv+QMOiRh+FmSOexQUUc6NPCf
-      2PtXEG+4wMV7zKqM2FgSq86GIGU0w=
