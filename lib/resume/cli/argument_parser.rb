@@ -30,7 +30,7 @@ module Resume
       def self.locale_option(opts)
         opts.on("-l", "--locale LOCALE",
           "Select the locale of the resume "\
-          "(#{I18n.available_locales.join(", ")})") do |locale|
+          "(#{I18n.available_locales.join(', ')})") do |locale|
           begin
             I18n.locale = locale.to_sym
           rescue I18n::InvalidLocale
