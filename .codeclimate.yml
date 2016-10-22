@@ -18,4 +18,4 @@ ratings:
   - Gemfile.lock
   - "**.rb"
 exclude_paths:
-  - "spec/"
+- "spec/**/*"
