@@ -6,7 +6,6 @@ strings_*.rb
 resume.rb
 reek.html
 
-Gemfile.lock
 doc/
 pkg/
 vendor/cache/*.gem
