@@ -31,8 +31,7 @@ module Resume
 
       def generate_logo_for(logo, pdf, logo_set)
         x_position = logo_set[:x_position]
-        pdf.bounding_box(
-          [x_position, pdf.cursor], width: logo[:width]) do
+        pdf.bounding_box([x_position, pdf.cursor], width: logo[:width]) do
           pdf.image(logo[:image], fit: logo[:fit], align: logo[:align])
           pdf.move_up logo[:link_overlay_start]
           TransparentLink.generate(pdf, logo)
