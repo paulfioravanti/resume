@@ -1,11 +1,10 @@
-require_relative '../output'
-require_relative 'exceptions'
-require_relative 'exception_suppressor'
+require_relative "../output"
+require_relative "exceptions"
+require_relative "exception_suppressor"
 
 module Resume
   module CLI
     class GemInstaller
-      include ExceptionSuppressor
       extend Forwardable
 
       attr_reader :gems
@@ -25,7 +24,7 @@ module Resume
       def audit_gem_dependencies
         gems.each do |name, version|
           # if gem not installed: leave in the gems list
-          suppress(Gem::LoadError, -> { next }) do
+          ExceptionSuppressor.suppress(Gem::LoadError, -> { next }) do
             if gem_already_installed?(name, version)
               # remove dependency to install
               self.gems -= [[name, version]]
@@ -38,9 +37,9 @@ module Resume
         return if gems.none?
         Output.warning(:ruby_gems)
         gems.each do |name, version|
-          Output.plain([
-            :gem_name_and_version, { name: name, version: version }
-          ])
+          Output.plain(
+            [:gem_name_and_version, { name: name, version: version }]
+          )
         end
       end
 
@@ -48,7 +47,7 @@ module Resume
         return true if gems.none?
         Output.plain(:installing_ruby_gems)
         gems.all? do |gem, version|
-          Kernel.system('gem', 'install', gem, '-v', version)
+          Kernel.system("gem", "install", gem, "-v", version)
         end
       rescue SocketError, Errno::ECONNREFUSED
         raise NetworkConnectionError

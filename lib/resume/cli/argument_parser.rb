@@ -1,10 +1,12 @@
-require 'optparse'
-require_relative 'exceptions'
+require "optparse"
+require_relative "exceptions"
 
 module Resume
   module CLI
-    class ArgumentParser
-      def self.parse
+    module ArgumentParser
+      module_function
+
+      def parse
         help = parser.help
         parser.parse!(ARGV)
       rescue OptionParser::InvalidOption
@@ -13,7 +15,7 @@ module Resume
         raise MissingArgumentError, help
       end
 
-      def self.parser
+      def parser
         OptionParser.new do |opts|
           opts.banner = "Usage: ./bin/resume [options]"
           opts.separator("")
@@ -27,8 +29,10 @@ module Resume
       end
       private_class_method :parser
 
-      def self.locale_option(opts)
-        opts.on("-l", "--locale LOCALE",
+      def locale_option(opts)
+        opts.on(
+          "-l",
+          "--locale LOCALE",
           "Select the locale of the resume "\
           "(#{I18n.available_locales.join(', ')})") do |locale|
           begin
@@ -40,7 +44,7 @@ module Resume
       end
       private_class_method :locale_option
 
-      def self.help_option(opts)
+      def help_option(opts)
         opts.on_tail("-h", "--help", "Show this message") do
           Output.raw(opts)
           throw :halt
@@ -48,7 +52,7 @@ module Resume
       end
       private_class_method :help_option
 
-      def self.version_option(opts)
+      def version_option(opts)
         opts.on_tail("-v", "--version", "Show version") do
           Output.raw(Resume::VERSION)
           throw :halt

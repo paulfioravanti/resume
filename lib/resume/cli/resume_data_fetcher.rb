@@ -1,6 +1,6 @@
-require 'json'
-require_relative '../output'
-require_relative 'file_fetcher'
+require "json"
+require_relative "../output"
+require_relative "file_fetcher"
 
 module Resume
   module CLI

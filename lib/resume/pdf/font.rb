@@ -1,7 +1,9 @@
 module Resume
   module PDF
-    class Font
-      def self.configure(pdf, font)
+    module Font
+      module_function
+
+      def configure(pdf, font)
         # Accented characters will bring up a
         # warning that we don't care about
         Prawn::Font::AFM.hide_m17n_warning = true

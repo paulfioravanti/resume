@@ -1,11 +1,7 @@
 module Resume
   module CLI
     module ExceptionSuppressor
-      def self.extended(base)
-        base.send(:private_class_method, :suppress)
-      end
-
-      private
+      module_function
 
       def suppress(exception_to_ignore = StandardError, default = -> {})
         yield

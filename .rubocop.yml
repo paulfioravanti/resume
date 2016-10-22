@@ -141,7 +141,7 @@ Lint/RequireParentheses:
 Lint/RescueException:
   Description: 'Avoid rescuing the Exception class.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-blind-rescues'
-  Enabled: true
+  Enabled: false
 
 Lint/ShadowingOuterLocalVariable:
   Description: >-
@@ -600,7 +600,7 @@ Style/GlobalVars:
 Style/GuardClause:
   Description: 'Check for conditionals that can be replaced with guard clauses'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-nested-conditionals'
-  Enabled: true
+  Enabled: false
 
 Style/HashSyntax:
   Description: >-
@@ -614,7 +614,7 @@ Style/IfUnlessModifier:
                  Favor modifier if/unless usage when you have a
                  single-line body.
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#if-as-a-modifier'
-  Enabled: true
+  Enabled: false
 
 Style/IfWithSemicolon:
   Description: 'Do not use if x; .... Use the ternary operator instead.'

@@ -1,14 +1,14 @@
-require 'open-uri'
-require 'socket'
-require 'tmpdir'
-require 'pathname'
-require_relative 'exceptions'
-require_relative 'file_system'
+require "open-uri"
+require "socket"
+require "tmpdir"
+require "pathname"
+require_relative "exceptions"
+require_relative "file_system"
 
 module Resume
   module CLI
     class FileFetcher
-      def self.fetch(path, filename: '')
+      def self.fetch(path, filename: "")
         pathname = Pathname.new(path)
         filename = pathname.basename.to_path if filename.empty?
         new(pathname, filename).fetch
@@ -38,7 +38,7 @@ module Resume
       end
 
       def remote_file
-        File.open(tmpfile_path, 'wb') do |file|
+        File.open(tmpfile_path, "wb") do |file|
           Kernel.open(remote_file_path) do |uri|
             file.write(uri.read)
           end

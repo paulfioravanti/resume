@@ -1,7 +1,9 @@
 module Resume
   module PDF
-    class Headline
-      def self.generate(pdf, headline)
+    module Headline
+      module_function
+
+      def generate(pdf, headline)
         pdf.move_down(headline[:top_padding])
         primary_header = headline[:primary]
         pdf.formatted_text(

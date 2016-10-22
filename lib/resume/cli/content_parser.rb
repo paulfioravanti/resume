@@ -1,25 +1,27 @@
-require 'json'
-require 'base64'
-require_relative 'file_fetcher'
-require_relative 'file_system'
+require "json"
+require "base64"
+require_relative "file_fetcher"
+require_relative "file_system"
 
 module Resume
   module CLI
-    class ContentParser
+    module ContentParser
       # Taken from http://stackoverflow.com/q/8571501/567863
       BASE64_STRING_REGEX = %r{\A
         ([A-Za-z0-9+/]{4})*
         ([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)
       \z}x
-      ASSET_PATH = %r{dropbox}
+      ASSET_PATH = /dropbox/
 
-      def self.decode_content(string)
+      module_function
+
+      def decode_content(string)
         # Force encoding to UTF-8 is needed for strings that had UTF-8
         # characters in them when they were originally encoded
-        Base64.strict_decode64(string).force_encoding('utf-8')
+        Base64.strict_decode64(string).force_encoding("utf-8")
       end
 
-      def self.parse(resume)
+      def parse(resume)
         JSON.recurse_proc(resume, &decode_and_fetch_assets)
       end
 
@@ -27,8 +29,8 @@ module Resume
       # in the JSON, so specifically target those data types for
       # manipulation, and ignore any direct references given to the
       # keys or values of the JSON hash.
-      def self.decode_and_fetch_assets
-        Proc.new do |object|
+      def decode_and_fetch_assets
+        proc do |object|
           case object
           when Hash
             parse_hash(object)
@@ -41,7 +43,7 @@ module Resume
       end
       private_class_method :decode_and_fetch_assets
 
-      def self.parse_hash(hash)
+      def parse_hash(hash)
         hash.each do |key, value|
           if value =~ BASE64_STRING_REGEX
             value = decode_content(value)
@@ -55,7 +57,7 @@ module Resume
       end
       private_class_method :parse_hash
 
-      def self.munge_hash_value(hash, key, value)
+      def munge_hash_value(hash, key, value)
         if key == :align
           # Prawn specifically requires :align values to
           # be symbols otherwise it errors out
@@ -74,17 +76,16 @@ module Resume
       end
       private_class_method :munge_hash_value
 
-      def self.substitute_filenames_for_filepaths(value)
+      def substitute_filenames_for_filepaths(value)
         [:normal, :bold].each do |property|
           if value.has_key?(property)
-            value[property] =
-              FileSystem.tmpfile_path(value[property])
+            value[property] = FileSystem.tmpfile_path(value[property])
           end
         end
       end
       private_class_method :substitute_filenames_for_filepaths
 
-      def self.parse_array(array)
+      def parse_array(array)
         array.each_with_index do |value, index|
           if value =~ BASE64_STRING_REGEX
             array[index] = decode_content(value)

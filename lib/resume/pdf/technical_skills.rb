@@ -1,9 +1,11 @@
-require_relative 'entry/heading'
+require_relative "entry/heading"
 
 module Resume
   module PDF
-    class TechnicalSkills
-      def self.generate(pdf, technical_skills)
+    module TechnicalSkills
+      module_function
+
+      def generate(pdf, technical_skills)
         Entry::Heading.generate(pdf, technical_skills[:heading])
         content = technical_skills[:content]
         pdf.move_down content[:top_padding]
