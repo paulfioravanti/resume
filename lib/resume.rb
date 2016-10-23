@@ -1,5 +1,5 @@
 module Resume
-  VERSION = "1.2"
+  VERSION = "1.3"
   REMOTE_REPO =
     "https://raw.githubusercontent.com/paulfioravanti/resume/master"
 
