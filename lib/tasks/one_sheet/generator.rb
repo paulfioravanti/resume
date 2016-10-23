@@ -40,7 +40,7 @@ module OneSheet
 
     def run_specs
       Resume::Output.raw_warning("Running specs...")
-      system("rspec", "resume.rb")
+      system("bin/rspec", "resume.rb")
     end
     private_class_method :run_specs
   end
