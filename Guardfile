@@ -1,4 +1,4 @@
-guard :rspec, cmd: "bundle exec rspec", env: { "NO_COVERAGE" => true } do
+guard :rspec, cmd: "bin/rspec", env: { "NO_COVERAGE" => true } do
   require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
 
