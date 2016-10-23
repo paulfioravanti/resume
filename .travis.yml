@@ -8,5 +8,5 @@ addons:
   code_climate:
     repo_token: $CODECLIMATE_REPO_TOKEN
 script:
-- bundle exec rspec spec/ --no-drb --format progress
-- bundle exec rake resume
+- bin/rspec spec/ --no-drb --format progress
+- bin/rake resume

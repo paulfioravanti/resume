@@ -15,6 +15,12 @@ Text is deliberately obfuscated in the JSON files that contain the resume conten
 with [Base64](http://ruby-doc.org/stdlib-2.3.0/libdoc/base64/rdoc/Base64.html)
 to ensure people generate the PDF in order to be able to read anything.
 
+## Setup
+
+    $ git clone https://github.com/paulfioravanti/resume.git
+    $ cd resume
+    $ bundle install
+
 ## Usage
 
 Generate the resume in the following languages:
@@ -27,12 +33,11 @@ Run `$ bin/resume -h` to see all the options.
 
 Run the specs:
 
-    $ bundle install
-    $ rspec spec/
+    $ bin/rspec
 
-If you have SimpleCov installed, view the test coverage report located at:
+If you have SimpleCov installed, view the test coverage report:
 
-    coverage/index.html
+    $ open coverage/index.html
 
 ### One Sheet Resume
 
@@ -57,7 +62,8 @@ The specs can also be run directly on the one sheet resume:
 ### Dependencies
 
 - Ruby 2.3.1
-- I18n 0.7, Prawn 2.1.0 and Prawn-Table 0.2.2 (if you don't have the specific versions of the gems, you will be prompted to install them)
+- I18n 0.7, Prawn 2.1.0 and Prawn-Table 0.2.2 (if you don't have the specific
+  versions of the gems, you will be prompted to install them)
 - RSpec 3.4, if you want to run the specs
 - SimpleCov 0.11 if you want to view the coverage report locally
 
@@ -69,7 +75,11 @@ The slide deck can be found [here](https://speakerdeck.com/paulfioravanti/resume
 
 ### Issues:
 
-- It doesn't seem possible yet in Prawn to make an embedded image a clickable link.  Until support is possible (if ever), I've simply pulled in images from Dropbox and overlaid a transparent text link on top to simulate clicking an image.  More discussion on this issue is at [this StackOverflow thread](http://stackoverflow.com/q/8289031/567863).
+- It doesn't seem possible yet in Prawn to make an embedded image a clickable
+  link.  Until support is possible (if ever), I've simply pulled in images from
+  Dropbox and overlaid a transparent text link on top to simulate clicking an
+  image.  More discussion on this issue is at
+  [this StackOverflow thread](http://stackoverflow.com/q/8289031/567863).
 
 ### Social
 
