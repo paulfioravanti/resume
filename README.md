@@ -46,7 +46,7 @@ single file called `resume.rb`).<br />
 If I sent my resume to you directly, it would have been generated from
 this `rake` task:
 
-    $ rake resume
+    $ bin/rake resume
 
 The resume PDF can be generated from the one sheet in a similar way as the
 CLI app:
