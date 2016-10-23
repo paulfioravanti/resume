@@ -14,7 +14,7 @@ module Resume
     class Application
       extend Forwardable
 
-      POSITIVE_INPUT = /\Ay(es)?\z/i
+      POSITIVE_INPUT = /\A(y|yes)\z/i
 
       def self.start
         Settings.configure
