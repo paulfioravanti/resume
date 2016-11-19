@@ -10,3 +10,5 @@ addons:
 script:
 - bin/rspec spec/ --no-drb --format progress
 - bin/rake resume
+after_success:
+- codeclimate-test-reporter
