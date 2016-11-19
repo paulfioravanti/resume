@@ -61,16 +61,17 @@ The specs can also be run directly on the one sheet resume:
 
 ### Dependencies
 
-- Ruby 2.3.1
+- Ruby 2.3.2
 - I18n 0.7, Prawn 2.1.0 and Prawn-Table 0.2.2 (if you don't have the specific
   versions of the gems, you will be prompted to install them)
-- RSpec 3.4, if you want to run the specs
-- SimpleCov 0.11 if you want to view the coverage report locally
+- RSpec 3.5, if you want to run the specs
+- SimpleCov 0.12 if you want to view the coverage report locally
 
 ### Presentation
 
-I did a lightning talk about this project at the Ruby on Rails Oceania Meetup
-on 10 May 2016.<br />
+I did a lightning talk about this project at the
+[Ruby on Rails Oceania Meetup](https://www.meetup.com/Ruby-On-Rails-Oceania-Sydney/)
+on [10 May 2016](https://www.meetup.com/Ruby-On-Rails-Oceania-Sydney/events/228886775/).<br />
 The slide deck can be found [here](https://speakerdeck.com/paulfioravanti/resume-as-code).
 
 ### Issues:
