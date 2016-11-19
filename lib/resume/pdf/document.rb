@@ -29,7 +29,7 @@ module Resume
             Title: title,
             Author: author,
             Creator: options[:repo_link],
-            CreationDate: Time.now,
+            CreationDate: Time.now
           }
         }
       end
