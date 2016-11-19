@@ -116,7 +116,7 @@
   :path: spec
   :files:
     - :file: spec_helper.rb
-      :from_line: 17
+      :from_line: 12
       :to_line: -2
 :resume_spec_files:
   :path: spec/lib/resume
