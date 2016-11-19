@@ -2,11 +2,6 @@ require "simplecov"
 require "resume/ruby_version_checker"
 Resume::RubyVersionChecker.check_ruby_version
 
-if ENV["TRAVIS"]
-  require "codeclimate-test-reporter"
-  CodeClimate::TestReporter.start
-end
-
 require "rspec"
 require "open-uri"
 require "resume"
