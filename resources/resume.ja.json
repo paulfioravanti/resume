@@ -24,7 +24,8 @@
     "margin_left": 1,
     "margin_right": 1,
     "background_image": "aHR0cHM6Ly9kbC5kcm9wYm94dXNlcmNvbnRlbnQuY29tL3UvNjg3ODA1Mi9yZXN1bWVfYXNzZXRzL2JhY2tncm91bmQuanBnP2RsPTE=",
-    "repeat": true
+    "repeat": true,
+    "repo_link": "aHR0cHM6Ly9naXRodWIuY29tL3BhdWxmaW9yYXZhbnRpL3Jlc3VtZQ=="
   },
   "font": {
     "name": "IPA",
@@ -69,7 +70,7 @@
       },
       "github": {
         "image": "aHR0cHM6Ly9kbC5kcm9wYm94dXNlcmNvbnRlbnQuY29tL3UvNjg3ODA1Mi9yZXN1bWVfYXNzZXRzL2dpdGh1Yi5wbmc/ZGw9MQ==",
-        "link": "aHR0cDovL2dpdGh1Yi5jb20vcGF1bGZpb3JhdmFudGk="
+        "link": "aHR0cHM6Ly9naXRodWIuY29tL3BhdWxmaW9yYXZhbnRp"
       },
       "stackoverflow": {
         "image": "aHR0cHM6Ly9kbC5kcm9wYm94dXNlcmNvbnRlbnQuY29tL3UvNjg3ODA1Mi9yZXN1bWVfYXNzZXRzL3N0YWNrb3ZlcmZsb3cucG5nP2RsPTE=",
