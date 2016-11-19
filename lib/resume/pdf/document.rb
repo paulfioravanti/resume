@@ -16,18 +16,19 @@ module Resume
       end
 
       def options(title, resume)
-        author = resume[:author]
+        options = resume[:options]
+        author = options[:author]
         {
-          margin_top: resume[:margin_top],
-          margin_bottom: resume[:margin_bottom],
-          margin_left: resume[:margin_left],
-          margin_right: resume[:margin_right],
-          background: resume[:background_image],
-          repeat: resume[:repeat],
+          margin_top: options[:margin_top],
+          margin_bottom: options[:margin_bottom],
+          margin_left: options[:margin_left],
+          margin_right: options[:margin_right],
+          background: options[:background_image],
+          repeat: options[:repeat],
           info: {
             Title: title,
             Author: author,
-            Creator: author,
+            Creator: options[:repo_link],
             CreationDate: Time.now
           }
         }
