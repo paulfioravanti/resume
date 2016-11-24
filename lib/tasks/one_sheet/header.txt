@@ -2,7 +2,7 @@
 ################################################################################
 ### Instructions to generate resume:
 ###
-### 1. Install Ruby version 2.3.2
+### 1. Install Ruby version 2.3.3
 ###
 ### 2. Ensure you have an internet connection as the script needs Ruby gems
 ###    for PDF generation, assets stored on Dropbox, and resume data

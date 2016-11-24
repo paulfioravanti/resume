@@ -61,7 +61,7 @@ The specs can also be run directly on the one sheet resume:
 
 ### Dependencies
 
-- Ruby 2.3.2
+- Ruby 2.3.3
 - I18n 0.7, Prawn 2.1.0 and Prawn-Table 0.2.2 (if you don't have the specific
   versions of the gems, you will be prompted to install them)
 - RSpec 3.5, if you want to run the specs
