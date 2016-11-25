@@ -15,6 +15,7 @@ module Resume
       extend Forwardable
 
       POSITIVE_INPUT = /\A(y|yes)\z/i
+      private_constant :POSITIVE_INPUT
 
       def self.start
         Settings.configure

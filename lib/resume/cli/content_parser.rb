@@ -6,12 +6,14 @@ require_relative "file_system"
 module Resume
   module CLI
     module ContentParser
-      # Taken from http://stackoverflow.com/q/8571501/567863
+      ASSET_PATH = /dropbox/
+      private_constant :ASSET_PATH
+      # Regex taken from http://stackoverflow.com/q/8571501/567863
       BASE64_STRING_REGEX = %r{\A
         ([A-Za-z0-9+/]{4})*
         ([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)
       \z}x
-      ASSET_PATH = /dropbox/
+      private_constant :BASE64_STRING_REGEX
 
       module_function
 
