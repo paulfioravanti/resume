@@ -106,10 +106,13 @@ module Resume
                 end
 
                 context "when an error occurs during uri parsing" do
+                  let(:remote_repo) { "https://www.example.com" }
+
                   before do
                     # Don't follow through with attempting to fetch the
                     # remote file
                     allow(Kernel).to receive(:open)
+                    stub_const("#{described_class}::REMOTE_REPO", remote_repo)
                   end
 
                   context "when a URI::BadURIError is raised" do
@@ -120,10 +123,8 @@ module Resume
                     end
 
                     it "fetches the file from the remote repo" do
-                      expect(File).to receive(:join).with(
-                        REMOTE_REPO,
-                        path
-                      )
+                      expect(File).to \
+                        receive(:join).with(described_class::REMOTE_REPO, path)
                       described_class.fetch(path)
                     end
                   end
@@ -136,10 +137,8 @@ module Resume
                     end
 
                     it "fetches the file from the remote repo" do
-                      expect(File).to receive(:join).with(
-                        REMOTE_REPO,
-                        path
-                      )
+                      expect(File).to \
+                        receive(:join).with(described_class::REMOTE_REPO, path)
                       described_class.fetch(path)
                     end
                   end

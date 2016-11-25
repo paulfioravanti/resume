@@ -8,6 +8,10 @@ require_relative "file_system"
 module Resume
   module CLI
     class FileFetcher
+      REMOTE_REPO =
+        "https://raw.githubusercontent.com/paulfioravanti/resume/master"
+      private_constant :REMOTE_REPO
+
       def self.fetch(path, filename: "")
         pathname = Pathname.new(path)
         filename = pathname.basename.to_path if filename.empty?
