@@ -73,7 +73,7 @@ GEM
       byebug (~> 9.0)
       pry (~> 0.10)
     rainbow (2.1.0)
-    rake (11.3.0)
+    rake (12.0.0)
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
@@ -128,7 +128,7 @@ DEPENDENCIES
   prawn (~> 2.1)
   prawn-table (= 0.2.2)
   pry-byebug (~> 3.1)
-  rake (~> 11.1)
+  rake (~> 12.0)
   reek (~> 4.0)
   resume!
   rspec (~> 3.4)
@@ -138,7 +138,7 @@ DEPENDENCIES
   yard (~> 0.8)
 
 RUBY VERSION
-   ruby 2.3.3p222
+   ruby 2.4.0p0
 
 BUNDLED WITH
    1.13.6
