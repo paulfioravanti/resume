@@ -45,7 +45,6 @@ module Resume
                      :installation_required?,
                      :request_dependency_installation,
                      :install
-      def_delegator self, :permission_granted?
 
       def start
         install_dependencies if installation_required?
@@ -59,7 +58,7 @@ module Resume
 
       def install_dependencies
         request_dependency_installation
-        if permission_granted?
+        if self.class.send(:permission_granted?)
           Output.success(:thank_you_kindly)
           install
         else
@@ -82,7 +81,9 @@ module Resume
 
       def open_resume
         Output.question(:would_you_like_me_to_open_the_resume)
-        FileSystem.open_document(filename) if permission_granted?
+        if self.class.send(:permission_granted?)
+          FileSystem.open_document(filename)
+        end
         Output.info([:thanks_for_looking_at_my_resume, { filename: filename }])
       end
     end

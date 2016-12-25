@@ -3,7 +3,7 @@
 language: ruby
 cache: bundler
 rvm:
-- 2.3.3
+- 2.4.0
 addons:
   code_climate:
     repo_token: $CODECLIMATE_REPO_TOKEN

@@ -192,7 +192,7 @@ module Resume
             before do
               expect(Output).to \
                 receive(:plain).with(:downloading_font)
-              allow(font_downloader).to \
+              allow(described_class).to \
                 receive(:download_font_file).with(font_location).
                   and_raise(NetworkConnectionError)
             end

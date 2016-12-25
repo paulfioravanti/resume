@@ -42,11 +42,11 @@ module Resume
         @fonts = fonts
       end
 
-      def_delegators self, :local_files_present?, :download_font_file
-
       def audit_font_dependencies
         fonts.each do |font|
-          fonts.delete(font) if local_files_present?(font[:files].values)
+          if self.class.send(:local_files_present?, font[:files].values)
+            fonts.delete(font)
+          end
         end
       end
 
@@ -59,7 +59,7 @@ module Resume
         return true if fonts.none?
         fonts.all? do |font|
           Output.plain(:downloading_font)
-          download_font_file(font[:location])
+          self.class.send(:download_font_file, font[:location])
           extract_fonts(font)
         end
       rescue NetworkConnectionError

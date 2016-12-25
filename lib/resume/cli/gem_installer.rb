@@ -19,13 +19,11 @@ module Resume
         @gems = gems
       end
 
-      def_delegator self, :gem_already_installed?
-
       def audit_gem_dependencies
         gems.each do |name, version|
           # if gem not installed: leave in the gems list
           ExceptionSuppressor.suppress(Gem::LoadError, -> { next }) do
-            if gem_already_installed?(name, version)
+            if self.class.send(:gem_already_installed?, name, version)
               # remove dependency to install
               self.gems -= [[name, version]]
             end
