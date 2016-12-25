@@ -1,6 +1,6 @@
 module Resume
   module RubyVersionChecker
-    REQUIRED_RUBY_VERSION = "2.3.3"
+    REQUIRED_RUBY_VERSION = "2.4.0"
     private_constant :REQUIRED_RUBY_VERSION
 
     module_function
@@ -25,7 +25,7 @@ module Resume
     private_class_method :old_ruby_version?
 
     def request_to_install_latest_ruby
-      puts "Please install Ruby version 2.3.1 or higher to generate resume."
+      puts "Please install Ruby version 2.4.0 or higher to generate resume."
       require "open3"
       puts "Your Ruby version is #{user_ruby_version}"
       exit
