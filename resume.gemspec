@@ -32,4 +32,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "rubyzip", "~> 1.2"
   gem.add_development_dependency "rubocop", "~> 0.46"
   gem.add_development_dependency "rubocop-rspec", "~> 1.9"
+  gem.add_development_dependency "guard-rubocop", "~> 1.2"
 end
