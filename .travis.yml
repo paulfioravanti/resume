@@ -9,6 +9,7 @@ addons:
     repo_token: $CODECLIMATE_REPO_TOKEN
 script:
 - bin/rspec spec/ --no-drb --format progress
+- bundle exec rubocop
 - bin/rake resume
 after_success:
 - bundle exec codeclimate-test-reporter

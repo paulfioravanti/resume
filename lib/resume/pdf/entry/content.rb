@@ -11,7 +11,7 @@ module Resume
           pdf.move_down entry[:top_padding]
           Header.generate(pdf, entry)
           CompanyLogo.generate(pdf, entry[:logo])
-          details(pdf, entry) if entry.has_key?(:summary)
+          details(pdf, entry) if entry.key?(:summary)
         end
 
         def details(pdf, entry)

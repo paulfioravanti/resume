@@ -37,16 +37,16 @@ module Resume
         Output.messages(error.messages)
         exit
       rescue LoadError
-        Output.messages({
+        Output.messages(
           error: :you_need_prawn_to_run_the_specs,
           warning: :please_install_them_or_run_the_resume
-        })
+        )
         exit
       rescue SocketError, OpenURI::HTTPError
-        Output.messages({
+        Output.messages(
           error: :you_need_an_internet_connection_to_run_the_specs,
           warning: :please_ensure_you_have_one
-        })
+        )
         exit
       end
     end

@@ -173,12 +173,12 @@ module Resume
                   and_return(bold_font_filepath)
               expect(normal_font_file).to \
                 receive(:extract).
-                  with(normal_font_filepath) do |*args, &block|
+                  with(normal_font_filepath) do |*_args, &block|
                     expect(block.call).to be true
                   end
               expect(bold_font_file).to \
                 receive(:extract).
-                  with(bold_font_filepath) do |*args, &block|
+                  with(bold_font_filepath) do |*_args, &block|
                     expect(block.call).to be true
                   end
             end
