@@ -47,7 +47,6 @@ module Resume
         end
       end
 
-
       context "when a LoadError occurs when loading open3 lib" do
         let(:message) do
           "Please install Ruby version 2.4.0 or higher "\

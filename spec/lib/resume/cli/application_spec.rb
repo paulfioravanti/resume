@@ -112,11 +112,9 @@ module Resume
               expect(Output).to \
                 receive(:question).
                   with(:would_you_like_me_to_open_the_resume)
-              expect(Output).to receive(:info).
-                with([
-                  :thanks_for_looking_at_my_resume,
-                  { filename: filename }
-                ])
+              expect(Output).to receive(:info).with(
+                [:thanks_for_looking_at_my_resume, { filename: filename }]
+              )
             end
 
             context "when permission to open the resume is denied" do

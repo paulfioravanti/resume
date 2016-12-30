@@ -84,9 +84,9 @@ module Resume
           it "outputs the name and version of each dependent gem" do
             expect(Output).to receive(:warning).with(:ruby_gems)
             gems.each do |name, version|
-              expect(Output).to receive(:plain).with([
-                :gem_name_and_version, { name: name, version: version }
-              ])
+              expect(Output).to receive(:plain).with(
+                [:gem_name_and_version, { name: name, version: version }]
+              )
             end
             gem_installer.output_gem_dependencies
           end

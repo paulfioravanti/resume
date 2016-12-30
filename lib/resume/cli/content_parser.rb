@@ -80,7 +80,7 @@ module Resume
 
       def substitute_filenames_for_filepaths(value)
         [:normal, :bold].each do |property|
-          if value.has_key?(property)
+          if value.key?(property)
             value[property] = FileSystem.tmpfile_path(value[property])
           end
         end

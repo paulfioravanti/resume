@@ -30,4 +30,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "codeclimate-test-reporter", "~> 1.0"
   gem.add_development_dependency "i18n", "~> 0.7"
   gem.add_development_dependency "rubyzip", "~> 1.2"
+  gem.add_development_dependency "rubocop", "~> 0.46"
 end
