@@ -15,7 +15,7 @@ guard :rspec, cmd: "NO_COVERAGE=true bin/rspec" do
   dsl.watch_spec_files_for(ruby.lib_files)
 end
 
-guard :rubocop, all_on_start: false do
+guard :rubocop, all_on_start: false, cli: ["--format", "fuubar"] do
   watch(/.+\.rb$/)
   watch(%r{(?:.+/)?\.rubocop\.yml$}) { |m| File.dirname(m[0]) }
 end
