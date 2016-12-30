@@ -6,6 +6,7 @@ AllCops:
     - "strings_en.rb"
     - "strings_it.rb"
     - "strings_ja.rb"
+    - "vendor/**/*"
 
 #################### Lint ################################
 
