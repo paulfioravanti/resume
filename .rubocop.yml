@@ -2,7 +2,6 @@
 require: rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.3
   Exclude:
     - "resume.rb"
     - "strings_en.rb"
@@ -10,12 +9,17 @@ AllCops:
     - "strings_ja.rb"
     # FIXME: Disabled for now...
     # - "spec/**/*"
+  TargetRubyVersion: 2.3
 
 Metrics/AbcSize:
   Max: 20
 
 Metrics/MethodLength:
   Max: 30
+
+Metrics/ModuleLength:
+  Exclude:
+    - "spec/**/*"
 
 RSpec/ExampleLength:
   Max: 9
@@ -41,6 +45,10 @@ Style/FrozenStringLiteralComment:
 
 Style/IfUnlessModifier:
   Enabled: false
+
+Style/MultilineMethodCallIndentation:
+  Exclude:
+    - "spec/**/*"
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes

@@ -88,8 +88,8 @@ module Resume
           allow(Output).to \
             receive(:question).with(:may_i_please_install_them)
           dependency_manager.request_dependency_installation
-
         end
+
         it "informs of the dependencies and asks to install them" do
           expect(Output).to \
             have_received(:warning).
