@@ -8,7 +8,8 @@ module Resume
           pdf.move_up logo[:y_start]
           pdf.bounding_box(
             [logo[:origin], pdf.cursor],
-            width: logo[:width], height: logo[:height]) do
+            width: logo[:width], height: logo[:height]
+          ) do
             render_image_link(pdf, logo)
           end
         end

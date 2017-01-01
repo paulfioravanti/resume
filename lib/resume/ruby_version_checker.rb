@@ -1,6 +1,6 @@
 module Resume
   module RubyVersionChecker
-    REQUIRED_RUBY_VERSION = "2.4.0"
+    REQUIRED_RUBY_VERSION = "2.4.0".freeze
     private_constant :REQUIRED_RUBY_VERSION
 
     module_function

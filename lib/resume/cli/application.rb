@@ -29,7 +29,7 @@ module Resume
       end
 
       def self.permission_granted?
-        Kernel.gets.chomp.match(POSITIVE_INPUT)
+        Kernel.gets.chomp.match?(POSITIVE_INPUT)
       end
       private_class_method :permission_granted?
 
@@ -58,12 +58,15 @@ module Resume
 
       def install_dependencies
         request_dependency_installation
+        # rubocop:disable Style/GuardClause
+        # NOTE: I think a non-guard clause reads better here
         if self.class.send(:permission_granted?)
           Output.success(:thank_you_kindly)
           install
         else
           raise DependencyInstallationPermissionError
         end
+        # rubocop:enable Style/GuardClause
       end
 
       def generate_resume
