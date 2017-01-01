@@ -7,8 +7,6 @@ AllCops:
     - "strings_en.rb"
     - "strings_it.rb"
     - "strings_ja.rb"
-    # FIXME: Disabled for now...
-    # - "spec/**/*"
   TargetRubyVersion: 2.3
 
 Metrics/AbcSize:
