@@ -15,7 +15,7 @@ module Resume
           end
 
           it "ignores requiring gems used only in development" do
-            expect(configuration).to_not raise_error
+            expect(configuration).not_to raise_error
           end
         end
 

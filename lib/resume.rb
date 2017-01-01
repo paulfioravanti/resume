@@ -1,5 +1,5 @@
 module Resume
-  VERSION = "1.3"
+  VERSION = "1.3".freeze
 
   module_function
 

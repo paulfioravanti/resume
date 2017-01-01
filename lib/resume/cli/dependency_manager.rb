@@ -40,11 +40,14 @@ module Resume
       end
 
       def install
+        # rubocop:disable Style/GuardClause
+        # NOTE: I think a non-guard clause reads better here
         if gems_successfully_installed? && fonts_successfully_downloaded?
           Output.success(:dependencies_successfully_installed)
         else
           raise DependencyInstallationError
         end
+        # rubocop:enable Style/GuardClause
       end
 
       private

@@ -9,7 +9,7 @@ module Resume
   module CLI
     class FileFetcher
       REMOTE_REPO =
-        "https://raw.githubusercontent.com/paulfioravanti/resume/master"
+        "https://raw.githubusercontent.com/paulfioravanti/resume/master".freeze
       private_constant :REMOTE_REPO
 
       def self.fetch(path, filename: "")

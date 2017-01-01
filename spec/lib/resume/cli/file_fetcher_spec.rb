@@ -16,11 +16,12 @@ module Resume
                 Pathname.new(path),
                 basename
               ).and_return(file_fetcher)
+              allow(file_fetcher).to receive(:fetch)
+              described_class.fetch(path)
             end
 
             it "provides default values to the initializer" do
-              expect(file_fetcher).to receive(:fetch)
-              described_class.fetch(path)
+              expect(file_fetcher).to have_received(:fetch)
             end
           end
 
@@ -31,11 +32,12 @@ module Resume
               allow(described_class).to \
                 receive(:new).with(Pathname.new(path), filename).
                   and_return(file_fetcher)
+              allow(file_fetcher).to receive(:fetch)
+              described_class.fetch(path, filename: filename)
             end
 
             it "passes the value to the initializer" do
-              expect(file_fetcher).to receive(:fetch)
-              described_class.fetch(path, filename: filename)
+              expect(file_fetcher).to have_received(:fetch)
             end
           end
         end
@@ -60,10 +62,14 @@ module Resume
           context "when local file is present" do
             let(:local_file_present) { true }
 
+            before do
+              allow(File).to receive(:open).with(pathname).and_return(file)
+              described_class.fetch(path)
+            end
+
             it "fetches the local file" do
               expect(File).to \
-                receive(:open).with(pathname).and_return(file)
-              described_class.fetch(path)
+                have_received(:open).with(pathname)
             end
           end
 
@@ -80,12 +86,14 @@ module Resume
                 allow(FileSystem).to \
                   receive(:tmpfile_path).with(basename).
                     and_return(tmpfile_path)
+                allow(File).to \
+                  receive(:open).with(tmpfile_path).and_return(file)
+                described_class.fetch(path)
               end
 
               it "fetches the temp file" do
                 expect(File).to \
-                  receive(:open).with(tmpfile_path).and_return(file)
-                described_class.fetch(path)
+                  have_received(:open).with(tmpfile_path)
               end
             end
 
@@ -120,12 +128,15 @@ module Resume
                       allow(URI).to \
                         receive(:parse).with(path).
                           and_raise(URI::BadURIError)
+                      allow(File).to \
+                        receive(:join).with(described_class::REMOTE_REPO, path)
+                      described_class.fetch(path)
                     end
 
                     it "fetches the file from the remote repo" do
                       expect(File).to \
-                        receive(:join).with(described_class::REMOTE_REPO, path)
-                      described_class.fetch(path)
+                        have_received(:join).
+                          with(described_class::REMOTE_REPO, path)
                     end
                   end
 
@@ -134,20 +145,27 @@ module Resume
                       allow(URI).to \
                         receive(:parse).with(path).
                           and_raise(URI::InvalidURIError)
+                      allow(File).to \
+                        receive(:join).with(described_class::REMOTE_REPO, path)
+                      described_class.fetch(path)
                     end
 
                     it "fetches the file from the remote repo" do
                       expect(File).to \
-                        receive(:join).with(described_class::REMOTE_REPO, path)
-                      described_class.fetch(path)
+                        have_received(:join).
+                          with(described_class::REMOTE_REPO, path)
                     end
                   end
                 end
 
                 context "when filename is a URI" do
-                  it "fetches the file from the URI" do
-                    expect(Kernel).to receive(:open).with(path)
+                  before do
+                    allow(Kernel).to receive(:open).with(path)
                     described_class.fetch(path)
+                  end
+
+                  it "fetches the file from the URI" do
+                    expect(Kernel).to have_received(:open).with(path)
                   end
                 end
 
@@ -196,7 +214,7 @@ module Resume
                 end
 
                 context "when remote file is fetched successfully" do
-                  let(:uri) { spy("uri") }
+                  let(:uri) { instance_spy("IO", "uri") }
 
                   before do
                     allow(Kernel).to \
@@ -206,12 +224,14 @@ module Resume
                     # it actually existing after fetching
                     allow(tmpfile_path).to \
                       receive(:file?).and_return(false, true)
+                    allow(file).to receive(:write).with(uri)
+                    allow(File).to receive(:open).with(tmpfile_path)
+                    described_class.fetch(path)
                   end
 
                   it "returns the newly created temp file" do
-                    expect(file).to receive(:write).with(uri)
-                    expect(File).to receive(:open).with(tmpfile_path)
-                    described_class.fetch(path)
+                    expect(file).to have_received(:write).with(uri)
+                    expect(File).to have_received(:open).with(tmpfile_path)
                   end
                 end
               end

@@ -9,11 +9,16 @@ RSpec.describe Resume do
   end
 
   describe ".generate" do
+    before do
+      allow(described_class::RubyVersionChecker).to receive(:check_ruby_version)
+      allow(described_class::CLI::Application).to receive(:start)
+      described_class.generate
+    end
+
     it "starts the CLI Application" do
       expect(described_class::RubyVersionChecker).to \
-        receive(:check_ruby_version)
-      expect(described_class::CLI::Application).to receive(:start)
-      described_class.generate
+        have_received(:check_ruby_version)
+      expect(described_class::CLI::Application).to have_received(:start)
     end
   end
 end

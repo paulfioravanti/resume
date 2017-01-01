@@ -28,34 +28,44 @@ module Resume
 
           before do
             stub_const("Prawn::Font::AFM::BUILT_INS", built_ins)
+            allow(Prawn::Font::AFM).to \
+              receive(:hide_m17n_warning=).with(true)
+            allow(pdf).to receive(:font).with(font_name)
+            described_class.configure(pdf, font)
           end
 
           it "sets the PDF font to the selected font" do
             expect(Prawn::Font::AFM).to \
-              receive(:hide_m17n_warning=).with(true)
-            expect(pdf).to receive(:font).with(font_name)
-            described_class.configure(pdf, font)
+              have_received(:hide_m17n_warning=).with(true)
+            expect(pdf).to have_received(:font).with(font_name)
           end
         end
 
         context "when font is not included in Prawn font built-ins" do
           let(:built_ins) { ["SomeOtherFont"] }
-
-          before do
-            stub_const("Prawn::Font::AFM::BUILT_INS", built_ins)
-          end
-
-          it "updates the PDF font families with the new font" do
-            expect(font_families).to receive(:update).with(
+          let(:new_font) do
+            {
               font_name => {
                 normal: normal_font_file_path,
                 bold: bold_font_file_path
               }
-            )
-            expect(Prawn::Font::AFM).to \
+            }
+          end
+
+          before do
+            stub_const("Prawn::Font::AFM::BUILT_INS", built_ins)
+            allow(font_families).to receive(:update).with(new_font)
+            allow(Prawn::Font::AFM).to \
               receive(:hide_m17n_warning=).with(true)
-            expect(pdf).to receive(:font).with(font_name)
+            allow(pdf).to receive(:font).with(font_name)
             described_class.configure(pdf, font)
+          end
+
+          it "updates the PDF font families with the new font" do
+            expect(font_families).to have_received(:update).with(new_font)
+            expect(Prawn::Font::AFM).to \
+              have_received(:hide_m17n_warning=).with(true)
+            expect(pdf).to have_received(:font).with(font_name)
           end
         end
       end

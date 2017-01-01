@@ -16,7 +16,7 @@ module Resume
             file?: true
           )
         end
-        let(:resume_data_file) { spy("resume_data_file") }
+        let(:resume_data_file) { instance_spy("File", :resume_data_file) }
         let(:json) { instance_double("Hash", :json_result) }
 
         before do
