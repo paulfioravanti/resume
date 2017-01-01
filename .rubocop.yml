@@ -37,7 +37,7 @@ Style/Documentation:
 Style/DotPosition:
   EnforcedStyle: trailing
 
-# FIXME: Disabled for now...
+# NOTE: PDF generation requires string mutation, so this can't be used for now.
 Style/FrozenStringLiteralComment:
   Enabled: false
 
