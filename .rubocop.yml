@@ -7,6 +7,10 @@ AllCops:
     - "strings_en.rb"
     - "strings_it.rb"
     - "strings_ja.rb"
+    # NOTE: Although this exclusion is in the default Rubocop config, it seems
+    # that CI still goes looking in the vendor directory and attempts to
+    # scan all files in all gems, so make the exclusion explicit here.
+    - "vendor/**/*"
   TargetRubyVersion: 2.3
 
 Metrics/AbcSize:
