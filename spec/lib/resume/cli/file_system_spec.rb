@@ -10,24 +10,32 @@ module Resume
         context "when run on Mac OS" do
           let(:mac_open_file_args) { ["open", filename] }
 
-          before { stub_const("RUBY_PLATFORM", "darwin") }
+          before do
+            stub_const("RUBY_PLATFORM", "darwin")
+            allow(described_class).to \
+              receive(:system).with(*mac_open_file_args)
+            described_class.open_document(filename)
+          end
 
           it "opens the file using the open command" do
             expect(described_class).to \
-              receive(:system).with(*mac_open_file_args)
-            described_class.open_document(filename)
+              have_received(:system).with(*mac_open_file_args)
           end
         end
 
         context "when run on Linux" do
           let(:linux_open_file_args) { ["xdg-open", filename] }
 
-          before { stub_const("RUBY_PLATFORM", "linux") }
+          before do
+            stub_const("RUBY_PLATFORM", "linux")
+            allow(described_class).to \
+              receive(:system).with(*linux_open_file_args)
+            described_class.open_document(filename)
+          end
 
           it "opens the file using the xdg-open command" do
             expect(described_class).to \
-              receive(:system).with(*linux_open_file_args)
-            described_class.open_document(filename)
+              have_received(:system).with(*linux_open_file_args)
           end
         end
 
@@ -36,22 +44,30 @@ module Resume
             ["cmd", "/c", "\"start #{filename}\""]
           end
 
-          before { stub_const("RUBY_PLATFORM", "windows") }
+          before do
+            stub_const("RUBY_PLATFORM", "windows")
+            allow(described_class).to \
+              receive(:system).with(*windows_open_file_args)
+            described_class.open_document(filename)
+          end
 
           it "opens the file using the cmd /c command" do
             expect(described_class).to \
-              receive(:system).with(*windows_open_file_args)
-            described_class.open_document(filename)
+              have_received(:system).with(*windows_open_file_args)
           end
         end
 
         context "when run on an unknown operating system" do
-          before { stub_const("RUBY_PLATFORM", "unknown") }
+          before do
+            stub_const("RUBY_PLATFORM", "unknown")
+            allow(Output).to \
+              receive(:warning).with(:dont_know_how_to_open_resume)
+            described_class.open_document(filename)
+          end
 
           it "requests the user to open the document themself" do
             expect(Output).to \
-              receive(:warning).with(:dont_know_how_to_open_resume)
-            described_class.open_document(filename)
+              have_received(:warning).with(:dont_know_how_to_open_resume)
           end
         end
       end
@@ -65,11 +81,12 @@ module Resume
           allow(Dir).to receive(:tmpdir).and_return(tmpdir)
           allow(Pathname).to \
             receive(:new).with(tmpdir).and_return(pathname)
+          allow(pathname).to receive(:join).with(filename)
+          described_class.tmpfile_path(filename)
         end
 
         it "returns the filepath for the file in system temp dir" do
-          expect(pathname).to receive(:join).with(filename)
-          described_class.tmpfile_path(filename)
+          expect(pathname).to have_received(:join).with(filename)
         end
       end
     end

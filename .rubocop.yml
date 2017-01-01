@@ -1,5 +1,5 @@
 # Contains personal customisations of Rubocop default rules
-# require: rubocop-rspec
+require: rubocop-rspec
 
 AllCops:
   TargetRubyVersion: 2.3
@@ -9,13 +9,25 @@ AllCops:
     - "strings_it.rb"
     - "strings_ja.rb"
     # FIXME: Disabled for now...
-    - "spec/**/*"
+    # - "spec/**/*"
 
 Metrics/AbcSize:
   Max: 20
 
 Metrics/MethodLength:
   Max: 30
+
+RSpec/ExampleLength:
+  Max: 9
+
+RSpec/MultipleExpectations:
+  Max: 5
+
+# NOTE: This deep nesting mostly due to the wide range of paths that gem
+# installation and file fetching can take, and the different errors that
+# can occur.
+RSpec/NestedGroups:
+  MaxNesting: 8
 
 Style/Documentation:
   Enabled: false

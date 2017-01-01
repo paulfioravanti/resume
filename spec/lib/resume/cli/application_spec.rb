@@ -26,7 +26,7 @@ module Resume
           end
 
           it "halts operation at the point halt is thrown" do
-            expect(ResumeDataFetcher).to_not receive(:fetch)
+            expect(ResumeDataFetcher).not_to receive(:fetch)
             described_class.start
           end
         end
@@ -63,7 +63,7 @@ module Resume
             before do
               allow(dependency_manager).to \
                 receive(:installation_required?).and_return(true)
-              expect(dependency_manager).to \
+              allow(dependency_manager).to \
                 receive(:request_dependency_installation)
             end
 
@@ -76,26 +76,34 @@ module Resume
                     with(DependencyInstallationPermissionError).
                       and_return(error)
                 allow(Kernel).to receive(:gets).and_return("no\n")
+                described_class.start
               end
 
               it "outputs the error messages" do
+                expect(dependency_manager).to \
+                  have_received(:request_dependency_installation)
                 expect(Output).to \
-                  receive(:messages).with(error.messages)
-                described_class.start
+                  have_received(:messages).with(error.messages)
               end
             end
 
             context "when permission to install gems is granted" do
               before do
                 allow(Kernel).to receive(:gets).and_return("yes\n")
+                allow(Output).to \
+                  receive(:success).with(:thank_you_kindly)
+                allow(dependency_manager).to \
+                  receive(:install).and_throw(:halt)
+                described_class.start
               end
 
               it "thanks the user and installs the dependencies" do
-                expect(Output).to \
-                  receive(:success).with(:thank_you_kindly)
                 expect(dependency_manager).to \
-                  receive(:install).and_throw(:halt)
-                described_class.start
+                  have_received(:request_dependency_installation)
+                expect(Output).to \
+                  have_received(:success).with(:thank_you_kindly)
+                expect(dependency_manager).to \
+                  have_received(:install)
               end
             end
           end
@@ -123,7 +131,7 @@ module Resume
               end
 
               it "does not open the document" do
-                expect(FileSystem).to_not receive(:open_document)
+                expect(FileSystem).not_to receive(:open_document)
                 described_class.start
               end
             end

@@ -63,7 +63,7 @@ module Resume
           end
 
           it "removes the gem from the list of dependencies" do
-            expect(gem_installer.gems).to_not include(gem)
+            expect(gem_installer.gems).not_to include(gem)
           end
         end
       end
@@ -73,7 +73,7 @@ module Resume
           let(:gems) { [] }
 
           it "outputs nothing" do
-            expect(Output).to_not receive(:warning)
+            expect(Output).not_to receive(:warning)
             gem_installer.output_gem_dependencies
           end
         end

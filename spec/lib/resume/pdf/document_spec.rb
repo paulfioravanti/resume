@@ -21,18 +21,28 @@ module Resume
         let(:title) { "My Resume" }
         let(:filename) { "My_Resume.pdf" }
 
+        before do
+          allow(Output).to \
+            receive(:plain).with(:creating_social_media_links)
+          allow(Output).to \
+            receive(:plain).with(:creating_technical_skills_section)
+          allow(Output).to \
+            receive(:plain).with(:creating_employment_history_section)
+          allow(Output).to \
+            receive(:plain).with(:creating_education_history_section)
+          described_class.generate(resume, title, filename)
+        end
         after { File.delete(filename) }
 
         it "generates a pdf resume with progress notifications" do
           expect(Output).to \
-            receive(:plain).with(:creating_social_media_links)
+            have_received(:plain).with(:creating_social_media_links)
           expect(Output).to \
-            receive(:plain).with(:creating_technical_skills_section)
+            have_received(:plain).with(:creating_technical_skills_section)
           expect(Output).to \
-            receive(:plain).with(:creating_employment_history_section)
+            have_received(:plain).with(:creating_employment_history_section)
           expect(Output).to \
-            receive(:plain).with(:creating_education_history_section)
-          described_class.generate(resume, title, filename)
+            have_received(:plain).with(:creating_education_history_section)
           expect(File.exist?(filename)).to be true
         end
       end

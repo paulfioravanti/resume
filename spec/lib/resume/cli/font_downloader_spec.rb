@@ -52,7 +52,7 @@ module Resume
             end
 
             it "removes the font from the list of font dependencies" do
-              expect(font_downloader.fonts).to_not include(font)
+              expect(font_downloader.fonts).not_to include(font)
             end
           end
 
@@ -79,7 +79,7 @@ module Resume
           let(:fonts) { [] }
 
           it "outputs nothing" do
-            expect(Output).to_not receive(:warning)
+            expect(Output).not_to receive(:warning)
             font_downloader.output_font_dependencies
           end
         end
@@ -132,7 +132,7 @@ module Resume
           let(:fonts) { [font] }
 
           context "all fonts successfully downloaded and extracted" do
-            # For the most part, mocking this out is complete madness,
+            # NOTE: For the most part, mocking this out is complete madness,
             # but I did not want the test suite to be dependent on the
             # rubyzip gem since it is not used to generate all resumes
             let(:font_file_filepath) { "/tmp/#{filename}" }
@@ -171,6 +171,7 @@ module Resume
               allow(FileSystem).to \
                 receive(:tmpfile_path).with(bold_font_name).
                   and_return(bold_font_filepath)
+              # rubocop:disable RSpec/MessageSpies
               expect(normal_font_file).to \
                 receive(:extract).
                   with(normal_font_filepath) do |*_args, &block|
@@ -181,6 +182,7 @@ module Resume
                   with(bold_font_filepath) do |*_args, &block|
                     expect(block.call).to be true
                   end
+              # rubocop:enable RSpec/MessageSpies
             end
 
             it "returns true" do

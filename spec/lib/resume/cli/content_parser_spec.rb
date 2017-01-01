@@ -9,11 +9,12 @@ module Resume
         before do
           allow(Base64).to \
             receive(:strict_decode64).with(string).and_return(string)
+          allow(string).to receive(:force_encoding).with("utf-8")
+          described_class.decode_content(string)
         end
 
         it "decodes the string and forces encoding to UTF-8" do
-          expect(string).to receive(:force_encoding).with("utf-8")
-          described_class.decode_content(string)
+          expect(string).to have_received(:force_encoding).with("utf-8")
         end
       end
 
