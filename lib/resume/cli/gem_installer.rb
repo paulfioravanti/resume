@@ -23,7 +23,7 @@ module Resume
         gems.each do |name, version|
           # if gem not installed: leave in the gems list
           ExceptionSuppressor.suppress(Gem::LoadError, -> { next }) do
-            if self.class.send(:gem_already_installed?, name, version)
+            if self.class.__send__(:gem_already_installed?, name, version)
               # remove dependency to install
               self.gems -= [[name, version]]
             end

@@ -41,6 +41,18 @@ Style/Documentation:
 Style/DotPosition:
   EnforcedStyle: trailing
 
+Style/FirstArrayElementLineBreak:
+  Enabled: true
+
+Style/FirstHashElementLineBreak:
+  Enabled: true
+
+Style/FirstMethodArgumentLineBreak:
+  Enabled: true
+
+Style/FirstMethodParameterLineBreak:
+  Enabled: true
+
 # NOTE: PDF generation requires string mutation, so this can't be used for now.
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -48,10 +60,35 @@ Style/FrozenStringLiteralComment:
 Style/IfUnlessModifier:
   Enabled: false
 
+Style/ImplicitRuntimeError:
+  Enabled: true
+
+Style/InlineComment:
+  Enabled: true
+
+Style/MethodCalledOnDoEndBlock:
+  Enabled: true
+
+Style/MultilineAssignmentLayout:
+  Enabled: true
+  EnforcedStyle: new_line
+
 Style/MultilineMethodCallIndentation:
   Exclude:
     - "spec/**/*"
 
+Style/OptionHash:
+  Enabled: true
+
+Style/Send:
+  Enabled: true
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
   ConsistentQuotesInMultiline: true
+
+Style/StringMethods:
+  Enabled: true
+
+Style/SymbolArray:
+  Enabled: true

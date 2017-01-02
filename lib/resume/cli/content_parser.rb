@@ -79,7 +79,7 @@ module Resume
       private_class_method :munge_hash_value
 
       def substitute_filenames_for_filepaths(value)
-        [:normal, :bold].each do |property|
+        %i(normal bold).each do |property|
           if value.key?(property)
             value[property] = FileSystem.tmpfile_path(value[property])
           end

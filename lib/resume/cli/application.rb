@@ -60,7 +60,7 @@ module Resume
         request_dependency_installation
         # rubocop:disable Style/GuardClause
         # NOTE: I think a non-guard clause reads better here
-        if self.class.send(:permission_granted?)
+        if self.class.__send__(:permission_granted?)
           Output.success(:thank_you_kindly)
           install
         else
@@ -84,7 +84,7 @@ module Resume
 
       def open_resume
         Output.question(:would_you_like_me_to_open_the_resume)
-        if self.class.send(:permission_granted?)
+        if self.class.__send__(:permission_granted?)
           FileSystem.open_document(filename)
         end
         Output.info([:thanks_for_looking_at_my_resume, { filename: filename }])

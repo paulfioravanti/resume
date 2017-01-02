@@ -17,7 +17,7 @@ module Resume
 
       def configure_i18n
         require "i18n"
-        I18n.available_locales = [:en, :it, :ja]
+        I18n.available_locales = %i(en it ja)
         I18n.available_locales.each do |locale|
           I18n.load_path += [
             FileFetcher.fetch("lib/resume/locales/#{locale}.yml")

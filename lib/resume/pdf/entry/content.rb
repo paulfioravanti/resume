@@ -24,9 +24,10 @@ module Resume
         def profile(pdf, entry)
           return unless (job_content = entry[:profile])
           cell_style = entry[:cell_style]
-          table_data = job_content.reduce([]) do |content, responsibility|
-            content << ["-", responsibility]
-          end
+          table_data =
+            job_content.reduce([]) do |content, responsibility|
+              content << ["-", responsibility]
+            end
           pdf.table(
             table_data,
             cell_style: {

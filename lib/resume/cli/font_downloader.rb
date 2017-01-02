@@ -29,9 +29,9 @@ module Resume
           file.each do |entry|
             font[:files].each do |_, filename|
               next unless entry.name.match(filename)
-              # overwrite any existing files with true block
+              # `true` in the block ensures any existing files are overwritten
               entry.extract(FileSystem.tmpfile_path(filename)) { true }
-              break # inner loop only
+              break
             end
           end
         end
@@ -44,7 +44,7 @@ module Resume
 
       def audit_font_dependencies
         fonts.each do |font|
-          if self.class.send(:local_files_present?, font[:files].values)
+          if self.class.__send__(:local_files_present?, font[:files].values)
             fonts.delete(font)
           end
         end
@@ -59,7 +59,7 @@ module Resume
         return true if fonts.none?
         fonts.all? do |font|
           Output.plain(:downloading_font)
-          self.class.send(:download_font_file, font[:location])
+          self.class.__send__(:download_font_file, font[:location])
           extract_fonts(font)
         end
       rescue NetworkConnectionError
@@ -70,7 +70,7 @@ module Resume
 
       def extract_fonts(font)
         require "zip"
-        self.class.send(:extract_fonts, font)
+        self.class.__send__(:extract_fonts, font)
       end
     end
   end
