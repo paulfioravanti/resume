@@ -10,12 +10,14 @@ module Resume
 
           before do
             allow(Settings).to receive(:configure).and_raise(error)
+            allow(Output).to \
+              receive(:messages).with(error.messages)
+            described_class.start
           end
 
           it "outputs the error messages" do
             expect(Output).to \
-              receive(:messages).with(error.messages)
-            described_class.start
+              have_received(:messages).with(error.messages)
           end
         end
 
@@ -23,11 +25,12 @@ module Resume
           before do
             allow(Settings).to receive(:configure)
             allow(ArgumentParser).to receive(:parse).and_throw(:halt)
+            allow(ResumeDataFetcher).to receive(:fetch)
+            described_class.start
           end
 
           it "halts operation at the point halt is thrown" do
-            expect(ResumeDataFetcher).not_to receive(:fetch)
-            described_class.start
+            expect(ResumeDataFetcher).not_to have_received(:fetch)
           end
         end
 
@@ -112,15 +115,15 @@ module Resume
             before do
               allow(dependency_manager).to \
                 receive(:installation_required?).and_return(false)
-              expect(Output).to receive(:plain).with(:generating_pdf)
-              expect(PDF::Document).to \
+              allow(Output).to receive(:plain).with(:generating_pdf)
+              allow(PDF::Document).to \
                 receive(:generate).with(resume, title, filename)
-              expect(Output).to \
+              allow(Output).to \
                 receive(:success).with(:resume_generated_successfully)
-              expect(Output).to \
+              allow(Output).to \
                 receive(:question).
                   with(:would_you_like_me_to_open_the_resume)
-              expect(Output).to receive(:info).with(
+              allow(Output).to receive(:info).with(
                 [:thanks_for_looking_at_my_resume, { filename: filename }]
               )
             end
@@ -128,23 +131,50 @@ module Resume
             context "when permission to open the resume is denied" do
               before do
                 allow(Kernel).to receive(:gets).and_return("no\n")
+                allow(FileSystem).to receive(:open_document)
+                described_class.start
+
+                expect(Output).to have_received(:plain).with(:generating_pdf)
+                expect(PDF::Document).to \
+                  have_received(:generate).with(resume, title, filename)
+                expect(Output).to \
+                  have_received(:success).with(:resume_generated_successfully)
+                expect(Output).to \
+                  have_received(:question).
+                    with(:would_you_like_me_to_open_the_resume)
+                expect(Output).to have_received(:info).with(
+                  [:thanks_for_looking_at_my_resume, { filename: filename }]
+                )
               end
 
               it "does not open the document" do
-                expect(FileSystem).not_to receive(:open_document)
-                described_class.start
+                expect(FileSystem).not_to have_received(:open_document)
               end
             end
 
             context "when permission to open the resume is given" do
               before do
                 allow(Kernel).to receive(:gets).and_return("yes\n")
+                allow(FileSystem).to \
+                  receive(:open_document).with(filename)
+                described_class.start
+
+                expect(Output).to have_received(:plain).with(:generating_pdf)
+                expect(PDF::Document).to \
+                  have_received(:generate).with(resume, title, filename)
+                expect(Output).to \
+                  have_received(:success).with(:resume_generated_successfully)
+                expect(Output).to \
+                  have_received(:question).
+                    with(:would_you_like_me_to_open_the_resume)
+                expect(Output).to have_received(:info).with(
+                  [:thanks_for_looking_at_my_resume, { filename: filename }]
+                )
               end
 
               it "attempts to open the document" do
                 expect(FileSystem).to \
-                  receive(:open_document).with(filename)
-                described_class.start
+                  have_received(:open_document).with(filename)
               end
             end
           end

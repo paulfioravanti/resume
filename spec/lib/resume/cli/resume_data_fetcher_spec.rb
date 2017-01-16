@@ -26,15 +26,20 @@ module Resume
           allow(File).to \
             receive(:open).with(pathname).
               and_return(resume_data_file)
-          expect(Output).to \
+          allow(JSON).to \
+            receive(:parse).
+              with(resume_data_file, symbolize_names: true)
+          allow(Output).to \
             receive(:plain).with(:gathering_resume_information)
+          described_class.fetch
         end
 
         it "parses and returns the JSON resume data file" do
           expect(JSON).to \
-            receive(:parse).
+            have_received(:parse).
               with(resume_data_file, symbolize_names: true)
-          described_class.fetch
+          expect(Output).to \
+            have_received(:plain).with(:gathering_resume_information)
         end
       end
     end

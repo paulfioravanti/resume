@@ -1,7 +1,7 @@
 require_relative "lib/resume"
 
 # rubocop:disable Metrics/BlockLength
-# NOTE: Block length can't really be helped here...
+# NOTE: Remove this disable when Code Climate Rubocop version updates
 Gem::Specification.new do |gem|
   gem.name          = "resume"
   gem.version       = Resume::VERSION
