@@ -1,7 +1,5 @@
 require_relative "lib/resume"
 
-# rubocop:disable Metrics/BlockLength
-# NOTE: Block length can't really be helped here...
 Gem::Specification.new do |gem|
   gem.name          = "resume"
   gem.version       = Resume::VERSION
@@ -36,4 +34,3 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "rubocop-rspec", "~> 1.9"
   gem.add_development_dependency "guard-rubocop", "~> 1.2"
 end
-# rubocop:enable Metrics/BlockLength
