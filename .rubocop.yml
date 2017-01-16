@@ -18,10 +18,10 @@ Metrics/AbcSize:
 
 Metrics/BlockLength:
   ExcludedMethods:
-    - "describe"
-    - "context"
     - "before"
     - "configure"
+    - "context"
+    - "describe"
     - "new"
 
 Metrics/MethodLength:
