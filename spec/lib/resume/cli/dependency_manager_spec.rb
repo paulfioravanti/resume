@@ -114,13 +114,16 @@ module Resume
             before do
               allow(font_downloader).to \
                 receive(:fonts_successfully_downloaded?).and_return(true)
+              allow(Output).to \
+                receive(:success).
+                  with(:dependencies_successfully_installed)
+              dependency_manager.install
             end
 
             it "outputs that dependencies were successfully installed" do
               expect(Output).to \
-                receive(:success).
+                have_received(:success).
                   with(:dependencies_successfully_installed)
-              dependency_manager.install
             end
           end
 

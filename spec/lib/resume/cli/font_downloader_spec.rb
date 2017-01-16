@@ -78,9 +78,13 @@ module Resume
         context "when there are no font dependencies" do
           let(:fonts) { [] }
 
-          it "outputs nothing" do
-            expect(Output).not_to receive(:warning)
+          before do
+            allow(Output).to receive(:warning)
             font_downloader.output_font_dependencies
+          end
+
+          it "outputs nothing" do
+            expect(Output).not_to have_received(:warning)
           end
         end
 
@@ -88,9 +92,13 @@ module Resume
           # there are fonts: we don"t care what they are
           let(:fonts) { [{}] }
 
-          it "informs that custom fonts must be installed" do
-            expect(Output).to receive(:warning).with(:custom_fonts)
+          before do
+            allow(Output).to receive(:warning).with(:custom_fonts)
             font_downloader.output_font_dependencies
+          end
+
+          it "informs that custom fonts must be installed" do
+            expect(Output).to have_received(:warning).with(:custom_fonts)
           end
         end
       end
@@ -154,9 +162,9 @@ module Resume
             let(:bold_font_filepath) { "/tmp/#{bold_font_name}" }
 
             before do
-              expect(Output).to \
+              allow(Output).to \
                 receive(:plain).with(:downloading_font)
-              expect(FileFetcher).to \
+              allow(FileFetcher).to \
                 receive(:fetch).with(decoded_font_location)
               allow(FileSystem).to \
                 receive(:tmpfile_path).with(filename).
@@ -171,28 +179,24 @@ module Resume
               allow(FileSystem).to \
                 receive(:tmpfile_path).with(bold_font_name).
                   and_return(bold_font_filepath)
-              # rubocop:disable RSpec/MessageSpies
-              expect(normal_font_file).to \
-                receive(:extract).
-                  with(normal_font_filepath) do |*_args, &block|
-                    expect(block.call).to be true
-                  end
-              expect(bold_font_file).to \
-                receive(:extract).
-                  with(bold_font_filepath) do |*_args, &block|
-                    expect(block.call).to be true
-                  end
-              # rubocop:enable RSpec/MessageSpies
+              allow(normal_font_file).to \
+                receive(:extract).with(normal_font_filepath)
+              allow(bold_font_file).to \
+                receive(:extract).with(bold_font_filepath)
             end
 
             it "returns true" do
               expect(fonts_successfully_downloaded).to be true
+              expect(Output).to \
+                have_received(:plain).with(:downloading_font)
+              expect(FileFetcher).to \
+                have_received(:fetch).with(decoded_font_location)
             end
           end
 
           context "when an error occurs during font download" do
             before do
-              expect(Output).to \
+              allow(Output).to \
                 receive(:plain).with(:downloading_font)
               allow(described_class).to \
                 receive(:download_font_file).with(font_location).
@@ -201,6 +205,8 @@ module Resume
 
             it "returns false" do
               expect(fonts_successfully_downloaded).to be false
+              expect(Output).to \
+                have_received(:plain).with(:downloading_font)
             end
           end
         end

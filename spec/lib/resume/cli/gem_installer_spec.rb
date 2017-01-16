@@ -72,23 +72,36 @@ module Resume
         context "when there are no gem dependencies" do
           let(:gems) { [] }
 
-          it "outputs nothing" do
-            expect(Output).not_to receive(:warning)
+          before do
+            allow(Output).to receive(:warning)
             gem_installer.output_gem_dependencies
+          end
+
+          it "outputs nothing" do
+            expect(Output).not_to have_received(:warning)
           end
         end
 
         context "when there are gem dependencies" do
           let(:gems) { [["prawn", "1.0.0"]] }
 
-          it "outputs the name and version of each dependent gem" do
-            expect(Output).to receive(:warning).with(:ruby_gems)
+          before do
+            allow(Output).to receive(:warning).with(:ruby_gems)
             gems.each do |name, version|
-              expect(Output).to receive(:plain).with(
+              allow(Output).to receive(:plain).with(
                 [:gem_name_and_version, { name: name, version: version }]
               )
             end
             gem_installer.output_gem_dependencies
+          end
+
+          it "outputs the name and version of each dependent gem" do
+            expect(Output).to have_received(:warning).with(:ruby_gems)
+            gems.each do |name, version|
+              expect(Output).to have_received(:plain).with(
+                [:gem_name_and_version, { name: name, version: version }]
+              )
+            end
           end
         end
       end
@@ -115,7 +128,7 @@ module Resume
 
           context "when all gems are successfully installed" do
             before do
-              expect(Output).to \
+              allow(Output).to \
                 receive(:plain).with(:installing_ruby_gems)
               gems.each do |gem, version|
                 allow(Kernel).to receive(:system).
@@ -126,12 +139,14 @@ module Resume
 
             it "returns true" do
               expect(gems_successfully_installed).to be true
+              expect(Output).to \
+                have_received(:plain).with(:installing_ruby_gems)
             end
           end
 
           context "when a gem is not successfully installed" do
             before do
-              expect(Output).to \
+              allow(Output).to \
                 receive(:plain).with(:installing_ruby_gems)
               gems.first.tap do |gem, version|
                 allow(Kernel).to receive(:system).
@@ -142,6 +157,8 @@ module Resume
 
             it "returns false" do
               expect(gems_successfully_installed).to be false
+              expect(Output).to \
+                have_received(:plain).with(:installing_ruby_gems)
             end
           end
 
@@ -152,7 +169,7 @@ module Resume
 
             context "when the error is a SocketError" do
               before do
-                expect(Output).to \
+                allow(Output).to \
                   receive(:plain).with(:installing_ruby_gems)
                 allow(Kernel).to receive(:system).and_raise(SocketError)
               end
@@ -160,12 +177,14 @@ module Resume
               it "raises a NetworkConnectionError" do
                 expect(gem_installation).to \
                   raise_error(NetworkConnectionError)
+                expect(Output).to \
+                  have_received(:plain).with(:installing_ruby_gems)
               end
             end
 
             context "when the error is a Errno::ECONNREFUSED error" do
               before do
-                expect(Output).to \
+                allow(Output).to \
                   receive(:plain).with(:installing_ruby_gems)
                 allow(Kernel).to \
                   receive(:system).and_raise(Errno::ECONNREFUSED)
@@ -174,6 +193,8 @@ module Resume
               it "raises a NetworkConnectionError" do
                 expect(gem_installation).to \
                   raise_error(NetworkConnectionError)
+                expect(Output).to \
+                  have_received(:plain).with(:installing_ruby_gems)
               end
             end
           end
