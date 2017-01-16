@@ -17,8 +17,11 @@ Metrics/AbcSize:
   Max: 20
 
 Metrics/BlockLength:
-  Exclude:
-    - "spec/**/*.rb"
+  ExcludedMethods:
+    - "describe"
+    - "context"
+    - "before"
+    - "configure"
 
 Metrics/MethodLength:
   Max: 30
