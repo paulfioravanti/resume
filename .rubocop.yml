@@ -16,12 +16,16 @@ AllCops:
 Metrics/AbcSize:
   Max: 20
 
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*.rb"
+
 Metrics/MethodLength:
   Max: 30
 
 Metrics/ModuleLength:
   Exclude:
-    - "spec/**/*"
+    - "spec/**/*.rb"
 
 RSpec/ExampleLength:
   Max: 9
@@ -33,7 +37,7 @@ RSpec/MultipleExpectations:
 # installation and file fetching can take, and the different errors that
 # can occur.
 RSpec/NestedGroups:
-  MaxNesting: 8
+  Max: 8
 
 Style/Documentation:
   Enabled: false
