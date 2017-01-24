@@ -26,7 +26,7 @@ module Resume
               sections.map { |section| properties_for(section) },
               at: [x_position, pdf.cursor]
             )
-            pdf.move_down sections.first[:bottom_padding]
+            pdf.move_down(sections.first[:bottom_padding])
           end
         end
         private_class_method :formatted_text_box_header
