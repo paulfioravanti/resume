@@ -10,16 +10,9 @@ module Resume
             [logo[:origin], pdf.cursor],
             width: logo[:width], height: logo[:height]
           ) do
-            render_image_link(pdf, logo)
+            ImageLink.generate(pdf, logo)
           end
         end
-
-        def render_image_link(pdf, logo)
-          pdf.image(logo[:image], fit: logo[:fit], align: logo[:align])
-          pdf.move_up logo[:link_overlay_start]
-          TransparentLink.generate(pdf, logo)
-        end
-        private_class_method :render_image_link
       end
     end
   end

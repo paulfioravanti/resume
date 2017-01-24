@@ -1,4 +1,4 @@
-require_relative "transparent_link"
+require_relative "image_link"
 
 module Resume
   module PDF
@@ -32,9 +32,7 @@ module Resume
       def generate_logo_for(logo, pdf, logo_set)
         x_position = logo_set[:x_position]
         pdf.bounding_box([x_position, pdf.cursor], width: logo[:width]) do
-          pdf.image(logo[:image], fit: logo[:fit], align: logo[:align])
-          pdf.move_up logo[:link_overlay_start]
-          TransparentLink.generate(pdf, logo)
+          ImageLink.generate(pdf, logo)
         end
         # Slightly cheating by keeping state in the logo set hash
         logo_set[:x_position] = x_position + logo_set[:padded_logo_width]
