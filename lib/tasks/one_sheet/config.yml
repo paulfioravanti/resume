@@ -34,7 +34,7 @@
     - :file: headline.rb
       :from_line: 2
       :to_line: -3
-    - :file: transparent_link.rb
+    - :file: image_link.rb
       :from_line: 2
       :to_line: -3
     - :file: social_media_logo_set.rb
