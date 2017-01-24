@@ -8,14 +8,14 @@ module Resume
         module_function
 
         def generate(pdf, entry)
-          pdf.move_down entry[:top_padding]
+          pdf.move_down(entry[:top_padding])
           Header.generate(pdf, entry)
           CompanyLogo.generate(pdf, entry[:logo])
           details(pdf, entry) if entry.key?(:summary)
         end
 
         def details(pdf, entry)
-          pdf.move_down entry.dig(:summary, :top_padding)
+          pdf.move_down(entry.dig(:summary, :top_padding))
           pdf.text(entry.dig(:summary, :text), inline_format: true)
           profile(pdf, entry)
         end

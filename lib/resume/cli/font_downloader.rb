@@ -58,9 +58,7 @@ module Resume
       def fonts_successfully_downloaded?
         return true if fonts.none?
         fonts.all? do |font|
-          Output.plain(:downloading_font)
-          self.class.__send__(:download_font_file, font[:location])
-          extract_fonts(font)
+          download_and_extract_font(font)
         end
       rescue NetworkConnectionError
         false
@@ -68,7 +66,9 @@ module Resume
 
       private
 
-      def extract_fonts(font)
+      def download_and_extract_font(font)
+        Output.plain(:downloading_font)
+        self.class.__send__(:download_font_file, font[:location])
         require "zip"
         self.class.__send__(:extract_fonts, font)
       end
