@@ -5,12 +5,12 @@ rules:
       - "spec/**/*.rb"
   ignore:
     - assignment_in_conditional
-    - IfUnlessModifier
+    - favor_if_unless_for_single_line
     - missing_class_documentation
     - missing_method_documentation
     - prefer_single_quoted_strings
     - use_a_logger
-  ParameterNumberCheck:
+  reduce_number_of_params:
     except:
       # NOTE: Use of Open3.popen3 triggers this violation
       - "lib/resume/ruby_version_checker.rb"
