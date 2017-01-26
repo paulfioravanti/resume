@@ -24,6 +24,10 @@ module Resume
       end
       private_class_method :download_font_file
 
+      # codebeat:disable[BLOCK_NESTING]
+      # codebeat:disable[ABC]
+      # NOTE: Deeply nested block and assignment/branch/condition
+      # violation due to use of rubyzip API.
       def self.extract_fonts(font)
         Zip::File.open(FileSystem.tmpfile_path(font[:filename])) do |file|
           file.each do |entry|
@@ -37,6 +41,8 @@ module Resume
         end
       end
       private_class_method :extract_fonts
+      # codebeat:enable[ABC]
+      # codebeat:enable[BLOCK_NESTING]
 
       def initialize(fonts)
         @fonts = fonts
