@@ -1,7 +1,6 @@
 {
   "RUBY": {
-    // NOTE: Info-level LOC violation moved up from 10 to 12 due to not quite
-    // agreeing with how the defaults handled the code.
-    "LOC": [12, 20, 40, 80]
+    "ABC": [19, 20, 40, 60],
+    "LOC": [19, 20, 40, 80]
   }
 }
