@@ -1,4 +1,16 @@
 ---
 rules:
+  avoid_copy_paste:
+    except:
+      - "spec/**/*.rb"
   ignore:
-  - use_a_logger
+    - assignment_in_conditional
+    - favor_if_unless_for_single_line
+    - missing_class_documentation
+    - missing_method_documentation
+    - prefer_single_quoted_strings
+    - use_a_logger
+  reduce_number_of_parameters:
+    except:
+      # NOTE: Use of Open3.popen3 triggers this violation
+      - "lib/resume/ruby_version_checker.rb"
