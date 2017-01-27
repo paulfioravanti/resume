@@ -4,7 +4,6 @@
 [![Test Coverage](https://codeclimate.com/github/paulfioravanti/resume/badges/coverage.svg)](https://codeclimate.com/github/paulfioravanti/resume)
 [![Code Climate](https://codeclimate.com/github/paulfioravanti/resume/badges/gpa.svg)](https://codeclimate.com/github/paulfioravanti/resume)
 [![Codebeat Badge](https://codebeat.co/badges/177b8978-ac33-4ec7-9534-765df49a0ef5)](https://codebeat.co/projects/github-com-paulfioravanti-resume)
-[![PullReview Stats](https://www.pullreview.com/github/paulfioravanti/resume/badges/master.svg)](https://www.pullreview.com/github/paulfioravanti/resume/reviews/master)
 [![Dependency Status](https://gemnasium.com/paulfioravanti/resume.svg)](https://gemnasium.com/paulfioravanti/resume)
 
 This is a Ruby CLI application that generates my resume.  I made it in order
@@ -84,7 +83,8 @@ The slide deck can be found [here](https://speakerdeck.com/paulfioravanti/resume
   image.  More discussion on this issue is at
   [this StackOverflow thread](http://stackoverflow.com/q/8289031/567863).
 
-### Social
+### Social [![Contact](https://img.shields.io/badge/contact-%40paulfioravanti-blue.svg)](https://twitter.com/paulfioravanti)
+
 
 <a href="http://stackoverflow.com/users/567863/paul-fioravanti">
   <img src="http://stackoverflow.com/users/flair/567863.png" width="208" height="58" alt="profile for Paul Fioravanti at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for Paul Fioravanti at Stack Overflow, Q&amp;A for professional and enthusiast programmers">
