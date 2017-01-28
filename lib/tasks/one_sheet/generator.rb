@@ -11,6 +11,7 @@ module OneSheet
       resume = document_content << executable
       output_file(resume)
       run_specs
+      run_code_quality_check
     end
 
     def document_content
@@ -23,7 +24,7 @@ module OneSheet
 
     def executable
       <<~EXECUTABLE
-        if __FILE__ == $0
+        if __FILE__ == $PROGRAM_NAME
           Resume.generate
         end
       EXECUTABLE
@@ -43,5 +44,17 @@ module OneSheet
       system("bin/rspec", "resume.rb")
     end
     private_class_method :run_specs
+
+    def run_code_quality_check
+      Resume::Output.raw_warning("Running code quality check...")
+      system(
+        "rubocop",
+        "--display-cop-names",
+        "--format",
+        "fuubar",
+        "resume.rb"
+      )
+    end
+    private_class_method :run_code_quality_check
   end
 end
