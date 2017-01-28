@@ -4,7 +4,7 @@ module Resume
   # (an edge case) ie:
   # $ bundle exec rspec spec/ && bundle exec rspec resume.rb
   remove_const(:VERSION) if const_defined?(:VERSION)
-  VERSION = "1.3"
+  VERSION = "1.3".freeze
 
   module_function
 
