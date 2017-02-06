@@ -3,13 +3,17 @@
 language: ruby
 cache: bundler
 rvm:
-- 2.4.0
+  - 2.4.0
 addons:
   code_climate:
     repo_token: $CODECLIMATE_REPO_TOKEN
+before_install:
+  # Prevent issues like the following happening:
+  # https://github.com/sickill/rainbow/issues/44
+  - gem update --system
 script:
-- bin/rspec spec/ --no-drb --format progress
-- bundle exec rubocop --display-cop-names
-- bin/rake resume
+  - bin/rspec spec/ --no-drb --format progress
+  - bundle exec rubocop --display-cop-names
+  - bin/rake resume
 after_success:
-- bundle exec codeclimate-test-reporter
+  - bundle exec codeclimate-test-reporter
