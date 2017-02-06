@@ -22,7 +22,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "guard-rspec", "~> 4.6"
   gem.add_development_dependency "guard-rubocop", "~> 1.2"
   gem.add_development_dependency "i18n", "~> 0.7"
-  gem.add_development_dependency "i18n-tasks", "~> 0.9"
   gem.add_development_dependency "kramdown", "~> 1.8"
   gem.add_development_dependency "prawn", "~> 2.1"
   gem.add_development_dependency "prawn-table", "0.2.2"
