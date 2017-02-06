@@ -1,52 +1,52 @@
 en:
-  gathering_resume_information: Gathering resume information...
+  cannot_generate_pdf_without_dependencies: |-
+    Sorry, I won't be able to generate a PDF
+    without installing these dependencies.
   cant_connect_to_the_internet: Can't connect to the internet.
-  please_check_your_network_settings:
-    Please check your network settings and try again.
-  i_need_the_following_to_generate_a_pdf:
-    "In order to help me generate a PDF, I need the following:"
-  ruby_gems: "* Ruby gems:"
-  gem_name_and_version: "  - %{name} %{version}"
+  creating_education_history_section: Creating education history section...
+  creating_employment_history_section: Creating employment history section...
+  creating_social_media_links: Creating social media links...
+  creating_technical_skills_section: Creating technical skills section...
   custom_fonts: "* Custom fonts for the resume"
-  may_i_please_install_them: "May I please install them? (Y/N) "
-  thank_you_kindly: "Thank you kindly :-)"
-  installing_ruby_gems: Installing Ruby gems...
-  downloading_font: Downloading font file. This may take a while...
   dependencies_successfully_installed: Dependencies successfully installed.
   dependency_installation_failed: |-
     Sorry, for some reason I wasn't able to
     install one or more required dependencies.
-  try_again_or_ask_me_directly_for_a_pdf_copy:
-    Either try again or ask me directly for a PDF copy of my resume.
-  cannot_generate_pdf_without_dependencies: |-
-    Sorry, I won't be able to generate a PDF
-    without installing these dependencies.
-  please_ask_me_directly_for_a_pdf_copy:
-    Please ask me directly for a PDF copy of my resume.
+  dont_know_how_to_open_resume: |-
+    Sorry, I can't figure out how to open the resume on
+    this computer. Please open it yourself.
+  downloading_font: Downloading font file. This may take a while...
+  gathering_resume_information: Gathering resume information...
+  gem_name_and_version: "  - %{name} %{version}"
   generating_pdf:
     "Generating PDF. This shouldn't take longer than a few seconds..."
-  creating_social_media_links: Creating social media links...
-  creating_technical_skills_section: Creating technical skills section...
-  creating_employment_history_section: Creating employment history section...
-  creating_education_history_section: Creating education history section...
+  i_need_the_following_to_generate_a_pdf:
+    "In order to help me generate a PDF, I need the following:"
+  installing_ruby_gems: Installing Ruby gems...
+  may_i_please_install_them: "May I please install them? (Y/N) "
+  please_ask_me_directly_for_a_pdf_copy:
+    Please ask me directly for a PDF copy of my resume.
+  please_check_your_network_settings:
+    Please check your network settings and try again.
+  please_ensure_you_have_one:
+    Please ensure that you have one before running them.
+  please_install_them_or_run_the_resume: >-
+    Either install them yourself or run the resume and it will
+    install them for you.
   resume_generated_successfully: Resume generated successfully.
-  would_you_like_me_to_open_the_resume:
-    "Would you like me to open the resume for you (Y/N)? "
+  ruby_gems: "* Ruby gems:"
+  thank_you_kindly: "Thank you kindly :-)"
   thanks_for_looking_at_my_resume: |-
     Thanks for looking at my resume. I hope to hear from you soon!
     My resume has been generated in the same
     directory you ran this script under, with the filename
     %{filename}
-  dont_know_how_to_open_resume: |-
-    Sorry, I can't figure out how to open the resume on
-    this computer. Please open it yourself.
+  try_again_or_ask_me_directly_for_a_pdf_copy:
+    Either try again or ask me directly for a PDF copy of my resume.
+  would_you_like_me_to_open_the_resume:
+    "Would you like me to open the resume for you (Y/N)? "
   you_need_prawn_to_run_the_specs: >-
     You need to have the prawn and prawn-table gems installed
     in order to run the specs.
-  please_install_them_or_run_the_resume: >-
-    Either install them yourself or run the resume and it will
-    install them for you.
   you_need_an_internet_connection_to_run_the_specs:
     You need to have an internet connection in order to run the specs.
-  please_ensure_you_have_one:
-    Please ensure that you have one before running them.
