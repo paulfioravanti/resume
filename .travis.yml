@@ -12,6 +12,7 @@ before_install:
   # https://github.com/sickill/rainbow/issues/44
   - gem update --system
 script:
+  - bundle exec bundle-audit check --update
   - bin/rspec spec/ --no-drb --format progress
   - bundle exec rubocop --display-cop-names
   - bin/rake resume
