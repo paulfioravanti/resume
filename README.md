@@ -1,9 +1,10 @@
 # Resume
 
 [![Build Status](https://travis-ci.org/paulfioravanti/resume.svg?branch=master)](https://travis-ci.org/paulfioravanti/resume)
-[![Test Coverage](https://codeclimate.com/github/paulfioravanti/resume/badges/coverage.svg)](https://codeclimate.com/github/paulfioravanti/resume)
 [![Code Climate](https://codeclimate.com/github/paulfioravanti/resume/badges/gpa.svg)](https://codeclimate.com/github/paulfioravanti/resume)
 [![Codebeat Badge](https://codebeat.co/badges/177b8978-ac33-4ec7-9534-765df49a0ef5)](https://codebeat.co/projects/github-com-paulfioravanti-resume)
+[![Test Coverage](https://codeclimate.com/github/paulfioravanti/resume/badges/coverage.svg)](https://codeclimate.com/github/paulfioravanti/resume)
+[![Codecov](https://codecov.io/gh/paulfioravanti/resume/branch/master/graph/badge.svg)](https://codecov.io/gh/paulfioravanti/resume)
 [![Dependency Status](https://gemnasium.com/paulfioravanti/resume.svg)](https://gemnasium.com/paulfioravanti/resume)
 
 This is a Ruby CLI application that generates my resume.  I made it in order
