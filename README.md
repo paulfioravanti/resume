@@ -1,4 +1,4 @@
-# Resume
+# Resume :page_facing_up:
 
 [![Build Status](https://travis-ci.org/paulfioravanti/resume.svg?branch=master)](https://travis-ci.org/paulfioravanti/resume)
 [![Code Climate](https://codeclimate.com/github/paulfioravanti/resume/badges/gpa.svg)](https://codeclimate.com/github/paulfioravanti/resume)
@@ -17,13 +17,13 @@ Text is deliberately obfuscated in the JSON files that contain the resume conten
 with [Base64](http://ruby-doc.org/stdlib-2.3.0/libdoc/base64/rdoc/Base64.html)
 to ensure people generate the PDF in order to be able to read anything.
 
-## Setup
+## Setup :paperclip:
 
     $ git clone https://github.com/paulfioravanti/resume.git
     $ cd resume
     $ bundle install
 
-## Usage
+## Usage :pencil2:
 
 Generate the resume in the following languages:
 
@@ -41,7 +41,7 @@ If you have SimpleCov installed, view the test coverage report:
 
     $ open coverage/index.html
 
-### One Sheet Resume
+### One Sheet Resume :memo:
 
 Generate the "one sheet" version of the resume (the whole app and specs in a
 single file called `resume.rb`).<br />
@@ -61,7 +61,7 @@ The specs can also be run directly on the one sheet resume:
 
     $ rspec resume.rb
 
-### Dependencies
+### Dependencies :fried_shrimp:
 
 - Ruby 2.4.0
 - I18n 0.7, Prawn 2.1.0 and Prawn-Table 0.2.2 (if you don't have the specific
@@ -69,14 +69,14 @@ The specs can also be run directly on the one sheet resume:
 - RSpec 3.5, if you want to run the specs
 - SimpleCov 0.12 if you want to view the coverage report locally
 
-### Presentation
+### Presentation :zap:
 
 I did a lightning talk about this project at the
 [Ruby on Rails Oceania Meetup](https://www.meetup.com/Ruby-On-Rails-Oceania-Sydney/)
 on [10 May 2016](https://www.meetup.com/Ruby-On-Rails-Oceania-Sydney/events/228886775/).<br />
 The slide deck can be found [here](https://speakerdeck.com/paulfioravanti/resume-as-code).
 
-### Issues:
+### Issues :confused:
 
 - It doesn't seem possible yet in Prawn to make an embedded image a clickable
   link.  Until support is possible (if ever), I've simply pulled in images from
@@ -84,8 +84,9 @@ The slide deck can be found [here](https://speakerdeck.com/paulfioravanti/resume
   image.  More discussion on this issue is at
   [this StackOverflow thread](http://stackoverflow.com/q/8289031/567863).
 
-### Social [![Contact](https://img.shields.io/badge/contact-%40paulfioravanti-blue.svg)](https://twitter.com/paulfioravanti)
+### Social :neckbeard:
 
+[![Contact](https://img.shields.io/badge/contact-%40paulfioravanti-blue.svg)](https://twitter.com/paulfioravanti)
 
 <a href="http://stackoverflow.com/users/567863/paul-fioravanti">
   <img src="http://stackoverflow.com/users/flair/567863.png" width="208" height="58" alt="profile for Paul Fioravanti at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for Paul Fioravanti at Stack Overflow, Q&amp;A for professional and enthusiast programmers">
