@@ -3,4 +3,8 @@ unless ENV["NO_COVERAGE"]
   SimpleCov.start do
     SimpleCov.minimum_coverage 100
   end
+  if ENV["TRAVIS"]
+    require "codecov"
+    SimpleCov.formatter = SimpleCov::Formatter::Codecov
+  end
 end
