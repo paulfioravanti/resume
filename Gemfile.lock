@@ -67,7 +67,6 @@ GEM
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    openssl (2.0.3)
     parser (2.4.0.0)
       ast (~> 2.2)
     pdf-core (0.6.1)
@@ -150,7 +149,6 @@ DEPENDENCIES
   guard-rubocop (~> 1.2)
   i18n (~> 0.7)
   kramdown (~> 1.8)
-  openssl
   prawn (~> 2.1)
   prawn-table (= 0.2.2)
   pry-byebug (~> 3.1)
