@@ -19,7 +19,6 @@ script:
   - bin/rubocop --display-cop-names
   # Agree to installing prawn and prawn-table gems
   - printf "yes\nno\n" | bin/resume
-  - printf "yes\nno\n" | bin/resume
   - printf "no\n" | bin/resume -l it
   # Agree to installing rubyzip and downloading custom font
   - printf "yes\nno\n" | bin/resume -l ja
