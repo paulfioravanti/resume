@@ -17,12 +17,12 @@ script:
   - bin/bundle-audit check --update
   - bin/rspec spec/ --no-drb --format progress
   - bin/rubocop --display-cop-names
-  - bin/resume
-  - bin/resume -l it
-  - bin/resume -l ja
+  - yes | bin/resume
+  - yes | bin/resume -l it
+  - yes | bin/resume -l ja
   - bin/rake resume
-  - ruby resume.rb
-  - ruby resume.rb -l it
-  - ruby resume.rb -l ja
+  - yes | ruby resume.rb
+  - yes | ruby resume.rb -l it
+  - yes | ruby resume.rb -l ja
 after_success:
   - bin/codeclimate-test-reporter
