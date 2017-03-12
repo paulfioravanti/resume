@@ -12,9 +12,15 @@ before_install:
   # https://github.com/sickill/rainbow/issues/44
   - gem update --system
 script:
-  - bundle exec bundle-audit check --update
+  - bin/bundle-audit check --update
+  - bin/resume -l en
+  - bin/resume -l it
+  - bin/resume -l ja
   - bin/rspec spec/ --no-drb --format progress
-  - bundle exec rubocop --display-cop-names
+  - bin/rubocop --display-cop-names
   - bin/rake resume
+  - ruby resume.rb -l en
+  - ruby resume.rb -l it
+  - ruby resume.rb -l ja
 after_success:
-  - bundle exec codeclimate-test-reporter
+  - bin/codeclimate-test-reporter
