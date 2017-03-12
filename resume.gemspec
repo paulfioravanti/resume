@@ -25,7 +25,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "guard-rubocop", "~> 1.2"
   gem.add_development_dependency "i18n", "~> 0.7"
   gem.add_development_dependency "kramdown", "~> 1.8"
-  gem.add_development_dependency "prawn", "~> 2.1"
+  gem.add_development_dependency "prawn", "~> 2.2"
   gem.add_development_dependency "prawn-table", "0.2.2"
   gem.add_development_dependency "pry-byebug", "~> 3.1"
   gem.add_development_dependency "rake", "~> 12.0"

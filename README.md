@@ -64,10 +64,10 @@ The specs can also be run directly on the one sheet resume:
 ### Dependencies :fried_shrimp:
 
 - Ruby 2.4.0
-- I18n 0.7, Prawn 2.1.0 and Prawn-Table 0.2.2 (if you don't have the specific
+- I18n, Prawn and Prawn-Table (if you don't have the specific
   versions of the gems, you will be prompted to install them)
-- RSpec 3.5, if you want to run the specs
-- SimpleCov 0.12 if you want to view the coverage report locally
+- RSpec, if you want to run the specs
+- SimpleCov, if you want to view the coverage report locally
 
 ### Presentation :zap:
 

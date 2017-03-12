@@ -36,6 +36,12 @@ Metrics/ModuleLength:
 RSpec/ExampleLength:
   Max: 9
 
+# NOTE: RSpec cop seems to ignore the AllCops directive and complains that
+# the resume.rb file isn't a *_spec.rb file, so suppress that issue.
+RSpec/FilePath:
+  Exclude:
+    - "resume.rb"
+
 RSpec/MultipleExpectations:
   Max: 5
 
