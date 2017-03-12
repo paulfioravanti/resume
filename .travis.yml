@@ -15,13 +15,13 @@ before_install:
   - bundle install
 script:
   - bin/bundle-audit check --update
-  - bin/resume -l en
-  - bin/resume -l it
-  - bin/resume -l ja
   - bin/rspec spec/ --no-drb --format progress
   - bin/rubocop --display-cop-names
+  - bin/resume
+  - bin/resume -l it
+  - bin/resume -l ja
   - bin/rake resume
-  - ruby resume.rb -l en
+  - ruby resume.rb
   - ruby resume.rb -l it
   - ruby resume.rb -l ja
 after_success:
