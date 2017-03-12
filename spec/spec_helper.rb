@@ -35,19 +35,19 @@ module Resume
         )
       rescue DependencyPrerequisiteError => error
         Output.messages(error.messages)
-        exit
+        exit(1)
       rescue LoadError
         Output.messages(
           error: :you_need_prawn_to_run_the_specs,
           warning: :please_install_them_or_run_the_resume
         )
-        exit
+        exit(1)
       rescue SocketError, OpenURI::HTTPError
         Output.messages(
           error: :you_need_an_internet_connection_to_run_the_specs,
           warning: :please_ensure_you_have_one
         )
-        exit
+        exit(1)
       end
     end
   end
