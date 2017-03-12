@@ -12,7 +12,6 @@ before_install:
   # https://github.com/sickill/rainbow/issues/44
   - gem update --system
   - gem install i18n rspec
-  # - bundle install
 script:
   - bin/bundle-audit check --update
   - bin/rspec spec/ --no-drb --format progress
