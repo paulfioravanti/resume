@@ -20,10 +20,10 @@ script:
   # NOTE: The 'no's below indicate not wanting to get CI to attempt to open
   # the generated PDF
   # Agree to installing prawn and prawn-table gems
-  - bin/resume <<< "yes\nno\n"
+  - printf "yes\nno\n" | bin/resume
   - bin/resume -l it <<< "no\n"
   # Agree to installing rubyzip and downloading custom font
-  - bin/resume -l ja <<< "yes\nno\n"
+  - printf "yes\nno\n" | bin/resume -l ja
   - bin/rake resume
   - ruby resume.rb <<< "no\n"
   - ruby resume.rb -l it <<< "no\n"
