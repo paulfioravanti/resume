@@ -19,12 +19,12 @@ module Resume
             receive(:require).with("rubygems").and_raise(LoadError)
           allow(described_class).to \
             receive(:require).with("open3").and_call_original
-          allow(described_class).to receive(:exit)
+          allow(described_class).to receive(:exit).with(1)
         end
 
         it "requests the user to install the expected Ruby version" do
           expect(checking_ruby_version).to output(message).to_stdout
-          expect(described_class).to have_received(:exit)
+          expect(described_class).to have_received(:exit).with(1)
         end
       end
 
@@ -40,12 +40,12 @@ module Resume
             "#{described_class}::REQUIRED_RUBY_VERSION",
             "3.0.0"
           )
-          allow(described_class).to receive(:exit)
+          allow(described_class).to receive(:exit).with(1)
         end
 
         it "requests the user to install the expected Ruby version" do
           expect(checking_ruby_version).to output(message).to_stdout
-          expect(described_class).to have_received(:exit)
+          expect(described_class).to have_received(:exit).with(1)
         end
       end
 
@@ -64,12 +64,12 @@ module Resume
             receive(:require).with("rubygems")
           allow(described_class).to \
             receive(:require).with("open3").and_raise(LoadError)
-          allow(described_class).to receive(:exit)
+          allow(described_class).to receive(:exit).with(1)
         end
 
         it "requests the user to install the expected Ruby version" do
           expect(checking_ruby_version).to output(message).to_stdout
-          expect(described_class).to have_received(:exit)
+          expect(described_class).to have_received(:exit).with(1)
         end
       end
     end

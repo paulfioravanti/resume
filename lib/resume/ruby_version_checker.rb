@@ -28,11 +28,11 @@ module Resume
       puts "Please install Ruby version 2.4.0 or higher to generate resume."
       require "open3"
       puts "Your Ruby version is #{user_ruby_version}"
-      exit
+      exit(1)
     rescue LoadError
       # NOTE: LoadError will likely occur if someone attempts to run
       # this with Ruby 1.8.7 and they don't have rubygems installed
-      exit
+      exit(1)
     end
     private_class_method :request_to_install_latest_ruby
 
