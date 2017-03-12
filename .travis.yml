@@ -17,8 +17,10 @@ script:
   - bin/bundle-audit check --update
   - bin/rspec spec/ --no-drb --format progress
   - bin/rubocop --display-cop-names
-  - printf "no\n" | bin/resume
+  # Agree to installing prawn and prawn-table gems
+  - printf "yes\nno\n" | bin/resume
   - printf "no\n" | bin/resume -l it
+  # Agree to installing rubyzip and downloading custom font
   - printf "yes\nno\n" | bin/resume -l ja
   - bin/rake resume
   - printf "no\n" | ruby resume.rb
