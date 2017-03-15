@@ -29,11 +29,11 @@ module Resume
         # a need to fetch the resources again.
         CLI::FileFetcher.fetch(
           CLI::ContentParser.decode_content(
-            "aHR0cHM6Ly9kbC5kcm9wYm94dXNlcmNvbnRlbnQuY29tL3UvNjg3"\
-            "ODA1Mi9yZXN1bWVfYXNzZXRzL2JhY2tncm91bmQuanBnP2RsPTE="
+            "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy9zb3Nsa3"\
+            "dqcHN2N2NobGgvYmFja2dyb3VuZC5qcGc/ZGw9MQ=="
           )
         )
-      rescue DependencyPrerequisiteError => error
+      rescue CLI::DependencyPrerequisiteError => error
         Output.messages(error.messages)
         exit(1)
       rescue LoadError
