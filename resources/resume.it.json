@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "gems": [
-      ["prawn", "2.2.0"],
+      ["prawn", "2.2.1"],
       ["prawn-table", "0.2.2"]
     ],
     "fonts": []
