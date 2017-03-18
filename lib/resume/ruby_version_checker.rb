@@ -1,7 +1,7 @@
 module Resume
   module RubyVersionChecker
-    REQUIRED_RUBY_VERSION = "2.4.0".freeze
-    private_constant :REQUIRED_RUBY_VERSION
+    MINIMUM_REQUIRED_RUBY_VERSION = "2.3.3".freeze
+    private_constant :MINIMUM_REQUIRED_RUBY_VERSION
 
     module_function
 
@@ -20,12 +20,12 @@ module Resume
 
     def old_ruby_version?
       Gem::Version.new(RUBY_VERSION.dup) <
-        Gem::Version.new(REQUIRED_RUBY_VERSION)
+        Gem::Version.new(MINIMUM_REQUIRED_RUBY_VERSION)
     end
     private_class_method :old_ruby_version?
 
     def request_to_install_latest_ruby
-      puts "Please install Ruby version 2.4.0 or higher to generate resume."
+      puts "Please install Ruby version >= 2.3.3 or higher to generate resume."
       require "open3"
       puts "Your Ruby version is #{user_ruby_version}"
       exit(1)
