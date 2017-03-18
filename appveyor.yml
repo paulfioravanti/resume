@@ -1,3 +1,4 @@
+# Base config taken from https://www.appveyor.com/docs/lang/ruby/#installation
 version: 1.0.{build}-{branch}
 cache:
   - vendor/bundle
@@ -7,18 +8,21 @@ environment:
   matrix:
     - ruby_version: 23
 install:
-  # AppVeyor currently only supports up to Ruby 2.3.3
+  # AppVeyor currently only supports up to Ruby 2.3.3, so set the
+  # custom Ruby version to be passed in to the program.
   - SET CUSTOM_RUBY_VERSION=2.3.3
   - SET PATH=C:\Ruby%ruby_version%\bin;%PATH%
-  # Attempt to get around the error
+  # Get around the error
   # OpenSSL::SSL::SSLError:
   #   SSL_connect returned=1 errno=0 state=error: certificate verify failed
-  # that occurs when trying to go and fetch a file remotely
+  # that occurs when trying to go and fetch a file remotely.
+  # See https://gist.github.com/fnichol/867550#the-manual-way-boring
   - choco install wget
   - wget https://curl.haxx.se/ca/cacert.pem -O C:\cacert.pem
   - set SSL_CERT_FILE=C:\cacert.pem
   - gem update --system
   - gem install i18n rspec
+  # Cache gems: https://www.appveyor.com/docs/lang/ruby/#caching
   - bundle config --local path vendor/bundle
   - bundle install
 before_test:
@@ -26,15 +30,15 @@ before_test:
   - gem -v
   - bundle -v
 test_script:
-  - bundle exec bundle-audit check --update
-  - bundle exec rspec spec/ --no-drb --format progress
-  - bundle exec rubocop --display-cop-names
   # NOTE: We can't run Unix executables under Windows,
   # so call them directly using Ruby.
+  - ruby bin/bundle-audit check --update
+  - ruby bin/rspec spec/ --no-drb --format progress
+  - ruby bin/rubocop --display-cop-names
   - printf "yes\nno\n" | ruby bin/resume
   - printf "no\n" | ruby bin/resume -l it
   - printf "yes\nno\n" | ruby bin/resume -l ja
-  - bundle exec rake resume
+  - ruby bin/rake resume
   - printf "no\n" | ruby resume.rb
   - printf "no\n" | ruby resume.rb -l it
   - printf "no\n" | ruby resume.rb -l ja
