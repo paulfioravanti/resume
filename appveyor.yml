@@ -29,6 +29,8 @@ test_script:
   - bundle exec bundle-audit check --update
   - bundle exec rspec spec/ --no-drb --format progress
   - bundle exec rubocop --display-cop-names
+  # NOTE: We can't run Unix executables under Windows,
+  # so call them directly using Ruby.
   - printf "yes\nno\n" | ruby bin/resume
   - printf "no\n" | ruby bin/resume -l it
   - printf "yes\nno\n" | ruby bin/resume -l ja
