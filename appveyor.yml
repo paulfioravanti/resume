@@ -2,7 +2,7 @@ version: 1.0.{build}-{branch}
 skip_tags: true
 environment:
   matrix:
-    - ruby_version: "Ruby24"
+    - RUBY_VERSION: 23
 install:
   - SET PATH=C:\%ruby_version%\bin;%PATH%
   - gem update --system
