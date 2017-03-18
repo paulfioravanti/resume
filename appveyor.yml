@@ -1,4 +1,6 @@
 version: 1.0.{build}-{branch}
+cache:
+  - vendor/bundle
 skip_tags: true
 build: off
 environment:
@@ -18,6 +20,7 @@ install:
   - gem update --system
   - gem uninstall bundler -a -x
   - gem install bundler i18n rspec
+  - bundle config --local path vendor/bundle
   - bundle install
 before_test:
   - ruby -v
@@ -27,9 +30,9 @@ test_script:
   - bundle exec bundle-audit check --update
   - bundle exec rspec spec/ --no-drb --format progress
   - bundle exec rubocop --display-cop-names
-  - bundle exec resume <<< "no\n"
-  - bundle exec resume -l it <<< "no\n"
-  - printf "yes\nno\n" | bundle exec resume -l ja
+  - bin/resume <<< "no\n"
+  - bin/resume -l it <<< "no\n"
+  - printf "yes\nno\n" | bin/resume -l ja
   - bundle exec rake resume
   - ruby resume.rb <<< "no\n"
   - ruby resume.rb -l it <<< "no\n"
