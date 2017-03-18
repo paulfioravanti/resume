@@ -11,7 +11,7 @@ module Resume
       end
 
       before do
-        stub_const("RUBY_VERSION", "2.4.0")
+        stub_const("#{described_class}::RUBY_VERSION", "2.4.0")
       end
 
       context "when a LoadError occurs when loading rubygems lib" do
