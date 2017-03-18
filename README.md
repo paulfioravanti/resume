@@ -16,6 +16,9 @@
       <a href="https://circleci.com/gh/paulfioravanti/resume">
         <img src="https://circleci.com/gh/paulfioravanti/resume/tree/master.svg?style=svg" alt="Build Status">
       </a>
+      <a href="https://app.codeship.com/projects/50157">
+        <img src="https://codeship.com/projects/50157/status?branch=master" alt="Build Status">
+      </a>
     </td>
     </td>
   </tr>
