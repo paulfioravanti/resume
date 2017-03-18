@@ -3,14 +3,12 @@ skip_tags: true
 environment:
   matrix:
     - ruby_version: "Ruby24"
-cache:
-  - vendor/bundle
 install:
   - SET PATH=C:\%ruby_version%\bin;%PATH%
   - gem update --system
   - gem uninstall bundler -a -x
   - gem install bundler i18n rspec
-  - bundle install --path=vendor/bundle --retry=3 --jobs=3
+  - bundle install
 before_test:
   - ruby -v
   - gem -v
