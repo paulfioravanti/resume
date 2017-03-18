@@ -10,6 +10,10 @@
       <a href="https://semaphoreci.com/paulfioravanti/resume">
         <img src="https://semaphoreci.com/api/v1/paulfioravanti/resume/branches/master/badge.svg" alt="Build Status">
       </a>
+      <a href="https://circleci.com/gh/paulfioravanti/resume">
+        <img src="https://circleci.com/gh/paulfioravanti/resume/tree/master.svg?style=svg" alt="Build Status">
+      </a>
+    </td>
     </td>
   </tr>
   <tr>
