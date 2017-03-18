@@ -21,7 +21,7 @@ install:
   - gem uninstall bundler -a -x
   - gem install bundler i18n rspec
   - bundle config --local path vendor/bundle
-  - bundle install
+  - bundle install --binstubs
 before_test:
   - ruby -v
   - gem -v
