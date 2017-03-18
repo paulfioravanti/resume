@@ -29,7 +29,8 @@ module Resume
       end
 
       def self.permission_granted?
-        Kernel.gets.chomp.match?(POSITIVE_INPUT)
+        # NOTE: Change back to `match?` when AppVeyor gets a Ruby 2.4 build.
+        Kernel.gets.chomp.match(POSITIVE_INPUT)
       end
       private_class_method :permission_granted?
 

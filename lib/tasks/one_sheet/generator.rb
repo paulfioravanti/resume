@@ -32,6 +32,10 @@ module OneSheet
     private_class_method :executable
 
     def output_file(resume)
+      # NOTE: When generated on Windows, the file will have have CRLF
+      # line endings, which will trip up Rubocop's Style/EndOfLine cop.
+      # This is unavoidable, so just ignore the warning when rubocop
+      # runs on the generated file.
       File.open("resume.rb", "w") do |file|
         file.write(resume)
       end

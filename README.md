@@ -7,6 +7,9 @@
       <a href="https://travis-ci.org/paulfioravanti/resume">
         <img src="https://travis-ci.org/paulfioravanti/resume.svg?branch=master" alt="Build Status" >
       </a>
+      <a href="https://ci.appveyor.com/project/paulfioravanti/resume">
+        <img src="https://ci.appveyor.com/api/projects/status/5v5426as3y3o9f6e/branch/master?svg=true" alt="Build Status">
+      </a>
       <a href="https://semaphoreci.com/paulfioravanti/resume">
         <img src="https://semaphoreci.com/api/v1/paulfioravanti/resume/branches/master/badge.svg" alt="Build Status">
       </a>
