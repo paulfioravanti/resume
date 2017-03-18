@@ -1,0 +1,29 @@
+version: 1.0.{build}-{branch}
+skip_tags: true
+environment:
+  matrix:
+    - ruby_version: "Ruby24"
+cache:
+  - vendor/bundle
+install:
+  - SET PATH=C:\%ruby_version%\bin;%PATH%
+  - gem update --system
+  - gem uninstall bundler -a -x
+  - gem install bundler i18n rspec
+  - bundle env
+  - bundle install --path=vendor/bundle --retry=3 --jobs=3
+before_test:
+  - ruby -v
+  - gem -v
+  - bundle -v
+test_script:
+  - bin/bundle-audit check --update
+  - bin/rspec spec/ --no-drb --format progress
+  - bin/rubocop --display-cop-names
+  - bin/resume <<< "no\n"
+  - bin/resume -l it <<< "no\n"
+  - printf "yes\nno\n" | bin/resume -l ja
+  - bin/rake resume
+  - ruby resume.rb <<< "no\n"
+  - ruby resume.rb -l it <<< "no\n"
+  - ruby resume.rb -l ja <<< "no\n"

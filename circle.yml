@@ -5,9 +5,8 @@ machine:
 dependencies:
   pre:
     - gem uninstall bundler <<< "Y\n" # use a custom version of bundler
-    - gem install bundler
+    - gem install bundler i18n rspec
     - gem update --system
-    - gem install i18n rspec
   override:
     - rvm use 2.4.0
     - bundle install: # note ':' here
@@ -24,4 +23,3 @@ test:
     - ruby resume.rb <<< "no\n"
     - ruby resume.rb -l it <<< "no\n"
     - ruby resume.rb -l ja <<< "no\n"
-
