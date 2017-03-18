@@ -4,7 +4,7 @@ machine:
       2.4.0
 dependencies:
   pre:
-    - gem uninstall bundler # use a custom version of bundler
+    - gem uninstall bundler <<< "Y\n" # use a custom version of bundler
     - gem install bundler
     - gem update --system
     - gem install i18n rspec
