@@ -4,6 +4,8 @@ environment:
   matrix:
     - ruby_version: 23
 install:
+  # AppVeyor currently only supports up to Ruby 2.3.3
+  - SET CUSTOM_RUBY_VERSION=2.3.3
   - SET PATH=C:\Ruby%ruby_version%\bin;%PATH%
   - gem update --system
   - gem uninstall bundler -a -x
