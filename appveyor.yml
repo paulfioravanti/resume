@@ -30,10 +30,10 @@ test_script:
   - bundle exec bundle-audit check --update
   - bundle exec rspec spec/ --no-drb --format progress
   - bundle exec rubocop --display-cop-names
-  - bin/resume <<< "no\n"
-  - bin/resume -l it <<< "no\n"
+  - printf "no\n" | bin/resume
+  - printf "no\n" | bin/resume -l it
   - printf "yes\nno\n" | bin/resume -l ja
   - bundle exec rake resume
-  - ruby resume.rb <<< "no\n"
-  - ruby resume.rb -l it <<< "no\n"
-  - ruby resume.rb -l ja <<< "no\n"
+  - printf "no\n" | ruby resume.rb
+  - printf "no\n" | ruby resume.rb -l it
+  - printf "no\n" | ruby resume.rb -l ja
