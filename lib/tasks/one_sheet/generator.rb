@@ -32,7 +32,7 @@ module OneSheet
     private_class_method :executable
 
     def output_file(resume)
-      File.open("resume.rb", "w") do |file|
+      File.open("resume.rb", mode: "w", crlf_newline: false) do |file|
         file.write(resume)
       end
       Resume::Output.raw_success("Successfully generated one-sheet resume")
