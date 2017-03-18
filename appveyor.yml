@@ -2,9 +2,9 @@ version: 1.0.{build}-{branch}
 skip_tags: true
 environment:
   matrix:
-    - RUBY_VERSION: 23
+    - ruby_version: 23
 install:
-  - SET PATH=C:\%ruby_version%\bin;%PATH%
+  - SET PATH=C:\Ruby%ruby_version%\bin;%PATH%
   - gem update --system
   - gem uninstall bundler -a -x
   - gem install bundler i18n rspec
