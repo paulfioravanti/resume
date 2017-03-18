@@ -1,5 +1,6 @@
 version: 1.0.{build}-{branch}
 skip_tags: true
+build: off
 environment:
   matrix:
     - ruby_version: 23
