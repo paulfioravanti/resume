@@ -12,10 +12,10 @@ install:
   # OpenSSL::SSL::SSLError:
   #   SSL_connect returned=1 errno=0 state=error: certificate verify failed
   # that occurs when trying to go and fetch a file remotely
-  - choco install wget
-  - wget https://curl.haxx.se/ca/cacert.pem -O C:\cacert.pem && setx /M SSL_CERT_FILE "C:\cacert.pem"
+  # - choco install wget
+  # - wget https://curl.haxx.se/ca/cacert.pem -O C:\cacert.pem && setx /M SSL_CERT_FILE "C:\cacert.pem"
   - gem update --system
-  - update_rubygems
+  # - update_rubygems
   - gem uninstall bundler -a -x
   - gem install bundler i18n rspec
   - bundle install
