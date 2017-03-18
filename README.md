@@ -1,11 +1,40 @@
 # Resume :page_facing_up:
 
-[![Build Status](https://travis-ci.org/paulfioravanti/resume.svg?branch=master)](https://travis-ci.org/paulfioravanti/resume)
-[![Code Climate](https://codeclimate.com/github/paulfioravanti/resume/badges/gpa.svg)](https://codeclimate.com/github/paulfioravanti/resume)
-[![Codebeat Badge](https://codebeat.co/badges/177b8978-ac33-4ec7-9534-765df49a0ef5)](https://codebeat.co/projects/github-com-paulfioravanti-resume)
-[![Test Coverage](https://codeclimate.com/github/paulfioravanti/resume/badges/coverage.svg)](https://codeclimate.com/github/paulfioravanti/resume)
-[![Codecov](https://codecov.io/gh/paulfioravanti/resume/branch/master/graph/badge.svg)](https://codecov.io/gh/paulfioravanti/resume)
-[![Dependency Status](https://gemnasium.com/paulfioravanti/resume.svg)](https://gemnasium.com/paulfioravanti/resume)
+<table>
+  <tr>
+    <td>Build Status</td>
+    <td>
+      <a href="https://travis-ci.org/paulfioravanti/resume">
+        <img src="https://travis-ci.org/paulfioravanti/resume.svg?branch=master" alt="Build Status" >
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>Code Quality</td>
+    <td>
+      <a href="https://codeclimate.com/github/paulfioravanti/resume">
+        <img src="https://codeclimate.com/github/paulfioravanti/resume/badges/gpa.svg" alt="Code Climate">
+      </a>
+      <a href="https://codebeat.co/projects/github-com-paulfioravanti-resume">
+        <img src="https://codebeat.co/badges/177b8978-ac33-4ec7-9534-765df49a0ef5" alt="Codebeat Badge">
+      </a>
+      <a href="https://codeclimate.com/github/paulfioravanti/resume">
+        <img src="https://codeclimate.com/github/paulfioravanti/resume/badges/coverage.svg" alt="Test Coverage">
+      </a>
+      <a href="https://codecov.io/gh/paulfioravanti/resume">
+        <img src="https://codecov.io/gh/paulfioravanti/resume/branch/master/graph/badge.svg" alt="Codecov">
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>Dependencies</td>
+    <td>
+      <a href="https://gemnasium.com/paulfioravanti/resume">
+        <img src="https://gemnasium.com/paulfioravanti/resume.svg" alt="Dependency Status">
+      </a>
+    </td>
+  </tr>
+</table>
 
 This is a Ruby CLI application that generates my resume.  I made it in order
 to teach myself a bit about the Ruby PDF generation library
