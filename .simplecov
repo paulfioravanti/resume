@@ -7,14 +7,17 @@ unless ENV["NO_COVERAGE"]
       SimpleCov::Formatter::Codecov,
       Coveralls::SimpleCov::Formatter
     ]
-  end
-
-  if ENV["SCRUTINIZER"]
+    SimpleCov.start do
+      SimpleCov.minimum_coverage 100
+    end
+  elsif ENV["SCRUTINIZER"]
     require "scrutinizer/ocular"
-    Scrutinizer::Ocular.watch!
-  end
-
-  SimpleCov.start do
-    SimpleCov.minimum_coverage 100
+    Scrutinizer::Ocular.watch! do
+      SimpleCov.minimum_coverage 100
+    end
+  else
+    SimpleCov.start do
+      SimpleCov.minimum_coverage 100
+    end
   end
 end
