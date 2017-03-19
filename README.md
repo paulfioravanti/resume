@@ -19,6 +19,9 @@
       <a href="https://app.codeship.com/projects/50157">
         <img src="https://codeship.com/projects/db246630-58c8-0132-9e3b-069770f0649f/status?branch=master" alt="Build Status" />
       </a>
+      <a href="https://scrutinizer-ci.com/g/paulfioravanti/resume">
+        <img src="https://scrutinizer-ci.com/g/paulfioravanti/resume/badges/build.png?b=master" alt="Build Status" />
+      </a>
     </td>
     </td>
   </tr>
@@ -39,6 +42,12 @@
       </a>
       <a href="https://coveralls.io/github/paulfioravanti/resume?branch=master">
         <img src="https://coveralls.io/repos/github/paulfioravanti/resume/badge.svg?branch=master" alt="Coverage Status" />
+      </a>
+      <a href="https://scrutinizer-ci.com/g/paulfioravanti/resume">
+        <img src="https://scrutinizer-ci.com/g/paulfioravanti/resume/badges/quality-score.png?b=master" alt="Scrutinizer Status" />
+      </a>
+      <a href="https://scrutinizer-ci.com/g/paulfioravanti/resume">
+        <img src="https://scrutinizer-ci.com/g/paulfioravanti/resume/badges/coverage.png?b=master" alt="Coverage Status" />
       </a>
     </td>
   </tr>
