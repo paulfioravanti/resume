@@ -1,5 +1,7 @@
 checks:
-  ruby: true
+  ruby:
+    code_rating: true
+    duplicate_code: true
 tools:
   rubocop:
     use_native_config: true

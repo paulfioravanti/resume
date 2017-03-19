@@ -7,6 +7,7 @@ unless ENV["NO_COVERAGE"]
     require "coveralls"
     require "codecov"
     require "scrutinizer/ocular"
+    Scrutinizer::Ocular.watch!
     SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
       SimpleCov::Formatter::Codecov,
       Coveralls::SimpleCov::Formatter,
