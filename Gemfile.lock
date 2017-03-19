@@ -136,6 +136,8 @@ GEM
     ruby_dep (1.5.0)
     rubygems-tasks (0.2.4)
     rubyzip (1.2.1)
+    scrutinizer-ocular (1.0.1)
+      simplecov (>= 0.7)
     shellany (0.0.1)
     simplecov (0.14.0)
       docile (~> 1.1.0)
@@ -186,6 +188,7 @@ DEPENDENCIES
   rubocop-rspec (~> 1.9)
   rubygems-tasks (~> 0.2)
   rubyzip (~> 1.2)
+  scrutinizer-ocular (~> 1.0)
   simplecov (~> 0.11)
   yard (~> 0.8)
 

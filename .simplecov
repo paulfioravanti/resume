@@ -6,9 +6,11 @@ unless ENV["NO_COVERAGE"]
   if ENV["TRAVIS"]
     require "coveralls"
     require "codecov"
+    require "scrutinizer/ocular"
     SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
       SimpleCov::Formatter::Codecov,
-      Coveralls::SimpleCov::Formatter
+      Coveralls::SimpleCov::Formatter,
+      Scrutinizer::Ocular::UploadFormatter
     ]
   end
 end

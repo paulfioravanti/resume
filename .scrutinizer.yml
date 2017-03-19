@@ -1,0 +1,31 @@
+checks:
+  ruby: true
+tools:
+  rubocop:
+    use_native_config: true
+filter:
+  excluded_paths:
+    - "spec/*"
+    - "vendor/*"
+build:
+  environment:
+    ruby: "2.4.0"
+  project_setup:
+    before:
+      - "gem update --system"
+      - "gem install i18n rspec"
+  tests:
+    before:
+      - "bin/bundle-audit check --update"
+    override:
+      -
+        command: "bin/rspec spec/ --no-drb --format progress"
+        environment:
+          "SCRUTINIZER_CC_FILE": "code-coverage"
+        coverage:
+          file: "code-coverage"
+          format: "rb-cc"
+checks:
+  ruby:
+    code_rating: true
+    duplicate_code: true
