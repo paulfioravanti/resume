@@ -1,5 +1,9 @@
 # Only run coverage when running spec suite outside of Guard
 unless ENV["NO_COVERAGE"]
+  SimpleCov.start do
+    SimpleCov.minimum_coverage 100
+  end
+
   if ENV["TRAVIS"]
     require "coveralls"
     require "codecov"
@@ -11,11 +15,9 @@ unless ENV["NO_COVERAGE"]
 
   if ENV["SCRUTINIZER"]
     require "scrutinizer/ocular"
-    SimpleCov.formatter = Scrutinizer::Ocular::UploadFormatter
-    Scrutinizer::Ocular.watch!
-  end
-
-  SimpleCov.start do
-    SimpleCov.minimum_coverage 100
+    SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+      SimpleCov::Formatter::HTMLFormatter,
+      Scrutinizer::Ocular::UploadFormatter
+    ]
   end
 end
