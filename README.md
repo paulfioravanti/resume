@@ -26,6 +26,22 @@
     </td>
   </tr>
   <tr>
+    <td>Code Coverage</td>
+      <a href="https://codeclimate.com/github/paulfioravanti/resume">
+        <img src="https://codeclimate.com/github/paulfioravanti/resume/badges/coverage.svg" alt="Code Climate Coverage" />
+      </a>
+      <a href="https://codecov.io/gh/paulfioravanti/resume">
+        <img src="https://codecov.io/gh/paulfioravanti/resume/branch/master/graph/badge.svg" alt="Codecov Coverage" />
+      </a>
+      <a href="https://coveralls.io/github/paulfioravanti/resume?branch=master">
+        <img src="https://coveralls.io/repos/github/paulfioravanti/resume/badge.svg?branch=master" alt="Coveralls Coverage" />
+      </a>
+      <a href="https://scrutinizer-ci.com/g/paulfioravanti/resume">
+        <img src="https://scrutinizer-ci.com/g/paulfioravanti/resume/badges/coverage.png?b=master" alt="Scrutinizer Coverage" />
+      </a>
+    <td>
+  </tr>
+  <tr>
     <td>Code Quality</td>
     <td>
       <a href="https://codeclimate.com/github/paulfioravanti/resume">
@@ -34,20 +50,8 @@
       <a href="https://codebeat.co/projects/github-com-paulfioravanti-resume">
         <img src="https://codebeat.co/badges/177b8978-ac33-4ec7-9534-765df49a0ef5" alt="Codebeat Badge" />
       </a>
-      <a href="https://codeclimate.com/github/paulfioravanti/resume">
-        <img src="https://codeclimate.com/github/paulfioravanti/resume/badges/coverage.svg" alt="Test Coverage" />
-      </a>
-      <a href="https://codecov.io/gh/paulfioravanti/resume">
-        <img src="https://codecov.io/gh/paulfioravanti/resume/branch/master/graph/badge.svg" alt="Codecov" />
-      </a>
-      <a href="https://coveralls.io/github/paulfioravanti/resume?branch=master">
-        <img src="https://coveralls.io/repos/github/paulfioravanti/resume/badge.svg?branch=master" alt="Coverage Status" />
-      </a>
       <a href="https://scrutinizer-ci.com/g/paulfioravanti/resume">
         <img src="https://scrutinizer-ci.com/g/paulfioravanti/resume/badges/quality-score.png?b=master" alt="Scrutinizer Status" />
-      </a>
-      <a href="https://scrutinizer-ci.com/g/paulfioravanti/resume">
-        <img src="https://scrutinizer-ci.com/g/paulfioravanti/resume/badges/coverage.png?b=master" alt="Coverage Status" />
       </a>
     </td>
   </tr>
