@@ -33,7 +33,7 @@ build:
         environment:
           "SCRUTINIZER_CC_FILE": "coverage"
         coverage:
-          file: coverage
+          # file: coverage
           format: rb-cc
 checks:
   ruby:
