@@ -37,7 +37,6 @@
       <a href="https://codecov.io/gh/paulfioravanti/resume">
         <img src="https://codecov.io/gh/paulfioravanti/resume/branch/master/graph/badge.svg" alt="Codecov">
       </a>
-
       <a href="https://coveralls.io/github/paulfioravanti/resume?branch=master">
         <img src="https://coveralls.io/repos/github/paulfioravanti/resume/badge.svg?branch=master" alt="Coverage Status" />
       </a>
