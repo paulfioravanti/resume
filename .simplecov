@@ -12,9 +12,8 @@ unless ENV["NO_COVERAGE"]
     end
   elsif ENV["SCRUTINIZER"]
     require "scrutinizer/ocular"
-    Scrutinizer::Ocular.watch! do
-      SimpleCov.minimum_coverage 100
-    end
+    SimpleCov.minimum_coverage 100
+    Scrutinizer::Ocular.watch!
   else
     SimpleCov.start do
       SimpleCov.minimum_coverage 100
