@@ -43,7 +43,7 @@
       <a href="https://scrutinizer-ci.com/g/paulfioravanti/resume">
         <img src="https://scrutinizer-ci.com/g/paulfioravanti/resume/badges/coverage.png?b=master" alt="Scrutinizer Coverage" />
       </a>
-    <td>
+    </td>
   </tr>
   <tr>
     <td>
