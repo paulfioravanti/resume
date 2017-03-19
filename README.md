@@ -2,7 +2,9 @@
 
 <table>
   <tr>
-    <td>Build Status</td>
+    <td>
+      Build Status
+    </td>
     <td>
       <a href="https://travis-ci.org/paulfioravanti/resume">
         <img src="https://travis-ci.org/paulfioravanti/resume.svg?branch=master" alt="Build Status" />
@@ -23,10 +25,12 @@
         <img src="https://scrutinizer-ci.com/g/paulfioravanti/resume/badges/build.png?b=master" alt="Build Status" />
       </a>
     </td>
-    </td>
   </tr>
   <tr>
-    <td>Code Coverage</td>
+    <td>
+      Code Coverage
+    </td>
+    <td>
       <a href="https://codeclimate.com/github/paulfioravanti/resume">
         <img src="https://codeclimate.com/github/paulfioravanti/resume/badges/coverage.svg" alt="Code Climate Coverage" />
       </a>
@@ -42,7 +46,9 @@
     <td>
   </tr>
   <tr>
-    <td>Code Quality</td>
+    <td>
+      Code Quality
+    </td>
     <td>
       <a href="https://codeclimate.com/github/paulfioravanti/resume">
         <img src="https://codeclimate.com/github/paulfioravanti/resume/badges/gpa.svg" alt="Code Climate" />
@@ -56,7 +62,9 @@
     </td>
   </tr>
   <tr>
-    <td>Dependencies</td>
+    <td>
+      Dependencies
+    </td>
     <td>
       <a href="https://gemnasium.com/paulfioravanti/resume">
         <img src="https://gemnasium.com/paulfioravanti/resume.svg" alt="Dependency Status">
