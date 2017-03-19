@@ -31,9 +31,9 @@ build:
       -
         command: bin/rspec spec/ --no-drb --format progress
         environment:
-          'SCRUTINIZER_CC_FILE': './coverage.json'
+          'SCRUTINIZER_CC_FILE': 'coverage.json'
         coverage:
-          file: './coverage.json'
+          file: 'coverage.json'
           format: 'rb-cc'
 checks:
   ruby:
