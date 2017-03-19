@@ -6,7 +6,6 @@ unless ENV["NO_COVERAGE"]
   if ENV["TRAVIS"]
     require "coveralls"
     require "codecov"
-    # SimpleCov.formatter = SimpleCov::Formatter::Codecov
     SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
       SimpleCov::Formatter::Codecov,
       Coveralls::SimpleCov::Formatter
