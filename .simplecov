@@ -15,6 +15,7 @@ unless ENV["NO_COVERAGE"]
 
   if ENV["SCRUTINIZER"]
     require "scrutinizer/ocular"
+    require "scrutinizer/ocular/formatter"
     SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
       SimpleCov::Formatter::HTMLFormatter,
       Scrutinizer::Ocular::UploadingFormatter
