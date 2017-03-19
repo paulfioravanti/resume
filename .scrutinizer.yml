@@ -19,11 +19,12 @@ build:
       - "bin/bundle-audit check --update"
     override:
       -
-        command: "bin/rspec spec/ --no-drb --format progress"
+        command:
+          - "bin/rspec spec/ --no-drb --format progress"
         environment:
-          "SCRUTINIZER_CC_FILE": "code-coverage"
+          "SCRUTINIZER_CC_FILE": "my-coverage"
         coverage:
-          file: "code-coverage"
+          file: "my-coverage"
           format: "rb-cc"
 checks:
   ruby:
