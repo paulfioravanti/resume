@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "bundler-audit", "~> 0.5"
   gem.add_development_dependency "codeclimate-test-reporter", "~> 1.0"
   gem.add_development_dependency "codecov", "~> 0.1"
-  gem.add_development_dependency "coveralls", "~> 0.7"
+  gem.add_development_dependency "coveralls", "~> 0.8"
   gem.add_development_dependency "fuubar", "~> 2.2.0"
   gem.add_development_dependency "guard-rspec", "~> 4.6"
   gem.add_development_dependency "guard-rubocop", "~> 1.2"
