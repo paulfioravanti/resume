@@ -31,9 +31,9 @@ build:
       -
         command: bin/rspec spec/ --no-drb --format progress
         environment:
-          "SCRUTINIZER_CC_FILE": "coverage"
+          "SCRUTINIZER_CC_FILE": "coverage/index.html"
         coverage:
-          file: coverage
+          file: coverage/index.html
           format: rb-cc
 checks:
   ruby:
