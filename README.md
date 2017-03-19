@@ -5,19 +5,19 @@
     <td>Build Status</td>
     <td>
       <a href="https://travis-ci.org/paulfioravanti/resume">
-        <img src="https://travis-ci.org/paulfioravanti/resume.svg?branch=master" alt="Build Status" >
+        <img src="https://travis-ci.org/paulfioravanti/resume.svg?branch=master" alt="Build Status" />
       </a>
       <a href="https://ci.appveyor.com/project/paulfioravanti/resume">
-        <img src="https://ci.appveyor.com/api/projects/status/5v5426as3y3o9f6e/branch/master?svg=true" alt="Build Status">
+        <img src="https://ci.appveyor.com/api/projects/status/5v5426as3y3o9f6e/branch/master?svg=true" alt="Build Status" />
       </a>
       <a href="https://semaphoreci.com/paulfioravanti/resume">
-        <img src="https://semaphoreci.com/api/v1/paulfioravanti/resume/branches/master/badge.svg" alt="Build Status">
+        <img src="https://semaphoreci.com/api/v1/paulfioravanti/resume/branches/master/badge.svg" alt="Build Status" />
       </a>
       <a href="https://circleci.com/gh/paulfioravanti/resume">
-        <img src="https://circleci.com/gh/paulfioravanti/resume/tree/master.svg?style=svg" alt="Build Status">
+        <img src="https://circleci.com/gh/paulfioravanti/resume/tree/master.svg?style=svg" alt="Build Status" />
       </a>
       <a href="https://app.codeship.com/projects/50157">
-        <img src="https://codeship.com/projects/db246630-58c8-0132-9e3b-069770f0649f/status?branch=master" alt="Build Status">
+        <img src="https://codeship.com/projects/db246630-58c8-0132-9e3b-069770f0649f/status?branch=master" alt="Build Status" />
       </a>
     </td>
     </td>
@@ -26,16 +26,19 @@
     <td>Code Quality</td>
     <td>
       <a href="https://codeclimate.com/github/paulfioravanti/resume">
-        <img src="https://codeclimate.com/github/paulfioravanti/resume/badges/gpa.svg" alt="Code Climate">
+        <img src="https://codeclimate.com/github/paulfioravanti/resume/badges/gpa.svg" alt="Code Climate" />
       </a>
       <a href="https://codebeat.co/projects/github-com-paulfioravanti-resume">
-        <img src="https://codebeat.co/badges/177b8978-ac33-4ec7-9534-765df49a0ef5" alt="Codebeat Badge">
+        <img src="https://codebeat.co/badges/177b8978-ac33-4ec7-9534-765df49a0ef5" alt="Codebeat Badge" />
       </a>
       <a href="https://codeclimate.com/github/paulfioravanti/resume">
-        <img src="https://codeclimate.com/github/paulfioravanti/resume/badges/coverage.svg" alt="Test Coverage">
+        <img src="https://codeclimate.com/github/paulfioravanti/resume/badges/coverage.svg" alt="Test Coverage" />
       </a>
       <a href="https://codecov.io/gh/paulfioravanti/resume">
-        <img src="https://codecov.io/gh/paulfioravanti/resume/branch/master/graph/badge.svg" alt="Codecov">
+        <img src="https://codecov.io/gh/paulfioravanti/resume/branch/master/graph/badge.svg" alt="Codecov" />
+      </a>
+      <a href="https://coveralls.io/github/paulfioravanti/resume?branch=master">
+        <img src="https://coveralls.io/repos/github/paulfioravanti/resume/badge.svg?branch=master" alt="Coverage Status" />
       </a>
     </td>
   </tr>
