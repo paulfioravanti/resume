@@ -61,6 +61,7 @@ module Resume
         let(:message) do
           "Please install Ruby version #{required_ruby_version} or higher "\
           "to generate resume.\n"\
+          "Your Ruby version is likely far too old to generate the resume.\n"
         end
 
         before do
