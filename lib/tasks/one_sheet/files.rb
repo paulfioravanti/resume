@@ -3,8 +3,9 @@ module OneSheet
     module_function
 
     def read(type)
-      type[:files].reduce("") do |content, file|
-        content << read_file(type[:path], file)
+      files, path = type.values_at(:files, :path)
+      files.reduce("") do |content, file|
+        content << read_file(path, file)
       end
     end
 
