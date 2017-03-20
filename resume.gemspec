@@ -36,7 +36,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "rubocop-rspec", "~> 1.9"
   gem.add_development_dependency "rubygems-tasks", "~> 0.2"
   gem.add_development_dependency "rubyzip", "~> 1.2"
-  gem.add_development_dependency "simplecov", "~> 0.11"
+  gem.add_development_dependency "simplecov", "~> 0.12"
   gem.add_development_dependency "scrutinizer-ocular", "~> 1.0"
   gem.add_development_dependency "yard", "~> 0.8"
 end
