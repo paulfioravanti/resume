@@ -31,8 +31,20 @@ end
 
 Rake.add_rakelib("lib/tasks")
 
-require_relative "lib/tasks/one_sheet/generator"
-desc "Generate the one-file resume from the application"
-task :resume do
-  OneSheet::Generator.run
+namespace :resume do
+  task :generate_one_sheet do
+    require_relative "lib/tasks/one_sheet/generator"
+    OneSheet::Generator.run
+  end
+
+  desc "Delete assets downloaded into the local tmpdir"
+  task :delete_assets do
+    require_relative "lib/resume/output"
+    Resume::Output.raw_warning("Deleting local assets in the tmpdir...")
+    File.delete(*Dir.glob(File.join(Dir.tmpdir, "resume_*")))
+    Resume::Output.raw_success("Successfully deleted local assets")
+  end
 end
+
+desc "Generate the 'one-sheet' resume from the application"
+task resume: "resume:generate_one_sheet"
