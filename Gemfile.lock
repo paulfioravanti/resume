@@ -173,7 +173,7 @@ DEPENDENCIES
   rubygems-tasks (~> 0.2)
   rubyzip (~> 1.2)
   scrutinizer-ocular (~> 1.0)
-  simplecov (~> 0.11)
+  simplecov (~> 0.12)
   yard (~> 0.8)
 
 RUBY VERSION

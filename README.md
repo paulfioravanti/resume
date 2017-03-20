@@ -127,6 +127,12 @@ The specs can also be run directly on the one sheet resume:
 
     $ rspec resume.rb
 
+If there are ever any errors or issues related to the downloading of remote
+assets that cause the resume to not be able to be generated, you can run the
+following `rake` task to delete all resume-related assets from the local tmpdir:
+
+    $ bin/rake resume:delete_assets
+
 ### Dependencies :fried_shrimp:
 
 - Ruby 2.4.0
