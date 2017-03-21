@@ -1,14 +1,30 @@
+DataClump:
+  # NOTE: The Prawn API and the functional nature of how the resume is
+  # generated tends to generate what OO would consider data clumps
+  exclude:
+    - "Resume::PDF::Entry::Content"
+FeatureEnvy:
+  # NOTE: Many of the exclusions here are due to reek not being able to see
+  # `module_function` methods aren't instance methods that need to refer to a
+  # `self`.
+  exclude:
+    - "Resume::PDF::EmploymentHistory#footer"
+    - "Resume::PDF::Entry::Content#details"
+    - "Resume::PDF::Entry::Header#formatted_text_box_header"
+    - "Resume::PDF::Entry::Heading#generate"
+    - "Resume::PDF::ImageLink#generate"
+    - "Resume::PDF::TechnicalSkills#generate_table"
 IrresponsibleModule:
   enabled: false
 NestedIterators:
   # NOTE: some of the exclusions are here because reek considers
   # passing a block to File.open an iterator, which I do not
   exclude:
+    - "Resume::PDF::Document#self.generate"
+    - "Resume::PDF::Entry::Header#formatted_text_box_header"
+    - "Resume::PDF::Entry::Header#formatted_text_header"
     - "Resume::CLI::FileFetcher#remote_file"
     - "Resume::CLI::FontDownloader#self.extract_fonts"
-    - "Resume::PDF::Document#self.generate"
-    - "Resume::PDF::Entry::Header#self.formatted_text_box_header"
-    - "Resume::PDF::Entry::Header#self.formatted_text_header"
 TooManyStatements:
   exclude:
     - "Resume::CLI::Application#self.start"
@@ -16,7 +32,7 @@ TooManyStatements:
     - "Resume::CLI::FontDownloader#fonts_successfully_downloaded?"
     - "Resume::CLI::FontDownloader#self.extract_fonts"
     - "Resume::PDF::EmploymentHistory#self.generate"
-    - "Resume::PDF::Manifest#self.process"
+    - "Resume::PDF::Manifest#process"
     - "Resume::PDF::SocialMediaLogoSet#self.generate_logo_for"
     - "Resume::PDF::TechnicalSkills#self.generate"
 

@@ -8,13 +8,26 @@ module Resume
 
       def generate(pdf, employment_history)
         Entry::Heading.generate(pdf, employment_history[:heading])
-        content = employment_history[:content]
-        content[:entries].values.each do |entry|
+        entries, bottom_padding, horizontal_rule_colour =
+          employment_history[:content].values_at(
+            :entries, :bottom_padding, :horizontal_rule_colour
+          )
+        generate_content(entries)
+        footer(pdf, bottom_padding, horizontal_rule_colour)
+      end
+
+      def generate_content(entries)
+        entries.values.each do |entry|
           Entry::Content.generate(pdf, entry)
         end
-        pdf.move_down(content[:bottom_padding])
-        pdf.stroke_horizontal_rule { color content[:horizontal_rule_colour] }
       end
+      private_class_method :generate_content
+
+      def footer(pdf, bottom_padding, horizontal_rule_colour)
+        pdf.move_down(bottom_padding)
+        pdf.stroke_horizontal_rule { color(horizontal_rule_colour) }
+      end
+      private_class_method :footer
     end
   end
 end
