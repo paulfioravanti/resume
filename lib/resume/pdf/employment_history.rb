@@ -12,11 +12,11 @@ module Resume
           employment_history[:content].values_at(
             :entries, :bottom_padding, :horizontal_rule_colour
           )
-        generate_content(entries)
+        generate_content(pdf, entries)
         footer(pdf, bottom_padding, horizontal_rule_colour)
       end
 
-      def generate_content(entries)
+      def generate_content(pdf, entries)
         entries.values.each do |entry|
           Entry::Content.generate(pdf, entry)
         end
