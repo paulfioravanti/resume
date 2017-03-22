@@ -8,15 +8,11 @@ module Resume
           # Different rendering behaviour needed depending on whether
           # the header is being drawn from left to right on the page
           # or specifically placed at a location on the x-axis
-          header_sections = [
-            [entry[:position]],
-            [entry[:organisation]],
-            [entry[:period], entry[:location]]
-          ]
+          entry_header_sections = header_sections(entry)
           if (x_position = entry[:at_x_position])
-            formatted_text_box_header(header_sections, pdf, x_position)
+            formatted_text_box_header(entry_header_sections, pdf, x_position)
           else
-            formatted_text_header(header_sections, pdf)
+            formatted_text_header(entry_header_sections, pdf)
           end
         end
 
@@ -39,6 +35,15 @@ module Resume
           end
         end
         private_class_method :formatted_text_header
+
+        def header_sections(entry)
+          [
+            [entry[:position]],
+            [entry[:organisation]],
+            [entry[:period], entry[:location]]
+          ]
+        end
+        private_class_method :header_sections
 
         def properties_for(section)
           {

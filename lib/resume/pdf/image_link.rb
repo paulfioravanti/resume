@@ -4,8 +4,10 @@ module Resume
       module_function
 
       def generate(pdf, logo)
-        pdf.image(logo[:image], fit: logo[:fit], align: logo[:align])
-        pdf.move_up logo[:link_overlay_start]
+        image, fit, align, link_overlay_start =
+          logo.values_at(:image, :fit, :align, :link_overlay_start)
+        pdf.image(image, fit: fit, align: align)
+        pdf.move_up(link_overlay_start)
         transparent_link(pdf, logo)
       end
 

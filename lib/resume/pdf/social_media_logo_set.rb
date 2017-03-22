@@ -6,19 +6,18 @@ module Resume
       module_function
 
       def generate(pdf, logo_set)
-        pdf.move_down(logo_set[:top_padding])
+        top_padding, horizontal_rule_colour =
+          logo_set.values_at(:top_padding, :horizontal_rule_colour)
+        pdf.move_down(top_padding)
         generate_logos(pdf, logo_set)
-        pdf.move_down(logo_set[:bottom_padding])
-        pdf.stroke_horizontal_rule { color logo_set[:horizontal_rule_colour] }
+        pdf.stroke_horizontal_rule { color(horizontal_rule_colour) }
       end
 
       def generate_logos(pdf, logo_set)
         logos = entire_logo_properties(logo_set)
         generate_logo_for(logos.first, pdf, logo_set)
-        logos[1..-1].each do |logo|
-          pdf.move_up(logo_set[:padded_logo_height])
-          generate_logo_for(logo, pdf, logo_set)
-        end
+        generate_logos_for(logos[1..-1], pdf, logo_set)
+        pdf.move_down(logo_set[:bottom_padding])
       end
       private_class_method :generate_logos
 
@@ -38,6 +37,14 @@ module Resume
         logo_set[:x_position] = x_position + logo_set[:padded_logo_width]
       end
       private_class_method :generate_logo_for
+
+      def generate_logos_for(logos, pdf, logo_set)
+        logos.each do |logo|
+          pdf.move_up(logo_set[:padded_logo_height])
+          generate_logo_for(logo, pdf, logo_set)
+        end
+      end
+      private_class_method :generate_logos
     end
   end
 end

@@ -4,6 +4,9 @@ require "yaml"
 
 module OneSheet
   module Generator
+    CONFIG = YAML.load_file(File.join(__dir__, "config.yml"))
+    private_constant :CONFIG
+
     module_function
 
     def run
@@ -15,9 +18,8 @@ module OneSheet
     end
 
     def document_content
-      config = YAML.load_file(File.join(__dir__, "config.yml"))
-      config.keys.reduce("") do |content, file_type|
-        content << Files.read(config[file_type])
+      CONFIG.keys.reduce("") do |content, file_type|
+        content << Files.read(CONFIG[file_type])
       end
     end
     private_class_method :document_content
