@@ -64,11 +64,11 @@ module Resume
           # Prawn specifically requires :align values to
           # be symbols otherwise it errors out
           hash[key] = value.to_sym
-        elsif array_of_styles?(key, value)
+        elsif key == :styles && value.is_a?(Array)
           # Prawn specifically requires :styles values to
           # be symbols otherwise the styles do not take effect
           hash[key] = value.map!(&:to_sym)
-        elsif font_hash?(key, value)
+        elsif key == :font && value.is_a?(Hash)
           # This is the hash that tells Prawn what the fonts to be used
           # are called and where they are located
           substitute_filenames_for_filepaths(value)
@@ -77,16 +77,6 @@ module Resume
         end
       end
       private_class_method :munge_hash_value
-
-      def array_of_styles?(key, value)
-        key == :styles && value.is_a?(Array)
-      end
-      private_class_method :array_of_styles?
-
-      def font_hash?(key, value)
-        key == :font && value.is_a?(Hash)
-      end
-      private_class_method :font_hash?
 
       def substitute_filenames_for_filepaths(value)
         %i(normal bold).each do |property|

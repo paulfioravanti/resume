@@ -2,12 +2,20 @@ DataClump:
   # NOTE: The Prawn API and the functional nature of how the resume is
   # generated tends to generate what OO would consider data clumps
   exclude:
+    - "Resume::CLI::ContentParser"
     - "Resume::PDF::Entry::Content"
+DuplicateMethodCall:
+  exclude:
+    # NOTE: This is due to the OptionParser syntax
+    - "Resume::CLI::ArgumentParser#parser"
 FeatureEnvy:
   # NOTE: Many of the exclusions here are due to reek not being able to see
   # `module_function` methods aren't instance methods that need to refer to a
   # `self`.
   exclude:
+    - "Resume::CLI::ArgumentParser#parser"
+    - "Resume::CLI::ContentParser#munge_hash_value"
+    - "Resume::CLI::ContentParser#parse_array"
     - "Resume::PDF::EmploymentHistory#footer"
     - "Resume::PDF::Entry::Content#details"
     - "Resume::PDF::Entry::Header#formatted_text_box_header"
@@ -28,11 +36,9 @@ NestedIterators:
 TooManyStatements:
   exclude:
     - "Resume::CLI::Application#self.start"
-    - "Resume::CLI::ArgumentParser#self.parser"
+    - "Resume::CLI::ArgumentParser#parser"
     - "Resume::CLI::FontDownloader#fonts_successfully_downloaded?"
     - "Resume::CLI::FontDownloader#self.extract_fonts"
-    - "Resume::PDF::EmploymentHistory#self.generate"
     - "Resume::PDF::Manifest#process"
-    - "Resume::PDF::SocialMediaLogoSet#self.generate_logo_for"
     - "Resume::PDF::TechnicalSkills#self.generate"
 
