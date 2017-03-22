@@ -124,65 +124,19 @@ module Resume
           let(:decoded_font_location) do
             "https://www.dropbox.com/s/xxx/fonts.zip?dl=1"
           end
-          let(:filename) { "IPAfont00303.zip" }
-          let(:normal_font_name) { "ipamp.ttf" }
-          let(:bold_font_name) { "ipagp.ttf" }
           let(:font) do
-            {
-              location: font_location,
-              filename: filename,
-              files: {
-                normal: normal_font_name,
-                bold: bold_font_name
-              }
-            }
+            { location: font_location }
           end
           let(:fonts) { [font] }
 
           context "all fonts successfully downloaded and extracted" do
-            # NOTE: For the most part, mocking this out is complete madness,
-            # but I did not want the test suite to be dependent on the
-            # rubyzip gem since it is not used to generate all resumes
-            let(:font_file_filepath) { "/tmp/#{filename}" }
-            let(:zip_file) do
-              class_double("Zip::File").as_stubbed_const
-            end
-            let(:normal_font_file) do
-              instance_double(
-                "Zip::File", :normal_font_file, name: normal_font_name
-              )
-            end
-            let(:bold_font_file) do
-              instance_double(
-                "Zip::File", :bold_font_file, name: bold_font_name
-              )
-            end
-            let(:font_zip_file) { [normal_font_file, bold_font_file] }
-            let(:normal_font_filepath) { "/tmp/#{normal_font_name}" }
-            let(:bold_font_filepath) { "/tmp/#{bold_font_name}" }
-
             before do
               allow(Output).to \
                 receive(:plain).with(:downloading_font)
               allow(FileFetcher).to \
                 receive(:fetch).with(decoded_font_location)
-              allow(FileSystem).to \
-                receive(:tmpfile_path).with(filename).
-                  and_return(font_file_filepath)
               allow(font_downloader).to receive(:require).with("zip")
-              allow(zip_file).to \
-                receive(:open).with(font_file_filepath).
-                  and_yield(font_zip_file)
-              allow(FileSystem).to \
-                receive(:tmpfile_path).with(normal_font_name).
-                  and_return(normal_font_filepath)
-              allow(FileSystem).to \
-                receive(:tmpfile_path).with(bold_font_name).
-                  and_return(bold_font_filepath)
-              allow(normal_font_file).to \
-                receive(:extract).with(normal_font_filepath)
-              allow(bold_font_file).to \
-                receive(:extract).with(bold_font_filepath)
+              allow(FontExtractor).to receive(:extract).with(font)
             end
 
             it "returns true" do
@@ -191,6 +145,7 @@ module Resume
                 have_received(:plain).with(:downloading_font)
               expect(FileFetcher).to \
                 have_received(:fetch).with(decoded_font_location)
+              expect(FontExtractor).to have_received(:extract).with(font)
             end
           end
 
@@ -198,9 +153,8 @@ module Resume
             before do
               allow(Output).to \
                 receive(:plain).with(:downloading_font)
-              allow(described_class).to \
-                receive(:download_font_file).with(font_location).
-                  and_raise(NetworkConnectionError)
+              allow(FileFetcher).to \
+                receive(:fetch).and_raise(NetworkConnectionError)
             end
 
             it "returns false" do

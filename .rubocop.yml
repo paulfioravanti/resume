@@ -34,7 +34,9 @@ Metrics/ModuleLength:
     - "resume.rb"
 
 RSpec/ExampleLength:
-  Max: 9
+  # NOTE: Pretty much the fault of the FontExtractor module needing to mock
+  # out the entirety of its interactiion with Zip::File
+  Max: 10
 
 # NOTE: RSpec cop seems to ignore the AllCops directive and complains that
 # the resume.rb file isn't a *_spec.rb file, so suppress that issue.
