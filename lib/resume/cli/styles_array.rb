@@ -4,7 +4,8 @@ module Resume
       module_function
 
       def ===(other)
-        other.first == :styles && other.last.is_a?(Array)
+        return false unless other.length == 1
+        other.key?(:styles) && other[:styles].is_a?(Array)
       end
     end
   end

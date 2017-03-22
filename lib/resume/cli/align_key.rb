@@ -4,7 +4,8 @@ module Resume
       module_function
 
       def ===(other)
-        other.first == :align
+        return false unless other.length == 1
+        other.key?(:align)
       end
     end
   end
