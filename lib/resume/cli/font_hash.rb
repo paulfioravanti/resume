@@ -4,7 +4,8 @@ module Resume
       module_function
 
       def ===(other)
-        other.first == :font && other.last.is_a?(Hash)
+        return false unless other.length == 1
+        other.key?(:font) && other[:font].is_a?(Hash)
       end
     end
   end

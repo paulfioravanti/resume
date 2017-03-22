@@ -63,7 +63,7 @@ module Resume
       private_class_method :parse_hash
 
       def munge_hash_value(hash, key, value)
-        case [key, value]
+        case Hash[key, value]
         when AlignKey
           # Prawn specifically requires :align values to
           # be symbols otherwise it errors out
