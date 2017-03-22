@@ -19,7 +19,7 @@ module OneSheet
 
     def document_content
       CONFIG.keys.reduce("") do |content, file_type|
-        content << Files.read(config[file_type])
+        content << Files.read(CONFIG[file_type])
       end
     end
     private_class_method :document_content

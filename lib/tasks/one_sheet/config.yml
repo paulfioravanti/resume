@@ -100,8 +100,11 @@
     - :file: resume_data_fetcher.rb
       :from_line: 6
       :to_line: -3
+    - :file: font_extractor.rb
+      :from_line: 4
+      :to_line: -3
     - :file: font_downloader.rb
-      :from_line: 9
+      :from_line: 10
       :to_line: -3
     - :file: gem_installer.rb
       :from_line: 6
@@ -156,6 +159,9 @@
       :to_line: -3
     - :file: file_system_spec.rb
       :from_line: 5
+      :to_line: -3
+    - :file: font_extractor_spec.rb
+      :from_line: 4
       :to_line: -3
     - :file: font_downloader_spec.rb
       :from_line: 4
