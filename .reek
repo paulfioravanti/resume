@@ -20,7 +20,7 @@ NestedIterators:
   # NOTE: some of the exclusions are here because reek considers
   # passing a block to File.open an iterator, which I do not
   exclude:
-    - "Resume::PDF::Document#self.generate"
+    - "Resume::PDF::Document#generate"
     - "Resume::PDF::Entry::Header#formatted_text_box_header"
     - "Resume::PDF::Entry::Header#formatted_text_header"
     - "Resume::CLI::FileFetcher#remote_file"
