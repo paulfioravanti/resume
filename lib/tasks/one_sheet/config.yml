@@ -88,8 +88,17 @@
     - :file: file_fetcher.rb
       :from_line: 9
       :to_line: -3
+    - :file: align_key.rb
+      :from_line: 2
+      :to_line: -3
+    - :file: font_hash.rb
+      :from_line: 2
+      :to_line: -3
+    - :file: styles_array.rb
+      :from_line: 2
+      :to_line: -3
     - :file: content_parser.rb
-      :from_line: 7
+      :from_line: 10
       :to_line: -3
     - :file: settings.rb
       :from_line: 6
@@ -137,6 +146,15 @@
   :path: spec/lib/resume/cli
   :files:
     - :file: application_spec.rb
+      :from_line: 4
+      :to_line: -3
+    - :file: align_key_spec.rb
+      :from_line: 4
+      :to_line: -3
+    - :file: font_hash_spec.rb
+      :from_line: 4
+      :to_line: -3
+    - :file: styles_array_spec.rb
       :from_line: 4
       :to_line: -3
     - :file: argument_parser_spec.rb

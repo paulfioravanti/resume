@@ -53,6 +53,11 @@ RSpec/MultipleExpectations:
 RSpec/NestedGroups:
   Max: 8
 
+Style/CaseEquality:
+  # NOTE: This is rule is disabled, but care should be made to
+  # *only ever* use `===` in `case` statements.
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
 
