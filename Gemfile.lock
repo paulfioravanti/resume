@@ -17,8 +17,8 @@ GEM
     byebug (9.0.6)
     codeclimate-engine-rb (0.4.0)
       virtus (~> 1.0)
-    codeclimate-test-reporter (1.0.7)
-      simplecov
+    codeclimate-test-reporter (1.0.8)
+      simplecov (<= 0.13)
     codecov (0.1.10)
       json
       simplecov
