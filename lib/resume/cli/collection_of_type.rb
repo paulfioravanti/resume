@@ -9,28 +9,18 @@ module Resume
       end
 
       module FontHash
-        KEY = :font
-        private_constant :KEY
-        COLLECTION_TYPE = Hash
-        private_constant :COLLECTION_TYPE
-
         module_function
 
         def ===(other)
-          Module.nesting[1].collection_of_type?(other, KEY, COLLECTION_TYPE)
+          Module.nesting[1].collection_of_type?(other, :font, Hash)
         end
       end
 
       module StylesArray
-        KEY = :styles
-        private_constant :KEY
-        COLLECTION_TYPE = Array
-        private_constant :COLLECTION_TYPE
-
         module_function
 
         def ===(other)
-          Module.nesting[1].collection_of_type?(other, KEY, COLLECTION_TYPE)
+          Module.nesting[1].collection_of_type?(other, :styles, Array)
         end
       end
     end
