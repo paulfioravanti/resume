@@ -106,7 +106,7 @@ Run the specs:
 
     $ bin/rspec
 
-If you have SimpleCov installed, view the test coverage report:
+View the Simplecov test coverage report:
 
     $ open coverage/index.html
 
