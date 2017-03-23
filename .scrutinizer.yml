@@ -14,7 +14,7 @@ build:
     ruby: 2.4.1
   project_setup:
     before:
-      # - cd /home/runner/.rbenv/plugins/ruby-build && git pull && cd -
+      - cd /home/scrutinizer/.rbenv/plugins/ruby-build && git pull && cd -
       - rbenv install -l
       - rbenv install 2.4.1
       - rbenv global 2.4.1
