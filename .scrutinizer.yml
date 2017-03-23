@@ -14,13 +14,15 @@ build:
     ruby: 2.4.1
   project_setup:
     before:
+      - cd /home/runner/.rbenv/plugins/ruby-build && git pull && cd -
+      - rbenv install -l
+      - rbenv install 2.4.1
+      - rbenv global 2.4.1
+      - ruby -v
       - gem update --system
-      - gem install i18n rspec
+      - gem install bundler i18n rspec
   tests:
     before:
-      - rvm list
-      - rbenv install -l
-      - chruby
       - bin/bundle-audit check --update
       - bin/rubocop --display-cop-names
       - printf "yes\nno\n" | bin/resume
