@@ -11,7 +11,7 @@ filter:
     - vendor/*
 build:
   environment:
-    ruby: 2.4.0
+    ruby: 2.4.1
   project_setup:
     before:
       - gem update --system
