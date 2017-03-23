@@ -59,6 +59,9 @@
       <a href="https://scrutinizer-ci.com/g/paulfioravanti/resume">
         <img src="https://scrutinizer-ci.com/g/paulfioravanti/resume/badges/quality-score.png?b=master" alt="Scrutinizer Status" />
       </a>
+      <a href="https://hakiri.io/github/paulfioravanti/resume/master">
+        <img src="https://hakiri.io/github/paulfioravanti/resume/master.svg" alt="Hakiri Status" />
+      </a>
     </td>
   </tr>
   <tr>
