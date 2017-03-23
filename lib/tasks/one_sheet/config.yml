@@ -91,14 +91,11 @@
     - :file: align_key.rb
       :from_line: 2
       :to_line: -3
-    - :file: font_hash.rb
-      :from_line: 2
-      :to_line: -3
-    - :file: styles_array.rb
+    - :file: collection_of_type.rb
       :from_line: 2
       :to_line: -3
     - :file: content_parser.rb
-      :from_line: 10
+      :from_line: 9
       :to_line: -3
     - :file: settings.rb
       :from_line: 6
@@ -151,10 +148,7 @@
     - :file: align_key_spec.rb
       :from_line: 4
       :to_line: -3
-    - :file: font_hash_spec.rb
-      :from_line: 4
-      :to_line: -3
-    - :file: styles_array_spec.rb
+    - :file: collection_of_type_spec.rb
       :from_line: 4
       :to_line: -3
     - :file: argument_parser_spec.rb
