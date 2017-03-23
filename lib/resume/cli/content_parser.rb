@@ -3,8 +3,7 @@ require "base64"
 require_relative "file_fetcher"
 require_relative "file_system"
 require_relative "align_key"
-require_relative "font_hash"
-require_relative "styles_array"
+require_relative "collection_of_type"
 
 module Resume
   module CLI
@@ -68,11 +67,11 @@ module Resume
           # Prawn specifically requires :align values to
           # be symbols otherwise it errors out
           hash[key] = value.to_sym
-        when StylesArray
+        when CollectionOfType::StylesArray
           # Prawn specifically requires :styles values to
           # be symbols otherwise the styles do not take effect
           hash[key] = value.map!(&:to_sym)
-        when FontHash
+        when CollectionOfType::FontHash
           # This is the hash that tells Prawn what the fonts to be used
           # are called and where they are located
           substitute_filenames_for_filepaths(value)
