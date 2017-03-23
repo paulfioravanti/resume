@@ -18,6 +18,9 @@ build:
       - gem install i18n rspec
   tests:
     before:
+      - rvm list
+      - rbenv install -l
+      - chruby
       - bin/bundle-audit check --update
       - bin/rubocop --display-cop-names
       - printf "yes\nno\n" | bin/resume
