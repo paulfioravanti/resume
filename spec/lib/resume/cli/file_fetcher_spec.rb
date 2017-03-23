@@ -7,42 +7,7 @@ module Resume
         let(:basename) { "file.txt" }
         let(:path) { "https://example.com/path/to/#{basename}" }
 
-        describe "data massaging before initialisation" do
-          let(:file_fetcher) { instance_double("FileFetcher") }
-
-          context "when filename is not provided" do
-            before do
-              allow(described_class).to receive(:new).with(
-                Pathname.new(path),
-                basename
-              ).and_return(file_fetcher)
-              allow(file_fetcher).to receive(:fetch)
-              described_class.fetch(path)
-            end
-
-            it "provides default values to the initializer" do
-              expect(file_fetcher).to have_received(:fetch)
-            end
-          end
-
-          context "when filename parameter is provided" do
-            let(:filename) { "some_other_file.txt" }
-
-            before do
-              allow(described_class).to \
-                receive(:new).with(Pathname.new(path), filename).
-                  and_return(file_fetcher)
-              allow(file_fetcher).to receive(:fetch)
-              described_class.fetch(path, filename: filename)
-            end
-
-            it "passes the value to the initializer" do
-              expect(file_fetcher).to have_received(:fetch)
-            end
-          end
-        end
-
-        describe "calling #fetch" do
+        describe ".fetch" do
           let(:pathname) do
             instance_double(
               "Pathname",
@@ -231,7 +196,8 @@ module Resume
 
                   it "returns the newly created temp file" do
                     expect(file).to have_received(:write).with(uri)
-                    expect(File).to have_received(:open).with(tmpfile_path)
+                    expect(File).to \
+                      have_received(:open).with(tmpfile_path, "wb")
                   end
                 end
               end

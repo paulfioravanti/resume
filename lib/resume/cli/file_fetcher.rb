@@ -7,66 +7,73 @@ require_relative "file_system"
 
 module Resume
   module CLI
-    class FileFetcher
+    module FileFetcher
       REMOTE_REPO =
         "https://raw.githubusercontent.com/paulfioravanti/resume/master".freeze
       private_constant :REMOTE_REPO
 
-      def self.fetch(path, filename: "")
+      module_function
+
+      def fetch(path, filename: "")
         pathname = Pathname.new(path)
         filename = pathname.basename.to_path if filename.empty?
-        new(pathname, filename).fetch
+        fetch_file(pathname, filename)
       end
 
-      private_class_method :new
-
-      def initialize(pathname, filename)
-        @pathname = pathname
-        @filename = filename
+      def fetch_file(pathname, filename)
+        local_file(pathname) ||
+          tmpfile(filename) ||
+          remote_file(pathname, filename)
       end
+      private_class_method :fetch_file
 
-      def fetch
-        local_file || tmpfile || remote_file
-      end
-
-      private
-
-      attr_reader :pathname, :filename
-
-      def local_file
+      def local_file(pathname)
         File.open(pathname) if pathname.file?
       end
+      private_class_method :local_file
 
-      def tmpfile
-        File.open(tmpfile_path) if tmpfile_path.file?
+      def tmpfile(filename)
+        tmpfile = tmpfile_path(filename)
+        File.open(tmpfile) if tmpfile.file?
       end
+      private_class_method :tmpfile
 
-      def remote_file
-        File.open(tmpfile_path, "wb") do |file|
-          Kernel.open(remote_file_path) do |uri|
-            file.write(uri.read)
-          end
+      def remote_file(pathname, filename)
+        tmpfile = tmpfile_path(filename)
+        File.open(tmpfile, "wb") do |file|
+          write_file(file, pathname)
         end
         tmpfile
       rescue SocketError, OpenURI::HTTPError, Errno::ECONNREFUSED
         raise NetworkConnectionError
       end
+      private_class_method :remote_file
 
-      def tmpfile_path
-        @tmpfile_path ||= FileSystem.tmpfile_path(filename)
+      def tmpfile_path(filename)
+        FileSystem.tmpfile_path(filename)
       end
+      private_class_method :tmpfile_path
 
-      def remote_file_path
+      def write_file(file, pathname)
+        Kernel.open(remote_file_path(pathname)) do |uri|
+          file.write(uri.read)
+        end
+      end
+      private_class_method :write_file
+
+      def remote_file_path(pathname)
         path = pathname.to_path
-        uri? ? path : File.join(REMOTE_REPO, path)
+        uri?(pathname) ? path : File.join(REMOTE_REPO, path)
       end
+      private_class_method :remote_file_path
 
-      def uri?
+      def uri?(pathname)
         uri = URI.parse(pathname.to_path)
         %w(http https).include?(uri.scheme)
       rescue URI::BadURIError, URI::InvalidURIError
         false
       end
+      private_class_method :uri?
     end
   end
 end
