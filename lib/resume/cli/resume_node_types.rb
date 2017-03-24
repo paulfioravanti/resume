@@ -3,9 +3,9 @@ module Resume
     module ResumeNodeTypes
       module_function
 
-      def key_of_type?(hash, key, collection_type)
+      def key_of_type?(hash, key, type)
         return false unless hash.length == 1
-        hash.key?(key) && hash[key].is_a?(collection_type)
+        hash.key?(key) && hash[key].is_a?(type)
       end
 
       module AlignValue
