@@ -106,7 +106,7 @@ Run the specs:
 
     $ bin/rspec
 
-If you have SimpleCov installed, view the test coverage report:
+View the Simplecov test coverage report:
 
     $ open coverage/index.html
 
@@ -138,11 +138,10 @@ following `rake` task to delete all resume-related assets from the local tmpdir:
 
 ### Dependencies :fried_shrimp:
 
-- Ruby 2.4.0
+- Ruby 2.4.1
 - I18n, Prawn and Prawn-Table (if you don't have the specific
   versions of the gems, you will be prompted to install them)
 - RSpec, if you want to run the specs
-- SimpleCov, if you want to view the coverage report locally
 
 ### Presentation :zap:
 
