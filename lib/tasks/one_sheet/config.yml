@@ -88,14 +88,11 @@
     - :file: file_fetcher.rb
       :from_line: 9
       :to_line: -3
-    - :file: align_key.rb
-      :from_line: 2
-      :to_line: -3
-    - :file: collection_of_type.rb
+    - :file: resume_node_types.rb
       :from_line: 2
       :to_line: -3
     - :file: content_parser.rb
-      :from_line: 9
+      :from_line: 8
       :to_line: -3
     - :file: settings.rb
       :from_line: 6
@@ -145,10 +142,7 @@
     - :file: application_spec.rb
       :from_line: 4
       :to_line: -3
-    - :file: align_key_spec.rb
-      :from_line: 4
-      :to_line: -3
-    - :file: collection_of_type_spec.rb
+    - :file: resume_node_types_spec.rb
       :from_line: 4
       :to_line: -3
     - :file: argument_parser_spec.rb

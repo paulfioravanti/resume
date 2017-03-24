@@ -1,8 +1,36 @@
-require "resume/cli/collection_of_type"
+require "resume/cli/resume_node_types"
 
 module Resume
   module CLI
-    module CollectionOfType
+    module ResumeNodeTypes
+      RSpec.describe AlignValue do
+        describe ".===" do
+          context "when other has a length > 1" do
+            let(:long_hash) { { align: 1, extra: 2 } }
+
+            it "returns false" do
+              expect(described_class === long_hash).to be false
+            end
+          end
+
+          context "when other has length == 1 but key != :align" do
+            let(:non_align_value) { { something_else: 1 } }
+
+            it "returns false" do
+              expect(described_class === non_align_value).to be false
+            end
+          end
+
+          context "when other has length == 1 and :align is a String" do
+            let(:align_value) { { align: "1" } }
+
+            it "returns value" do
+              expect(described_class === align_value).to be true
+            end
+          end
+        end
+      end
+
       RSpec.describe FontHash do
         describe ".===" do
           context "when other has a length > 1" do

@@ -2,8 +2,7 @@ require "json"
 require "base64"
 require_relative "file_fetcher"
 require_relative "file_system"
-require_relative "align_key"
-require_relative "collection_of_type"
+require_relative "resume_node_types"
 
 module Resume
   module CLI
@@ -63,15 +62,15 @@ module Resume
 
       def munge_hash_value(hash, key, value)
         case Hash[key, value]
-        when AlignKey
+        when ResumeNodeTypes::AlignValue
           # Prawn specifically requires :align values to
           # be symbols otherwise it errors out
           hash[key] = value.to_sym
-        when CollectionOfType::StylesArray
+        when ResumeNodeTypes::StylesArray
           # Prawn specifically requires :styles values to
           # be symbols otherwise the styles do not take effect
           hash[key] = value.map!(&:to_sym)
-        when CollectionOfType::FontHash
+        when ResumeNodeTypes::FontHash
           # This is the hash that tells Prawn what the fonts to be used
           # are called and where they are located
           substitute_filenames_for_filepaths(value)
