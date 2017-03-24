@@ -142,7 +142,6 @@ following `rake` task to delete all resume-related assets from the local tmpdir:
 - I18n, Prawn and Prawn-Table (if you don't have the specific
   versions of the gems, you will be prompted to install them)
 - RSpec, if you want to run the specs
-- SimpleCov, if you want to view the coverage report locally
 
 ### Presentation :zap:
 
