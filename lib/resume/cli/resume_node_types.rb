@@ -1,18 +1,26 @@
 module Resume
   module CLI
-    module CollectionOfType
+    module ResumeNodeTypes
       module_function
 
-      def collection_of_type?(hash, key, collection_type)
+      def key_of_type?(hash, key, collection_type)
         return false unless hash.length == 1
         hash.key?(key) && hash[key].is_a?(collection_type)
+      end
+
+      module AlignValue
+        module_function
+
+        def ===(other)
+          Module.nesting[1].key_of_type?(other, :align, String)
+        end
       end
 
       module FontHash
         module_function
 
         def ===(other)
-          Module.nesting[1].collection_of_type?(other, :font, Hash)
+          Module.nesting[1].key_of_type?(other, :font, Hash)
         end
       end
 
@@ -20,7 +28,7 @@ module Resume
         module_function
 
         def ===(other)
-          Module.nesting[1].collection_of_type?(other, :styles, Array)
+          Module.nesting[1].key_of_type?(other, :styles, Array)
         end
       end
     end
