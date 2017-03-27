@@ -64,6 +64,13 @@ Style/Documentation:
 Style/DotPosition:
   EnforcedStyle: trailing
 
+# NOTE: This is here specifically for building on Appveyor since Rubocop
+# sees "Carriage return character missing" by default.
+<% if RUBY_PLATFORM =~ /mingw32/ %>
+Style/EndOfLine:
+  Enabled: false
+<% end %>
+
 Style/FirstArrayElementLineBreak:
   Enabled: true
 
