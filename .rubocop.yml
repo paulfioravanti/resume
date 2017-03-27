@@ -64,6 +64,11 @@ Style/Documentation:
 Style/DotPosition:
   EnforcedStyle: trailing
 
+# NOTE: This cop is only disabled due to build-related issues on Windows
+# via Appveyor.
+Style/EndOfLine:
+  Enabled: false
+
 Style/FirstArrayElementLineBreak:
   Enabled: true
 
