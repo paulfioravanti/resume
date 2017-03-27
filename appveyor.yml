@@ -12,6 +12,7 @@ install:
   # custom Ruby version to be passed in to the program.
   - SET CUSTOM_RUBY_VERSION=2.3.3
   - SET PATH=C:\Ruby%ruby_version%\bin;%PATH%
+  - SET
   # Get around the error
   # OpenSSL::SSL::SSLError:
   #   SSL_connect returned=1 errno=0 state=error: certificate verify failed
