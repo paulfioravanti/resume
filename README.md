@@ -13,10 +13,10 @@
         <img src="https://ci.appveyor.com/api/projects/status/5v5426as3y3o9f6e/branch/master?svg=true" alt="Build Status" />
       </a>
       <a href="https://semaphoreci.com/paulfioravanti/resume">
-        <img src="https://semaphoreci.com/api/v1/paulfioravanti/resume/branches/master/badge.svg" alt="Build Status" />
+        <img src="https://semaphoreci.com/api/v1/paulfioravanti/resume/branches/master/shields_badge.svg" alt="Build Status" />
       </a>
       <a href="https://circleci.com/gh/paulfioravanti/resume">
-        <img src="https://circleci.com/gh/paulfioravanti/resume/tree/master.svg?style=svg" alt="Build Status" />
+        <img src="https://circleci.com/gh/paulfioravanti/resume/tree/master.svg?style=shield" alt="Build Status" />
       </a>
       <a href="https://app.codeship.com/projects/50157">
         <img src="https://codeship.com/projects/db246630-58c8-0132-9e3b-069770f0649f/status?branch=master" alt="Build Status" />
