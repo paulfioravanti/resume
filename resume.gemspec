@@ -12,8 +12,8 @@ Gem::Specification.new do |spec|
   spec.email         = "paul.fioravanti@gmail.com"
 
   spec.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
-  spec.executables   = gem.files.grep(%r{^bin/}).map { |f| File.basename(f) }
-  spec.test_files    = gem.files.grep(%r{^(spec)/})
+  spec.executables   = spec.files.grep(%r{^bin/}).map { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(spec)/})
   spec.require_paths = ["lib"]
 
   spec.add_dependency "i18n", "~> 0.7"
