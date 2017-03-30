@@ -72,6 +72,9 @@
       <a href="https://gemnasium.com/paulfioravanti/resume">
         <img src="https://gemnasium.com/paulfioravanti/resume.svg" alt="Dependency Status">
       </a>
+      <a href="https://git.legal/projects/3664">
+        <img src="https://git.legal/projects/3664/badge.svg?key=c393d7902601db754c83" alt="Number of libraries approved">
+      </a>
     </td>
   </tr>
 </table>
