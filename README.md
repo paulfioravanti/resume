@@ -1,4 +1,4 @@
-# Resume :page_facing_up:
+# Resume
 
 <table>
   <tr>
@@ -89,13 +89,13 @@ Text is deliberately obfuscated in the JSON files that contain the resume conten
 with [Base64](http://ruby-doc.org/stdlib-2.3.0/libdoc/base64/rdoc/Base64.html)
 to ensure people generate the PDF in order to be able to read anything.
 
-## Setup :paperclip:
+## Setup
 
     $ git clone https://github.com/paulfioravanti/resume.git
     $ cd resume
     $ bundle install
 
-## Usage :pencil2:
+## Usage
 
 Generate the resume in the following languages:
 
@@ -103,24 +103,33 @@ Generate the resume in the following languages:
 :it: `$ bin/resume -l it`<br />
 :jp: `$ bin/resume -l ja`
 
-Run `$ bin/resume -h` to see all the options.
+Help: `$ bin/resume -h`
+
+### Specs
 
 Run the specs:
 
     $ bin/rspec
 
+### Coverage Report
+
 View the Simplecov test coverage report:
 
     $ open coverage/index.html
 
-### One Sheet Resume :memo:
+## One Sheet Resume
 
 Generate the "one sheet" version of the resume (the whole app and specs in a
 single file called `resume.rb`).<br />
+
+### Create
+
 If I sent my resume to you directly, it would have been generated from
 this `rake` task:
 
     $ bin/rake resume
+
+### Generate
 
 The resume PDF can be generated from the one sheet in a similar way as the
 CLI app:
@@ -129,9 +138,13 @@ CLI app:
 :it: `$ ruby resume.rb -l it`<br />
 :jp: `$ ruby resume.rb -l ja`
 
+### Specs
+
 The specs can also be run directly on the one sheet resume:
 
     $ rspec resume.rb
+
+### Delete Assets
 
 If there are ever any errors or issues related to the downloading of remote
 assets that cause the resume to not be able to be generated, you can run the
@@ -139,21 +152,21 @@ following `rake` task to delete all resume-related assets from the local tmpdir:
 
     $ bin/rake resume:delete_assets
 
-### Dependencies :fried_shrimp:
+## Dependencies
 
 - Ruby 2.4.1
 - I18n, Prawn and Prawn-Table (if you don't have the specific
   versions of the gems, you will be prompted to install them)
 - RSpec, if you want to run the specs
 
-### Presentation :zap:
+## Presentation
 
 I did a lightning talk about this project at the
 [Ruby on Rails Oceania Meetup](https://www.meetup.com/Ruby-On-Rails-Oceania-Sydney/)
 on [10 May 2016](https://www.meetup.com/Ruby-On-Rails-Oceania-Sydney/events/228886775/).<br />
 The slide deck can be found [here](https://speakerdeck.com/paulfioravanti/resume-as-code).
 
-### Issues :confused:
+## Issues
 
 - It doesn't seem possible yet in Prawn to make an embedded image a clickable
   link.  Until support is possible (if ever), I've simply pulled in images from
@@ -161,7 +174,7 @@ The slide deck can be found [here](https://speakerdeck.com/paulfioravanti/resume
   image.  More discussion on this issue is at
   [this StackOverflow thread](http://stackoverflow.com/q/8289031/567863).
 
-### Social :neckbeard:
+## Social
 
 [![Contact](https://img.shields.io/badge/contact-%40paulfioravanti-blue.svg)](https://twitter.com/paulfioravanti)
 
