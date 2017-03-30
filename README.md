@@ -97,6 +97,8 @@ to ensure people generate the PDF in order to be able to read anything.
 
 ## Usage
 
+### Generate
+
 Generate the resume in the following languages:
 
 :uk: `$ bin/resume`<br />
