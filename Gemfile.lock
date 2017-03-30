@@ -177,7 +177,7 @@ DEPENDENCIES
   rubocop-rspec (~> 1.9)
   rubygems-tasks (~> 0.2)
   scrutinizer-ocular (~> 1.0)
-  simplecov (~> 0.12)
+  simplecov (~> 0.14)
   yard (~> 0.8)
 
 RUBY VERSION
