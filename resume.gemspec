@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.version       = Resume::VERSION
   gem.summary       = "Resume Generator"
   gem.description   = "Generates my resume using the Prawn PDF library"
-  gem.license       = "MIT"
+  gem.licenses      = ["MIT"]
   gem.authors       = ["Paul Fioravanti"]
   gem.email         = "paul.fioravanti@gmail.com"
 
