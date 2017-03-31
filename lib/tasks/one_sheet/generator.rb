@@ -3,7 +3,7 @@ require_relative "files"
 require "yaml"
 
 module OneSheet
-  # Entry point for the `bin/rake resume` task to
+  # Entry point for the `rake resume` task to
   # generate the one-sheet resume.
   #
   # @author Paul Fioravanti
@@ -20,7 +20,6 @@ module OneSheet
     # - Runs the specs on the file
     # - Runs quality checks on the file
     #
-    # @author Paul Fioravanti
     # @return [true, nil]
     #   true if everything runs correctly, and nil if something fails
     def run
