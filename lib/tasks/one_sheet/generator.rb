@@ -3,12 +3,26 @@ require_relative "files"
 require "yaml"
 
 module OneSheet
+  # Entry point for the `bin/rake resume` task to
+  # generate the one-sheet resume.
+  #
+  # @author Paul Fioravanti
   module Generator
     CONFIG = YAML.load_file(File.join(__dir__, "config.yml"))
     private_constant :CONFIG
 
     module_function
 
+    # Runs the generator for the one-sheet resume.
+    #
+    # - Compiles the contents of all the resume Ruby files
+    # - Outputs it as a single `resume.rb` Ruby file
+    # - Runs the specs on the file
+    # - Runs quality checks on the file
+    #
+    # @author Paul Fioravanti
+    # @return [true, nil]
+    #   true if everything runs correctly, and nil if something fails
     def run
       Resume::Output.raw_warning("Generating one-sheet resume...")
       resume = document_content << executable
