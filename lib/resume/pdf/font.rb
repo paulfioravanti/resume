@@ -12,8 +12,8 @@ module Resume
 
       # Configures the PDF font.
       #
-      # @param pdf [Prawn::Document] The PDF to configure the font for.
-      # @param font [Hash] Determines which font is needed for the PDF.
+      # @param pdf [Prawn::Document] The PDF on which to configure the font.
+      # @param font [Hash] Presentation information about the font.
       def configure(pdf, font)
         # Accented characters will bring up a
         # warning that we don't care about
