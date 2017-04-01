@@ -6,6 +6,10 @@ require_relative "resume_node_types"
 
 module Resume
   module CLI
+    # Module concerned with parsing resume JSON objects and decoding
+    # any encoded information within them.
+    #
+    # @author Paul Fioravanti
     module ContentParser
       ASSET_PATH = /dropbox/
       private_constant :ASSET_PATH
@@ -18,12 +22,21 @@ module Resume
 
       module_function
 
+      # Decodes a Base64-encoded string into a UTF-8 string.
+      #
+      # @param string [String] a Base64-encoded string.
+      # @return [String] a decoded UTF-8 string.
       def decode_content(string)
         # Force encoding to UTF-8 is needed for strings that had UTF-8
         # characters in them when they were originally encoded
         Base64.strict_decode64(string).force_encoding("utf-8")
       end
 
+      # Parses a resume JSON file, decoding any encoded strings and fetching
+      # any remote resume assets needed to build the resume.
+      #
+      # @param resume [Hash] The resume data hash.
+      # @return [Hash] The parsed resume data hash.
       def parse(resume)
         JSON.recurse_proc(resume, &decode_and_fetch_assets)
       end
@@ -66,14 +79,14 @@ module Resume
           # Prawn specifically requires :align values to
           # be symbols otherwise it errors out
           hash[key] = value.to_sym
-        when ResumeNodeTypes::StylesArray
-          # Prawn specifically requires :styles values to
-          # be symbols otherwise the styles do not take effect
-          hash[key] = value.map!(&:to_sym)
         when ResumeNodeTypes::FontHash
           # This is the hash that tells Prawn what the fonts to be used
           # are called and where they are located
           substitute_filenames_for_filepaths(value)
+        when ResumeNodeTypes::StylesArray
+          # Prawn specifically requires :styles values to
+          # be symbols otherwise the styles do not take effect
+          hash[key] = value.map!(&:to_sym)
         else
           hash[key] = value
         end

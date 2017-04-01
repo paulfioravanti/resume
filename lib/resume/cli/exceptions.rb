@@ -1,10 +1,25 @@
 module Resume
   module CLI
+    # The Base error class that all resume generation-related errors
+    # inherit from.
+    #
+    # @author Paul Fioravanti
     class Error < StandardError
+      # The messages for the error.
+      #
+      # @!attribute messages [r]
+      # @return [Hash] The hash of error messages and their types.
       attr_reader :messages
     end
 
+    # Error class for when the very basic prerequisites for running the
+    # resume application are not met.
+    #
+    # @author Paul Fioravanti
     class DependencyPrerequisiteError < Error
+      # Initialises a new instance of the error.
+      #
+      # @return [DependencyPrerequisiteError] The new error instance.
       def initialize
         @messages = {
           raw_error:
@@ -14,7 +29,14 @@ module Resume
       end
     end
 
+    # Error class for when a connection cannot be made to the internet
+    # to fetch resources needed for resume generation.
+    #
+    # @author Paul Fioravanti
     class NetworkConnectionError < Error
+      # Initialises a new instance of the error.
+      #
+      # @return [NetworkConnectionError] The new error instance.
       def initialize
         @messages = {
           error: :cant_connect_to_the_internet,
@@ -23,7 +45,14 @@ module Resume
       end
     end
 
+    # Error class for when a permission is not given to download
+    # assets needed for resume generation.
+    #
+    # @author Paul Fioravanti
     class DependencyInstallationPermissionError < Error
+      # Initialises a new instance of the error.
+      #
+      # @return [DependencyInstallationPermissionError] The new error instance.
       def initialize
         @messages = {
           error: :cannot_generate_pdf_without_dependencies,
@@ -32,7 +61,14 @@ module Resume
       end
     end
 
+    # Error class for when a installation of a required dependency
+    # fails for whatever reason.
+    #
+    # @author Paul Fioravanti
     class DependencyInstallationError < Error
+      # Initialises a new instance of the error.
+      #
+      # @return [DependencyInstallationError] The new error instance.
       def initialize
         @messages = {
           error: :dependency_installation_failed,
@@ -41,7 +77,15 @@ module Resume
       end
     end
 
+    # Error class for when an invalid or unknown locale is specified
+    # for resume generation.
+    #
+    # @author Paul Fioravanti
     class LocaleNotSupportedError < Error
+      # Initialises a new instance of the error.
+      #
+      # @param locale [String] The unsupported locale
+      # @return [LocaleNotSupportedError] The new error instance.
       def initialize(locale)
         super(locale)
         @messages = {
@@ -52,7 +96,14 @@ module Resume
       end
     end
 
+    # Error class for when an invalid option is given as a CLI parameter.
+    #
+    # @author Paul Fioravanti
     class InvalidOptionError < Error
+      # Initialises a new instance of the error.
+      #
+      # @param error [String] The error message.
+      # @return [InvalidOptionError] The new error instance.
       def initialize(error)
         super(error)
         @messages = {
@@ -62,7 +113,14 @@ module Resume
       end
     end
 
+    # Error class for when a required argument for a CLI option is missing.
+    #
+    # @author Paul Fioravanti
     class MissingArgumentError < Error
+      # Initialises a new instance of the error.
+      #
+      # @param error [String] The error message.
+      # @return [MissingArgumentError] The new error instance.
       def initialize(error)
         super(error)
         @messages = {

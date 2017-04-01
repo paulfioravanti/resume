@@ -123,9 +123,11 @@ module Resume
               allow(Output).to \
                 receive(:question).
                   with(:would_you_like_me_to_open_the_resume)
-              allow(Output).to receive(:info).with(
-                [:thanks_for_looking_at_my_resume, { filename: filename }]
-              )
+              allow(Output).to \
+                receive(:info).with(
+                  :thanks_for_looking_at_my_resume,
+                  filename: filename
+                )
             end
 
             context "when permission to open the resume is denied" do
@@ -142,9 +144,11 @@ module Resume
                 expect(Output).to \
                   have_received(:question).
                     with(:would_you_like_me_to_open_the_resume)
-                expect(Output).to have_received(:info).with(
-                  [:thanks_for_looking_at_my_resume, { filename: filename }]
-                )
+                expect(Output).to \
+                  have_received(:info).with(
+                    :thanks_for_looking_at_my_resume,
+                    filename: filename
+                  )
               end
 
               it "does not open the document" do
@@ -167,9 +171,11 @@ module Resume
                 expect(Output).to \
                   have_received(:question).
                     with(:would_you_like_me_to_open_the_resume)
-                expect(Output).to have_received(:info).with(
-                  [:thanks_for_looking_at_my_resume, { filename: filename }]
-                )
+                expect(Output).to \
+                  have_received(:info).with(
+                    :thanks_for_looking_at_my_resume,
+                    filename: filename
+                  )
               end
 
               it "attempts to open the document" do

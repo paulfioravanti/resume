@@ -1,13 +1,24 @@
+# Top level module for resume CLI utility and PDF generation
+#
+# @author Paul Fioravanti
 module Resume
   # These consts would only ever be defined when this file's specs
   # are run in the repo with the structured version of the resume
   # (an edge case) ie:
   # $ bundle exec rspec spec/ && bundle exec rspec resume.rb
   remove_const(:VERSION) if const_defined?(:VERSION)
+  # Resume version
   VERSION = "1.3".freeze
 
   module_function
 
+  # Entry point for generating the PDF resume.
+  #
+  # Ensures that correct version of Ruby is being used before
+  # attempting to generate it.
+  #
+  # @author Paul Fioravanti
+  # @return [nil]
   def generate
     RubyVersionChecker.check_ruby_version
     CLI::Application.start

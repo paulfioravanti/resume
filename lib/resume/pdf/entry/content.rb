@@ -4,9 +4,18 @@ require_relative "company_logo"
 module Resume
   module PDF
     module Entry
+      # Module for generating the content section of an entry.
+      #
+      # @author Paul Fioravanti
       module Content
         module_function
 
+        # Generates content for a job history entry.
+        #
+        # @param pdf [Prawn::Document]
+        #   The PDF to on which to apply the content.
+        # @param entry [Hash]
+        #   Presentation information about the job history entry.
         def generate(pdf, entry)
           top_padding, logo, summary =
             entry.values_at(:top_padding, :logo, :summary)

@@ -11,3 +11,4 @@ pkg/
 vendor/cache/*.gem
 coverage/
 tmp/
+.yardoc

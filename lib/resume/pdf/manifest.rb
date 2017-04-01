@@ -9,9 +9,19 @@ require_relative "education_history"
 
 module Resume
   module PDF
+    # Module outlining the list of sections to generate for the PDF resume.
+    #
+    # @author Paul Fioravanti
     module Manifest
       module_function
 
+      # Runs the process of telling each section of the PDF resume
+      # to generate itself.
+      #
+      # @param pdf [Prawn::Document]
+      #   The PDF to on which to apply the sections.
+      # @param resume [Hash]
+      #   Hash containing all data relating to the resume.
       def process(pdf, resume)
         Font.configure(pdf, resume[:font])
         Name.generate(pdf, resume[:name])

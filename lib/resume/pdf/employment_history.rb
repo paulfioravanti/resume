@@ -3,9 +3,18 @@ require_relative "entry/content"
 
 module Resume
   module PDF
+    # Module representing the Employment History section of the PDF resume.
+    #
+    # @author Paul Fioravanti
     module EmploymentHistory
       module_function
 
+      # Generates the Employment History section of the PDF.
+      #
+      # @param pdf [Prawn::Document]
+      #   The PDF to on which to apply the education history section.
+      # @param employment_history [Hash]
+      #   Presentation information about the employment history section.
       def generate(pdf, employment_history)
         Entry::Heading.generate(pdf, employment_history[:heading])
         entries, bottom_padding, horizontal_rule_colour =

@@ -1,12 +1,21 @@
 module Resume
+  # Ensures that the version of Ruby being used is recent enough
+  # to generate the resume.
+  #
+  # @author Paul Fioravanti
   module RubyVersionChecker
     REQUIRED_RUBY_VERSION = ENV.fetch("CUSTOM_RUBY_VERSION", "2.4.1").freeze
     private_constant :REQUIRED_RUBY_VERSION
 
     module_function
 
-    # NOTE: On the one-sheet resume, this check will only work for
-    # >= Ruby 2.1  Earlier versions will throw a syntax error.
+    # Checks the Ruby version being used to generate the resume.
+    #
+    # @return [nil]
+    #   if rubygems is successfully required and the Ruby version is either
+    #   installed or not installed.
+    # @note On the one-sheet resume, this check will only work for
+    #   >= Ruby 2.1  Earlier versions will throw a syntax error.
     def check_ruby_version
       # require "rubygems" only needed for ruby pre-1.9.0
       # but it's safe for later versions (evaluates to false).
@@ -43,6 +52,8 @@ module Resume
         Open3.popen3("ruby -v") do |_stdin, stdout, _stderr, _wait_thr|
           stdout.read
         end
+      # For example, this will extract `2.4.1` from a string like:
+      # `ruby 2.4.1p111 (2017-03-22 revision 58053) [x86_64-darwin16]`
       ruby_version.match(/\Aruby ([\d\.][^p]+)/)[0]
     end
     private_class_method :user_ruby_version

@@ -2,9 +2,19 @@ require_relative "image_link"
 
 module Resume
   module PDF
+    # Module for generating a social media logo set to display
+    # at the top of the resume.
+    #
+    # @author Paul Fioravanti
     module SocialMediaLogoSet
       module_function
 
+      # Generates a social media logo set on the resume.
+      #
+      # @param pdf [Prawn::Document]
+      #   The PDF to on which to apply the social media logo set.
+      # @param logo_set [Hash]
+      #   Presentation information about the set of logos.
       def generate(pdf, logo_set)
         top_padding, horizontal_rule_colour =
           logo_set.values_at(:top_padding, :horizontal_rule_colour)
@@ -44,7 +54,7 @@ module Resume
           generate_logo_for(logo, pdf, logo_set)
         end
       end
-      private_class_method :generate_logos
+      private_class_method :generate_logos_for
     end
   end
 end

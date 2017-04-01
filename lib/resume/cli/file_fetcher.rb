@@ -7,6 +7,10 @@ require_relative "file_system"
 
 module Resume
   module CLI
+    # The module concerned with fetching an asset file to be used in the
+    # generation of a resume.
+    #
+    # @author Paul Fioravanti
     module FileFetcher
       REMOTE_REPO =
         "https://raw.githubusercontent.com/paulfioravanti/resume/master".freeze
@@ -14,13 +18,24 @@ module Resume
 
       module_function
 
-      def fetch(path, filename: "")
+      # Fetches an asset file.
+      #
+      # File is fetched by making lookups in the following order:
+      #
+      # - Search in immediate local directory
+      # - Search in the machine `/tmp` directory
+      # - Search at the remote asset repository
+      #
+      # @param path [String] The path to look up to fetch an asset file.
+      # @raise [NetworkConnectionError] if a remote asset cannot be reached.
+      # @return [File] The fetched file.
+      def fetch(path)
         pathname = Pathname.new(path)
-        filename = pathname.basename.to_path if filename.empty?
-        fetch_file(pathname, filename)
+        fetch_file(pathname)
       end
 
-      def fetch_file(pathname, filename)
+      def fetch_file(pathname)
+        filename = pathname.basename.to_path
         local_file(pathname) ||
           tmpfile(filename) ||
           remote_file(pathname, filename)

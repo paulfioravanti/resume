@@ -3,9 +3,23 @@ require_relative "exceptions"
 
 module Resume
   module CLI
+    # CLI argument validity parser.
+    #
+    # @author Paul Fioravanti
     module ArgumentParser
       module_function
 
+      # Parses the CLI arguments.
+      #
+      # @raise [InvalidOptionError]
+      #   if a CLI option is invalid (eg invalid locale)
+      # @raise [MissingArgumentError]
+      #   if a CLI option is missing (eg -l flag without locale)
+      # @raise [LocaleNotSupportedError]
+      #   if the given locale is not supported by the app.
+      # @return [Array]
+      #   if all arguments can be parsed correctly, an empty array will
+      #   be returned.
       def parse
         help = parser.help
         parser.parse!(ARGV)

@@ -21,7 +21,7 @@
 ###    For Japanese: `$ ruby resume.rb -l ja`
 ###    (Run `$ ruby resume.rb -h` to see all the options)
 ###
-### 4. If you have RSpec 3.4 or above installed, run the specs:
+### 4. If you have RSpec 3.5 or above installed, run the specs:
 ###
 ###    `$ rspec resume.rb`
 ###
