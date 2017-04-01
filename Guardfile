@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength
 group :red_green_refactor, halt_on_fail: true do
   guard :rspec, cmd: "NO_COVERAGE=true bin/rspec" do
     require "guard/rspec/dsl"
@@ -28,4 +29,12 @@ group :red_green_refactor, halt_on_fail: true do
     watch(/.+\.rb$/)
     watch(".reek")
   end
+
+  guard :yard,
+        cli: "--reload" do
+    watch(%r{app\/.+\.rb})
+    watch(%r{lib\/.+\.rb})
+    watch(%r{ext\/.+\.c})
+  end
 end
+# rubocop:enable Metrics/BlockLength
