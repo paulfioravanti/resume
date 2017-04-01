@@ -54,7 +54,7 @@ module Resume
           generate_logo_for(logo, pdf, logo_set)
         end
       end
-      private_class_method :generate_logos
+      private_class_method :generate_logos_for
     end
   end
 end
