@@ -20,8 +20,8 @@ module OneSheet
     # - Runs the specs on the file
     # - Runs quality checks on the file
     #
-    # @return [true, nil]
-    #   true if everything runs correctly, and nil if something fails
+    # @return [true] if everything runs correctly
+    # @return [nil] if something fails
     def run
       Resume::Output.raw_warning("Generating one-sheet resume...")
       resume = document_content << executable
