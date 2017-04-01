@@ -11,6 +11,8 @@ module Resume
     class GemInstaller
       extend Forwardable
 
+      # @!attribute gems [r]
+      # @return [Hash] The hash of gems to install.
       attr_reader :gems
 
       def self.gem_already_installed?(name, version)

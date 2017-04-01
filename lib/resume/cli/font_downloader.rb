@@ -15,6 +15,8 @@ module Resume
     class FontDownloader
       extend Forwardable
 
+      # @!attribute fonts [r]
+      # @return [Hash] The hash of fonts to download.
       attr_reader :fonts
 
       def self.local_files_present?(files)
