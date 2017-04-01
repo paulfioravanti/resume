@@ -4,6 +4,10 @@ require_relative "exception_suppressor"
 
 module Resume
   module CLI
+    # Module concerned with the installation and dependency checking
+    # of Ruby gems on to the system in order to generate the resume.
+    #
+    # @author Paul Fioravanti
     class GemInstaller
       extend Forwardable
 
@@ -15,10 +19,19 @@ module Resume
       end
       private_class_method :gem_already_installed?
 
+      # Initialises a new instance of a Gem Installer.
+      #
+      # @param gems [Hash]
+      #   A hash containing the gem dependencies for the resume.
+      # @return [GemInstaller]
+      #   The gem installer object.
       def initialize(gems)
         @gems = gems
       end
 
+      # Audits the local system to see if the necessary gems are installed.
+      #
+      # @return [Hash] The list of remaining gem dependencies to install.
       def audit_gem_dependencies
         gems.each do |name, version|
           # if gem not installed: leave in the gems list
@@ -31,6 +44,10 @@ module Resume
         end
       end
 
+      # Outputs the name and version of the gems that must be installed
+      # in order to generate the resume.
+      #
+      # @return [Hash] The list of dependencies to install.
       def output_gem_dependencies
         return if gems.none?
         Output.warning(:ruby_gems)
@@ -41,6 +58,15 @@ module Resume
         end
       end
 
+      # Attempts to install gem dependencies and reports back on
+      # whether it was successful.
+      #
+      # @raise [NetworkConnectionError]
+      #   if an internet connection is unavailable to download gems.
+      # @return [true]
+      #   if gem dependencies were successfully installed.
+      # @return [false]
+      #   if gem dependencies were not successfully installed.
       def gems_successfully_installed?
         return true if gems.none?
         Output.plain(:installing_ruby_gems)

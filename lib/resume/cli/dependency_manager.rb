@@ -17,7 +17,8 @@ module Resume
       #
       # @param dependencies [Hash]
       #   A hash containing the gem and font dependencies for resume generation.
-      # @return [DependencyManager] The dependency manager object.
+      # @return [DependencyManager]
+      #   The dependency manager object.
       def initialize(dependencies)
         @gem_installer = GemInstaller.new(dependencies[:gems])
         @font_downloader = FontDownloader.new(dependencies[:fonts])
