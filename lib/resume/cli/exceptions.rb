@@ -84,7 +84,7 @@ module Resume
     class LocaleNotSupportedError < Error
       # Initialises a new instance of the error.
       #
-      # @param error [String] The error message.
+      # @param locale [String] The unsupported locale
       # @return [LocaleNotSupportedError] The new error instance.
       def initialize(locale)
         super(locale)
