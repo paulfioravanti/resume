@@ -1,9 +1,18 @@
 module Resume
   module PDF
     module Entry
+      # Module for generating a header for an entry.
+      #
+      # @author Paul Fioravanti
       module Header
         module_function
 
+        # Generates the header section for a job history entry.
+        #
+        # @param pdf [Prawn::Document]
+        #   The PDF to on which to apply the header.
+        # @param entry [Hash]
+        #   Presentation information about the job history entry.
         def generate(pdf, entry)
           # Different rendering behaviour needed depending on whether
           # the header is being drawn from left to right on the page

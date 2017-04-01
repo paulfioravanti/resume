@@ -4,13 +4,13 @@ module Resume
     #
     # @author Paul Fioravanti
     module Entry
-      # Module for generating the header section of the PDF.
+      # Module for generating the header section of an entry.
       #
       # @author Paul Fioravanti
       module Heading
         module_function
 
-        # Generates the PDF heading section.
+        # Generates the heading for a job history entry.
         #
         # @param pdf [Prawn::Document]
         #   The PDF to on which to generate the heading.
