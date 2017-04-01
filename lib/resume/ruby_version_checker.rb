@@ -54,6 +54,8 @@ module Resume
         Open3.popen3("ruby -v") do |_stdin, stdout, _stderr, _wait_thr|
           stdout.read
         end
+      # For example, this will extract `2.4.1` from a string like:
+      # `ruby 2.4.1p111 (2017-03-22 revision 58053) [x86_64-darwin16]`
       ruby_version.match(/\Aruby ([\d\.][^p]+)/)[0]
     end
     private_class_method :user_ruby_version
