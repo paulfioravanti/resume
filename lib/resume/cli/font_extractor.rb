@@ -2,9 +2,17 @@ require_relative "file_system"
 
 module Resume
   module CLI
+    # Module concerned with extracting font files from a zip file.
+    #
+    # @author Paul Fioravanti
     module FontExtractor
       module_function
 
+      # Extract font files from a zip file and store them in the system
+      # temp directory.
+      #
+      # @param font [Hash] The hash containing data about the font file.
+      # @return [Hash] A hash containing data about the extracted font files.
       def extract(font)
         Zip::File.open(FileSystem.tmpfile_path(font[:filename])) do |file|
           extract_file(font, file)
