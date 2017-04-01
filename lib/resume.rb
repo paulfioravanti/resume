@@ -2,6 +2,7 @@
 #
 # @author Paul Fioravanti
 module Resume
+  # Resume version
   VERSION = "1.3".freeze
 
   module_function
