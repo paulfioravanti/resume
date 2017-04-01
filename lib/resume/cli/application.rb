@@ -88,7 +88,7 @@ module Resume
         if self.class.__send__(:permission_granted?)
           FileSystem.open_document(filename)
         end
-        Output.info([:thanks_for_looking_at_my_resume, { filename: filename }])
+        Output.info(:thanks_for_looking_at_my_resume, filename: filename)
       end
     end
   end

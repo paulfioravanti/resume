@@ -17,8 +17,7 @@ module Resume
 
       before do
         allow(I18n).to receive(:translate).
-          with(key, params_to_interpolate).
-            and_return(translated_message)
+          with(*params).and_return(translated_message)
         allow(Colours).to \
           receive(colour).with(translated_message).
             and_return(colourised_translated_message)
@@ -61,7 +60,7 @@ module Resume
     describe ".error" do
       include_context "Colourised I18n keys", :red
 
-      let(:outputting_the_error) { -> { described_class.error(params) } }
+      let(:outputting_the_error) { -> { described_class.error(*params) } }
 
       it "outputs the values of the I18n-ised error to stdout" do
         expect(outputting_the_error).to \
@@ -73,7 +72,7 @@ module Resume
       include_context "Colourised I18n keys", :yellow
 
       let(:outputting_the_warning) do
-        -> { described_class.warning(params) }
+        -> { described_class.warning(*params) }
       end
 
       it "outputs the values of the I18n-ised warning to stdout" do
@@ -86,7 +85,7 @@ module Resume
       include_context "Colourised I18n keys", :yellow
 
       let(:outputting_the_question) do
-        -> { described_class.question(params) }
+        -> { described_class.question(*params) }
       end
 
       it "outputs the values of the I18n-ised question to stdout" do
@@ -99,7 +98,7 @@ module Resume
       include_context "Colourised I18n keys", :green
 
       let(:outputting_the_success_message) do
-        -> { described_class.success(params) }
+        -> { described_class.success(*params) }
       end
 
       it "outputs the values of the I18n-ised success message to stdout" do
@@ -112,7 +111,7 @@ module Resume
       include_context "Colourised I18n keys", :cyan
 
       let(:outputting_the_info_message) do
-        -> { described_class.info(params) }
+        -> { described_class.info(*params) }
       end
 
       it "outputs the values of the I18n-ised info message to stdout" do
@@ -128,12 +127,12 @@ module Resume
       let(:translated_message) { "Translated Message" }
       let(:translated_message_with_new_line) { "#{translated_message}\n" }
       let(:outputting_the_plain_message) do
-        -> { described_class.plain(params) }
+        -> { described_class.plain(*params) }
       end
 
       before do
         allow(I18n).to receive(:translate).
-          with(key, params_to_interpolate).and_return(translated_message)
+          with(*params).and_return(translated_message)
       end
 
       it "outputs the values of the I18n-ised plain message to stdout" do
