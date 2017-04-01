@@ -11,10 +11,12 @@ module Resume
 
       # Parses the CLI arguments.
       #
-      # @raise InvalidOptionError
+      # @raise [InvalidOptionError]
       #   if a CLI option is invalid (eg invalid locale)
-      # @raise MissingArgumentError
+      # @raise [MissingArgumentError]
       #   if a CLI option is missing (eg -l flag without locale)
+      # @raise [LocaleNotSupportedError]
+      #   if the given locale is not supported by the app.
       # @return [Array]
       #   if all arguments can be parsed correctly, an empty array will
       #   be returned.

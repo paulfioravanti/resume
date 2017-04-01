@@ -59,6 +59,8 @@ module Resume
 
       # Starts the CLI.
       #
+      # @raise [DependencyInstallationPermissionError]
+      #   if permission is not granted to install dependencies.
       # @return [nil]
       def start
         install_dependencies if installation_required?

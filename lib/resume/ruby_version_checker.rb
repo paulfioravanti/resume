@@ -14,8 +14,6 @@ module Resume
     # @return [nil]
     #   if rubygems is successfully required and the Ruby version is either
     #   installed or not installed.
-    # @raise [LoadError]
-    #   if there is an issue loading the rubygem library.
     # @note On the one-sheet resume, this check will only work for
     #   >= Ruby 2.1  Earlier versions will throw a syntax error.
     def check_ruby_version

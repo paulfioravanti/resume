@@ -27,6 +27,7 @@ module Resume
       # - Search at the remote asset repository
       #
       # @param path [String] The path to look up to fetch an asset file.
+      # @raise [NetworkConnectionError] if a remote asset cannot be reached.
       # @return [File] The fetched file.
       def fetch(path)
         pathname = Pathname.new(path)

@@ -4,9 +4,18 @@ require_relative "file_fetcher"
 
 module Resume
   module CLI
+    # Module responsible for setting up gem and internationalisation
+    # configuration for the resume before running generation commands.
+    #
+    # @author Paul Fioravanti
     module Settings
       module_function
 
+      # Configures gems and i18n for resume generation.
+      #
+      # @raise [DependencyPreprequisiteError]
+      #   if the `i18n` gem is not installed.
+      # @return [Array] The list of available locales.
       def configure
         # Ignore requiring gems that are used just for development
         ExceptionSuppressor.suppress(LoadError) do

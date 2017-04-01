@@ -17,14 +17,16 @@ module Resume
       #   The exception type to ignore.
       # @param default [Proc]
       #   The code to be executed when the exception is to be ignored.
+      # @raise [Exception]
+      #   The exception to be raised if it is not to be ignored.
       def suppress(exception_to_ignore = StandardError, default = -> {})
-        # NOTE: This method needs to rescue from LoadError and Gem::LoadError
-        # which don't inherit from StandardError, hence needing to rescue from
-        # the Exception class.
         yield
+      # NOTE: This method needs to rescue from LoadError and Gem::LoadError
+      # which don't inherit from StandardError, hence needing to rescue from
+      # the Exception class.
       # rubocop:disable Lint/RescueException
       rescue Exception => exception
-        raise unless exception.is_a?(exception_to_ignore)
+        raise exception unless exception.is_a?(exception_to_ignore)
         default.call
       end
       # rubocop:enable Lint/RescueException
