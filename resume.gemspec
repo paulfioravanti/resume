@@ -1,5 +1,7 @@
 require_relative "lib/resume"
 
+# rubocop:disable Metrics/BlockLength
+# NOTE: Remove this disable when Code Climate Rubocop version updates
 Gem::Specification.new do |spec|
   spec.name          = "resume"
   spec.version       = Resume::VERSION
@@ -41,3 +43,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "scrutinizer-ocular", "~> 1.0"
   spec.add_development_dependency "yard", "~> 0.8"
 end
+# rubocop:enable Metrics/BlockLength
