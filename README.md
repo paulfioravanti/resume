@@ -62,6 +62,9 @@
       <a href="https://hakiri.io/github/paulfioravanti/resume/master">
         <img src="https://hakiri.io/github/paulfioravanti/resume/master.svg" alt="Hakiri Status" />
       </a>
+      <a href="https://inch-ci.org/github/paulfioravanti/resume?branch=master">
+        <img src="http://inch-ci.org/github/paulfioravanti/resume.svg?branch=master" alt="Documentation Status" />
+      </a>
     </td>
   </tr>
   <tr>
