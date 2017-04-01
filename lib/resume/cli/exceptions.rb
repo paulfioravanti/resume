@@ -19,8 +19,7 @@ module Resume
     class DependencyPrerequisiteError < Error
       # Initialises a new instance of the error.
       #
-      # @return [DependencyPrerequisiteError]
-      #   The new error instance.
+      # @return [DependencyPrerequisiteError] The new error instance.
       def initialize
         @messages = {
           raw_error:
@@ -37,8 +36,7 @@ module Resume
     class NetworkConnectionError < Error
       # Initialises a new instance of the error.
       #
-      # @return [NetworkConnectionError]
-      #   The new error instance.
+      # @return [NetworkConnectionError] The new error instance.
       def initialize
         @messages = {
           error: :cant_connect_to_the_internet,
@@ -54,8 +52,7 @@ module Resume
     class DependencyInstallationPermissionError < Error
       # Initialises a new instance of the error.
       #
-      # @return [DependencyInstallationPermissionError]
-      #   The new error instance.
+      # @return [DependencyInstallationPermissionError] The new error instance.
       def initialize
         @messages = {
           error: :cannot_generate_pdf_without_dependencies,
@@ -71,8 +68,7 @@ module Resume
     class DependencyInstallationError < Error
       # Initialises a new instance of the error.
       #
-      # @return [DependencyInstallationError]
-      #   The new error instance.
+      # @return [DependencyInstallationError] The new error instance.
       def initialize
         @messages = {
           error: :dependency_installation_failed,
@@ -88,8 +84,8 @@ module Resume
     class LocaleNotSupportedError < Error
       # Initialises a new instance of the error.
       #
-      # @return [LocaleNotSupportedError]
-      #   The new error instance.
+      # @param error [String] The error message.
+      # @return [LocaleNotSupportedError] The new error instance.
       def initialize(locale)
         super(locale)
         @messages = {
@@ -106,8 +102,8 @@ module Resume
     class InvalidOptionError < Error
       # Initialises a new instance of the error.
       #
-      # @return [InvalidOptionError]
-      #   The new error instance.
+      # @param error [String] The error message.
+      # @return [InvalidOptionError] The new error instance.
       def initialize(error)
         super(error)
         @messages = {
@@ -123,8 +119,8 @@ module Resume
     class MissingArgumentError < Error
       # Initialises a new instance of the error.
       #
-      # @return [MissingArgumentError]
-      #   The new error instance.
+      # @param error [String] The error message.
+      # @return [MissingArgumentError] The new error instance.
       def initialize(error)
         super(error)
         @messages = {
