@@ -122,6 +122,12 @@ View the Simplecov test coverage report:
 
     $ open coverage/index.html
 
+### Documentation
+
+Generate the YARD documentation:
+
+    $ bin/yardoc
+
 ## One Sheet Resume
 
 Generate the "one sheet" version of the resume (the whole app and specs in a
