@@ -29,14 +29,9 @@ NestedIterators:
     - "Resume::PDF::Document#generate"
     - "Resume::PDF::Entry::Header#formatted_text_box_header"
     - "Resume::PDF::Entry::Header#formatted_text_header"
-    - "Resume::CLI::FileFetcher#remote_file"
-    - "Resume::CLI::FontDownloader#self.extract_fonts"
 TooManyStatements:
   exclude:
     - "Resume::CLI::Application#self.start"
     - "Resume::CLI::ArgumentParser#parser"
-    - "Resume::CLI::FontDownloader#fonts_successfully_downloaded?"
     - "Resume::CLI::FontDownloader#self.extract_fonts"
     - "Resume::PDF::Manifest#process"
-    - "Resume::PDF::TechnicalSkills#self.generate"
-
