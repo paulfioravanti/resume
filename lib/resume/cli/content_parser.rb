@@ -79,14 +79,14 @@ module Resume
           # Prawn specifically requires :align values to
           # be symbols otherwise it errors out
           hash[key] = value.to_sym
-        when ResumeNodeTypes::StylesArray
-          # Prawn specifically requires :styles values to
-          # be symbols otherwise the styles do not take effect
-          hash[key] = value.map!(&:to_sym)
         when ResumeNodeTypes::FontHash
           # This is the hash that tells Prawn what the fonts to be used
           # are called and where they are located
           substitute_filenames_for_filepaths(value)
+        when ResumeNodeTypes::StylesArray
+          # Prawn specifically requires :styles values to
+          # be symbols otherwise the styles do not take effect
+          hash[key] = value.map!(&:to_sym)
         else
           hash[key] = value
         end
