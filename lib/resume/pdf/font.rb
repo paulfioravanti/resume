@@ -1,8 +1,19 @@
 module Resume
+  # Namespace for all parts and functionality of the resume
+  # PDF document.
+  #
+  # @author Paul Fioravanti
   module PDF
+    # Module for configuration of fonts to use in the resume PDF document
+    #
+    # @author Paul Fioravanti
     module Font
       module_function
 
+      # Configures the PDF font.
+      #
+      # @param pdf [Prawn::Document] The PDF to configure the font for.
+      # @param font [Hash] Determines which font is needed for the PDF.
       def configure(pdf, font)
         # Accented characters will bring up a
         # warning that we don't care about
