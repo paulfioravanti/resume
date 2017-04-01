@@ -9,12 +9,12 @@ module OneSheet
     # Reads in a range of lines of files of a particular type
     # and returns them as a string.
     #
-    # @param type [Hash]
+    # @param file_type [Hash]
     #   a hash of values representing a set of line ranges of files to read in.
     # @return [String]
     #   the combined content of the set of line ranges of the files.
-    def read(type)
-      files, path = type.values_at(:files, :path)
+    def read(file_type)
+      files, path = file_type.values_at(:files, :path)
       files.reduce("") do |content, file|
         content << read_file(path, file)
       end
