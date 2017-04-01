@@ -22,8 +22,6 @@ FeatureEnvy:
     - "Resume::PDF::Entry::Heading#generate"
     - "Resume::PDF::ImageLink#generate"
     - "Resume::PDF::TechnicalSkills#generate_table"
-IrresponsibleModule:
-  enabled: false
 NestedIterators:
   # NOTE: some of the exclusions are here because reek considers
   # passing a block to File.open an iterator, which I do not

@@ -59,7 +59,14 @@ Style/CaseEquality:
   Enabled: false
 
 Style/Documentation:
-  Enabled: false
+  Exclude:
+    # NOTE: When the specs are added to the bottom of the generated one-sheet
+    # resume file, there is no top-level module documentation to go with it,
+    # and Rubocop seems to not be able to see that it exists earlier in the
+    # file. So, exclude resume.rb from Rubocop's document gaze.
+    - "resume.rb"
+    # No need to repeat top-level documentation for specs.
+    - "spec/**/*"
 
 Style/DotPosition:
   EnforcedStyle: trailing
