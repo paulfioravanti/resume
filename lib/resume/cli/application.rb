@@ -10,10 +10,6 @@ require_relative "content_parser"
 require_relative "file_system"
 
 module Resume
-  # Module encapsulating all the functionality of the command line
-  # interface to generate the resume.
-  #
-  # @author Paul Fioravanti
   module CLI
     # The entry point for starting the CLI.
     #

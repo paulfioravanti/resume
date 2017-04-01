@@ -1,4 +1,8 @@
 module Resume
+  # Module encapsulating all the functionality of the command line
+  # interface to generate the resume.
+  #
+  # @author Paul Fioravanti
   module CLI
     # Module concerned with suppressing exceptions of a specific type.
     #
