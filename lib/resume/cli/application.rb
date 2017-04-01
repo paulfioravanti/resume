@@ -10,13 +10,23 @@ require_relative "content_parser"
 require_relative "file_system"
 
 module Resume
+  # Module encapsulating all the functionality of the command line
+  # interface to generate the resume.
+  #
+  # @author Paul Fioravanti
   module CLI
+    # The entry point for starting the CLI.
+    #
+    # @author Paul Fioravanti
     class Application
       extend Forwardable
 
       POSITIVE_INPUT = /\A(y|yes)\z/i
       private_constant :POSITIVE_INPUT
 
+      # Configures and calls to start the CLI.
+      #
+      # @return [nil]
       def self.start
         Settings.configure
         catch(:halt) do
@@ -36,6 +46,10 @@ module Resume
 
       private_class_method :new
 
+      # Creates a new instance of the CLI Application
+      #
+      # @param resume [Hash] The hash containing resume data.
+      # @return [Application]
       def initialize(resume)
         @resume = resume
         @dependency_manager =
@@ -47,6 +61,9 @@ module Resume
                      :request_dependency_installation,
                      :install
 
+      # Starts the CLI.
+      #
+      # @return [nil]
       def start
         install_dependencies if installation_required?
         generate_resume
