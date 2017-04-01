@@ -19,6 +19,7 @@ module Resume
       #   The code to be executed when the exception is to be ignored.
       # @raise [Exception]
       #   The exception to be raised if it is not to be ignored.
+      # @return the result of the passed-in lambda
       def suppress(exception_to_ignore = StandardError, default = -> {})
         yield
       # NOTE: This method needs to rescue from LoadError and Gem::LoadError
