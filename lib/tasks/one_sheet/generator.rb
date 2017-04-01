@@ -2,9 +2,11 @@ require_relative "../../resume/output"
 require_relative "files"
 require "yaml"
 
+# Module concerned with the generating the one-sheet resume.
+#
+# @author Paul Fioravanti
 module OneSheet
-  # Entry point for the `rake resume` task to
-  # generate the one-sheet resume.
+  # Entry point for the `rake resume` task to generate the one-sheet resume.
   #
   # @author Paul Fioravanti
   module Generator
