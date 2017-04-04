@@ -84,7 +84,7 @@ module Resume
 
       def uri?(pathname)
         uri = URI.parse(pathname.to_path)
-        %w(http https).include?(uri.scheme)
+        %w[http https].include?(uri.scheme)
       rescue URI::BadURIError, URI::InvalidURIError
         false
       end
