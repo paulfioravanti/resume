@@ -28,25 +28,6 @@
   </tr>
   <tr>
     <td>
-      Code Coverage
-    </td>
-    <td>
-      <a href="https://codeclimate.com/github/paulfioravanti/resume">
-        <img src="https://codeclimate.com/github/paulfioravanti/resume/badges/coverage.svg" alt="Code Climate Coverage" />
-      </a>
-      <a href="https://codecov.io/gh/paulfioravanti/resume">
-        <img src="https://codecov.io/gh/paulfioravanti/resume/branch/master/graph/badge.svg" alt="Codecov Coverage" />
-      </a>
-      <a href="https://coveralls.io/github/paulfioravanti/resume?branch=master">
-        <img src="https://coveralls.io/repos/github/paulfioravanti/resume/badge.svg?branch=master" alt="Coveralls Coverage" />
-      </a>
-      <a href="https://scrutinizer-ci.com/g/paulfioravanti/resume">
-        <img src="https://scrutinizer-ci.com/g/paulfioravanti/resume/badges/coverage.png?b=master" alt="Scrutinizer Coverage" />
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td>
       Code Quality
     </td>
     <td>
@@ -62,8 +43,30 @@
       <a href="https://hakiri.io/github/paulfioravanti/resume/master">
         <img src="https://hakiri.io/github/paulfioravanti/resume/master.svg" alt="Hakiri Status" />
       </a>
+      <a href="https://snyk.io/test/github/paulfioravanti/resume">
+        <img src="https://snyk.io/test/github/paulfioravanti/resume/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/paulfioravanti/resume" style="max-width:100%;">
+      </a>
       <a href="https://inch-ci.org/github/paulfioravanti/resume?branch=master">
         <img src="http://inch-ci.org/github/paulfioravanti/resume.svg?branch=master" alt="Documentation Status" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Code Coverage
+    </td>
+    <td>
+      <a href="https://codeclimate.com/github/paulfioravanti/resume">
+        <img src="https://codeclimate.com/github/paulfioravanti/resume/badges/coverage.svg" alt="Code Climate Coverage" />
+      </a>
+      <a href="https://codecov.io/gh/paulfioravanti/resume">
+        <img src="https://codecov.io/gh/paulfioravanti/resume/branch/master/graph/badge.svg" alt="Codecov Coverage" />
+      </a>
+      <a href="https://coveralls.io/github/paulfioravanti/resume?branch=master">
+        <img src="https://coveralls.io/repos/github/paulfioravanti/resume/badge.svg?branch=master" alt="Coveralls Coverage" />
+      </a>
+      <a href="https://scrutinizer-ci.com/g/paulfioravanti/resume">
+        <img src="https://scrutinizer-ci.com/g/paulfioravanti/resume/badges/coverage.png?b=master" alt="Scrutinizer Coverage" />
       </a>
     </td>
   </tr>
