@@ -12,7 +12,6 @@ module Resume
   # Ensures that correct version of Ruby is being used before
   # attempting to generate it.
   #
-  # @author Paul Fioravanti
   # @return [nil]
   def generate
     require_relative "resume/ruby_version_checker"
