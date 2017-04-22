@@ -11,6 +11,8 @@ engines:
       - ruby
   fixme:
     enabled: true
+  flog:
+    enabled: true
   rubocop:
     enabled: true
 ratings:
