@@ -56,7 +56,7 @@ GEM
       shellany (~> 0.0)
       thor (>= 0.18.1)
     guard-compat (1.2.1)
-    guard-reek (1.0.2)
+    guard-reek (1.1.0)
       guard-compat (~> 1.1)
       reek
     guard-rspec (4.7.3)
@@ -141,7 +141,7 @@ GEM
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
-    simplecov-html (0.10.0)
+    simplecov-html (0.10.1)
     slop (3.6.0)
     term-ansicolor (1.6.0)
       tins (~> 1.0)
@@ -189,4 +189,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.14.6
+   1.15.0
