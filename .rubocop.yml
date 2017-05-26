@@ -13,6 +13,35 @@ AllCops:
     - "vendor/**/*"
   TargetRubyVersion: 2.3
 
+Layout/DotPosition:
+  EnforcedStyle: trailing
+
+# NOTE: This cop is only disabled due to build-related issues on Windows
+# via Appveyor.
+Layout/EndOfLine:
+  Enabled: false
+
+Layout/FirstArrayElementLineBreak:
+  Enabled: true
+
+Layout/FirstHashElementLineBreak:
+  Enabled: true
+
+Layout/FirstMethodArgumentLineBreak:
+  Enabled: true
+
+Layout/FirstMethodParameterLineBreak:
+  Enabled: true
+
+Layout/MultilineAssignmentLayout:
+  Enabled: true
+  EnforcedStyle: new_line
+
+Layout/MultilineMethodCallIndentation:
+  Exclude:
+    - "spec/**/*"
+    - "resume.rb"
+
 Metrics/AbcSize:
   Max: 18
 
@@ -68,26 +97,6 @@ Style/Documentation:
     # No need to repeat top-level documentation for specs.
     - "spec/**/*"
 
-Style/DotPosition:
-  EnforcedStyle: trailing
-
-# NOTE: This cop is only disabled due to build-related issues on Windows
-# via Appveyor.
-Style/EndOfLine:
-  Enabled: false
-
-Style/FirstArrayElementLineBreak:
-  Enabled: true
-
-Style/FirstHashElementLineBreak:
-  Enabled: true
-
-Style/FirstMethodArgumentLineBreak:
-  Enabled: true
-
-Style/FirstMethodParameterLineBreak:
-  Enabled: true
-
 # NOTE: PDF generation requires string mutation, so this can't be used for now.
 Style/FrozenStringLiteralComment:
   Enabled: false
@@ -103,15 +112,6 @@ Style/InlineComment:
 
 Style/MethodCalledOnDoEndBlock:
   Enabled: true
-
-Style/MultilineAssignmentLayout:
-  Enabled: true
-  EnforcedStyle: new_line
-
-Style/MultilineMethodCallIndentation:
-  Exclude:
-    - "spec/**/*"
-    - "resume.rb"
 
 Style/OptionHash:
   Enabled: true
