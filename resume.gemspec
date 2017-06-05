@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(spec)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "i18n", "~> 0.7"
+  spec.add_dependency "i18n", "~> 0.8"
   spec.add_dependency "prawn", "~> 2.2.0"
   spec.add_dependency "prawn-table", "~> 0.2.2"
   spec.add_dependency "rubyzip", "~> 1.2"
