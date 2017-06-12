@@ -5,6 +5,7 @@ strings_*.rb
 *.zip
 resume.rb
 reek.html
+.tool-versions-e
 
 doc/
 pkg/
