@@ -12,6 +12,10 @@ filter:
 build:
   environment:
     ruby: 2.4.1
+    variables:
+      # This ENV variable added to get bundle install working initially
+      # with Scrutinizer-supported Ruby 2.4.0.
+      CUSTOM_RUBY_VERSION: 2.4.0
   project_setup:
     before:
       - cd /home/scrutinizer/.rbenv/plugins/ruby-build && git pull origin master && cd -
