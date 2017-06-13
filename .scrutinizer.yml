@@ -10,13 +10,7 @@ filter:
     - spec/*
     - vendor/*
 build:
-  environment:
-    ruby: 2.4.1
-    variables:
-      # This ENV variable added to get bundle install working initially
-      # with Scrutinizer-supported Ruby 2.4.0.
-      CUSTOM_RUBY_VERSION: 2.4.0
-  project_setup:
+  dependencies:
     before:
       - cd /home/scrutinizer/.rbenv/plugins/ruby-build && git pull origin master && cd -
       - rbenv install -l
@@ -25,9 +19,10 @@ build:
       - ruby -v
       - gem update --system
       - gem install bundler i18n rspec
+  environment:
+    ruby: 2.4.1
   tests:
     before:
-      - rbenv local 2.4.1
       - bin/bundle-audit check --update
       - bin/rubocop --display-cop-names
       - printf "yes\nno\n" | bin/resume
