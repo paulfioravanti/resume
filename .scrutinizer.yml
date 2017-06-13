@@ -10,9 +10,7 @@ filter:
     - spec/*
     - vendor/*
 build:
-  environment:
-    ruby: 2.4.1
-  project_setup:
+  dependencies:
     before:
       - cd /home/scrutinizer/.rbenv/plugins/ruby-build && git pull origin master && cd -
       - rbenv install -l
@@ -21,6 +19,8 @@ build:
       - ruby -v
       - gem update --system
       - gem install bundler i18n rspec
+  environment:
+    ruby: 2.4.1
   tests:
     before:
       - bin/bundle-audit check --update

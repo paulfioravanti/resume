@@ -5,7 +5,11 @@ strings_*.rb
 *.zip
 resume.rb
 reek.html
+
+# Ignore Ruby version manager files
+.tool-versions
 .tool-versions-e
+.ruby-version
 
 doc/
 pkg/
