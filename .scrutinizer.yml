@@ -27,6 +27,7 @@ build:
       - gem install bundler i18n rspec
   tests:
     before:
+      - rbenv local 2.4.1
       - bin/bundle-audit check --update
       - bin/rubocop --display-cop-names
       - printf "yes\nno\n" | bin/resume
