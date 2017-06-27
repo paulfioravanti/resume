@@ -1,3 +1,4 @@
 engines:
   rubocop:
     enabled: true
+styleguide: paulfioravanti/resume
