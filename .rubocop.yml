@@ -128,3 +128,4 @@ Style/StringMethods:
 
 Style/SymbolArray:
   Enabled: true
+  EnforcedStyle: percent
