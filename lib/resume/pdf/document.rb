@@ -34,7 +34,6 @@ module Resume
           margin_bottom: options[:margin_bottom],
           margin_left: options[:margin_left],
           margin_right: options[:margin_right],
-          background: options[:background_image],
           repeat: options[:repeat],
           info: {
             Title: title,
