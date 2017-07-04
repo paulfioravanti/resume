@@ -28,13 +28,7 @@
   "headline": {
     "top_padding": 0,
     "size": 14,
-    "primary": {
-      "text": "UnVieSBEZXZlbG9wZXIg",
-      "colour": "85200C"
-    },
-    "secondary": {
-      "text": "YW5kIEluZm9ybWF0aW9uIFRlY2hub2xvZ3kgU2VydmljZXMgUHJvZmVzc2lvbmFs"
-    }
+    "text": "RGV2ZWxvcGVyIGFuZCBJbmZvcm1hdGlvbiBUZWNobm9sb2d5IFNlcnZpY2VzIFByb2Zlc3Npb25hbA=="
   },
   "social_media_logo_set": {
     "x_position": 0,
