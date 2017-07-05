@@ -55,8 +55,8 @@ Note:
 
 ---
 
-# _Not fun_ to
-# **read** _or_ **write**
+# _Not fun_  to
+# **read** _or_  **write**
 
 Note:
 - ...resumes aren't so much fun to read or write
@@ -65,7 +65,7 @@ Note:
 
 ---
 
-# _Actually_ be
+# _Actually_  be
 # **read**
 
 Note:
@@ -82,7 +82,7 @@ Through that, it would hopefully be more likely to get a positive response...
 
 ---
 
-# _Gets_ an
+# _Gets_  an
 # **Interview**
 
 Note:
@@ -100,7 +100,7 @@ Note:
 
 ---
 
-# _**Components**_
+# **Components**
 
 Note:
 - The codebase of the resume has changed greatly as I've tinkered with it
@@ -123,7 +123,7 @@ Note:
 
 ---
 
-# _**Content**_
+# **Content**
 
 Note:
 - There is no content in the resume app at all
@@ -132,7 +132,7 @@ Note:
 
 ---
 
-## Text ➡ JSON ➡  _Github_
+## Text ➡ JSON ➡  **Github**
 
 Note:
 - JSON files hosted in the project Github repo
@@ -140,13 +140,13 @@ Note:
 
 ---
 
-# Images ➡ _Dropbox_
+## Images ➡ **Dropbox**
 
 Note: And image assets are hosted on my Dropbox account
 
 ---
 
-# _`/tmp`_
+# `/tmp`
 
 Note:
 - When you run the resume for the first time, it downloads all those files and stores them in your system tmp directory.
@@ -154,7 +154,7 @@ Note:
 
 ---
 
-# _**Structure**_
+# **Structure**
 
 Note:
 - The directory structure of the resume is pretty much standard for any Ruby project, which is fine for development
@@ -162,7 +162,7 @@ Note:
 
 ---
 
-# `$rake`
+## `$rake`
 
 Note:
 - So, there is a `rake` task that reads in all the files, writes them to a single file (which I call the one-sheet resume).
@@ -170,28 +170,28 @@ Note:
 
 ---
 
-# _**Design**_
+# **Design**
 
 Note:
 I am not a designer, but a few things I did want to have in the resume are:
 
 ---
 
-# 2 Pages _Max_
+# **2 Pages _Max_**
 
 Note:
 - 2 Pages maximum because of low attention spans
 
 ---
 
-# Buzzword _Bingo_
+# **Buzzword Bingo**
 
 Note:
 Buzzword Bingo up the top to make it easier to matchmake my abilities with the position requirements...
 
 ---
 
-# LinkedIn-_Style_
+# **LinkedIn-Style**
 
 Note:
 ...and LinkedIn-style position and education listings with links and images
@@ -211,7 +211,7 @@ Note:
 
 ---
 
-## _`paulfioravanti/resume`_
+## `paulfioravanti/resume`
 
 Note:
 - The resume is available on Github if you want to adapt it to your needs or are just curious and want a play
@@ -223,7 +223,7 @@ Note:
 
 ![neko](https://www.dropbox.com/s/kilublbesj7glr2/nekobus_headshot_scaled_down.jpeg?dl=1)
 # **Thanks!**
-## _`@paulfioravanti`_
+### _`@paulfioravanti`_
 
 Note:
 Questions
