@@ -55,8 +55,8 @@ Note:
 
 ---
 
-# _Not fun_  to
-# **read** _or_  **write**
+# **_Not fun_ to**
+# **read _or_ write**
 
 Note:
 - ...resumes aren't so much fun to read or write
@@ -65,7 +65,7 @@ Note:
 
 ---
 
-# _Actually_  be
+# **_Actually_ be**
 # **read**
 
 Note:
@@ -146,7 +146,7 @@ Note: And image assets are hosted on my Dropbox account
 
 ---
 
-# `/tmp`
+**`/tmp`**
 
 Note:
 - When you run the resume for the first time, it downloads all those files and stores them in your system tmp directory.
@@ -162,7 +162,7 @@ Note:
 
 ---
 
-## `$rake`
+**`$rake`**
 
 Note:
 - So, there is a `rake` task that reads in all the files, writes them to a single file (which I call the one-sheet resume).
@@ -198,7 +198,7 @@ Note:
 
 ---
 
-# Demo
+# **Demo**
 
 Note:
 - Generate resume: `$ bin/resume`
@@ -211,7 +211,7 @@ Note:
 
 ---
 
-## `paulfioravanti/resume`
+**`paulfioravanti/resume`**
 
 Note:
 - The resume is available on Github if you want to adapt it to your needs or are just curious and want a play
@@ -223,7 +223,7 @@ Note:
 
 ![neko](https://www.dropbox.com/s/kilublbesj7glr2/nekobus_headshot_scaled_down.jpeg?dl=1)
 # **Thanks!**
-### _`@paulfioravanti`_
+**`@paulfioravanti`**
 
 Note:
 Questions
