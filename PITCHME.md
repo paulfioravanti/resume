@@ -132,7 +132,7 @@ Note:
 
 ---
 
-# Text :arrow_right: JSON :arrow_right: _Github_
+# Text ➡ JSON ➡  _Github_
 
 Note:
 - JSON files hosted in the project Github repo
@@ -140,7 +140,7 @@ Note:
 
 ---
 
-# Images :arrow_right: _Dropbox_
+# Images ➡ _Dropbox_
 
 Note: And image assets are hosted on my Dropbox account
 
