@@ -1,4 +1,4 @@
-# **_Resume_** AS
+# **RESUME** AS
 # **`$CODE`**
 
 Note:
@@ -15,7 +15,7 @@ So, where previously I would send a prospective employer a...
 
 ---
 
-# **DOCUMENT**
+# DOCUMENT
 
 Note:
 ...resume document, I'd now send them a...
@@ -40,7 +40,7 @@ Note:
 
 ---
 
-# **_WHY?_**
+# **WHY?**
 
 Note:
 Why even make this?
@@ -177,7 +177,7 @@ I am not a designer, but a few things I did want to have in the resume are:
 
 ---
 
-# **2 PAGES** _MAX_
+# **2 PAGES** MAX
 
 Note:
 - 2 Pages maximum because of low attention spans
@@ -211,8 +211,8 @@ Note:
 
 ---
 
-# `paulfioravanti/`
-# `resume`
+## `paulfioravanti/`
+## `resume`
 
 Note:
 - The resume is available on Github if you want to adapt it to your needs or are just curious and want a play
