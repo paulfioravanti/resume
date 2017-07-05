@@ -1,0 +1,19 @@
+/* Moon theme CSS at the following location:
+ * https://github.com/gitpitch/gitpitch/blob/master/public/libs/reveal.js/3.4.1/css/theme/moon.css
+ */
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  text-transform: none;
+}
+
+.reveal h1 > strong {
+  color: #EA3046;
+}
+
+.reveal h2 > strong {
+  color: #EA3046;
+}
