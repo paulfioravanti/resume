@@ -222,9 +222,12 @@ Note:
 
 ---
 
-![neko](https://www.dropbox.com/s/kilublbesj7glr2/nekobus_headshot_scaled_down.jpeg?dl=1)
+![neko](assets/images/nekobus_headshot.jpeg)
 # **Thanks!**
 ## `@paulfioravanti`
 
 Note:
-Questions
+- Questions?
+- Link for remote image in case it's ever needed:
+  ![neko](https://www.dropbox.com/s/kilublbesj7glr2/nekobus_headshot_scaled_down.jpeg?dl=1)
+
