@@ -47,7 +47,7 @@ Why even make this?
 
 ---
 
-# ![neko](pitch/assets/prawn.png)
+# ![prawn](pitch/assets/prawn.png)
 
 Note:
 - Initially I just wanted to use it to learn how to use the Prawn gem to generate PDFs
