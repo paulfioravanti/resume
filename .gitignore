@@ -11,6 +11,9 @@ reek.html
 .tool-versions-e
 .ruby-version
 
+# Ignore any toplevel GitPitch files
+PITCHME
+
 doc/
 pkg/
 vendor/cache/*.gem
