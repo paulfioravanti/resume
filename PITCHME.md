@@ -221,7 +221,7 @@ Note:
 
 ---
 
-![right](https://www.dropbox.com/s/5w770gu31uw33l9/nekobus_headshot.jpeg?dl=1)
+---?image=https://www.dropbox.com/s/5w770gu31uw33l9/nekobus_headshot.jpeg?dl=1&size=contain
 # **Thanks!**
 # _`@paulfioravanti`_
 
