@@ -1,6 +1,10 @@
 /* Moon theme CSS at the following location:
  * https://github.com/gitpitch/gitpitch/blob/master/public/libs/reveal.js/3.4.1/css/theme/moon.css
  */
+
+/* Don't automatically upcase headings since I don't want that
+ * to happen for headings which are blocks of code.
+ */
 .reveal h1,
 .reveal h2,
 .reveal h3,
@@ -10,14 +14,18 @@
   text-transform: none;
 }
 
+/* Colour strong words the same as the Poster Deckset theme.  */
 .reveal h1 > strong {
   color: #EA3046;
 }
-
 .reveal h2 > strong {
   color: #EA3046;
 }
 
+/* Don't put borders around images. This was needed due to the Prawn
+ * emoji not displaying properly in full screen mode, so it had to
+ * be replaced with an image of itself to display properly.
+ */
 .reveal section img {
   border: 0;
   box-shadow: none;
