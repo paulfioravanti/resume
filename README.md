@@ -183,6 +183,11 @@ I did a lightning talk about this project at the
 on [10 May 2016](https://www.meetup.com/Ruby-On-Rails-Oceania-Sydney/events/228886775/).<br />
 The slide deck can be found [here](https://speakerdeck.com/paulfioravanti/resume-as-code).
 
+Just for fun, I created a [GitPitch](https://gitpitch.com/) version of the
+presentation as well, which can be viewed
+[here](https://gitpitch.com/paulfioravanti/resume) (or with presenter notes
+visible [here](https://gitpitch.com/paulfioravanti/resume?n=true)).
+
 ## Issues
 
 - It doesn't seem possible yet in Prawn to make an embedded image a clickable
