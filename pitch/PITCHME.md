@@ -47,11 +47,14 @@ Why even make this?
 
 ---
 
-# 🍤
+# ![neko](pitch/assets/prawn.png)
 
 Note:
 - Initially I just wanted to use it to learn how to use the Prawn gem to generate PDFs
 - But, after a while I figured I could actually make it into something I could use because...
+
+- NOTE: Image used instead of emoji character because when you run the presentation
+  in full screen, the character disappears(!)
 
 ---
 
