@@ -7,7 +7,7 @@ Hi everyone, my name is Paul and..
 ---
 
 # _I made my resume with_
-# **Ruby** :heart:
+# **Ruby** ♥
 
 Note:
 ...I made my resume with Ruby.
@@ -23,7 +23,7 @@ Note:
 ---
 
 # _Document_
-# *:arrow_down:*
+# ⬇
 # Program
 
 Note:
