@@ -72,7 +72,7 @@
   </tr>
   <tr>
     <td>
-      Dependencies
+      Other
     </td>
     <td>
       <a href="https://gemnasium.com/paulfioravanti/resume">
@@ -80,6 +80,9 @@
       </a>
       <a href="https://git.legal/projects/3664">
         <img src="https://git.legal/projects/3664/badge.svg?key=c393d7902601db754c83" alt="Number of libraries approved">
+      </a>
+      <a href="https://gitpitch.com/paulfioravanti/resume?grs=github&t=white">
+        <img src="https://gitpitch.com/assets/badge.svg" alt="GitPitch">
       </a>
     </td>
   </tr>
