@@ -229,5 +229,5 @@ Note:
 Note:
 - Questions?
 - Link for remote image in case it's ever needed:
-  ![neko](https://www.dropbox.com/s/kilublbesj7glr2/nekobus_headshot_scaled_down.jpeg?dl=1)
+  `![neko](https://www.dropbox.com/s/kilublbesj7glr2/nekobus_headshot_scaled_down.jpeg?dl=1)`
 
