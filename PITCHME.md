@@ -6,7 +6,7 @@ Hi everyone, my name is Paul and..
 
 ---
 
-# I made my resume with
+## _I made my resume with_
 # **Ruby** ♥
 
 Note:
@@ -15,7 +15,7 @@ So, where previously I would send a prospective employer a...
 
 ---
 
-# _Document_
+# *Document*
 
 Note:
 ...resume document, I'd now send them a...
