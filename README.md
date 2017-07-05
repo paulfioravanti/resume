@@ -81,7 +81,7 @@
       <a href="https://git.legal/projects/3664">
         <img src="https://git.legal/projects/3664/badge.svg?key=c393d7902601db754c83" alt="Number of libraries approved">
       </a>
-      <a href="https://gitpitch.com/paulfioravanti/resume?grs=github&t=white">
+      <a href="https://gitpitch.com/paulfioravanti/resume?p=pitch">
         <img src="https://gitpitch.com/assets/badge.svg" alt="GitPitch">
       </a>
     </td>
@@ -185,8 +185,8 @@ The slide deck can be found [here](https://speakerdeck.com/paulfioravanti/resume
 
 Just for fun, I created a [GitPitch](https://gitpitch.com/) version of the
 presentation as well, which can be viewed
-[here](https://gitpitch.com/paulfioravanti/resume) (or with presenter notes
-visible [here](https://gitpitch.com/paulfioravanti/resume?n=true)).
+[here](https://gitpitch.com/paulfioravanti/resume?p=pitch) (or with presenter notes
+visible [here](https://gitpitch.com/paulfioravanti/resume?p=pitch&n=true)).
 
 ## Issues
 
