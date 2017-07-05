@@ -222,7 +222,7 @@ Note:
 
 ---
 
-![neko](pitch/assets/images/nekobus_headshot.jpeg)
+![neko](pitch/assets/nekobus_headshot.jpeg)
 # **Thanks!**
 ## `@paulfioravanti`
 
