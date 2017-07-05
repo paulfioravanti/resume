@@ -1,7 +1,3 @@
-theme: poster
-footer: _@paulfioravanti_
-slidenumbers: true
-
 # [fit] **Resume** _as_
 # [fit] **`$CODE`**
 
