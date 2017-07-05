@@ -10,6 +10,7 @@
   text-transform: none;
 }
 
-.reveal h1 > strong {
+.reveal h1 > strong,
+.reveal h2 > strong, {
   color: #EA3046;
 }

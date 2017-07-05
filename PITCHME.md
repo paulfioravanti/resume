@@ -6,7 +6,7 @@ Hi everyone, my name is Paul and..
 
 ---
 
-## _I MADE MY RESUME WITH_
+## I MADE MY RESUME WITH
 # **Ruby ♥**
 
 Note:
