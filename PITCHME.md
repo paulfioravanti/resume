@@ -32,7 +32,7 @@ Note:
 ---
 
 # _Document_
-# **:arrow_up:**
+# ⬆
 # Program
 
 Note:
@@ -47,7 +47,7 @@ Why even make this?
 
 ---
 
-# :fried_shrimp:
+# 🍤
 
 Note:
 - Initially I just wanted to use it to learn how to use the Prawn gem to generate PDFs
