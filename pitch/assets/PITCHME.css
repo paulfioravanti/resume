@@ -17,3 +17,8 @@
 .reveal h2 > strong {
   color: #EA3046;
 }
+
+.reveal section img {
+  border: 0;
+  box-shadow: none;
+}
