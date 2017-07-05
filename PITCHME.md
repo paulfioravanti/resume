@@ -209,7 +209,7 @@ Note:
     - Open resume.rb file to show code modularisation, even in a single file
     - Create Japanese resume
 
-    ---
+---
 
 ## _`paulfioravanti/resume`_
 
