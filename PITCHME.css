@@ -9,3 +9,7 @@
 .reveal h6 {
   text-transform: none;
 }
+
+.reveal h1 > em {
+  color: #EA3046;
+}

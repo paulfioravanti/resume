@@ -1,4 +1,4 @@
-# **RESUME** _as_
+# **Resume** _AS_
 # **`$CODE`**
 
 Note:
@@ -100,7 +100,7 @@ Note:
 
 ---
 
-# **COMPONENTS**
+# **Components**
 
 Note:
 - The codebase of the resume has changed greatly as I've tinkered with it
@@ -123,7 +123,7 @@ Note:
 
 ---
 
-# **CONTENT**
+# **Content**
 
 Note:
 - There is no content in the resume app at all
@@ -154,7 +154,7 @@ Note:
 
 ---
 
-# **STRUCTURE**
+# **Structure**
 
 Note:
 - The directory structure of the resume is pretty much standard for any Ruby project, which is fine for development
@@ -170,7 +170,7 @@ Note:
 
 ---
 
-# **DESIGN**
+# **Design**
 
 Note:
 I am not a designer, but a few things I did want to have in the resume are:
@@ -211,7 +211,7 @@ Note:
 
 ---
 
-# `paulfioravanti/resume`
+## `paulfioravanti/resume`
 
 Note:
 - The resume is available on Github if you want to adapt it to your needs or are just curious and want a play
