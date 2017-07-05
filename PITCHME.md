@@ -7,7 +7,7 @@ Hi everyone, my name is Paul and..
 ---
 
 ## _I MADE MY RESUME WITH_
-# **Ruby** ♥
+# **Ruby ♥**
 
 Note:
 ...I made my resume with Ruby.
@@ -22,7 +22,7 @@ Note:
 
 ---
 
-# **DOCUMENT**
+# DOCUMENT
 # ⬇
 # **PROGRAM**
 
@@ -31,8 +31,8 @@ Note:
 
 ---
 
-# **DOCUMENT**
-# ⬆
+# DOCUMENT
+# **⬆**
 # **PROGRAM**
 
 Note:
@@ -40,7 +40,7 @@ Note:
 
 ---
 
-# _WHY?_
+# **_WHY?_**
 
 Note:
 Why even make this?
@@ -55,8 +55,8 @@ Note:
 
 ---
 
-# **_NOT FUN_ TO**
-# **READ _OR_ WRITE**
+# _NOT FUN_ TO
+# **READ** _OR_ **WRITE**
 
 Note:
 - ...resumes aren't so much fun to read or write
@@ -65,7 +65,7 @@ Note:
 
 ---
 
-# **_ACTUALLY_ BE**
+# _ACTUALLY_ BE
 # **READ**
 
 Note:
@@ -74,8 +74,8 @@ Note:
 
 ---
 
-# _POSITIVE_
-# **RESPONSE**
+# **POSITIVE**
+# RESPONSE
 
 Note:
 Through that, it would hopefully be more likely to get a positive response...
@@ -92,15 +92,15 @@ Note:
 
 ---
 
-# _SKIP_
-# **CODING TEST**
+# **SKIP**
+# CODING TEST
 
 Note:
 - As a bonus, it would be nice to be able to skip any coding tests, as the resume itself would also be a code sample
 
 ---
 
-# **Components**
+# Components
 
 Note:
 - The codebase of the resume has changed greatly as I've tinkered with it
@@ -123,7 +123,7 @@ Note:
 
 ---
 
-# **Content**
+# Content
 
 Note:
 - There is no content in the resume app at all
@@ -132,7 +132,7 @@ Note:
 
 ---
 
-## TEXT ➡ JSON ➡  **GITHUB**
+## **TEXT ➡ JSON ➡** GITHUB
 
 Note:
 - JSON files hosted in the project Github repo
@@ -140,7 +140,7 @@ Note:
 
 ---
 
-## IMAGES ➡ **DROPBOX**
+## **IMAGES ➡** DROPBOX
 
 Note: And image assets are hosted on my Dropbox account
 
@@ -154,7 +154,7 @@ Note:
 
 ---
 
-# **Structure**
+# Structure
 
 Note:
 - The directory structure of the resume is pretty much standard for any Ruby project, which is fine for development
@@ -162,7 +162,7 @@ Note:
 
 ---
 
-# `$rake`
+# **`$rake`**
 
 Note:
 - So, there is a `rake` task that reads in all the files, writes them to a single file (which I call the one-sheet resume).
@@ -177,21 +177,21 @@ I am not a designer, but a few things I did want to have in the resume are:
 
 ---
 
-# **2 PAGES _MAX_**
+# **2 PAGES** _MAX_
 
 Note:
 - 2 Pages maximum because of low attention spans
 
 ---
 
-# **BUZZWORD BINGO**
+# **BUZZWORD** BINGO
 
 Note:
 Buzzword Bingo up the top to make it easier to matchmake my abilities with the position requirements...
 
 ---
 
-# **LINKEDIN-STYLE**
+# **LINKEDIN-**STYLE
 
 Note:
 ...and LinkedIn-style position and education listings with links and images
