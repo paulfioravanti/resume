@@ -219,7 +219,7 @@ Note:
 - It can be as fun and rewarding as any other software that you write
 - And that's all the better if doing something a bit different can help you in your jobhunting as well
 
----?image=https://www.dropbox.com/s/5w770gu31uw33l9/nekobus_headshot.jpeg?dl=1&size=contain
+---?image=https://www.dropbox.com/s/5w770gu31uw33l9/nekobus_headshot.jpeg&size=contain
 
 # **Thanks!**
 # _`@paulfioravanti`_
