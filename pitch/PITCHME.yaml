@@ -1,5 +1,5 @@
 footnote: "@paulfioravanti"
 slide-number: true
 theme: moon
-theme-override: "PITCHME.css"
+theme-override: "pitch/PITCHME.css"
 transition: none
