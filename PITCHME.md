@@ -1,4 +1,5 @@
-# **Resume** _as_
+# **Resume**
+### _as_
 # **`$CODE`**
 
 Note:
@@ -6,7 +7,7 @@ Hi everyone, my name is Paul and..
 
 ---
 
-# _I made my resume with_
+## _I made my resume with_
 # **Ruby** ♥
 
 Note:
