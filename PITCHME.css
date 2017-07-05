@@ -10,7 +10,7 @@
   text-transform: none;
 }
 
-.reveal h1 > strong > em {
+h1 > strong > em {
   color: #EA3046;
   font-family: "Noteworthy Bold", Impact, sans-serif;
 }
