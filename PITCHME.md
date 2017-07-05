@@ -55,8 +55,8 @@ Note:
 
 ---
 
-# _NOT FUN_ TO
-# **READ** _OR_ **WRITE**
+# NOT FUN TO
+# **READ** OR **WRITE**
 
 Note:
 - ...resumes aren't so much fun to read or write
@@ -65,7 +65,7 @@ Note:
 
 ---
 
-# _ACTUALLY_ BE
+# ACTUALLY BE
 # **READ**
 
 Note:
@@ -82,7 +82,7 @@ Through that, it would hopefully be more likely to get a positive response...
 
 ---
 
-# _GETS_ AN
+# GETS AN
 # **INTERVIEW**
 
 Note:
@@ -132,7 +132,7 @@ Note:
 
 ---
 
-## **TEXT ➡ JSON ➡** GITHUB
+## **TEXT** **➡** **JSON** **➡** GITHUB
 
 Note:
 - JSON files hosted in the project Github repo
@@ -140,7 +140,7 @@ Note:
 
 ---
 
-## **IMAGES ➡** DROPBOX
+## **IMAGES** **➡** DROPBOX
 
 Note: And image assets are hosted on my Dropbox account
 
@@ -170,7 +170,7 @@ Note:
 
 ---
 
-# **Design**
+# Design
 
 Note:
 I am not a designer, but a few things I did want to have in the resume are:
@@ -211,7 +211,8 @@ Note:
 
 ---
 
-## `paulfioravanti/resume`
+# `paulfioravanti/`
+# `resume`
 
 Note:
 - The resume is available on Github if you want to adapt it to your needs or are just curious and want a play
