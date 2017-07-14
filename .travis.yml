@@ -13,7 +13,10 @@ before_install:
   - gem update --system
   - gem install i18n rspec
 script:
+  # Ensure gem dependencies do not have known vulnerabilities
   - bin/bundle-audit check --update
+  # Ensure each dependency has a permissive license
+  - bin/license_finder
   - bin/rspec spec/ --no-drb --format progress
   - bin/rubocop --display-cop-names
   # NOTE: The 'no's below indicate not wanting to get CI to attempt to open

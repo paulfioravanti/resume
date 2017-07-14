@@ -34,6 +34,7 @@ test_script:
   # NOTE: We can't run Unix executables under Windows,
   # so call them directly using Ruby.
   - ruby bin/bundle-audit check --update
+  - ruby bin/license_finder
   - ruby bin/rspec spec/ --no-drb --format progress
   - ruby bin/rubocop --display-cop-names
   - printf "yes\nno\n" | ruby bin/resume

@@ -24,6 +24,7 @@ build:
   tests:
     before:
       - bin/bundle-audit check --update
+      - bin/license_finder
       - bin/rubocop --display-cop-names
       - printf "yes\nno\n" | bin/resume
       - bin/resume -l it <<< "no\n"
