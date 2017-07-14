@@ -11,11 +11,14 @@ engines:
       - ruby
   fixme:
     enabled: true
+  git-legal:
+    enabled: true
   rubocop:
     enabled: true
 ratings:
   paths:
-  - Gemfile.lock
+  - "Gemfile*"
+  - "*.gemspec"
   - "**.rb"
 exclude_paths:
 - "spec/**/*"
