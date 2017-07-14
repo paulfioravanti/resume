@@ -11,11 +11,21 @@ engines:
       - ruby
   fixme:
     enabled: true
+  git-legal:
+    # Looks like there needs to be a subscription to Git Legal Pro for this
+    # config to be effective, so for now, leave this engine off, and depend
+    # on the integration directly with Git Legal on pull requests.
+    enabled: false
+    config:
+      # For the resume gem itself
+      allow_unknown_libraries: true
+      license_whitelist: ["GNU General Public License 3.0"]
   rubocop:
     enabled: true
 ratings:
   paths:
-  - Gemfile.lock
+  - "Gemfile.lock"
+  - "*.gemspec"
   - "**.rb"
 exclude_paths:
 - "spec/**/*"

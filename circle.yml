@@ -14,6 +14,7 @@ dependencies:
 test:
   override:
     - bin/bundle-audit check --update
+    - bin/license_finder
     - bin/rspec spec/ --no-drb --format progress
     - bin/rubocop --display-cop-names
     - bin/resume <<< "no\n"
