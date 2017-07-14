@@ -12,7 +12,10 @@ engines:
   fixme:
     enabled: true
   git-legal:
-    enabled: true
+    # Looks like there needs to be a subscription to Git Legal Pro for this
+    # config to be effective, so for now, leave this engine off, and depend
+    # on the integration directly with Git Legal on pull requests.
+    enabled: false
     config:
       # For the resume gem itself
       allow_unknown_libraries: true
