@@ -16,14 +16,12 @@ engines:
     config:
       # For the resume gem itself
       allow_unknown_libraries: true
-      license_whitelist:
-      # For Bundler-audit
-      - "GNU General Public License 3.0"
+      license_whitelist: ["GNU General Public License 3.0"]
   rubocop:
     enabled: true
 ratings:
   paths:
-  - "Gemfile*"
+  - "Gemfile.lock"
   - "*.gemspec"
   - "**.rb"
 exclude_paths:
