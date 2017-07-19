@@ -35,6 +35,10 @@ TooManyStatements:
     - "Resume::CLI::ArgumentParser#parser"
     - "Resume::CLI::FontDownloader#self.extract_fonts"
     - "Resume::PDF::Manifest#process"
+exclude_paths:
+  # NOTE: CI goes looking in the vendor directory and attempts to scan all files
+  # in all gems, so make the exclusion explicit here.
+  - "vendor"
 "spec/":
   # NOTE: Top-level documentation is done in the module/class files themselves,
   # so they don't need to be repeated for their definitions in spec files.

@@ -18,6 +18,7 @@ script:
   # Ensure each dependency has a permissive license
   - bin/license_finder
   - bin/rspec spec/ --no-drb --format progress
+  - bin/reek
   - bin/rubocop --display-cop-names
   # NOTE: The 'no's below indicate not wanting to get CI to attempt to open
   # the generated PDF
