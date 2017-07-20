@@ -3,9 +3,12 @@ unless ENV["NO_COVERAGE"]
   if ENV["TRAVIS"]
     require "coveralls"
     require "codecov"
+    require "codacy-coverage"
     SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+      SimpleCov::Formatter::HTMLFormatter,
       SimpleCov::Formatter::Codecov,
-      Coveralls::SimpleCov::Formatter
+      Coveralls::SimpleCov::Formatter,
+      Codacy::Formatter
     ]
     SimpleCov.start do
       SimpleCov.minimum_coverage 100
