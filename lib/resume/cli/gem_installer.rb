@@ -72,8 +72,8 @@ module Resume
       def gems_successfully_installed?
         return true if gems.none?
         Output.plain(:installing_ruby_gems)
-        gems.all? do |gem, version|
-          Kernel.system("gem", "install", gem, "-v", version)
+        gems.all? do |gem_name, version|
+          Kernel.system("gem", "install", gem_name, "-v", version)
         end
       rescue SocketError, Errno::ECONNREFUSED
         raise NetworkConnectionError

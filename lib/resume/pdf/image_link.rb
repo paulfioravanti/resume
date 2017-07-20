@@ -4,6 +4,14 @@ module Resume
     #
     # @author Paul Fioravanti
     module ImageLink
+      # The character to be used as filler when placed over images
+      # to make a transparent link.
+      BAR = "|".freeze
+      private_constant :BAR
+      # Level of opaqueness for an image link.
+      TRANSPARENT = 0
+      private_constant :TRANSPARENT
+
       module_function
 
       # Generates an image link on the PDF document.
@@ -30,11 +38,11 @@ module Resume
       # @param logo [Hash]
       #   Presentation information about the target logo.
       def transparent_link(pdf, logo)
-        pdf.transparent(0) do
+        pdf.transparent(TRANSPARENT) do
           pdf.formatted_text(
             [
               {
-                text: "|" * logo[:bars],
+                text: BAR * logo[:bars],
                 size: logo[:size],
                 link: logo[:link]
               }

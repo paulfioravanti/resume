@@ -4,8 +4,17 @@ module Resume
   #
   # @author Paul Fioravanti
   module RubyVersionChecker
+    # Required Ruby version for resume to work
     REQUIRED_RUBY_VERSION = ENV.fetch("CUSTOM_RUBY_VERSION", "2.4.1").freeze
     private_constant :REQUIRED_RUBY_VERSION
+    # Ruby version command
+    RUBY_VERSION_COMMAND = "ruby -v".freeze
+    private_constant :RUBY_VERSION_COMMAND
+    # Ruby version output regex.
+    # For example, this will extract `2.4.1` from a string like:
+    # `ruby 2.4.1p111 (2017-03-22 revision 58053) [x86_64-darwin16]`
+    RUBY_VERSION_REGEX = /\Aruby ([\d\.][^p]+)/
+    private_constant :RUBY_VERSION_REGEX
 
     module_function
 
@@ -49,12 +58,10 @@ module Resume
 
     def user_ruby_version
       ruby_version =
-        Open3.popen3("ruby -v") do |_stdin, stdout, _stderr, _wait_thr|
+        Open3.popen3(RUBY_VERSION_COMMAND) do |_stdin, stdout, _stderr, _wait|
           stdout.read
         end
-      # For example, this will extract `2.4.1` from a string like:
-      # `ruby 2.4.1p111 (2017-03-22 revision 58053) [x86_64-darwin16]`
-      ruby_version.match(/\Aruby ([\d\.][^p]+)/)[0]
+      ruby_version.match(RUBY_VERSION_REGEX)[0]
     end
     private_class_method :user_ruby_version
   end

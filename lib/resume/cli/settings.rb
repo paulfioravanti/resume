@@ -9,6 +9,13 @@ module Resume
     #
     # @author Paul Fioravanti
     module Settings
+      # List of locales the resume supports
+      AVAILABLE_LOCALES = %i[en it ja].freeze
+      private_constant :AVAILABLE_LOCALES
+      # Locale file location
+      LOCALE_FILE = ->(locale) { "lib/resume/locales/#{locale}.yml" }
+      private_constant :LOCALE_FILE
+
       module_function
 
       # Configures gems and i18n for resume generation.
@@ -26,10 +33,10 @@ module Resume
 
       def configure_i18n
         require "i18n"
-        I18n.available_locales = %i[en it ja]
+        I18n.available_locales = AVAILABLE_LOCALES
         I18n.available_locales.each do |locale|
           I18n.load_path += [
-            FileFetcher.fetch("lib/resume/locales/#{locale}.yml")
+            FileFetcher.fetch(LOCALE_FILE.call(locale))
           ]
         end
       rescue LoadError

@@ -8,6 +8,10 @@ module Resume
     #
     # @author Paul Fioravanti
     module FileSystem
+      # Represents the ?dl=1 parameter on a Dropbox link.
+      DOWNLOAD_PARAMETER_REGEX = /\?.+\z/
+      private_constant :DOWNLOAD_PARAMETER_REGEX
+
       module_function
 
       # Attempts to open a file in a system-appropriate way.
@@ -35,7 +39,9 @@ module Resume
       # @return [Pathname] The generated tmpfile pathname for `filename`.
       def tmpfile_path(filename)
         # Ensure that the ?dl=1 parameter is removed
-        Pathname.new(Dir.tmpdir).join(filename.sub(/\?.+\z/, ""))
+        Pathname.new(Dir.tmpdir).join(
+          filename.sub(DOWNLOAD_PARAMETER_REGEX, "")
+        )
       end
     end
   end

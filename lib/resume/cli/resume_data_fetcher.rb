@@ -8,6 +8,10 @@ module Resume
     #
     # @author Paul Fioravanti
     module ResumeDataFetcher
+      # Location of resume JSON data
+      RESUME_LOCATION = ->(locale) { "resources/resume.#{locale}.json" }
+      private_constant :RESUME_LOCATION
+
       module_function
 
       # Fetches the resume data JSON file for the current locale
@@ -16,7 +20,7 @@ module Resume
       # @return [Hash] The resume data
       def fetch
         Output.plain(:gathering_resume_information)
-        resume = FileFetcher.fetch("resources/resume.#{I18n.locale}.json")
+        resume = FileFetcher.fetch(RESUME_LOCATION.call(I18n.locale))
         JSON.parse(resume.read, symbolize_names: true)
       end
     end

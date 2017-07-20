@@ -8,6 +8,10 @@ module Resume
       #
       # @author Paul Fioravanti
       module Content
+        # Marker style for lists.
+        LIST_MARKER = "-".freeze
+        private_constant :LIST_MARKER
+
         module_function
 
         # Generates content for a job history entry.
@@ -38,7 +42,7 @@ module Resume
           borders, height = entry[:cell_style].values_at(:borders, :height)
           table_data =
             job_content.reduce([]) do |content, responsibility|
-              content << ["-", responsibility]
+              content << [LIST_MARKER, responsibility]
             end
           pdf.table(
             table_data, cell_style: { borders: borders, height: height }
