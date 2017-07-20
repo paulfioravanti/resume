@@ -37,6 +37,9 @@
       <a href="https://codebeat.co/projects/github-com-paulfioravanti-resume">
         <img src="https://codebeat.co/badges/177b8978-ac33-4ec7-9534-765df49a0ef5" alt="Codebeat Badge" />
       </a>
+      <a href="https://www.codacy.com/app/paulfioravanti/resume/resume">
+        <img src="https://api.codacy.com/project/badge/Grade/f20808b9a57a42d1a06d821bca5df9df"/>
+      </a>
       <a href="https://scrutinizer-ci.com/g/paulfioravanti/resume">
         <img src="https://scrutinizer-ci.com/g/paulfioravanti/resume/badges/quality-score.png?b=master" alt="Scrutinizer Status" />
       </a>
@@ -45,9 +48,6 @@
       </a>
       <a href="https://snyk.io/test/github/paulfioravanti/resume">
         <img src="https://snyk.io/test/github/paulfioravanti/resume/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/paulfioravanti/resume" style="max-width:100%;">
-      </a>
-      <a href="https://inch-ci.org/github/paulfioravanti/resume?branch=master">
-        <img src="http://inch-ci.org/github/paulfioravanti/resume.svg?branch=master" alt="Documentation Status" />
       </a>
     </td>
   </tr>
@@ -67,6 +67,9 @@
       </a>
       <a href="https://scrutinizer-ci.com/g/paulfioravanti/resume">
         <img src="https://scrutinizer-ci.com/g/paulfioravanti/resume/badges/coverage.png?b=master" alt="Scrutinizer Coverage" />
+      </a>
+      <a href="https://inch-ci.org/github/paulfioravanti/resume?branch=master">
+        <img src="http://inch-ci.org/github/paulfioravanti/resume.svg?branch=master" alt="Documentation Status" />
       </a>
     </td>
   </tr>
