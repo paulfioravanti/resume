@@ -10,14 +10,14 @@ module Resume
 
           before do
             allow(Settings).to receive(:configure).and_raise(error)
-            allow(Output).to \
-              receive(:messages).with(error.messages)
+            allow(Console).to \
+              receive(:output).with(error.messages)
             described_class.start
           end
 
           it "outputs the error messages" do
-            expect(Output).to \
-              have_received(:messages).with(error.messages)
+            expect(Console).to \
+              have_received(:output).with(error.messages)
           end
         end
 
@@ -59,7 +59,7 @@ module Resume
             allow(DependencyManager).to \
               receive(:new).with(dependencies).
                 and_return(dependency_manager)
-            allow(Output).to receive(:messages)
+            allow(Console).to receive(:output)
           end
 
           context "when gem installation is required" do
@@ -85,15 +85,15 @@ module Resume
               it "outputs the error messages" do
                 expect(dependency_manager).to \
                   have_received(:request_dependency_installation)
-                expect(Output).to \
-                  have_received(:messages).with(error.messages)
+                expect(Console).to \
+                  have_received(:output).with(error.messages)
               end
             end
 
             context "when permission to install gems is granted" do
               before do
                 allow(Kernel).to receive(:gets).and_return("yes\n")
-                allow(Output).to \
+                allow(Console).to \
                   receive(:success).with(:thank_you_kindly)
                 allow(dependency_manager).to \
                   receive(:install).and_throw(:halt)
@@ -103,7 +103,7 @@ module Resume
               it "thanks the user and installs the dependencies" do
                 expect(dependency_manager).to \
                   have_received(:request_dependency_installation)
-                expect(Output).to \
+                expect(Console).to \
                   have_received(:success).with(:thank_you_kindly)
                 expect(dependency_manager).to \
                   have_received(:install)
@@ -115,15 +115,15 @@ module Resume
             before do
               allow(dependency_manager).to \
                 receive(:installation_required?).and_return(false)
-              allow(Output).to receive(:plain).with(:generating_pdf)
+              allow(Console).to receive(:plain).with(:generating_pdf)
               allow(PDF::Document).to \
                 receive(:generate).with(resume, title, filename)
-              allow(Output).to \
+              allow(Console).to \
                 receive(:success).with(:resume_generated_successfully)
-              allow(Output).to \
+              allow(Console).to \
                 receive(:question).
                   with(:would_you_like_me_to_open_the_resume)
-              allow(Output).to \
+              allow(Console).to \
                 receive(:info).with(
                   :thanks_for_looking_at_my_resume,
                   filename: filename
@@ -137,16 +137,20 @@ module Resume
                 described_class.start
               end
 
+<<<<<<< HEAD
               it "does not open the document" do
                 expect(Output).to have_received(:plain).with(:generating_pdf)
+=======
+                expect(Console).to have_received(:plain).with(:generating_pdf)
+>>>>>>> Re-name Output module to Console module
                 expect(PDF::Document).to \
                   have_received(:generate).with(resume, title, filename)
-                expect(Output).to \
+                expect(Console).to \
                   have_received(:success).with(:resume_generated_successfully)
-                expect(Output).to \
+                expect(Console).to \
                   have_received(:question).
                     with(:would_you_like_me_to_open_the_resume)
-                expect(Output).to \
+                expect(Console).to \
                   have_received(:info).with(
                     :thanks_for_looking_at_my_resume,
                     filename: filename
@@ -163,16 +167,20 @@ module Resume
                 described_class.start
               end
 
+<<<<<<< HEAD
               it "attempts to open the document" do
                 expect(Output).to have_received(:plain).with(:generating_pdf)
+=======
+                expect(Console).to have_received(:plain).with(:generating_pdf)
+>>>>>>> Re-name Output module to Console module
                 expect(PDF::Document).to \
                   have_received(:generate).with(resume, title, filename)
-                expect(Output).to \
+                expect(Console).to \
                   have_received(:success).with(:resume_generated_successfully)
-                expect(Output).to \
+                expect(Console).to \
                   have_received(:question).
                     with(:would_you_like_me_to_open_the_resume)
-                expect(Output).to \
+                expect(Console).to \
                   have_received(:info).with(
                     :thanks_for_looking_at_my_resume,
                     filename: filename

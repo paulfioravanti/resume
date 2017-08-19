@@ -1,4 +1,4 @@
-require_relative "../output"
+require_relative "../console"
 require_relative "exceptions"
 require_relative "exception_suppressor"
 
@@ -52,9 +52,9 @@ module Resume
       # @return [Hash] The list of dependencies to install.
       def output_gem_dependencies
         return if gems.none?
-        Output.warning(:ruby_gems)
+        Console.warning(:ruby_gems)
         gems.each do |name, version|
-          Output.plain(
+          Console.plain(
             [:gem_name_and_version, { name: name, version: version }]
           )
         end
@@ -71,7 +71,7 @@ module Resume
       #   if gem dependencies were not successfully installed.
       def gems_successfully_installed?
         return true if gems.none?
-        Output.plain(:installing_ruby_gems)
+        Console.plain(:installing_ruby_gems)
         gems.all? do |gem_name, version|
           Kernel.system("gem", "install", gem_name, "-v", version)
         end

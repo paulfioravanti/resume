@@ -19,7 +19,7 @@
     - :file: colours.rb
       :from_line: 1
       :to_line: -2
-    - :file: output.rb
+    - :file: console.rb
       :from_line: 3
       :to_line: -2
 :pdf_files_1:
@@ -130,7 +130,7 @@
     - :file: colours_spec.rb
       :from_line: 3
       :to_line: -2
-    - :file: output_spec.rb
+    - :file: console_spec.rb
       :from_line: 4
       :to_line: -2
     - :file: ruby_version_checker_spec.rb

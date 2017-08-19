@@ -1,4 +1,4 @@
-require_relative "../../resume/output"
+require_relative "../../resume/console"
 require_relative "files"
 require "yaml"
 
@@ -25,7 +25,7 @@ module OneSheet
     # @return [true] if everything runs correctly
     # @return [nil] if something fails
     def run
-      Resume::Output.raw_warning("Generating one-sheet resume...")
+      Resume::Console.raw_warning("Generating one-sheet resume...")
       resume = document_content << executable
       output_file(resume)
       run_specs
@@ -56,18 +56,18 @@ module OneSheet
       File.open("resume.rb", "w") do |file|
         file.write(resume)
       end
-      Resume::Output.raw_success("Successfully generated one-sheet resume")
+      Resume::Console.raw_success("Successfully generated one-sheet resume")
     end
     private_class_method :output_file
 
     def run_specs
-      Resume::Output.raw_warning("Running specs...")
+      Resume::Console.raw_warning("Running specs...")
       system("bin/rspec", "resume.rb")
     end
     private_class_method :run_specs
 
     def run_code_quality_check
-      Resume::Output.raw_warning("Running code quality check...")
+      Resume::Console.raw_warning("Running code quality check...")
       system(
         "rubocop",
         "--display-cop-names",

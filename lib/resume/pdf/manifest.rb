@@ -1,4 +1,4 @@
-require_relative "../output"
+require_relative "../console"
 require_relative "font"
 require_relative "name"
 require_relative "headline"
@@ -26,13 +26,13 @@ module Resume
         Font.configure(pdf, resume[:font])
         Name.generate(pdf, resume[:name])
         Headline.generate(pdf, resume[:headline])
-        Output.plain(:creating_social_media_links)
+        Console.plain(:creating_social_media_links)
         SocialMediaLogoSet.generate(pdf, resume[:social_media_logo_set])
-        Output.plain(:creating_technical_skills_section)
+        Console.plain(:creating_technical_skills_section)
         TechnicalSkills.generate(pdf, resume[:technical_skills])
-        Output.plain(:creating_employment_history_section)
+        Console.plain(:creating_employment_history_section)
         EmploymentHistory.generate(pdf, resume[:employment_history])
-        Output.plain(:creating_education_history_section)
+        Console.plain(:creating_education_history_section)
         EducationHistory.generate(pdf, resume[:education_history])
       end
     end

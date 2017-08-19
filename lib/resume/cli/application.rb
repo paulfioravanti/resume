@@ -1,5 +1,5 @@
 require "forwardable"
-require_relative "../output"
+require_relative "../console"
 require_relative "../pdf/document"
 require_relative "settings"
 require_relative "argument_parser"
@@ -31,7 +31,7 @@ module Resume
           new(resume).start
         end
       rescue Error => error
-        Output.messages(error.messages)
+        Console.output(error.messages)
       end
 
       def self.permission_granted?
@@ -77,7 +77,7 @@ module Resume
         # rubocop:disable Style/GuardClause
         # NOTE: I think a non-guard clause reads better here
         if self.class.__send__(:permission_granted?)
-          Output.success(:thank_you_kindly)
+          Console.success(:thank_you_kindly)
           install
         else
           raise DependencyInstallationPermissionError
@@ -87,9 +87,9 @@ module Resume
 
       def generate_resume
         prepare_resume_data
-        Output.plain(:generating_pdf)
+        Console.plain(:generating_pdf)
         PDF::Document.generate(resume, title, filename)
-        Output.success(:resume_generated_successfully)
+        Console.success(:resume_generated_successfully)
       end
 
       def prepare_resume_data
@@ -99,11 +99,11 @@ module Resume
       end
 
       def open_resume
-        Output.question(:would_you_like_me_to_open_the_resume)
+        Console.question(:would_you_like_me_to_open_the_resume)
         if self.class.__send__(:permission_granted?)
           FileSystem.open_document(filename)
         end
-        Output.info(:thanks_for_looking_at_my_resume, filename: filename)
+        Console.info(:thanks_for_looking_at_my_resume, filename: filename)
       end
     end
   end

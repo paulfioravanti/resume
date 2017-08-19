@@ -5,7 +5,7 @@ module Resume
   # colours and internationalisation.
   #
   # @author Paul Fioravanti
-  module Output
+  module Console
     module_function
 
     # Calls to appropriately output each type of message in the
@@ -15,7 +15,7 @@ module Resume
     #   A hash of messages where the keys describe the type of message to
     #   output, and the values describe the i18n key for the message to ouput.
     # @return [Hash] the original hash of `messages`.
-    def messages(messages)
+    def output(messages)
       messages.each { |type, key| public_send(type, key) }
     end
 

@@ -1,5 +1,5 @@
 require "tmpdir"
-require_relative "../output"
+require_relative "../console"
 require_relative "exceptions"
 require_relative "file_system"
 require_relative "file_fetcher"
@@ -52,7 +52,7 @@ module Resume
       # @return [nil]
       def output_font_dependencies
         return if fonts.none?
-        Output.warning(:custom_fonts)
+        Console.warning(:custom_fonts)
       end
 
       # Attempts to download the font file and reports back on
@@ -77,7 +77,7 @@ module Resume
       private
 
       def download_and_extract_font(font)
-        Output.plain(:downloading_font)
+        Console.plain(:downloading_font)
         FileFetcher.fetch(
           ContentParser.decode_content(font[:location])
         )

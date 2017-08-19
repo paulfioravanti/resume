@@ -1,5 +1,5 @@
 require "forwardable"
-require_relative "../output"
+require_relative "../console"
 require_relative "exceptions"
 require_relative "gem_installer"
 require_relative "font_downloader"
@@ -52,10 +52,10 @@ module Resume
       #
       # @return [nil]
       def request_dependency_installation
-        Output.warning(:i_need_the_following_to_generate_a_pdf)
+        Console.warning(:i_need_the_following_to_generate_a_pdf)
         output_gem_dependencies
         output_font_dependencies
-        Output.question(:may_i_please_install_them)
+        Console.question(:may_i_please_install_them)
       end
 
       # Attempts to install the dependencies needed to
@@ -69,7 +69,7 @@ module Resume
         # rubocop:disable Style/GuardClause
         # NOTE: I think a non-guard clause reads better here
         if gems_successfully_installed? && fonts_successfully_downloaded?
-          Output.success(:dependencies_successfully_installed)
+          Console.success(:dependencies_successfully_installed)
         else
           raise DependencyInstallationError
         end

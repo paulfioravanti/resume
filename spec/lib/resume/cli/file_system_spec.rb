@@ -60,13 +60,13 @@ module Resume
         context "when run on an unknown operating system" do
           before do
             stub_const("RUBY_PLATFORM", "unknown")
-            allow(Output).to \
+            allow(Console).to \
               receive(:warning).with(:dont_know_how_to_open_resume)
             described_class.open_document(filename)
           end
 
           it "requests the user to open the document themself" do
-            expect(Output).to \
+            expect(Console).to \
               have_received(:warning).with(:dont_know_how_to_open_resume)
           end
         end

@@ -95,24 +95,24 @@ module Resume
           context "using the abbreviated option name" do
             before do
               stub_const("ARGV", ["-v"])
-              allow(Output).to receive(:raw).with(version)
+              allow(Console).to receive(:raw).with(version)
             end
 
             it "informs the user of the version number and halts" do
               expect(parsing_options).to throw_symbol(:halt)
-              expect(Output).to have_received(:raw).with(version)
+              expect(Console).to have_received(:raw).with(version)
             end
           end
 
           context "using the full option name" do
             before do
               stub_const("ARGV", ["--version"])
-              allow(Output).to receive(:raw).with(version)
+              allow(Console).to receive(:raw).with(version)
             end
 
             it "informs the user of the version number and halts" do
               expect(parsing_options).to throw_symbol(:halt)
-              expect(Output).to have_received(:raw).with(version)
+              expect(Console).to have_received(:raw).with(version)
             end
           end
         end
@@ -121,24 +121,24 @@ module Resume
           context "using the abbreviated option name" do
             before do
               stub_const("ARGV", ["-h"])
-              allow(Output).to receive(:raw).with(anything)
+              allow(Console).to receive(:raw).with(anything)
             end
 
             it "informs the user of the help options and halts" do
               expect(parsing_options).to throw_symbol(:halt)
-              expect(Output).to have_received(:raw).with(anything)
+              expect(Console).to have_received(:raw).with(anything)
             end
           end
 
           context "using the full option name" do
             before do
               stub_const("ARGV", ["--help"])
-              allow(Output).to receive(:raw).with(anything)
+              allow(Console).to receive(:raw).with(anything)
             end
 
             it "informs the user of the help options and halts" do
               expect(parsing_options).to throw_symbol(:halt)
-              expect(Output).to have_received(:raw).with(anything)
+              expect(Console).to have_received(:raw).with(anything)
             end
           end
         end
