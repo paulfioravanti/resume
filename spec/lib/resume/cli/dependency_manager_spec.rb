@@ -31,21 +31,18 @@ module Resume
           allow(font_downloader).to receive(:audit_font_dependencies)
         end
 
-        after do
-          expect(gem_installer).to \
-            have_received(:audit_gem_dependencies)
-          expect(font_downloader).to \
-            have_received(:audit_font_dependencies)
-        end
-
         context "when gem dependencies are present" do
           before do
             allow(gem_installer).to \
               receive(:gems).and_return(["foo", "1.0.0"])
           end
 
-          it "returns true" do
+          it "audits the dependencies and returns true" do
             expect(installation_required).to be true
+            expect(gem_installer).to \
+              have_received(:audit_gem_dependencies)
+            expect(font_downloader).to \
+              have_received(:audit_font_dependencies)
           end
         end
 
@@ -61,8 +58,12 @@ module Resume
                   and_return([instance_double("Hash", :font)])
             end
 
-            it "returns true" do
+            it "audits the dependencies and returns true" do
               expect(installation_required).to be true
+              expect(gem_installer).to \
+                have_received(:audit_gem_dependencies)
+              expect(font_downloader).to \
+                have_received(:audit_font_dependencies)
             end
           end
 
@@ -72,8 +73,12 @@ module Resume
                 receive(:fonts).and_return([])
             end
 
-            it "returns false" do
+            it "audits the dependencies and returns false" do
               expect(installation_required).to be false
+              expect(gem_installer).to \
+                have_received(:audit_gem_dependencies)
+              expect(font_downloader).to \
+                have_received(:audit_font_dependencies)
             end
           end
         end

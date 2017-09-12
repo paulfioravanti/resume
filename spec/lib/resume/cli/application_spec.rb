@@ -135,7 +135,9 @@ module Resume
                 allow(Kernel).to receive(:gets).and_return("no\n")
                 allow(FileSystem).to receive(:open_document)
                 described_class.start
+              end
 
+              it "does not open the document" do
                 expect(Output).to have_received(:plain).with(:generating_pdf)
                 expect(PDF::Document).to \
                   have_received(:generate).with(resume, title, filename)
@@ -149,9 +151,6 @@ module Resume
                     :thanks_for_looking_at_my_resume,
                     filename: filename
                   )
-              end
-
-              it "does not open the document" do
                 expect(FileSystem).not_to have_received(:open_document)
               end
             end
@@ -162,7 +161,9 @@ module Resume
                 allow(FileSystem).to \
                   receive(:open_document).with(filename)
                 described_class.start
+              end
 
+              it "attempts to open the document" do
                 expect(Output).to have_received(:plain).with(:generating_pdf)
                 expect(PDF::Document).to \
                   have_received(:generate).with(resume, title, filename)
@@ -176,9 +177,6 @@ module Resume
                     :thanks_for_looking_at_my_resume,
                     filename: filename
                   )
-              end
-
-              it "attempts to open the document" do
                 expect(FileSystem).to \
                   have_received(:open_document).with(filename)
               end

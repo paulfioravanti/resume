@@ -113,13 +113,12 @@ module Resume
 
         before { allow(Gem).to receive(:clear_paths) }
 
-        after { expect(Gem).to have_received(:clear_paths) }
-
         context "when there are no gem dependencies" do
           let(:gems) { [] }
 
           it "returns true" do
             expect(gems_successfully_installed).to be true
+            expect(Gem).to have_received(:clear_paths)
           end
         end
 
@@ -141,6 +140,7 @@ module Resume
               expect(gems_successfully_installed).to be true
               expect(Output).to \
                 have_received(:plain).with(:installing_ruby_gems)
+              expect(Gem).to have_received(:clear_paths)
             end
           end
 
@@ -159,6 +159,7 @@ module Resume
               expect(gems_successfully_installed).to be false
               expect(Output).to \
                 have_received(:plain).with(:installing_ruby_gems)
+              expect(Gem).to have_received(:clear_paths)
             end
           end
 
@@ -179,6 +180,7 @@ module Resume
                   raise_error(NetworkConnectionError)
                 expect(Output).to \
                   have_received(:plain).with(:installing_ruby_gems)
+                expect(Gem).to have_received(:clear_paths)
               end
             end
 
@@ -195,6 +197,7 @@ module Resume
                   raise_error(NetworkConnectionError)
                 expect(Output).to \
                   have_received(:plain).with(:installing_ruby_gems)
+                expect(Gem).to have_received(:clear_paths)
               end
             end
           end

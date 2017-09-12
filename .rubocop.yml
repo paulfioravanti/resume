@@ -64,8 +64,10 @@ Metrics/ModuleLength:
 
 RSpec/ExampleLength:
   # NOTE: Pretty much the fault of the FontExtractor module needing to mock
-  # out the entirety of its interactiion with Zip::File
-  Max: 10
+  # out the entirety of its interactiion with Zip::File, as well as the
+  # amount of expectations needed in the application_spec to trace the
+  # application flow all the way to opening a generated resume.
+  Max: 15
 
 # NOTE: RSpec cop seems to ignore the AllCops directive and complains that
 # the resume.rb file isn't a *_spec.rb file, so suppress that issue.
@@ -73,8 +75,10 @@ RSpec/FilePath:
   Exclude:
     - "resume.rb"
 
+# NOTE: Increased maximum number of allowed expectations due to having
+# expectations in before/after blocks becoming bad practice.
 RSpec/MultipleExpectations:
-  Max: 5
+  Max: 6
 
 # NOTE: This deep nesting mostly due to the wide range of paths that gem
 # installation and file fetching can take, and the different errors that
