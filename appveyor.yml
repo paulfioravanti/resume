@@ -6,11 +6,11 @@ skip_tags: true
 build: off
 environment:
   matrix:
-    - ruby_version: 23
+    - ruby_version: 24
 install:
-  # AppVeyor currently only supports up to Ruby 2.3.3, so set the
+  # AppVeyor currently only supports up to Ruby 2.4.1, so set the
   # custom Ruby version to be passed in to the program.
-  - SET CUSTOM_RUBY_VERSION=2.3.3
+  - SET CUSTOM_RUBY_VERSION=2.4.1
   - SET PATH=C:\Ruby%ruby_version%\bin;%PATH%
   - ruby -e "puts RUBY_PLATFORM"
   # Get around the error

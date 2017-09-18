@@ -26,7 +26,7 @@ module Resume
       end
 
       def generate_content(pdf, entries)
-        entries.values.each do |entry|
+        entries.each_value do |entry|
           Entry::Content.generate(pdf, entry)
         end
       end

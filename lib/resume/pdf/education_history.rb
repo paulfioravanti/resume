@@ -17,7 +17,7 @@ module Resume
       #   Presentation information about the education history section.
       def generate(pdf, education_history)
         Entry::Heading.generate(pdf, education_history[:heading])
-        education_history.dig(:content, :entries).values.each do |entry|
+        education_history.dig(:content, :entries).each_value do |entry|
           Entry::Content.generate(pdf, entry)
         end
       end

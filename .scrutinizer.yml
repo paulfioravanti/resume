@@ -14,13 +14,13 @@ build:
     before:
       - cd /home/scrutinizer/.rbenv/plugins/ruby-build && git pull origin master && cd -
       - rbenv install -l
-      - rbenv install 2.4.1
-      - rbenv local 2.4.1
+      - rbenv install 2.4.2
+      - rbenv local 2.4.2
       - ruby -v
       - gem update --system
       - gem install bundler i18n rspec
   environment:
-    ruby: 2.4.1
+    ruby: 2.4.2
   tests:
     before:
       - bin/bundle-audit check --update
