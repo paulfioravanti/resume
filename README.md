@@ -202,6 +202,58 @@ visible [here](https://gitpitch.com/paulfioravanti/resume?n=true)).
   image.  More discussion on this issue is at
   [this StackOverflow thread](http://stackoverflow.com/q/8289031/567863).
 
+## Executable
+
+Using [Ruby Packer](https://github.com/pmq20/ruby-packer), an executable can
+be created for the resume.  However, this is _very experimental_, doesn't really
+work properly, and is only documented here as an interesting curiosity.
+
+### Install Ruby Packer
+
+Follow the instructions on the repository's README file. I'll focus on the
+[MacOS installation instructions](https://github.com/pmq20/ruby-packer#install-on-macos).
+
+In the `resume` directory, perform the following:
+
+```sh
+$ brew install squashfs
+$ curl -L http://enclose.io/rubyc/rubyc-darwin-x64.gz | gunzip > rubyc
+$ chmod +x rubyc
+```
+
+### Generate resume first
+
+Before attempting to do anything with any executable, make sure that you've
+generated the resume in your target language already so that image and font
+assets are stored in your local tmp folder and no further connections need to be
+made in order to fetch them.  This is because of an
+[open issue regarding SSL with Enclose.IO's Ruby executable](https://github.com/pmq20/ruby-packer/issues/10).
+
+If this issue gets solved, maybe the executable can be used to go fetch assets
+as well.
+
+### Generate and run resume executable
+
+As of this writing, [Enclose.IO's Ruby executable](http://enclose.io/ruby) only
+goes up to version 2.4.1. Therefore, similar to the
+[AppVeyor build](https://www.appveyor.com/docs/build-environment/#ruby), we
+will have to override the specified Ruby version with an `ENV` variable when
+generating and running the resume executable.
+
+Generate executable (here named `resume.out`):
+
+```sh
+$ CUSTOM_RUBY_VERSION="2.4.1" ./rubyc bin/resume -o resume.out
+```
+
+Run resume executable:
+
+:uk: `$ CUSTOM_RUBY_VERSION="2.4.1" ./resume.out`<br />
+:it: `$ CUSTOM_RUBY_VERSION="2.4.1" ./resume.out -l it`<br />
+:ja: `$ CUSTOM_RUBY_VERSION="2.4.1" ./resume.out -l ja`<br />
+
+So, yes, more of a curiosity here than anything really useful.
+
 ## Social
 
 [![Contact](https://img.shields.io/badge/contact-%40paulfioravanti-blue.svg)](https://twitter.com/paulfioravanti)
