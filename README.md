@@ -250,7 +250,7 @@ Run resume executable:
 
 :uk: `$ CUSTOM_RUBY_VERSION="2.4.1" ./resume.out`<br />
 :it: `$ CUSTOM_RUBY_VERSION="2.4.1" ./resume.out -l it`<br />
-:ja: `$ CUSTOM_RUBY_VERSION="2.4.1" ./resume.out -l ja`<br />
+:jp: `$ CUSTOM_RUBY_VERSION="2.4.1" ./resume.out -l ja`<br />
 
 So, yes, more of a curiosity here than anything really useful.
 
