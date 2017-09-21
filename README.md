@@ -240,13 +240,13 @@ goes up to version 2.4.1. Therefore, similar to the
 will have to override the specified Ruby version with an `ENV` variable when
 generating and running the resume executable.
 
-Generate executable (here named `resume.out`):
+**Generate executable** (here named `resume.out`):
 
 ```sh
 $ CUSTOM_RUBY_VERSION="2.4.1" ./rubyc bin/resume -o resume.out
 ```
 
-Run resume executable:
+**Run resume executable**:
 
 :uk: `$ CUSTOM_RUBY_VERSION="2.4.1" ./resume.out`<br />
 :it: `$ CUSTOM_RUBY_VERSION="2.4.1" ./resume.out -l it`<br />
