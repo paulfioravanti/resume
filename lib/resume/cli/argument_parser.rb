@@ -61,7 +61,7 @@ module Resume
 
       def help_option(opts)
         opts.on_tail("-h", "--help", "Show this message") do
-          Output.raw(opts)
+          Console.raw(opts)
           throw :halt
         end
       end
@@ -69,7 +69,7 @@ module Resume
 
       def version_option(opts)
         opts.on_tail("-v", "--version", "Show version") do
-          Output.raw(Resume::VERSION)
+          Console.raw(Resume::VERSION)
           throw :halt
         end
       end

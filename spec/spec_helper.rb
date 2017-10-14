@@ -8,7 +8,7 @@ require "resume"
 require "resume/cli/settings"
 require "resume/cli/content_parser"
 require "resume/cli/file_fetcher"
-require "resume/output"
+require "resume/console"
 
 module Resume
   RSpec.configure do |config|
@@ -34,16 +34,16 @@ module Resume
           )
         )
       rescue CLI::DependencyPrerequisiteError => error
-        Output.messages(error.messages)
+        Console.messages(error.messages)
         exit(1)
       rescue LoadError
-        Output.messages(
+        Console.messages(
           error: :you_need_prawn_to_run_the_specs,
           warning: :please_install_them_or_run_the_resume
         )
         exit(1)
       rescue SocketError, OpenURI::HTTPError
-        Output.messages(
+        Console.messages(
           error: :you_need_an_internet_connection_to_run_the_specs,
           warning: :please_ensure_you_have_one
         )

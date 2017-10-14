@@ -1,8 +1,8 @@
 require "spec_helper"
-require "resume/output"
+require "resume/console"
 
 module Resume
-  RSpec.describe Output do
+  RSpec.describe Console do
     shared_context "Colourised I18n keys" do |colour|
       let(:key) { :message }
       let(:params_to_interpolate) { { param: "param" } }
@@ -47,7 +47,7 @@ module Resume
         messages.each do |type, key|
           allow(described_class).to receive(type).with(key)
         end
-        described_class.messages(messages)
+        described_class.output(messages)
       end
 
       it "calls to output each message as its specific type" do

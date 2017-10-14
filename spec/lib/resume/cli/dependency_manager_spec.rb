@@ -86,22 +86,22 @@ module Resume
 
       describe "#request_dependency_installation" do
         before do
-          allow(Output).to \
+          allow(Console).to \
             receive(:warning).with(:i_need_the_following_to_generate_a_pdf)
           allow(gem_installer).to receive(:output_gem_dependencies)
           allow(font_downloader).to receive(:output_font_dependencies)
-          allow(Output).to \
+          allow(Console).to \
             receive(:question).with(:may_i_please_install_them)
           dependency_manager.request_dependency_installation
         end
 
         it "informs of the dependencies and asks to install them" do
-          expect(Output).to \
+          expect(Console).to \
             have_received(:warning).
               with(:i_need_the_following_to_generate_a_pdf)
           expect(gem_installer).to have_received(:output_gem_dependencies)
           expect(font_downloader).to have_received(:output_font_dependencies)
-          expect(Output).to \
+          expect(Console).to \
             have_received(:question).with(:may_i_please_install_them)
         end
       end
@@ -119,14 +119,14 @@ module Resume
             before do
               allow(font_downloader).to \
                 receive(:fonts_successfully_downloaded?).and_return(true)
-              allow(Output).to \
+              allow(Console).to \
                 receive(:success).
                   with(:dependencies_successfully_installed)
               dependency_manager.install
             end
 
             it "outputs that dependencies were successfully installed" do
-              expect(Output).to \
+              expect(Console).to \
                 have_received(:success).
                   with(:dependencies_successfully_installed)
             end

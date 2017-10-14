@@ -79,12 +79,12 @@ module Resume
           let(:fonts) { [] }
 
           before do
-            allow(Output).to receive(:warning)
+            allow(Console).to receive(:warning)
             font_downloader.output_font_dependencies
           end
 
           it "outputs nothing" do
-            expect(Output).not_to have_received(:warning)
+            expect(Console).not_to have_received(:warning)
           end
         end
 
@@ -93,12 +93,12 @@ module Resume
           let(:fonts) { [{}] }
 
           before do
-            allow(Output).to receive(:warning).with(:custom_fonts)
+            allow(Console).to receive(:warning).with(:custom_fonts)
             font_downloader.output_font_dependencies
           end
 
           it "informs that custom fonts must be installed" do
-            expect(Output).to have_received(:warning).with(:custom_fonts)
+            expect(Console).to have_received(:warning).with(:custom_fonts)
           end
         end
       end
@@ -131,7 +131,7 @@ module Resume
 
           context "all fonts successfully downloaded and extracted" do
             before do
-              allow(Output).to \
+              allow(Console).to \
                 receive(:plain).with(:downloading_font)
               allow(FileFetcher).to \
                 receive(:fetch).with(decoded_font_location)
@@ -141,7 +141,7 @@ module Resume
 
             it "returns true" do
               expect(fonts_successfully_downloaded).to be true
-              expect(Output).to \
+              expect(Console).to \
                 have_received(:plain).with(:downloading_font)
               expect(FileFetcher).to \
                 have_received(:fetch).with(decoded_font_location)
@@ -151,7 +151,7 @@ module Resume
 
           context "when an error occurs during font download" do
             before do
-              allow(Output).to \
+              allow(Console).to \
                 receive(:plain).with(:downloading_font)
               allow(FileFetcher).to \
                 receive(:fetch).and_raise(NetworkConnectionError)
@@ -159,7 +159,7 @@ module Resume
 
             it "returns false" do
               expect(fonts_successfully_downloaded).to be false
-              expect(Output).to \
+              expect(Console).to \
                 have_received(:plain).with(:downloading_font)
             end
           end

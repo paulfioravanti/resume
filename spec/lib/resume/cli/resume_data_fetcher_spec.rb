@@ -10,7 +10,7 @@ module Resume
         let(:resume_data_file) { instance_spy("File", :resume_data_file) }
 
         before do
-          allow(Output).to \
+          allow(Console).to \
             receive(:plain).with(:gathering_resume_information)
           allow(I18n).to receive(:locale).and_return(:en)
           allow(FileFetcher).to \
@@ -23,7 +23,7 @@ module Resume
         end
 
         it "parses and returns the JSON resume data file" do
-          expect(Output).to \
+          expect(Console).to \
             have_received(:plain).with(:gathering_resume_information)
           expect(JSON).to \
             have_received(:parse).
