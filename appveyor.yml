@@ -21,7 +21,7 @@ install:
   - choco install wget
   - wget https://curl.haxx.se/ca/cacert.pem -O C:\cacert.pem
   - set SSL_CERT_FILE=C:\cacert.pem
-  - gem update --system
+  # - gem update --system
   - gem install i18n rspec
   # Cache gems: https://www.appveyor.com/docs/lang/ruby/#caching
   # - bundle config --local path vendor/bundle
