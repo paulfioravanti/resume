@@ -96,13 +96,12 @@
 
 This is a Ruby CLI application that generates my resume.  I made it in order
 to teach myself a bit about the Ruby PDF generation library
-[Prawn](https://github.com/prawnpdf/prawn).
-[Railscast #153](http://railscasts.com/episodes/153-pdfs-with-prawn-revised)
-is also a good resource for learning about it.
+[Prawn][prawn]. [Railscast #153][railscast-153] is also a good resource for
+learning about it.
 
 Text is deliberately obfuscated in the JSON files that contain the resume content
-with [Base64](http://ruby-doc.org/stdlib-2.3.0/libdoc/base64/rdoc/Base64.html)
-to ensure people generate the PDF in order to be able to read anything.
+with [Base64][base64] to ensure people generate the PDF in order to be able to
+read anything.
 
 ## Setup
 
@@ -185,14 +184,11 @@ following `rake` task to delete all resume-related assets from the local tmpdir:
 ## Presentation
 
 I did a lightning talk about this project at the
-[Ruby on Rails Oceania Meetup](https://www.meetup.com/Ruby-On-Rails-Oceania-Sydney/)
-on [10 May 2016](https://www.meetup.com/Ruby-On-Rails-Oceania-Sydney/events/228886775/).<br />
-The slide deck can be found [here](https://speakerdeck.com/paulfioravanti/resume-as-code).
+[Ruby on Rails Oceania Meetup][roro] on [10 May 2016][roro-20160510]
+([slide deck][speakerdeck]).
 
-Just for fun, I created a [GitPitch](https://gitpitch.com/) version of the
-presentation as well, which can be viewed
-[here](https://gitpitch.com/paulfioravanti/resume) (or with presenter notes
-visible [here](https://gitpitch.com/paulfioravanti/resume?n=true)).
+Just for fun, I created a [GitPitch version of the presentation][gitpitch]
+(or with [presenter notes visible][gitpitch-with-notes]).
 
 ## Issues
 
@@ -200,18 +196,18 @@ visible [here](https://gitpitch.com/paulfioravanti/resume?n=true)).
   link.  Until support is possible (if ever), I've simply pulled in images from
   Dropbox and overlaid a transparent text link on top to simulate clicking an
   image.  More discussion on this issue is at
-  [this StackOverflow thread](http://stackoverflow.com/q/8289031/567863).
+  [this StackOverflow thread][stackoverflow-transparent-link].
 
 ## Executable
 
-Using [Ruby Packer](https://github.com/pmq20/ruby-packer), an executable can
-be created for the resume.  However, this is _very experimental_, doesn't really
-work properly, and is only documented here as an interesting curiosity.
+Using [Ruby Packer][ruby-packer], an executable can be created for the resume.
+However, this is _very experimental_, doesn't really work properly, and is only
+documented here as an interesting curiosity.
 
 ### Install Ruby Packer
 
 Follow the instructions on the repository's README file. I'll focus on the
-[MacOS installation instructions](https://github.com/pmq20/ruby-packer#install-on-macos).
+[MacOS installation instructions][ruby-packer-install].
 
 In the `resume` directory, perform the following:
 
@@ -227,18 +223,18 @@ Before attempting to do anything with any executable, make sure that you've
 generated the resume in your target language already so that image and font
 assets are stored in your local tmp folder and no further connections need to be
 made in order to fetch them.  This is because of an
-[open issue regarding SSL with Enclose.IO's Ruby executable](https://github.com/pmq20/ruby-packer/issues/10).
+[open issue regarding SSL with Enclose.IO's Ruby executable][enclose-io-issue].
 
 If this issue gets solved, maybe the executable can be used to go fetch assets
 as well.
 
 ### Generate and run resume executable
 
-As of this writing, [Enclose.IO's Ruby executable](http://enclose.io/ruby) only
-goes up to version 2.4.1. Therefore, similar to the
-[AppVeyor build](https://www.appveyor.com/docs/build-environment/#ruby), we
-will have to override the specified Ruby version with an `ENV` variable when
-generating and running the resume executable.
+As of this writing, [Enclose.IO's Ruby executable][enclose-io-ruby] only goes
+up to version 2.4.1. Therefore, similar to the
+[AppVeyor build][appveyor-build-ruby], we will have to override the specified
+Ruby version with an `ENV` variable when generating and running the resume
+executable.
 
 **Generate executable** (here named `resume.out`):
 
@@ -256,8 +252,24 @@ So, yes, more of a curiosity here than anything really useful.
 
 ## Social
 
-[![Contact](https://img.shields.io/badge/contact-%40paulfioravanti-blue.svg)](https://twitter.com/paulfioravanti)
+[![Contact][twitter-badge]][twitter-url]<br />
+[![Stack Overflow][stackoverflow-badge]][stackoverflow-url]
 
-<a href="http://stackoverflow.com/users/567863/paul-fioravanti">
-  <img src="http://stackoverflow.com/users/flair/567863.png" width="208" height="58" alt="profile for Paul Fioravanti at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for Paul Fioravanti at Stack Overflow, Q&amp;A for professional and enthusiast programmers">
-</a>
+[appveyor-build-ruby]: https://www.appveyor.com/docs/build-environment/#ruby
+[base64]: http://ruby-doc.org/stdlib-2.3.0/libdoc/base64/rdoc/Base64.html
+[enclose-io-issue]: https://github.com/pmq20/ruby-packer/issues/10
+[enclose-io-ruby]: http://enclose.io/ruby
+[gitpitch]: https://gitpitch.com/paulfioravanti/resume
+[gitpitch-with-notes]: https://gitpitch.com/paulfioravanti/resume?n=true
+[prawn]: https://github.com/prawnpdf/prawn
+[railscast-153]: http://railscasts.com/episodes/153-pdfs-with-prawn-revised
+[roro]: https://www.meetup.com/Ruby-On-Rails-Oceania-Sydney/
+[roro-20160510]: https://www.meetup.com/Ruby-On-Rails-Oceania-Sydney/events/228886775/
+[ruby-packer]: https://github.com/pmq20/ruby-packer
+[ruby-packer-install]: https://github.com/pmq20/ruby-packer#install-on-macos
+[speakerdeck]: https://speakerdeck.com/paulfioravanti/resume-as-code
+[stackoverflow-badge]: http://stackoverflow.com/users/flair/567863.png
+[stackoverflow-transparent-link]: http://stackoverflow.com/q/8289031/567863
+[stackoverflow-url]: http://stackoverflow.com/users/567863/paul-fioravanti
+[twitter-badge]: https://img.shields.io/badge/contact-%40paulfioravanti-blue.svg
+[twitter-url]: https://twitter.com/paulfioravanti
