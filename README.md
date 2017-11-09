@@ -99,9 +99,9 @@ to teach myself a bit about the Ruby PDF generation library
 [Prawn][prawn]. [Railscast #153][railscast-153] is also a good resource for
 learning about it.
 
-Text is deliberately obfuscated in the JSON files that contain the resume content
-with [Base64][base64] to ensure people generate the PDF in order to be able to
-read anything.
+Text is deliberately obfuscated in the JSON files that contain the resume
+content with [Base64][base64] to ensure people generate the PDF in order to be
+able to read anything.
 
 ## Setup
 
