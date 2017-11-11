@@ -129,7 +129,7 @@ module Resume
           end
           let(:fonts) { [font] }
 
-          context "all fonts successfully downloaded and extracted" do
+          context "when all fonts successfully downloaded and extracted" do
             before do
               allow(Output).to \
                 receive(:plain).with(:downloading_font)

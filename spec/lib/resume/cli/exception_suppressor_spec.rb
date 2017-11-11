@@ -69,7 +69,7 @@ module Resume
           end
         end
 
-        context "StandardError is raised" do
+        context "when StandardError is raised" do
           let(:exception_to_raise) { StandardError }
 
           it "returns the default empty lambda value" do

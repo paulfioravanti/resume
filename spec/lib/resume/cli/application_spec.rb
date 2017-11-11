@@ -34,7 +34,7 @@ module Resume
           end
         end
 
-        context "once application is initialized" do
+        context "when application is initialized" do
           let(:title) { "Resume title" }
           let(:dependencies) do
             instance_double("Hash", :dependencies)

@@ -62,7 +62,7 @@ module Resume
         context "when a supported locale option is specified" do
           let(:supported_locale) { "ja" }
 
-          context "using the abbreviated option name" do
+          context "when using the abbreviated option name" do
             before do
               stub_const("ARGV", ["-l", supported_locale])
               described_class.parse
@@ -73,7 +73,7 @@ module Resume
             end
           end
 
-          context "using the full option name" do
+          context "when using the full option name" do
             before do
               stub_const("ARGV", ["--locale", supported_locale])
               described_class.parse
@@ -92,7 +92,7 @@ module Resume
             stub_const("Resume::VERSION", version)
           end
 
-          context "using the abbreviated option name" do
+          context "when using the abbreviated option name" do
             before do
               stub_const("ARGV", ["-v"])
               allow(Output).to receive(:raw).with(version)
@@ -104,7 +104,7 @@ module Resume
             end
           end
 
-          context "using the full option name" do
+          context "when using the full option name" do
             before do
               stub_const("ARGV", ["--version"])
               allow(Output).to receive(:raw).with(version)
@@ -118,7 +118,7 @@ module Resume
         end
 
         context "when the help option is specified" do
-          context "using the abbreviated option name" do
+          context "when using the abbreviated option name" do
             before do
               stub_const("ARGV", ["-h"])
               allow(Output).to receive(:raw).with(anything)
@@ -130,7 +130,7 @@ module Resume
             end
           end
 
-          context "using the full option name" do
+          context "when using the full option name" do
             before do
               stub_const("ARGV", ["--help"])
               allow(Output).to receive(:raw).with(anything)
