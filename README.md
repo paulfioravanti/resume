@@ -96,48 +96,55 @@
 
 This is a Ruby CLI application that generates my resume.  I made it in order
 to teach myself a bit about the Ruby PDF generation library
-[Prawn][prawn]. [Railscast #153][railscast-153] is also a good resource for
-learning about it.
+[Prawn][]. [Railscast #153][] is also a good resource for learning about it.
 
 Text is deliberately obfuscated in the JSON files that contain the resume
-content with [Base64][base64] to ensure people generate the PDF in order to be
-able to read anything.
+content with [Base64][] to ensure people generate the PDF in order to be able
+to read anything.
 
 ## Setup
 
-    $ git clone https://github.com/paulfioravanti/resume.git
-    $ cd resume
-    $ bundle install
+```sh
+git clone https://github.com/paulfioravanti/resume.git
+cd resume
+bundle install
+```
 
 ## Usage
 
-### Generate
+### Generate Resume
 
 Generate the resume in the following languages:
 
-:uk: `$ bin/resume`<br />
-:it: `$ bin/resume -l it`<br />
-:jp: `$ bin/resume -l ja`
+:uk: `bin/resume`<br />
+:it: `bin/resume -l it`<br />
+:jp: `bin/resume -l ja`
 
-Help: `$ bin/resume -h`
+Help: `bin/resume -h`
 
-### Specs
+### Resume Specs
 
 Run the specs:
 
-    $ bin/rspec
+```sh
+bin/rspec
+```
 
 ### Coverage Report
 
 View the Simplecov test coverage report:
 
-    $ open coverage/index.html
+```sh
+open coverage/index.html
+```
 
 ### Documentation
 
 Generate the YARD documentation:
 
-    $ bin/yardoc
+```sh
+bin/yardoc
+```
 
 ## One Sheet Resume
 
@@ -149,22 +156,26 @@ single file called `resume.rb`).<br />
 If I sent my resume to you directly, it would have been generated from
 this `rake` task:
 
-    $ bin/rake resume
+```sh
+bin/rake resume
+```
 
-### Generate
+### Generate One Sheet
 
 The resume PDF can be generated from the one sheet in a similar way as the
 CLI app:
 
-:uk: `$ ruby resume.rb`<br />
-:it: `$ ruby resume.rb -l it`<br />
-:jp: `$ ruby resume.rb -l ja`
+:uk: `ruby resume.rb`<br />
+:it: `ruby resume.rb -l it`<br />
+:jp: `ruby resume.rb -l ja`
 
-### Specs
+### One Sheet Specs
 
 The specs can also be run directly on the one sheet resume:
 
-    $ rspec resume.rb
+```sh
+rspec resume.rb
+```
 
 ### Delete Assets
 
@@ -172,7 +183,9 @@ If there are ever any errors or issues related to the downloading of remote
 assets that cause the resume to not be able to be generated, you can run the
 following `rake` task to delete all resume-related assets from the local tmpdir:
 
-    $ bin/rake resume:delete_assets
+```sh
+bin/rake resume:delete_assets
+```
 
 ## Dependencies
 
@@ -200,7 +213,7 @@ Just for fun, I created a [GitPitch version of the presentation][gitpitch]
 
 ## Executable
 
-Using [Ruby Packer][ruby-packer], an executable can be created for the resume.
+Using [Ruby Packer][], an executable can be created for the resume.
 However, this is _very experimental_, doesn't really work properly, and is only
 documented here as an interesting curiosity.
 
@@ -212,9 +225,9 @@ Follow the instructions on the repository's README file. I'll focus on the
 In the `resume` directory, perform the following:
 
 ```sh
-$ brew install squashfs
-$ curl -L http://enclose.io/rubyc/rubyc-darwin-x64.gz | gunzip > rubyc
-$ chmod +x rubyc
+brew install squashfs
+curl -L http://enclose.io/rubyc/rubyc-darwin-x64.gz | gunzip > rubyc
+chmod +x rubyc
 ```
 
 ### Generate resume first
@@ -239,14 +252,14 @@ executable.
 **Generate executable** (here named `resume.out`):
 
 ```sh
-$ CUSTOM_RUBY_VERSION="2.4.1" ./rubyc bin/resume -o resume.out
+CUSTOM_RUBY_VERSION="2.4.1" ./rubyc bin/resume -o resume.out
 ```
 
 **Run resume executable**:
 
-:uk: `$ CUSTOM_RUBY_VERSION="2.4.1" ./resume.out`<br />
-:it: `$ CUSTOM_RUBY_VERSION="2.4.1" ./resume.out -l it`<br />
-:jp: `$ CUSTOM_RUBY_VERSION="2.4.1" ./resume.out -l ja`<br />
+:uk: `CUSTOM_RUBY_VERSION="2.4.1" ./resume.out`<br />
+:it: `CUSTOM_RUBY_VERSION="2.4.1" ./resume.out -l it`<br />
+:jp: `CUSTOM_RUBY_VERSION="2.4.1" ./resume.out -l ja`<br />
 
 So, yes, more of a curiosity here than anything really useful.
 
@@ -256,16 +269,16 @@ So, yes, more of a curiosity here than anything really useful.
 [![Stack Overflow][stackoverflow-badge]][stackoverflow-url]
 
 [appveyor-build-ruby]: https://www.appveyor.com/docs/build-environment/#ruby
-[base64]: http://ruby-doc.org/stdlib-2.3.0/libdoc/base64/rdoc/Base64.html
+[Base64]: http://ruby-doc.org/stdlib-2.3.0/libdoc/base64/rdoc/Base64.html
 [enclose-io-issue]: https://github.com/pmq20/ruby-packer/issues/10
 [enclose-io-ruby]: http://enclose.io/ruby
 [gitpitch]: https://gitpitch.com/paulfioravanti/resume
 [gitpitch-with-notes]: https://gitpitch.com/paulfioravanti/resume?n=true
-[prawn]: https://github.com/prawnpdf/prawn
-[railscast-153]: http://railscasts.com/episodes/153-pdfs-with-prawn-revised
+[Prawn]: https://github.com/prawnpdf/prawn
+[Railscast #153]: http://railscasts.com/episodes/153-pdfs-with-prawn-revised
 [roro]: https://www.meetup.com/Ruby-On-Rails-Oceania-Sydney/
 [roro-20160510]: https://www.meetup.com/Ruby-On-Rails-Oceania-Sydney/events/228886775/
-[ruby-packer]: https://github.com/pmq20/ruby-packer
+[Ruby Packer]: https://github.com/pmq20/ruby-packer
 [ruby-packer-install]: https://github.com/pmq20/ruby-packer#install-on-macos
 [speakerdeck]: https://speakerdeck.com/paulfioravanti/resume-as-code
 [stackoverflow-badge]: http://stackoverflow.com/users/flair/567863.png
