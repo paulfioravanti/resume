@@ -18,7 +18,8 @@ build:
       - rbenv local 2.4.2
       - ruby -v
       - gem update --system
-      - gem install bundler i18n rspec
+      # - gem install bundler i18n rspec
+      - gem install i18n rspec
   environment:
     ruby: 2.4.2
   tests:
