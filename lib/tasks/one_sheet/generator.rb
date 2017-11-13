@@ -41,7 +41,7 @@ module OneSheet
 
     def executable
       <<~EXECUTABLE
-        if __FILE__ == $PROGRAM_NAME
+        if $PROGRAM_NAME == __FILE__
           Resume.generate
         end
       EXECUTABLE
