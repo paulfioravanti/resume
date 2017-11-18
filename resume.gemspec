@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 12.0"
   spec.add_development_dependency "reek", "~> 4.0"
   spec.add_development_dependency "rspec", "~> 3.4"
-  spec.add_development_dependency "rubocop", "~> 0.46"
+  spec.add_development_dependency "rubocop", "~> 0.49"
   spec.add_development_dependency "rubocop-rspec", "~> 1.9"
   spec.add_development_dependency "rubygems-tasks", "~> 0.2"
   spec.add_development_dependency "scrutinizer-ocular", "~> 1.0"
