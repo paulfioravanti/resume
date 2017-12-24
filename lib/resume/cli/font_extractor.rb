@@ -28,7 +28,7 @@ module Resume
 
       def extract_entry(files, entry)
         files.each_value do |filename|
-          next unless entry.name.match(filename)
+          next unless entry.name.match?(filename)
           # `true` in the block ensures any existing files are overwritten
           entry.extract(FileSystem.tmpfile_path(filename)) { true }
           break

@@ -61,12 +61,14 @@ module Resume
 
       def parse_hash(hash)
         hash.each do |key, value|
-          if value =~ BASE64_STRING_REGEX
-            value = decode_content(value)
-          end
-          if value =~ ASSET_PATH
-            hash[key] = FileFetcher.fetch(value)
-            next
+          if value.is_a?(String)
+            if value.match?(BASE64_STRING_REGEX)
+              value = decode_content(value)
+            end
+            if value.match?(ASSET_PATH)
+              hash[key] = FileFetcher.fetch(value)
+              next
+            end
           end
           munge_hash_value(hash, key, value)
         end
@@ -104,7 +106,7 @@ module Resume
 
       def parse_array(array)
         array.each_with_index do |value, index|
-          if value =~ BASE64_STRING_REGEX
+          if value.is_a?(String) && value.match?(BASE64_STRING_REGEX)
             array[index] = decode_content(value)
           end
         end

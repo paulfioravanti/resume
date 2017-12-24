@@ -13,7 +13,7 @@ before_install:
   # Prevent issues like the following happening:
   # https://github.com/sickill/rainbow/issues/44
   - gem update --system
-  - gem install i18n rspec
+  - gem install i18n rspec bundler
 script:
   # Ensure gem dependencies do not have known vulnerabilities
   - bin/bundle-audit check --update

@@ -14,6 +14,7 @@ FeatureEnvy:
   # `self`.
   exclude:
     - "Resume::CLI::ArgumentParser#parser"
+    - "Resume::CLI::ContentParser#parse_hash"
     - "Resume::CLI::ContentParser#munge_hash_value"
     - "Resume::CLI::ContentParser#parse_array"
     - "Resume::PDF::EmploymentHistory#footer"
