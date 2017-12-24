@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "guard-rubocop", "~> 1.2"
   spec.add_development_dependency "guard-yard", "~> 2.2"
   spec.add_development_dependency "kramdown", "~> 1.8"
-  spec.add_development_dependency "license_finder", "~> 3.0"
+  spec.add_development_dependency "license_finder", "~> 4.0"
   spec.add_development_dependency "pry-byebug", "~> 3.1"
   spec.add_development_dependency "rake", "~> 12.0"
   spec.add_development_dependency "reek", "~> 4.0"

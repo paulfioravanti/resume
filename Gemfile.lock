@@ -81,7 +81,7 @@ GEM
     ice_nine (0.11.2)
     json (2.1.0)
     kramdown (1.16.2)
-    license_finder (3.1.1)
+    license_finder (4.0.2)
       bundler
       httparty
       rubyzip
@@ -198,7 +198,7 @@ DEPENDENCIES
   guard-rubocop (~> 1.2)
   guard-yard (~> 2.2)
   kramdown (~> 1.8)
-  license_finder (~> 3.0)
+  license_finder (~> 4.0)
   pry-byebug (~> 3.1)
   rake (~> 12.0)
   reek (~> 4.0)
