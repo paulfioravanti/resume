@@ -209,7 +209,7 @@ DEPENDENCIES
   rubygems-tasks (~> 0.2)
   scrutinizer-ocular (~> 1.0)
   simplecov (~> 0.14)
-  yard (~> 0.8)
+  yard (~> 0.9)
 
 RUBY VERSION
    ruby 2.4.3p205
