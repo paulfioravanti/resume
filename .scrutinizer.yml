@@ -2,9 +2,9 @@ checks:
   ruby:
     code_rating: true
     duplicate_code: true
-tools:
-  rubocop:
-    use_native_config: true
+# tools:
+#   rubocop:
+#     use_native_config: true
 filter:
   excluded_paths:
     - spec/*
