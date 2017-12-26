@@ -36,6 +36,10 @@ build:
       - ruby resume.rb <<< "no\n"
       - ruby resume.rb -l it <<< "no\n"
       - ruby resume.rb -l ja <<< "no\n"
+      # Temporary hack for the rubocop-run script Scrutinizer runs.
+      # Should handle the following error:
+      # Error: Unknown Ruby version 2.5 found in `.ruby-version`.
+      - echo "2.4.3" > .ruby-version
     override:
       -
         command: bin/rspec spec/ --no-drb --format progress
@@ -44,7 +48,6 @@ build:
         coverage:
           file: 'my-coverage'
           format: 'rb-cc'
-      - rubocop-run --config .rubocop.yml
 checks:
   ruby:
     code_rating: true
