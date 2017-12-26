@@ -14,7 +14,9 @@ build:
     before:
       - cd /home/scrutinizer/.rbenv/plugins/ruby-build && git pull origin master && cd -
       - rbenv install -l
-      - rbenv install 2.5.0
+      -
+        command: rbenv install 2.5.0
+        idle_timeout: 600
       - rbenv local 2.5.0
       - ruby -v
       # - gem update --system
