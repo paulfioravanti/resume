@@ -1,14 +1,14 @@
 machine:
   ruby:
     version:
-      2.4.3
+      2.5.0
 dependencies:
   pre:
     - gem uninstall bundler <<< "Y\n" # use a custom version of bundler
     - gem install bundler i18n rspec
     - gem update --system
   override:
-    - rvm use 2.4.3
+    - rvm use 2.5.0
     - bundle install: # note ':' here
         timeout: 180 # fail if command has no output for 3 minutes
 test:
