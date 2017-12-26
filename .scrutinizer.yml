@@ -1,7 +1,3 @@
-# checks:
-#   ruby:
-#     code_rating: true
-#     duplicate_code: true
 tools:
   rubocop:
     use_native_config: true
@@ -24,6 +20,11 @@ build:
       - gem install i18n rspec
   environment:
     ruby: 2.4.2
+  nodes:
+    analysis:
+      tests:
+        override:
+          - rubocop-run --config .rubocop.yml
   tests:
     before:
       - bin/bundle-audit check --update
@@ -47,5 +48,5 @@ build:
       - rubocop-run --config .rubocop.yml
 checks:
   ruby:
-    code_rating: false
+    code_rating: true
     duplicate_code: true
