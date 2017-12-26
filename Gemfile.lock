@@ -204,7 +204,7 @@ DEPENDENCIES
   reek (~> 4.0)
   resume!
   rspec (~> 3.4)
-  rubocop (~> 0.49)
+  rubocop (~> 0.52)
   rubocop-rspec (~> 1.9)
   rubygems-tasks (~> 0.2)
   scrutinizer-ocular (~> 1.0)
