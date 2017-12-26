@@ -1,10 +1,8 @@
 checks:
   ruby:
-    code_rating: true
+    # code_rating: true
+    code_rating: false
     duplicate_code: true
-  tests:
-    override:
-      - rubocop-run --config .rubocop.yml
 tools:
   rubocop:
     use_native_config: true
