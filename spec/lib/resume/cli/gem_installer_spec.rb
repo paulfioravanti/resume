@@ -89,7 +89,7 @@ module Resume
             allow(Output).to receive(:warning).with(:ruby_gems)
             gems.each do |name, version|
               allow(Output).to receive(:plain).with(
-                [:gem_name_and_version, { name: name, version: version }]
+                :gem_name_and_version, name: name, version: version
               )
             end
             gem_installer.output_gem_dependencies
@@ -99,7 +99,7 @@ module Resume
             expect(Output).to have_received(:warning).with(:ruby_gems)
             gems.each do |name, version|
               expect(Output).to have_received(:plain).with(
-                [:gem_name_and_version, { name: name, version: version }]
+                :gem_name_and_version, name: name, version: version
               )
             end
           end
