@@ -44,6 +44,7 @@ build:
         coverage:
           file: 'my-coverage'
           format: 'rb-cc'
+      - rubocop-run --config .rubocop.yml
 checks:
   ruby:
     code_rating: true
