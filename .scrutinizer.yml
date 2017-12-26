@@ -2,9 +2,12 @@ checks:
   ruby:
     code_rating: true
     duplicate_code: true
-# tools:
-#   rubocop:
-#     use_native_config: true
+  tests:
+    override:
+      - rubocop-run --config .rubocop.yml
+tools:
+  rubocop:
+    use_native_config: true
 filter:
   excluded_paths:
     - spec/*
@@ -45,7 +48,3 @@ build:
           file: 'my-coverage'
           format: 'rb-cc'
       - rubocop-run --config .rubocop.yml
-checks:
-  ruby:
-    code_rating: true
-    duplicate_code: true
