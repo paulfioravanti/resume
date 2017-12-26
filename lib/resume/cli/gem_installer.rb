@@ -54,9 +54,7 @@ module Resume
         return if gems.none?
         Output.warning(:ruby_gems)
         gems.each do |name, version|
-          Output.plain(
-            [:gem_name_and_version, { name: name, version: version }]
-          )
+          Output.plain(:gem_name_and_version, { name: name, version: version })
         end
       end
 
