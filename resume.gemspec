@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "codeclimate-test-reporter", "~> 1.0"
   spec.add_development_dependency "codecov", "~> 0.1"
   spec.add_development_dependency "coveralls", "~> 0.8"
-  spec.add_development_dependency "fuubar", "~> 2.2.0"
+  spec.add_development_dependency "fuubar", "~> 2.3"
   spec.add_development_dependency "guard-reek", "~> 1.0"
   spec.add_development_dependency "guard-rspec", "~> 4.6"
   spec.add_development_dependency "guard-rubocop", "~> 1.2"
