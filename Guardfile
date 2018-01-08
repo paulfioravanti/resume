@@ -26,6 +26,11 @@ group :red_green_refactor, halt_on_fail: true do
 
   guard :reek,
         all_on_start: false do
+    # NOTE: Irresponsible Module issues (no top level documentation) occur on
+    # generated resume.rb file that I don't care about, and I couldn't seem
+    # to be able to filter it out of this guard scope, so just remove the file
+    # as by this point it's already been tested.
+    callback(:start_begin) { system("rm", "resume.rb") }
     watch(/.+\.rb$/)
     watch(".reek")
   end
