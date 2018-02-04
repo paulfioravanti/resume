@@ -38,7 +38,7 @@
         <img src="https://codebeat.co/badges/177b8978-ac33-4ec7-9534-765df49a0ef5" alt="Codebeat Badge" />
       </a>
       <a href="https://www.codacy.com/app/paulfioravanti/resume">
-        <img src="https://api.codacy.com/project/badge/Grade/f20808b9a57a42d1a06d821bca5df9df"/>
+        <img src="https://api.codacy.com/project/badge/Grade/f20808b9a57a42d1a06d821bca5df9df" />
       </a>
       <a href="https://scrutinizer-ci.com/g/paulfioravanti/resume">
         <img src="https://scrutinizer-ci.com/g/paulfioravanti/resume/badges/quality-score.png?b=master" alt="Scrutinizer Status" />
@@ -47,7 +47,7 @@
         <img src="https://hakiri.io/github/paulfioravanti/resume/master.svg" alt="Hakiri Status" />
       </a>
       <a href="https://snyk.io/test/github/paulfioravanti/resume">
-        <img src="https://snyk.io/test/github/paulfioravanti/resume/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/paulfioravanti/resume" style="max-width:100%;">
+        <img src="https://snyk.io/test/github/paulfioravanti/resume/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/paulfioravanti/resume" style="max-width:100%;" />
       </a>
     </td>
   </tr>
@@ -63,7 +63,7 @@
         <img src="https://codecov.io/gh/paulfioravanti/resume/branch/master/graph/badge.svg" alt="Codecov Coverage" />
       </a>
       <a href="https://www.codacy.com/app/paulfioravanti/resume">
-        <img src="https://api.codacy.com/project/badge/Coverage/f20808b9a57a42d1a06d821bca5df9df"/>
+        <img src="https://api.codacy.com/project/badge/Coverage/f20808b9a57a42d1a06d821bca5df9df" />
       </a>
       <a href="https://coveralls.io/github/paulfioravanti/resume?branch=master">
         <img src="https://coveralls.io/repos/github/paulfioravanti/resume/badge.svg?branch=master" alt="Coveralls Coverage" />
@@ -82,13 +82,16 @@
     </td>
     <td>
       <a href="https://gemnasium.com/paulfioravanti/resume">
-        <img src="https://gemnasium.com/paulfioravanti/resume.svg" alt="Dependency Status">
-      </a>
-      <a href="https://git.legal/projects/3664">
-        <img src="https://git.legal/projects/3664/badge.svg?key=c393d7902601db754c83" alt="Number of libraries approved">
+        <img src="https://gemnasium.com/paulfioravanti/resume.svg" alt="Dependency Status" />
       </a>
       <a href="https://gitpitch.com/paulfioravanti/resume">
-        <img src="https://gitpitch.com/assets/badge.svg" alt="GitPitch">
+        <img src="https://gitpitch.com/assets/badge.svg" alt="GitPitch" />
+      </a>
+      <a href="LICENSE.txt">
+        <img src="https://img.shields.io/github/license/mashape/apistatus.svg" />
+      </a>
+      <a href="https://forthebadge.com/">
+        <img src="http://forthebadge.com/images/badges/made-with-ruby.svg" alt="Made with Ruby" />
       </a>
     </td>
   </tr>
