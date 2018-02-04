@@ -24,8 +24,6 @@ GEM
       simplecov
     codeclimate-engine-rb (0.4.1)
       virtus (~> 1.0)
-    codeclimate-test-reporter (1.0.7)
-      simplecov
     codecov (0.1.10)
       json
       simplecov
@@ -187,7 +185,6 @@ DEPENDENCIES
   bundler (~> 1.11)
   bundler-audit (~> 0.5)
   codacy-coverage (~> 1.1)
-  codeclimate-test-reporter (~> 1.0)
   codecov (~> 0.1)
   coveralls (~> 0.8)
   fuubar (~> 2.3)
