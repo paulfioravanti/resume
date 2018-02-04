@@ -43,6 +43,3 @@ script:
 after_script:
   # Send results to Code Climate
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-# after_success:
-#   # Send results to Code Climate
-#   - bin/codeclimate-test-reporter

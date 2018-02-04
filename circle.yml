@@ -4,9 +4,6 @@ machine:
       2.5.0
 dependencies:
   pre:
-    # NOTE: Looks like Circle CI isn't allowing bundler to be uninstalled
-    # anymore, so comment out for now...
-    # - gem uninstall bundler <<< "Y\n" # use a custom version of bundler
     - gem install bundler i18n rspec
     - gem update --system
   override:
