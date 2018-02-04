@@ -90,6 +90,9 @@
       <a href="LICENSE.txt">
         <img src="https://img.shields.io/github/license/mashape/apistatus.svg" />
       </a>
+      <a href="https://github.com/ellerbrock/open-source-badges/">
+        <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103" />
+      </a>
       <a href="https://forthebadge.com/">
         <img src="http://forthebadge.com/images/badges/made-with-ruby.svg" alt="Made with Ruby" />
       </a>
