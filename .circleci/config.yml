@@ -3,18 +3,35 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.5
+    environment:
+      CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
+      CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
+      command: /sbin/init
     steps:
       - checkout
       - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
-      - run:
-          working_directory: ~/paulfioravanti/resume
-          command: rm -f paulfioravanti/resume/.rvmrc; echo 2.5.0 > paulfioravanti/resume/.ruby-version; rvm use 2.5.0 --default
+      - restore_cache:
+          keys:
+          - v1-dep-{{ .Branch }}-
+          - v1-dep-master-
+          - v1-dep-
       - run: gem install bundler i18n rspec
       - run: gem update --system
       - run: rvm use 2.5.0
       - run:
           command: bundle install
           no_output_timeout: 180s
+      - save_cache:
+          key: v1-dep-{{ .Branch }}-{{ epoch }}
+          paths:
+          - vendor/bundle
+          - ~/virtualenvs
+          - ~/.m2
+          - ~/.ivy2
+          - ~/.bundle
+          - ~/.go_workspace
+          - ~/.gradle
+          - ~/.cache/bower
       - run: bin/bundle-audit check --update
       - run: bin/license_finder
       - run: bin/rspec spec/ --no-drb --format progress
