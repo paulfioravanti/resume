@@ -4,7 +4,6 @@ jobs:
     docker:
       - image: circleci/ruby:2.5
     steps:
-      - run: rvm use 2.5.0
       - run: gem update --system
       - run: gem install bundler i18n rspec
       - run:
