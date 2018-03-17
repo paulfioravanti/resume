@@ -250,9 +250,8 @@ as well.
 ### Generate and run resume executable
 
 As of this writing, [Enclose.IO's Ruby executable][enclose-io-ruby] only goes
-up to version 2.4.1. Therefore, similar to the
-[AppVeyor build][appveyor-build-ruby], we will have to override the specified
-Ruby version with an `ENV` variable when generating and running the resume
+up to version 2.4.1. Therefore, we will have to override the specified Ruby
+version with an `ENV` variable when generating and running the resume
 executable.
 
 **Generate executable** (here named `resume.out`):
@@ -274,7 +273,6 @@ So, yes, more of a curiosity here than anything really useful.
 [![Contact][twitter-badge]][twitter-url]<br />
 [![Stack Overflow][stackoverflow-badge]][stackoverflow-url]
 
-[appveyor-build-ruby]: https://www.appveyor.com/docs/build-environment/#ruby
 [Base64]: http://ruby-doc.org/stdlib-2.3.0/libdoc/base64/rdoc/Base64.html
 [enclose-io-issue]: https://github.com/pmq20/ruby-packer/issues/10
 [enclose-io-ruby]: http://enclose.io/ruby
