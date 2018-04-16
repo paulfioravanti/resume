@@ -19,7 +19,8 @@ build:
       # - gem install bundler i18n rspec
       - gem install i18n rspec
   environment:
-    ruby: 2.5.1
+    # ruby: 2.5.1
+    ruby: 2.4.2
   nodes:
     analysis:
       tests:
@@ -42,6 +43,10 @@ build:
         command: bin/rspec spec/ --no-drb --format progress
         environment:
           'SCRUTINIZER_CC_FILE': 'my-coverage'
+          # Scrutinizer cracked down on the possible versions used in the
+          # `environment.ruby` variable, so make the build run on the highest
+          # possible version available on their systems.
+          # 'CUSTOM_RUBY_VERSION': '2.4.2'
         coverage:
           file: 'my-coverage'
           format: 'rb-cc'
