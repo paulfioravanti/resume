@@ -81,9 +81,6 @@
       Other
     </td>
     <td>
-      <a href="https://gemnasium.com/paulfioravanti/resume">
-        <img src="https://gemnasium.com/paulfioravanti/resume.svg" alt="Dependency Status" />
-      </a>
       <a href="https://gitpitch.com/paulfioravanti/resume">
         <img src="https://gitpitch.com/assets/badge.svg" alt="GitPitch" />
       </a>
