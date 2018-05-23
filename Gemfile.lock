@@ -78,7 +78,7 @@ GEM
     ice_nine (0.11.2)
     json (2.1.0)
     kramdown (1.16.2)
-    license_finder (5.2.0)
+    license_finder (5.2.3)
       bundler
       httparty
       rubyzip
@@ -136,7 +136,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
-    rubocop (0.55.0)
+    rubocop (0.56.0)
       parallel (~> 1.10)
       parser (>= 2.5)
       powerpack (~> 0.1)
@@ -209,4 +209,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
