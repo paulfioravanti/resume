@@ -32,6 +32,7 @@ module Resume
             receive(:plain).with(:creating_education_history_section)
           described_class.generate(resume, title, filename)
         end
+
         after { File.delete(filename) }
 
         it "generates a pdf resume with progress notifications" do
