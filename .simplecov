@@ -14,6 +14,7 @@ unless ENV["NO_COVERAGE"]
         ]
       )
     SimpleCov.start do
+      add_filter "/spec/"
       SimpleCov.minimum_coverage 100
     end
   elsif ENV["SCRUTINIZER"]
@@ -23,6 +24,7 @@ unless ENV["NO_COVERAGE"]
   else
     SimpleCov.start do
       SimpleCov.minimum_coverage 100
+      add_filter "/spec/"
     end
   end
 end
