@@ -1,3 +1,4 @@
+require "tmpdir"
 require_relative "../resume/output"
 
 namespace :resume do
