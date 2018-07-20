@@ -36,7 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "license_finder", "~> 5.0"
   spec.add_development_dependency "pry-byebug", "~> 3.1"
   spec.add_development_dependency "rake", "~> 12.0"
-  spec.add_development_dependency "reek", "~> 4.0"
+  spec.add_development_dependency "reek", "~> 5.0"
   spec.add_development_dependency "rspec", "~> 3.4"
   spec.add_development_dependency "rubocop", "~> 0.52"
   spec.add_development_dependency "rubocop-rspec", "~> 1.9"

@@ -1,0 +1,49 @@
+detectors:
+  DataClump:
+    # NOTE: The Prawn API and the functional nature of how the resume is
+    # generated tends to generate what OO would consider data clumps
+    exclude:
+      - "Resume::CLI::ContentParser"
+      - "Resume::PDF::Entry::Content"
+  DuplicateMethodCall:
+    exclude:
+      # NOTE: This is due to the OptionParser syntax
+      - "Resume::CLI::ArgumentParser#parser"
+  FeatureEnvy:
+    # NOTE: Many of the exclusions here are due to reek not being able to see
+    # `module_function` methods aren't instance methods that need to refer to a
+    # `self`.
+    exclude:
+      - "Resume::CLI::ArgumentParser#parser"
+      - "Resume::CLI::ContentParser#parse_hash"
+      - "Resume::CLI::ContentParser#munge_hash_value"
+      - "Resume::CLI::ContentParser#parse_array"
+      - "Resume::PDF::EmploymentHistory#footer"
+      - "Resume::PDF::Entry::Content#details"
+      - "Resume::PDF::Entry::Header#formatted_text_box_header"
+      - "Resume::PDF::Entry::Heading#generate"
+      - "Resume::PDF::ImageLink#generate"
+      - "Resume::PDF::TechnicalSkills#generate_table"
+  NestedIterators:
+    # NOTE: some of the exclusions are here because reek considers
+    # passing a block to File.open an iterator, which I do not
+    exclude:
+      - "Resume::PDF::Document#generate"
+      - "Resume::PDF::Entry::Header#formatted_text_box_header"
+      - "Resume::PDF::Entry::Header#formatted_text_header"
+  TooManyStatements:
+    exclude:
+      - "Resume::CLI::Application#self.start"
+      - "Resume::CLI::ArgumentParser#parser"
+      - "Resume::CLI::FontDownloader#self.extract_fonts"
+      - "Resume::PDF::Manifest#process"
+exclude_paths:
+  # NOTE: CI goes looking in the vendor directory and attempts to scan all files
+  # in all gems, so make the exclusion explicit here.
+  - "vendor"
+directories:
+  "spec/":
+    # NOTE: Top-level documentation is done in the module/class files themselves,
+    # so they don't need to be repeated for their definitions in spec files.
+    IrresponsibleModule:
+      enabled: false
