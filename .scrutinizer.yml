@@ -26,6 +26,7 @@ build:
       tests:
         override:
           - rubocop-run --config .rubocop.yml
+          - ruby-scrutinizer-run
   tests:
     before:
       - bin/bundle-audit check --update
