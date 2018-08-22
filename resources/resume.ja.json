@@ -70,17 +70,21 @@
         "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy82dHI2aGZ4b3l2NmdhYW4vcmVzdW1lX3N0YWNrb3ZlcmZsb3cucG5nP2RsPTE=",
         "link": "aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS91c2Vycy81Njc4NjMvcGF1bC1maW9yYXZhbnRp"
       },
+      "blog": {
+        "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy94YndsNjVsa29sZGNycnUvcmVzdW1lX25la28uanBnP2RsPTE=",
+        "link": "aHR0cHM6Ly9wYXVsZmlvcmF2YW50aS5jb20="
+      },
       "speakerdeck": {
         "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy9heDd2dmozY2pyYmRqMHcvcmVzdW1lX3NwZWFrZXJkZWNrLnBuZz9kbD0x",
         "link": "aHR0cHM6Ly9zcGVha2VyZGVjay5jb20vcGF1bGZpb3JhdmFudGk="
       },
-      "vimeo": {
-        "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy9pZDNxbTN5MjBpaXB2N3ovcmVzdW1lX3ZpbWVvLnBuZz9kbD0x",
-        "link": "aHR0cHM6Ly92aW1lby5jb20vcGF1bGZpb3JhdmFudGk="
-      },
       "exercism": {
         "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy85ajcyc3hkbmVlY2FsbnMvcmVzdW1lX2V4ZXJjaXNtLnBuZz9kbD0x",
         "link": "aHR0cDovL2V4ZXJjaXNtLmlvL3BhdWxmaW9yYXZhbnRp"
+      },
+      "vimeo": {
+        "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy9pZDNxbTN5MjBpaXB2N3ovcmVzdW1lX3ZpbWVvLnBuZz9kbD0x",
+        "link": "aHR0cHM6Ly92aW1lby5jb20vcGF1bGZpb3JhdmFudGk="
       },
       "meetup": {
         "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy93OTg4eHp1bzE5Zzh3M2MvcmVzdW1lX21lZXR1cC5wbmc/ZGw9MQ==",
@@ -97,10 +101,6 @@
       "memrise": {
         "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy9nNzFleGpmeXB2bXVvNG0vcmVzdW1lX21lbXJpc2UucG5nP2RsPTE=",
         "link": "aHR0cHM6Ly93d3cubWVtcmlzZS5jb20vdXNlci9wYXVsZmlvcmF2YW50aS9jb3Vyc2VzL2xlYXJuaW5nLw=="
-      },
-      "blog": {
-        "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy94YndsNjVsa29sZGNycnUvcmVzdW1lX25la28uanBnP2RsPTE=",
-        "link": "aHR0cHM6Ly9wYXVsZmlvcmF2YW50aS5jb20="
       }
     },
     "logo_properties": {
