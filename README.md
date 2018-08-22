@@ -125,9 +125,9 @@ Generate the resume in the following languages:
 
 Help: `bin/resume -h`
 
-### Resume Specs
+### Tests
 
-Run the specs:
+Run the tests:
 
 ```sh
 bin/rspec
