@@ -46,12 +46,6 @@
       <a href="https://www.codefactor.io/repository/github/paulfioravanti/resume">
         <img src="https://www.codefactor.io/repository/github/paulfioravanti/resume/badge" />
       </a>
-      <a href="https://hakiri.io/github/paulfioravanti/resume/master">
-        <img src="https://hakiri.io/github/paulfioravanti/resume/master.svg" alt="Hakiri Status" />
-      </a>
-      <a href="https://snyk.io/test/github/paulfioravanti/resume">
-        <img src="https://snyk.io/test/github/paulfioravanti/resume/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/paulfioravanti/resume" style="max-width:100%;" />
-      </a>
     </td>
   </tr>
   <tr>
@@ -84,6 +78,12 @@
       Other
     </td>
     <td>
+      <a href="https://hakiri.io/github/paulfioravanti/resume/master">
+        <img src="https://hakiri.io/github/paulfioravanti/resume/master.svg" alt="Hakiri Status" />
+      </a>
+      <a href="https://snyk.io/test/github/paulfioravanti/resume">
+        <img src="https://snyk.io/test/github/paulfioravanti/resume/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/paulfioravanti/resume" style="max-width:100%;" />
+      </a>
       <a href="https://gitpitch.com/paulfioravanti/resume">
         <img src="https://gitpitch.com/assets/badge.svg" alt="GitPitch" />
       </a>
