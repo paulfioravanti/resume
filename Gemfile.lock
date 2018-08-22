@@ -45,7 +45,7 @@ GEM
     equalizer (0.0.11)
     ffi (1.9.25)
     formatador (0.2.5)
-    fuubar (2.3.1)
+    fuubar (2.3.2)
       rspec-core (~> 3.0)
       ruby-progressbar (~> 1.4)
     guard (2.14.2)
@@ -71,14 +71,14 @@ GEM
     guard-yard (2.2.1)
       guard (>= 1.1.0)
       yard (>= 0.7.0)
-    i18n (1.0.1)
+    i18n (1.1.0)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     jaro_winkler (1.5.1)
     json (2.1.0)
     kramdown (1.17.0)
     kwalify (0.7.2)
-    license_finder (5.3.0)
+    license_finder (5.4.0)
       bundler
       rubyzip
       thor
@@ -122,19 +122,19 @@ GEM
       kwalify (~> 0.7.0)
       parser (>= 2.5.0.0, < 2.6, != 2.5.1.1)
       rainbow (>= 2.0, < 4.0)
-    rspec (3.7.0)
-      rspec-core (~> 3.7.0)
-      rspec-expectations (~> 3.7.0)
-      rspec-mocks (~> 3.7.0)
-    rspec-core (3.7.1)
-      rspec-support (~> 3.7.0)
-    rspec-expectations (3.7.0)
+    rspec (3.8.0)
+      rspec-core (~> 3.8.0)
+      rspec-expectations (~> 3.8.0)
+      rspec-mocks (~> 3.8.0)
+    rspec-core (3.8.0)
+      rspec-support (~> 3.8.0)
+    rspec-expectations (3.8.1)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.7.0)
-    rspec-mocks (3.7.0)
+      rspec-support (~> 3.8.0)
+    rspec-mocks (3.8.0)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.7.0)
-    rspec-support (3.7.1)
+      rspec-support (~> 3.8.0)
+    rspec-support (3.8.0)
     rubocop (0.58.2)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -143,9 +143,9 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
-    rubocop-rspec (1.27.0)
-      rubocop (>= 0.56.0)
-    ruby-progressbar (1.9.0)
+    rubocop-rspec (1.28.0)
+      rubocop (>= 0.58.0)
+    ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
     rubygems-tasks (0.2.4)
     rubyzip (1.2.1)
@@ -174,7 +174,7 @@ GEM
       equalizer (~> 0.0, >= 0.0.9)
     with_env (1.1.0)
     xml-simple (1.1.5)
-    yard (0.9.15)
+    yard (0.9.16)
 
 PLATFORMS
   ruby
@@ -209,4 +209,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.3
+   1.16.4
