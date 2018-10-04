@@ -52,6 +52,7 @@ module Resume
       # @return [nil]
       def output_font_dependencies
         return if fonts.none?
+
         Output.warning(:custom_fonts)
       end
 
@@ -66,6 +67,7 @@ module Resume
       #   if the font file was not successfuly downloaded.
       def fonts_successfully_downloaded?
         return true if fonts.none?
+
         fonts.all? do |font|
           download_and_extract_font(font)
           true

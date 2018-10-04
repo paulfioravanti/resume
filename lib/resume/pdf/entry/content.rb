@@ -39,6 +39,7 @@ module Resume
 
         def profile(pdf, entry)
           return unless (job_content = entry[:profile])
+
           borders, height = entry[:cell_style].values_at(:borders, :height)
           table_data =
             job_content.reduce([]) do |content, responsibility|

@@ -15,6 +15,7 @@ module Resume
       # @param type [Class] The class type to check for `key`'s value.
       def key_of_type?(hash, key, type)
         return false unless hash.length == 1
+
         hash.key?(key) && hash[key].is_a?(type)
       end
 

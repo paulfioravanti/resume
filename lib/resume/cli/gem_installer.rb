@@ -52,6 +52,7 @@ module Resume
       # @return [Hash] The list of dependencies to install.
       def output_gem_dependencies
         return if gems.none?
+
         Output.warning(:ruby_gems)
         gems.each do |name, version|
           Output.plain(:gem_name_and_version, name: name, version: version)
@@ -69,6 +70,7 @@ module Resume
       #   if gem dependencies were not successfully installed.
       def gems_successfully_installed?
         return true if gems.none?
+
         Output.plain(:installing_ruby_gems)
         gems.all? do |gem_name, version|
           Kernel.system("gem", "install", gem_name, "-v", version)

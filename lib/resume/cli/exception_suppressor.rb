@@ -28,6 +28,7 @@ module Resume
       # rubocop:disable Lint/RescueException
       rescue Exception => exception
         raise exception unless exception.is_a?(exception_to_ignore)
+
         default.call
       end
       # rubocop:enable Lint/RescueException
