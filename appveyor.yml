@@ -23,7 +23,11 @@ install:
   - choco install wget
   - wget https://curl.haxx.se/ca/cacert.pem -O C:\cacert.pem
   - set SSL_CERT_FILE=C:\cacert.pem
-  - gem update --system
+  # Updating system gems may return the following error:
+  # `ERROR:  While executing gem ... (Gem::RemoteFetcher::FetchError)`
+  # `SSL_connect returned=1 errno=0 state=SSLv2/v3 read server hello A: tlsv1 alert protocol version`
+  # In that case, just don't update the system gems.
+  # - gem update --system
   - gem install i18n rspec
   # Cache gems: https://www.appveyor.com/docs/lang/ruby/#caching
   # - bundle config --local path vendor/bundle
