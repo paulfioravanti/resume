@@ -50,11 +50,9 @@ module Resume
           "Select the locale of the resume "\
           "(#{I18n.available_locales.join(', ')})"
         ) do |locale|
-          begin
-            I18n.locale = locale.to_sym
-          rescue I18n::InvalidLocale
-            raise LocaleNotSupportedError, locale
-          end
+          I18n.locale = locale.to_sym
+        rescue I18n::InvalidLocale
+          raise LocaleNotSupportedError, locale
         end
       end
       private_class_method :locale_option

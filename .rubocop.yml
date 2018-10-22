@@ -11,7 +11,7 @@ AllCops:
     # that CI still goes looking in the vendor directory and attempts to
     # scan all files in all gems, so make the exclusion explicit here.
     - "vendor/**/*"
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.5
 
 Layout/DotPosition:
   EnforcedStyle: trailing

@@ -24,7 +24,7 @@ GEM
       simplecov
     codeclimate-engine-rb (0.4.1)
       virtus (~> 1.0)
-    codecov (0.1.10)
+    codecov (0.1.13)
       json
       simplecov
       url
@@ -71,14 +71,14 @@ GEM
     guard-yard (2.2.1)
       guard (>= 1.1.0)
       yard (>= 0.7.0)
-    i18n (1.1.0)
+    i18n (1.1.1)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     jaro_winkler (1.5.1)
     json (2.1.0)
     kramdown (1.17.0)
     kwalify (0.7.2)
-    license_finder (5.4.1)
+    license_finder (5.5.2)
       bundler
       rubyzip
       thor
@@ -117,7 +117,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    reek (5.1.0)
+    reek (5.2.0)
       codeclimate-engine-rb (~> 0.4.0)
       kwalify (~> 0.7.0)
       parser (>= 2.5.0.0, < 2.6, != 2.5.1.1)
@@ -128,7 +128,7 @@ GEM
       rspec-mocks (~> 3.8.0)
     rspec-core (3.8.0)
       rspec-support (~> 3.8.0)
-    rspec-expectations (3.8.1)
+    rspec-expectations (3.8.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
     rspec-mocks (3.8.0)
@@ -143,7 +143,7 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
-    rubocop-rspec (1.29.1)
+    rubocop-rspec (1.30.0)
       rubocop (>= 0.58.0)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
@@ -161,7 +161,7 @@ GEM
       tins (~> 1.0)
     thor (0.19.4)
     thread_safe (0.3.6)
-    tins (1.16.3)
+    tins (1.17.0)
     toml (0.2.0)
       parslet (~> 1.8.0)
     ttfunk (1.5.1)
@@ -206,7 +206,7 @@ DEPENDENCIES
   yard (~> 0.9)
 
 RUBY VERSION
-   ruby 2.5.1p57
+   ruby 2.5.3p105
 
 BUNDLED WITH
-   1.16.5
+   1.16.6

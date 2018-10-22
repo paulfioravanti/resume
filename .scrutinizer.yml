@@ -11,16 +11,17 @@ build:
       - cd /home/scrutinizer/.rbenv/plugins/ruby-build && git pull origin master && cd -
       - rbenv install -l
       -
-        command: rbenv install 2.5.1
+        command: rbenv install 2.5.3
         idle_timeout: 600
-      - rbenv local 2.5.1
+      - rbenv local 2.5.3
       - ruby -v
       # - gem update --system
       # - gem install bundler i18n rspec
       - gem install i18n rspec
   environment:
     # ruby: 2.5.1
-    ruby: 2.4.2
+    # ruby: 2.4.2
+    ruby: 2.5.3
   nodes:
     analysis:
       tests:
