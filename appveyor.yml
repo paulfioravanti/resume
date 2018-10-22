@@ -16,8 +16,7 @@ install:
   # - SET PATH=C:\Ruby%ruby_version%\bin;%PATH%
   - ruby -e "puts RUBY_PLATFORM"
   # Get around the error
-  # OpenSSL::SSL::SSLError:
-  #   SSL_connect returned=1 errno=0 state=error: certificate verify failed
+  # `OpenSSL::SSL::SSLError: SSL_connect returned=1 errno=0 state=error: certificate verify failed`
   # that occurs when trying to go and fetch a file remotely.
   # See https://gist.github.com/fnichol/867550#the-manual-way-boring
   - choco install wget
@@ -27,10 +26,10 @@ install:
   # `ERROR:  While executing gem ... (Gem::RemoteFetcher::FetchError)`
   # `SSL_connect returned=1 errno=0 state=SSLv2/v3 read server hello A: tlsv1 alert protocol version`
   # In that case, just don't update the system gems.
-  # - gem update --system
+  - gem update --system
   - gem install i18n rspec
   # Cache gems: https://www.appveyor.com/docs/lang/ruby/#caching
-  # - bundle config --local path vendor/bundle
+  - bundle config --local path vendor/bundle
   - bundle install
 before_test:
   - ruby -v
