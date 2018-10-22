@@ -19,9 +19,10 @@ build:
       # - gem install bundler i18n rspec
       - gem install i18n rspec
   environment:
-    # ruby: 2.5.1
-    # ruby: 2.4.2
-    ruby: 2.5.3
+    # This is currently the latest version that can be installed by default in
+    # the environment. Check here for the latest supported versions:
+    # https://scrutinizer-ci.com/docs/build/languages#ruby
+    ruby: 2.4.2
   nodes:
     analysis:
       tests:
