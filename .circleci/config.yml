@@ -3,9 +3,14 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.6
+        environment:
+          BUNDLER_VERSION: 2.0.1
     steps:
       - checkout
       - run: gem update --system
+      - run: gem uninstall bundler
+      - run: rm /usr/local/bin/bundle
+      - run: rm /usr/local/bin/bundler
       - run: gem install bundler i18n rspec
       - run:
           command: bundle install
