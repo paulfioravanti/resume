@@ -7,11 +7,11 @@ jobs:
           BUNDLER_VERSION: 2.0.1
     steps:
       - checkout
-      - run: gem update --system
-      - run: gem uninstall bundler
+      - run: sudo gem update --system
+      - run: sudo gem uninstall bundler
       - run: sudo rm /usr/local/bin/bundle
       - run: sudo rm /usr/local/bin/bundler
-      - run: gem install bundler i18n rspec
+      - run: sudo gem install bundler i18n rspec
       - run:
           command: bundle install
           no_output_timeout: 180s
