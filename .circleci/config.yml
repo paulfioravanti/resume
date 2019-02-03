@@ -9,8 +9,8 @@ jobs:
       - checkout
       - run: gem update --system
       - run: gem uninstall bundler
-      - run: rm /usr/local/bin/bundle
-      - run: rm /usr/local/bin/bundler
+      - run: sudo rm /usr/local/bin/bundle
+      - run: sudo rm /usr/local/bin/bundler
       - run: gem install bundler i18n rspec
       - run:
           command: bundle install
