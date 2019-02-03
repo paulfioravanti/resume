@@ -11,13 +11,14 @@ module Resume
     #
     # @author Paul Fioravanti
     module ContentParser
-      ASSET_PATH = /dropbox/
+      ASSET_PATH = /dropbox/.freeze
       private_constant :ASSET_PATH
       # Regex taken from http://stackoverflow.com/q/8571501/567863
-      BASE64_STRING_REGEX = %r{\A
+      BASE64_STRING_REGEX =
+        %r{\A
         ([A-Za-z0-9+/]{4})*
         ([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)
-      \z}x
+        \z}x.freeze
       private_constant :BASE64_STRING_REGEX
 
       module_function

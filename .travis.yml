@@ -5,7 +5,7 @@ dist: trusty
 language: ruby
 cache: bundler
 rvm:
-  - 2.5.3
+  - 2.6.1
 addons:
   code_climate:
     repo_token: $CODECLIMATE_REPO_TOKEN
