@@ -21,7 +21,10 @@ engines:
       allow_unknown_libraries: true
       license_whitelist: ["GNU General Public License 3.0"]
   rubocop:
-    enabled: true
+    # 20190209 NOTE: The version of Rubocop on Code Climate currently only
+    # supports up to Ruby 2.5, while current Rubocop is up to 2.6, so for now,
+    # disable old Rubocop on Code Climate.
+    enabled: false
 ratings:
   paths:
   - "Gemfile.lock"
