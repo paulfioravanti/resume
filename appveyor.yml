@@ -33,7 +33,7 @@ install:
   # In that case, just don't update the system gems.
   - gem update --system
   # Specific handling needed for now to get Bundler 2.0 working
-  - gem uninstall bundler
+  - gem uninstall bundler --executables
   - gem install bundler:2.0.1
   - gem install i18n rspec
   # Cache gems: https://www.appveyor.com/docs/lang/ruby/#caching
