@@ -62,6 +62,9 @@ Metrics/ModuleLength:
     - "spec/**/*.rb"
     - "resume.rb"
 
+Naming/RescuedExceptionsVariableName:
+  PreferredName: error
+
 RSpec/ExampleLength:
   # NOTE: Pretty much the fault of the FontExtractor module needing to mock
   # out the entirety of its interactiion with Zip::File, as well as the

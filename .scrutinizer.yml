@@ -11,9 +11,9 @@ build:
       - cd /home/scrutinizer/.rbenv/plugins/ruby-build && git pull origin master && cd -
       - rbenv install -l
       -
-        command: rbenv install 2.6.1
+        command: rbenv install 2.6.3
         idle_timeout: 600
-      - rbenv local 2.6.1
+      - rbenv local 2.6.3
       - ruby -v
       - gem uninstall bundler
       - gem install bundler

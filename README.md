@@ -195,7 +195,7 @@ bin/rake resume:delete_assets
 
 ## Dependencies
 
-- Ruby 2.6.1
+- Ruby 2.6.3
 - I18n, Prawn and Prawn-Table (if you don't have the specific
   versions of the gems, you will be prompted to install them)
 - RSpec, if you want to run the specs

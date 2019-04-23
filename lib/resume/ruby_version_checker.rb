@@ -5,14 +5,14 @@ module Resume
   # @author Paul Fioravanti
   module RubyVersionChecker
     # Required Ruby version for resume to work
-    REQUIRED_RUBY_VERSION = ENV.fetch("CUSTOM_RUBY_VERSION", "2.6.1").freeze
+    REQUIRED_RUBY_VERSION = ENV.fetch("CUSTOM_RUBY_VERSION", "2.6.3").freeze
     private_constant :REQUIRED_RUBY_VERSION
     # Ruby version command
     RUBY_VERSION_COMMAND = "ruby -v".freeze
     private_constant :RUBY_VERSION_COMMAND
     # Ruby version output regex.
-    # For example, this will extract `2.6.1` from a string like:
-    # ruby 2.6.1p33 (2019-01-30 revision 66950) [x86_64-darwin18]
+    # For example, this will extract `2.6.3` from a string like:
+    # ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-darwin18]
     RUBY_VERSION_REGEX = /\Aruby ([\d\.][^p]+)/.freeze
     private_constant :RUBY_VERSION_REGEX
 
