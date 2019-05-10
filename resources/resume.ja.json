@@ -303,7 +303,7 @@
           "logo": {
             "y_start": 35,
             "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy9raGRydmFja3JpZmgxZjkvcmVzdW1lX21ham9yYW4ucG5nP2RsPTE=",
-            "link": "aHR0cDovL21ham9yYW4uY28v",
+            "link": "aHR0cHM6Ly9hcnRzLnNhLmdvdi5hdS9vcmdhbmlzYXRpb25zL21ham9yYW4tZGlzdGlsbGVyeQ==",
             "origin": 415,
             "width": 118,
             "height": 40,
@@ -497,7 +497,7 @@
           "logo": {
             "y_start": 35,
             "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy9vZ2RyMHBkamUwdGQwYnYvcmVzdW1lX2pldC5wbmc/ZGw9MQ==",
-            "link": "aHR0cDovL3d3dy5qZXRwcm9ncmFtbWUub3JnL2ovaW5kZXguaHRtbA==",
+            "link": "aHR0cDovL2pldHByb2dyYW1tZS5vcmcvamEvcG9zaXRpb25zLw==",
             "origin": 435,
             "width": 75,
             "height": 40,
@@ -540,7 +540,7 @@
           "logo": {
             "y_start": 35,
             "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy94bHZzanNxcno1N2V4Ym8vcmVzdW1lX3NhdGMucG5nP2RsPTE=",
-            "link": "aHR0cDovL2pwLnNvdXRoYXVzdHJhbGlhLmNvbS9pbmRleC5hc3B4",
+            "link": "aHR0cHM6Ly9zb3V0aGF1c3RyYWxpYS5jb20v",
             "origin": 430,
             "width": 100,
             "height": 40,
