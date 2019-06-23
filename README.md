@@ -100,11 +100,12 @@
   </tr>
 </table>
 
-This is a Ruby CLI application that generates my resume.  I made it in order
-to teach myself a bit about the Ruby PDF generation library
-[Prawn][]. [Railscast #153][] is also a good resource for learning about it.
+This is a [Ruby][] command line interface (CLI) application that generates my
+resume.  I made it in order to teach myself a bit about the Ruby [PDF][]
+generation library [Prawn][]. [Railscast #153][] is also a good resource for
+learning about it.
 
-Text is deliberately obfuscated in the JSON files that contain the resume
+Text is deliberately obfuscated in the [JSON][] files that contain the resume
 content with [Base64][] to ensure people generate the PDF in order to be able
 to read anything.
 
@@ -115,6 +116,13 @@ git clone https://github.com/paulfioravanti/resume.git
 cd resume
 bundle install
 ```
+
+## Dependencies
+
+- Ruby 2.6.3
+- [i18n][], Prawn and [Prawn-Table][] (if you don't have the specific versions
+  of the gems, you will be prompted to install them)
+- [RSpec][], if you want to run the tests
 
 ## Usage
 
@@ -138,7 +146,7 @@ bin/rspec
 
 ### Coverage Report
 
-View the Simplecov test coverage report:
+View the [Simplecov][] test coverage report:
 
 ```sh
 open coverage/index.html
@@ -146,7 +154,7 @@ open coverage/index.html
 
 ### Documentation
 
-Generate the YARD documentation:
+Generate the [YARD][] documentation:
 
 ```sh
 bin/yardoc
@@ -193,21 +201,16 @@ following `rake` task to delete all resume-related assets from the local tmpdir:
 bin/rake resume:delete_assets
 ```
 
-## Dependencies
+## Related Resources
 
-- Ruby 2.6.3
-- I18n, Prawn and Prawn-Table (if you don't have the specific
-  versions of the gems, you will be prompted to install them)
-- RSpec, if you want to run the specs
-
-## Presentation
-
-I did a lightning talk about this project at the
-[Ruby on Rails Oceania Meetup][roro] on [10 May 2016][roro-20160510]
-([slide deck][speakerdeck]).
-
-Just for fun, I created a [GitPitch version of the presentation][gitpitch]
-(or with [presenter notes visible][gitpitch-with-notes]).
+- I did a lightning talk about this project at the
+  [Ruby on Rails Oceania Meetup][roro] on [10 May 2016][roro-20160510]
+  ([slide deck][speakerdeck]).
+  Just for fun, I created a [GitPitch version of the presentation][gitpitch]
+  ([version with presenter notes visible][gitpitch-with-notes]).
+- I wrote a companion blog post for this project called _[Resume as Code][]_
+  outlining some reasons for making it, as well as some of the technical
+  challenges.
 
 ## Issues
 
@@ -278,15 +281,24 @@ So, yes, more of a curiosity here than anything really useful.
 [enclose-io-ruby]: http://enclose.io/ruby
 [gitpitch]: https://gitpitch.com/paulfioravanti/resume
 [gitpitch-with-notes]: https://gitpitch.com/paulfioravanti/resume?n=true
+[i18n]: https://github.com/ruby-i18n/i18n
+[JSON]: https://en.wikipedia.org/wiki/JSON
+[PDF]: https://en.wikipedia.org/wiki/PDF
 [Prawn]: https://github.com/prawnpdf/prawn
+[Prawn-Table]: https://github.com/prawnpdf/prawn-table
 [Railscast #153]: http://railscasts.com/episodes/153-pdfs-with-prawn-revised
+[Resume as Code]: https://paulfioravanti.com/blog/2019/06/22/resume-as-code/
 [roro]: https://www.meetup.com/Ruby-On-Rails-Oceania-Sydney/
 [roro-20160510]: https://www.meetup.com/Ruby-On-Rails-Oceania-Sydney/events/228886775/
+[RSpec]: https://github.com/rspec/rspec
+[Ruby]: https://www.ruby-lang.org/en/
 [Ruby Packer]: https://github.com/pmq20/ruby-packer
 [ruby-packer-install]: https://github.com/pmq20/ruby-packer#install-on-macos
+[Simplecov]: https://github.com/colszowka/simplecov
 [speakerdeck]: https://speakerdeck.com/paulfioravanti/resume-as-code
 [stackoverflow-badge]: http://stackoverflow.com/users/flair/567863.png
 [stackoverflow-transparent-link]: http://stackoverflow.com/q/8289031/567863
 [stackoverflow-url]: http://stackoverflow.com/users/567863/paul-fioravanti
 [twitter-badge]: https://img.shields.io/badge/contact-%40paulfioravanti-blue.svg
 [twitter-url]: https://twitter.com/paulfioravanti
+[YARD]: https://yardoc.org/
