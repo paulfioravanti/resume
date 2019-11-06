@@ -1,4 +1,0 @@
-# https://houndci.com/configuration
-fail_on_violations: true
-ruby:
-  config_file: .rubocop.yml
