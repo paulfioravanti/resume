@@ -21,7 +21,7 @@ install:
   #    psych (>= 3.1.0) was resolved to 3.1.0, which depends on
   #      ruby (< 2.6) x86-mingw32
   # Could not find gem 'ruby (< 2.6)', which is required by gem 'psych (>= 3.1.0)',
-  - SET CUSTOM_RUBY_VERSION=2.5.3
+  - SET CUSTOM_RUBY_VERSION=2.5.5
   # If there are `Unable to download data from https://rubygems.org/` issues,
   # then add the current Appveyor Ruby version to the path.
   # https://help.appveyor.com/discussions/problems/15052-unable-to-download-data-from-httpsrubygemsorg
