@@ -21,8 +21,6 @@ before_script:
 script:
   # Ensure gem dependencies do not have known vulnerabilities
   - bin/bundle-audit check --update
-  # Ensure each dependency has a permissive license
-  - bin/license_finder
   # Run tests
   - bin/rspec spec/ --no-drb --format progress
   # Check for any code reeks
