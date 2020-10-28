@@ -12,6 +12,7 @@ AllCops:
     # scan all files in all gems, so make the exclusion explicit here.
     - "vendor/**/*"
   TargetRubyVersion: 2.6
+  NewCops: enable
 
 Layout/DotPosition:
   EnforcedStyle: trailing
