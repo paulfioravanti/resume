@@ -1,7 +1,7 @@
 # References:
 # - https://docs.travis-ci.com/user/caching/#Bundler
-sudo: false
 dist: trusty
+os: linux
 language: ruby
 cache: bundler
 rvm:
