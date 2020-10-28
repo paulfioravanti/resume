@@ -84,7 +84,7 @@ module Resume
                   before do
                     # Don't follow through with attempting to fetch the
                     # remote file
-                    allow(Kernel).to receive(:open)
+                    allow(OpenURI).to receive(:open_uri)
                     stub_const("#{described_class}::REMOTE_REPO", remote_repo)
                   end
 
@@ -125,12 +125,12 @@ module Resume
 
                 context "when filename is a URI" do
                   before do
-                    allow(Kernel).to receive(:open).with(path)
+                    allow(OpenURI).to receive(:open_uri).with(path)
                     described_class.fetch(path)
                   end
 
                   it "fetches the file from the URI" do
-                    expect(Kernel).to have_received(:open).with(path)
+                    expect(OpenURI).to have_received(:open_uri).with(path)
                   end
                 end
 
@@ -141,8 +141,8 @@ module Resume
 
                   context "when a socket error occurs" do
                     before do
-                      allow(Kernel).to \
-                        receive(:open).with(path).
+                      allow(OpenURI).to \
+                        receive(:open_uri).with(path).
                           and_raise(SocketError)
                     end
 
@@ -154,7 +154,7 @@ module Resume
 
                   context "when a http error occurs" do
                     before do
-                      allow(Kernel).to receive(:open).with(path).
+                      allow(OpenURI).to receive(:open_uri).with(path).
                         and_raise(OpenURI::HTTPError.new("some error", file))
                     end
 
@@ -166,8 +166,8 @@ module Resume
 
                   context "when a network connection error occurs" do
                     before do
-                      allow(Kernel).to \
-                        receive(:open).with(path).
+                      allow(OpenURI).to \
+                        receive(:open_uri).with(path).
                           and_raise(Errno::ECONNREFUSED)
                     end
 
@@ -182,8 +182,8 @@ module Resume
                   let(:uri) { instance_spy("IO", "uri") }
 
                   before do
-                    allow(Kernel).to \
-                      receive(:open).with(path).and_yield(uri)
+                    allow(OpenURI).to \
+                      receive(:open_uri).with(path).and_yield(uri)
                     # Re-stub the first call to file? to simulate the
                     # tempfile not existing prior to fetching, and then
                     # it actually existing after fetching

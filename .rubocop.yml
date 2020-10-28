@@ -11,6 +11,7 @@ AllCops:
     # that CI still goes looking in the vendor directory and attempts to
     # scan all files in all gems, so make the exclusion explicit here.
     - "vendor/**/*"
+    - "bin/*"
   TargetRubyVersion: 2.6
   NewCops: enable
 
@@ -83,6 +84,11 @@ RSpec/FilePath:
 # expectations in before/after blocks becoming bad practice.
 RSpec/MultipleExpectations:
   Max: 6
+
+# NOTE: I have lots of tests that require more than 5 let statements in order
+# to make them intelligible.
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
 
 # NOTE: This deep nesting mostly due to the wide range of paths that gem
 # installation and file fetching can take, and the different errors that

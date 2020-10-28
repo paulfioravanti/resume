@@ -70,7 +70,7 @@ module Resume
       private_class_method :tmpfile_path
 
       def write_file(file, pathname)
-        Kernel.open(remote_file_path(pathname)) do |uri|
+        OpenURI.open_uri(remote_file_path(pathname)) do |uri|
           file.write(uri.read)
         end
       end

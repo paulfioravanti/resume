@@ -21,6 +21,7 @@ module Resume
       #
       # @return [DependencyPrerequisiteError] The new error instance.
       def initialize
+        super
         @messages = {
           raw_error:
             "My resume and the specs are bilingual and need the I18n gem.",
@@ -38,6 +39,7 @@ module Resume
       #
       # @return [NetworkConnectionError] The new error instance.
       def initialize
+        super
         @messages = {
           error: :cant_connect_to_the_internet,
           warning: :please_check_your_network_settings
@@ -54,6 +56,7 @@ module Resume
       #
       # @return [DependencyInstallationPermissionError] The new error instance.
       def initialize
+        super
         @messages = {
           error: :cannot_generate_pdf_without_dependencies,
           warning: :please_ask_me_directly_for_a_pdf_copy
@@ -70,6 +73,7 @@ module Resume
       #
       # @return [DependencyInstallationError] The new error instance.
       def initialize
+        super
         @messages = {
           error: :dependency_installation_failed,
           warning: :try_again_or_ask_me_directly_for_a_pdf_copy

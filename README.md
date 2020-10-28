@@ -43,7 +43,7 @@ bundle install
 
 ## Dependencies
 
-- Ruby 2.6.5
+- Ruby 2.7.2
 - [i18n][], Prawn and [Prawn-Table][] (if you don't have the specific versions
   of the gems, you will be prompted to install them)
 - [RSpec][], if you want to run the tests

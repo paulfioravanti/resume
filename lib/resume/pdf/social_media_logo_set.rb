@@ -26,7 +26,7 @@ module Resume
       def generate_logos(pdf, logo_set)
         logos = entire_logo_properties(logo_set)
         generate_logo_for(logos.first, pdf, logo_set)
-        generate_logos_for(logos[1..-1], pdf, logo_set)
+        generate_logos_for(logos[1..], pdf, logo_set)
         pdf.move_down(logo_set[:bottom_padding])
       end
       private_class_method :generate_logos

@@ -47,3 +47,8 @@ directories:
     # so they don't need to be repeated for their definitions in spec files.
     IrresponsibleModule:
       enabled: false
+  "lib/":
+    # NOTE: I wish I didn't have to do this, but there ended up being too many
+    # false positives generated.
+    IrresponsibleModule:
+      enabled: false

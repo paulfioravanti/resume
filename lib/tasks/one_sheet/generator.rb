@@ -69,7 +69,7 @@ module OneSheet
     def run_code_quality_check
       Resume::Output.raw_warning("Running code quality check...")
       system(
-        "rubocop",
+        "bin/rubocop",
         "--display-cop-names",
         "--format",
         "fuubar",
