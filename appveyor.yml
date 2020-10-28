@@ -36,8 +36,7 @@ install:
   # NOTE 2: Don't update system Ruby gems for now as it seems to break the build
   # - gem update --system
   # https://github.com/rubygems/rubygems/issues/2534#issuecomment-448843746
-  - gem install rubygems-update -v '<3' && update_rubygems
-  - gem update --system --conservative || (gem install "rubygems-update:~>2.7" && update_rubygems)
+  - gem update --system --conservative
   - gem update bundler --conservative
   - gem install i18n rspec
   # Cache gems: https://www.appveyor.com/docs/lang/ruby/#caching
