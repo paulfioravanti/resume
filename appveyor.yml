@@ -6,13 +6,13 @@ skip_tags: true
 build: off
 environment:
   matrix:
-    - RUBY_VERSION: 27
+    - RUBY_VERSION: 26
 install:
   # If AppVeyor doesn't keep up and support the latest Ruby versions, then
   # set the CUSTOM_RUBY_VERSION flag to whatever the latest version it supports.
   # Check current supported Windows images here:
   # https://www.appveyor.com/docs/windows-images-software/#ruby
-  - SET CUSTOM_RUBY_VERSION=2.7.1
+  - SET CUSTOM_RUBY_VERSION=2.6.6
   # If there are `Unable to download data from https://rubygems.org/` issues,
   # then add the current Appveyor Ruby version to the path.
   # https://help.appveyor.com/discussions/problems/15052-unable-to-download-data-from-httpsrubygemsorg
