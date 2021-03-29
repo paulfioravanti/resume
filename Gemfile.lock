@@ -44,7 +44,7 @@ GEM
     io-console (0.5.6)
     irb (1.2.7)
       reline (>= 0.1.5)
-    kramdown (2.3.0)
+    kramdown (2.3.1)
       rexml
     kwalify (0.7.2)
     listen (3.2.1)
@@ -139,7 +139,7 @@ DEPENDENCIES
   guard-rubocop (~> 1.2)
   guard-yard (~> 2.2)
   i18n (~> 1.0)
-  kramdown (~> 2.1)
+  kramdown (~> 2.3)
   prawn (~> 2.3)
   prawn-table (~> 0.2.2)
   pry-byebug (~> 3.1)
