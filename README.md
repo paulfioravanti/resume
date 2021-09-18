@@ -33,6 +33,17 @@ Text is deliberately obfuscated in the [JSON][] files that contain the resume
 content with [Base64][] to ensure people generate the PDF in order to be able
 to read anything.
 
+## Blog Post and Presentation
+
+- I wrote a companion blog post for this project called _[Resume as Code][]_
+  outlining some reasons for making it, as well as some of the technical
+  challenges.
+- I did a lightning talk about this project at the
+  [Ruby on Rails Oceania Meetup][roro] on [10 May 2016][roro-20160510]
+  ([slide deck][speakerdeck]).
+  Just for fun, I created a [GitPitch version of the presentation][gitpitch]
+  as well ([version with presenter notes visible][gitpitch-with-notes]).
+
 ## Setup
 
 ```sh
@@ -124,17 +135,6 @@ following `rake` task to delete all resume-related assets from the local tmpdir:
 ```sh
 bin/rake resume:delete_assets
 ```
-
-## Related Resources
-
-- I did a lightning talk about this project at the
-  [Ruby on Rails Oceania Meetup][roro] on [10 May 2016][roro-20160510]
-  ([slide deck][speakerdeck]).
-  Just for fun, I created a [GitPitch version of the presentation][gitpitch]
-  ([version with presenter notes visible][gitpitch-with-notes]).
-- I wrote a companion blog post for this project called _[Resume as Code][]_
-  outlining some reasons for making it, as well as some of the technical
-  challenges.
 
 ## Issues
 
