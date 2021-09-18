@@ -18,9 +18,6 @@
 <a href="https://snyk.io/test/github/paulfioravanti/resume">
   <img src="https://snyk.io/test/github/paulfioravanti/resume/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/paulfioravanti/resume" style="max-width:100%;" />
 </a>
-<a href="https://gitpitch.com/paulfioravanti/resume">
-  <img src="https://gitpitch.com/assets/badge.svg" alt="GitPitch" />
-</a>
 <br />
 <br />
 
@@ -41,8 +38,6 @@ to read anything.
 - I did a lightning talk about this project at the
   [Ruby on Rails Oceania Meetup][roro] on [10 May 2016][roro-20160510]
   ([slide deck][speakerdeck]).
-  Just for fun, I created a [GitPitch version of the presentation][gitpitch]
-  as well ([version with presenter notes visible][gitpitch-with-notes]).
 
 ## Setup
 
@@ -203,8 +198,6 @@ So, yes, more of a curiosity here than anything really useful.
 [Base64]: http://ruby-doc.org/stdlib-2.3.0/libdoc/base64/rdoc/Base64.html
 [enclose-io-issue]: https://github.com/pmq20/ruby-packer/issues/10
 [enclose-io-ruby]: http://enclose.io/ruby
-[gitpitch]: https://gitpitch.com/paulfioravanti/resume
-[gitpitch-with-notes]: https://gitpitch.com/paulfioravanti/resume?n=true
 [i18n]: https://github.com/ruby-i18n/i18n
 [JSON]: https://en.wikipedia.org/wiki/JSON
 [PDF]: https://en.wikipedia.org/wiki/PDF
