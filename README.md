@@ -3,9 +3,6 @@
 <a href="https://travis-ci.com/paulfioravanti/resume">
   <img src="https://travis-ci.com/paulfioravanti/resume.svg?branch=master" alt="Build Status" />
 </a>
-<a href="https://ci.appveyor.com/project/paulfioravanti/resume">
-  <img src="https://ci.appveyor.com/api/projects/status/5v5426as3y3o9f6e/branch/master?svg=true" alt="Build Status" />
-</a>
 <a href="https://codeclimate.com/github/paulfioravanti/resume">
   <img src="https://codeclimate.com/github/paulfioravanti/resume/badges/gpa.svg" alt="Code Climate" />
 </a>
