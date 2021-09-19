@@ -3,7 +3,7 @@
     "gems": [
       ["prawn", "2.4.0"],
       ["prawn-table", "0.2.2"],
-      ["rubyzip", "2.3.0"]
+      ["rubyzip", "2.3.2"]
     ],
     "fonts": [
       {
@@ -176,8 +176,51 @@
     "content": {
       "bottom_padding": 10,
       "entries": {
-        "re": {
+        "al": {
           "top_padding": 7,
+          "position": {
+            "text": "44OX44Oq44Oz44K344OR44Or44Kz44Oz44K144Or44K/44Oz44OI",
+            "styles": ["Ym9sZA=="],
+            "size": 12
+          },
+          "organisation": {
+            "text": "QWxlbWJpYw==",
+            "styles": ["Ym9sZA=="],
+            "size": 11
+          },
+          "period": {
+            "text": "MjAxOeW5tDfmnIgg44CcIOePvuWcqCB8IA==",
+            "styles": [],
+            "colour": "666666",
+            "size": 10
+          },
+          "location": {
+            "text": "44Oq44Oi44O844OI44CB44K344OJ44OL44O844O744Kq44O844K544OI44Op44Oq44Ki",
+            "link": "aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9tYXBzL3BsYWNlL0VtZXJnZStTeWRuZXkrU3VycnkrSGlsbHMvQC0zMy44ODM3MDU5LDE1MS4yMDc0NjM1LDE3ei9kYXRhPSEzbTIhNGIxITVzMHg2YjEyYWUyMjFjMTZhMjQxOjB4NDdhNTYzMzg0MjRlYTk1NSE0bTUhM200ITFzMHg2YjEyYWZlMWNmNjcyNDdkOjB4ODM1ZjlhZTIxNjAzZjNmNSE4bTIhM2QtMzMuODgzNzA1OSE0ZDE1MS4yMDk2NTIyP2hsPWph",
+            "styles": [],
+            "colour": "666666",
+            "size": 10
+          },
+          "logo": {
+            "y_start": 40,
+            "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy9xczB3ZjZuZGg0MWg0azgvcmVzdW1lX2FsLnBuZz9kbD0x",
+            "link": "aHR0cHM6Ly93d3cuYWxlbWJpYy5jb20uYXU=",
+            "origin": 415,
+            "width": 115,
+            "height": 40,
+            "fit": [110, 40],
+            "link_overlay_start": 30,
+            "bars": 17,
+            "size": 33,
+            "align": "bGVmdA=="
+          },
+          "summary": {
+            "top_padding": 10,
+            "text": "5qeY44CF44Gq6aGn5a6i44Gu44OX44Ot44K444Kn44Kv44OI44Gr44GK44GE44Gm44Gu6ZaL55m644O744Kz44Oz44K144Or44OG44Kj44Oz44Kw44O75oyH5bCO44O744Oq44O844OA44O844K344OD44OX44CC5Li744Gq5oqA6KGT44K544K/44OD44Kv77yaRWxpeGlyL1Bob2VuaXgsIEdyYXBoUUwsIFJlYWN0IEpT"
+          }
+        },
+        "re": {
+          "top_padding": 15,
           "position": {
             "text": "6ZaL55m66ICF",
             "styles": ["Ym9sZA=="],

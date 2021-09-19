@@ -164,8 +164,51 @@
     "content": {
       "bottom_padding": 10,
       "entries": {
-        "re": {
+        "al": {
           "top_padding": 5,
+          "position": {
+            "text": "Q29uc3VsZW50ZSBQcmluY2lwYWxl",
+            "styles": ["Ym9sZA=="],
+            "size": 12
+          },
+          "organisation": {
+            "text": "QWxlbWJpYw==",
+            "styles": ["Ym9sZA=="],
+            "size": 11
+          },
+          "period": {
+            "text": "THVnbGlvIDIwMTkgLSBQcmVzZW50ZSB8IA==",
+            "styles": [],
+            "colour": "666666",
+            "size": 10
+          },
+          "location": {
+            "text": "VGVsZWxhdm9yby9TeWRuZXksIEF1c3RyYWxpYQ==",
+            "link": "aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9tYXBzL3BsYWNlL0VtZXJnZStTeWRuZXkrU3VycnkrSGlsbHMvQC0zMy44ODM3MDU5LDE1MS4yMDc0NjM1LDE3ei9kYXRhPSEzbTIhNGIxITVzMHg2YjEyYWUyMjFjMTZhMjQxOjB4NDdhNTYzMzg0MjRlYTk1NSE0bTUhM200ITFzMHg2YjEyYWZlMWNmNjcyNDdkOjB4ODM1ZjlhZTIxNjAzZjNmNSE4bTIhM2QtMzMuODgzNzA1OSE0ZDE1MS4yMDk2NTIyP2hsPWl0",
+            "styles": [],
+            "colour": "666666",
+            "size": 10
+          },
+          "logo": {
+            "y_start": 40,
+            "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy9xczB3ZjZuZGg0MWg0azgvcmVzdW1lX2FsLnBuZz9kbD0x",
+            "link": "aHR0cHM6Ly93d3cuYWxlbWJpYy5jb20uYXU=",
+            "origin": 415,
+            "width": 115,
+            "height": 40,
+            "fit": [110, 40],
+            "link_overlay_start": 30,
+            "bars": 13,
+            "size": 33,
+            "align": "bGVmdA=="
+          },
+          "summary": {
+            "top_padding": 10,
+            "text": "U3ZpbHVwcG8sIGNvbnN1bGVuemEsIHR1dG9yYWdnaW8gZSBsZWFkZXJzaGlwIHBlciB1bmEgdmFyaWV0w6AgZGkgcHJvZ2V0dGkgZGVpIGNsaWVudGkuIFN0YWNrIHRlY25vbG9naWNvOiBFbGl4aXIvUGhvZW5peCwgR3JhcGhRTCwgUmVhY3QgSlMu"
+          }
+        },
+        "re": {
+          "top_padding": 15,
           "position": {
             "text": "U3ZpbHVwcGF0b3Jl",
             "styles": ["Ym9sZA=="],
