@@ -26,12 +26,17 @@ to read anything.
 
 ## Blog Post and Presentation
 
-- I wrote a companion blog post for this project called _[Resume as Code][]_
-  outlining some reasons for making it, as well as some of the technical
-  challenges.
-- I did a lightning talk about this project at the
-  [Ruby on Rails Oceania Meetup][roro] on [10 May 2016][roro-20160510]
-  ([slide deck][speakerdeck]).
+I wrote a companion blog post for this project:
+
+- _[Resume as Code][]_
+
+It outlines some reasons for making it, as well as some of the technical
+challenges and quirks.
+
+I also did a lightning talk about this project at the [Ruby on Rails Oceania
+Meetup][roro] on [10 May 2016][roro-20160510] ([slide deck][speakerdeck]). No
+video of the talk exists, unfortunately. Perhaps I will re-record it again some
+time...
 
 ## Setup
 
