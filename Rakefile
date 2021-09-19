@@ -21,7 +21,9 @@ require "rake"
 require "rspec/core/rake_task"
 RSpec::Core::RakeTask.new
 
+desc "Runs the tests"
 task test: :spec
+desc "Runs the tests by default"
 task default: :spec
 
 require "reek/rake/task"

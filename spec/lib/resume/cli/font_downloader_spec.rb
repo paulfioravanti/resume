@@ -119,7 +119,7 @@ module Resume
         context "when there are font dependencies" do
           let(:font_location) do
             "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy94eHg"\
-            "vZm9udHMuemlwP2RsPTE="
+              "vZm9udHMuemlwP2RsPTE="
           end
           let(:decoded_font_location) do
             "https://www.dropbox.com/s/xxx/fonts.zip?dl=1"

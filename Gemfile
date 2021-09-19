@@ -20,6 +20,7 @@ gem "rake", "~> 13.0"
 gem "reek", "~> 6.0"
 gem "rspec", "~> 3.4"
 gem "rubocop", "~> 1.0"
+gem "rubocop-rake", "~> 0.6", require: false
 gem "rubocop-rspec", "~> 2.0.0.pre"
 gem "rubygems-tasks", "~> 0.2"
 gem "simplecov", "~> 0.16"

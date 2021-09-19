@@ -77,7 +77,9 @@ module Resume
       private_class_method :parse_hash
 
       def munge_hash_value(hash, key, value)
-        case Hash[key, value]
+        hash_value = { key => value }
+
+        case hash_value
         when ResumeNodeTypes::AlignValue
           # Prawn specifically requires :align values to
           # be symbols otherwise it errors out

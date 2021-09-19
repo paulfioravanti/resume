@@ -1,5 +1,7 @@
 # Contains personal customisations of Rubocop default rules
-require: rubocop-rspec
+require:
+  - rubocop-rake
+  - rubocop-rspec
 
 AllCops:
   Exclude:
@@ -48,7 +50,7 @@ Metrics/AbcSize:
   Max: 18
 
 Metrics/BlockLength:
-  ExcludedMethods:
+  IgnoredMethods:
     - "before"
     - "configure"
     - "context"
