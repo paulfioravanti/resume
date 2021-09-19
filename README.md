@@ -9,9 +9,6 @@
 <a href="https://codeclimate.com/github/paulfioravanti/resume">
   <img src="https://codeclimate.com/github/paulfioravanti/resume/badges/gpa.svg" alt="Code Climate" />
 </a>
-<a href="https://codeclimate.com/github/paulfioravanti/resume">
-  <img src="https://codeclimate.com/github/paulfioravanti/resume/badges/coverage.svg" alt="Code Climate Coverage" />
-</a>
 <a href="https://inch-ci.org/github/paulfioravanti/resume?branch=master">
   <img src="http://inch-ci.org/github/paulfioravanti/resume.svg?branch=master" alt="Documentation Status" />
 </a>
