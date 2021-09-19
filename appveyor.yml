@@ -6,7 +6,7 @@ skip_tags: true
 build: off
 environment:
   matrix:
-    - RUBY_VERSION: 30-x64
+    - RUBY_VERSION: 302-x64
 install:
   # If AppVeyor doesn't keep up and support the latest Ruby versions, then
   # set the CUSTOM_RUBY_VERSION flag to whatever the latest version it supports.
