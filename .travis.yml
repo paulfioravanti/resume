@@ -1,6 +1,6 @@
 # References:
 # - https://docs.travis-ci.com/user/caching/#Bundler
-dist: trusty
+dist: focal
 os: linux
 language: ruby
 cache: bundler
