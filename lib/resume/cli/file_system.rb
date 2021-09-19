@@ -9,7 +9,7 @@ module Resume
     # @author Paul Fioravanti
     module FileSystem
       # Represents the ?dl=1 parameter on a Dropbox link.
-      DOWNLOAD_PARAMETER_REGEX = /\?.+\z/.freeze
+      DOWNLOAD_PARAMETER_REGEX = /\?.+\z/
       private_constant :DOWNLOAD_PARAMETER_REGEX
 
       module_function

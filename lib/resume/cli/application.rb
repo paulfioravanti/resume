@@ -17,7 +17,7 @@ module Resume
     class Application
       extend Forwardable
 
-      POSITIVE_INPUT = /\A(y|yes)\z/i.freeze
+      POSITIVE_INPUT = /\A(y|yes)\z/i
       private_constant :POSITIVE_INPUT
 
       # Configures and calls to start the CLI.

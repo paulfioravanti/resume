@@ -1,8 +1,8 @@
 source "https://rubygems.org"
-ruby ENV["CUSTOM_RUBY_VERSION"] || "2.7.2"
+ruby ENV["CUSTOM_RUBY_VERSION"] || "3.0.2"
 
 gem "i18n", "~> 1.0"
-gem "prawn", "~> 2.3"
+gem "prawn", "~> 2.4"
 gem "prawn-table", "~> 0.2.2"
 gem "rubyzip", "~> 2.3"
 
@@ -21,7 +21,7 @@ gem "reek", "~> 6.0"
 gem "rspec", "~> 3.4"
 gem "rubocop", "~> 1.0"
 gem "rubocop-rake", "~> 0.6", require: false
-gem "rubocop-rspec", "~> 2.0.0.pre"
+gem "rubocop-rspec", "~> 2.4"
 gem "rubygems-tasks", "~> 0.2"
 gem "simplecov", "~> 0.16"
 gem "yard", "~> 0.9"

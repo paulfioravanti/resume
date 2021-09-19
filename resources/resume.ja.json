@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "gems": [
-      ["prawn", "2.3.0"],
+      ["prawn", "2.4.0"],
       ["prawn-table", "0.2.2"],
       ["rubyzip", "2.3.0"]
     ],
