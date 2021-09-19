@@ -94,8 +94,8 @@ module Resume
         super(locale)
         @messages = {
           raw_error: "Locale '#{locale}' is not supported",
-          raw_warning: "Supported locales are: "\
-                       "#{I18n.available_locales.join(', ')}"
+          raw_warning:
+            "Supported locales are: #{I18n.available_locales.join(', ')}"
         }
       end
     end
@@ -128,8 +128,7 @@ module Resume
       def initialize(error)
         super(error)
         @messages = {
-          raw_error: "You have a missing argument in "\
-                     "one of your options.",
+          raw_error: "You have a missing argument in one of your options.",
           raw: message
         }
       end
