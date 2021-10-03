@@ -134,7 +134,7 @@ module Resume
                   end
                 end
 
-                context "when an error occurs fetching remote file " do
+                context "when an error occurs fetching remote file" do
                   let(:fetching_file) do
                     -> { described_class.fetch(path) }
                   end
