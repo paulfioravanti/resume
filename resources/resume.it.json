@@ -71,12 +71,16 @@
         "link": "aHR0cHM6Ly9leGVyY2lzbS5vcmcvcHJvZmlsZXMvcGF1bGZpb3JhdmFudGk="
       },
       "youtube": {
-        "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy8yNXNlNGh5NWIwcGNvNGsvcmVzdW1lX3lvdXR1YmUucG5nP2RsPTE=",
+        "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy9zMzMwaW02dWk1YXBsbGovcmVzdW1lX3lvdXR1YmUuanBnP2RsPTE=",
         "link": "aHR0cHM6Ly93d3cueW91dHViZS5jb20vdXNlci9wYXVsZmlvcmF2YW50aS92aWRlb3M="
       },
       "meetup": {
         "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy93OTg4eHp1bzE5Zzh3M2MvcmVzdW1lX21lZXR1cC5wbmc/ZGw9MQ==",
         "link": "aHR0cHM6Ly93d3cubWVldHVwLmNvbS9tZW1iZXJzLzU4NjY1MTQyLw=="
+      },
+      "strava": {
+        "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy80ZGV2YnFucmRzODR5OXQvcmVzdW1lX3N0cmF2YS5qcGc/ZGw9MQ==",
+        "link": "aHR0cHM6Ly93d3cuc3RyYXZhLmNvbS9hdGhsZXRlcy9wYXVsZmlvcmF2YW50aQ=="
       },
       "ten_fast_fingers": {
         "image": "aHR0cHM6Ly93d3cuZHJvcGJveC5jb20vcy9rMml5cTA1ZGs1MWZ2NTAvcmVzdW1lXzEwZmFzdGZpbmdlcnMucG5nP2RsPTE=",
