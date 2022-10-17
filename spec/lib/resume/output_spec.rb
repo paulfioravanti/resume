@@ -60,10 +60,10 @@ module Resume
     describe ".error" do
       include_context "with colourised I18n keys", :red
 
-      let(:outputting_the_error) { -> { described_class.error(*params) } }
+      let(:outputting_the_error) { described_class.error(*params) }
 
       it "outputs the values of the I18n-ised error to stdout" do
-        expect(outputting_the_error).to \
+        expect { outputting_the_error }.to \
           output(colourised_translated_message_with_new_line).to_stdout
       end
     end
@@ -71,12 +71,10 @@ module Resume
     describe ".warning" do
       include_context "with colourised I18n keys", :yellow
 
-      let(:outputting_the_warning) do
-        -> { described_class.warning(*params) }
-      end
+      let(:outputting_the_warning) { described_class.warning(*params) }
 
       it "outputs the values of the I18n-ised warning to stdout" do
-        expect(outputting_the_warning).to \
+        expect { outputting_the_warning }.to \
           output(colourised_translated_message_with_new_line).to_stdout
       end
     end
@@ -84,12 +82,10 @@ module Resume
     describe ".question" do
       include_context "with colourised I18n keys", :yellow
 
-      let(:outputting_the_question) do
-        -> { described_class.question(*params) }
-      end
+      let(:outputting_the_question) { described_class.question(*params) }
 
       it "outputs the values of the I18n-ised question to stdout" do
-        expect(outputting_the_question).to \
+        expect { outputting_the_question }.to \
           output(colourised_translated_message).to_stdout
       end
     end
@@ -97,12 +93,10 @@ module Resume
     describe ".success" do
       include_context "with colourised I18n keys", :green
 
-      let(:outputting_the_success_message) do
-        -> { described_class.success(*params) }
-      end
+      let(:outputting_the_success_message) { described_class.success(*params) }
 
       it "outputs the values of the I18n-ised success message to stdout" do
-        expect(outputting_the_success_message).to \
+        expect { outputting_the_success_message }.to \
           output(colourised_translated_message_with_new_line).to_stdout
       end
     end
@@ -110,12 +104,10 @@ module Resume
     describe ".info" do
       include_context "with colourised I18n keys", :cyan
 
-      let(:outputting_the_info_message) do
-        -> { described_class.info(*params) }
-      end
+      let(:outputting_the_info_message) { described_class.info(*params) }
 
       it "outputs the values of the I18n-ised info message to stdout" do
-        expect(outputting_the_info_message).to \
+        expect { outputting_the_info_message }.to \
           output(colourised_translated_message_with_new_line).to_stdout
       end
     end
@@ -126,9 +118,7 @@ module Resume
       let(:params) { [key, params_to_interpolate] }
       let(:translated_message) { "Translated Message" }
       let(:translated_message_with_new_line) { "#{translated_message}\n" }
-      let(:outputting_the_plain_message) do
-        -> { described_class.plain(*params) }
-      end
+      let(:outputting_the_plain_message) { described_class.plain(*params) }
 
       before do
         allow(I18n).to receive(:translate).
@@ -136,7 +126,7 @@ module Resume
       end
 
       it "outputs the values of the I18n-ised plain message to stdout" do
-        expect(outputting_the_plain_message).to \
+        expect { outputting_the_plain_message }.to \
           output(translated_message_with_new_line).to_stdout
       end
     end
@@ -144,12 +134,10 @@ module Resume
     describe ".raw_error" do
       include_context "with raw colourised strings", :red
 
-      let(:outputting_the_raw_error) do
-        -> { described_class.raw_error(message) }
-      end
+      let(:outputting_the_raw_error) { described_class.raw_error(message) }
 
       it "outputs the colourised error message to stdout" do
-        expect(outputting_the_raw_error).to \
+        expect { outputting_the_raw_error }.to \
           output(message_with_new_line).to_stdout
       end
     end
@@ -157,12 +145,10 @@ module Resume
     describe ".raw_warning" do
       include_context "with raw colourised strings", :yellow
 
-      let(:outputting_the_raw_warning) do
-        -> { described_class.raw_warning(message) }
-      end
+      let(:outputting_the_raw_warning) { described_class.raw_warning(message) }
 
       it "outputs the colourised warning message to stdout" do
-        expect(outputting_the_raw_warning).to \
+        expect { outputting_the_raw_warning }.to \
           output(message_with_new_line).to_stdout
       end
     end
@@ -171,11 +157,11 @@ module Resume
       include_context "with raw colourised strings", :green
 
       let(:outputting_the_raw_success_message) do
-        -> { described_class.raw_success(message) }
+        described_class.raw_success(message)
       end
 
       it "outputs the colourised warning message to stdout" do
-        expect(outputting_the_raw_success_message).to \
+        expect { outputting_the_raw_success_message }.to \
           output(message_with_new_line).to_stdout
       end
     end
@@ -183,12 +169,10 @@ module Resume
     describe ".raw" do
       let(:message) { "The message" }
       let(:message_with_new_line) { "#{message}\n" }
-      let(:outputting_the_raw_message) do
-        -> { described_class.raw(message) }
-      end
+      let(:outputting_the_raw_message) { described_class.raw(message) }
 
       it "outputs the values of the message to stdout" do
-        expect(outputting_the_raw_message).to \
+        expect { outputting_the_raw_message }.to \
           output(message_with_new_line).to_stdout
       end
     end

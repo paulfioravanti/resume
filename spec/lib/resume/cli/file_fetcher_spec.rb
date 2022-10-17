@@ -135,9 +135,7 @@ module Resume
                 end
 
                 context "when an error occurs fetching remote file" do
-                  let(:fetching_file) do
-                    -> { described_class.fetch(path) }
-                  end
+                  let(:fetching_file) { described_class.fetch(path) }
 
                   context "when a socket error occurs" do
                     before do
@@ -147,7 +145,7 @@ module Resume
                     end
 
                     it "raises a NetworkConnectionError" do
-                      expect(fetching_file).to \
+                      expect { fetching_file }.to \
                         raise_error(NetworkConnectionError)
                     end
                   end
@@ -159,7 +157,7 @@ module Resume
                     end
 
                     it "raises a NetworkConnectionError" do
-                      expect(fetching_file).to \
+                      expect { fetching_file }.to \
                         raise_error(NetworkConnectionError)
                     end
                   end
@@ -172,7 +170,7 @@ module Resume
                     end
 
                     it "raises a NetworkConnectionError" do
-                      expect(fetching_file).to \
+                      expect { fetching_file }.to \
                         raise_error(NetworkConnectionError)
                     end
                   end

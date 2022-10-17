@@ -3,9 +3,7 @@ require "resume/cli/exception_suppressor"
 module Resume
   module CLI
     RSpec.describe ExceptionSuppressor do
-      let(:suppressing_exception) do
-        -> { suppress_exception }
-      end
+      let(:suppressing_exception) { suppress_exception }
 
       describe "#suppress_exception_with_both_params" do
         let(:exception) { SystemExit }
@@ -30,7 +28,7 @@ module Resume
           let(:default) { "bar" }
 
           it "re-raises the non-ignored exception" do
-            expect(suppressing_exception).to \
+            expect { suppressing_exception }.to \
               raise_error(exception_to_raise)
           end
         end
@@ -56,7 +54,7 @@ module Resume
           let(:exception_to_raise) { LoadError }
 
           it "re-raises the non-ignored exception" do
-            expect(suppressing_exception).to \
+            expect { suppressing_exception }.to \
               raise_error(exception_to_raise)
           end
         end
@@ -81,7 +79,7 @@ module Resume
           let(:exception_to_raise) { LoadError }
 
           it "re-raises the non-ignored exception" do
-            expect(suppressing_exception).to \
+            expect { suppressing_exception }.to \
               raise_error(exception_to_raise)
           end
         end

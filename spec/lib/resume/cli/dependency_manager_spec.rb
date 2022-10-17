@@ -107,7 +107,7 @@ module Resume
       end
 
       describe "#install" do
-        let(:installing) { -> { dependency_manager.install } }
+        let(:install) { dependency_manager.install }
 
         context "when gems are sucessfully installed" do
           before do
@@ -139,7 +139,7 @@ module Resume
             end
 
             it "raises a DependencyInstallationError" do
-              expect(installing).to \
+              expect { install }.to \
                 raise_error(DependencyInstallationError)
             end
           end
@@ -152,7 +152,7 @@ module Resume
           end
 
           it "raises a DependencyInstallationError" do
-            expect(installing).to \
+            expect { install }.to \
               raise_error(DependencyInstallationError)
           end
         end

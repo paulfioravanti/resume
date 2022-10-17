@@ -165,7 +165,7 @@ module Resume
 
           context "when an error occurs during gem installation" do
             let(:gem_installation) do
-              -> { gem_installer.gems_successfully_installed? }
+              gem_installer.gems_successfully_installed?
             end
 
             context "when the error is a SocketError" do
@@ -176,7 +176,7 @@ module Resume
               end
 
               it "raises a NetworkConnectionError" do
-                expect(gem_installation).to \
+                expect { gem_installation }.to \
                   raise_error(NetworkConnectionError)
                 expect(Output).to \
                   have_received(:plain).with(:installing_ruby_gems)
@@ -193,7 +193,7 @@ module Resume
               end
 
               it "raises a NetworkConnectionError" do
-                expect(gem_installation).to \
+                expect { gem_installation }.to \
                   raise_error(NetworkConnectionError)
                 expect(Output).to \
                   have_received(:plain).with(:installing_ruby_gems)

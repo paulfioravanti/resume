@@ -3,9 +3,7 @@ require "resume/ruby_version_checker"
 module Resume
   RSpec.describe RubyVersionChecker do
     describe ".check_ruby_version" do
-      let(:checking_ruby_version) do
-        -> { described_class.check_ruby_version }
-      end
+      let(:check_ruby_version) { described_class.check_ruby_version }
       let(:required_ruby_version) do
         described_class.const_get(:REQUIRED_RUBY_VERSION)
       end
@@ -30,7 +28,7 @@ module Resume
         end
 
         it "requests the user to install a compatible Ruby version" do
-          expect(checking_ruby_version).to output(message).to_stdout
+          expect{ check_ruby_version }.to output(message).to_stdout
           expect(described_class).to have_received(:exit).with(1)
         end
       end
@@ -52,7 +50,7 @@ module Resume
         end
 
         it "requests the user to install the expected Ruby version" do
-          expect(checking_ruby_version).to output(message).to_stdout
+          expect{ check_ruby_version }.to output(message).to_stdout
           expect(described_class).to have_received(:exit).with(1)
         end
       end
@@ -78,7 +76,7 @@ module Resume
         end
 
         it "requests the user to install the expected Ruby version" do
-          expect(checking_ruby_version).to output(message).to_stdout
+          expect{ check_ruby_version }.to output(message).to_stdout
           expect(described_class).to have_received(:exit).with(1)
         end
       end

@@ -5,7 +5,7 @@ module Resume
   module CLI
     RSpec.describe ArgumentParser do
       describe ".parse" do
-        let(:parsing_options) { -> { described_class.parse } }
+        let(:parse) { described_class.parse }
 
         context "when no options are specified" do
           before do
@@ -26,7 +26,7 @@ module Resume
           end
 
           it "raises a LocaleNotSupportedError for the locale" do
-            expect(parsing_options).to \
+            expect { parse }.to \
               raise_error(LocaleNotSupportedError, unsupported_locale)
           end
         end
@@ -41,7 +41,7 @@ module Resume
           it "raises an InvalidOptionError" do
             # can"t get direct access to the help message, so just
             # say that *something* is passed in with the exception
-            expect(parsing_options).to \
+            expect { parse }.to \
               raise_error(InvalidOptionError, anything)
           end
         end
@@ -54,7 +54,7 @@ module Resume
           it "raises a MissingArgumentError" do
             # can"t get direct access to the help message, so just
             # say that *something* is passed in with the exception
-            expect(parsing_options).to \
+            expect { parse }.to \
               raise_error(MissingArgumentError, anything)
           end
         end
@@ -99,7 +99,7 @@ module Resume
             end
 
             it "informs the user of the version number and halts" do
-              expect(parsing_options).to throw_symbol(:halt)
+              expect { parse }.to throw_symbol(:halt)
               expect(Output).to have_received(:raw).with(version)
             end
           end
@@ -111,7 +111,7 @@ module Resume
             end
 
             it "informs the user of the version number and halts" do
-              expect(parsing_options).to throw_symbol(:halt)
+              expect { parse }.to throw_symbol(:halt)
               expect(Output).to have_received(:raw).with(version)
             end
           end
@@ -125,7 +125,7 @@ module Resume
             end
 
             it "informs the user of the help options and halts" do
-              expect(parsing_options).to throw_symbol(:halt)
+              expect { parse }.to throw_symbol(:halt)
               expect(Output).to have_received(:raw).with(anything)
             end
           end
@@ -137,7 +137,7 @@ module Resume
             end
 
             it "informs the user of the help options and halts" do
-              expect(parsing_options).to throw_symbol(:halt)
+              expect { parse }.to throw_symbol(:halt)
               expect(Output).to have_received(:raw).with(anything)
             end
           end

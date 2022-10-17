@@ -5,7 +5,7 @@ module Resume
   module CLI
     RSpec.describe Settings do
       describe ".configure" do
-        let(:configuration) { -> { described_class.configure } }
+        let(:configure) { described_class.configure }
 
         context "when development dependencies are not present" do
           before do
@@ -15,7 +15,7 @@ module Resume
           end
 
           it "ignores requiring gems used only in development" do
-            expect(configuration).not_to raise_error
+            expect { configure }.not_to raise_error
           end
         end
 
@@ -27,7 +27,7 @@ module Resume
           end
 
           it "raises a DependencyPrerequisiteError" do
-            expect(configuration).to \
+            expect { configure }.to \
               raise_error(DependencyPrerequisiteError)
           end
         end
