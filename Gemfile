@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby ENV["CUSTOM_RUBY_VERSION"] || "3.1.2"
+ruby "3.1.2"
 
 gem "i18n", "~> 1.0"
 gem "prawn", "~> 2.4"

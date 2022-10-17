@@ -138,65 +138,12 @@ bin/rake resume:delete_assets
   image.  More discussion on this issue is at
   [this StackOverflow thread][stackoverflow-transparent-link].
 
-## Executable
-
-Using [Ruby Packer][], an executable can be created for the resume.
-However, this is _very experimental_, doesn't really work properly, and is only
-documented here as an interesting curiosity.
-
-### Install Ruby Packer
-
-Follow the instructions on the repository's README file. I'll focus on the
-[MacOS installation instructions][ruby-packer-install].
-
-In the `resume` directory, perform the following:
-
-```sh
-brew install squashfs
-curl -L http://enclose.io/rubyc/rubyc-darwin-x64.gz | gunzip > rubyc
-chmod +x rubyc
-```
-
-### Generate resume first
-
-Before attempting to do anything with any executable, make sure that you've
-generated the resume in your target language already so that image and font
-assets are stored in your local tmp folder and no further connections need to be
-made in order to fetch them.  This is because of an
-[open issue regarding SSL with Enclose.IO's Ruby executable][enclose-io-issue].
-
-If this issue gets solved, maybe the executable can be used to go fetch assets
-as well.
-
-### Generate and run resume executable
-
-As of this writing, [Enclose.IO's Ruby executable][enclose-io-ruby] only goes
-up to version 2.4.1. Therefore, we will have to override the specified Ruby
-version with an `ENV` variable when generating and running the resume
-executable.
-
-**Generate executable** (here named `resume.out`):
-
-```sh
-CUSTOM_RUBY_VERSION="2.4.1" ./rubyc bin/resume -o resume.out
-```
-
-**Run resume executable**:
-
-:uk: `CUSTOM_RUBY_VERSION="2.4.1" ./resume.out`<br />
-:it: `CUSTOM_RUBY_VERSION="2.4.1" ./resume.out -l it`<br />
-:jp: `CUSTOM_RUBY_VERSION="2.4.1" ./resume.out -l ja`<br />
-
-So, yes, more of a curiosity here than anything really useful.
-
 ## Social
 
 [![Contact][twitter-badge]][twitter-url]<br />
 [![Stack Overflow][stackoverflow-badge]][stackoverflow-url]
 
 [Base64]: http://ruby-doc.org/stdlib-2.3.0/libdoc/base64/rdoc/Base64.html
-[enclose-io-issue]: https://github.com/pmq20/ruby-packer/issues/10
-[enclose-io-ruby]: http://enclose.io/ruby
 [i18n]: https://github.com/ruby-i18n/i18n
 [JSON]: https://en.wikipedia.org/wiki/JSON
 [PDF]: https://en.wikipedia.org/wiki/PDF
@@ -208,8 +155,6 @@ So, yes, more of a curiosity here than anything really useful.
 [roro-20160510]: https://www.meetup.com/Ruby-On-Rails-Oceania-Sydney/events/228886775/
 [RSpec]: https://github.com/rspec/rspec
 [Ruby]: https://www.ruby-lang.org/en/
-[Ruby Packer]: https://github.com/pmq20/ruby-packer
-[ruby-packer-install]: https://github.com/pmq20/ruby-packer#install-on-macos
 [Simplecov]: https://github.com/colszowka/simplecov
 [speakerdeck]: https://speakerdeck.com/paulfioravanti/resume-as-code
 [stackoverflow-badge]: http://stackoverflow.com/users/flair/567863.png

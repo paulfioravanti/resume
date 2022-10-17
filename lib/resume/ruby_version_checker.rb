@@ -5,7 +5,7 @@ module Resume
   # @author Paul Fioravanti
   module RubyVersionChecker
     # Required Ruby version for resume to work
-    REQUIRED_RUBY_VERSION = ENV.fetch("CUSTOM_RUBY_VERSION", "3.1.2").freeze
+    REQUIRED_RUBY_VERSION = "3.1.2".freeze
     private_constant :REQUIRED_RUBY_VERSION
     # Ruby version command
     RUBY_VERSION_COMMAND = "ruby -v".freeze
