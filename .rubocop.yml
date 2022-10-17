@@ -14,7 +14,7 @@ AllCops:
     # scan all files in all gems, so make the exclusion explicit here.
     - "vendor/**/*"
     - "bin/*"
-  TargetRubyVersion: 3.0
+  TargetRubyVersion: 3.1
   NewCops: enable
 
 Layout/DotPosition:
@@ -116,6 +116,10 @@ Style/Documentation:
 # NOTE: PDF generation requires string mutation, so this can't be used for now.
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+# NOTE: I'm still on the fence about Ruby 3.1's shorthand syntax...
+Style/HashSyntax:
+  EnforcedShorthandSyntax: either
 
 # NOTE: There are some places where having modifier-if just looks strange to me,
 # so this rule is disabled.
