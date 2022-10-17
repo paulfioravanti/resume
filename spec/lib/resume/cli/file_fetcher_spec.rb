@@ -10,14 +10,14 @@ module Resume
         describe ".fetch" do
           let(:pathname) do
             instance_double(
-              "Pathname",
+              Pathname,
               :pathname,
-              basename: instance_double("Pathname", to_path: basename),
+              basename: instance_double(Pathname, to_path: basename),
               to_path: path,
               file?: local_file_present
             )
           end
-          let(:file) { instance_double("File") }
+          let(:file) { instance_double(File) }
 
           before do
             allow(Pathname).to \
@@ -41,7 +41,7 @@ module Resume
           context "when local file is not present" do
             let(:local_file_present) { false }
             let(:tmpfile_path) do
-              instance_double("Pathname", file?: tmpfile_present)
+              instance_double(Pathname, file?: tmpfile_present)
             end
 
             context "when temp file is present" do
@@ -177,7 +177,7 @@ module Resume
                 end
 
                 context "when remote file is fetched successfully" do
-                  let(:uri) { instance_spy("IO", "uri") }
+                  let(:uri) { instance_spy(IO, "uri") }
 
                   before do
                     allow(OpenURI).to \

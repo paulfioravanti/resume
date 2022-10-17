@@ -7,7 +7,7 @@ module Resume
       describe ".fetch" do
         let(:basename) { "resume.en.json" }
         let(:resume_data_path) { "resources/#{basename}" }
-        let(:resume_data_file) { instance_spy("File", :resume_data_file) }
+        let(:resume_data_file) { instance_spy(File, :resume_data_file) }
 
         before do
           allow(Output).to \

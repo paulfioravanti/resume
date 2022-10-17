@@ -80,7 +80,7 @@ module Resume
         let(:messages) do
           {
             raw_error: "Locale '#{locale}' is not supported",
-            raw_warning: "Supported locales are: "\
+            raw_warning: "Supported locales are: " \
                          "#{I18n.available_locales.join(', ')}"
           }
         end
@@ -116,7 +116,7 @@ module Resume
       describe "#messages" do
         let(:messages) do
           {
-            raw_error: "You have a missing argument in "\
+            raw_error: "You have a missing argument in " \
                        "one of your options.",
             raw: options
           }

@@ -14,8 +14,8 @@ module Resume
 
       context "when a LoadError occurs when loading rubygems lib" do
         let(:message) do
-          "Please install Ruby version #{required_ruby_version} or higher "\
-            "to generate resume.\n"\
+          "Please install Ruby version #{required_ruby_version} or higher " \
+            "to generate resume.\n" \
             "Your Ruby version is ruby #{RUBY_VERSION}\n"
         end
 
@@ -35,8 +35,8 @@ module Resume
 
       context "when attempting to run the app with an old Ruby version" do
         let(:message) do
-          "Please install Ruby version #{required_ruby_version} or higher "\
-            "to generate resume.\n"\
+          "Please install Ruby version #{required_ruby_version} or higher " \
+            "to generate resume.\n" \
             "Your Ruby version is ruby #{RUBY_VERSION}\n"
         end
 
@@ -57,8 +57,8 @@ module Resume
 
       context "when a LoadError occurs when loading open3 lib" do
         let(:message) do
-          "Please install Ruby version #{required_ruby_version} or higher "\
-            "to generate resume.\n"\
+          "Please install Ruby version #{required_ruby_version} or higher " \
+            "to generate resume.\n" \
             "Your Ruby version is likely far too old to generate the resume.\n"
         end
 

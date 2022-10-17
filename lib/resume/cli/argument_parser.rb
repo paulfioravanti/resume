@@ -47,7 +47,7 @@ module Resume
         opts.on(
           "-l",
           "--locale LOCALE",
-          "Select the locale of the resume "\
+          "Select the locale of the resume " \
           "(#{I18n.available_locales.join(', ')})"
         ) do |locale|
           I18n.locale = locale.to_sym

@@ -53,9 +53,7 @@ module OneSheet
       # line endings, which will trip up Rubocop's Style/EndOfLine cop.
       # This is unavoidable, so just ignore the warning when rubocop
       # runs on the generated file.
-      File.open("resume.rb", "w") do |file|
-        file.write(resume)
-      end
+      File.write("resume.rb", resume)
       Resume::Output.raw_success("Successfully generated one-sheet resume")
     end
     private_class_method :output_file

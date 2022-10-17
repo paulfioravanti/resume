@@ -21,16 +21,16 @@ module Resume
         end
         let(:font_file_filepath) { "/tmp/#{filename}" }
         let(:zip_file) do
-          class_double("Zip::File").as_stubbed_const
+          class_double(Zip::File).as_stubbed_const
         end
         let(:normal_font_file) do
           instance_double(
-            "Zip::File", :normal_font_file, name: normal_font_name
+            Zip::File, :normal_font_file, name: normal_font_name
           )
         end
         let(:bold_font_file) do
           instance_double(
-            "Zip::File", :bold_font_file, name: bold_font_name
+            Zip::File, :bold_font_file, name: bold_font_name
           )
         end
         let(:font_zip_file) { [normal_font_file, bold_font_file] }

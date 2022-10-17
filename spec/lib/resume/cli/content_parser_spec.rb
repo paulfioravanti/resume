@@ -91,7 +91,7 @@ module Resume
               "https://www.dropbox.com/s/xxx/file.jpg?dl=1"
             end
             let(:object) { { key: asset_file_path } }
-            let(:file) { instance_double("File", :asset_file) }
+            let(:file) { instance_double(File, :asset_file) }
             let(:parsed_object) { { key: file } }
 
             before do

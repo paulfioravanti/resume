@@ -75,7 +75,7 @@ module Resume
       describe ".tmpfile_path" do
         let(:filename) { "file.txt" }
         let(:tmpdir) { "/tmp" }
-        let(:pathname) { instance_double("Pathname") }
+        let(:pathname) { instance_double(Pathname) }
 
         before do
           allow(Dir).to receive(:tmpdir).and_return(tmpdir)

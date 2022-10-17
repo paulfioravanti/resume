@@ -46,7 +46,7 @@ module Resume
           let(:exception_to_raise) { exception }
 
           it "returns the the default empty lambda value" do
-            expect(suppress_exception).to be nil
+            expect(suppress_exception).to be_nil
           end
         end
 
@@ -71,7 +71,7 @@ module Resume
           let(:exception_to_raise) { StandardError }
 
           it "returns the default empty lambda value" do
-            expect(suppress_exception).to be nil
+            expect(suppress_exception).to be_nil
           end
         end
 

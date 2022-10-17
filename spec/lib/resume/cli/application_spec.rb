@@ -37,7 +37,7 @@ module Resume
         context "when application is initialized" do
           let(:title) { "Resume title" }
           let(:dependencies) do
-            instance_double("Hash", :dependencies)
+            instance_double(Hash, :dependencies)
           end
           let(:resume) do
             {
@@ -48,7 +48,7 @@ module Resume
           let(:locale) { :en }
           let(:filename) { "#{title}_#{locale}.pdf" }
           let(:dependency_manager) do
-            instance_double("DependencyManager")
+            instance_double(DependencyManager)
           end
 
           before do

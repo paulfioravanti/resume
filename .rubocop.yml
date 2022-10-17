@@ -50,7 +50,7 @@ Metrics/AbcSize:
   Max: 18
 
 Metrics/BlockLength:
-  IgnoredMethods:
+  AllowedMethods:
     - "before"
     - "configure"
     - "context"

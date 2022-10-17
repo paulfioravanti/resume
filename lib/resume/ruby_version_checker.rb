@@ -43,7 +43,7 @@ module Resume
     private_class_method :old_ruby_version?
 
     def request_to_install_latest_ruby
-      puts "Please install Ruby version #{REQUIRED_RUBY_VERSION} "\
+      puts "Please install Ruby version #{REQUIRED_RUBY_VERSION} " \
            "or higher to generate resume."
       require "open3"
       puts "Your Ruby version is #{user_ruby_version}"

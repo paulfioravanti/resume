@@ -26,4 +26,3 @@ gem "rubocop-rspec", "~> 2.4"
 gem "rubygems-tasks", "~> 0.2"
 gem "simplecov", "~> 0.16"
 gem "yard", "~> 0.9"
-

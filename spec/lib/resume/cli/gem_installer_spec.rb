@@ -28,7 +28,7 @@ module Resume
           let(:wrong_version) { "0.5" }
           let(:installed_gem) do
             instance_double(
-              "Gem::Specification",
+              Gem::Specification,
               :installed_gem,
               version: Gem::Version.new(wrong_version)
             )
@@ -49,7 +49,7 @@ module Resume
         context "when a required gem is already installed" do
           let(:installed_gem) do
             instance_double(
-              "Gem::Specification",
+              Gem::Specification,
               :installed_gem,
               version: Gem::Version.new(gem_version)
             )

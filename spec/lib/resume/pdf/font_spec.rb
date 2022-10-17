@@ -4,10 +4,10 @@ module Resume
   module PDF
     RSpec.describe Font do
       describe ".configure" do
-        let(:font_families) { instance_double("Hash", :font_families) }
+        let(:font_families) { instance_double(Hash, :font_families) }
         let(:pdf) do
           instance_double(
-            "Prawn::Document",
+            Prawn::Document,
             :pdf,
             font_families: font_families
           )
