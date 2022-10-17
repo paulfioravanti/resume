@@ -28,7 +28,7 @@ module Resume
         end
 
         it "requests the user to install a compatible Ruby version" do
-          expect{ check_ruby_version }.to output(message).to_stdout
+          expect { check_ruby_version }.to output(message).to_stdout
           expect(described_class).to have_received(:exit).with(1)
         end
       end
@@ -50,7 +50,7 @@ module Resume
         end
 
         it "requests the user to install the expected Ruby version" do
-          expect{ check_ruby_version }.to output(message).to_stdout
+          expect { check_ruby_version }.to output(message).to_stdout
           expect(described_class).to have_received(:exit).with(1)
         end
       end
@@ -76,7 +76,7 @@ module Resume
         end
 
         it "requests the user to install the expected Ruby version" do
-          expect{ check_ruby_version }.to output(message).to_stdout
+          expect { check_ruby_version }.to output(message).to_stdout
           expect(described_class).to have_received(:exit).with(1)
         end
       end
