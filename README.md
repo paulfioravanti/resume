@@ -138,11 +138,6 @@ bin/rake resume:delete_assets
   image.  More discussion on this issue is at
   [this StackOverflow thread][stackoverflow-transparent-link].
 
-## Social
-
-[![Contact][twitter-badge]][twitter-url]<br />
-[![Stack Overflow][stackoverflow-badge]][stackoverflow-url]
-
 [Base64]: http://ruby-doc.org/stdlib-2.3.0/libdoc/base64/rdoc/Base64.html
 [i18n]: https://github.com/ruby-i18n/i18n
 [JSON]: https://en.wikipedia.org/wiki/JSON
@@ -157,9 +152,5 @@ bin/rake resume:delete_assets
 [Ruby]: https://www.ruby-lang.org/en/
 [Simplecov]: https://github.com/colszowka/simplecov
 [speakerdeck]: https://speakerdeck.com/paulfioravanti/resume-as-code
-[stackoverflow-badge]: http://stackoverflow.com/users/flair/567863.png
 [stackoverflow-transparent-link]: http://stackoverflow.com/q/8289031/567863
-[stackoverflow-url]: http://stackoverflow.com/users/567863/paul-fioravanti
-[twitter-badge]: https://img.shields.io/badge/contact-%40paulfioravanti-blue.svg
-[twitter-url]: https://twitter.com/paulfioravanti
 [YARD]: https://yardoc.org/
