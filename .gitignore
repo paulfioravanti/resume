@@ -1,22 +1,10 @@
+coverage/
 .DS_Store
 *.pdf
 strings_*.rb
-*.ttf
-*.zip
 resume.rb
 reek.html
-
-# Ignore Ruby version manager files
+tmp/
 .tool-versions
 .tool-versions-e
-.ruby-version
-
-# Ignore any toplevel GitPitch files
-PITCHME
-
-doc/
-pkg/
-vendor/cache/*.gem
-coverage/
-tmp/
 .yardoc
