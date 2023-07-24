@@ -40,12 +40,14 @@ jobs:
         # open the generated PDF Agree to installing prawn and prawn-table gems.
         # JA: Agree to installing rubyzip and downloading custom font
         run: |
+          gem install i18n
           printf "yes\nno\n" | bin/resume
           bin/resume -l it <<< "no\n"
           printf "yes\nno\n" | bin/resume -l ja
 
       - name: Generate one-sheet resumes
         run: |
+          bin/rake resume
           ruby resume.rb <<< "no\n"
           ruby resume.rb -l it <<< "no\n"
           ruby resume.rb -l ja <<< "no\n"
