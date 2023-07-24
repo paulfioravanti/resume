@@ -1,19 +1,6 @@
 # Resume
 
-<a href="https://travis-ci.com/paulfioravanti/resume">
-  <img src="https://travis-ci.com/paulfioravanti/resume.svg?branch=master" alt="Build Status" />
-</a>
-<a href="https://codeclimate.com/github/paulfioravanti/resume">
-  <img src="https://codeclimate.com/github/paulfioravanti/resume/badges/gpa.svg" alt="Code Climate" />
-</a>
-<a href="https://inch-ci.org/github/paulfioravanti/resume?branch=master">
-  <img src="http://inch-ci.org/github/paulfioravanti/resume.svg?branch=master" alt="Documentation Status" />
-</a>
-<a href="https://snyk.io/test/github/paulfioravanti/resume">
-  <img src="https://snyk.io/test/github/paulfioravanti/resume/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/paulfioravanti/resume" style="max-width:100%;" />
-</a>
-<br />
-<br />
+[![Build Status][Build Status image]][Build Status url]
 
 This is a [Ruby][] command line interface (CLI) application that generates my
 resume.  I made it in order to teach myself a bit about the Ruby [PDF][]
@@ -139,6 +126,8 @@ bin/rake resume:delete_assets
   [this StackOverflow thread][stackoverflow-transparent-link].
 
 [Base64]: http://ruby-doc.org/stdlib-2.3.0/libdoc/base64/rdoc/Base64.html
+[Build Status image]: https://github.com/paulfioravanti/resume/actions/workflows/ci.yml/badge.svg
+[Build Status url]: https://github.com/paulfioravanti/resume/actions/workflows/ci.yml
 [i18n]: https://github.com/ruby-i18n/i18n
 [JSON]: https://en.wikipedia.org/wiki/JSON
 [PDF]: https://en.wikipedia.org/wiki/PDF

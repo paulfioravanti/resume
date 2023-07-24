@@ -22,7 +22,7 @@ module Resume
       require "prawn/table"
       # Grab the resume background image.  This serves two purposes:
       # 1. Grabs the biggest image and puts it in the tmp directory
-      #    if it"s not already there
+      #    if it's not already there
       # 2. Tests out network connection
       # If the file is fetched locally, chances are high that the
       # resume has already been generated once and there won"t be

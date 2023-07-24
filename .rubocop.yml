@@ -55,8 +55,7 @@ Metrics/BlockLength:
     - "configure"
     - "context"
     - "describe"
-    # NOTE: Re-enable this when Code Climate Rubocop version updates
-    # - "new"
+    - "new"
 
 Metrics/MethodLength:
   Max: 16
