@@ -1,0 +1,51 @@
+name: CI
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+concurrency:
+  group: ci-tests-${{ github.ref }}-1
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          # runs 'bundle install' and caches installed gems automatically
+          bundler-cache: true
+
+      - name: Run bundler-audit
+        run: bin/bundle-audit check --update
+
+      - name: Run tests
+        run: bin/rspec spec/ --no-drb --format progress
+
+      - name: Run reek
+        run: bin/reek
+
+      - name: Run Rubocop
+        run: bin/rubocop --display-cop-names
+
+      - name: Generate resumes
+        # NOTE: The 'no's below indicate not wanting to get CI to attempt to
+        # open the generated PDF Agree to installing prawn and prawn-table gems.
+        # JA: Agree to installing rubyzip and downloading custom font
+        run: |
+          printf "yes\nno\n" | bin/resume
+          bin/resume -l it <<< "no\n"
+          printf "yes\nno\n" | bin/resume -l ja
+
+      - name: Generate one-sheet resumes
+        run: |
+          ruby resume.rb <<< "no\n"
+          ruby resume.rb -l it <<< "no\n"
+          ruby resume.rb -l ja <<< "no\n"
