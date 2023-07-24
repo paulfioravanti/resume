@@ -13,7 +13,7 @@ module Resume
     # Ruby version output regex.
     # For example, this will extract `3.2.2` from a string like:
     # ruby 3.2.2 (2023-03-30 revision e51014f9c0) [arm64-darwin22]
-    RUBY_VERSION_REGEX = /\Aruby ([\d\.]+)/.freeze
+    RUBY_VERSION_REGEX = /\Aruby ([\d\.]+)/
     private_constant :RUBY_VERSION_REGEX
 
     module_function
