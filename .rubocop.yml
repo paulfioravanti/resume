@@ -14,7 +14,7 @@ AllCops:
     # scan all files in all gems, so make the exclusion explicit here.
     - "vendor/**/*"
     - "bin/*"
-  TargetRubyVersion: 3.1
+  TargetRubyVersion: 3.2
   NewCops: enable
 
 Layout/DotPosition:
