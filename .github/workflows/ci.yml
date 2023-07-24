@@ -47,6 +47,7 @@ jobs:
 
       - name: Generate one-sheet resumes
         run: |
+          gem install rspec
           bin/rake resume
           ruby resume.rb <<< "no\n"
           ruby resume.rb -l it <<< "no\n"
