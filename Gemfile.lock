@@ -139,7 +139,7 @@ GEM
     thor (1.2.2)
     ttfunk (1.7.0)
     unicode-display_width (2.4.2)
-    yard (0.9.34)
+    yard (0.9.35)
 
 PLATFORMS
   arm64-darwin-21
